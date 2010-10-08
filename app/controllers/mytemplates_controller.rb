@@ -241,35 +241,10 @@ class MytemplatesController < ApplicationController
     end
   end
 
-  def destroy_selection
-    @ids = params[:ids].split(",")
-    
-    @ids.each do |id|
-      mytemplate = Mytemplate.get(id.to_i)
-      
-      begin
-        if mytemplate != nil
-          if File.exist?(mytemplate.path.force_encoding('UTF8-MAC')) 
-            FileUtils.remove_entry_secure mytemplate.path.force_encoding('UTF8-MAC') 
-          end
-          
-          if mytemplate.destroy
-            puts_message "마이템플릿 삭제 완료!"
-          end
-        end
-      rescue
-        puts_message "Error! in progress of mytemplate file deletion."
-      end
-
-    end
-    
-    render :nothing => true
-    
-    end
-
-
+  # DELETE /mytemplates/1
+  # DELETE /mytemplates/1.xml
   def destroy
-    mytemplate = Mytemplate.get(params[:id].to_i)
+    mytemplate = Mytemplate.get(params[:id])
     close_document(mytemplate)
     
     begin
@@ -382,7 +357,6 @@ class MytemplatesController < ApplicationController
       @cloned_object.thumb_url = "/user_files/" + current_user.userid + "/article_templates/" +  mytemplate_new_filename + "/web/doc_thumb.jpg"         
       @cloned_object.preview_url = "/user_files/" + current_user.userid + "/article_templates/" + mytemplate_new_filename + "/web/doc_preview.jpg"             
 
-      @cloned_object.is_col = @object_to_clone.is_col
       @cloned_object.category = @object_to_clone.category
       @cloned_object.subcategory = @object_to_clone.subcategory
 

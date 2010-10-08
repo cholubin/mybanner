@@ -1,0 +1,4 @@
+/* @override http://mac.fooleaf.com:3000/css/skin.closeup.css */
+
+body { background-image: url(/images/skin.closeup/background.jpg); background-color: #e4e789; background-position: center -50px; }
+#header #nav-menu { background-image: url(/images/skin.closeup/menubar.png);  }

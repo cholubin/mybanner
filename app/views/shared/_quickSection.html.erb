@@ -1,0 +1,71 @@
+		<div id="quick-section">
+			<div id="myinfo" class="sideblock">
+<% if signed_in? %>
+				<!-- myinfo start -->
+				<div id="info">
+					<h3>My info</h3>
+					<ul>
+						<li class="login-id"><%= current_user.name %></li>
+						<li class="login-name"><%= current_user.userid %></li>
+						<li class="logout"><a href="/logout">로그아웃</a></li>
+						<li class="webhard"><a href="/myimages">내 이미지하드</a></li>
+						<li class="user-edit"><a href="/users/<%= current_user.id %>/edit">정보수정</a></li>
+					</ul>
+				</div>
+				<div id="work-summary">
+					<h3>진행상태 요약</h3>
+					<ul>
+						
+						<li><strong>시안확인요청</strong> <span>1건</span></li>
+						<li><strong>파일에러</strong> <span class="none">없음</span></li>
+						<li><strong>디자인바구니</strong> <span>2건</span></li>
+						<li><strong>입금요청</strong> <span>1건</span></li>
+						<li><strong>제작중</strong> <span>1건</span></li>
+						<li><strong>최근출고완료</strong> <span>3건</span></li>
+					</ul>
+				</div>
+				<!--myinfo end -->
+<% else %>
+				<!-- login start -->
+				<h3 id="title-signin">Sign in</h3>
+				<% form_for(:session, :url => sessions_path) do |f| %>
+				<input type="hidden" name="session[uri]" value="<%= params[:uri] %>">
+					<fieldset id="quick-login">
+							<legend>로그인 정보 입력</legend>
+							<p>
+								<label for="userid">아이디</label>
+								<input name="session[userid]" id="userid" type="text" placeholder="ID" autofocus/>
+							</p>
+							<p>
+								<label for="password">비밀번호</label>
+								<input name="session[password]" id="password" type="password" placeholder="PASSWORD"/>
+							</p>
+							<input type="submit" value="로그인" class="submit-button">
+					</fieldset>
+				<% end %>
+				<p class="signup-message"><a href="/users/new">회원가입</a> 무료 회원 가입하시고, 웹 편집 기능을 사용해보세요. </p>
+				<!-- login end -->
+<% end %>
+			</div>
+			
+			<div id="quick-link">
+				<h3>빠른 메뉴</h3>
+				<ul>
+					<li id="direct-order"><img src="/images/default/button-direct-order.png"></li>
+				</ul>
+			</div>
+			<ul id="quick-information">
+				<li class="payment">
+					<h4>결제계좌번호</h4>
+					<p>기업은행 / 정상혁 <br/> 010-9662-7441 </p>
+				</li>
+				<li class="business-time">
+					<h4>업무시간</h4>
+					<p>평일 10:00 - 18:00<br/>토요일 10:00 - 13:00</p>
+				</li>
+				<li class="cscenter-phone">
+					<h4>고객센터 전화번호</h4>
+					<p>010-9662-7441<br/>업무시간외 통화불가</p>
+				</li>
+			</ul>
+		</div>
