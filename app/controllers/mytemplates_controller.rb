@@ -382,6 +382,7 @@ class MytemplatesController < ApplicationController
       @cloned_object.thumb_url = "/user_files/" + current_user.userid + "/article_templates/" +  mytemplate_new_filename + "/web/doc_thumb.jpg"         
       @cloned_object.preview_url = "/user_files/" + current_user.userid + "/article_templates/" + mytemplate_new_filename + "/web/doc_preview.jpg"             
 
+      @cloned_object.is_col = @object_to_clone.is_col
       @cloned_object.category = @object_to_clone.category
       @cloned_object.subcategory = @object_to_clone.subcategory
 

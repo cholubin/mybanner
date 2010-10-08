@@ -35510,3 +35510,2130 @@ Rendered mytemplates/_leftsidebar (0.1ms)
 Rendered mytemplates/_mytemplate_index (5.3ms)
 Rendered shared/_footer (0.1ms)
 Completed in 15ms (View: 11 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2010-10-08 10:50:48) [GET]
+Rendering template within layouts/adminsessions
+Rendering admin/adminsessions/new
+Completed in 138ms (View: 44 | 200 OK [http://localhost/admin]
+
+
+Processing AdminsessionsController#create (for 127.0.0.1 at 2010-10-08 10:50:52) [POST]
+  Parameters: {"authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o=", "adminsession"=>{"admin_id"=>"webtop", "password"=>"5972"}, "x"=>"0", "y"=>"0"}
+Redirected to http://localhost:3000/admin/temps
+Completed in 67ms | 302 Found [http://localhost/adminsessions]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 10:50:52) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (2.1ms)
+Rendered admin/shared/_top_menu (0.9ms)
+Rendered admin/temps/_sub_menu (0.6ms)
+Rendered admin/temps/_temp_index (23.6ms)
+Rendered shared/_footer (0.9ms)
+Completed in 428ms (View: 82 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 10:50:58) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.4ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (2.2ms)
+Rendered admin/temps/_temp_new (783.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 795ms (View: 794 | 200 OK [http://localhost/admin/temps/new]
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 10:51:41) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.3ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (1.3ms)
+Rendered admin/temps/_temp_new (11.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 16ms (View: 16 | 200 OK [http://localhost/admin/temps/new]
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 10:51:48) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.3ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (1.3ms)
+Rendered admin/temps/_temp_new (11.2ms)
+Rendered shared/_footer (0.1ms)
+Completed in 16ms (View: 15 | 200 OK [http://localhost/admin/temps/new]
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 10:51:49) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.3ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (1.3ms)
+Rendered admin/temps/_temp_new (10.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 15ms (View: 15 | 200 OK [http://localhost/admin/temps/new]
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 10:51:49) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.3ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (1.2ms)
+Rendered admin/temps/_temp_new (11.3ms)
+Rendered shared/_footer (0.1ms)
+Completed in 16ms (View: 15 | 200 OK [http://localhost/admin/temps/new]
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 10:51:56) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.5ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (1.3ms)
+Rendered admin/temps/_temp_new (12.0ms)
+Rendered shared/_footer (0.1ms)
+Completed in 17ms (View: 16 | 200 OK [http://localhost/admin/temps/new]
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2010-10-08 10:59:18) [GET]
+Redirected to http://localhost:3000/admin/users
+Completed in 95ms | 302 Found [http://localhost/admin]
+
+
+Processing Admin::UsersController#index (for 127.0.0.1 at 2010-10-08 10:59:18) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/users/user
+Rendered admin/shared/_login (0.8ms)
+Rendered admin/shared/_top_menu (0.9ms)
+Rendered admin/shared/_cus_sub_menu (0.9ms)
+Rendered admin/users/_user_index (36.7ms)
+Rendered shared/_footer (0.6ms)
+Completed in 816ms (View: 160 | 200 OK [http://localhost/admin/users]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 10:59:23) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.4ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.8ms)
+Rendered admin/temps/_temp_index (22.4ms)
+Rendered shared/_footer (0.1ms)
+Completed in 406ms (View: 113 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 10:59:24) [GET]
+Rendering admin/categories/category
+
+ActionView::MissingTemplate (Missing template admin/categories/category.erb in view path app/views):
+  haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+  app/controllers/admin/categories_controller.rb:14:in `index'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 11:00:17) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.3ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (2.1ms)
+Rendered admin/temps/_temp_new (21.7ms)
+Rendered shared/_footer (0.1ms)
+Completed in 33ms (View: 32 | 200 OK [http://localhost/admin/temps/new]
+
+
+Processing Admin::UsersController#index (for 127.0.0.1 at 2010-10-08 11:00:18) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/users/user
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/shared/_cus_sub_menu (0.1ms)
+Rendered admin/users/_user_index (11.2ms)
+Rendered shared/_footer (0.1ms)
+Completed in 20ms (View: 14 | 200 OK [http://localhost/admin/users]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 11:00:19) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.2ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_index (17.2ms)
+Rendered shared/_footer (0.1ms)
+Completed in 26ms (View: 22 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::NoticesController#index (for 127.0.0.1 at 2010-10-08 11:00:20) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/notices/notice
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/shared/_board_sub_menu (0.7ms)
+Rendered admin/notices/_notice_index (9.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 185ms (View: 35 | 200 OK [http://localhost/admin/notices]
+
+
+Processing Admin::MyadminsController#index (for 127.0.0.1 at 2010-10-08 11:00:21) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/myadmins/myadmin
+Rendered admin/shared/_login (2.4ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/myadmins/_sub_menu (0.7ms)
+Rendered admin/myadmins/_admin_index (11.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 60ms (View: 52 | 200 OK [http://localhost/admin/myadmins]
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:00:21) [GET]
+Rendering admin/categories/category
+
+ActionView::MissingTemplate (Missing template admin/categories/category.erb in view path app/views):
+  haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+  app/controllers/admin/categories_controller.rb:14:in `index'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+Rendering admin/categories/category
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/categories/_sub_menu (1.0ms)
+Rendered admin/categories/_category_index (88.7ms)
+Rendered shared/_footer (0.1ms)
+Completed in 186ms (View: 183 | 200 OK [http://localhost/admin/categories]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-topbg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/input-bg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-edit.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-delete.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-sub-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:03:15) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+Rendering admin/categories/category
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/categories/_sub_menu (0.0ms)
+Rendered admin/categories/_category_index (16.4ms)
+Rendered shared/_footer (0.1ms)
+Completed in 84ms (View: 82 | 200 OK [http://localhost/admin/categories]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/input-bg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-edit.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-topbg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-delete.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-sub-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:06:25) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:09:23) [GET]
+Rendering admin/categories/category
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/categories/_sub_menu (0.0ms)
+Rendered admin/categories/_category_index (16.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 21ms (View: 18 | 200 OK [http://localhost/admin/categories]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:23) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:23) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:23) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-delete.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:23) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:23) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:24) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-topbg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:24) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/input-bg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:24) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-sub-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:24) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-edit.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:09:24) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+Rendering admin/categories/category
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/categories/_sub_menu (0.0ms)
+Rendered admin/categories/_category_index (18.5ms)
+Rendered shared/_footer (0.1ms)
+Completed in 23ms (View: 20 | 200 OK [http://localhost/admin/categories]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-delete.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/input-bg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-edit.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-topbg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-sub-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:29) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:17:30) [GET]
+Rendering admin/categories/category
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/categories/_sub_menu (0.1ms)
+Rendered admin/categories/_category_index (15.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 20ms (View: 18 | 200 OK [http://localhost/admin/categories]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/input-bg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-edit.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-main-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-main-topbg.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-delete.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/list-sub-icon.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/button-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 11:17:31) [GET]
+
+ActionController::RoutingError (No route matches "/images/admin/category/label-sub-add.png" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:18:22) [GET]
+Rendering admin/categories/category
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/categories/_sub_menu (0.1ms)
+Rendered admin/categories/_category_index (15.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 20ms (View: 18 | 200 OK [http://localhost/admin/categories]
+
+
+Processing Admin::CategoriesController#category_order_update (for 127.0.0.1 at 2010-10-08 11:34:11) [POST]
+  Parameters: {"category_id"=>"cate_67,cate_64,cate_68", "authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o="}
+Completed in 42ms (View: 1 | 200 OK [http://localhost/admin/categories/category_order_update]
+
+
+Processing Admin::CategoriesController#category_order_update (for 127.0.0.1 at 2010-10-08 11:34:12) [POST]
+  Parameters: {"category_id"=>"cate_64,cate_67,cate_68", "authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o="}
+Completed in 46ms (View: 1 | 200 OK [http://localhost/admin/categories/category_order_update]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 11:34:41) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_index (15.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 23ms (View: 19 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 11:35:29) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.3ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (1.1ms)
+Rendered admin/temps/_temp_new (10.3ms)
+Rendered shared/_footer (0.1ms)
+Completed in 15ms (View: 14 | 200 OK [http://localhost/admin/temps/new]
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 11:37:49) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (2.4ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (1.2ms)
+
+ActionView::TemplateError (undefined method `is_col' for #<Temp:0x0000010232c5f0>) on line #22 of app/views/admin/temps/_temp_new.html.erb:
+19: -->
+20:   <p>
+21:     <%= f.label "세로디자인 " %>
+22: 	<%= f.check_box :is_col %>
+23:   </p>
+24: 
+25:   <p>
+
+    app/views/admin/temps/_temp_new.html.erb:22:in `block in _run_erb_app47views47admin47temps47_temp_new46html46erb_locals_object_temp_new'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:229:in `form_for_with_haml'
+    app/views/admin/temps/_temp_new.html.erb:4
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/admin/temps/temp.html.erb:47
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/admin/temps_controller.rb:79:in `new'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (92.1ms)
+Rendered rescues/_request_and_response (1.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing Admin::TempsController#new (for 127.0.0.1 at 2010-10-08 11:38:54) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.4ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_subcategories (1.2ms)
+Rendered admin/temps/_temp_new (11.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 151ms (View: 16 | 200 OK [http://localhost/admin/temps/new]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-08 11:42:57) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_logo (1.2ms)
+Rendered shared/_login (7.2ms)
+Rendered shared/_menu (1.8ms)
+Rendered pages/_main_content (7.0ms)
+Rendered shared/_footer (0.1ms)
+Completed in 142ms (View: 135 | 200 OK [http://localhost/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-10-08 11:43:04) [GET]
+  Parameters: {"uri"=>"/"}
+Rendering template within layouts/application
+Rendering sessions/session
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered sessions/_session_new (4.2ms)
+Rendered shared/_footer (0.1ms)
+Completed in 29ms (View: 26 | 200 OK [http://localhost/login?uri=/]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-08 11:43:09) [POST]
+  Parameters: {"authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o=", "session"=>{"uri"=>"/", "userid"=>"cholubin", "password"=>"5972"}, "x"=>"0", "y"=>"0"}
+Redirected to http://localhost:3000/
+Completed in 424ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-08 11:43:09) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.7ms)
+Rendered shared/_menu (0.1ms)
+Rendered pages/_main_content (1.5ms)
+Rendered shared/_footer (0.1ms)
+Completed in 17ms (View: 14 | 200 OK [http://localhost/]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-08 11:47:29) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered temps/_left_sidebar (19.2ms)
+Rendered temps/_temp_index (13.2ms)
+Rendered shared/_footer (0.1ms)
+Completed in 245ms (View: 140 | 200 OK [http://localhost/temps]
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2010-10-08 11:47:53) [GET]
+Redirected to http://localhost:3000/admin/users
+Completed in 3ms | 302 Found [http://localhost/admin]
+
+
+Processing Admin::UsersController#index (for 127.0.0.1 at 2010-10-08 11:47:53) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/users/user
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/shared/_cus_sub_menu (0.1ms)
+Rendered admin/users/_user_index (7.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 14ms (View: 10 | 200 OK [http://localhost/admin/users]
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:47:57) [GET]
+Rendering admin/categories/category
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/categories/_sub_menu (0.0ms)
+Rendered admin/categories/_category_index (15.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 19ms (View: 18 | 200 OK [http://localhost/admin/categories]
+
+
+Processing Admin::CategoriesController#delete_category (for 127.0.0.1 at 2010-10-08 11:48:06) [POST]
+  Parameters: {"category_id"=>"cate-del_67"}
+Completed in 48ms (View: 1 | 200 OK [http://localhost/admin/categories/delete_category]
+
+
+Processing Admin::CategoriesController#delete_category (for 127.0.0.1 at 2010-10-08 11:48:15) [POST]
+  Parameters: {"category_id"=>"subcate-del_85"}
+Completed in 34ms (View: 1 | 200 OK [http://localhost/admin/categories/delete_category]
+
+
+Processing Admin::CategoriesController#add_subcategory (for 127.0.0.1 at 2010-10-08 11:48:21) [POST]
+  Parameters: {"category_id"=>"64", "subcategory_name"=>"일반현수막"}
+Rendered admin/categories/_created_subcategory (17.6ms)
+Completed in 80ms (View: 27 | 200 OK [http://localhost/admin/categories/add_subcategory]
+
+
+Processing Admin::CategoriesController#delete_category (for 127.0.0.1 at 2010-10-08 11:48:28) [POST]
+  Parameters: {"category_id"=>"cate-del_68"}
+Completed in 14ms (View: 1 | 200 OK [http://localhost/admin/categories/delete_category]
+
+
+Processing Admin::CategoriesController#add_category (for 127.0.0.1 at 2010-10-08 11:48:36) [POST]
+  Parameters: {"category_name"=>"배너"}
+Rendered admin/categories/_created_category (24.6ms)
+Completed in 44ms (View: 33 | 200 OK [http://localhost/admin/categories/add_category]
+
+
+Processing Admin::CategoriesController#add_category (for 127.0.0.1 at 2010-10-08 11:48:40) [POST]
+  Parameters: {"category_name"=>"롤블라인더"}
+Rendered admin/categories/_created_category (0.2ms)
+Completed in 18ms (View: 2 | 200 OK [http://localhost/admin/categories/add_category]
+
+
+Processing Admin::CategoriesController#add_category (for 127.0.0.1 at 2010-10-08 11:48:49) [POST]
+  Parameters: {"category_name"=>"롤포스터"}
+Rendered admin/categories/_created_category (0.2ms)
+Completed in 53ms (View: 2 | 200 OK [http://localhost/admin/categories/add_category]
+
+
+Processing Admin::CategoriesController#category_order_update (for 127.0.0.1 at 2010-10-08 11:48:53) [POST]
+  Parameters: {"category_id"=>"cate_64,cate_71,cate_70,cate_69", "authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o="}
+Completed in 53ms (View: 1 | 200 OK [http://localhost/admin/categories/category_order_update]
+
+
+Processing Admin::CategoriesController#category_order_update (for 127.0.0.1 at 2010-10-08 11:48:57) [POST]
+  Parameters: {"category_id"=>"cate_64,cate_69,cate_71,cate_70", "authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o="}
+Completed in 45ms (View: 1 | 200 OK [http://localhost/admin/categories/category_order_update]
+
+
+Processing Admin::CategoriesController#category_order_update (for 127.0.0.1 at 2010-10-08 11:49:00) [POST]
+  Parameters: {"category_id"=>"cate_64,cate_69,cate_70,cate_71", "authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o="}
+Completed in 44ms (View: 1 | 200 OK [http://localhost/admin/categories/category_order_update]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-08 11:49:06) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (2.9ms)
+Rendered shared/_menu (0.1ms)
+Rendered temps/_left_sidebar (6.5ms)
+Rendered temps/_temp_index (2.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 26ms (View: 15 | 200 OK [http://localhost/temps]
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:51:28) [GET]
+Redirected to http://localhost:3000/admin/login
+Filter chain halted as [:authenticate_admin!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/admin/categories]
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2010-10-08 11:51:28) [GET]
+Rendering template within layouts/adminsessions
+Rendering admin/adminsessions/new
+Completed in 23ms (View: 20 | 200 OK [http://localhost/admin/login]
+
+
+Processing AdminsessionsController#create (for 127.0.0.1 at 2010-10-08 11:51:32) [POST]
+  Parameters: {"authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o=", "adminsession"=>{"admin_id"=>"webtop", "password"=>"5972"}, "x"=>"0", "y"=>"0"}
+Redirected to http://localhost:3000/admin/temps
+Completed in 9ms | 302 Found [http://localhost/adminsessions]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 11:51:32) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.4ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_index (15.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 275ms (View: 20 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:51:34) [GET]
+Rendering admin/categories/category
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/categories/_sub_menu (0.0ms)
+Rendered admin/categories/_category_index (22.2ms)
+Rendered shared/_footer (0.1ms)
+Completed in 26ms (View: 24 | 200 OK [http://localhost/admin/categories]
+
+
+Processing Admin::CategoriesController#index (for 127.0.0.1 at 2010-10-08 11:52:42) [GET]
+Rendering admin/categories/category
+Rendered admin/shared/_login (0.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/categories/_sub_menu (0.0ms)
+Rendered admin/categories/_category_index (24.7ms)
+Rendered shared/_footer (0.1ms)
+Completed in 243ms (View: 27 | 200 OK [http://localhost/admin/categories]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 11:53:21) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_index (14.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 22ms (View: 18 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::MyadminsController#index (for 127.0.0.1 at 2010-10-08 11:53:23) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/myadmins/myadmin
+Rendered admin/shared/_login (1.2ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/myadmins/_sub_menu (0.1ms)
+Rendered admin/myadmins/_admin_index (6.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 14ms (View: 10 | 200 OK [http://localhost/admin/myadmins]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 11:53:26) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (11.0ms)
+Rendered mytemplates/_mytemplate_index (12.7ms)
+Rendered shared/_footer (0.1ms)
+Completed in 396ms (View: 63 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#destroy (for 127.0.0.1 at 2010-10-08 11:54:33) [POST]
+  Parameters: {"id"=>"85"}
+Redirected to http://localhost:3000/mytemplates
+Completed in 744ms | 302 Found [http://localhost/mytemplates/destroy]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 11:54:34) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (0.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 18ms (View: 8 | 200 OK [http://localhost/mytemplates]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-08 11:54:37) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered temps/_left_sidebar (7.7ms)
+Rendered temps/_temp_index (2.7ms)
+Rendered shared/_footer (0.1ms)
+Completed in 30ms (View: 17 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-08 11:54:40) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered temps/_left_sidebar (6.8ms)
+Rendered temps/_temp_index (2.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 126ms (View: 15 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-08 11:54:41) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"84"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered temps/_left_sidebar (7.3ms)
+Rendered temps/_temp_index (15.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 41ms (View: 29 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=84]
+
+
+Processing MytemplatesController#copyto_my_template (for 127.0.0.1 at 2010-10-08 11:54:44) [POST]
+  Parameters: {"temp_id"=>"52", "authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o="}
+Rendered mytemplates/_copy_template (15.5ms)
+Completed in 120ms (View: 29 | 200 OK [http://localhost/mytemplates/copyto_my_template]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 11:54:46) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (5.2ms)
+Rendered shared/_footer (0.1ms)
+Completed in 15ms (View: 11 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:00:14) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.8ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.+) on line #116 of app/views/mytemplates/_mytemplate_index.html.erb:
+113: 				@mytemplates.each do |my| 
+114: 					main_category_sn = Category.get(my.category.to_i).sn 
+115: 					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+116: 					sn_num = main_category_sn + sub_category_sn + my.id.to_s
+117: 				%>
+118: 				<tr id="<%= my.id.to_s %>" class="item">
+119: 					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
+
+    app/views/mytemplates/_mytemplate_index.html.erb:116:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:113
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (181.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:03:05) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+ERROR: compiling _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object RAISED /Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:171: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:173: syntax error, unexpected $end, expecting keyword_end
+Function body:           def _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object(local_assigns)
+            old_output_buffer = output_buffer;mytemplate_index = local_assigns[:mytemplate_index];object = local_assigns[:object];;@output_buffer = '';  __in_erb_template=true ;  
+	if params[:cate] != nil; cate = params[:cate] else; cate = "" end
+	if params[:folder] != nil; folder = params[:folder] else; folder = "" end
+	if params[:page] != nil; page = params[:page] else; page = "" end
+	if params[:search] != nil; search = params[:search] else; search = "" end
+
+	if cate == nil or cate == "" or cate == "all"
+		cate = "all"
+		title_text = "전체"
+	else
+		title_text = Category.get(cate.to_i).name
+	end
+@output_buffer.concat "\n\n<script language=\"javascript\">\n function popup(doc_name) {\n       // var url = '/mlayout?doc_name='+doc_name;\n\t   var url = \"/MClientBox/index.html?spread_list=YES&user_path=/user_files/"
+
+
+
+
+; @output_buffer.concat(( current_user.userid ).to_s); @output_buffer.concat "&doc_path=/article_templates/\"+ doc_name+\".mlayoutP\"\n\t   width = screen.width;\n\t   height = screen.height;\n      window.open(url ,'webtop_print','width='+width+', height='+height);\n}\n\n</script>\n\n<script language=\"javascript\">\n$(document).ready(function(){\n\t$('#chk_all').click(function(){\n\t\t$('.chkbox').click();\n\t});\n\t\n\t$('.delete').click(function(){\n\t\tif (event.target.id == \"\"){\n\t\t\tvar temp_array = jQuery.makeArray($('.chkbox:checked'));\n\t\t\t// $(\"input:checkbox:checked\").each(function(){\n\t\t\t// \ttemp_array += $(this).val() + \",\";\n\t\t\t// });\n\t\t\tvar del_ids = \"\";\n\t\t\tjQuery.each(temp_array, function(){\n\t\t\t\tdel_ids += $(this).val() + \",\";\n\t\t\t})\n\t\t\t\n\t\t\tif (del_ids == \"\"){\n\t\t\t\talert(\"\xEC\x82\xAD\xEC\xA0\x9C\xED\x95\xA0 \xED\x95\xAD\xEB\xAA\xA9\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94!\");\n\t\t\t}else{\n\t\t\t\tif (window.confirm(\"\xEC\xA0\x95\xEB\xA7\x90 \xEC\x82\xAD\xEC\xA0\x9C\xED\x95\x98\xEC\x8B\x9C\xEA\xB2\xA0\xEC\x8A\xB5\xEB\x8B\x88\xEA\xB9\x8C?\")){\n\t\t\t\t\tloadingView();\n\t\t\t\t\t$.ajax({\n\t\t\t\t\t\tdata:'ids='+ del_ids, \n\t\t\t\t\t\tdataType:'script', \n\t\t\t\t\t\ttype:'post', \n\t\t\t\t\t\turl:'/mytemplates/destroy_selection',\n\t\t\t\t\t\tsuccess: function(request){\n\t\t\t\t\t\t\tjQuery.each(temp_array, function(){\n\t\t\t\t\t\t\t\t$('#'+$(this).val()).remove();\n\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\tloadingView();\n\t\t\t\t\t\t}\n\t\t\t\t\t});\t\n\t\t\t\t}\n\t\t\t\t\n\t\t\t}\n\n\t\t\t\t\n\t\t}else{\n\t\t\tvar temp_id = event.target.id.split(\"_\");\n\t\t\tvar id = temp_id[1];\n\t\t\tif (window.confirm(\"\xEC\xA0\x95\xEB\xA7\x90 \xEC\x82\xAD\xEC\xA0\x9C\xED\x95\x98\xEC\x8B\x9C\xEA\xB2\xA0\xEC\x8A\xB5\xEB\x8B\x88\xEA\xB9\x8C?\")){\n\t\t\t\tloadingView();\n\t\t\t\t$.ajax({\n\t\t\t\t\tdata:'id='+ id, \n\t\t\t\t\tdataType:'script', \n\t\t\t\t\ttype:'post', \n\t\t\t\t\turl:'/mytemplates/destroy',\n\t\t\t\t\tsuccess: function(request){\n\t\t\t\t\t\t$('#'+id).remove();\n\t\t\t\t\t\tloadingView();\n\n\t\t\t\t\t}\n\t\t\t\t});\t\n\t\t\t};\t\n\t\t}\n\t\t\n\t});\n});\t\n\n</script>\n\n<div id=\"designcart\">\n\t<h3>\xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8\xEB\xB0\x94\xEA\xB5\xAC\xEB\x8B\x88</h3>\n\t<p>\xEC\x9E\x91\xEC\x97\x85\xEB\x90\x9C \xED\x92\x88\xEB\xAA\xA9\xEC\x9D\x84 \xEA\xB4\x80\xEB\xA6\xAC\xED\x95\x98\xEA\xB3\xA0, \xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\x98\xEB\x8A\x94 \xED\x8E\x98\xEC\x9D\xB4\xEC\xA7\x80\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4.</p>\n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;  if @mytemplates.count > 0 ; @output_buffer.concat "\n\t<form action=\"### \xEC\xA3\xBC\xEB\xAC\xB8 \xED\x94\x84\xEB\xA1\x9C\xEC\x84\xB8\xEC\x8A\xA4\xEB\xA1\x9C ###\" method=\"post\" id=\"design-list\">\n\t<input name=\"authenticity_token\" type=\"hidden\" value=\"### \xEC\x9D\xB8\xEC\xA6\x9D\xED\x86\xA0\xED\x81\xB0 ###\" />\n\t\t<h4><span class=\"step\">Step 1.</span> \xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xEB\xAA\xA9\xEB\xA1\x9D, \xEA\xB2\x80\xED\x86\xA0 </h4>\n\t\t<table>\n\t\t\t<caption>\xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\xA0 \xED\x95\xAD\xEB\xAA\xA9\xEA\xB3\xBC \xEC\x98\xB5\xEC\x85\x98\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94. <a href=\"#\" class=\"delete\">\xEC\x84\xA0\xED\x83\x9D\xED\x95\x9C \xED\x95\xAD\xEB\xAA\xA9 \xEC\x82\xAD\xEC\xA0\x9C</a></caption>\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th class=\"check\" id=\"chk_all\">check</th>\n\t\t\t\t\t<th>\xEC\x9E\x91\xEC\x97\x85\xEA\xB5\xAC\xEB\xB6\x84</th>\n\t\t\t\t\t<th>\xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xED\x92\x88\xEB\xAA\xA9</th>\n\t\t\t\t\t<th>\xEC\x82\xAC\xEC\x9D\xB4\xEC\xA6\x88</th>\n\t\t\t\t\t<th>\xEA\xB0\x80\xEA\xB2\xA9</th>\n\t\t\t\t\t<th>\xEC\x88\x98\xEC\xA0\x95\xEC\x9D\xBC</th>\n\t\t\t\t\t<th>\xEA\xB8\xB0\xEB\x8A\xA5</th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<!-- \xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xED\x95\xAD\xEB\xAA\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; 
+				@temp = 1 
+				@mytemplates.each do |my| 
+					main_category_sn = Category.get(my.category.to_i).sn
+					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+					if main_category_sn.nil?; main_category_sn = "mc"
+					if sub_category_sn.nil?; main_category_sn = "sc"
+						
+					sn_num = main_category_sn + sub_category_sn + my.id.to_s
+				; @output_buffer.concat "\n\t\t\t\t<tr id=\""
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\" class=\"item\">\n\t\t\t\t\t<td class=\"check\"><!-- \xED\x8E\xB8\xEC\xA7\x91\xEC\x9D\x98\xEB\xA2\xB0\xEC\x9D\x98 \xEA\xB2\xBD\xEC\x9A\xB0 \xEC\x8B\x9C\xEC\x95\x88\xED\x99\x95\xEC\xA0\x95\xEC\x9D\x84 \xED\x95\xB4\xEC\x95\xBC \xEC\xB2\xB4\xED\x81\xAC\xED\x95\xA0 \xEC\x88\x98 \xEC\x9E\x88\xEC\x9D\x8C. input\xED\x83\x9C\xEA\xB7\xB8\xEC\x97\x90  disabled \xEC\xB2\x98\xEB\xA6\xAC\xED\x95\x98\xEB\xA9\xB4 \xEB\x90\xA0\xEB\x93\xAF\xED\x95\xA9\xEB\x8B\x88\xEB\x8B\xA4. --><input class=\"chkbox\" type=\"checkbox\"  value=\""
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\"/></td>\n\t\t\t\t\t<td class=\"edit-type\">### \xEC\x9E\x91\xEC\x97\x85\xEA\xB5\xAC\xEB\xB6\x84(\xEC\xA7\x81\xEC\xA0\x91\xED\x8E\xB8\xEC\xA7\x91,\xED\x8E\xB8\xEC\xA7\x91\xEC\x9D\x98\xEB\xA2\xB0) ###</td>\n\t\t\t\t\t<td class=\"design\">"
+
+; @output_buffer.concat(( Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? ).to_s); @output_buffer.concat(("/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil).to_s); @output_buffer.concat "<span class=\"design-code\">("; @output_buffer.concat(( sn_num ).to_s); @output_buffer.concat ")</span> <span>### \xED\x94\xBC\xEB\x93\x9C\xEB\xB0\xB1\xEC\x83\x81\xED\x83\x9C\xED\x91\x9C\xEC\x8B\x9C(\xED\x8E\xB8\xEC\xA7\x91\xEC\x9D\x98\xEB\xA2\xB0) ###</span></td>\n\t\t\t\t\t<td class=\"size\">### \xEA\xB0\x80\xEB\xA1\x9C\xEC\x82\xAC\xEC\x9D\xB4\xEC\xA6\x88 ###cm x ### \xEC\x84\xB8\xEB\xA1\x9C\xEC\x82\xAC\xEC\x9D\xB4\xEC\xA6\x88 ###cm</td>\n\t\t\t\t\t<td class=\"price\">"
+
+; @output_buffer.concat(( Temp.get(my.temp_id).price ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"date\">"
+; @output_buffer.concat(( my.updated_at.strftime('%Y-%m-%d') ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"action\">\n\t\t\t\t\t\t<h5>\xEC\x9D\xB4 \xED\x92\x88\xEB\xAA\xA9\xEC\x9D\x84...</h5>\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"edit\"><a href=\"### \xEC\x9B\xB9\xED\x83\x91 ###\" onClick=\"popup('"
+
+
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "');\">\xED\x8E\xB8\xEC\xA7\x91</a></li>\n\t\t\t\t\t\t\t<li class=\"options\"><a href=\"### \xEC\x98\xB5\xEC\x85\x98 \xEC\x84\xA0\xED\x83\x9D \xEC\xB0\xBD ###\">\xEC\x98\xB5\xEC\x85\x98 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</a></li>\n\t\t\t\t\t\t\t<li class=\"delete\"><a href=\"### \xEC\x82\xAD\xEC\xA0\x9C ###\" id=\"del_"
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\">\xEC\x82\xAD\xEC\xA0\x9C</a></li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<!-- jQuery\xEB\xA1\x9C \xEC\x88\xA8\xEA\xB2\xA8\xEB\x86\xA8\xEB\x8B\xA4\xEA\xB0\x80 \xEB\xA0\x88\xEC\x9D\xB4\xEC\x96\xB4\xEB\xA1\x9C \xED\x86\xA0\xEA\xB8\x80\xED\x95\xA0 \xEC\x83\x9D\xEA\xB0\x81\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t<div class=\"option-select\">\n\t\t\t\t\t\t\t<h5>\xEC\x98\xB5\xEC\x85\x98 \xEC\x84\xA0\xED\x83\x9D</h5>\n\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t<li><label for=\"piece\">\xEA\xB0\x9C\xEC\x88\x98</label> <input id=\"piece\" name=\"piece[]\" type=\"number\" value=\"1\"/>ea</li>\n\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t<label>### \xEC\x98\xB5\xEC\x85\x98\xEC\xA0\x9C\xEB\xAA\xA9 ###</label>\n\t\t\t\t\t\t\t\t\t<select name=\"select_"
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\">\n\t\t\t\t\t\t\t\t\t\t<option value=\"\" selected>\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\">------------------</option>\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t\t\t\t\t<option value=\"### \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9\xEA\xB0\x92 ###\">### \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9\xEA\xB0\x92 ###</option>\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<!-- jQuery\xEB\xA1\x9C \xEC\x88\xA8\xEA\xB2\xA8\xEB\x86\xA8\xEB\x8B\xA4\xEA\xB0\x80 \xEB\xA0\x88\xEC\x9D\xB4\xEC\x96\xB4\xEB\xA1\x9C \xED\x86\xA0\xEA\xB8\x80\xED\x95\xA0 \xEC\x83\x9D\xEA\xB0\x81\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. \xEB\x81\x9D-->\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t"
+
+
+
+
+
+
+
+
+
+
+
+
+
+;  end ; @output_buffer.concat "\n\t\t\t\t<!-- \xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xED\x95\xAD\xEB\xAA\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t</tbody>\n\t\t</table>\n\t\t\n\t<div id=\"total-price\">\n\t\t<h4>\xEC\xB4\x9D \xEC\xA3\xBC\xEB\xAC\xB8 \xEA\xB8\x88\xEC\x95\xA1</h4>\n\t\t<!-- jQuery\xEB\xA1\x9C \xEC\xB2\x98\xEB\xA6\xAC\xED\x95\xA0 \xEC\x98\x88\xEC\xA0\x95\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. -->\n\t\t<p class=\"price\">00,000\xEC\x9B\x90</p>\n\t</div>\n\t<input type=\"submit\" class=\"order\" value=\"\xEC\x84\xA0\xED\x83\x9D\xED\x95\x9C \xED\x95\xAD\xEB\xAA\xA9 \xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\x98\xEA\xB8\xB0\"/>\n\t</form>\n"
+
+
+
+
+
+
+
+
+
+
+
+;  end ; @output_buffer.concat "\n</div>"
+; @output_buffer.force_encoding(__ENCODING__)
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /Users/cholubin/development/mybanner/config/initializers/fix_renderable.rb:19:in `module_eval'
+/Users/cholubin/development/mybanner/config/initializers/fix_renderable.rb:19:in `compile!'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:61:in `compile'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:28:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:20:in `block in render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:26:in `block in benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `block in ms'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:26:in `benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:19:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/template.rb:205:in `render_template'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:44:in `render_partial'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/partials.rb:184:in `render_partial'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:267:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+/Users/cholubin/development/mybanner/app/views/mytemplates/mytemplate.html.erb:40:in `_run_erb_app47views47mytemplates47mytemplate46html46erb'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:34:in `block in render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:306:in `with_template'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:30:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/template.rb:205:in `render_template'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:265:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:348:in `_render_with_layout'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:262:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:1250:in `render_for_file'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:951:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:51:in `block in render_with_benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `block in ms'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:51:in `render_with_benchmark'
+/Users/cholubin/development/mybanner/app/controllers/mytemplates_controller.rb:46:in `index'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:1331:in `perform_action'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/filters.rb:617:in `call_filters'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/filters.rb:610:in `perform_action_with_filters'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in `block in perform_action_with_benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `block in ms'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in `perform_action_with_benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/rescue.rb:160:in `perform_action_with_rescue'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/flash.rb:146:in `perform_action_with_flash'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:532:in `process'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/filters.rb:606:in `process_with_filters'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:391:in `process'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:386:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:437:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:87:in `dispatch'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:121:in `_call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:130:in `block in build_middleware_stack'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/string_coercion.rb:25:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/head.rb:9:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/methodoverride.rb:24:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/params_parser.rb:15:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/session/abstract_store.rb:122:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/failsafe.rb:26:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `block in call'
+<internal:prelude>:8:in `synchronize'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:114:in `block in call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/reloader.rb:34:in `run'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:108:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/static.rb:31:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:46:in `block in call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `each'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/log_tailer.rb:17:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/content_length.rb:13:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/handler/webrick.rb:50:in `service'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+ActionView::TemplateError (/Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:171: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:173: syntax error, unexpected $end, expecting keyword_end) on line #171 of app/views/mytemplates/_mytemplate_index.html.erb:
+168: 	</form>
+169: <% end %>
+170: </div>
+
+    config/initializers/fix_renderable.rb:19:in `module_eval'
+    config/initializers/fix_renderable.rb:19:in `compile!'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (86.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:03:16) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+
+ActionView::TemplateError (can't convert nil into String) on line #119 of app/views/mytemplates/_mytemplate_index.html.erb:
+116: 					if main_category_sn.nil?; main_category_sn = "mc"; end
+117: 					if sub_category_sn.nil?; main_category_sn = "sc"; end
+118: 						
+119: 					sn_num = main_category_sn + sub_category_sn + my.id.to_s
+120: 				%>
+121: 				<tr id="<%= my.id.to_s %>" class="item">
+122: 					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
+
+    app/views/mytemplates/_mytemplate_index.html.erb:119:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:113
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (91.6ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:03:32) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+
+ActionView::TemplateError (can't convert nil into String) on line #119 of app/views/mytemplates/_mytemplate_index.html.erb:
+116: 					if main_category_sn.nil?; main_category_sn = "mc"; end
+117: 					if sub_category_sn.nil?; main_category_sn = "sc"; end
+118: 						
+119: 					sn_num = main_category_sn + sub_category_sn 
+120: 				%>
+121: 				<tr id="<%= my.id.to_s %>" class="item">
+122: 					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
+
+    app/views/mytemplates/_mytemplate_index.html.erb:119:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:113
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (178.0ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:03:33) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+
+ActionView::TemplateError (can't convert nil into String) on line #119 of app/views/mytemplates/_mytemplate_index.html.erb:
+116: 					if main_category_sn.nil?; main_category_sn = "mc"; end
+117: 					if sub_category_sn.nil?; main_category_sn = "sc"; end
+118: 						
+119: 					sn_num = main_category_sn + sub_category_sn 
+120: 				%>
+121: 				<tr id="<%= my.id.to_s %>" class="item">
+122: 					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
+
+    app/views/mytemplates/_mytemplate_index.html.erb:119:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:113
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (160.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:03:52) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.2ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (10.4ms)
+Rendered shared/_footer (0.1ms)
+Completed in 31ms (View: 25 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:11:17) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (9.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 27ms (View: 22 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:15:32) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (10.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 91ms (View: 86 | 200 OK [http://localhost/mytemplates]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 12:15:58) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_index (15.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 22ms (View: 19 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::TempsController#show (for 127.0.0.1 at 2010-10-08 12:16:00) [GET]
+  Parameters: {"search"=>"", "page"=>"", "id"=>"52"}
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.2ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_show (16.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 30ms (View: 27 | 200 OK [http://localhost/admin/temps/52?search=&page=]
+
+
+Processing Admin::TempsController#edit (for 127.0.0.1 at 2010-10-08 12:16:02) [GET]
+  Parameters: {"id"=>"52"}
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_edit (72.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 84ms (View: 82 | 200 OK [http://localhost/admin/temps/52/edit]
+
+
+Processing Admin::TempsController#update (for 127.0.0.1 at 2010-10-08 12:16:08) [PUT]
+  Parameters: {"authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o=", "user_list"=>"cholubin,test1,test2,test3,test4,test5,test6", "temp"=>{"category"=>"64", "subcategory"=>"84", "name"=>"1", "price"=>"500", "size"=>""}, "commit"=>"   수정   ", "id"=>"52"}
+Redirected to http://localhost:3000/admin/temps/52
+Completed in 108ms | 302 Found [http://localhost/admin/temps/52]
+
+
+Processing Admin::TempsController#show (for 127.0.0.1 at 2010-10-08 12:16:08) [GET]
+  Parameters: {"id"=>"52"}
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_show (4.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 10ms (View: 8 | 200 OK [http://localhost/admin/temps/52]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 12:16:10) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_index (14.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 22ms (View: 18 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::TempsController#show (for 127.0.0.1 at 2010-10-08 12:16:13) [GET]
+  Parameters: {"search"=>"", "page"=>"", "id"=>"51"}
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.2ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_show (4.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 11ms (View: 8 | 200 OK [http://localhost/admin/temps/51?search=&page=]
+
+
+Processing Admin::TempsController#edit (for 127.0.0.1 at 2010-10-08 12:16:14) [GET]
+  Parameters: {"id"=>"51"}
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_edit (14.5ms)
+Rendered shared/_footer (0.1ms)
+Completed in 20ms (View: 18 | 200 OK [http://localhost/admin/temps/51/edit]
+
+
+Processing Admin::TempsController#update (for 127.0.0.1 at 2010-10-08 12:16:19) [PUT]
+  Parameters: {"authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o=", "user_list"=>"cholubin,test1,test2,test3,test4,test5,test6", "temp"=>{"category"=>"64", "name"=>"명함 샘플", "price"=>"1500", "size"=>""}, "commit"=>"   수정   ", "id"=>"51"}
+Redirected to http://localhost:3000/admin/temps/51
+Completed in 87ms | 302 Found [http://localhost/admin/temps/51]
+
+
+Processing Admin::TempsController#show (for 127.0.0.1 at 2010-10-08 12:16:19) [GET]
+  Parameters: {"id"=>"51"}
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.2ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_show (4.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 10ms (View: 8 | 200 OK [http://localhost/admin/temps/51]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 12:16:20) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_index (15.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 23ms (View: 19 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::TempsController#show (for 127.0.0.1 at 2010-10-08 12:16:22) [GET]
+  Parameters: {"search"=>"", "page"=>"", "id"=>"48"}
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_show (3.5ms)
+Rendered shared/_footer (0.1ms)
+Completed in 9ms (View: 7 | 200 OK [http://localhost/admin/temps/48?search=&page=]
+
+
+Processing Admin::TempsController#edit (for 127.0.0.1 at 2010-10-08 12:16:24) [GET]
+  Parameters: {"id"=>"48"}
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.1ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_edit (13.5ms)
+Rendered shared/_footer (0.1ms)
+Completed in 19ms (View: 17 | 200 OK [http://localhost/admin/temps/48/edit]
+
+
+Processing Admin::TempsController#update (for 127.0.0.1 at 2010-10-08 12:16:29) [PUT]
+  Parameters: {"authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o=", "user_list"=>"cholubin,test1,test2,test3,test4", "temp"=>{"category"=>"64", "name"=>"", "price"=>"2000", "size"=>""}, "commit"=>"   수정   ", "id"=>"48"}
+Redirected to http://localhost:3000/admin/temps/48
+Completed in 63ms | 302 Found [http://localhost/admin/temps/48]
+
+
+Processing Admin::TempsController#show (for 127.0.0.1 at 2010-10-08 12:16:29) [GET]
+  Parameters: {"id"=>"48"}
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (65.6ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_show (4.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 75ms (View: 73 | 200 OK [http://localhost/admin/temps/48]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-08 12:16:31) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (1.2ms)
+Rendered admin/shared/_top_menu (0.1ms)
+Rendered admin/temps/_sub_menu (0.1ms)
+Rendered admin/temps/_temp_index (17.3ms)
+Rendered shared/_footer (0.1ms)
+Completed in 25ms (View: 21 | 200 OK [http://localhost/admin/temps]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:16:34) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (6.7ms)
+Rendered shared/_footer (0.1ms)
+Completed in 16ms (View: 12 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:19:36) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (10.4ms)
+Rendered shared/_footer (0.1ms)
+Completed in 193ms (View: 24 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:21:55) [GET]
+
+ArgumentError (options :defalut are unknown):
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/property.rb:901:in `assert_valid_options'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/property.rb:811:in `initialize'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/property.rb:51:in `new'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/property.rb:51:in `property'
+  app/models/mytemplate.rb:35:in `<class:Mytemplate>'
+  app/models/mytemplate.rb:9:in `<top (required)>'
+  app/controllers/mytemplates_controller.rb:36:in `index'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (64.5ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:22:20) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.9ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (10.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 468ms (View: 25 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:23:09) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (6.5ms)
+Rendered shared/_footer (0.1ms)
+Completed in 165ms (View: 12 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#destroy_selection (for 127.0.0.1 at 2010-10-08 12:23:16) [POST]
+  Parameters: {"ids"=>"86,"}
+Completed in 51ms (View: 1 | 200 OK [http://localhost/mytemplates/destroy_selection]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-08 12:23:18) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered temps/_left_sidebar (6.8ms)
+Rendered temps/_temp_index (2.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 27ms (View: 15 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-08 12:23:19) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered temps/_left_sidebar (6.6ms)
+Rendered temps/_temp_index (2.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 26ms (View: 15 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-08 12:23:20) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"84"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered temps/_left_sidebar (6.6ms)
+Rendered temps/_temp_index (15.3ms)
+Rendered shared/_footer (0.1ms)
+Completed in 38ms (View: 27 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=84]
+
+
+Processing MytemplatesController#copyto_my_template (for 127.0.0.1 at 2010-10-08 12:23:22) [POST]
+  Parameters: {"temp_id"=>"52", "authenticity_token"=>"PlJUuJzVND99gnDBgLCqUSWLg/J8CFvxE5YW2ByrL+o="}
+Rendered mytemplates/_copy_template (0.1ms)
+Completed in 136ms (View: 2 | 200 OK [http://localhost/mytemplates/copyto_my_template]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:23:23) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (6.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 16ms (View: 12 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:24:19) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (7.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 237ms (View: 15 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:24:22) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (7.0ms)
+Rendered shared/_footer (0.1ms)
+Completed in 17ms (View: 13 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 12:24:55) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (11.2ms)
+Rendered shared/_footer (0.1ms)
+Completed in 28ms (View: 24 | 200 OK [http://localhost/mytemplates]

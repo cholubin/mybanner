@@ -110,12 +110,19 @@ $(document).ready(function(){
 				<!-- 디자인 항목 반복 시작 -->
 				<%
 				@temp = 1 
-				@mytemplates.each do |my| %>
+				@mytemplates.each do |my| 
+					main_category_sn = Category.get(my.category.to_i).sn
+					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+					if main_category_sn.nil?; main_category_sn = "mc"; end
+					if sub_category_sn.nil?; sub_category_sn = "sc"; end
+						
+					sn_num = main_category_sn + sub_category_sn + my.id.to_s
+				%>
 				<tr id="<%= my.id.to_s %>" class="item">
 					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
-					<td class="edit-type">### 작업구분(직접편집,편집의뢰) ###</td>
-					<td class="design"><%= Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? %><%="/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil%><span class="design-code">(### 디자인번호 ###)</span> <span>### 피드백상태표시(편집의뢰) ###</span></td>
-					<td class="size">### 가로사이즈 ###cm x ### 세로사이즈 ###cm</td>
+					<td class="edit-type"><%= my.job_code %></td>
+					<td class="design"><%= Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? %><%="/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil%><span class="design-code">(<%= sn_num %>)</span> <span><%= my.feedback_code %></span></td>
+					<td class="size"><%= my.size %></td>
 					<td class="price"><%= Temp.get(my.temp_id).price %></td>
 					<td class="date"><%= my.updated_at.strftime('%Y-%m-%d') %></td>
 					<td class="action">
@@ -133,11 +140,39 @@ $(document).ready(function(){
 								<!-- 옵션 반복 시작 -->
 								<li>
 									<label>### 옵션제목 ###</label>
-									<select name="### 옵션목록 이름 ###">
+									<select name="select_main_<%= my.id.to_s %>">
 										<option value="" selected>선택해주세요.</option>
 										<option value="">------------------</option>
 										<!-- 옵션내용 반복 시작 -->
-										<option value="### 옵션내용값 ###">### 옵션내용값 ###</option>
+										<option value="그래픽천(현수막전용원단)">그래픽천(현수막전용원단)</option>
+										<option value="페트(얇은플라스틱제질원단)">페트(얇은플라스틱제질원단)</option>
+										<option value="합성지(점착가능원단)">합성지(점착가능원단)</option>
+										<option value="PVC켈(점착가능원단)">PVC켈(점착가능원단)</option>
+										<option value="부직포(어깨띠전용원단)">부직포(어깨띠전용원단)</option>
+										<option value="폰지(디지털날염전용원단)">폰지(디지털날염전용원단)</option>
+										
+										<!-- 옵션내용 반복 끝 -->
+										
+										
+										
+										
+										
+										
+										
+										
+									</select>
+									<select name="select_sub_<%= my.id.to_s %>">
+										<option value="" selected>선택해주세요.</option>
+										<option value="">------------------</option>
+										<!-- 옵션내용 반복 시작 -->
+										<option value="열재단">열재단</option>
+										<option value="사구아일렛">사구아일렛</option>
+										<option value="막대가공">막대가공</option>
+										<option value="봉미싱">봉미싱</option>
+										<option value="끈고리">끈고리</option>
+										<option value="사방줄미싱">사방줄미싱</option>
+										<option value="큐방">큐방</option>
+										<option value="기타">기타</option>
 										<!-- 옵션내용 반복 끝 -->
 									</select>
 								</li>

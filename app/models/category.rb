@@ -14,6 +14,7 @@ class Category
   property :id,           Serial
   property :name,         String, :required => true
   property :priority,     Integer, :default => 9999
+  property :sn,           String, :default => "mc"
   timestamps :at
 
   has n, :subcategories

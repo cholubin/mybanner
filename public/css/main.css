@@ -480,7 +480,7 @@ h5 .on{
 
 #content_section {
 	width: 800px;
-	height: 1146px;
+/*	height: 1146px;*/
 	padding-top: 15px;
 	padding-left: 15px;
 	float: right;
@@ -874,7 +874,6 @@ table a:link, table a:active, table a:visited{
     margin: 0;padding: 0;
 }
 
-
 .clipart_thead{
     background:#334827;
     font-size: 100%;
@@ -889,7 +888,7 @@ table a:link, table a:active, table a:visited{
 		background-color: #92b64f;
 }
 
-
+.highlight { background-color: yellow }
 
 
 

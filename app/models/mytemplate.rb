@@ -29,6 +29,11 @@ class Mytemplate
   property :pdf_path,               String, :length => 200       
   property :folder,                 String, :default => "basic"
 
+  # 현수막용 
+  property :is_col,                 Boolean, :default => false  
+  property :size,                   String
+  property :feedback_code,          Integer, :default => 0
+  property :job_code,               Integer, :default => 0
   timestamps :at
   
   belongs_to :user
