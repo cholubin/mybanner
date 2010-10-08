@@ -57,30 +57,24 @@ class PagesController < ApplicationController
     @menu = "home"
   end
   
-  def login
-    @title = "login"
-    @menu = "home"    
-  end 
-  
-  def logout
- 
-  end
-  
   def congratulations
+  	# AJAX 팝업을 위한 레이아웃 변경
     @title = "가입완료"
     @menu = "home"
+    render :layout => 'ajax-load-page'
   end
   
   
   def withdraw
-    
+  	# AJAX 팝업을 위한 레이아웃 변경
+  	
     if signed_in?
       @users = current_user
       @menu = "home"
       @board = "user"
       @section = "withdraw"
-
-      render 'users/user' 
+      #render 'users/user'
+      render :layout => 'ajax-load-page'
     else
       redirect_to '/' 
     end

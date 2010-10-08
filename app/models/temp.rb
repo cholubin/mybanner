@@ -44,8 +44,6 @@ class Temp
   property :copy_cnt,               Integer, :default => 0  
   property :is_best,                Boolean, :default => false  
 
-  # 현수막용 
-  property :is_col,                 Boolean, :default => false  
   # for 원플러스 (특정사용자에게만 템플릿 공개)
   property :users,                  Text
        
