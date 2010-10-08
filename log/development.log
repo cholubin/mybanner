@@ -43473,3 +43473,207 @@ Rendered users/_modify_leftsidebar (0.1ms)
 Rendered myorders/_myorder_index (1.4ms)
 Rendered shared/_footer (0.0ms)
 Completed in 67ms (View: 65 | 200 OK [http://localhost/myorders]
+
+
+Processing MyordersController#show (for 127.0.0.1 at 2010-10-08 21:44:36) [GET]
+  Parameters: {"id"=>"4"}
+Rendering template within layouts/application
+Rendering myorders/show
+
+ActionView::TemplateError (undefined method `option' for nil:NilClass) on line #3 of app/views/myorders/show.html.erb:
+1: <p>
+2:   <b>Option:</b>
+3:   <%=h @mycart.option %>
+4: </p>
+5: 
+6: <p>
+
+    app/views/myorders/show.html.erb:3
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (72.3ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:49:10) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.5ms)
+Rendered shared/_login (251.9ms)
+Rendered shared/_menu (1.4ms)
+Rendered users/_modify_leftsidebar (0.9ms)
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.each) on line #27 of app/views/myorders/_myorder_index.html.erb:
+24: 			<caption>완료된 주문은 1년동안 보관됩니다.<br/>주문 취소는 제작전에만 가능합니다. 특수한 상황의 경우 고객센터 전화로 연락해주세요.</caption>
+25: 			<!-- 주문목록에 따라 반복될 부분 시작-->
+26: 			<%
+27: 			@myorders.each do |my|
+28: 			%>
+29: 			<thead>
+30: 				<th>주문날짜</th>
+
+    app/views/myorders/_myorder_index.html.erb:27
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/myorders/myorder.html.erb:41
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/myorders_controller.rb:12:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (142.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:52:18) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (0.1ms)
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.count) on line #22 of app/views/myorders/_myorder_index.html.erb:
+19: 	</div>
+20: -->
+21: 	<%
+22: 	if @myorders.count > 0
+23: 	%>
+24: 	<div id="order-list">
+25: 		<h4>주문 목록</h4>
+
+    app/views/myorders/_myorder_index.html.erb:22
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/myorders/myorder.html.erb:41
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/myorders_controller.rb:12:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (150.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:53:08) [GET]
+Redirected to http://localhost:3000/login
+Filter chain halted as [:authenticate_user!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/myorders]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-10-08 21:53:08) [GET]
+Rendering template within layouts/application
+Rendering sessions/session
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered sessions/_session_new (5.3ms)
+Rendered shared/_footer (0.6ms)
+Completed in 37ms (View: 34 | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-08 21:53:12) [POST]
+  Parameters: {"authenticity_token"=>"ZhMCRDbqrmyioIptTSCt61x7GasjdxjA4jvoVWNj7Jk=", "session"=>{"uri"=>"", "userid"=>"cholubin", "password"=>"5972"}, "x"=>"0", "y"=>"0"}
+Redirected to http://localhost:3000/
+Completed in 301ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-08 21:53:12) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered pages/_main_content (4.3ms)
+Rendered shared/_footer (0.1ms)
+Completed in 275ms (View: 34 | 200 OK [http://localhost/]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:53:17) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (0.1ms)
+Rendered myorders/_myorder_index (1.6ms)
+Rendered shared/_footer (0.0ms)
+Completed in 15ms (View: 14 | 200 OK [http://localhost/myorders]
+
+
+Processing MyordersController#show (for 127.0.0.1 at 2010-10-08 21:53:49) [GET]
+  Parameters: {"id"=>"34"}
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (0.1ms)
+Rendered myorders/_myorder_show (1.5ms)
+Rendered shared/_footer (0.0ms)
+Completed in 16ms (View: 14 | 200 OK [http://localhost/myorders/34]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 21:55:25) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.9ms)
+Rendered mytemplates/_mytemplate_index (18.4ms)
+Rendered shared/_footer (0.1ms)
+Completed in 140ms (View: 49 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-08 21:55:36) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"102"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_show (70.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 86ms (View: 83 | 200 OK [http://localhost/mytemplates/102?cate=&page=]
+
+
+Processing MytemplatesController#jobboard_create (for 127.0.0.1 at 2010-10-08 21:55:42) [POST]
+  Parameters: {"id"=>"102", "content"=>"sss", "feedback_code"=>"0"}
+Rendered mytemplates/_jbbs_body (8.5ms)
+Completed in 25ms (View: 18 | 200 OK [http://localhost/mytemplates/jobboard_create]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:58:34) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (0.1ms)
+Rendered myorders/_myorder_index (1.6ms)
+Rendered shared/_footer (0.0ms)
+Completed in 17ms (View: 14 | 200 OK [http://localhost/myorders]

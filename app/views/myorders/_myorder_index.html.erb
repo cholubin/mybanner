@@ -18,11 +18,17 @@
 		</form>
 	</div>
 -->
+	<%
+	if !@myorders.nil?
+	%>
 	<div id="order-list">
 		<h4>주문 목록</h4>
 		<table>
 			<caption>완료된 주문은 1년동안 보관됩니다.<br/>주문 취소는 제작전에만 가능합니다. 특수한 상황의 경우 고객센터 전화로 연락해주세요.</caption>
 			<!-- 주문목록에 따라 반복될 부분 시작-->
+			<%
+			@myorders.each do |my|
+			%>
 			<thead>
 				<th>주문날짜</th>
 				<th>주문내용</th>
@@ -45,9 +51,12 @@
 				</td>
 				<td class="price">### 결제금액 ###</td>
 				<td class="status">### 진행상황 ###</td>
-				<td class="detail"><a href="### 상세정보링크 ###">상세정보 보기</a></td>
+				<td class="detail"><a href="/myorders/<%= my.id %>">상세정보 보기</a></td>
 				<td class="cencel"><a href="### 취소링크 ###">취소</a></td>
 			</tbody>
+			<%
+			end
+			%>
 			<!-- 주문목록 끝 -->
 		</table>
 	</div>
@@ -71,4 +80,7 @@
 			<li class="last"><a href="">마지막 페이지 목록</a></li>
 		</ul>
 	</div>
+	<%
+	end
+	%>
 </div>

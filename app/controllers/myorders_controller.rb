@@ -13,7 +13,17 @@ class MyordersController < ApplicationController
     else
       redirect_to '/'
     end
+  end
+  
+  def show
+    @menu = "home"
+    @board = "myorder"
+    @section = "show"
+    
+    @myorder = Myorder.all(:user_id => current_user.id)   
+    
+    render 'myorder'    
+  end
 
   
-  end
 end
