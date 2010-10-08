@@ -33,8 +33,7 @@ class Myorder
   timestamps :at
 
   belongs_to :user
-  
-  has n, :myordersubs
+  # has n, :myordersubs
 end
 
 DataMapper.auto_upgrade!

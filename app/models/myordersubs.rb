@@ -19,6 +19,8 @@ class Myordersub
   property :order,        Integer,  :default => 1
   timestamps :at
 
+# belongs_to :myorder
+
 end
 
 DataMapper.auto_upgrade!

@@ -1,0 +1,74 @@
+<div id="order-delivery">
+	<h3>주문/배송확인</h3>
+	<p>주문하신 목록 페이지입니다. 주문번호 조회와 배송조회/결제정보를 확인할 수 있습니다.</p>
+<!-- 차 후 검색 기능을 위한 폼
+	<div id="order-search">
+		<form action="/" method="get">
+			<fieldset>
+				<legend>기간별 주문 조회</legend>
+				<p>
+					<label for="startdate">시작기간</label>
+					<input name="startdate" id="startdate" type="date" value="2010-09-30"/>
+				</p>
+				<p>
+					<label for="startdate">종료기간</label>
+					<input name="startdate" id="startdate" type="date" value="2010-10-08"/>
+				</p>
+			</fieldset>
+		</form>
+	</div>
+-->
+	<div id="order-list">
+		<h4>주문 목록</h4>
+		<table>
+			<caption>완료된 주문은 1년동안 보관됩니다.<br/>주문 취소는 제작전에만 가능합니다. 특수한 상황의 경우 고객센터 전화로 연락해주세요.</caption>
+			<!-- 주문목록에 따라 반복될 부분 시작-->
+			<thead>
+				<th>주문날짜</th>
+				<th>주문내용</th>
+				<th>결제금액</th>
+				<th>진행상황</th>
+				<th>상세정보</th>
+				<th>취소</th>
+			</thead>
+			<tbody>
+				<td class="date">2010/9/1 <span>(주문번호:##########)</span></td>
+				<td class="item">
+					<ul>
+						<!-- 주문 품목 반복될 부분 -->
+						<li>###카테고리1단계 ### / ### 카테고리2단계 #### <span>(### 디자인번호 ### / ### 개별가격 ### x ### 구입수량 ###)</li>
+						<li>###카테고리1단계 ### / ### 카테고리2단계 #### <span>(### 디자인번호 ### / ### 개별가격 ### x ### 구입수량 ###)</li>
+						<li>###카테고리1단계 ### / ### 카테고리2단계 #### <span>(### 디자인번호 ### / ### 개별가격 ### x ### 구입수량 ###)</li>
+						<li>###카테고리1단계 ### / ### 카테고리2단계 #### <span>(### 디자인번호 ### / ### 개별가격 ### x ### 구입수량 ###)</li>
+						<!-- 주문 품목 반복될 부분 끝 -->
+					</ul>
+				</td>
+				<td class="price">### 결제금액 ###</td>
+				<td class="status">### 진행상황 ###</td>
+				<td class="detail"><a href="### 상세정보링크 ###">상세정보 보기</a></td>
+				<td class="cencel"><a href="### 취소링크 ###">취소</a></td>
+			</tbody>
+			<!-- 주문목록 끝 -->
+		</table>
+	</div>
+	<div id="order-list-page">
+	<h4>페이지 네비게이션</h4>
+		<ul>
+			<li class="first"><a href="">처음 페이지 목록</a></li>
+			<li class="prev"><a href="">이전 페이지</a></li>
+			<li class="more">...</li>
+			<li><a href="">1</a></li>
+			<li><a href="">2</a></li>
+			<li><a href="">3</a></li>
+			<li><a href="">4</a></li>
+			<li class="parent"><a href="">5</a></li>
+			<li><a href="">6</a></li>
+			<li><a href="">7</a></li>
+			<li><a href="">8</a></li>
+			<li><a href="">9</a></li>
+			<li class="more">...</li>
+			<li class="next"><a href="">다음 페이지</a></li>
+			<li class="last"><a href="">마지막 페이지 목록</a></li>
+		</ul>
+	</div>
+</div>

@@ -43159,3 +43159,317 @@ Rendered mytemplates/_leftsidebar (0.1ms)
 Rendered mytemplates/_mytemplate_show (5.0ms)
 Rendered shared/_footer (0.1ms)
 Completed in 13ms (View: 10 | 200 OK [http://localhost/mytemplates/102?cate=&page=]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-08 21:12:20) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_logo (0.5ms)
+Rendered shared/_login (42.4ms)
+Rendered shared/_menu (1.4ms)
+Rendered pages/_main_content (4.4ms)
+Rendered shared/_footer (0.6ms)
+Completed in 1422ms (View: 126 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 21:12:49) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.8ms)
+Rendered mytemplates/_mytemplate_index (18.5ms)
+Rendered shared/_footer (0.1ms)
+Completed in 129ms (View: 48 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-08 21:12:51) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"102"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_show (8.2ms)
+Rendered shared/_footer (0.1ms)
+Completed in 24ms (View: 21 | 200 OK [http://localhost/mytemplates/102?cate=&page=]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 21:15:14) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (11.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 24ms (View: 18 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-08 21:16:16) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"101"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_show (5.3ms)
+Rendered shared/_footer (0.1ms)
+Completed in 13ms (View: 11 | 200 OK [http://localhost/mytemplates/101?cate=&page=]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 21:16:23) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 21:16:23) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 21:16:23) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 21:16:23) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-08 21:16:24) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"101.mlayoutP", "userinfo"=>"0"}
+Completed in 585ms (View: 7 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=101.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-08 21:16:25) [GET]
+  Parameters: {"request"=>"/article_templates/101.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 20ms (View: 18 | 200 OK [http://localhost/filelist?request=/article_templates/101.mlayoutP/web/]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-08 21:16:25) [GET]
+  Parameters: {"request"=>"/article_templates/101.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 9ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/101.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-08 21:16:25) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"101.mlayoutP", "userinfo"=>"0"}
+Completed in 90ms (View: 3 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=101.mlayoutP&userinfo=0]
+
+
+Processing UsersController#edit (for 127.0.0.1 at 2010-10-08 21:17:11) [GET]
+  Parameters: {"id"=>"22"}
+Rendering template within layouts/application
+Rendering users/user
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (1.0ms)
+Rendered users/_user_edit (6.3ms)
+Rendered shared/_footer (0.1ms)
+Completed in 49ms (View: 42 | 200 OK [http://localhost/users/22/edit]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:17:28) [GET]
+
+ActionController::UnknownAction (No action responded to index. Actions: admin_from_ad_remember_token, admin_sign_in, admin_sign_out, admin_signed_in?, authenticate_admin!, authenticate_user!, create, current_admin, current_admin=, current_user, current_user=, sign_in, sign_out, signed_in?, and user_from_remember_token):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing UsersController#edit (for 127.0.0.1 at 2010-10-08 21:34:49) [GET]
+  Parameters: {"id"=>"22"}
+Rendering template within layouts/application
+Rendering users/user
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (0.1ms)
+Rendered users/_user_edit (3.0ms)
+Rendered shared/_footer (0.1ms)
+Completed in 12ms (View: 9 | 200 OK [http://localhost/users/22/edit]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:35:03) [GET]
+
+NameError (Cannot find the child_model Myordersub for Myorder in myordersubs):
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/relationship.rb:172:in `rescue in child_model'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/relationship.rb:168:in `child_model'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/relationship.rb:392:in `inverse'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/one_to_many.rb:22:in `child_key'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:709:in `block (2 levels) in assert_valid'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:708:in `each_value'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:708:in `block in assert_valid'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:707:in `each_value'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:707:in `assert_valid'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:1370:in `auto_upgrade!'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:45:in `block in repository_execute'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/descendant_set.rb:33:in `block in each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/descendant_set.rb:33:in `each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/descendant_set.rb:33:in `each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:44:in `repository_execute'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:27:in `auto_upgrade!'
+  app/models/myorder.rb:40:in `<top (required)>'
+  app/controllers/myorders_controller.rb:11:in `index'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (82.5ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:37:08) [GET]
+
+NameError (Cannot find the child_model Myordersub for Myorder in myordersubs):
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/relationship.rb:172:in `rescue in child_model'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/relationship.rb:168:in `child_model'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/relationship.rb:392:in `inverse'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/one_to_many.rb:22:in `child_key'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:709:in `block (2 levels) in assert_valid'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:708:in `each_value'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:708:in `block in assert_valid'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:707:in `each_value'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:707:in `assert_valid'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:1370:in `auto_upgrade!'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:45:in `block in repository_execute'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/descendant_set.rb:33:in `block in each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/descendant_set.rb:33:in `each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/descendant_set.rb:33:in `each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:44:in `repository_execute'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:27:in `auto_upgrade!'
+  app/models/myorder.rb:40:in `<top (required)>'
+  app/controllers/myorders_controller.rb:11:in `index'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (83.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 21:37:45) [GET]
+
+ActionController::RoutingError (No route matches "/myordersubs" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:38:04) [GET]
+
+NameError (Cannot find the child_model Myordersub for Myorder in myordersubs):
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/relationship.rb:172:in `rescue in child_model'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/relationship.rb:168:in `child_model'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/relationship.rb:392:in `inverse'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/associations/one_to_many.rb:22:in `child_key'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:709:in `block (2 levels) in assert_valid'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:708:in `each_value'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:708:in `block in assert_valid'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:707:in `each_value'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model.rb:707:in `assert_valid'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:1370:in `auto_upgrade!'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:45:in `block in repository_execute'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/descendant_set.rb:33:in `block in each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/descendant_set.rb:33:in `each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/model/descendant_set.rb:33:in `each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:44:in `repository_execute'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/migrations.rb:27:in `auto_upgrade!'
+  app/models/myorder.rb:39:in `<top (required)>'
+  app/controllers/myorders_controller.rb:11:in `index'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (78.5ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:39:06) [GET]
+
+ActionView::MissingTemplate (Missing template myorders/myorder.erb in view path app/views):
+  app/controllers/myorders_controller.rb:12:in `index'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 21:39:41) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (0.1ms)
+Rendered myorders/_myorder_index (1.4ms)
+Rendered shared/_footer (0.0ms)
+Completed in 67ms (View: 65 | 200 OK [http://localhost/myorders]
