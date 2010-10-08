@@ -1,18 +1,18 @@
-<h1>New freeboard</h1>
-
-<% form_for(@freeboard) do |f| %>
-  <%= f.error_messages %>
-<p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
-
-<%= link_to 'Back', freeboards_path %>
+<div id="board">
+	<h3>질문과 답변</h3>
+	<p>질문과 답변 게시판입니다. 저희 사이트 이용에 있어서 어려운점, 궁금한점을 작성해주시면 빠른시간 내에 답변 드리겠습니다. </p>
+	<hr/>
+	<% if flash[:notice]? %>
+	<div id="error-message">
+		<h4>작성된 내용에 문제가 있습니다.</h4>
+		<p><%= flash[:notice] %></p>
+	</div>
+	<% end %>
+	<% form_for(@freeboard) do |f| %>
+	<fieldset class="board-write-form">
+		<legend>게시물 작성</legend>
+		<p><label for="board-subject">제목</label><input name="freeboard[title]" maxlength="100" type="text" placeholder="제목을 입력하세요. (100글자 이내)" id="board-subject" value="<%= @subject if @subject != nil %>"/></p>
+		<p><label for="board-content">내용</label><textarea name="freeboard[content]" placeholder="내용을 입력하세요." id="board-content"><%= @content if @content != nil %></textarea></p>	
+	<% end %>	
+	</fieldset>
+</div>

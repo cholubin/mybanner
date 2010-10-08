@@ -1,5 +1,27 @@
-  <b>Title:</b>
-  <%=h @freeboard.title %>
-</p>
-<%= link_to 'Edit', edit_freeboard_path(@freeboard) %> |
-<%= link_to 'Back', freeboards_path %>
+<div id="board">
+	<h3>질문과 답변</h3>
+	<p>질문과 답변 게시판입니다. 저희 사이트 이용에 있어서 어려운점, 궁금한점을 작성해주시면 빠른시간 내에 답변 드리겠습니다. </p>
+	<hr/>
+	<div class="board-article">
+		<h4><%= @freeboard.title %></h4>
+		<dl class="article-info">
+			<dt>작성자</dt>
+			<dd><%= User.first(:id => @freeboard.user_id).name %></dd>
+			<dt>작성일</dt>
+			<dd><%= @freeboard.created_at.strftime('%Y-%m-%d') %></dd>
+		</dl>
+		<div class="article-content">
+			<%= simple_format(@freeboard.content) %>
+		</div>
+	</div>
+	<% if signed_in? && current_user.id == @freeboard.user_id %>
+	<div class="article-action">
+		<h4>게시판 동작</h4>
+		<ul>
+			<li class="edit"><%= link_to image_tag("/images/board/modify.jpg", :border=>0), edit_freeboard_path(@freeboard.id) %>수정</li>
+			<li class="delete"><%= link_to image_tag("/images/board/delete.jpg", :border=>0), freeboard_path, :confirm => '정말 삭제하시겠습니까?', :method => :delete %>삭제</li>
+		</ul>
+	</div>
+	<% end  %>
+	<p class="back-list"><a href="/freeboards?search=<%=params[:search]%>&page=<%=params[:page]%>">목록으로 돌아가기</a></p>
+</div>
