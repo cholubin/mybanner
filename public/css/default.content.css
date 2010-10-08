@@ -1,0 +1,83 @@
+/* @override http://mac.fooleaf.com:3000/css/default.content.css */
+
+
+/* 서브페이지 서브 메뉴, 기본 레이아웃 */
+#sub h1 { position: absolute; top: 10px; }
+#sub #header { width: 960px; height: 126px; margin: 0 auto; position: relative;}
+#sub #header #nav-menu { background-repeat: no-repeat; position: absolute; top:82px;left: 0; width: 960px; height: 44px;}
+#sub #content {	background: #fff url(/images/default/page-sub-bg.png) left 78px no-repeat; }
+#sub #submenu { position: absolute; width: 170px; left: 10px; top: 10px; padding:0;  }
+#sub #submenu h3 { padding: 40px 0 30px; text-align: center; color: #bbb; font-weight: normal; }
+#sub #submenu { position: absolute; width: 170px; left: 10px; top: 10px; padding:0; }
+#sub #submenu ul { padding: 0 10px 10px }
+#sub #submenu ul li { padding: 4px 0 8px; line-height: 150%; }
+#sub #submenu a.title { font-weight: bold; font-size: 12px;padding-left: 14px; background:  url(/images/default/submenu-title-icon.png) no-repeat 2px center;  }
+#sub #submenu a.title:hover {  background:  url(/images/default/submenu-title-icon-hover.png) no-repeat 2px center;  }
+#sub #submenu ul li ul { border: 1px solid #ccc; background: white; margin: 5px 0; *zoom:1; padding: 5px; border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
+#sub #submenu ul li ul:after {content:" "; display:block; clear:both;}
+#sub #submenu ul li ul li { display: inline-block; font-size: 11px; padding: 0;margin: 2px; padding:0 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
+#sub #submenu ul li ul li:hover { background: #67991a; } #content #submenu ul li ul li:hover a { color: white;}
+#sub #submenu ul li ul li:active { background: #b0681b; } #content #submenu ul li ul li:active a { color: white;}
+#sub .content-layout { padding: 10px 190px; width: 580px; min-height: 600px; height: auto !important; height: 600px; }
+#sub .content-layout h3 { width:580px; height: 30px; padding-top:39px; text-indent:-5000px; background-repeat: no-repeat; background-position: left 29px;}
+#sub .content-description { margin: 15px 0 20px; border: 1px solid #ddd; padding: 10px; background: #eee; }
+
+/* 템플릿 페이지 헤더  */
+#sub #design.content-layout h3 { display: none;}
+#sub #design.content-layout .content-description { display: none;}
+#sub #design-list.horizon h4 { width: 560px; height: 35px; margin-top:8px; background: url(/images/default/block-template-header-horizon.png); line-height: 35px; padding: 10px;}
+#sub #design-list.vertical h4 { width: 560px; height: 35px; margin-top:8px; background: url(/images/default/block-template-header-vertical.png); line-height: 35px; padding: 10px;}
+#sub #design-list #template-type {  position: relative; }
+#sub #design-list #template-type li {  position: absolute ;}
+#sub #design-list #template-type li.vertical { top: -26px; left: 434px;}
+#sub #design-list #template-type li.horizon { top: -26px; left: 290px;}
+#sub #design-list #template-type li a { text-indent: -5000px; width: 120px; height:26px; display: block; }
+
+
+/* 템플릿 페이지 목록 스타일 가로형 */
+#sub #design-list.horizon .article { margin: 10px 0; padding: 10px 0; }
+#sub #design-list.horizon .article .preview { width: 578px; text-align: center; min-height: 90px; display: block; border: 1px solid #ccc; border-top-left-radius:4px; -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-right-radius:4px; -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px;}
+#sub #design-list.horizon .article ul { position: relative; background: url(/images/default/block-template-base-horizon.png) no-repeat; height: 55px; }
+#sub #design-list.horizon .article li { position: absolute; height:24px; line-height: 24px; padding-left: 40px; background: no-repeat left center }
+#sub #design-list.horizon .article li.designcode { top: 5px; left: 10px;width: 200px; background-image: url(/images/default/block-template-title-designcode.png);}
+#sub #design-list.horizon .article li.item { display: none; }
+#sub #design-list.horizon .article li.size { top: 26px; width: 130px; left: 10px; background-image: url(/images/default/block-template-title-size.png);}
+#sub #design-list.horizon .article li.price { top: 26px; width: 130px; left: 160px; background-image: url(/images/default/block-template-title-price.png);}
+#sub #design-list.horizon .article li.self-edit { top: 3px; left: 292px; padding: 0;}
+#sub #design-list.horizon .article li.self-edit a { display: block; text-indent: -5000px; width: 156px; height: 46px; background: url(/images/default/button-direct-edit.png) no-repeat center center }
+#sub #design-list.horizon .article li.self-edit a:hover { background-image: url(/images/default/button-direct-edit-hover.png)}
+#sub #design-list.horizon .article li.self-edit a:active { background-image: url(/images/default/button-direct-edit-click.png)}
+
+#sub #design-list.horizon .article li.order-edit { top: 3px; left: 450px;padding: 0; }
+#sub #design-list.horizon .article li.order-edit a { display: block; text-indent: -5000px; width: 126px; height: 46px; background: url(/images/default/button-order-edit.png) no-repeat center center }
+#sub #design-list.horizon .article li.order-edit a:hover { background-image: url(/images/default/button-order-edit-hover.png)}
+#sub #design-list.horizon .article li.order-edit a:active { background-image: url(/images/default/button-order-edit-click.png)}
+#sub #design-list.horizon .article li span { display: none; }
+
+/* 템플릿 페이지 목록 스타일 세로형 */
+#sub #design-list.vertical { *zoom : 1 }
+#sub #design-list.vertical:after {content:" "; display:block; clear:both;}
+#sub #design-list.vertical .article { float: left; width: 141px; display: inline; margin: 10px 4px 20px 0; }
+#sub #design-list.vertical .article .preview { width: 139px; height: 500px; line-height: 500px; text-align: center; display: block; border: 1px solid #ccc; border-top-left-radius:4px; -webkit-border-top-left-radius: 4px; -moz-border-radius-topleft: 4px; border-top-right-radius:4px; -webkit-border-top-right-radius: 4px; -moz-border-radius-topright: 4px;}
+#sub #design-list.vertical .article ul { position: relative; background: url(/images/default/block-template-base-vertical.png) no-repeat; height: 160px; }
+#sub #design-list.vertical .article li { position: absolute; height:24px; line-height: 24px; padding-left: 40px; background: no-repeat left center }
+#sub #design-list.vertical .article li span { display: none; }
+#sub #design-list.vertical .article li.designcode { top: 7px; left: 10px;width: 200px; background-image: url(/images/default/block-template-title-designcode.png);}
+#sub #design-list.vertical .article li.item { display: none; }
+#sub #design-list.vertical .article li.size { top: 26px; width: 130px; left: 10px; background-image: url(/images/default/block-template-title-size.png);}
+#sub #design-list.vertical .article li.price { top: 46px; width: 130px; left: 10px; background-image: url(/images/default/block-template-title-price.png); font-weight: bold;}
+#sub #design-list.vertical .article li.self-edit { top: 72px; left: 7px; padding: 0; }
+#sub #design-list.vertical .article li.self-edit a { display: block; text-indent: -5000px; width: 126px; height: 45px; background: url(/images/default/button-direct-edit-v.png) no-repeat center center }
+#sub #design-list.vertical .article li.self-edit a:hover { background-image: url(/images/default/button-direct-edit-v-hover.png)}
+#sub #design-list.vertical .article li.self-edit a:active { background-image: url(/images/default/button-direct-edit-v-click.png)}
+
+#sub #design-list.vertical .article li.order-edit { top: 117px; left: 7px; padding: 0; }
+#sub #design-list.vertical .article li.order-edit a { display: block; text-indent: -5000px; width: 126px; height: 35px; background: url(/images/default/button-order-edit-v.png) no-repeat center center }
+#sub #design-list.vertical .article li.order-edit a:hover { background-image: url(/images/default/button-order-edit-hover-v.png)}
+#sub #design-list.vertical .article li.order-edit a:active { background-image: url(/images/default/button-order-edit-click-v.png)}
+
+/* 편집의뢰 주문 */
+
+#ajaxloadpage #edit-order-form .designinfo { position: absolute; width: 270px; }
+#ajaxloadpage #edit-order-form .memo { position: absolute; width: 318px; left: 310px; }
+#ajaxloadpage #edit-order-form #first-price { position: absolute; top: 300px; left: 30px; }
