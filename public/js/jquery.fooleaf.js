@@ -54,6 +54,6 @@ function popupView(popWidth, popHeight, url) {
 }
 
 $(document).ready(function() {
-	$("body").delegate("a[href='/login']","click", function() { popupView(400,360,$(this).attr("href")); return false });
+	$("body").delegate("a[href='/login']","click", function() { popupView(240,390,$(this).attr("href")); return false });
 	$("body").delegate("a[href='/users/new']","click", function() { popupView(450,430,$(this).attr("href")); return false });
 });
