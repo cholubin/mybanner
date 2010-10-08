@@ -1,0 +1,26 @@
+= 웹탑 현수막 
+현수막 업체들을 위한 웹탑버전입니다.
+관리자로 로그인을 해서 웹사이트의 UI를 바꿀 수 있습니다.
+
+== 개발 프로세스 
+* 김현수과장님(cholubin/mybanner)개발중 iedit/mybanner로 푸쉬
+* 김재국이 iedit/mybanner를 jaigouk/mybanner로 git pull
+* 정상혁이 개발한 fooleaf/mybanner를 김재국이 git merge
+* 김재국은 merge 이후 프로그램오류 체크 후 push => jaigouk/mybanner
+
+== 김현수 과장님
+
+  $ git remote add jaigouk git://github.com/jaigouk/mybanner  # 리모트 브랜치를jaigouk이라는 이름으로 더합니다. 
+  $ git pull jaigouk                                          # 리모트 브랜치이름이 jaigouk인 저장소 소스코드를 받습니다.
+                                                              # 자동으로 remotes/jaigouk/master를 git이 인식하게 됩니다. 
+  $ git branch --track jaigouk jaigouk/master                 # 명시적으로 브랜치 이름을 jaigouk이라고 생성해줍니다.
+                                                              # jaigouk브랜치에는 jaigouk/mybanner의 최신파일을 받으려고
+  $ 합니다.
+  $ git checkout jaigouk                                      # jaigouk 브랜치로 체크아웃
+  $ git pull                                                  # 최신 소스 받기
+  $ git checkout master                                       # master 브랜치로 돌아가기
+  $ git merge jaigouk                                         # 현재 개발한 내용과 jaigouk브랜치 내용 합치기
+  $ git push origin/master                                    # 업데이트 된 내용들을 iedit으로 올리기 
+  $ git push iedit/master                                     # 이후 김재국은 이 내용을 자신의 내용과 합치는 작업 실행
+
+

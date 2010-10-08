@@ -1,20 +1,60 @@
-<h1>Listing freeboards</h1>
-
-<table>
-  <tr>
-  </tr>
-
-<% @freeboards.each do |freeboard| %>
-  <tr>
-    <td><%=h freeboard.title %></td>
+<div id="board">
+	<h3>질문과 답변</h3>
+	<p>질문과 답변 게시판입니다. 저희 사이트 이용에 있어서 어려운점, 궁금한점을 작성해주시면 빠른시간 내에 답변 드리겠습니다.</p>
+	<div class="board-list">
+		<h4>게시물 목록</h4>
+		<table>
+		    <thead>
+		        <tr>
+		            <th class="number">번호</th>
+		            <th class="subject">제목</th>
+					<th class="write">작성자</th>
+		            <th class="date">등록일</th>
+		            <th class="read">조회</th>
 	
-    <td><%= link_to 'Show', freeboard %></td>
-    <td><%= link_to 'Edit', edit_freeboard_path(freeboard) %></td>
-    <td><%= link_to 'Destroy', freeboard, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New freeboard', new_freeboard_path %>
+		        </tr>
+		    </thead>
+		    <tbody>
+				<% 	if params[:page].to_i == 0 or params[:page].to_i == 1
+						@temp_page = 0
+					else
+						@temp_page = params[:page].to_i - 1
+					end
+					@page_num = @total_count - (10 * @temp_page) %>
+				<% @freeboard.each do |freeboard| %>
+		        <tr>
+		            <td class="number"><%= @page_num %></td>
+		            <td class="subject" title="<%= freeboard.title if freeboard.title.length > 90 %>"><a href="/freeboards/<%=freeboard.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= entitle(freeboard) %></a></td>
+					<td class="write"><%= User.first(:id => freeboard.user_id).name %></td>
+		            <td class="date"><%= freeboard.created_at.strftime('%Y-%m-%d') %></td>
+		            <td class="read"><%= freeboard.hit_cnt %></td>
+		        </tr>
+		        <% @page_num -= 1
+				end %>
+		    </tbody>
+		</table>
+	</div>
+	<div class="board-nav">
+		<div class="page">
+			<h4>게시판 페이지</h4>
+			<%=Freeboard.search(params[:search], params[:page]).pager.to_html "/freeboards?search=#{params[:search]}" %>
+		</div>
+		<div class="action">
+			<h4>이 게시판에...</h4>
+			<ul>
+				<%if signed_in? %>
+				<li class="write"><a href="/freeboards/new">글쓰기</a></li>
+				<%else%>
+				<li class="login-write"><a href="/login?uri=/freeboards/new">로그인 후 글쓰기</a></li>
+				<%end%>
+			</ul>
+		</div>
+		<div class="search">
+			<h4>게시판 검색</h4>
+			<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>
+			<%= text_field_tag :search, params[:search] %>
+			<input type="submit" value="검색"/>
+			<% end %>
+		</div>
+	</div>
+</div>

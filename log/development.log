@@ -43726,3 +43726,1433 @@ Rendered mytemplates/_leftsidebar (0.1ms)
 Rendered mytemplates/_mytemplate_show (9.3ms)
 Rendered shared/_footer (0.1ms)
 Completed in 25ms (View: 21 | 200 OK [http://localhost/mytemplates/102?cate=&page=]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:33:07) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.6ms)
+Rendered shared/_login (27.1ms)
+Rendered shared/_menu (1.4ms)
+Rendered mytemplates/_leftsidebar (0.8ms)
+ERROR: compiling _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object RAISED /Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:417: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:419: syntax error, unexpected $end, expecting keyword_end
+Function body:           def _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object(local_assigns)
+            old_output_buffer = output_buffer;mytemplate_index = local_assigns[:mytemplate_index];object = local_assigns[:object];;@output_buffer = '';  __in_erb_template=true ;  
+up_my_temps = Mytemplate.all(:user_id => current_user.id)
+up_my_temps.each do |u|
+	if !Temp.get(u.temp_id).nil?
+		puts_message Temp.get(u.temp_id).id.to_s
+		u.category = Temp.get(u.temp_id).category
+		u.subcategory = Temp.get(u.temp_id).subcategory
+		u.save
+	end
+	puts_message "mytemp updated"
+end
+@output_buffer.concat "\n<style>\n#layer1{border:0px solid green;position:absolute; left:500px; top:200px;width:100;height:100px; z-index:999999}\n</style>\n\n<div id=\"layer1\" style=\"display:none\">"
+
+
+
+
+; @output_buffer.concat(( image_tag("/images/template/loading.gif", :width => '100') ).to_s); @output_buffer.concat "</div>\n\n<script language=\"javascript\">\nfunction folder_view() {\n\tvar t = document.getElementById('folder');\n\t\n\tif (t.style.display == \"none\") {\n\t\tt.style.display = \"block\";\t\t\t\n\t}else{\n\t\tt.style.display = \"none\";\t\t\t\t\t\n\t}\n\n}\n\nfunction show_progress() {\n\tvar width = 100;\n\tvar height = 100;\n\t\n\tvar left = (screen.width - width)/2;\n \tvar top = (screen.height - height)/2;\n\t\n\tdocument.getElementById(\"layer1\").style.left = left;\n\tdocument.getElementById(\"layer1\").style.top = top;\n\t\n\tdocument.getElementById(\"layer1\").style.display = \"block\";\t\t\n\n}\n\nfunction hide_progress() {\n\tdocument.getElementById(\"layer1\").style.display = \"none\";\t\t\n}\n\n</script>\n\n<link href=\"/css/paginate.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;  if params[:cate] != nil; cate = params[:cate] else; cate = "" end
+   if params[:folder] != nil; folder = params[:folder] else; folder = "" end
+   if params[:page] != nil; page = params[:page] else; page = "" end
+   if params[:search] != nil; search = params[:search] else; search = "" end
+@output_buffer.concat "\n"
+;  	
+   	if cate == nil or cate == "" or cate == "all"
+		cate = "all"
+		title_text = "전체"
+	else
+		title_text = Category.get(cate.to_i).name
+	end
+@output_buffer.concat "\n<div id=\"admincontents_wrapper\" style=\"margin:0 0 -30 0\">\n<h2>\xEB\xA7\x88\xEC\x9D\xB4\xED\x85\x9C\xED\x94\x8C\xEB\xA6\xBF \xEB\xA6\xAC\xEC\x8A\xA4\xED\x8A\xB8</h2>\n</div>\n<div align=\"right\" style=\"padding:0 24 5 0\">\n\t<font color=\"white\">\xED\x8F\xB4\xEB\x8D\x94\xEB\xB3\x84 </font> \n\t<span id=\"folder_select\">\n\t<select name=\"_folder\" onChange=\"location.href='/mytemplates?page="
+
+
+
+
+
+
+; @output_buffer.concat(( page ).to_s); @output_buffer.concat "&search="; @output_buffer.concat(( params[:search] ).to_s); @output_buffer.concat "&cate="; @output_buffer.concat(( params[:cate] ).to_s); @output_buffer.concat "&folder='+document.all._folder.value;\">\n\t\t<option value=\"all\" "
+; @output_buffer.concat(( "selected" if params[:folder] == "all" ).to_s); @output_buffer.concat ">\xEC\xA0\x84\xEC\xB2\xB4</option>\t\t\t\t\n\t\t"
+; @tempfolders.each do |s| ; @output_buffer.concat "\t\n\t\t<option value=\""
+; @output_buffer.concat(( s.id ).to_s); @output_buffer.concat "\" "; @output_buffer.concat(( "selected" if params[:folder] == s.id.to_s ).to_s); @output_buffer.concat ">"; @output_buffer.concat(( s.name ).to_s); @output_buffer.concat "</option>\t\t\t\t\n\t\t"
+;  end ; @output_buffer.concat "\n\t</select>\n\t</span>\n\t<font color=\"white\">\xEB\xA9\x94\xEC\x9D\xB8\xEB\xB6\x84\xEB\xA5\x98 </font><select name=\"_cate\" onChange=\"location.href='/mytemplates?search="
+
+
+; @output_buffer.concat(( params[:search] ).to_s); @output_buffer.concat "&cate='+document.all._cate.value;\">\n\t\t"
+;   if @categories.length > 0 ; @output_buffer.concat "\n\t\t\t\t<option value=\"all\" "
+; @output_buffer.concat(( "selected" if cate == "all" ).to_s); @output_buffer.concat ">\xEC\xA0\x84\xEC\xB2\xB4</option>\t\t\t\t\t\t\n\t\t\t"
+;  @categories.each do |s| ; @output_buffer.concat "\n\t\t\t\t<option value=\""
+; @output_buffer.concat(( s.id ).to_s); @output_buffer.concat "\" "; @output_buffer.concat(( "selected" if cate == s.id.to_s ).to_s); @output_buffer.concat ">"; @output_buffer.concat(( s.name ).to_s); @output_buffer.concat "</option>\t\t\t\t\n\t\t\t"
+; end; @output_buffer.concat "\n\t\t"
+; 	else; @output_buffer.concat "\n\t\t\t\t<option value=\"\">\"\xEB\xA8\xBC\xEC\xA0\x80 \xEB\xA9\x94\xEC\x9D\xB8\xEB\xB6\x84\xEB\xA5\x98\xEB\xA5\xBC \xEC\xB6\x94\xEA\xB0\x80\xED\x95\x98\xEC\x84\xB8\xEC\x9A\x94!\"</option>\t\t\t\t\t\n\t\t\t"
+
+; end ; @output_buffer.concat "\n\t</select>\n</div>\n<table class=\"clipart_table\">\n    <thead class=\"clipart_thead\">\n        <tr>\n            <td class=\"clipart_thead\" width=\"400px\">\xEB\xA7\x88\xEC\x9D\xB4 \xED\x85\x9C\xED\x94\x8C\xEB\xA6\xBF \xEB\xA6\xAC\xEC\x8A\xA4\xED\x8A\xB8 ("
+
+
+
+
+
+; @output_buffer.concat(( title_text ).to_s); @output_buffer.concat ")</td>\n\t\t\t<td class=\"clipart_thead\" width=\"400px\" align=\"right\"><a href=\"Javascript:folder_view();\">"
+; @output_buffer.concat(( image_tag("/images/folder/folder_manage.jpg", :border=>'0', :align => 'absmiddle') ).to_s); @output_buffer.concat "</a></td>\n        </tr>\n\t\t<tr>\n\t\t\t<td colspan=\"2\">\n\t\t\t\t"
+
+
+
+; @output_buffer.concat(( render :partial => "/mytemplates/folder" ).to_s); @output_buffer.concat "\n\t\t\t</td>\n\t\t</tr>\n    </thead>\n</table>\n"
+
+
+
+
+; 
+@temp = 1 
+@mytemplates.each do |my| ; @output_buffer.concat "\n\n"
+
+;  if @temp%4 == 1; @output_buffer.concat "\n\n<<<<<<< HEAD\n<script language=\"javascript\">\n$(document).ready(function(){\n\t$('#orderform').css('display','none');\n\t\n\t$('#order').click(function(){\n\t\talert(\"\xEB\x8B\x88\xEA\xB0\x80 \xEC\xA3\xBC\xEB\xAC\xB8\xEC\x9D\x84 \xEB\x88\x8C\xEB\xA0\x80\xEB\x83\x90?\");\n\t\t$('#orderform').css('display','block');\n\t});\n\t\n\t$('#order_basic').click(function(){\n\t\talert(\"\xEB\x8B\x88\xEA\xB0\x80 \xEA\xB2\xB0\xEC\x9E\xAC\xEC\xB0\xBD\xEC\x9D\x84 \xEB\x88\x8C\xEB\xA0\x80\xEB\x83\x90?\");\n\t\tvar temp_array = jQuery.makeArray($('.chkbox:checked'));\n\t\t// $(\"input:checkbox:checked\").each(function(){\n\t\t// \ttemp_array += $(this).val() + \",\";\n\t\t// });\n\t\tvar del_ids = \"\";\n\t\tjQuery.each(temp_array, function(){\n\t\t\tdel_ids += $(this).val() + \",\";\n\t\t})\n\t\t\n\t\tif (del_ids == \"\"){\n\t\t\talert(\"\xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\xA0 \xED\x95\xAD\xEB\xAA\xA9\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94!\");\n\t\t}else{\n\t\t\tif (window.confirm(\"\xEA\xB2\xB0\xEC\x9E\xAC\xEB\xA5\xBC \xEC\xA7\x84\xED\x96\x89\xED\x95\x98\xEC\x8B\x9C\xEA\xB2\xA0\xEC\x8A\xB5\xEB\x8B\x88\xEA\xB9\x8C?\")){\n\t\t\t\tloadingView();\n\t\t\t\t// $.ajax({\n\t\t\t\t// \t\t\t\t\tdata:'ids='+ del_ids, \n\t\t\t\t// \t\t\t\t\tdataType:'script', \n\t\t\t\t// \t\t\t\t\ttype:'post', \n\t\t\t\t// \t\t\t\t\turl:'/mytemplates/destroy_selection',\n\t\t\t\t// \t\t\t\t\tsuccess: function(request){\n\t\t\t\t// \t\t\t\t\t\tjQuery.each(temp_array, function(){\n\t\t\t\t// \t\t\t\t\t\t\t$('#'+$(this).val()).remove();\n\t\t\t\t// \t\t\t\t\t\t})\n\t\t\t\t// \t\t\t\t\t\tloadingView();\n\t\t\t\t// \t\t\t\t\t}\n\t\t\t\t// \t\t\t\t});\t\n\t\t\t}\n\t\t\t\n\t\t}\n\t});\n\t\n\t$('#chk_all').click(function(){\n\t\t$('.chkbox').click();\n\t});\n\t\n\t$('.delete').click(function(){\n\t\tif (event.target.id == \"\"){\n\t\t\tvar temp_array = jQuery.makeArray($('.chkbox:checked'));\n\t\t\t// $(\"input:checkbox:checked\").each(function(){\n\t\t\t// \ttemp_array += $(this).val() + \",\";\n\t\t\t// });\n\t\t\tvar del_ids = \"\";\n\t\t\tjQuery.each(temp_array, function(){\n\t\t\t\tdel_ids += $(this).val() + \",\";\n\t\t\t})\n\t\t\t\n\t\t\tif (del_ids == \"\"){\n\t\t\t\talert(\"\xEC\x82\xAD\xEC\xA0\x9C\xED\x95\xA0 \xED\x95\xAD\xEB\xAA\xA9\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94!\");\n\t\t\t}else{\n\t\t\t\tif (window.confirm(\"\xEC\xA0\x95\xEB\xA7\x90 \xEC\x82\xAD\xEC\xA0\x9C\xED\x95\x98\xEC\x8B\x9C\xEA\xB2\xA0\xEC\x8A\xB5\xEB\x8B\x88\xEA\xB9\x8C?\")){\n\t\t\t\t\tloadingView();\n\t\t\t\t\t$.ajax({\n\t\t\t\t\t\tdata:'ids='+ del_ids, \n\t\t\t\t\t\tdataType:'script', \n\t\t\t\t\t\ttype:'post', \n\t\t\t\t\t\turl:'/mytemplates/destroy_selection',\n\t\t\t\t\t\tsuccess: function(request){\n\t\t\t\t\t\t\tjQuery.each(temp_array, function(){\n\t\t\t\t\t\t\t\t$('#'+$(this).val()).remove();\n\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\tloadingView();\n\t\t\t\t\t\t}\n\t\t\t\t\t});\t\n\t\t\t\t}\n\t\t\t\t\n\t\t\t}\n\n\n\t\t\t\t\t"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat(( link_string  if my.thumb_url ).to_s); @output_buffer.concat "\n\t\t\t\t</td>\t\t\t\t \t\t\t\n\t\t\t\t<td width=\"14\">&nbsp;</td></tr>\n\t\t\t\t<tr>\n\t\t\t\t<td>&nbsp;</td></tr>\n\t\t\t\t<tr> \n\t\t\t\t<td class=\"templatelist\"><a href=\"/mytemplates/"
+
+
+
+
+
+; @output_buffer.concat((my.id).to_s); @output_buffer.concat "?cate="; @output_buffer.concat(( cate ).to_s); @output_buffer.concat "&search="; @output_buffer.concat((params[:search]).to_s); @output_buffer.concat "&page="; @output_buffer.concat((params[:page]).to_s); @output_buffer.concat "\">"; @output_buffer.concat(( my.name ).to_s); @output_buffer.concat "</a></td></tr>\n\t\t\t\t<tr> \n\t\t\t\t<td class=\"templatelist\"><a href=\"#\">"
+
+; @output_buffer.concat(( Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? ).to_s); @output_buffer.concat(("/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil).to_s); @output_buffer.concat "</a></td></tr>\n\t\t\t\t<tr>\n\t\t\t\t<td class=\"templatelist\">\n\n\t\t\t\t\t<a href=\"/mytemplates/"
+
+
+
+; @output_buffer.concat((my.id).to_s); @output_buffer.concat "?cate="; @output_buffer.concat(( cate ).to_s); @output_buffer.concat "&search="; @output_buffer.concat((params[:search]).to_s); @output_buffer.concat "&page="; @output_buffer.concat((params[:page]).to_s); @output_buffer.concat "\"><img src=\"/images/template/edit_instant_s.jpg\" border=\"0\" title=\"\xEC\x83\x81\xEC\x84\xB8\xEB\xB3\xB4\xEA\xB8\xB0\"></a>\n\t\t\t\t\t"
+; @output_buffer.concat "\n\t\t\n\t\t\t\t\t"
+
+; @output_buffer.concat(( link_to image_tag("/images/template/delete_s.jpg", :border=>0, :title => "삭제"), mytemplate_path(my.id), :confirm => '정말 삭제하시겠습니까?',  :method => :delete ).to_s); @output_buffer.concat "\t\t\n\t\t\t\t</td></tr>\n\t\t\t\t<tr>\n\t\t\t\t<td>&nbsp;</td></tr>\n\t\t\t</table>\n\t\t\t<!-- <\xED\x85\x9C\xED\x94\x8C\xEB\xA6\xBF \xEC\xA0\x95\xEB\xB3\xB4 \xEB\xB0\x98\xEB\xB3\xB5 \xEA\xB5\xAC\xEA\xB0\x84\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4.> -->\n\t\t</td>\n\n"
+
+
+
+
+
+
+
+;  if @temp%4 == 0 or @temp == @mytemplates.length; @output_buffer.concat "\t\t\n\t</tr>\n</table>\n"
+
+
+; end; @output_buffer.concat "\n<!-- <\xED\x85\x9C\xED\x94\x8C\xEB\xA6\xBF \xEC\xA0\x95\xEB\xB3\xB4\xEC\xB0\xBD \xED\x95\x9C\xEC\xA4\x84 \xEB\xB0\x98\xEB\xB3\xB5 \xEA\xB5\xAC\xEA\xB0\x84\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. -->\t\n"
+
+;  @temp += 1
+end; @output_buffer.concat "\n\n"
+
+;  if @mytemplates.count > 0 ; @output_buffer.concat "\n\n\t<!-- <form action=\"### \xEC\xA3\xBC\xEB\xAC\xB8 \xED\x94\x84\xEB\xA1\x9C\xEC\x84\xB8\xEC\x8A\xA4\xEB\xA1\x9C ###\" method=\"post\" id=\"design-list\"> -->\n\t"
+
+
+; @output_buffer.concat "\t\n\t\t<h4><span class=\"step\">Step 1.</span> \xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xEB\xAA\xA9\xEB\xA1\x9D, \xEA\xB2\x80\xED\x86\xA0 </h4>\n\t\t<table>\n\t\t\t<caption>\xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\xA0 \xED\x95\xAD\xEB\xAA\xA9\xEA\xB3\xBC \xEC\x98\xB5\xEC\x85\x98\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94. <a href=\"#\" class=\"delete\">\xEC\x84\xA0\xED\x83\x9D\xED\x95\x9C \xED\x95\xAD\xEB\xAA\xA9 \xEC\x82\xAD\xEC\xA0\x9C</a></caption>\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th class=\"check\" id=\"chk_all\">check</th>\n\t\t\t\t\t<th>\xEC\x9E\x91\xEC\x97\x85\xEA\xB5\xAC\xEB\xB6\x84</th>\n\t\t\t\t\t<th>\xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xED\x92\x88\xEB\xAA\xA9</th>\n\t\t\t\t\t<th>\xEC\x82\xAC\xEC\x9D\xB4\xEC\xA6\x88</th>\n\t\t\t\t\t<th>\xEA\xB0\x80\xEA\xB2\xA9</th>\n\t\t\t\t\t<th>\xEC\x88\x98\xEC\xA0\x95\xEC\x9D\xBC</th>\n\t\t\t\t\t<th>\xEA\xB8\xB0\xEB\x8A\xA5</th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<!-- \xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xED\x95\xAD\xEB\xAA\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; 
+				@temp = 1 
+				@mytemplates.each do |my| 
+					main_category_sn = Category.get(my.category.to_i).sn
+					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+					if main_category_sn.nil?; main_category_sn = "mc"; end
+					if sub_category_sn.nil?; sub_category_sn = "sc"; end
+						
+					sn_num = main_category_sn + sub_category_sn + my.id.to_s
+				; @output_buffer.concat "\n\t\t\t\t<tr id=\""
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\" class=\"item\">\n\t\t\t\t\t<td class=\"check\"><!-- \xED\x8E\xB8\xEC\xA7\x91\xEC\x9D\x98\xEB\xA2\xB0\xEC\x9D\x98 \xEA\xB2\xBD\xEC\x9A\xB0 \xEC\x8B\x9C\xEC\x95\x88\xED\x99\x95\xEC\xA0\x95\xEC\x9D\x84 \xED\x95\xB4\xEC\x95\xBC \xEC\xB2\xB4\xED\x81\xAC\xED\x95\xA0 \xEC\x88\x98 \xEC\x9E\x88\xEC\x9D\x8C. input\xED\x83\x9C\xEA\xB7\xB8\xEC\x97\x90  disabled \xEC\xB2\x98\xEB\xA6\xAC\xED\x95\x98\xEB\xA9\xB4 \xEB\x90\xA0\xEB\x93\xAF\xED\x95\xA9\xEB\x8B\x88\xEB\x8B\xA4. --><input class=\"chkbox\" type=\"checkbox\"  value=\""
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\"/></td>\n\t\t\t\t\t<td class=\"edit-type\">"
+; @output_buffer.concat(( my.job_code ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"design\" onClick=\"location.href='/mytemplates/"
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "?cate="; @output_buffer.concat(( params[:cate] ).to_s); @output_buffer.concat "&page="; @output_buffer.concat(( params[:page] ).to_s); @output_buffer.concat "'\">"; @output_buffer.concat(( Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? ).to_s); @output_buffer.concat(("/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil).to_s); @output_buffer.concat "<span class=\"design-code\">("; @output_buffer.concat(( sn_num ).to_s); @output_buffer.concat ")</span> <span>"; @output_buffer.concat(( my.feedback_code ).to_s); @output_buffer.concat "</span></td>\n\t\t\t\t\t<td class=\"size\">"
+; @output_buffer.concat(( my.size ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"price\">"
+; @output_buffer.concat(( Temp.get(my.temp_id).price ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"date\">"
+; @output_buffer.concat(( my.updated_at.strftime('%Y-%m-%d') ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"action\">\n\t\t\t\t\t\t<h5>\xEC\x9D\xB4 \xED\x92\x88\xEB\xAA\xA9\xEC\x9D\x84...</h5>\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"edit\"><a href=\"### \xEC\x9B\xB9\xED\x83\x91 ###\" onClick=\"popup('"
+
+
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "');\">\xED\x8E\xB8\xEC\xA7\x91</a></li>\n\t\t\t\t\t\t\t<li class=\"options\"><a href=\"### \xEC\x98\xB5\xEC\x85\x98 \xEC\x84\xA0\xED\x83\x9D \xEC\xB0\xBD ###\">\xEC\x98\xB5\xEC\x85\x98 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</a></li>\n\t\t\t\t\t\t\t<li class=\"delete\"><a href=\"### \xEC\x82\xAD\xEC\xA0\x9C ###\" id=\"del_"
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\">\xEC\x82\xAD\xEC\xA0\x9C</a></li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<!-- jQuery\xEB\xA1\x9C \xEC\x88\xA8\xEA\xB2\xA8\xEB\x86\xA8\xEB\x8B\xA4\xEA\xB0\x80 \xEB\xA0\x88\xEC\x9D\xB4\xEC\x96\xB4\xEB\xA1\x9C \xED\x86\xA0\xEA\xB8\x80\xED\x95\xA0 \xEC\x83\x9D\xEA\xB0\x81\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t<div class=\"option-select\">\n\t\t\t\t\t\t\t<h5>\xEC\x98\xB5\xEC\x85\x98 \xEC\x84\xA0\xED\x83\x9D</h5>\n\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t<li><label for=\"piece\">\xEA\xB0\x9C\xEC\x88\x98</label> <input id=\"piece\" name=\"piece[]\" type=\"number\" value=\"1\"/>ea</li>\n\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t<label>### \xEC\x98\xB5\xEC\x85\x98\xEC\xA0\x9C\xEB\xAA\xA9 ###</label>\n\t\t\t\t\t\t\t\t\t<select name=\"select_main_"
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\">\n\t\t\t\t\t\t\t\t\t\t<option value=\"\" selected>\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\">------------------</option>\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEA\xB7\xB8\xEB\x9E\x98\xED\x94\xBD\xEC\xB2\x9C(\xED\x98\x84\xEC\x88\x98\xEB\xA7\x89\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)\">\xEA\xB7\xB8\xEB\x9E\x98\xED\x94\xBD\xEC\xB2\x9C(\xED\x98\x84\xEC\x88\x98\xEB\xA7\x89\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xED\x8E\x98\xED\x8A\xB8(\xEC\x96\x87\xEC\x9D\x80\xED\x94\x8C\xEB\x9D\xBC\xEC\x8A\xA4\xED\x8B\xB1\xEC\xA0\x9C\xEC\xA7\x88\xEC\x9B\x90\xEB\x8B\xA8)\">\xED\x8E\x98\xED\x8A\xB8(\xEC\x96\x87\xEC\x9D\x80\xED\x94\x8C\xEB\x9D\xBC\xEC\x8A\xA4\xED\x8B\xB1\xEC\xA0\x9C\xEC\xA7\x88\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xED\x95\xA9\xEC\x84\xB1\xEC\xA7\x80(\xEC\xA0\x90\xEC\xB0\xA9\xEA\xB0\x80\xEB\x8A\xA5\xEC\x9B\x90\xEB\x8B\xA8)\">\xED\x95\xA9\xEC\x84\xB1\xEC\xA7\x80(\xEC\xA0\x90\xEC\xB0\xA9\xEA\xB0\x80\xEB\x8A\xA5\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"PVC\xEC\xBC\x88(\xEC\xA0\x90\xEC\xB0\xA9\xEA\xB0\x80\xEB\x8A\xA5\xEC\x9B\x90\xEB\x8B\xA8)\">PVC\xEC\xBC\x88(\xEC\xA0\x90\xEC\xB0\xA9\xEA\xB0\x80\xEB\x8A\xA5\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEB\xB6\x80\xEC\xA7\x81\xED\x8F\xAC(\xEC\x96\xB4\xEA\xB9\xA8\xEB\x9D\xA0\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)\">\xEB\xB6\x80\xEC\xA7\x81\xED\x8F\xAC(\xEC\x96\xB4\xEA\xB9\xA8\xEB\x9D\xA0\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xED\x8F\xB0\xEC\xA7\x80(\xEB\x94\x94\xEC\xA7\x80\xED\x84\xB8\xEB\x82\xA0\xEC\x97\xBC\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)\">\xED\x8F\xB0\xEC\xA7\x80(\xEB\x94\x94\xEC\xA7\x80\xED\x84\xB8\xEB\x82\xA0\xEC\x97\xBC\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t\t\t\t<select name=\"select_sub_"
+
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\">\n\t\t\t\t\t\t\t\t\t\t<option value=\"\" selected>\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\">------------------</option>\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEC\x97\xB4\xEC\x9E\xAC\xEB\x8B\xA8\">\xEC\x97\xB4\xEC\x9E\xAC\xEB\x8B\xA8</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEC\x82\xAC\xEA\xB5\xAC\xEC\x95\x84\xEC\x9D\xBC\xEB\xA0\x9B\">\xEC\x82\xAC\xEA\xB5\xAC\xEC\x95\x84\xEC\x9D\xBC\xEB\xA0\x9B</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEB\xA7\x89\xEB\x8C\x80\xEA\xB0\x80\xEA\xB3\xB5\">\xEB\xA7\x89\xEB\x8C\x80\xEA\xB0\x80\xEA\xB3\xB5</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEB\xB4\x89\xEB\xAF\xB8\xEC\x8B\xB1\">\xEB\xB4\x89\xEB\xAF\xB8\xEC\x8B\xB1</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEB\x81\x88\xEA\xB3\xA0\xEB\xA6\xAC\">\xEB\x81\x88\xEA\xB3\xA0\xEB\xA6\xAC</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEC\x82\xAC\xEB\xB0\xA9\xEC\xA4\x84\xEB\xAF\xB8\xEC\x8B\xB1\">\xEC\x82\xAC\xEB\xB0\xA9\xEC\xA4\x84\xEB\xAF\xB8\xEC\x8B\xB1</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xED\x81\x90\xEB\xB0\xA9\">\xED\x81\x90\xEB\xB0\xA9</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEA\xB8\xB0\xED\x83\x80\">\xEA\xB8\xB0\xED\x83\x80</option>\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<!-- jQuery\xEB\xA1\x9C \xEC\x88\xA8\xEA\xB2\xA8\xEB\x86\xA8\xEB\x8B\xA4\xEA\xB0\x80 \xEB\xA0\x88\xEC\x9D\xB4\xEC\x96\xB4\xEB\xA1\x9C \xED\x86\xA0\xEA\xB8\x80\xED\x95\xA0 \xEC\x83\x9D\xEA\xB0\x81\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. \xEB\x81\x9D-->\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;  end ; @output_buffer.concat "\n\t\t\t\t<!-- \xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xED\x95\xAD\xEB\xAA\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t</tbody>\n\t\t</table>\n\t\t\n\t<div id=\"total-price\">\n\t\t<h4>\xEC\xB4\x9D \xEC\xA3\xBC\xEB\xAC\xB8 \xEA\xB8\x88\xEC\x95\xA1</h4>\n\t\t<!-- jQuery\xEB\xA1\x9C \xEC\xB2\x98\xEB\xA6\xAC\xED\x95\xA0 \xEC\x98\x88\xEC\xA0\x95\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. -->\n\t\t<p class=\"price\">00,000\xEC\x9B\x90</p>\n\t</div>\n\t<input id=\"order\" type=\"button\" value=\"\xEC\x84\xA0\xED\x83\x9D\xED\x95\x9C \xED\x95\xAD\xEB\xAA\xA9 \xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\x98\xEA\xB8\xB0\">\n\t<!-- <input type=\"submit\" class=\"order\" value=\"\xEC\x84\xA0\xED\x83\x9D\xED\x95\x9C \xED\x95\xAD\xEB\xAA\xA9 \xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\x98\xEA\xB8\xB0\"/>-->\n\t"
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat "\n"
+;  end ; @output_buffer.concat "\n</div>\n\n<div id=\"orderform\">\n\t<h3>\xEC\xA3\xBC\xEB\xAC\xB8\xED\x8E\x98\xEC\x9D\xB4\xEC\xA7\x80</h3>\n\t<p>\xEA\xB2\xB0\xEC\xA0\x9C \xEA\xB8\x88\xEC\x95\xA1\xEC\x9D\x84 \xED\x99\x95\xEC\x9D\xB8\xED\x95\x98\xEA\xB3\xA0 \xEB\xB0\xB0\xEC\x86\xA1\xEC\xA0\x95\xEB\xB3\xB4 \xEB\xB0\x8F \xEA\xB2\xB0\xEC\xA0\x9C\xEB\xB0\xA9\xEB\xB2\x95\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xA9\xEB\x8B\x88\xEB\x8B\xA4.</p>\n\t<!-- \xEC\x84\xA0\xEA\xB2\xB0\xEC\xA0\x9C \xEC\x9E\x88\xEC\x9D\x84\xEA\xB2\xBD\xEC\x9A\xB0\xEC\x97\x90\xEB\xA7\x8C \xED\x91\x9C\xEC\x8B\x9C -->\n\t<div id=\"order-price\">\n\t\t<h4>\xED\x98\x84\xEC\x9E\xAC \xEA\xB2\xB0\xEC\xA0\x9C \xEC\x83\x81\xED\x99\xA9</h4>\n\t\t<ul>\n\t\t\t<li class=\"total\"><strong>\xEC\xB4\x9D \xEC\xA3\xBC\xEB\xAC\xB8\xEA\xB8\x88\xEC\x95\xA1</strong> <!-- \xEC\x84\x9C\xEB\xB2\x84\xEC\x97\x90\xEC\x84\x9C \xEC\xA0\x95\xED\x99\x95\xED\x95\x98\xEA\xB2\x8C \xEA\xB3\x84\xEC\x82\xB0\xEB\x90\x9C \xEC\xB4\x9D \xEA\xB8\x88\xEC\x95\xA1 --> <span class=\"price\">40,000\xEC\x9B\x90</span></li>\n\t\t\t<li class=\"first\"><strong>\xEC\x84\xA0\xEA\xB2\xB0\xEC\xA0\x9C\xEA\xB8\x88\xEC\x95\xA1</strong> <!-- \xEC\x84\x9C\xEB\xB2\x84\xEC\x97\x90\xEC\x84\x9C \xEC\xA0\x95\xED\x99\x95\xED\x95\x98\xEA\xB2\x8C \xEA\xB3\x84\xEC\x82\xB0\xEB\x90\x9C \xEC\xB4\x9D \xEA\xB8\x88\xEC\x95\xA1 --> <span class=\"price\">10,000\xEC\x9B\x90</span></li>\n\t\t\t<li class=\"more\"><strong>\xEB\x82\xA8\xEC\x9D\x80 \xEA\xB2\xB0\xEC\xA0\x9C\xEA\xB8\x88\xEC\x95\xA1</strong> <!-- \xEC\x84\x9C\xEB\xB2\x84\xEC\x97\x90\xEC\x84\x9C \xEC\xA0\x95\xED\x99\x95\xED\x95\x98\xEA\xB2\x8C \xEA\xB3\x84\xEC\x82\xB0\xEB\x90\x9C \xEC\xB4\x9D \xEA\xB8\x88\xEC\x95\xA1 --> <span class=\"price\">30,000\xEC\x9B\x90</span></li>\n\t\t</ul>\n\t</div>\n\t<!-- \xEC\x84\xA0\xEA\xB2\xB0\xEC\xA0\x9C \xEC\x9E\x88\xEC\x9D\x84\xEA\xB2\xBD\xEC\x9A\xB0\xEC\x97\x90\xEB\xA7\x8C \xED\x91\x9C\xEC\x8B\x9C -->\n\t<form action=\"### ###\" method=\"post\">\n\t\t<fieldset id=\"delivery-information\">\n\t\t\t<legend>\xEB\xB0\xB0\xEC\x86\xA1\xEC\xA0\x95\xEB\xB3\xB4</legend>\n\t\t\t<p>\n\t\t\t\t<label for=\"receive-name\">\xEC\x88\x98\xEB\xA0\xB9\xEC\x9D\xB8</label>\n\t\t\t\t<input value=\""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat(( current_user.name ).to_s); @output_buffer.concat "\" name=\"### \xEC\x88\x98\xEB\xA0\xB9\xEC\x9D\xB8\xED\x85\x8D\xEC\x8A\xA4\xED\x8A\xB8\xEB\xB0\x95\xEC\x8A\xA4\xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-name\" placeholder=\"\xEC\x88\x98\xEB\xA0\xB9\xEC\x9D\xB8 \xEC\x84\xB1\xED\x95\xA8\" type=\"text\"/>\n\t\t\t</p>\n\t\t\t<p>\n\t\t\t\t<label for=\"receive-phone\">\xEC\x9D\xBC\xEB\xB0\x98\xEC\xA0\x84\xED\x99\x94</label>\n\t\t\t\t<input value=\""
+
+
+
+; @output_buffer.concat(( current_user.tel ).to_s); @output_buffer.concat "\" name=\"### \xEC\x97\xB0\xEB\x9D\xBD\xEC\xB2\x98\xED\x85\x8D\xEC\x8A\xA4\xED\x8A\xB8\xEB\xB0\x95\xEC\x8A\xA4\xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-tel\" placeholder=\"010-5964-3645\" maxlength=\"13\" size=\"16\" type=\"text\"/>\n\t\t\t</p>\n\t\t\t<p>\n\t\t\t\t<label for=\"receive-phone\">\xEB\xAA\xA8\xEB\xB0\x94\xEC\x9D\xBC</label>\n\t\t\t\t<input value=\""
+
+
+
+; @output_buffer.concat(( current_user.mobile ).to_s); @output_buffer.concat "\" name=\"### \xEC\x97\xB0\xEB\x9D\xBD\xEC\xB2\x98\xED\x85\x8D\xEC\x8A\xA4\xED\x8A\xB8\xEB\xB0\x95\xEC\x8A\xA4\xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-mobile\" placeholder=\"010-5964-3645\" maxlength=\"13\" size=\"16\" type=\"text\"/>\n\t\t\t</p>\n\t\t\t<p>\n\t\t\t\t<label for=\"receive-type\">\xEB\xB0\xB0\xEC\x86\xA1\xEB\xB0\xA9\xEB\xB2\x95</label>\n\t\t\t\t<select name=\"### \xEB\xB0\xB0\xEC\x86\xA1\xEB\xB0\xA9\xEB\xB2\x95\xEC\x85\x80\xEB\xA0\x89\xEB\xB0\x95\xEC\x8A\xA4\xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-type\">\n\t\t\t\t\t<option value=\"\" selected>\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t<option value=\"\">-----------------</option>\n\t\t\t\t\t<!-- \xEB\xB0\xB0\xEC\x86\xA1\xEB\xB0\xA9\xEB\xB2\x95 \xEB\xAA\xA9\xEB\xA1\x9D \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t<option value=\"\xEC\x9D\xBC\xEB\xB0\x98\xED\x83\x9D\xEB\xB0\xB0\">\xEC\x9D\xBC\xEB\xB0\x98\xED\x83\x9D\xEB\xB0\xB0</option>\n\t\t\t\t\t<option value=\"\xED\x80\xB5\xEC\x84\x9C\xEB\xB9\x84\xEC\x8A\xA4\">\xED\x80\xB5\xEC\x84\x9C\xEB\xB9\x84\xEC\x8A\xA4</option>\n\t\t\t\t\t<option value=\"\xEC\xA7\x81\xEC\xA0\x91\xEC\x88\x98\xEB\xA0\xB9\">\xEC\xA7\x81\xEC\xA0\x91\xEC\x88\x98\xEB\xA0\xB9</option>\n\t\t\t\t\t<!-- \xEB\xB0\xB0\xEC\x86\xA1\xEB\xB0\xA9\xEB\xB2\x95 \xEB\xAA\xA9\xEB\xA1\x9D \xEC\xA2\x85\xEB\xA3\x8C -->\n\t\t\t\t</select>\n\t\t\t</p>\n\t\t\t<p>\n\t\t\t\t<label for=\"search-address\">\xEB\xB0\xB0\xEC\x86\xA1\xEC\xA3\xBC\xEC\x86\x8C</label>\n\t\t\t\t<ul>\n\t\t\t\t\t<li><label for=\"zipcode\">\xEC\x9A\xB0\xED\x8E\xB8\xEB\xB2\x88\xED\x98\xB8</label> <input id=\"zipcode\" placeholder=\"\xEB\x8F\x99/\xEB\xA9\xB4/\xEC\x9D\x8D\" maxlength=\"10\" size=\"8\" type=\"text\"/> <input type=\"button\" value=\"\xEB\x8F\x99/\xEB\xA9\xB4/\xEC\x9D\x8D \xEA\xB2\x80\xEC\x83\x89\"/></li>\n\t\t\t\t\t<li><label for=\"address-selector\">\xEC\xA3\xBC\xEC\x86\x8C\xEC\x84\xA0\xED\x83\x9D</label>\n\t\t\t\t\t\t<select id=\"address-selector\">\n\t\t\t\t\t\t\t<option value=\"\" selected>\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t\t\t<option value=\"\">\xEC\xA3\xBC\xEC\x86\x8C \xEC\xA7\x81\xEC\xA0\x91 \xEC\x9E\x85\xEB\xA0\xA5</option>\n\t\t\t\t\t\t\t<option value=\"\">-----------------</option>\n\t\t\t\t\t\t\t<option value=\"\">jQuery\xEB\xA1\x9C \xEA\xB5\xAC\xED\x98\x84\xED\x95\xB4\xEB\x86\x93\xEA\xB2\xA0\xEC\x8A\xB5\xEB\x8B\x88\xEB\x8B\xA4~</option>\n\t\t\t\t\t\t</select>\n\t\t\t\t\t\t<input name=\"### \xEC\xA3\xBC\xEC\x86\x8C1 ###\" id=\"address1\" placeholder=\"\xEC\x8B\x9C/\xEB\x8F\x84, \xEA\xB5\xAC/\xEC\x8B\x9C, \xEB\x8F\x99/\xEB\xA9\xB4/\xEC\x9D\x8D\" maxlength=\"24\" size=\"24\" type=\"text\"/>\n\t\t\t\t\t</li>\n\t\t\t\t\t<li><label for=\"address2\">\xEB\x82\x98\xEB\xA8\xB8\xEC\xA7\x80 \xEC\xA3\xBC\xEC\x86\x8C</label><input name=\"### \xEC\xA3\xBC\xEC\x86\x8C2 ###\" id=\"address2\" placeholder=\"\xEB\x82\x98\xEB\xA8\xB8\xEC\xA7\x80 \xEC\xA3\xBC\xEC\x86\x8C\" maxlength=\"50\" size=\"36\" type=\"text\"/></li>\n\t\t\t\t</ul>\n\t\t\t</p>\n\t\t\t<p><label for=\"receive-note\">\xEB\xB0\xB0\xEC\x86\xA1 \xEC\x9A\x94\xEC\xB2\xAD\xEC\x82\xAC\xED\x95\xAD</label><input name=\"### \xEB\xB0\xB0\xEC\x86\xA1\xEC\x8B\x9C\xEC\x9A\x94\xEC\xB2\xAD\xEC\x82\xAC\xED\x95\xAD \xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-note\" placeholder=\"\xEB\xB0\xB0\xEC\x86\xA1\xEC\x8B\x9C \xEC\x9A\x94\xEC\xB2\xAD\xEC\x82\xAC\xED\x95\xAD\xEC\x9D\x84 \xEC\xA7\xA7\xEA\xB2\x8C \xEC\x9E\x85\xEB\xA0\xA5\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.\" maxlength=\"30\" size=\"35\" type=\"text\"></p>\n\t\t</fieldset>\n\t\t<fieldset id=\"payment-information\">\n\t\t\t<legend>\xEA\xB2\xB0\xEC\xA0\x9C\xEC\xA0\x95\xEB\xB3\xB4 \xEC\x9E\x85\xEB\xA0\xA5</legend>\n\t\t\t<h4>\xEA\xB2\xB0\xEC\xA0\x9C \xEA\xB8\x88\xEC\x95\xA1</h4>\n\t\t\t<p class=\"price\">00,000\xEC\x9B\x90</p>\n\t\t\t<h4>\xEA\xB2\xB0\xEC\xA0\x9C\xEB\xB0\xA9\xEB\xB2\x95 \xEC\x84\xA0\xED\x83\x9D</h4>\n\t\t\t<ul>\n\t\t\t\t<li class=\"user\">\n\t\t\t\t\t<input type=\"radio\" name=\"### \xEA\xB2\xB0\xEC\xA0\x9C\xEB\xB0\xA9\xEB\xB2\x95 ###\" id=\"user\" value=\"### \xEC\x98\xA8\xEB\x9D\xBC\xEC\x9D\xB8\xEC\x9E\x85\xEA\xB8\x88 ###\" checked/> <label for=\"user\">\xEC\xA7\x81\xEC\xA0\x91 \xEA\xB3\x84\xEC\xA2\x8C\xEC\x9D\xB4\xEC\xB2\xB4</label>\n<!--\n\t\t\t\t\t<fieldset id=\"payment-user\">\n\t\t\t\t\t\t<legend>\xEC\x9E\x85\xEA\xB8\x88 \xEC\xA0\x95\xEB\xB3\xB4</legend>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t<label for=\"payment-account\">\xEC\x9E\x85\xEA\xB8\x88\xED\x95\xA0 \xEA\xB3\x84\xEC\xA2\x8C\xEB\xB2\x88\xED\x98\xB8 \xEC\x84\xA0\xED\x83\x9D</label>\n\t\t\t\t\t\t\t<select name=\"### \xEC\x98\xA8\xEB\x9D\xBC\xEC\x9D\xB8\xEC\x9E\x85\xEA\xB8\x88 \xEA\xB3\x84\xEC\xA2\x8C\xEC\x84\xA0\xED\x83\x9D ###\" id=\"payment-account\">\n\t\t\t\t\t\t\t\t<option value=\"\">\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t\t\t\t<option value=\"\">------------------</option>\n\t\t\t\t\t\t\t\t!-- \xEC\x9E\x85\xEA\xB8\x88\xED\x95\xA0 \xEA\xB3\x84\xEC\xA2\x8C\xEB\xB2\x88\xED\x98\xB8 \xEB\xAA\xA9\xEB\xA1\x9D \xEC\x8B\x9C\xEC\x9E\x91 (\xEC\x98\x88: [\xEA\xB8\xB0\xEC\x97\x85] 010-9662-7441 (\xEC\x98\x88\xEA\xB8\x88\xEC\xA3\xBC:\xEC\xA0\x95\xEC\x83\x81\xED\x98\x81)--\n\t\t\t\t\t\t\t\t<option>[### \xEC\x9D\x80\xED\x96\x89\xEB\xAA\x85 ###] ### \xEA\xB3\x84\xEC\xA2\x8C\xEB\xB2\x88\xED\x98\xB8 ### (\xEC\x98\x88\xEA\xB8\x88\xEC\xA3\xBC: ###\xEC\x98\x88\xEA\xB8\x88\xEC\xA3\xBC ###)</option>\n\t\t\t\t\t\t\t\t!-- \xEC\x9E\x85\xEA\xB8\x88\xED\x95\xA0 \xEA\xB3\x84\xEC\xA2\x8C\xEB\xB2\x88\xED\x98\xB8 \xEB\xAA\xA9\xEB\xA1\x9D \xEC\xA2\x85\xEB\xA3\x8C --\n\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t<label for=\"payment-account-name\">\xEC\x9E\x85\xEA\xB8\x88\xEC\x9E\x90 \xEC\x84\xB1\xED\x95\xA8</label> <input name=\"###\xEC\x9E\x85\xEA\xB8\x88 \xEA\xB3\x84\xEC\xA2\x8C \xEC\x9D\xB4\xEB\xA6\x84 ###\" type=\"text\" id=\"payment-account-name\"/>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t</fieldset>\n-->\n\t\t\t\t</li>\n\t\t\t\t<li class=\"realtime\"><input type=\"radio\" name=\"pay_m\" id=\"payment-realtime\" value=\"\xEA\xB3\x84\xEC\xA2\x8C\xEC\x9D\xB4\xEC\xB2\xB4\"/> <label for=\"payment-realtime\">\xEC\x8B\xA4\xEC\x8B\x9C\xEA\xB0\x84 \xEA\xB3\x84\xEC\xA2\x8C\xEC\x9D\xB4\xEC\xB2\xB4</label>\t</li>\n\t\t\t\t<li class=\"credit\"><input type=\"radio\" name=\"pay_m\" id=\"payment-credit\" value=\"\xEC\xB9\xB4\xEB\x93\x9C\xEA\xB2\xB0\xEC\xA0\x9C\"/> <label for=\"payment-credit\">\xEC\x8B\xA0\xEC\x9A\xA9\xEC\xB9\xB4\xEB\x93\x9C</label></li>\n\t\t\t\t<li class=\"mobile\"><input type=\"radio\" name=\"pay_m\" id=\"payment-mobile\" value=\"\xED\x9C\xB4\xEB\x8C\x80\xED\x8F\xB0\xEA\xB2\xB0\xEC\xA0\x9C\"/> <label for=\"payment-mobile\">\xED\x9C\xB4\xEB\x8C\x80\xED\x8F\xB0</label></li>\n\t\t\t</ul>\n\t\t</fieldset>\n\t\t<input id=\"order_basic\" type=\"button\" value=\"\xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\x98\xEA\xB8\xB0\"/>\n\t</form>\n\t<div id=\"PGIOscreen\"></div>\n</div>\n\n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.force_encoding(__ENCODING__)
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /Users/cholubin/development/mybanner/config/initializers/fix_renderable.rb:19:in `module_eval'
+/Users/cholubin/development/mybanner/config/initializers/fix_renderable.rb:19:in `compile!'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:61:in `compile'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:28:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:20:in `block in render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:26:in `block in benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `block in ms'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:26:in `benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:19:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/template.rb:205:in `render_template'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:44:in `render_partial'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/partials.rb:184:in `render_partial'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:267:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+/Users/cholubin/development/mybanner/app/views/mytemplates/mytemplate.html.erb:40:in `_run_erb_app47views47mytemplates47mytemplate46html46erb'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:34:in `block in render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:306:in `with_template'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:30:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/template.rb:205:in `render_template'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:265:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:348:in `_render_with_layout'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:262:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:1250:in `render_for_file'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:951:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:51:in `block in render_with_benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `block in ms'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:51:in `render_with_benchmark'
+/Users/cholubin/development/mybanner/app/controllers/mytemplates_controller.rb:46:in `index'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:1331:in `perform_action'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/filters.rb:617:in `call_filters'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/filters.rb:610:in `perform_action_with_filters'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in `block in perform_action_with_benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `block in ms'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in `perform_action_with_benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/rescue.rb:160:in `perform_action_with_rescue'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/flash.rb:146:in `perform_action_with_flash'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:532:in `process'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/filters.rb:606:in `process_with_filters'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:391:in `process'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:386:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:437:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:87:in `dispatch'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:121:in `_call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:130:in `block in build_middleware_stack'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/string_coercion.rb:25:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/head.rb:9:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/methodoverride.rb:24:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/params_parser.rb:15:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/session/abstract_store.rb:122:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/failsafe.rb:26:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `block in call'
+<internal:prelude>:8:in `synchronize'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:114:in `block in call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/reloader.rb:34:in `run'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:108:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/static.rb:31:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:46:in `block in call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `each'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/log_tailer.rb:17:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/content_length.rb:13:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/handler/webrick.rb:50:in `service'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+ActionView::TemplateError (/Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:417: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:419: syntax error, unexpected $end, expecting keyword_end) on line #417 of app/views/mytemplates/_mytemplate_index.html.erb:
+414: </div>
+
+    config/initializers/fix_renderable.rb:19:in `module_eval'
+    config/initializers/fix_renderable.rb:19:in `compile!'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (136.0ms)
+Rendered rescues/_request_and_response (1.2ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:34:01) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (2.9ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+ERROR: compiling _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object RAISED /Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:416: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:418: syntax error, unexpected $end, expecting keyword_end
+Function body:           def _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object(local_assigns)
+            old_output_buffer = output_buffer;mytemplate_index = local_assigns[:mytemplate_index];object = local_assigns[:object];;@output_buffer = '';  __in_erb_template=true ;  
+up_my_temps = Mytemplate.all(:user_id => current_user.id)
+up_my_temps.each do |u|
+	if !Temp.get(u.temp_id).nil?
+		puts_message Temp.get(u.temp_id).id.to_s
+		u.category = Temp.get(u.temp_id).category
+		u.subcategory = Temp.get(u.temp_id).subcategory
+		u.save
+	end
+	puts_message "mytemp updated"
+end
+@output_buffer.concat "\n<style>\n#layer1{border:0px solid green;position:absolute; left:500px; top:200px;width:100;height:100px; z-index:999999}\n</style>\n\n<div id=\"layer1\" style=\"display:none\">"
+
+
+
+
+; @output_buffer.concat(( image_tag("/images/template/loading.gif", :width => '100') ).to_s); @output_buffer.concat "</div>\n\n<script language=\"javascript\">\nfunction folder_view() {\n\tvar t = document.getElementById('folder');\n\t\n\tif (t.style.display == \"none\") {\n\t\tt.style.display = \"block\";\t\t\t\n\t}else{\n\t\tt.style.display = \"none\";\t\t\t\t\t\n\t}\n\n}\n\nfunction show_progress() {\n\tvar width = 100;\n\tvar height = 100;\n\t\n\tvar left = (screen.width - width)/2;\n \tvar top = (screen.height - height)/2;\n\t\n\tdocument.getElementById(\"layer1\").style.left = left;\n\tdocument.getElementById(\"layer1\").style.top = top;\n\t\n\tdocument.getElementById(\"layer1\").style.display = \"block\";\t\t\n\n}\n\nfunction hide_progress() {\n\tdocument.getElementById(\"layer1\").style.display = \"none\";\t\t\n}\n\n</script>\n\n<link href=\"/css/paginate.css\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\" />\n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;  if params[:cate] != nil; cate = params[:cate] else; cate = "" end
+   if params[:folder] != nil; folder = params[:folder] else; folder = "" end
+   if params[:page] != nil; page = params[:page] else; page = "" end
+   if params[:search] != nil; search = params[:search] else; search = "" end
+@output_buffer.concat "\n"
+;  	
+   	if cate == nil or cate == "" or cate == "all"
+		cate = "all"
+		title_text = "전체"
+	else
+		title_text = Category.get(cate.to_i).name
+	end
+@output_buffer.concat "\n<div id=\"admincontents_wrapper\" style=\"margin:0 0 -30 0\">\n<h2>\xEB\xA7\x88\xEC\x9D\xB4\xED\x85\x9C\xED\x94\x8C\xEB\xA6\xBF \xEB\xA6\xAC\xEC\x8A\xA4\xED\x8A\xB8</h2>\n</div>\n<div align=\"right\" style=\"padding:0 24 5 0\">\n\t<font color=\"white\">\xED\x8F\xB4\xEB\x8D\x94\xEB\xB3\x84 </font> \n\t<span id=\"folder_select\">\n\t<select name=\"_folder\" onChange=\"location.href='/mytemplates?page="
+
+
+
+
+
+
+; @output_buffer.concat(( page ).to_s); @output_buffer.concat "&search="; @output_buffer.concat(( params[:search] ).to_s); @output_buffer.concat "&cate="; @output_buffer.concat(( params[:cate] ).to_s); @output_buffer.concat "&folder='+document.all._folder.value;\">\n\t\t<option value=\"all\" "
+; @output_buffer.concat(( "selected" if params[:folder] == "all" ).to_s); @output_buffer.concat ">\xEC\xA0\x84\xEC\xB2\xB4</option>\t\t\t\t\n\t\t"
+; @tempfolders.each do |s| ; @output_buffer.concat "\t\n\t\t<option value=\""
+; @output_buffer.concat(( s.id ).to_s); @output_buffer.concat "\" "; @output_buffer.concat(( "selected" if params[:folder] == s.id.to_s ).to_s); @output_buffer.concat ">"; @output_buffer.concat(( s.name ).to_s); @output_buffer.concat "</option>\t\t\t\t\n\t\t"
+;  end ; @output_buffer.concat "\n\t</select>\n\t</span>\n\t<font color=\"white\">\xEB\xA9\x94\xEC\x9D\xB8\xEB\xB6\x84\xEB\xA5\x98 </font><select name=\"_cate\" onChange=\"location.href='/mytemplates?search="
+
+
+; @output_buffer.concat(( params[:search] ).to_s); @output_buffer.concat "&cate='+document.all._cate.value;\">\n\t\t"
+;   if @categories.length > 0 ; @output_buffer.concat "\n\t\t\t\t<option value=\"all\" "
+; @output_buffer.concat(( "selected" if cate == "all" ).to_s); @output_buffer.concat ">\xEC\xA0\x84\xEC\xB2\xB4</option>\t\t\t\t\t\t\n\t\t\t"
+;  @categories.each do |s| ; @output_buffer.concat "\n\t\t\t\t<option value=\""
+; @output_buffer.concat(( s.id ).to_s); @output_buffer.concat "\" "; @output_buffer.concat(( "selected" if cate == s.id.to_s ).to_s); @output_buffer.concat ">"; @output_buffer.concat(( s.name ).to_s); @output_buffer.concat "</option>\t\t\t\t\n\t\t\t"
+; end; @output_buffer.concat "\n\t\t"
+; 	else; @output_buffer.concat "\n\t\t\t\t<option value=\"\">\"\xEB\xA8\xBC\xEC\xA0\x80 \xEB\xA9\x94\xEC\x9D\xB8\xEB\xB6\x84\xEB\xA5\x98\xEB\xA5\xBC \xEC\xB6\x94\xEA\xB0\x80\xED\x95\x98\xEC\x84\xB8\xEC\x9A\x94!\"</option>\t\t\t\t\t\n\t\t\t"
+
+; end ; @output_buffer.concat "\n\t</select>\n</div>\n<table class=\"clipart_table\">\n    <thead class=\"clipart_thead\">\n        <tr>\n            <td class=\"clipart_thead\" width=\"400px\">\xEB\xA7\x88\xEC\x9D\xB4 \xED\x85\x9C\xED\x94\x8C\xEB\xA6\xBF \xEB\xA6\xAC\xEC\x8A\xA4\xED\x8A\xB8 ("
+
+
+
+
+
+; @output_buffer.concat(( title_text ).to_s); @output_buffer.concat ")</td>\n\t\t\t<td class=\"clipart_thead\" width=\"400px\" align=\"right\"><a href=\"Javascript:folder_view();\">"
+; @output_buffer.concat(( image_tag("/images/folder/folder_manage.jpg", :border=>'0', :align => 'absmiddle') ).to_s); @output_buffer.concat "</a></td>\n        </tr>\n\t\t<tr>\n\t\t\t<td colspan=\"2\">\n\t\t\t\t"
+
+
+
+; @output_buffer.concat(( render :partial => "/mytemplates/folder" ).to_s); @output_buffer.concat "\n\t\t\t</td>\n\t\t</tr>\n    </thead>\n</table>\n"
+
+
+
+
+; 
+@temp = 1 
+@mytemplates.each do |my| ; @output_buffer.concat "\n\n"
+
+;  if @temp%4 == 1; @output_buffer.concat "\n\n<script language=\"javascript\">\n$(document).ready(function(){\n\t$('#orderform').css('display','none');\n\t\n\t$('#order').click(function(){\n\t\talert(\"\xEB\x8B\x88\xEA\xB0\x80 \xEC\xA3\xBC\xEB\xAC\xB8\xEC\x9D\x84 \xEB\x88\x8C\xEB\xA0\x80\xEB\x83\x90?\");\n\t\t$('#orderform').css('display','block');\n\t});\n\t\n\t$('#order_basic').click(function(){\n\t\talert(\"\xEB\x8B\x88\xEA\xB0\x80 \xEA\xB2\xB0\xEC\x9E\xAC\xEC\xB0\xBD\xEC\x9D\x84 \xEB\x88\x8C\xEB\xA0\x80\xEB\x83\x90?\");\n\t\tvar temp_array = jQuery.makeArray($('.chkbox:checked'));\n\t\t// $(\"input:checkbox:checked\").each(function(){\n\t\t// \ttemp_array += $(this).val() + \",\";\n\t\t// });\n\t\tvar del_ids = \"\";\n\t\tjQuery.each(temp_array, function(){\n\t\t\tdel_ids += $(this).val() + \",\";\n\t\t})\n\t\t\n\t\tif (del_ids == \"\"){\n\t\t\talert(\"\xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\xA0 \xED\x95\xAD\xEB\xAA\xA9\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94!\");\n\t\t}else{\n\t\t\tif (window.confirm(\"\xEA\xB2\xB0\xEC\x9E\xAC\xEB\xA5\xBC \xEC\xA7\x84\xED\x96\x89\xED\x95\x98\xEC\x8B\x9C\xEA\xB2\xA0\xEC\x8A\xB5\xEB\x8B\x88\xEA\xB9\x8C?\")){\n\t\t\t\tloadingView();\n\t\t\t\t// $.ajax({\n\t\t\t\t// \t\t\t\t\tdata:'ids='+ del_ids, \n\t\t\t\t// \t\t\t\t\tdataType:'script', \n\t\t\t\t// \t\t\t\t\ttype:'post', \n\t\t\t\t// \t\t\t\t\turl:'/mytemplates/destroy_selection',\n\t\t\t\t// \t\t\t\t\tsuccess: function(request){\n\t\t\t\t// \t\t\t\t\t\tjQuery.each(temp_array, function(){\n\t\t\t\t// \t\t\t\t\t\t\t$('#'+$(this).val()).remove();\n\t\t\t\t// \t\t\t\t\t\t})\n\t\t\t\t// \t\t\t\t\t\tloadingView();\n\t\t\t\t// \t\t\t\t\t}\n\t\t\t\t// \t\t\t\t});\t\n\t\t\t}\n\t\t\t\n\t\t}\n\t});\n\t\n\t$('#chk_all').click(function(){\n\t\t$('.chkbox').click();\n\t});\n\t\n\t$('.delete').click(function(){\n\t\tif (event.target.id == \"\"){\n\t\t\tvar temp_array = jQuery.makeArray($('.chkbox:checked'));\n\t\t\t// $(\"input:checkbox:checked\").each(function(){\n\t\t\t// \ttemp_array += $(this).val() + \",\";\n\t\t\t// });\n\t\t\tvar del_ids = \"\";\n\t\t\tjQuery.each(temp_array, function(){\n\t\t\t\tdel_ids += $(this).val() + \",\";\n\t\t\t})\n\t\t\t\n\t\t\tif (del_ids == \"\"){\n\t\t\t\talert(\"\xEC\x82\xAD\xEC\xA0\x9C\xED\x95\xA0 \xED\x95\xAD\xEB\xAA\xA9\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94!\");\n\t\t\t}else{\n\t\t\t\tif (window.confirm(\"\xEC\xA0\x95\xEB\xA7\x90 \xEC\x82\xAD\xEC\xA0\x9C\xED\x95\x98\xEC\x8B\x9C\xEA\xB2\xA0\xEC\x8A\xB5\xEB\x8B\x88\xEA\xB9\x8C?\")){\n\t\t\t\t\tloadingView();\n\t\t\t\t\t$.ajax({\n\t\t\t\t\t\tdata:'ids='+ del_ids, \n\t\t\t\t\t\tdataType:'script', \n\t\t\t\t\t\ttype:'post', \n\t\t\t\t\t\turl:'/mytemplates/destroy_selection',\n\t\t\t\t\t\tsuccess: function(request){\n\t\t\t\t\t\t\tjQuery.each(temp_array, function(){\n\t\t\t\t\t\t\t\t$('#'+$(this).val()).remove();\n\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\tloadingView();\n\t\t\t\t\t\t}\n\t\t\t\t\t});\t\n\t\t\t\t}\n\t\t\t\t\n\t\t\t}\n\n\n\t\t\t\t\t"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat(( link_string  if my.thumb_url ).to_s); @output_buffer.concat "\n\t\t\t\t</td>\t\t\t\t \t\t\t\n\t\t\t\t<td width=\"14\">&nbsp;</td></tr>\n\t\t\t\t<tr>\n\t\t\t\t<td>&nbsp;</td></tr>\n\t\t\t\t<tr> \n\t\t\t\t<td class=\"templatelist\"><a href=\"/mytemplates/"
+
+
+
+
+
+; @output_buffer.concat((my.id).to_s); @output_buffer.concat "?cate="; @output_buffer.concat(( cate ).to_s); @output_buffer.concat "&search="; @output_buffer.concat((params[:search]).to_s); @output_buffer.concat "&page="; @output_buffer.concat((params[:page]).to_s); @output_buffer.concat "\">"; @output_buffer.concat(( my.name ).to_s); @output_buffer.concat "</a></td></tr>\n\t\t\t\t<tr> \n\t\t\t\t<td class=\"templatelist\"><a href=\"#\">"
+
+; @output_buffer.concat(( Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? ).to_s); @output_buffer.concat(("/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil).to_s); @output_buffer.concat "</a></td></tr>\n\t\t\t\t<tr>\n\t\t\t\t<td class=\"templatelist\">\n\n\t\t\t\t\t<a href=\"/mytemplates/"
+
+
+
+; @output_buffer.concat((my.id).to_s); @output_buffer.concat "?cate="; @output_buffer.concat(( cate ).to_s); @output_buffer.concat "&search="; @output_buffer.concat((params[:search]).to_s); @output_buffer.concat "&page="; @output_buffer.concat((params[:page]).to_s); @output_buffer.concat "\"><img src=\"/images/template/edit_instant_s.jpg\" border=\"0\" title=\"\xEC\x83\x81\xEC\x84\xB8\xEB\xB3\xB4\xEA\xB8\xB0\"></a>\n\t\t\t\t\t"
+; @output_buffer.concat "\n\t\t\n\t\t\t\t\t"
+
+; @output_buffer.concat(( link_to image_tag("/images/template/delete_s.jpg", :border=>0, :title => "삭제"), mytemplate_path(my.id), :confirm => '정말 삭제하시겠습니까?',  :method => :delete ).to_s); @output_buffer.concat "\t\t\n\t\t\t\t</td></tr>\n\t\t\t\t<tr>\n\t\t\t\t<td>&nbsp;</td></tr>\n\t\t\t</table>\n\t\t\t<!-- <\xED\x85\x9C\xED\x94\x8C\xEB\xA6\xBF \xEC\xA0\x95\xEB\xB3\xB4 \xEB\xB0\x98\xEB\xB3\xB5 \xEA\xB5\xAC\xEA\xB0\x84\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4.> -->\n\t\t</td>\n\n"
+
+
+
+
+
+
+
+;  if @temp%4 == 0 or @temp == @mytemplates.length; @output_buffer.concat "\t\t\n\t</tr>\n</table>\n"
+
+
+; end; @output_buffer.concat "\n<!-- <\xED\x85\x9C\xED\x94\x8C\xEB\xA6\xBF \xEC\xA0\x95\xEB\xB3\xB4\xEC\xB0\xBD \xED\x95\x9C\xEC\xA4\x84 \xEB\xB0\x98\xEB\xB3\xB5 \xEA\xB5\xAC\xEA\xB0\x84\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. -->\t\n"
+
+;  @temp += 1
+end; @output_buffer.concat "\n\n"
+
+;  if @mytemplates.count > 0 ; @output_buffer.concat "\n\n\t<!-- <form action=\"### \xEC\xA3\xBC\xEB\xAC\xB8 \xED\x94\x84\xEB\xA1\x9C\xEC\x84\xB8\xEC\x8A\xA4\xEB\xA1\x9C ###\" method=\"post\" id=\"design-list\"> -->\n\t"
+
+
+; @output_buffer.concat "\t\n\t\t<h4><span class=\"step\">Step 1.</span> \xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xEB\xAA\xA9\xEB\xA1\x9D, \xEA\xB2\x80\xED\x86\xA0 </h4>\n\t\t<table>\n\t\t\t<caption>\xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\xA0 \xED\x95\xAD\xEB\xAA\xA9\xEA\xB3\xBC \xEC\x98\xB5\xEC\x85\x98\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94. <a href=\"#\" class=\"delete\">\xEC\x84\xA0\xED\x83\x9D\xED\x95\x9C \xED\x95\xAD\xEB\xAA\xA9 \xEC\x82\xAD\xEC\xA0\x9C</a></caption>\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th class=\"check\" id=\"chk_all\">check</th>\n\t\t\t\t\t<th>\xEC\x9E\x91\xEC\x97\x85\xEA\xB5\xAC\xEB\xB6\x84</th>\n\t\t\t\t\t<th>\xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xED\x92\x88\xEB\xAA\xA9</th>\n\t\t\t\t\t<th>\xEC\x82\xAC\xEC\x9D\xB4\xEC\xA6\x88</th>\n\t\t\t\t\t<th>\xEA\xB0\x80\xEA\xB2\xA9</th>\n\t\t\t\t\t<th>\xEC\x88\x98\xEC\xA0\x95\xEC\x9D\xBC</th>\n\t\t\t\t\t<th>\xEA\xB8\xB0\xEB\x8A\xA5</th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<!-- \xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xED\x95\xAD\xEB\xAA\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; 
+				@temp = 1 
+				@mytemplates.each do |my| 
+					main_category_sn = Category.get(my.category.to_i).sn
+					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+					if main_category_sn.nil?; main_category_sn = "mc"; end
+					if sub_category_sn.nil?; sub_category_sn = "sc"; end
+						
+					sn_num = main_category_sn + sub_category_sn + my.id.to_s
+				; @output_buffer.concat "\n\t\t\t\t<tr id=\""
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\" class=\"item\">\n\t\t\t\t\t<td class=\"check\"><!-- \xED\x8E\xB8\xEC\xA7\x91\xEC\x9D\x98\xEB\xA2\xB0\xEC\x9D\x98 \xEA\xB2\xBD\xEC\x9A\xB0 \xEC\x8B\x9C\xEC\x95\x88\xED\x99\x95\xEC\xA0\x95\xEC\x9D\x84 \xED\x95\xB4\xEC\x95\xBC \xEC\xB2\xB4\xED\x81\xAC\xED\x95\xA0 \xEC\x88\x98 \xEC\x9E\x88\xEC\x9D\x8C. input\xED\x83\x9C\xEA\xB7\xB8\xEC\x97\x90  disabled \xEC\xB2\x98\xEB\xA6\xAC\xED\x95\x98\xEB\xA9\xB4 \xEB\x90\xA0\xEB\x93\xAF\xED\x95\xA9\xEB\x8B\x88\xEB\x8B\xA4. --><input class=\"chkbox\" type=\"checkbox\"  value=\""
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\"/></td>\n\t\t\t\t\t<td class=\"edit-type\">"
+; @output_buffer.concat(( my.job_code ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"design\" onClick=\"location.href='/mytemplates/"
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "?cate="; @output_buffer.concat(( params[:cate] ).to_s); @output_buffer.concat "&page="; @output_buffer.concat(( params[:page] ).to_s); @output_buffer.concat "'\">"; @output_buffer.concat(( Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? ).to_s); @output_buffer.concat(("/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil).to_s); @output_buffer.concat "<span class=\"design-code\">("; @output_buffer.concat(( sn_num ).to_s); @output_buffer.concat ")</span> <span>"; @output_buffer.concat(( my.feedback_code ).to_s); @output_buffer.concat "</span></td>\n\t\t\t\t\t<td class=\"size\">"
+; @output_buffer.concat(( my.size ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"price\">"
+; @output_buffer.concat(( Temp.get(my.temp_id).price ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"date\">"
+; @output_buffer.concat(( my.updated_at.strftime('%Y-%m-%d') ).to_s); @output_buffer.concat "</td>\n\t\t\t\t\t<td class=\"action\">\n\t\t\t\t\t\t<h5>\xEC\x9D\xB4 \xED\x92\x88\xEB\xAA\xA9\xEC\x9D\x84...</h5>\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"edit\"><a href=\"### \xEC\x9B\xB9\xED\x83\x91 ###\" onClick=\"popup('"
+
+
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "');\">\xED\x8E\xB8\xEC\xA7\x91</a></li>\n\t\t\t\t\t\t\t<li class=\"options\"><a href=\"### \xEC\x98\xB5\xEC\x85\x98 \xEC\x84\xA0\xED\x83\x9D \xEC\xB0\xBD ###\">\xEC\x98\xB5\xEC\x85\x98 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</a></li>\n\t\t\t\t\t\t\t<li class=\"delete\"><a href=\"### \xEC\x82\xAD\xEC\xA0\x9C ###\" id=\"del_"
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\">\xEC\x82\xAD\xEC\xA0\x9C</a></li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t<!-- jQuery\xEB\xA1\x9C \xEC\x88\xA8\xEA\xB2\xA8\xEB\x86\xA8\xEB\x8B\xA4\xEA\xB0\x80 \xEB\xA0\x88\xEC\x9D\xB4\xEC\x96\xB4\xEB\xA1\x9C \xED\x86\xA0\xEA\xB8\x80\xED\x95\xA0 \xEC\x83\x9D\xEA\xB0\x81\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t<div class=\"option-select\">\n\t\t\t\t\t\t\t<h5>\xEC\x98\xB5\xEC\x85\x98 \xEC\x84\xA0\xED\x83\x9D</h5>\n\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t<li><label for=\"piece\">\xEA\xB0\x9C\xEC\x88\x98</label> <input id=\"piece\" name=\"piece[]\" type=\"number\" value=\"1\"/>ea</li>\n\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t<label>### \xEC\x98\xB5\xEC\x85\x98\xEC\xA0\x9C\xEB\xAA\xA9 ###</label>\n\t\t\t\t\t\t\t\t\t<select name=\"select_main_"
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\">\n\t\t\t\t\t\t\t\t\t\t<option value=\"\" selected>\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\">------------------</option>\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEA\xB7\xB8\xEB\x9E\x98\xED\x94\xBD\xEC\xB2\x9C(\xED\x98\x84\xEC\x88\x98\xEB\xA7\x89\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)\">\xEA\xB7\xB8\xEB\x9E\x98\xED\x94\xBD\xEC\xB2\x9C(\xED\x98\x84\xEC\x88\x98\xEB\xA7\x89\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xED\x8E\x98\xED\x8A\xB8(\xEC\x96\x87\xEC\x9D\x80\xED\x94\x8C\xEB\x9D\xBC\xEC\x8A\xA4\xED\x8B\xB1\xEC\xA0\x9C\xEC\xA7\x88\xEC\x9B\x90\xEB\x8B\xA8)\">\xED\x8E\x98\xED\x8A\xB8(\xEC\x96\x87\xEC\x9D\x80\xED\x94\x8C\xEB\x9D\xBC\xEC\x8A\xA4\xED\x8B\xB1\xEC\xA0\x9C\xEC\xA7\x88\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xED\x95\xA9\xEC\x84\xB1\xEC\xA7\x80(\xEC\xA0\x90\xEC\xB0\xA9\xEA\xB0\x80\xEB\x8A\xA5\xEC\x9B\x90\xEB\x8B\xA8)\">\xED\x95\xA9\xEC\x84\xB1\xEC\xA7\x80(\xEC\xA0\x90\xEC\xB0\xA9\xEA\xB0\x80\xEB\x8A\xA5\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"PVC\xEC\xBC\x88(\xEC\xA0\x90\xEC\xB0\xA9\xEA\xB0\x80\xEB\x8A\xA5\xEC\x9B\x90\xEB\x8B\xA8)\">PVC\xEC\xBC\x88(\xEC\xA0\x90\xEC\xB0\xA9\xEA\xB0\x80\xEB\x8A\xA5\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEB\xB6\x80\xEC\xA7\x81\xED\x8F\xAC(\xEC\x96\xB4\xEA\xB9\xA8\xEB\x9D\xA0\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)\">\xEB\xB6\x80\xEC\xA7\x81\xED\x8F\xAC(\xEC\x96\xB4\xEA\xB9\xA8\xEB\x9D\xA0\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xED\x8F\xB0\xEC\xA7\x80(\xEB\x94\x94\xEC\xA7\x80\xED\x84\xB8\xEB\x82\xA0\xEC\x97\xBC\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)\">\xED\x8F\xB0\xEC\xA7\x80(\xEB\x94\x94\xEC\xA7\x80\xED\x84\xB8\xEB\x82\xA0\xEC\x97\xBC\xEC\xA0\x84\xEC\x9A\xA9\xEC\x9B\x90\xEB\x8B\xA8)</option>\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t\t\t\t<select name=\"select_sub_"
+
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat(( my.id.to_s ).to_s); @output_buffer.concat "\">\n\t\t\t\t\t\t\t\t\t\t<option value=\"\" selected>\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\">------------------</option>\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEC\x97\xB4\xEC\x9E\xAC\xEB\x8B\xA8\">\xEC\x97\xB4\xEC\x9E\xAC\xEB\x8B\xA8</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEC\x82\xAC\xEA\xB5\xAC\xEC\x95\x84\xEC\x9D\xBC\xEB\xA0\x9B\">\xEC\x82\xAC\xEA\xB5\xAC\xEC\x95\x84\xEC\x9D\xBC\xEB\xA0\x9B</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEB\xA7\x89\xEB\x8C\x80\xEA\xB0\x80\xEA\xB3\xB5\">\xEB\xA7\x89\xEB\x8C\x80\xEA\xB0\x80\xEA\xB3\xB5</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEB\xB4\x89\xEB\xAF\xB8\xEC\x8B\xB1\">\xEB\xB4\x89\xEB\xAF\xB8\xEC\x8B\xB1</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEB\x81\x88\xEA\xB3\xA0\xEB\xA6\xAC\">\xEB\x81\x88\xEA\xB3\xA0\xEB\xA6\xAC</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEC\x82\xAC\xEB\xB0\xA9\xEC\xA4\x84\xEB\xAF\xB8\xEC\x8B\xB1\">\xEC\x82\xAC\xEB\xB0\xA9\xEC\xA4\x84\xEB\xAF\xB8\xEC\x8B\xB1</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xED\x81\x90\xEB\xB0\xA9\">\xED\x81\x90\xEB\xB0\xA9</option>\n\t\t\t\t\t\t\t\t\t\t<option value=\"\xEA\xB8\xB0\xED\x83\x80\">\xEA\xB8\xB0\xED\x83\x80</option>\n\t\t\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98\xEB\x82\xB4\xEC\x9A\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t<!-- \xEC\x98\xB5\xEC\x85\x98 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<!-- jQuery\xEB\xA1\x9C \xEC\x88\xA8\xEA\xB2\xA8\xEB\x86\xA8\xEB\x8B\xA4\xEA\xB0\x80 \xEB\xA0\x88\xEC\x9D\xB4\xEC\x96\xB4\xEB\xA1\x9C \xED\x86\xA0\xEA\xB8\x80\xED\x95\xA0 \xEC\x83\x9D\xEA\xB0\x81\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. \xEB\x81\x9D-->\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;  end ; @output_buffer.concat "\n\t\t\t\t<!-- \xEB\x94\x94\xEC\x9E\x90\xEC\x9D\xB8 \xED\x95\xAD\xEB\xAA\xA9 \xEB\xB0\x98\xEB\xB3\xB5 \xEB\x81\x9D -->\n\t\t\t</tbody>\n\t\t</table>\n\t\t\n\t<div id=\"total-price\">\n\t\t<h4>\xEC\xB4\x9D \xEC\xA3\xBC\xEB\xAC\xB8 \xEA\xB8\x88\xEC\x95\xA1</h4>\n\t\t<!-- jQuery\xEB\xA1\x9C \xEC\xB2\x98\xEB\xA6\xAC\xED\x95\xA0 \xEC\x98\x88\xEC\xA0\x95\xEC\x9E\x85\xEB\x8B\x88\xEB\x8B\xA4. -->\n\t\t<p class=\"price\">00,000\xEC\x9B\x90</p>\n\t</div>\n\t<input id=\"order\" type=\"button\" value=\"\xEC\x84\xA0\xED\x83\x9D\xED\x95\x9C \xED\x95\xAD\xEB\xAA\xA9 \xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\x98\xEA\xB8\xB0\">\n\t<!-- <input type=\"submit\" class=\"order\" value=\"\xEC\x84\xA0\xED\x83\x9D\xED\x95\x9C \xED\x95\xAD\xEB\xAA\xA9 \xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\x98\xEA\xB8\xB0\"/>-->\n\t"
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat "\n"
+;  end ; @output_buffer.concat "\n</div>\n\n<div id=\"orderform\">\n\t<h3>\xEC\xA3\xBC\xEB\xAC\xB8\xED\x8E\x98\xEC\x9D\xB4\xEC\xA7\x80</h3>\n\t<p>\xEA\xB2\xB0\xEC\xA0\x9C \xEA\xB8\x88\xEC\x95\xA1\xEC\x9D\x84 \xED\x99\x95\xEC\x9D\xB8\xED\x95\x98\xEA\xB3\xA0 \xEB\xB0\xB0\xEC\x86\xA1\xEC\xA0\x95\xEB\xB3\xB4 \xEB\xB0\x8F \xEA\xB2\xB0\xEC\xA0\x9C\xEB\xB0\xA9\xEB\xB2\x95\xEC\x9D\x84 \xEC\x84\xA0\xED\x83\x9D\xED\x95\xA9\xEB\x8B\x88\xEB\x8B\xA4.</p>\n\t<!-- \xEC\x84\xA0\xEA\xB2\xB0\xEC\xA0\x9C \xEC\x9E\x88\xEC\x9D\x84\xEA\xB2\xBD\xEC\x9A\xB0\xEC\x97\x90\xEB\xA7\x8C \xED\x91\x9C\xEC\x8B\x9C -->\n\t<div id=\"order-price\">\n\t\t<h4>\xED\x98\x84\xEC\x9E\xAC \xEA\xB2\xB0\xEC\xA0\x9C \xEC\x83\x81\xED\x99\xA9</h4>\n\t\t<ul>\n\t\t\t<li class=\"total\"><strong>\xEC\xB4\x9D \xEC\xA3\xBC\xEB\xAC\xB8\xEA\xB8\x88\xEC\x95\xA1</strong> <!-- \xEC\x84\x9C\xEB\xB2\x84\xEC\x97\x90\xEC\x84\x9C \xEC\xA0\x95\xED\x99\x95\xED\x95\x98\xEA\xB2\x8C \xEA\xB3\x84\xEC\x82\xB0\xEB\x90\x9C \xEC\xB4\x9D \xEA\xB8\x88\xEC\x95\xA1 --> <span class=\"price\">40,000\xEC\x9B\x90</span></li>\n\t\t\t<li class=\"first\"><strong>\xEC\x84\xA0\xEA\xB2\xB0\xEC\xA0\x9C\xEA\xB8\x88\xEC\x95\xA1</strong> <!-- \xEC\x84\x9C\xEB\xB2\x84\xEC\x97\x90\xEC\x84\x9C \xEC\xA0\x95\xED\x99\x95\xED\x95\x98\xEA\xB2\x8C \xEA\xB3\x84\xEC\x82\xB0\xEB\x90\x9C \xEC\xB4\x9D \xEA\xB8\x88\xEC\x95\xA1 --> <span class=\"price\">10,000\xEC\x9B\x90</span></li>\n\t\t\t<li class=\"more\"><strong>\xEB\x82\xA8\xEC\x9D\x80 \xEA\xB2\xB0\xEC\xA0\x9C\xEA\xB8\x88\xEC\x95\xA1</strong> <!-- \xEC\x84\x9C\xEB\xB2\x84\xEC\x97\x90\xEC\x84\x9C \xEC\xA0\x95\xED\x99\x95\xED\x95\x98\xEA\xB2\x8C \xEA\xB3\x84\xEC\x82\xB0\xEB\x90\x9C \xEC\xB4\x9D \xEA\xB8\x88\xEC\x95\xA1 --> <span class=\"price\">30,000\xEC\x9B\x90</span></li>\n\t\t</ul>\n\t</div>\n\t<!-- \xEC\x84\xA0\xEA\xB2\xB0\xEC\xA0\x9C \xEC\x9E\x88\xEC\x9D\x84\xEA\xB2\xBD\xEC\x9A\xB0\xEC\x97\x90\xEB\xA7\x8C \xED\x91\x9C\xEC\x8B\x9C -->\n\t<form action=\"### ###\" method=\"post\">\n\t\t<fieldset id=\"delivery-information\">\n\t\t\t<legend>\xEB\xB0\xB0\xEC\x86\xA1\xEC\xA0\x95\xEB\xB3\xB4</legend>\n\t\t\t<p>\n\t\t\t\t<label for=\"receive-name\">\xEC\x88\x98\xEB\xA0\xB9\xEC\x9D\xB8</label>\n\t\t\t\t<input value=\""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.concat(( current_user.name ).to_s); @output_buffer.concat "\" name=\"### \xEC\x88\x98\xEB\xA0\xB9\xEC\x9D\xB8\xED\x85\x8D\xEC\x8A\xA4\xED\x8A\xB8\xEB\xB0\x95\xEC\x8A\xA4\xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-name\" placeholder=\"\xEC\x88\x98\xEB\xA0\xB9\xEC\x9D\xB8 \xEC\x84\xB1\xED\x95\xA8\" type=\"text\"/>\n\t\t\t</p>\n\t\t\t<p>\n\t\t\t\t<label for=\"receive-phone\">\xEC\x9D\xBC\xEB\xB0\x98\xEC\xA0\x84\xED\x99\x94</label>\n\t\t\t\t<input value=\""
+
+
+
+; @output_buffer.concat(( current_user.tel ).to_s); @output_buffer.concat "\" name=\"### \xEC\x97\xB0\xEB\x9D\xBD\xEC\xB2\x98\xED\x85\x8D\xEC\x8A\xA4\xED\x8A\xB8\xEB\xB0\x95\xEC\x8A\xA4\xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-tel\" placeholder=\"010-5964-3645\" maxlength=\"13\" size=\"16\" type=\"text\"/>\n\t\t\t</p>\n\t\t\t<p>\n\t\t\t\t<label for=\"receive-phone\">\xEB\xAA\xA8\xEB\xB0\x94\xEC\x9D\xBC</label>\n\t\t\t\t<input value=\""
+
+
+
+; @output_buffer.concat(( current_user.mobile ).to_s); @output_buffer.concat "\" name=\"### \xEC\x97\xB0\xEB\x9D\xBD\xEC\xB2\x98\xED\x85\x8D\xEC\x8A\xA4\xED\x8A\xB8\xEB\xB0\x95\xEC\x8A\xA4\xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-mobile\" placeholder=\"010-5964-3645\" maxlength=\"13\" size=\"16\" type=\"text\"/>\n\t\t\t</p>\n\t\t\t<p>\n\t\t\t\t<label for=\"receive-type\">\xEB\xB0\xB0\xEC\x86\xA1\xEB\xB0\xA9\xEB\xB2\x95</label>\n\t\t\t\t<select name=\"### \xEB\xB0\xB0\xEC\x86\xA1\xEB\xB0\xA9\xEB\xB2\x95\xEC\x85\x80\xEB\xA0\x89\xEB\xB0\x95\xEC\x8A\xA4\xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-type\">\n\t\t\t\t\t<option value=\"\" selected>\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t<option value=\"\">-----------------</option>\n\t\t\t\t\t<!-- \xEB\xB0\xB0\xEC\x86\xA1\xEB\xB0\xA9\xEB\xB2\x95 \xEB\xAA\xA9\xEB\xA1\x9D \xEC\x8B\x9C\xEC\x9E\x91 -->\n\t\t\t\t\t<option value=\"\xEC\x9D\xBC\xEB\xB0\x98\xED\x83\x9D\xEB\xB0\xB0\">\xEC\x9D\xBC\xEB\xB0\x98\xED\x83\x9D\xEB\xB0\xB0</option>\n\t\t\t\t\t<option value=\"\xED\x80\xB5\xEC\x84\x9C\xEB\xB9\x84\xEC\x8A\xA4\">\xED\x80\xB5\xEC\x84\x9C\xEB\xB9\x84\xEC\x8A\xA4</option>\n\t\t\t\t\t<option value=\"\xEC\xA7\x81\xEC\xA0\x91\xEC\x88\x98\xEB\xA0\xB9\">\xEC\xA7\x81\xEC\xA0\x91\xEC\x88\x98\xEB\xA0\xB9</option>\n\t\t\t\t\t<!-- \xEB\xB0\xB0\xEC\x86\xA1\xEB\xB0\xA9\xEB\xB2\x95 \xEB\xAA\xA9\xEB\xA1\x9D \xEC\xA2\x85\xEB\xA3\x8C -->\n\t\t\t\t</select>\n\t\t\t</p>\n\t\t\t<p>\n\t\t\t\t<label for=\"search-address\">\xEB\xB0\xB0\xEC\x86\xA1\xEC\xA3\xBC\xEC\x86\x8C</label>\n\t\t\t\t<ul>\n\t\t\t\t\t<li><label for=\"zipcode\">\xEC\x9A\xB0\xED\x8E\xB8\xEB\xB2\x88\xED\x98\xB8</label> <input id=\"zipcode\" placeholder=\"\xEB\x8F\x99/\xEB\xA9\xB4/\xEC\x9D\x8D\" maxlength=\"10\" size=\"8\" type=\"text\"/> <input type=\"button\" value=\"\xEB\x8F\x99/\xEB\xA9\xB4/\xEC\x9D\x8D \xEA\xB2\x80\xEC\x83\x89\"/></li>\n\t\t\t\t\t<li><label for=\"address-selector\">\xEC\xA3\xBC\xEC\x86\x8C\xEC\x84\xA0\xED\x83\x9D</label>\n\t\t\t\t\t\t<select id=\"address-selector\">\n\t\t\t\t\t\t\t<option value=\"\" selected>\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t\t\t<option value=\"\">\xEC\xA3\xBC\xEC\x86\x8C \xEC\xA7\x81\xEC\xA0\x91 \xEC\x9E\x85\xEB\xA0\xA5</option>\n\t\t\t\t\t\t\t<option value=\"\">-----------------</option>\n\t\t\t\t\t\t\t<option value=\"\">jQuery\xEB\xA1\x9C \xEA\xB5\xAC\xED\x98\x84\xED\x95\xB4\xEB\x86\x93\xEA\xB2\xA0\xEC\x8A\xB5\xEB\x8B\x88\xEB\x8B\xA4~</option>\n\t\t\t\t\t\t</select>\n\t\t\t\t\t\t<input name=\"### \xEC\xA3\xBC\xEC\x86\x8C1 ###\" id=\"address1\" placeholder=\"\xEC\x8B\x9C/\xEB\x8F\x84, \xEA\xB5\xAC/\xEC\x8B\x9C, \xEB\x8F\x99/\xEB\xA9\xB4/\xEC\x9D\x8D\" maxlength=\"24\" size=\"24\" type=\"text\"/>\n\t\t\t\t\t</li>\n\t\t\t\t\t<li><label for=\"address2\">\xEB\x82\x98\xEB\xA8\xB8\xEC\xA7\x80 \xEC\xA3\xBC\xEC\x86\x8C</label><input name=\"### \xEC\xA3\xBC\xEC\x86\x8C2 ###\" id=\"address2\" placeholder=\"\xEB\x82\x98\xEB\xA8\xB8\xEC\xA7\x80 \xEC\xA3\xBC\xEC\x86\x8C\" maxlength=\"50\" size=\"36\" type=\"text\"/></li>\n\t\t\t\t</ul>\n\t\t\t</p>\n\t\t\t<p><label for=\"receive-note\">\xEB\xB0\xB0\xEC\x86\xA1 \xEC\x9A\x94\xEC\xB2\xAD\xEC\x82\xAC\xED\x95\xAD</label><input name=\"### \xEB\xB0\xB0\xEC\x86\xA1\xEC\x8B\x9C\xEC\x9A\x94\xEC\xB2\xAD\xEC\x82\xAC\xED\x95\xAD \xEC\x9D\xB4\xEB\xA6\x84 ###\" id=\"receive-note\" placeholder=\"\xEB\xB0\xB0\xEC\x86\xA1\xEC\x8B\x9C \xEC\x9A\x94\xEC\xB2\xAD\xEC\x82\xAC\xED\x95\xAD\xEC\x9D\x84 \xEC\xA7\xA7\xEA\xB2\x8C \xEC\x9E\x85\xEB\xA0\xA5\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.\" maxlength=\"30\" size=\"35\" type=\"text\"></p>\n\t\t</fieldset>\n\t\t<fieldset id=\"payment-information\">\n\t\t\t<legend>\xEA\xB2\xB0\xEC\xA0\x9C\xEC\xA0\x95\xEB\xB3\xB4 \xEC\x9E\x85\xEB\xA0\xA5</legend>\n\t\t\t<h4>\xEA\xB2\xB0\xEC\xA0\x9C \xEA\xB8\x88\xEC\x95\xA1</h4>\n\t\t\t<p class=\"price\">00,000\xEC\x9B\x90</p>\n\t\t\t<h4>\xEA\xB2\xB0\xEC\xA0\x9C\xEB\xB0\xA9\xEB\xB2\x95 \xEC\x84\xA0\xED\x83\x9D</h4>\n\t\t\t<ul>\n\t\t\t\t<li class=\"user\">\n\t\t\t\t\t<input type=\"radio\" name=\"### \xEA\xB2\xB0\xEC\xA0\x9C\xEB\xB0\xA9\xEB\xB2\x95 ###\" id=\"user\" value=\"### \xEC\x98\xA8\xEB\x9D\xBC\xEC\x9D\xB8\xEC\x9E\x85\xEA\xB8\x88 ###\" checked/> <label for=\"user\">\xEC\xA7\x81\xEC\xA0\x91 \xEA\xB3\x84\xEC\xA2\x8C\xEC\x9D\xB4\xEC\xB2\xB4</label>\n<!--\n\t\t\t\t\t<fieldset id=\"payment-user\">\n\t\t\t\t\t\t<legend>\xEC\x9E\x85\xEA\xB8\x88 \xEC\xA0\x95\xEB\xB3\xB4</legend>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t<label for=\"payment-account\">\xEC\x9E\x85\xEA\xB8\x88\xED\x95\xA0 \xEA\xB3\x84\xEC\xA2\x8C\xEB\xB2\x88\xED\x98\xB8 \xEC\x84\xA0\xED\x83\x9D</label>\n\t\t\t\t\t\t\t<select name=\"### \xEC\x98\xA8\xEB\x9D\xBC\xEC\x9D\xB8\xEC\x9E\x85\xEA\xB8\x88 \xEA\xB3\x84\xEC\xA2\x8C\xEC\x84\xA0\xED\x83\x9D ###\" id=\"payment-account\">\n\t\t\t\t\t\t\t\t<option value=\"\">\xEC\x84\xA0\xED\x83\x9D\xED\x95\xB4\xEC\xA3\xBC\xEC\x84\xB8\xEC\x9A\x94.</option>\n\t\t\t\t\t\t\t\t<option value=\"\">------------------</option>\n\t\t\t\t\t\t\t\t!-- \xEC\x9E\x85\xEA\xB8\x88\xED\x95\xA0 \xEA\xB3\x84\xEC\xA2\x8C\xEB\xB2\x88\xED\x98\xB8 \xEB\xAA\xA9\xEB\xA1\x9D \xEC\x8B\x9C\xEC\x9E\x91 (\xEC\x98\x88: [\xEA\xB8\xB0\xEC\x97\x85] 010-9662-7441 (\xEC\x98\x88\xEA\xB8\x88\xEC\xA3\xBC:\xEC\xA0\x95\xEC\x83\x81\xED\x98\x81)--\n\t\t\t\t\t\t\t\t<option>[### \xEC\x9D\x80\xED\x96\x89\xEB\xAA\x85 ###] ### \xEA\xB3\x84\xEC\xA2\x8C\xEB\xB2\x88\xED\x98\xB8 ### (\xEC\x98\x88\xEA\xB8\x88\xEC\xA3\xBC: ###\xEC\x98\x88\xEA\xB8\x88\xEC\xA3\xBC ###)</option>\n\t\t\t\t\t\t\t\t!-- \xEC\x9E\x85\xEA\xB8\x88\xED\x95\xA0 \xEA\xB3\x84\xEC\xA2\x8C\xEB\xB2\x88\xED\x98\xB8 \xEB\xAA\xA9\xEB\xA1\x9D \xEC\xA2\x85\xEB\xA3\x8C --\n\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t<label for=\"payment-account-name\">\xEC\x9E\x85\xEA\xB8\x88\xEC\x9E\x90 \xEC\x84\xB1\xED\x95\xA8</label> <input name=\"###\xEC\x9E\x85\xEA\xB8\x88 \xEA\xB3\x84\xEC\xA2\x8C \xEC\x9D\xB4\xEB\xA6\x84 ###\" type=\"text\" id=\"payment-account-name\"/>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t</fieldset>\n-->\n\t\t\t\t</li>\n\t\t\t\t<li class=\"realtime\"><input type=\"radio\" name=\"pay_m\" id=\"payment-realtime\" value=\"\xEA\xB3\x84\xEC\xA2\x8C\xEC\x9D\xB4\xEC\xB2\xB4\"/> <label for=\"payment-realtime\">\xEC\x8B\xA4\xEC\x8B\x9C\xEA\xB0\x84 \xEA\xB3\x84\xEC\xA2\x8C\xEC\x9D\xB4\xEC\xB2\xB4</label>\t</li>\n\t\t\t\t<li class=\"credit\"><input type=\"radio\" name=\"pay_m\" id=\"payment-credit\" value=\"\xEC\xB9\xB4\xEB\x93\x9C\xEA\xB2\xB0\xEC\xA0\x9C\"/> <label for=\"payment-credit\">\xEC\x8B\xA0\xEC\x9A\xA9\xEC\xB9\xB4\xEB\x93\x9C</label></li>\n\t\t\t\t<li class=\"mobile\"><input type=\"radio\" name=\"pay_m\" id=\"payment-mobile\" value=\"\xED\x9C\xB4\xEB\x8C\x80\xED\x8F\xB0\xEA\xB2\xB0\xEC\xA0\x9C\"/> <label for=\"payment-mobile\">\xED\x9C\xB4\xEB\x8C\x80\xED\x8F\xB0</label></li>\n\t\t\t</ul>\n\t\t</fieldset>\n\t\t<input id=\"order_basic\" type=\"button\" value=\"\xEC\xA3\xBC\xEB\xAC\xB8\xED\x95\x98\xEA\xB8\xB0\"/>\n\t</form>\n\t<div id=\"PGIOscreen\"></div>\n</div>\n\n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; @output_buffer.force_encoding(__ENCODING__)
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /Users/cholubin/development/mybanner/config/initializers/fix_renderable.rb:19:in `module_eval'
+/Users/cholubin/development/mybanner/config/initializers/fix_renderable.rb:19:in `compile!'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:61:in `compile'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:28:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:20:in `block in render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:26:in `block in benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `block in ms'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:26:in `benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:19:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/template.rb:205:in `render_template'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable_partial.rb:44:in `render_partial'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/partials.rb:184:in `render_partial'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:267:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+/Users/cholubin/development/mybanner/app/views/mytemplates/mytemplate.html.erb:40:in `_run_erb_app47views47mytemplates47mytemplate46html46erb'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:34:in `block in render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:306:in `with_template'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/renderable.rb:30:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/template.rb:205:in `render_template'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:265:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:348:in `_render_with_layout'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_view/base.rb:262:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:1250:in `render_for_file'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:951:in `render'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:51:in `block in render_with_benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `block in ms'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:51:in `render_with_benchmark'
+/Users/cholubin/development/mybanner/app/controllers/mytemplates_controller.rb:46:in `index'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:1331:in `perform_action'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/filters.rb:617:in `call_filters'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/filters.rb:610:in `perform_action_with_filters'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in `block in perform_action_with_benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `block in ms'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/benchmark.rb:309:in `realtime'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in `perform_action_with_benchmark'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/rescue.rb:160:in `perform_action_with_rescue'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/flash.rb:146:in `perform_action_with_flash'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:532:in `process'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/filters.rb:606:in `process_with_filters'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:391:in `process'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/base.rb:386:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:437:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:87:in `dispatch'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:121:in `_call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:130:in `block in build_middleware_stack'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/string_coercion.rb:25:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/head.rb:9:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/methodoverride.rb:24:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/params_parser.rb:15:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/session/abstract_store.rb:122:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/failsafe.rb:26:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `block in call'
+<internal:prelude>:8:in `synchronize'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:114:in `block in call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/reloader.rb:34:in `run'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:108:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/static.rb:31:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:46:in `block in call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `each'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/log_tailer.rb:17:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/content_length.rb:13:in `call'
+/Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/handler/webrick.rb:50:in `service'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+/Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+ActionView::TemplateError (/Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:416: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/cholubin/development/mybanner/app/views/mytemplates/_mytemplate_index.html.erb:418: syntax error, unexpected $end, expecting keyword_end) on line #416 of app/views/mytemplates/_mytemplate_index.html.erb:
+413: </div>
+
+    config/initializers/fix_renderable.rb:19:in `module_eval'
+    config/initializers/fix_renderable.rb:19:in `compile!'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (145.6ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:38:44) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.5ms)
+Rendered shared/_login (27.5ms)
+Rendered shared/_menu (1.4ms)
+Rendered mytemplates/_leftsidebar (0.7ms)
+
+ActionView::TemplateError (undefined method `sn' for #<Category:0x0000010297b8d8>) on line #154 of app/views/mytemplates/_mytemplate_index.html.erb:
+151: 				<%
+152: 				@temp = 1 
+153: 				@mytemplates.each do |my| 
+154: 					main_category_sn = Category.get(my.category.to_i).sn
+155: 					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+156: 					if main_category_sn.nil?; main_category_sn = "mc"; end
+157: 					if sub_category_sn.nil?; sub_category_sn = "sc"; end
+
+    app/views/mytemplates/_mytemplate_index.html.erb:154:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:153
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (88.7ms)
+Rendered rescues/_request_and_response (1.2ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:39:44) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.5ms)
+Rendered shared/_login (27.8ms)
+Rendered shared/_menu (1.4ms)
+Rendered mytemplates/_leftsidebar (0.7ms)
+
+ActionView::TemplateError (undefined method `sn' for #<Category:0x000001032387a0>) on line #154 of app/views/mytemplates/_mytemplate_index.html.erb:
+151: 				<%
+152: 				@temp = 1 
+153: 				@mytemplates.each do |my| 
+154: 					main_category_sn = Category.get(my.category.to_i).sn
+155: 					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+156: 					if main_category_sn.nil?; main_category_sn = "mc"; end
+157: 					if sub_category_sn.nil?; sub_category_sn = "sc"; end
+
+    app/views/mytemplates/_mytemplate_index.html.erb:154:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:153
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (89.3ms)
+Rendered rescues/_request_and_response (1.2ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:39:49) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+
+ActionView::TemplateError (undefined method `sn' for #<Category:0x0000010311e4d8>) on line #154 of app/views/mytemplates/_mytemplate_index.html.erb:
+151: 				<%
+152: 				@temp = 1 
+153: 				@mytemplates.each do |my| 
+154: 					main_category_sn = Category.get(my.category.to_i).sn
+155: 					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+156: 					if main_category_sn.nil?; main_category_sn = "mc"; end
+157: 					if sub_category_sn.nil?; sub_category_sn = "sc"; end
+
+    app/views/mytemplates/_mytemplate_index.html.erb:154:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:153
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (154.2ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:43:03) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.5ms)
+Rendered shared/_login (27.5ms)
+Rendered shared/_menu (1.4ms)
+Rendered mytemplates/_leftsidebar (0.8ms)
+
+ActionView::TemplateError (undefined method `sn' for #<Category:0x0000010343dc40>) on line #154 of app/views/mytemplates/_mytemplate_index.html.erb:
+151: 				<%
+152: 				@temp = 1 
+153: 				@mytemplates.each do |my| 
+154: 					main_category_sn = Category.get(my.category.to_i).sn
+155: 					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+156: 					if main_category_sn.nil?; main_category_sn = "mc"; end
+157: 					if sub_category_sn.nil?; sub_category_sn = "sc"; end
+
+    app/views/mytemplates/_mytemplate_index.html.erb:154:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:153
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (87.7ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:45:05) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.8ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+
+ActionView::TemplateError (undefined method `sn' for #<Subcategory:0x000001051aac70>) on line #155 of app/views/mytemplates/_mytemplate_index.html.erb:
+152: 				@temp = 1 
+153: 				@mytemplates.each do |my| 
+154: 					main_category_sn = Category.get(my.category.to_i).sn
+155: 					sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+156: 					if main_category_sn.nil?; main_category_sn = "mc"; end
+157: 					if sub_category_sn.nil?; sub_category_sn = "sc"; end
+158: 						
+
+    app/views/mytemplates/_mytemplate_index.html.erb:155:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `block in each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    extlib (0.9.14) lib/extlib/lazy_array.rb:411:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:153
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:40
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:46:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (155.4ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:46:06) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.7ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (188.9ms)
+Rendered shared/_footer (0.7ms)
+Rendered shared/_header (0.7ms)
+Rendered shared/_footer (0.0ms)
+Completed in 780ms (View: 211 | 200 OK [http://localhost/mytemplates]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-08 22:46:14) [GET]
+
+ActionController::RoutingError (No route matches "/carts" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-08 22:46:43) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (2.7ms)
+Rendered shared/_category (9.7ms)
+Rendered pages/_main_content (3.2ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 202ms (View: 47 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:46:48) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (11.8ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 22ms (View: 18 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:47:56) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (12.0ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.8ms)
+Rendered shared/_footer (0.0ms)
+Completed in 29ms (View: 25 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 22:47:58) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (5.3ms)
+Rendered myorders/_myorder_index (1.6ms)
+Rendered shared/_footer (0.0ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 214ms (View: 37 | 200 OK [http://localhost/myorders]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:48:29) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (12.3ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 23ms (View: 19 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#destroy (for 127.0.0.1 at 2010-10-08 22:48:42) [POST]
+  Parameters: {"id"=>"101"}
+Redirected to http://localhost:3000/mytemplates
+Completed in 127ms | 302 Found [http://localhost/mytemplates/destroy]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:48:42) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (5.2ms)
+Rendered shared/_menu (0.2ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (11.6ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 30ms (View: 22 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-08 22:48:47) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"102"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.6ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_show (61.1ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 82ms (View: 79 | 200 OK [http://localhost/mytemplates/102?cate=&page=]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:49:50) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.6ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (7.3ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 18ms (View: 14 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 22:49:53) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (0.1ms)
+Rendered myorders/_myorder_index (0.0ms)
+Rendered shared/_footer (0.0ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 8ms (View: 6 | 200 OK [http://localhost/myorders]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-08 22:50:16) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.4ms)
+Rendered shared/_category (7.8ms)
+Rendered temps/_temp_index (15.9ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 51ms (View: 43 | 200 OK [http://localhost/temps]

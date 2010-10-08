@@ -241,6 +241,7 @@ class MytemplatesController < ApplicationController
     end
   end
 
+
   def jobboard_create
     mytemp_id = params[:id].to_s
     content = params[:content]
@@ -290,8 +291,9 @@ class MytemplatesController < ApplicationController
     end
 
 
+
   def destroy
-    mytemplate = Mytemplate.get(params[:id].to_i)
+    mytemplate = Mytemplate.get(params[:id])
     close_document(mytemplate)
     
     begin
@@ -410,7 +412,6 @@ class MytemplatesController < ApplicationController
       @cloned_object.thumb_url = "/user_files/" + current_user.userid + "/article_templates/" +  mytemplate_new_filename + "/web/doc_thumb.jpg"         
       @cloned_object.preview_url = "/user_files/" + current_user.userid + "/article_templates/" + mytemplate_new_filename + "/web/doc_preview.jpg"             
 
-      @cloned_object.is_col = @object_to_clone.is_col
       @cloned_object.category = @object_to_clone.category
       @cloned_object.subcategory = @object_to_clone.subcategory
 

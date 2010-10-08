@@ -1,9 +1,13 @@
 # encoding: utf-8
 
 class UsersController < ApplicationController
+  # jQuery 대응 레이아웃 추가
+  layout "ajax-load-page"
+  
   # GET /users
   # GET /users.xml
   def index
+  	
     @users = User.search(params[:search], params[:page])
     @total_count = User.search(params[:search],"").count
         

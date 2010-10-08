@@ -31,6 +31,7 @@ class PagesController < ApplicationController
     #   User.new(:userid =>'test9', :name => 'test9', :password => 'test9', :email=>'test9@iedit.net').save  
     #   User.new(:userid =>'test10', :name => 'test10', :password => 'test10', :email=>'test10@iedit.net').save  
     # end 
+
   end
 
   def contact
@@ -57,30 +58,30 @@ class PagesController < ApplicationController
     @menu = "home"
   end
   
-  def login
-    @title = "login"
-    @menu = "home"    
-  end 
-  
-  def logout
  
-  end
-  
-  def congratulations
+  def editorder
+  	# 편집의뢰 페이지 ( AJAX 페이지 )
     @title = "가입완료"
     @menu = "home"
+    render :layout => 'ajax-load-page'
+  end
+
+  def congratulations
+  	# AJAX 팝업을 위한 레이아웃 변경
+    @title = "가입완료"
+    @menu = "home"
+    render :layout => 'ajax-load-page'
   end
   
-  
   def withdraw
-    
+  	# AJAX 팝업을 위한 레이아웃 변경
     if signed_in?
       @users = current_user
       @menu = "home"
       @board = "user"
       @section = "withdraw"
-
-      render 'users/user' 
+      #render 'users/user'
+      render :layout => 'ajax-load-page'
     else
       redirect_to '/' 
     end

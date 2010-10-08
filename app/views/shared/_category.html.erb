@@ -1,0 +1,19 @@
+		<div id="<%=(@menu == "home")? "category" : "submenu"%>"<%=(@menu == "home")? " class=\"sideblock\"" : nil%>>
+			<h3>제품 카테고리</h3>
+			<ul>
+<% @categories = Category.all(:order => [ :priority.asc ]) %>
+<% @categories.each do |category| %>
+				<li>
+					<a class="title" href="/temps?category_name=<%= category.id %>"<%= "class='on'" if @category_name == category.name%>><%= category.name %></a>
+<% @subcategories = category.subcategories 
+if @subcategories.count !=0 %>
+					<ul>
+<% @subcategories.each do |subcategory| %>
+	<li><a class="sub-title" href="/temps?category_name=<%= category.id %>&subcategory_name=<%= subcategory.id %>"<%= " class='on'" if @subcategory_name == subcategory.name and @category_name == category.name%>><%= subcategory.name %></a></li>
+<% end  %>
+					</ul>
+<% end %>
+				</li>
+<% end  %>
+			</ul>
+		</div>
