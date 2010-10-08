@@ -1,0 +1,15 @@
+
+
+@font-face{font-family:ABCDEF1; src:url("file://localhost/Library/Fonts/smWallin Bold.otf");}
+@font-face{font-family:ABCDEF2; src:url("file://localhost/Library/Fonts/SM 서체/smHeadT Medium.otf");}
+@font-face{font-family:ABCDEF3; src:url("file://localhost/Library/Fonts/SM 서체/smJohabP Medium.otf");}
+@font-face{font-family:ABCDEF4; src:url("file://localhost/Library/Fonts/SM 서체/smMokPan Medium.otf");}
+@font-face{font-family:ABCDEF5; src:url("file://localhost/Library/Fonts/SM 서체/smSooryo DemiBold.otf");}
+@font-face{font-family:ABCDEF6; src:url("file://localhost/Library/Fonts/SM 서체/smType DemiBold.otf");}
+
+.para1 {font-size:16pt; color:#254088; }
+.para2 {font-family:ABCDEF2; font-size:14pt; color:red; }
+.파라3 {font-family:ABCDEF3; font-size:24pt; color:gray; }
+.para4 {font-family:ABCDEF4; font-size:18pt; color:black; }
+.para5 {font-family:ABCDEF5; font-size:16pt; color:yellow; }
+.para6 {font-family:ABCDEF6; font-size:16pt; color:green; }

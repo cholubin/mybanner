@@ -1,0 +1,13 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+    	<key>Action</key>
+    	<string>MakeContentsXML</string>
+    	<key>DocPath</key>
+    	<string>/Users/cholubin/development/webtop/public/templates/04B_body-R.mlayoutP</string>   
+     <key>ID</key>
+    	<string>52</string>     	
+    </dict>
+    </plist>
+    </xml>

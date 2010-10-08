@@ -1,0 +1,163 @@
+<% 
+	if params[:cate] != nil; cate = params[:cate] else; cate = "" end
+	if params[:folder] != nil; folder = params[:folder] else; folder = "" end
+	if params[:page] != nil; page = params[:page] else; page = "" end
+	if params[:search] != nil; search = params[:search] else; search = "" end
+
+	if cate == nil or cate == "" or cate == "all"
+		cate = "all"
+		title_text = "전체"
+	else
+		title_text = Category.get(cate.to_i).name
+	end
+%>
+
+<script language="javascript">
+ function popup(doc_name) {
+       // var url = '/mlayout?doc_name='+doc_name;
+	   var url = "/MClientBox/index.html?spread_list=YES&user_path=/user_files/<%= current_user.userid %>&doc_path=/article_templates/"+ doc_name+".mlayoutP"
+	   width = screen.width;
+	   height = screen.height;
+      window.open(url ,'webtop_print','width='+width+', height='+height);
+}
+
+</script>
+
+<script language="javascript">
+$(document).ready(function(){
+	$('#chk_all').click(function(){
+		$('.chkbox').click();
+	});
+	
+	$('.delete').click(function(){
+		if (event.target.id == ""){
+			var temp_array = jQuery.makeArray($('.chkbox:checked'));
+			// $("input:checkbox:checked").each(function(){
+			// 	temp_array += $(this).val() + ",";
+			// });
+			var del_ids = "";
+			jQuery.each(temp_array, function(){
+				del_ids += $(this).val() + ",";
+			})
+			
+			if (del_ids == ""){
+				alert("삭제할 항목을 선택해주세요!");
+			}else{
+				if (window.confirm("정말 삭제하시겠습니까?")){
+					loadingView();
+					$.ajax({
+						data:'ids='+ del_ids, 
+						dataType:'script', 
+						type:'post', 
+						url:'/mytemplates/destroy_selection',
+						success: function(request){
+							jQuery.each(temp_array, function(){
+								$('#'+$(this).val()).remove();
+							})
+							loadingView();
+						}
+					});	
+				}
+				
+			}
+
+				
+		}else{
+			var temp_id = event.target.id.split("_");
+			var id = temp_id[1];
+			if (window.confirm("정말 삭제하시겠습니까?")){
+				loadingView();
+				$.ajax({
+					data:'id='+ id, 
+					dataType:'script', 
+					type:'post', 
+					url:'/mytemplates/destroy',
+					success: function(request){
+						$('#'+id).remove();
+						loadingView();
+
+					}
+				});	
+			};	
+		}
+		
+	});
+});	
+
+</script>
+
+<div id="designcart">
+	<h3>디자인바구니</h3>
+	<p>작업된 품목을 관리하고, 주문하는 페이지입니다.</p>
+<% if @mytemplates.count > 0 %>
+	<form action="### 주문 프로세스로 ###" method="post" id="design-list">
+	<input name="authenticity_token" type="hidden" value="### 인증토큰 ###" />
+		<h4><span class="step">Step 1.</span> 디자인 목록, 검토 </h4>
+		<table>
+			<caption>주문할 항목과 옵션을 선택해주세요. <a href="#" class="delete">선택한 항목 삭제</a></caption>
+			<thead>
+				<tr>
+					<th class="check" id="chk_all">check</th>
+					<th>작업구분</th>
+					<th>디자인 품목</th>
+					<th>사이즈</th>
+					<th>가격</th>
+					<th>수정일</th>
+					<th>기능</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- 디자인 항목 반복 시작 -->
+				<%
+				@temp = 1 
+				@mytemplates.each do |my| %>
+				<tr id="<%= my.id.to_s %>" class="item">
+					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
+					<td class="edit-type">### 작업구분(직접편집,편집의뢰) ###</td>
+					<td class="design"><%= Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? %><%="/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil%><span class="design-code">(### 디자인번호 ###)</span> <span>### 피드백상태표시(편집의뢰) ###</span></td>
+					<td class="size">### 가로사이즈 ###cm x ### 세로사이즈 ###cm</td>
+					<td class="price"><%= Temp.get(my.temp_id).price %></td>
+					<td class="date"><%= my.updated_at.strftime('%Y-%m-%d') %></td>
+					<td class="action">
+						<h5>이 품목을...</h5>
+						<ul>
+							<li class="edit"><a href="### 웹탑 ###" onClick="popup('<%= my.id.to_s %>');">편집</a></li>
+							<li class="options"><a href="### 옵션 선택 창 ###">옵션 선택해주세요.</a></li>
+							<li class="delete"><a href="### 삭제 ###" id="del_<%= my.id.to_s %>">삭제</a></li>
+						</ul>
+						<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 시작 -->
+						<div class="option-select">
+							<h5>옵션 선택</h5>
+							<ul>
+								<li><label for="piece">개수</label> <input id="piece" name="piece[]" type="number" value="1"/>ea</li>
+								<!-- 옵션 반복 시작 -->
+								<li>
+									<label>### 옵션제목 ###</label>
+									<select name="### 옵션목록 이름 ###">
+										<option value="" selected>선택해주세요.</option>
+										<option value="">------------------</option>
+										<!-- 옵션내용 반복 시작 -->
+										<option value="### 옵션내용값 ###">### 옵션내용값 ###</option>
+										<!-- 옵션내용 반복 끝 -->
+									</select>
+								</li>
+								<!-- 옵션 반복 끝 -->
+							</ul>
+						</div>
+						<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 끝-->
+					</td>
+				</tr>
+				<% end %>
+				<!-- 디자인 항목 반복 끝 -->
+			</tbody>
+		</table>
+		
+	<div id="total-price">
+		<h4>총 주문 금액</h4>
+		<!-- jQuery로 처리할 예정입니다. -->
+		<p class="price">00,000원</p>
+	</div>
+	<input type="submit" class="order" value="선택한 항목 주문하기"/>
+	</form>
+<% end %>
+</div>
