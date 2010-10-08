@@ -1,0 +1,111 @@
+
+@import <AppKit/CPView.j>
+ @import "com/cetrasoft/components/formatbar/CSEditorWebView.j"
+      
+var STYLE_POPUP_WIDTH =	100;
+var STYLE_POPUP_HEIGHT = 24;
+var DEF_ITEM_VIEW_WIDTH	= 300;
+var DEF_ITEM_VIEW_HEIGHT = 100;
+var DEF_ADD_ITEM_HEIGHT = (STYLE_POPUP_HEIGHT + 10);
+
+@implementation StyleInfo : CPObject
+{
+	CPString mStyleName;
+	int mFontSize;
+	int mTextRed;
+	int mTextGreen;
+	int mTextBlue;
+}
+
+- (id)initWithString:(CPString)styleInfoStr
+{
+	self = [super init];
+	if(self) {
+		var lFieldList = [styleInfoStr componentsSeparatedByString:@","];
+		var i, icnt = [lFieldList count];
+		if(icnt !== 5) {
+			[self release];
+			return nil;
+		}
+		mStyleName = 	[[lFieldList objectAtIndex:0] retain];
+		mFontSize = 	[[lFieldList objectAtIndex:1] intValue];
+		mTextRed = 		[[lFieldList objectAtIndex:2] intValue];
+		mTextGreen = 	[[lFieldList objectAtIndex:3] intValue];
+		mTextBlue = 	[[lFieldList objectAtIndex:4] intValue];
+	}
+	return self;
+}
+
+- (CPString)styleName
+{
+	return mStyleName;
+}
+
+- (int)fontSize
+{
+	return mFontSize;
+}
+
+- (int)textRed
+{
+	return mTextRed;
+}
+
+- (int)textGreen
+{
+	return mTextGreen;
+}
+
+- (int)textBlue
+{
+	return mTextBlue;
+}
+@end
+
+/* 																						 
+			StyledTextEditView
+
+*/
+@implementation StyledTextEditView : CSEditorWebView
+{
+}
+
+- (id)initWithFrame:(CGRect)aRect
+{
+  if (self = [super initWithFrame:aRect])
+    {
+   }
+    return self;
+}
+
+- (void)clearStyleInfoList
+{
+	//[mStyleInfoList removeAllObjects];
+}
+
+- (void)addStyleInfo:(StyleInfo)styleInfo
+{
+	//	[mStyleInfoList addObject:styleInfo];
+}
+
+- (void)loadXMLString:(CPString)aStyledStr
+{
+	var lHTMLText = @"<html><head></head>";
+	lHTMLText += @"<body onKeyDown=KeyDown()>";
+	lHTMLText += "<script type=\"text/javascript\">";
+	lHTMLText += @"<p>";
+ 	var j, jcnt = [aStyledStr length];
+	for(j=0;j<jcnt;j++) {
+		var ch = [aStyledStr characterAtIndex:j];
+		if(ch === '\n') {
+			ch = "</p><p>";
+		}
+		lHTMLText += ch;
+	}
+	lHTMLText += @"</p>";
+	lHTMLText += @"</body></html>";
+	
+	[self loadHTMLString:lHTMLText];
+	
+}
+@end

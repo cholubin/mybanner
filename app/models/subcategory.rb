@@ -14,7 +14,7 @@ class Subcategory
   property :id,           Serial
   property :name,         String, :required => true
   property :priority,     Integer, :default => 9999
-  property :sn,           String, :default => "sc"    
+      
   timestamps :at
 
   belongs_to :category
