@@ -24,3 +24,26 @@
   $ git push iedit/master                                     # 이후 김재국은 이 내용을 자신의 내용과 합치는 작업 실행
 
 
+== 상혁. github에 저장소는 있지만 로컬컴에는 없는 상태
+
+김현수 과장님이 모든 소스코드를 합쳐서 iedit에 올린 후, iedit에 있는 소스코드를 
+받아서 작업을 계속하려고 함. 혹시 모르기 때문에 기존 디렉토리는 이름을 바꿔서
+일단 놔두고 자신의 저장소에 있는 소스코드를 받아서 합치는 작업을 시작하기로 함.
+
+  $ git clone git@github.com:fooleaf/mybanner.git             # github에 있는 자신의 소스코드를 받음
+  $ git remote add iedit git://github.com/iedit/mybanner.git  # iedit 리모트 저장소를 추가
+  $ git pull iedit                                            # ieidt 리모트 소스코드 받으려는..
+  $ git branch --track iedit iedit/master                     # 현재 master 브랜치에 덮어쓰면 위험하므로 브랜치 생성
+  $ git checkout iedit                                        # 새로 만든 브랜치로 이동
+  $ git pull iedit master                                     # 이제 iedit에 있는 소스코드를 합침, 이상이 없는지 테스트
+  $ script/server                                             # 테스트를 해봄
+  $ git checkout master                                       # master 브랜치로 이동
+  $ git merge iedit                                           # iedit 브랜치와 master 브랜치를 합침
+  $ git push origin master                                    # 합치고 나서 이상이 없다면 github으로 올림
+  
+  $ git remote add jaigouk                                    # jaigouk 리모트 저장소 추가
+  $ ... work ...                                              # 작업 ...
+  $ git add .
+  $ git commit -m "did some work"
+  $ git push origin master
+
