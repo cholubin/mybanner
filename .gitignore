@@ -1,5 +1,8 @@
 #이미 추가된 파일명을 삭제시에는 git rm --cached filename 를 이용한다.
 .DS_Store
+*.sqlite3
+*.log
+*.mlayoutP
 public/images/.DS_Store
 public/uploads/*
 public/templates/*
