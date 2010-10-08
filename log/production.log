@@ -13118,3 +13118,45 @@ ActionView::TemplateError (uninitialized constant ActionView::Base::CompiledTemp
     /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
 
 Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-08 15:14:37) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"96"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 102ms (View: 94 | 200 OK [http://localhost/mytemplates/96?cate=&page=]
+
+
+Processing MytemplatesController#jobboard_create (for 127.0.0.1 at 2010-10-08 15:14:40) [POST]
+  Parameters: {"id"=>"96", "content"=>"aaaa", "feedback_code"=>"0"}
+
+ActionController::UnknownAction (No action responded to jobboard_create. Actions: admin_from_ad_remember_token, admin_sign_in, admin_sign_out, admin_signed_in?, authenticate_admin!, authenticate_user!, check_job_done_and_publish, copyto_my_template, create, current_admin, current_admin=, current_user, current_user=, destroy, destroy_selection, edit, erase_job_done_file, index, move_to_mypdf, new, publish, show, sign_in, sign_out, signed_in?, update, update_subcategories, and user_from_remember_token):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-08 15:14:54) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"96"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 13ms (View: 10 | 200 OK [http://localhost/mytemplates/96?cate=&page=]
+
+
+Processing MytemplatesController#jobboard_create (for 127.0.0.1 at 2010-10-08 15:15:07) [POST]
+  Parameters: {"id"=>"96", "content"=>"ddd", "feedback_code"=>"0"}
+
+ActionController::UnknownAction (No action responded to jobboard_create. Actions: admin_from_ad_remember_token, admin_sign_in, admin_sign_out, admin_signed_in?, authenticate_admin!, authenticate_user!, check_job_done_and_publish, copyto_my_template, create, current_admin, current_admin=, current_user, current_user=, destroy, destroy_selection, edit, erase_job_done_file, index, move_to_mypdf, new, publish, show, sign_in, sign_out, signed_in?, update, update_subcategories, and user_from_remember_token):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)

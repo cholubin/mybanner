@@ -1,0 +1,19 @@
+<!-- 요청사항 표시 반복부분 시작 -->
+<%
+	mytemp_id = @mytemp_id
+	jbbs = Jobboard.all(:user_id => current_user.id, :mytemp_id => mytemp_id, :order => [:created_at.desc]) 
+num = jbbs.count
+	jbbs.each do |bbs|
+%>
+<tr>
+	<td class="number"><%= num %></td>
+	<td class="type"><%= bbs.feedback_code %></td>
+	<td class="memo"><a href="### 내용보기 페이지로 ###">### 내용 요약 ###</a></td>
+	<td class="name"><%= User.get(bbs.user_id).name %></td>
+	<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
+	<td class="file"></td>
+</tr>
+<%
+		num -= 1
+	end
+%>

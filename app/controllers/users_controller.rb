@@ -223,7 +223,7 @@ class UsersController < ApplicationController
   def id_check
 
       # 중복아이디 체크 
-     @user = User.first(:userid => params[:user_id])
+     @user = User.get(:userid => params[:user_id].to_i)
      # puts @user.name
 
      render :update do |page|

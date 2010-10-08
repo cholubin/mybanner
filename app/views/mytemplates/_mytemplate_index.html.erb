@@ -25,6 +25,46 @@
 
 <script language="javascript">
 $(document).ready(function(){
+	$('#orderform').css('display','none');
+	
+	$('#order').click(function(){
+		alert("니가 주문을 눌렀냐?");
+		$('#orderform').css('display','block');
+	});
+	
+	$('#order_basic').click(function(){
+		alert("니가 결재창을 눌렀냐?");
+		var temp_array = jQuery.makeArray($('.chkbox:checked'));
+		// $("input:checkbox:checked").each(function(){
+		// 	temp_array += $(this).val() + ",";
+		// });
+		var del_ids = "";
+		jQuery.each(temp_array, function(){
+			del_ids += $(this).val() + ",";
+		})
+		
+		if (del_ids == ""){
+			alert("주문할 항목을 선택해주세요!");
+		}else{
+			if (window.confirm("결재를 진행하시겠습니까?")){
+				loadingView();
+				// $.ajax({
+				// 					data:'ids='+ del_ids, 
+				// 					dataType:'script', 
+				// 					type:'post', 
+				// 					url:'/mytemplates/destroy_selection',
+				// 					success: function(request){
+				// 						jQuery.each(temp_array, function(){
+				// 							$('#'+$(this).val()).remove();
+				// 						})
+				// 						loadingView();
+				// 					}
+				// 				});	
+			}
+			
+		}
+	});
+	
 	$('#chk_all').click(function(){
 		$('.chkbox').click();
 	});
@@ -90,8 +130,8 @@ $(document).ready(function(){
 	<h3>디자인바구니</h3>
 	<p>작업된 품목을 관리하고, 주문하는 페이지입니다.</p>
 <% if @mytemplates.count > 0 %>
-	<form action="### 주문 프로세스로 ###" method="post" id="design-list">
-	<input name="authenticity_token" type="hidden" value="### 인증토큰 ###" />
+	<!-- <form action="### 주문 프로세스로 ###" method="post" id="design-list"> -->
+	<%#= form_for :myorders, :url => { :action => "create_order" } do |f| %>	
 		<h4><span class="step">Step 1.</span> 디자인 목록, 검토 </h4>
 		<table>
 			<caption>주문할 항목과 옵션을 선택해주세요. <a href="#" class="delete">선택한 항목 삭제</a></caption>
@@ -121,7 +161,7 @@ $(document).ready(function(){
 				<tr id="<%= my.id.to_s %>" class="item">
 					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
 					<td class="edit-type"><%= my.job_code %></td>
-					<td class="design"><%= Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? %><%="/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil%><span class="design-code">(<%= sn_num %>)</span> <span><%= my.feedback_code %></span></td>
+					<td class="design" onClick="location.href='/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>'"><%= Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? %><%="/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil%><span class="design-code">(<%= sn_num %>)</span> <span><%= my.feedback_code %></span></td>
 					<td class="size"><%= my.size %></td>
 					<td class="price"><%= Temp.get(my.temp_id).price %></td>
 					<td class="date"><%= my.updated_at.strftime('%Y-%m-%d') %></td>
@@ -152,14 +192,6 @@ $(document).ready(function(){
 										<option value="폰지(디지털날염전용원단)">폰지(디지털날염전용원단)</option>
 										
 										<!-- 옵션내용 반복 끝 -->
-										
-										
-										
-										
-										
-										
-										
-										
 									</select>
 									<select name="select_sub_<%= my.id.to_s %>">
 										<option value="" selected>선택해주세요.</option>
@@ -192,7 +224,103 @@ $(document).ready(function(){
 		<!-- jQuery로 처리할 예정입니다. -->
 		<p class="price">00,000원</p>
 	</div>
-	<input type="submit" class="order" value="선택한 항목 주문하기"/>
-	</form>
+	<input id="order" type="button" value="선택한 항목 주문하기">
+	<!-- <input type="submit" class="order" value="선택한 항목 주문하기"/>-->
+	<%#= end %>
 <% end %>
+</div>
+
+<div id="orderform">
+	<h3>주문페이지</h3>
+	<p>결제 금액을 확인하고 배송정보 및 결제방법을 선택합니다.</p>
+	<!-- 선결제 있을경우에만 표시 -->
+	<div id="order-price">
+		<h4>현재 결제 상황</h4>
+		<ul>
+			<li class="total"><strong>총 주문금액</strong> <!-- 서버에서 정확하게 계산된 총 금액 --> <span class="price">40,000원</span></li>
+			<li class="first"><strong>선결제금액</strong> <!-- 서버에서 정확하게 계산된 총 금액 --> <span class="price">10,000원</span></li>
+			<li class="more"><strong>남은 결제금액</strong> <!-- 서버에서 정확하게 계산된 총 금액 --> <span class="price">30,000원</span></li>
+		</ul>
+	</div>
+	<!-- 선결제 있을경우에만 표시 -->
+	<form action="### ###" method="post">
+		<fieldset id="delivery-information">
+			<legend>배송정보</legend>
+			<p>
+				<label for="receive-name">수령인</label>
+				<input value="<%= current_user.name %>" name="### 수령인텍스트박스이름 ###" id="receive-name" placeholder="수령인 성함" type="text"/>
+			</p>
+			<p>
+				<label for="receive-phone">일반전화</label>
+				<input value="<%= current_user.tel %>" name="### 연락처텍스트박스이름 ###" id="receive-tel" placeholder="010-5964-3645" maxlength="13" size="16" type="text"/>
+			</p>
+			<p>
+				<label for="receive-phone">모바일</label>
+				<input value="<%= current_user.mobile %>" name="### 연락처텍스트박스이름 ###" id="receive-mobile" placeholder="010-5964-3645" maxlength="13" size="16" type="text"/>
+			</p>
+			<p>
+				<label for="receive-type">배송방법</label>
+				<select name="### 배송방법셀렉박스이름 ###" id="receive-type">
+					<option value="" selected>선택해주세요.</option>
+					<option value="">-----------------</option>
+					<!-- 배송방법 목록 시작 -->
+					<option value="일반택배">일반택배</option>
+					<option value="퀵서비스">퀵서비스</option>
+					<option value="직접수령">직접수령</option>
+					<!-- 배송방법 목록 종료 -->
+				</select>
+			</p>
+			<p>
+				<label for="search-address">배송주소</label>
+				<ul>
+					<li><label for="zipcode">우편번호</label> <input id="zipcode" placeholder="동/면/읍" maxlength="10" size="8" type="text"/> <input type="button" value="동/면/읍 검색"/></li>
+					<li><label for="address-selector">주소선택</label>
+						<select id="address-selector">
+							<option value="" selected>선택해주세요.</option>
+							<option value="">주소 직접 입력</option>
+							<option value="">-----------------</option>
+							<option value="">jQuery로 구현해놓겠습니다~</option>
+						</select>
+						<input name="### 주소1 ###" id="address1" placeholder="시/도, 구/시, 동/면/읍" maxlength="24" size="24" type="text"/>
+					</li>
+					<li><label for="address2">나머지 주소</label><input name="### 주소2 ###" id="address2" placeholder="나머지 주소" maxlength="50" size="36" type="text"/></li>
+				</ul>
+			</p>
+			<p><label for="receive-note">배송 요청사항</label><input name="### 배송시요청사항 이름 ###" id="receive-note" placeholder="배송시 요청사항을 짧게 입력해주세요." maxlength="30" size="35" type="text"></p>
+		</fieldset>
+		<fieldset id="payment-information">
+			<legend>결제정보 입력</legend>
+			<h4>결제 금액</h4>
+			<p class="price">00,000원</p>
+			<h4>결제방법 선택</h4>
+			<ul>
+				<li class="user">
+					<input type="radio" name="### 결제방법 ###" id="user" value="### 온라인입금 ###" checked/> <label for="user">직접 계좌이체</label>
+<!--
+					<fieldset id="payment-user">
+						<legend>입금 정보</legend>
+						<p>
+							<label for="payment-account">입금할 계좌번호 선택</label>
+							<select name="### 온라인입금 계좌선택 ###" id="payment-account">
+								<option value="">선택해주세요.</option>
+								<option value="">------------------</option>
+								!-- 입금할 계좌번호 목록 시작 (예: [기업] 010-9662-7441 (예금주:정상혁)--
+								<option>[### 은행명 ###] ### 계좌번호 ### (예금주: ###예금주 ###)</option>
+								!-- 입금할 계좌번호 목록 종료 --
+							</select>
+						</p>
+						<p>
+							<label for="payment-account-name">입금자 성함</label> <input name="###입금 계좌 이름 ###" type="text" id="payment-account-name"/>
+						</p>
+					</fieldset>
+-->
+				</li>
+				<li class="realtime"><input type="radio" name="pay_m" id="payment-realtime" value="계좌이체"/> <label for="payment-realtime">실시간 계좌이체</label>	</li>
+				<li class="credit"><input type="radio" name="pay_m" id="payment-credit" value="카드결제"/> <label for="payment-credit">신용카드</label></li>
+				<li class="mobile"><input type="radio" name="pay_m" id="payment-mobile" value="휴대폰결제"/> <label for="payment-mobile">휴대폰</label></li>
+			</ul>
+		</fieldset>
+		<input id="order_basic" type="button" value="주문하기"/>
+	</form>
+	<div id="PGIOscreen"></div>
 </div>

@@ -241,6 +241,28 @@ class MytemplatesController < ApplicationController
     end
   end
 
+  def jobboard_create
+    mytemp_id = params[:id].to_s
+    content = params[:content]
+    feedback_code = params[:feedback_code].to_i
+
+    bbs = Jobboard.new()
+    bbs.user_id = current_user.id
+    bbs.content = content
+    bbs.feedback_code = feedback_code
+    bbs.mytemp_id = mytemp_id
+
+    if bbs.save
+      puts_message "요청게시글 등록완료!"
+    else
+      puts_message "error!"
+    end
+
+    @mytemp_id = mytemp_id
+    render :partial => "jbbs_body", :object => @mytemp_id
+  end    
+
+
   def destroy_selection
     @ids = params[:ids].split(",")
     
@@ -289,6 +311,12 @@ class MytemplatesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def create_order
+    puts_message "good"
+    
+    render :nothing => true
+  end   
   
   
     #::PRIVATE METHODS:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::    
@@ -628,4 +656,5 @@ class MytemplatesController < ApplicationController
         # throw error
       end
     end  
+    
 end

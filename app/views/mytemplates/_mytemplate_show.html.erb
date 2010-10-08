@@ -1,135 +1,160 @@
-<% 	if File.exist?(@mytemplate.preview_url)
-		temp_image_path = @mytemplate.preview_url  
-	else
-		temp_image_path = @mytemplate.thumb_url  		
-	end 
+<%
+my = @mytemplate
+
+main_category_sn = Category.get(my.category.to_i).sn
+sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
+if main_category_sn.nil?; main_category_sn = "mc"; end
+if sub_category_sn.nil?; sub_category_sn = "sc"; end
+	
+sn_num = main_category_sn + sub_category_sn + my.id.to_s
 %>
-<p5><a href="#"><%= Category.get(@mytemplate.category.to_i).name if !Category.get(@mytemplate.category.to_i).nil?%></a>
-	<% if !Subcategory.get(@mytemplate.subcategory.to_i).nil? %>
-		<a class="on" href="#">&nbsp;&nbsp;>&nbsp;<%= Subcategory.get(@mytemplate.subcategory.to_i).name %></a>  
-	<% end %>
 
-</p5>
+<script language="javascript">
+function del_mytemp(id){
+	if (window.confirm("정말 삭제하시겠습니까?")){
+		loadingView();
+		$.ajax({
+			data:'id='+ id, 
+			dataType:'script', 
+			type:'post', 
+			url:'/mytemplates/destroy',
+			success: function(request){
+				loadingView();
+				document.location.replace('/mytemplates');
 
-<div id="line_top3"></div>
-<div id="line_top2"></div>
-
-<%if @mytemplate.category != "현수막"%>
-
-<table>
-		<tr width="450" height="260">
-            <td width="400" class="imgmargin"><%= "<img src='" + temp_image_path+"?"+ Time.now.to_f.to_s + "'>" %></td>
-			<td width="280px">
-				<table width="250">
-					<tr>
-						<td width="250" height="35" class="table_t4" colspan="2" ><%= @mytemplate.name %></td>
+			}
+		});	
+	};
+}
+</script>
+<script language="javascript">
+$(document).ready(function(){
+	$('#req_submit').click(function(){
+		if ($('#feedback_memo').val() == ""){
+			alert("요청사항을 입력해주세요~");
+		}else{
+			loadingView();
+			$.ajax({
+				data:'id=<%= my.id.to_s %>&content='+$('#feedback_memo').val()+'&feedback_code='+$('#feedback_code').val(), 
+				dataType:'script', 
+				type:'post', 
+				url:'/mytemplates/jobboard_create',
+				success:function(request){
+					loadingView();
+					$('#feedback_memo').val("");
+					$('#jbbs_body').html(request);
+				}
+			});
+		}
 		
-					</tr>
+	});
+});
+</script>
 
-					<tr class="table_t5">
-						<td width="70" class="table_t5">등록일</td>
-						<td  width="180" class="table_t5"><%= @mytemplate.created_at.strftime('%Y-%m-%d') %></td>
-					</tr>
-	
-					<tr>
-						<td width="70" class="table_t5">가격</td>
-						<td width="180" class="table_t5_bold"><%= Temp.get(@mytemplate.temp_id).price if Temp.get(@mytemplate.temp_id).price != nil %></td>
-					</tr>
-					
-					<tr>
-						<td colspan="2" width="250" class="table_t5_underline"></td>
-					</tr>
-	
-					<tr>
-						<td width="70" class="table_t5">사이즈</td>
-						<td width="180" class="table_t5"><%= Temp.get(@mytemplate.temp_id).size if Temp.get(@mytemplate.temp_id).size != nil %></td>
-					</tr>
-	
-					<tr>
-						<td width="70" class="table_t5">태그</td>
-						<td width="180" class="table_t5"><%= Temp.get(@mytemplate.temp_id).tags if Temp.get(@mytemplate.temp_id).tags != nil %></td>
-					</tr>
-					<tr>
-						<td colspan="2" width="250" class="table_t5_underline"></td>
-					</tr>
-				</table>
-			</td>
-        </tr>
-
-</table>
-
-
-
-<%elsif @mytemplate.category == "현수막"%>
-<table>
-		<tr width="730" height="220">
-            <td class="imgmargin_banner" colspan="2"><center><%= image_tag temp_image_path %></center></td>
-        </tr>
-       
-
-		 <tr width="730" >  
-            <td width="430px">&nbsp;</td>
-
-			<td width="300" >
-					<table width="250">
-						<tr>
-							<td width="250" height="35" class="table_t4" colspan="2" ><%= @mytemplate.name %></td>
-
-						</tr>
-
-						<tr class="table_t5">
-							<td width="70" class="table_t5">등록일</td>
-							<td  width="180" class="table_t5"><%= @mytemplate.created_at.strftime('%Y-%m-%d') %></td>
-						</tr>
-
-						<tr>
-							<td width="70" class="table_t5">가격</td>
-							<td width="180" class="table_t5_bold"><%= Temp.first(:id => @mytemplate.temp_id).price if Temp.first(:id => @mytemplate.temp_id).price != nil %></td>
-						</tr>
-
-						<tr>
-							<td colspan="2" width="250" class="table_t5_underline"></td>
-						</tr>
-
-						<tr>
-							<td width="70" class="table_t5">사이즈</td>
-							<td width="180" class="table_t5"><%= Temp.first(:id => @mytemplate.temp_id).size if Temp.first(:id => @mytemplate.temp_id).size != nil %></td>
-						</tr>
-
-						<tr>
-							<td width="70" class="table_t5">태그</td>
-							<td width="180" class="table_t5"><%= Temp.first(:id => @mytemplate.temp_id).tags if Temp.first(:id => @mytemplate.temp_id).tags != nil %></td>
-						</tr>
-						<tr>
-							<td colspan="2" width="250" class="table_t5_underline"></td>
-						</tr>
-					
-					
-					</table>
-			</td>
-			<tr>
-
-		
-		</tr>
-
-</table>
-<%end%>
-
-<div id="line_bottom5"></div>	
-<table>
-	<tr>
-		<td width="727" >
-			<%= link_to image_tag("/images/board/list.jpg", :border=>0, :align => 'right'), mytemplates_path + "?page=" + params[:page] %>&nbsp;
-			<a title='복사된 템플릿의 기본정보를 수정합니다.' href="/mytemplates/<%= @mytemplate.id.to_s %>/edit?cate=<%= params[:cate] %>&page=<%= params[:page] %>"><img align="right" src="/images/board/modify.jpg" style="padding:0 2 0 2"></a>			
-			<%#= link_to image_tag("/images/template/edit.jpg", :border=>0, :align => 'right', :title => '편집기에서 템플릿을 수정합니다.'), '/mlayout?doc_name='+ @mytemplate.file_filename.gsub(/.zip/,''), :confirm => '바로 편집하시겠습니까?'%>						
-			<% if signed_in? %>
-				<%= javascript_include_tag :defaults %>
-				<%= image_tag '/images/cart/cart.gif', :align => 'left', 
-				:onmouseover => "this.style.cursor='hand';",
-				:onclick => "if (window.confirm('장바구니에 담으시겠습니까?')){}else{return false;};" + remote_function(:url => { :controller => 'mycarts', :action => :create },
-				:with => "'item_id=#{@mytemplate.id.to_s}'")
-				%><span id="into_cart"></span>		
-			<%end %>
-	</td>
-	</tr>
-	</table>
+<div id="designcart-detail">
+	<h3>디자인바구니 - 상세보기</h3>
+	<p>작업한 품목의 상세정보를 확인하고 옵션 선택을 합니다.</p>
+	<a href="javascript:history.back(-1)" class="back-list">목록으로 돌아가기</a>
+	<!-- 미리보기의 가로가 길면 item-horizon, 세로가 길면 item-vertical -->
+	<div id="item-information" class="### 가로, 세로 스타일명 ###">
+		<h4>상세보기</h4>
+		<ul>
+			<li class="preview"><strong class="title">미리보기</strong> <img src="<%= my.preview_url %>" class="preview"></li>
+			<li class="type"><strong class="title">구분</strong><%= my.job_code %></li>
+			<li class="item"><strong class="title">품목</strong><%= Category.get(my.category.to_i).name %> <%= "/ " + Subcategory.get(my.subcategory.to_i).name if !Subcategory.get(my.subcategory.to_i).nil? %></li>
+			<li class="designcode"><strong class="title">디자인번호</strong><%= sn_num %></li>
+			<li class="size"><strong class="title">사이즈</strong><%= my.size %></li>
+			<li class="date"><strong class="title">최종수정일</strong><%= my.updated_at.strftime('%Y-%m-%d') %></li>
+			<li class="price"><strong class="title">개별금액</strong> ### 옵션가 포함하여 계산항야 함! ###</li>
+		</ul>
+		<form action="### 결제페이지 이동 ###" method="post">
+		<fieldset>
+			<legend>옵션 선택</legend>
+			<ul>
+				<!-- 옵션 반복 시작 -->
+				<li>
+					<label>### 옵션제목 ###</label>
+					<select name="### 옵션목록 이름 ###">
+						<option value="" selected>선택해주세요.</option>
+						<option value="">------------------</option>
+						<!-- 옵션내용 반복 시작 -->
+						<option value="그래픽천(현수막전용원단)">그래픽천(현수막전용원단)</option>
+						<option value="페트(얇은플라스틱제질원단)">페트(얇은플라스틱제질원단)</option>
+						<option value="합성지(점착가능원단)">합성지(점착가능원단)</option>
+						<option value="PVC켈(점착가능원단)">PVC켈(점착가능원단)</option>
+						<option value="부직포(어깨띠전용원단)">부직포(어깨띠전용원단)</option>
+						<option value="폰지(디지털날염전용원단)">폰지(디지털날염전용원단)</option>
+						<!-- 옵션내용 반복 끝 -->
+					</select>
+				</li>
+				<!-- 옵션 반복 끝 -->
+			</ul>
+		<h5>이 품목을..</h5>
+		<ul>
+			<!-- 작업구분이 편집의뢰일때만 -->
+			<li class="accept"><a href="### 시안확정 URL ###">시안확정</a></li>
+			<li class="edit"><a href="### 편집하기(웹탑)">편집하기</a></li>
+			<li class=""><a href="javascript:del_mytemp('<%= my.id %>');">삭제</a></li>
+			<li class=""><a href="### 주문하기 URL ###">바로 주문하기</a></li>
+			<li class="back-list"><a href="/mytemplates">목록으로 돌아가기</a><span>동시에 여러항목을 주문할 경우 디자인바구니 목록에서 주문해주세요.</span></li>
+		</ul>
+		</fieldset>
+		</form>
+	</div>
+	<div id="feedback-list">
+	<%
+		jbbs = Jobboard.all(:user_id => current_user.id, :mytemp_id => my.id, :order => [:created_at.desc]) 
+	%>	
+		<h4>요청사항/처리 목록</h4>
+		<table>
+			<% if jbbs.count > 0 %>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>구분</th>
+					<th>내용</th>
+					<th>작성자</th>
+					<th>요청날짜</th>
+					<th>파일</th>
+				</tr>
+			</thead>
+			<% end %>
+			<tbody id="jbbs_body">
+				<!-- 요청사항 표시 반복부분 시작 -->
+				<% 
+					num = jbbs.count
+					jbbs.each do |bbs|
+				%>
+				<tr>
+					<td class="number"><%= num %></td>
+					<td class="type"><%= bbs.feedback_code %></td>
+					<td class="memo"><a href="### 내용보기 페이지로 ###">### 내용 요약 ###</a></td>
+					<td class="name"><%= User.get(bbs.user_id).name %></td>
+					<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
+					<td class="file"></td>
+				</tr>
+				<%
+						num -= 1
+			 		end
+				%>
+				<!-- 요청사항 표시 반복부분 종료 -->
+			</tbody>
+		</table>
+	</div>
+	<form action="### 요청사항 입력 URL ###" method="post" id="feedback-add">
+		<fieldset>
+			<legend>요청사항 입력</legend>
+			<p><label for="feedback-type">글 구분</label> <input id="feedback_code" type="radio" checked value="0">수정요청</p>
+			<p>
+				<label for="" id="feedback-memo">요청내용</label>
+				<textarea name="content" id="feedback_memo" placeholder="내용을 입력해주세요."></textarea>
+			</p>
+			<p>
+				<label for="" id="feedback-file">파일올리기</label>
+				<input type="file" name="### 피드백 파일 ###" id="feedback-file" />
+			</p>
+			<input id="req_submit" type="button" value="요청사항 접수"/>
+		</fieldset>
+	</form>
+	<a href="/mytemplates" class="back-list">목록으로 돌아가기</a>
+</div>

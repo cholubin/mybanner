@@ -18,6 +18,8 @@ class User
   property :userid,             String, :required => true
   property :name,               String, :required => true
   property :email,              String, :required => true
+  property :tel,                String
+  property :mobile,             String
 
   property :encrypted_password, String, :length => 150
   property :salt,               String, :length => 150
@@ -26,12 +28,14 @@ class User
   property :withdrawal_reason,  Text
   timestamps :at
   
+  
   has n, :mybooks
   has n, :mytemplates
   has n, :freeboards
   has n, :myimages
   has n, :mycarts
   has n, :mypdfs 
+  has n, :jobboards
   before :save, :encrypt_password
   before :create, :pdf_path
   after  :save, :demo_up

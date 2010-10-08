@@ -37,10 +37,13 @@ function update_subcategory(){
 			<option value="<%= s.id %>" <%= "selected" if s.id.to_s == @temp.subcategory.to_s %>><%= s.name %></option>
 	 	<%end%>
 	<%  end 	%>
-	   	
-	
 	</select></span>
 
+  </p>
+<br>
+  <p>
+    <%= f.label "세로디자인 " %>
+	<input type="checkbox" name="temp[is_col]" <%= "checked" if @temp.is_col == true %>>
   </p>
 
   <p>

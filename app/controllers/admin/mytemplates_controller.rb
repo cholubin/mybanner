@@ -58,8 +58,6 @@ class Admin::MytemplatesController < ApplicationController
     @categories = Category.all(:order => :priority)   
     @mytemplate = Mytemplate.get(params[:id])
     
-    @category_name = @mytemplate.category
-    @subcategory_name = @mytemplate.subcategory
     render 'mytemplate'    
   end
 
@@ -189,10 +187,8 @@ class Admin::MytemplatesController < ApplicationController
     
     mytemplate.destroy
     
-    respond_to do |format|
-      format.html { redirect_to(mytemplates_url) }
-      format.xml  { head :ok }
-    end
+    render 'mytemplate'
+    
   end
   
   def deleteSelection 
@@ -507,5 +503,8 @@ class Admin::MytemplatesController < ApplicationController
       else "error"
         # throw error
       end
-    end  
+  end  
+    
+  
+  
 end

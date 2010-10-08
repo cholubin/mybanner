@@ -192,7 +192,11 @@ class Admin::TempsController < ApplicationController
     @temp = Temp.get(temp_id)
     @temp.category = params[:temp][:category]
     @temp.subcategory = params[:temp][:subcategory]
-    
+    if params[:temp][:is_col] == "on" #가로디자인의 경우 
+      @temp.is_col = true
+    else                #새로디자인의 경우 
+      @temp.is_col = false
+    end
     
     user_list = params[:user_list].split(',')
 

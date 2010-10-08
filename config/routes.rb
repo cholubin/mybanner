@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :myorders
   map.resources :mybooks,:mybookpdfs, :mybookfolders
 
   map.resources :tempfolders
@@ -30,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :notices
   map.resources :freeboards, :users
   map.resources :users, :has_many => :freeboards
+    map.resources :users, :has_many => :jobboards
   map.resources :faqs
   # map.resources :articles
 
@@ -38,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.resources :mytemplates, :only => [:index, :show]
 
   map.namespace :admin do |admin|
-      admin.resources :folders, :mypdfs, :users, :temps, :categories, :notices, :freeboards, :myadmins, :faqs, :mytemplates, :myimages
+      admin.resources :folders, :mypdfs, :users, :temps, :categories, :notices, :freeboards, :myadmins, :faqs, :mytemplates, :myimages, :myorders
   end 
   
   
