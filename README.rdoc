@@ -10,25 +10,25 @@
 * 김현수 과장님이 
 
   $ git remote add jaigouk git://github.com/jaigouk/mybanner
-  # 리모트 브랜치를jaigouk이라는 이름으로 더합니다. 
+  $ 리모트 브랜치를jaigouk이라는 이름으로 더합니다. 
   $ git pull jaigouk
-  # 리모트 브랜치이름이 jaigouk인 저장소 소스코드를 받습니다.
-  # 자동으로 remotes/jaigouk/master를 git이 인식하게 됩니다. 
+  $ 리모트 브랜치이름이 jaigouk인 저장소 소스코드를 받습니다.
+  $ 자동으로 remotes/jaigouk/master를 git이 인식하게 됩니다. 
   $ git branch --track jaigouk jaigouk/master
-  # 명시적으로 브랜치 이름을 jaigouk이라고 생성해줍니다.
-  # jaigouk브랜치에는 jaigouk/mybanner의 최신파일을 받으려고
-  # 합니다.
+  $ 명시적으로 브랜치 이름을 jaigouk이라고 생성해줍니다.
+  $ jaigouk브랜치에는 jaigouk/mybanner의 최신파일을 받으려고
+  $ 합니다.
   $ git checkout jaigouk
-  # jaigouk 브랜치로 체크아웃
+  $ jaigouk 브랜치로 체크아웃
   $ git pull   
-  # 최신 소스 받기
+  $ 최신 소스 받기
   $ git checkout master
-  # master 브랜치로 돌아가기
+  $ master 브랜치로 돌아가기
   $ git merge jaigouk
-  # 현재 개발한 내용과 jaigouk브랜치 내용 합치기
+  $ 현재 개발한 내용과 jaigouk브랜치 내용 합치기
   $ git push origin/master
   $ git push iedit/master
-  # 업데이트 된 내용들을 iedit으로 올리기
-  # 이후 김재국은 이 내용을 자신의 내용과 합치는 작업 실행
+  $ 업데이트 된 내용들을 iedit으로 올리기
+  $ 이후 김재국은 이 내용을 자신의 내용과 합치는 작업 실행
 
 
