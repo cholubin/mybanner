@@ -13,10 +13,11 @@ class Myordersub
   
   # Attributes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   property :id,           Serial
-  property :name,         String
+  property :temp_id,      Integer
   property :user_id,      String
-  property :folder_name,  String
-  property :order,        Integer,  :default => 1
+  property :price,        Integer
+  property :num,          Integer
+  
   timestamps :at
 
 # belongs_to :myorder

@@ -43677,3 +43677,52 @@ Rendered users/_modify_leftsidebar (0.1ms)
 Rendered myorders/_myorder_index (1.6ms)
 Rendered shared/_footer (0.0ms)
 Completed in 17ms (View: 14 | 200 OK [http://localhost/myorders]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:00:53) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.5ms)
+Rendered shared/_login (28.1ms)
+Rendered shared/_menu (1.4ms)
+Rendered mytemplates/_leftsidebar (0.8ms)
+Rendered mytemplates/_mytemplate_index (174.1ms)
+Rendered shared/_footer (0.6ms)
+Completed in 1253ms (View: 265 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-08 22:06:14) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (0.9ms)
+Rendered myorders/_myorder_index (1.5ms)
+Rendered shared/_footer (0.0ms)
+Completed in 168ms (View: 30 | 200 OK [http://localhost/myorders]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-08 22:06:45) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (11.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 22ms (View: 17 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-08 22:18:26) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"102"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_show (9.3ms)
+Rendered shared/_footer (0.1ms)
+Completed in 25ms (View: 21 | 200 OK [http://localhost/mytemplates/102?cate=&page=]
