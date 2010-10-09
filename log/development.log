@@ -1567,3 +1567,2751 @@ Rendered temps/_temp_index (1.8ms)
 Rendered shared/_header (0.0ms)
 Rendered shared/_footer (0.0ms)
 Completed in 19ms (View: 12 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:45:46) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.6ms)
+Rendered shared/_category (10.2ms)
+Rendered temps/_temp_index (3.4ms)
+Rendered shared/_header (0.7ms)
+Rendered shared/_footer (0.6ms)
+Completed in 1616ms (View: 112 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:45:53) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"84"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (0.1ms)
+Rendered shared/_category (74.6ms)
+Rendered temps/_temp_index (1.7ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 86ms (View: 79 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=84]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:45:56) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (0.1ms)
+Rendered shared/_category (7.7ms)
+Rendered temps/_temp_index (1.7ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 19ms (View: 12 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:45:58) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88", "dir"=>"col"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (0.1ms)
+Rendered shared/_category (7.7ms)
+Rendered temps/_temp_index (1.8ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 20ms (View: 12 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88&dir=col]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:46:00) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88", "dir"=>"row"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (0.1ms)
+Rendered shared/_category (8.2ms)
+Rendered temps/_temp_index (1.8ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 20ms (View: 12 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88&dir=row]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:46:01) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"84"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (0.1ms)
+Rendered shared/_category (8.5ms)
+Rendered temps/_temp_index (1.7ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 21ms (View: 12 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=84]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 01:46:19) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (1.5ms)
+Rendered shared/_category (10.5ms)
+Rendered pages/_main_content (3.3ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 162ms (View: 74 | 200 OK [http://localhost/]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:46:21) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (0.1ms)
+Rendered shared/_category (73.6ms)
+Rendered temps/_temp_index (0.7ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 86ms (View: 77 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:23) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (0.1ms)
+Rendered shared/_category (8.5ms)
+Rendered temps/_temp_index (0.4ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 21ms (View: 11 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:25) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"84"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (0.1ms)
+Rendered shared/_category (7.7ms)
+Rendered temps/_temp_index (1.9ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 20ms (View: 12 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=84]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:26) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (0.1ms)
+Rendered shared/_category (8.3ms)
+Rendered temps/_temp_index (3.6ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 22ms (View: 14 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:46) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (867.3ms)
+Rendered shared/_category (9.9ms)
+Rendered temps/_temp_index (103.5ms)
+Rendered shared/_header (0.7ms)
+Rendered shared/_footer (0.6ms)
+Completed in 1424ms (View: 1039 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:50) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.1ms)
+Rendered shared/_category (8.1ms)
+Rendered temps/_temp_index (6.5ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 23ms (View: 18 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:50) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"84"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.2ms)
+Rendered shared/_category (7.7ms)
+Rendered temps/_temp_index (6.3ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 23ms (View: 18 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=84]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:52) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.2ms)
+Rendered shared/_category (7.7ms)
+Rendered temps/_temp_index (6.2ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 23ms (View: 18 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:52) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"84"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.2ms)
+Rendered shared/_category (8.1ms)
+Rendered temps/_temp_index (6.2ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 23ms (View: 18 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=84]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:54) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.2ms)
+Rendered shared/_category (7.9ms)
+Rendered temps/_temp_index (6.2ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 23ms (View: 18 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:47:55) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"84"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.3ms)
+Rendered shared/_category (8.3ms)
+Rendered temps/_temp_index (6.5ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 24ms (View: 18 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=84]
+
+
+Processing TempsController#create_mytemp (for 127.0.0.1 at 2010-10-10 01:48:02) [POST]
+  Parameters: {"temp_id"=>"53", "edit"=>"y"}
+Rendered temps/_popup_m (1.0ms)
+Completed in 349ms (View: 16 | 200 OK [http://localhost/temps/create_mytemp]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:48:03) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:48:03) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:48:04) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:48:04) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 01:48:04) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"113.mlayoutP", "userinfo"=>"0"}
+
+NoMethodError (undefined method `puts_message' for #<CappuccinoController:0x00000105905378>):
+  app/controllers/cappuccino_controller.rb:95:in `request_mlayout'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (47.3ms)
+Rendered rescues/_request_and_response (1.2ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 01:48:16) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.6ms)
+Rendered shared/_login (5.7ms)
+Rendered shared/_menu (1.4ms)
+Rendered mytemplates/_leftsidebar (0.8ms)
+Rendered mytemplates/_mytemplate_index (24.4ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 287ms (View: 133 | 200 OK [http://localhost/mytemplates]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:48:18) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.1ms)
+Rendered shared/_category (7.8ms)
+Rendered temps/_temp_index (4.6ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 22ms (View: 16 | 200 OK [http://localhost/temps]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 01:48:24) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.6ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (19.2ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 30ms (View: 26 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-10 01:48:29) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"113"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_show (9.0ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 26ms (View: 23 | 200 OK [http://localhost/mytemplates/113?cate=&page=]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-10 01:48:38) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (1.0ms)
+Rendered myorders/_myorder_index (1.6ms)
+Rendered shared/_footer (0.0ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 169ms (View: 72 | 200 OK [http://localhost/myorders]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 01:48:40) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (17.9ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 28ms (View: 24 | 200 OK [http://localhost/mytemplates]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:48:41) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.2ms)
+Rendered shared/_category (8.0ms)
+Rendered temps/_temp_index (4.7ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 22ms (View: 16 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:48:46) [GET]
+  Parameters: {"category_name"=>"", "subcategory_name"=>"", "dir"=>"col"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.3ms)
+Rendered shared/_category (7.9ms)
+Rendered temps/_temp_index (1.4ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 84ms (View: 13 | 200 OK [http://localhost/temps?category_name=&subcategory_name=&dir=col]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:48:48) [GET]
+  Parameters: {"category_name"=>"", "subcategory_name"=>"", "dir"=>"row"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.1ms)
+Rendered shared/_category (7.8ms)
+Rendered temps/_temp_index (5.3ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 22ms (View: 16 | 200 OK [http://localhost/temps?category_name=&subcategory_name=&dir=row]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:48:49) [GET]
+  Parameters: {"category_name"=>"", "subcategory_name"=>"", "dir"=>"col"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.1ms)
+Rendered shared/_category (7.7ms)
+Rendered temps/_temp_index (1.3ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 18ms (View: 12 | 200 OK [http://localhost/temps?category_name=&subcategory_name=&dir=col]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:48:50) [GET]
+  Parameters: {"category_name"=>"", "subcategory_name"=>"", "dir"=>"row"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.1ms)
+Rendered shared/_category (7.6ms)
+Rendered temps/_temp_index (5.4ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 22ms (View: 16 | 200 OK [http://localhost/temps?category_name=&subcategory_name=&dir=row]
+
+
+Processing TempsController#create_mytemp (for 127.0.0.1 at 2010-10-10 01:48:52) [POST]
+  Parameters: {"temp_id"=>"54", "edit"=>"y"}
+Rendered temps/_popup_m (0.2ms)
+Completed in 109ms (View: 2 | 200 OK [http://localhost/temps/create_mytemp]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:48:53) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:48:53) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:48:53) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:48:53) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 01:48:54) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"114.mlayoutP", "userinfo"=>"0"}
+
+NoMethodError (undefined method `puts_message' for #<CappuccinoController:0x000001017b4e90>):
+  app/controllers/cappuccino_controller.rb:95:in `request_mlayout'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (113.6ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 01:50:03) [GET]
+  Parameters: {"category_name"=>"", "subcategory_name"=>"", "dir"=>"row"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (865.5ms)
+Rendered shared/_category (9.9ms)
+Rendered temps/_temp_index (102.8ms)
+Rendered shared/_header (0.7ms)
+Rendered shared/_footer (0.6ms)
+Completed in 1402ms (View: 1037 | 200 OK [http://localhost/temps?category_name=&subcategory_name=&dir=row]
+
+
+Processing TempsController#create_mytemp (for 127.0.0.1 at 2010-10-10 01:50:07) [POST]
+  Parameters: {"temp_id"=>"54", "edit"=>"y"}
+Rendered temps/_popup_m (0.7ms)
+Completed in 157ms (View: 10 | 200 OK [http://localhost/temps/create_mytemp]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:50:08) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:50:08) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:50:08) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:50:08) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 01:50:09) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"115.mlayoutP", "userinfo"=>"0"}
+Completed in 5310ms (View: 35 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=115.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 01:50:14) [GET]
+  Parameters: {"request"=>"/article_templates/115.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 359ms (View: 355 | 200 OK [http://localhost/filelist?request=/article_templates/115.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 01:50:15) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"115.mlayoutP", "userinfo"=>"0"}
+Completed in 82ms (View: 4 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=115.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 01:50:15) [GET]
+  Parameters: {"request"=>"/article_templates/115.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 6ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/115.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 01:50:42) [GET]
+  Parameters: {"requested_action"=>"GetContentsJSON", "docname"=>"115.mlayoutP", "userinfo"=>"44"}
+Completed in 101ms (View: 5 | 200 OK [http://localhost/request_mlayout?requested_action=GetContentsJSON&docname=115.mlayoutP&userinfo=44]
+
+
+Processing TempsController#create_mytemp (for 127.0.0.1 at 2010-10-10 01:51:17) [POST]
+  Parameters: {"temp_id"=>"54", "edit"=>"y"}
+Rendered temps/_popup_m (0.2ms)
+Completed in 193ms (View: 2 | 200 OK [http://localhost/temps/create_mytemp]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:51:18) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:51:18) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:51:18) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 01:51:18) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 01:51:19) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"116.mlayoutP", "userinfo"=>"0"}
+Completed in 1202ms (View: 1 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=116.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 01:51:20) [GET]
+  Parameters: {"request"=>"/article_templates/116.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 5ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/116.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 01:51:20) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"116.mlayoutP", "userinfo"=>"0"}
+Completed in 108ms (View: 3 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=116.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 01:51:20) [GET]
+  Parameters: {"request"=>"/article_templates/116.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 8ms (View: 3 | 200 OK [http://localhost/filelist?request=/article_templates/116.mlayoutP/web/]
+
+
+Processing UsersController#edit (for 127.0.0.1 at 2010-10-10 01:51:59) [GET]
+  Parameters: {"id"=>"22"}
+Rendering template within layouts/ajax-load-page
+Rendering users/user
+Rendered users/_user_edit (1.1ms)
+Completed in 174ms (View: 166 | 200 OK [http://localhost/users/22/edit]
+
+
+Processing UsersController#update (for 127.0.0.1 at 2010-10-10 01:52:10) [POST]
+  Parameters: {"id"=>"22", "current_password"=>"5972", "new_password"=>"", "email"=>"1cholubin@gmail.com"}
+Completed in 13ms (View: 1 | 200 OK [http://localhost/users/update]
+
+
+Processing UsersController#edit (for 127.0.0.1 at 2010-10-10 01:52:23) [GET]
+  Parameters: {"id"=>"22"}
+Rendering template within layouts/ajax-load-page
+Rendering users/user
+Rendered users/_user_edit (0.1ms)
+Completed in 4ms (View: 2 | 200 OK [http://localhost/users/22/edit]
+
+
+Processing UsersController#update (for 127.0.0.1 at 2010-10-10 01:52:36) [POST]
+  Parameters: {"id"=>"22", "current_password"=>"5972", "new_password"=>"", "email"=>"cholubin@gmail.com"}
+Completed in 41ms (View: 1 | 200 OK [http://localhost/users/update]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 01:52:39) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.5ms)
+Rendered shared/_login (5.9ms)
+Rendered shared/_menu (1.5ms)
+Rendered mytemplates/_leftsidebar (1.3ms)
+Rendered mytemplates/_mytemplate_index (119.4ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 267ms (View: 179 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#destroy_selection (for 127.0.0.1 at 2010-10-10 01:52:47) [POST]
+  Parameters: {"ids"=>"116,115,114,113,111,110,"}
+Completed in 86ms (View: 1 | 200 OK [http://localhost/mytemplates/destroy_selection]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 01:52:54) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (0.8ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 11ms (View: 7 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-10-10 01:52:58) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered users/_modify_leftsidebar (0.9ms)
+Rendered myorders/_myorder_index (1.6ms)
+Rendered shared/_footer (0.0ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 201ms (View: 104 | 200 OK [http://localhost/myorders]
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2010-10-10 01:53:33) [GET]
+
+NoMethodError (undefined method `admin_signed_in?' for #<AdminsessionsController:0x00000107623738>):
+  app/controllers/adminsessions_controller.rb:12:in `new'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (50.1ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2010-10-10 01:54:04) [GET]
+Rendering template within layouts/adminsessions
+Rendering admin/adminsessions/new
+Completed in 57ms (View: 53 | 200 OK [http://localhost/admin]
+
+
+Processing AdminsessionsController#create (for 127.0.0.1 at 2010-10-10 01:54:11) [POST]
+  Parameters: {"authenticity_token"=>"OtRAH3rDXQEEdnBj+2fHFe5upUkzyq6WfgqS3uYDyo8=", "adminsession"=>{"admin_id"=>"webtop", "password"=>"5972"}, "x"=>"0", "y"=>"0"}
+Redirected to http://localhost:3000/admin/temps
+Completed in 258ms | 302 Found [http://localhost/adminsessions]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2010-10-10 01:54:11) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Rendered admin/shared/_login (2.1ms)
+Rendered admin/shared/_top_menu (0.8ms)
+Rendered admin/temps/_sub_menu (0.7ms)
+Rendered admin/temps/_temp_index (87.8ms)
+Rendered shared/_footer (0.1ms)
+Completed in 167ms (View: 160 | 200 OK [http://localhost/admin/temps]
+
+
+Processing AddressController#search (for 127.0.0.1 at 2010-10-10 01:56:18) [GET]
+  Parameters: {"dong"=>"삼성동"}
+Rendering template within layouts/application
+Rendering address/search
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 362ms (View: 61 | 200 OK [http://localhost/address/search?dong=%EC%82%BC%EC%84%B1%EB%8F%99]
+/!\ FAILSAFE /!\  2010-10-10 01:58:31 +0900
+  Status: 500 Internal Server Error
+  /Users/cholubin/development/mybanner/app/helpers/application_helper.rb:39: syntax error, unexpected keyword_end, expecting $end
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `block in load_file'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:379:in `load_file'
+    /Users/cholubin/development/mybanner/vendor/plugins/rails-dev-boost/lib/rails_development_boost/dependencies_patch.rb:47:in `load_file_with_constant_tracking'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:259:in `require_or_load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:224:in `depend_on'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:136:in `require_dependency'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/helpers.rb:197:in `default_helper_module!'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/helpers.rb:212:in `inherited_with_helper'
+    /Users/cholubin/development/mybanner/app/controllers/application_controller.rb:4:in `<top (required)>'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `block in load_file'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:379:in `load_file'
+    /Users/cholubin/development/mybanner/vendor/plugins/rails-dev-boost/lib/rails_development_boost/dependencies_patch.rb:47:in `load_file_with_constant_tracking'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:259:in `require_or_load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:425:in `load_missing_constant'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:80:in `const_missing_with_dependencies'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:92:in `const_missing'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:89:in `rescue in dispatch'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:96:in `dispatch'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:121:in `_call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:130:in `block in build_middleware_stack'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/string_coercion.rb:25:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/head.rb:9:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/methodoverride.rb:24:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/params_parser.rb:15:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/session/cookie_store.rb:93:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/failsafe.rb:26:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `block in call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:114:in `block in call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/reloader.rb:34:in `run'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:108:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/static.rb:31:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:46:in `block in call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/log_tailer.rb:17:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/content_length.rb:13:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/handler/webrick.rb:50:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+/!\ FAILSAFE /!\  2010-10-10 01:59:36 +0900
+  Status: 500 Internal Server Error
+  /Users/cholubin/development/mybanner/app/helpers/application_helper.rb:39: syntax error, unexpected keyword_end, expecting $end
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `block in load_file'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:379:in `load_file'
+    /Users/cholubin/development/mybanner/vendor/plugins/rails-dev-boost/lib/rails_development_boost/dependencies_patch.rb:47:in `load_file_with_constant_tracking'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:259:in `require_or_load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:224:in `depend_on'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:136:in `require_dependency'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/helpers.rb:197:in `default_helper_module!'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/helpers.rb:212:in `inherited_with_helper'
+    /Users/cholubin/development/mybanner/app/controllers/application_controller.rb:4:in `<top (required)>'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `block in load_file'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:379:in `load_file'
+    /Users/cholubin/development/mybanner/vendor/plugins/rails-dev-boost/lib/rails_development_boost/dependencies_patch.rb:47:in `load_file_with_constant_tracking'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:259:in `require_or_load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:425:in `load_missing_constant'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:80:in `const_missing_with_dependencies'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:92:in `const_missing'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:89:in `rescue in dispatch'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:96:in `dispatch'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:121:in `_call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:130:in `block in build_middleware_stack'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/string_coercion.rb:25:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/head.rb:9:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/methodoverride.rb:24:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/params_parser.rb:15:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/session/cookie_store.rb:93:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/failsafe.rb:26:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `block in call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:114:in `block in call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/reloader.rb:34:in `run'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:108:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/static.rb:31:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:46:in `block in call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/log_tailer.rb:17:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/content_length.rb:13:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/handler/webrick.rb:50:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+/!\ FAILSAFE /!\  2010-10-10 01:59:53 +0900
+  Status: 500 Internal Server Error
+  /Users/cholubin/development/mybanner/app/helpers/application_helper.rb:39: syntax error, unexpected keyword_end, expecting $end
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `block in load_file'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:379:in `load_file'
+    /Users/cholubin/development/mybanner/vendor/plugins/rails-dev-boost/lib/rails_development_boost/dependencies_patch.rb:47:in `load_file_with_constant_tracking'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:259:in `require_or_load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:224:in `depend_on'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:136:in `require_dependency'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/helpers.rb:197:in `default_helper_module!'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/helpers.rb:212:in `inherited_with_helper'
+    /Users/cholubin/development/mybanner/app/controllers/application_controller.rb:4:in `<top (required)>'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `block in load_file'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:379:in `load_file'
+    /Users/cholubin/development/mybanner/vendor/plugins/rails-dev-boost/lib/rails_development_boost/dependencies_patch.rb:47:in `load_file_with_constant_tracking'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:259:in `require_or_load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:425:in `load_missing_constant'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:80:in `const_missing_with_dependencies'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:92:in `const_missing'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:89:in `rescue in dispatch'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:96:in `dispatch'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:121:in `_call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:130:in `block in build_middleware_stack'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/string_coercion.rb:25:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/head.rb:9:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/methodoverride.rb:24:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/params_parser.rb:15:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/session/cookie_store.rb:93:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/failsafe.rb:26:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `block in call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:114:in `block in call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/reloader.rb:34:in `run'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:108:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/static.rb:31:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:46:in `block in call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/log_tailer.rb:17:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/content_length.rb:13:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/handler/webrick.rb:50:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+/!\ FAILSAFE /!\  2010-10-10 02:00:17 +0900
+  Status: 500 Internal Server Error
+  /Users/cholubin/development/mybanner/app/helpers/application_helper.rb:39: syntax error, unexpected keyword_end, expecting $end
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `block in load_file'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:379:in `load_file'
+    /Users/cholubin/development/mybanner/vendor/plugins/rails-dev-boost/lib/rails_development_boost/dependencies_patch.rb:47:in `load_file_with_constant_tracking'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:259:in `require_or_load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:224:in `depend_on'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:136:in `require_dependency'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/helpers.rb:197:in `default_helper_module!'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/helpers.rb:212:in `inherited_with_helper'
+    /Users/cholubin/development/mybanner/app/controllers/application_controller.rb:4:in `<top (required)>'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:380:in `block in load_file'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:379:in `load_file'
+    /Users/cholubin/development/mybanner/vendor/plugins/rails-dev-boost/lib/rails_development_boost/dependencies_patch.rb:47:in `load_file_with_constant_tracking'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:259:in `require_or_load'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:425:in `load_missing_constant'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:80:in `const_missing_with_dependencies'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/activesupport-2.3.5/lib/active_support/dependencies.rb:92:in `const_missing'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:89:in `rescue in dispatch'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:96:in `dispatch'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:121:in `_call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:130:in `block in build_middleware_stack'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/haml-3.0.4/lib/sass/plugin/rack.rb:41:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/string_coercion.rb:25:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/head.rb:9:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/methodoverride.rb:24:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/params_parser.rb:15:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/session/cookie_store.rb:93:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/failsafe.rb:26:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `block in call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/lock.rb:11:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:114:in `block in call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/reloader.rb:34:in `run'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:108:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/static.rb:31:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:46:in `block in call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rails-2.3.5/lib/rails/rack/log_tailer.rb:17:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/content_length.rb:13:in `call'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/rack-1.0.1/lib/rack/handler/webrick.rb:50:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 02:00:53) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (3.1ms)
+Rendered shared/_category (9.7ms)
+Rendered pages/_main_content (3.2ms)
+Rendered shared/_header (0.7ms)
+Rendered shared/_footer (0.7ms)
+Completed in 1599ms (View: 211 | 200 OK [http://localhost/]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 02:00:58) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.4ms)
+Rendered shared/_category (8.4ms)
+Rendered temps/_temp_index (37.6ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 76ms (View: 66 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 02:01:14) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.1ms)
+Rendered shared/_category (8.7ms)
+Rendered temps/_temp_index (4.9ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 22ms (View: 17 | 200 OK [http://localhost/temps]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:01:15) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.5ms)
+Rendered shared/_login (6.2ms)
+Rendered shared/_menu (1.4ms)
+Rendered mytemplates/_leftsidebar (0.8ms)
+Rendered mytemplates/_mytemplate_index (6.1ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 212ms (View: 64 | 200 OK [http://localhost/mytemplates]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 02:01:20) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.1ms)
+Rendered shared/_category (7.5ms)
+Rendered temps/_temp_index (4.7ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 21ms (View: 16 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#create_mytemp (for 127.0.0.1 at 2010-10-10 02:01:22) [POST]
+  Parameters: {"temp_id"=>"54", "edit"=>"y"}
+Rendered temps/_popup_m (0.8ms)
+Completed in 334ms (View: 10 | 200 OK [http://localhost/temps/create_mytemp]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:01:23) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:01:23) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:01:23) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:01:23) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:01:24) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"117.mlayoutP", "userinfo"=>"0"}
+Completed in 910ms (View: 25 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=117.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:01:25) [GET]
+  Parameters: {"request"=>"/article_templates/117.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 201ms (View: 198 | 200 OK [http://localhost/filelist?request=/article_templates/117.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:01:25) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"117.mlayoutP", "userinfo"=>"0"}
+Completed in 79ms (View: 3 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=117.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:01:26) [GET]
+  Parameters: {"request"=>"/article_templates/117.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 7ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/117.mlayoutP/web/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:02:10) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (10.1ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 24ms (View: 18 | 200 OK [http://localhost/mytemplates]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:02:13) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:02:13) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:02:13) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:02:13) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:02:14) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"117.mlayoutP", "userinfo"=>"0"}
+Completed in 162ms (View: 3 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=117.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:02:15) [GET]
+  Parameters: {"request"=>"/article_templates/117.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 4ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/117.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:02:15) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"117.mlayoutP", "userinfo"=>"0"}
+Completed in 92ms (View: 4 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=117.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:02:15) [GET]
+  Parameters: {"request"=>"/article_templates/117.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 7ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/117.mlayoutP/web/]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:07:12) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:07:12) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:07:12) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:07:12) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:07:13) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"117.mlayoutP", "userinfo"=>"0"}
+Completed in 13499ms (View: 59 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=117.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:07:27) [GET]
+  Parameters: {"request"=>"/article_templates/117.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 15ms (View: 9 | 200 OK [http://localhost/filelist?request=/article_templates/117.mlayoutP/web/]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:07:27) [GET]
+  Parameters: {"request"=>"/article_templates/117.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 32ms (View: 1 | 200 OK [http://localhost/filelist?request=/article_templates/117.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:07:27) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"117.mlayoutP", "userinfo"=>"0"}
+Completed in 752ms (View: 2 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=117.mlayoutP&userinfo=0]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 02:12:36) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (23.7ms)
+Rendered shared/_category (23.4ms)
+Rendered pages/_main_content (9.1ms)
+Rendered shared/_header (10.3ms)
+Rendered shared/_footer (1.8ms)
+Completed in 2086ms (View: 277 | 200 OK [http://localhost/]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 02:12:40) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.7ms)
+Rendered shared/_category (12.4ms)
+Rendered temps/_temp_index (157.2ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 251ms (View: 242 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#create_mytemp (for 127.0.0.1 at 2010-10-10 02:12:43) [POST]
+  Parameters: {"temp_id"=>"54", "edit"=>"y"}
+Rendered temps/_popup_m (26.3ms)
+Completed in 522ms (View: 36 | 200 OK [http://localhost/temps/create_mytemp]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:12:44) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:12:44) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:12:44) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:12:45) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:12:45) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"118.mlayoutP", "userinfo"=>"0"}
+Completed in 688ms (View: 14 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=118.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:12:46) [GET]
+  Parameters: {"request"=>"/article_templates/118.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 66ms (View: 55 | 200 OK [http://localhost/filelist?request=/article_templates/118.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:12:47) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"118.mlayoutP", "userinfo"=>"0"}
+Completed in 143ms (View: 5 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=118.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:12:47) [GET]
+  Parameters: {"request"=>"/article_templates/118.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 6ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/118.mlayoutP/web/]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 02:14:44) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (2.7ms)
+Rendered shared/_category (10.3ms)
+Rendered pages/_main_content (2.5ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 21ms (View: 18 | 200 OK [http://localhost/]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 02:14:51) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.4ms)
+Rendered shared/_category (8.5ms)
+Rendered temps/_temp_index (4.9ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 24ms (View: 17 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#create_mytemp (for 127.0.0.1 at 2010-10-10 02:14:55) [POST]
+  Parameters: {"temp_id"=>"54", "edit"=>"y"}
+Rendered temps/_popup_m (0.2ms)
+Completed in 294ms (View: 2 | 200 OK [http://localhost/temps/create_mytemp]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:14:55) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:14:56) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:14:56) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:14:56) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:14:58) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"119.mlayoutP", "userinfo"=>"0"}
+Completed in 715ms (View: 2 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=119.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:14:59) [GET]
+  Parameters: {"request"=>"/article_templates/119.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 7ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/119.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:14:59) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"119.mlayoutP", "userinfo"=>"0"}
+Completed in 94ms (View: 3 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=119.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:14:59) [GET]
+  Parameters: {"request"=>"/article_templates/119.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 11ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/119.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:15:11) [GET]
+  Parameters: {"requested_action"=>"GetContentsJSON", "docname"=>"119.mlayoutP", "userinfo"=>"44"}
+Completed in 687ms (View: 6 | 200 OK [http://localhost/request_mlayout?requested_action=GetContentsJSON&docname=119.mlayoutP&userinfo=44]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:15:17) [GET]
+  Parameters: {"requested_action"=>"GetContentsJSON", "docname"=>"119.mlayoutP", "userinfo"=>"15"}
+Completed in 136ms (View: 8 | 200 OK [http://localhost/request_mlayout?requested_action=GetContentsJSON&docname=119.mlayoutP&userinfo=15]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:15:17) [GET]
+
+ActionController::RoutingError (No route matches "/Users/cholubin/development/mybanner/public/user_files/cholubin/article_templates/119.mlayoutP/Preview/%EC%9D%BC%EB%B0%98_%EA%B4%80%EA%B3%B5%EC%84%9C_%EA%B8%B0%EC%97%85.jpg" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:15:17) [GET]
+
+ActionController::RoutingError (No route matches "/Users/cholubin/development/mybanner/public/user_files/cholubin/article_templates/119.mlayoutP/Preview/%EC%9D%BC%EB%B0%98_%EA%B4%80%EA%B3%B5%EC%84%9C_%EA%B8%B0%EC%97%85.jpg" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:15:23) [GET]
+  Parameters: {"request"=>"/images/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 8ms (View: 2 | 200 OK [http://localhost/filelist?request=/images/]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:15:23) [GET]
+  Parameters: {"request"=>"/images/basic_photo/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 21ms (View: 2 | 200 OK [http://localhost/filelist?request=/images/basic_photo/]
+
+
+Processing CappuccinoController#post_mlayout (for 127.0.0.1 at 2010-10-10 02:15:27) [POST]
+  Parameters: {"requested_action"=>"SetContents", "docname"=>"119.mlayoutP", "userinfo"=>"15__GIDSEP__IMAGE2__FIELD_SEP__Path__IMG_ATTR__/user_files/cholubin/images/basic_photo/10.jpg__ATTR_SEP__ImgRect__IMG_ATTR__{{0, -466.17581047381543}, {708, 1059.3516209476309}}"}
+Completed in 624ms (View: 2 | 200 OK [http://localhost/post_mlayout]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:15:28) [GET]
+  Parameters: {"request"=>"/article_templates/119.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 5ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/119.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:15:33) [GET]
+  Parameters: {"requested_action"=>"GetContentsJSON", "docname"=>"119.mlayoutP", "userinfo"=>"15"}
+Completed in 140ms (View: 3 | 200 OK [http://localhost/request_mlayout?requested_action=GetContentsJSON&docname=119.mlayoutP&userinfo=15]
+
+
+Processing TempsController#create_mytemp (for 127.0.0.1 at 2010-10-10 02:16:04) [POST]
+  Parameters: {"temp_id"=>"54", "edit"=>"y"}
+Rendered temps/_popup_m (0.2ms)
+Completed in 102ms (View: 2 | 200 OK [http://localhost/temps/create_mytemp]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:16:05) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:16:05) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:16:05) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:16:05) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:16:06) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"120.mlayoutP", "userinfo"=>"0"}
+Completed in 5299ms (View: 1 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=120.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:16:11) [GET]
+  Parameters: {"request"=>"/article_templates/120.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 10ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/120.mlayoutP/web/]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:16:12) [GET]
+  Parameters: {"request"=>"/article_templates/120.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 3ms (View: 1 | 200 OK [http://localhost/filelist?request=/article_templates/120.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:16:12) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"120.mlayoutP", "userinfo"=>"0"}
+Completed in 238ms (View: 5 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=120.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:16:23) [GET]
+  Parameters: {"requested_action"=>"GetContentsJSON", "docname"=>"120.mlayoutP", "userinfo"=>"15"}
+Completed in 296ms (View: 3 | 200 OK [http://localhost/request_mlayout?requested_action=GetContentsJSON&docname=120.mlayoutP&userinfo=15]
+
+
+Processing MytemplatesController#destroy_selection (for 127.0.0.1 at 2010-10-10 02:20:30) [POST]
+  Parameters: {"ids"=>"121,120,119,"}
+Completed in 1207ms (View: 56 | 200 OK [http://localhost/mytemplates/destroy_selection]
+
+
+Processing AddressController#search (for 127.0.0.1 at 2010-10-10 02:33:32) [GET]
+  Parameters: {"dong"=>"삼성동"}
+Rendering template within layouts/application
+Rendering address/search
+Rendered shared/_header (12.2ms)
+Rendered shared/_footer (11.9ms)
+Completed in 478ms (View: 309 | 200 OK [http://localhost/address/search?dong=%EC%82%BC%EC%84%B1%EB%8F%99]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:34:20) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (1.1ms)
+Rendered shared/_login (150.6ms)
+Rendered shared/_menu (1.9ms)
+Rendered mytemplates/_leftsidebar (18.6ms)
+Rendered mytemplates/_mytemplate_index (216.8ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 760ms (View: 450 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:35:18) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (18.4ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 98ms (View: 34 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:38:04) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.9ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (20.1ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 62ms (View: 36 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:38:43) [GET]
+Redirected to http://localhost:3000/login
+Filter chain halted as [:authenticate_user!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/mytemplates]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-10-10 02:38:43) [GET]
+Rendering template within layouts/ajax-load-page
+Rendering sessions/session
+Rendered sessions/_session_new (55.5ms)
+Completed in 178ms (View: 174 | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-10 02:38:51) [POST]
+  Parameters: {"authenticity_token"=>"jKPexAgYthbD+cRhjXJAob4TIlUC8arB3s+ViTkcoNA=", "session"=>{"uri"=>"", "userid"=>"cholubin", "password"=>"5972"}}
+Redirected to http://localhost:3000/
+Completed in 353ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 02:38:52) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (12.8ms)
+Rendered shared/_category (11.1ms)
+Rendered pages/_main_content (3.3ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 253ms (View: 84 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:38:55) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.6ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (30.1ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 62ms (View: 45 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:39:09) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (88.6ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 126ms (View: 103 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:39:22) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (18.8ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 38ms (View: 32 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:40:19) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (6.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (19.3ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 50ms (View: 36 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:40:24) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (13.2ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 44ms (View: 20 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:40:44) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (19.5ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 154ms (View: 103 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:41:10) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (17.3ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 59ms (View: 33 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:42:38) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (19.1ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 53ms (View: 32 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:42:57) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.6ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (20.0ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 62ms (View: 35 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:47:38) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.3ms)
+Rendered shared/_menu (0.6ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (22.0ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 117ms (View: 38 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search (for 127.0.0.1 at 2010-10-10 02:47:53) [POST]
+  Parameters: {"dong"=>"문래"}
+Rendering template within layouts/application
+Rendering address/search
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 236ms (View: 232 | 200 OK [http://localhost/address/search]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:48:42) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.6ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (20.6ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 49ms (View: 36 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 02:48:52) [POST]
+  Parameters: {"dong"=>"문래"}
+
+ActionController::UnknownAction (No action responded to search_ajax. Actions: input and search):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:50:24) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (1.0ms)
+Rendered shared/_login (153.9ms)
+Rendered shared/_menu (3.9ms)
+Rendered mytemplates/_leftsidebar (1.2ms)
+Rendered mytemplates/_mytemplate_index (263.1ms)
+Rendered shared/_footer (17.0ms)
+Rendered shared/_header (5.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 2258ms (View: 631 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:50:26) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (13.0ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 23ms (View: 19 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:50:29) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.9ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (13.0ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 24ms (View: 20 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 02:50:38) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 470ms (View: 45 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:06:03) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (28.2ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 72ms (View: 43 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:06:12) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 294ms (View: 1 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:06:40) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (30.9ms)
+Rendered shared/_login (162.4ms)
+Rendered shared/_menu (53.3ms)
+Rendered mytemplates/_leftsidebar (41.4ms)
+Rendered mytemplates/_mytemplate_index (284.1ms)
+Rendered shared/_footer (19.7ms)
+Rendered shared/_header (30.9ms)
+Rendered shared/_footer (0.1ms)
+Completed in 2267ms (View: 855 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:06:59) [POST]
+  Parameters: {"dong"=>"문래"}
+
+TypeError (can't convert nil into String):
+  vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:26:in `block in search_ajax'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+  extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `block in each'
+  extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+  extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+  vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:25:in `search_ajax'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (66.3ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:09:25) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (1.4ms)
+Rendered shared/_login (231.0ms)
+Rendered shared/_menu (1.9ms)
+Rendered mytemplates/_leftsidebar (22.5ms)
+Rendered mytemplates/_mytemplate_index (234.9ms)
+Rendered shared/_footer (14.4ms)
+Rendered shared/_header (4.6ms)
+Rendered shared/_footer (0.0ms)
+Completed in 2016ms (View: 651 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:09:39) [POST]
+  Parameters: {"dong"=>"문래"}
+
+TypeError (can't convert nil into String):
+  vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:28:in `block in search_ajax'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+  extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `block in each'
+  extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+  extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+  vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:26:in `search_ajax'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (60.5ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing AddressController#search (for 127.0.0.1 at 2010-10-10 03:10:13) [GET]
+  Parameters: {"dong"=>"문래"}
+Rendering template within layouts/application
+Rendering address/search
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 113ms (View: 112 | 200 OK [http://localhost/address/search?dong=%EB%AC%B8%EB%9E%98]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:14:04) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (3.2ms)
+Rendered shared/_login (166.4ms)
+Rendered shared/_menu (5.6ms)
+Rendered mytemplates/_leftsidebar (22.6ms)
+Rendered mytemplates/_mytemplate_index (290.9ms)
+Rendered shared/_footer (22.2ms)
+Rendered shared/_header (5.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 2258ms (View: 731 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:14:16) [POST]
+  Parameters: {"dong"=>"문래"}
+
+NoMethodError (undefined method `+' for true:TrueClass):
+  vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:28:in `block in search_ajax'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+  extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `block in each'
+  extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+  extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+  /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+  vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:26:in `search_ajax'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (111.4ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:18:55) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (1.0ms)
+Rendered shared/_login (183.9ms)
+Rendered shared/_menu (1.8ms)
+Rendered mytemplates/_leftsidebar (26.2ms)
+Rendered mytemplates/_mytemplate_index (261.0ms)
+Rendered shared/_footer (19.5ms)
+Rendered shared/_header (44.3ms)
+Rendered shared/_footer (0.1ms)
+Completed in 2209ms (View: 707 | 200 OK [http://localhost/mytemplates]
+
+
+Processing ApplicationController#search_ajax (for 127.0.0.1 at 2010-10-10 03:19:08) [POST]
+  Parameters: {"dong"=>"문래"}
+
+SyntaxError (/Users/cholubin/development/mybanner/vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:28: syntax error, unexpected '=', expecting keyword_end
+...i_goon_goo; else si_goon_goo; = "" end
+...                               ^
+/Users/cholubin/development/mybanner/vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:29: syntax error, unexpected '=', expecting keyword_end
+      if f.dong != nil; dong = " " + f.dong; else dong; = "" end
+                                                         ^
+/Users/cholubin/development/mybanner/vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:30: syntax error, unexpected '=', expecting keyword_end
+... + f.building; else building; = "" end
+...                               ^
+/Users/cholubin/development/mybanner/vendor/plugins/ko_zipcode/app/controllers/address_controller.rb:31: syntax error, unexpected '=', expecting keyword_end
+... " + f.address; else address; = "" end
+...                               ^):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (59.6ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:20:25) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (1.2ms)
+Rendered shared/_login (169.6ms)
+Rendered shared/_menu (37.3ms)
+Rendered mytemplates/_leftsidebar (33.5ms)
+Rendered mytemplates/_mytemplate_index (238.5ms)
+Rendered shared/_footer (18.3ms)
+Rendered shared/_header (5.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 2098ms (View: 669 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:20:37) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 444ms (View: 102 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:22:15) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (29.5ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 76ms (View: 45 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:22:25) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 50ms (View: 2 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:24:33) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (1.3ms)
+Rendered shared/_login (191.8ms)
+Rendered shared/_menu (1.8ms)
+Rendered mytemplates/_leftsidebar (20.5ms)
+Rendered mytemplates/_mytemplate_index (222.8ms)
+Rendered shared/_footer (18.4ms)
+Rendered shared/_header (5.5ms)
+Rendered shared/_footer (0.0ms)
+Completed in 1999ms (View: 591 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:24:46) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 385ms (View: 34 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:25:56) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.9ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (12.6ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 96ms (View: 74 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:29:50) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (18.3ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 80ms (View: 33 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:30:13) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (1.1ms)
+Rendered shared/_login (158.3ms)
+Rendered shared/_menu (3.8ms)
+Rendered mytemplates/_leftsidebar (9.3ms)
+Rendered mytemplates/_mytemplate_index (231.7ms)
+Rendered shared/_footer (16.4ms)
+Rendered shared/_header (5.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 2214ms (View: 563 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:30:27) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 726ms (View: 68 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:30:46) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 41ms (View: 2 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:30:55) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (5.3ms)
+Rendered shared/_menu (0.3ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (14.7ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 77ms (View: 24 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:31:06) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 39ms (View: 1 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:32:20) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (1.4ms)
+Rendered shared/_login (162.4ms)
+Rendered shared/_menu (1.9ms)
+Rendered mytemplates/_leftsidebar (2.3ms)
+Rendered mytemplates/_mytemplate_index (249.5ms)
+Rendered shared/_footer (29.6ms)
+Rendered shared/_header (21.6ms)
+Rendered shared/_footer (0.1ms)
+Completed in 1975ms (View: 632 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:32:32) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 734ms (View: 130 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:33:51) [POST]
+  Parameters: {"dong"=>"영등포"}
+Completed in 42ms (View: 2 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:35:28) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (18.7ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 58ms (View: 32 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:37:30) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.9ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (22.4ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 54ms (View: 37 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:37:38) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 45ms (View: 1 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:38:00) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (14.5ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 50ms (View: 23 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:38:27) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 382ms (View: 60 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:38:46) [POST]
+  Parameters: {"dong"=>"삼성"}
+Completed in 142ms (View: 1 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:41:27) [GET]
+Redirected to http://localhost:3000/login
+Filter chain halted as [:authenticate_user!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/mytemplates]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-10-10 03:41:27) [GET]
+Rendering template within layouts/ajax-load-page
+Rendering sessions/session
+Rendered sessions/_session_new (64.6ms)
+Completed in 144ms (View: 141 | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-10 03:41:33) [POST]
+  Parameters: {"authenticity_token"=>"jKPexAgYthbD+cRhjXJAob4TIlUC8arB3s+ViTkcoNA=", "session"=>{"uri"=>"", "userid"=>"cholubin", "password"=>"5972"}}
+Redirected to http://localhost:3000/
+Completed in 1694ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 03:41:34) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (42.7ms)
+Rendered shared/_category (30.8ms)
+Rendered pages/_main_content (39.2ms)
+Rendered shared/_header (24.9ms)
+Rendered shared/_footer (1.2ms)
+Completed in 933ms (View: 396 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:41:40) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (16.8ms)
+Rendered shared/_login (75.1ms)
+Rendered shared/_menu (2.0ms)
+Rendered mytemplates/_leftsidebar (39.7ms)
+Rendered mytemplates/_mytemplate_index (36.4ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 377ms (View: 258 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:41:57) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 709ms (View: 79 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:46:50) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (20.1ms)
+Rendered shared/_footer (0.4ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 193ms (View: 95 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:47:10) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 231ms (View: 2 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:48:40) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (5.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (13.4ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 48ms (View: 22 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:49:13) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 106ms (View: 2 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:55:21) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (20.4ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 66ms (View: 36 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:56:06) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 216ms (View: 2 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 03:57:40) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.4ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (20.9ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 169ms (View: 36 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 03:57:53) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 160ms (View: 3 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 04:01:41) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.8ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (21.2ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 58ms (View: 36 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 04:01:50) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 294ms (View: 3 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 04:02:49) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (81.3ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 108ms (View: 95 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 04:02:59) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 40ms (View: 2 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 04:04:46) [POST]
+  Parameters: {"dong"=>"150091"}
+Completed in 55ms (View: 2 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 04:04:53) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 41ms (View: 1 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-10 04:05:46) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"117"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_show (100.4ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 116ms (View: 114 | 200 OK [http://localhost/mytemplates/117?cate=&page=]
+
+
+Processing MytemplatesController#jobboard_create (for 127.0.0.1 at 2010-10-10 04:06:41) [POST]
+  Parameters: {"id"=>"117", "content"=>"좀 그렇게 해주세요~", "feedback_code"=>"0"}
+Rendered mytemplates/_jbbs_body (30.3ms)
+Completed in 113ms (View: 48 | 200 OK [http://localhost/mytemplates/jobboard_create]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-10 04:06:57) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"117"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_show (8.4ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 19ms (View: 16 | 200 OK [http://localhost/mytemplates/117?cate=&page=]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 04:07:39) [POST]
+  Parameters: {"dong"=>"삼성"}
+Completed in 152ms (View: 2 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 04:11:16) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.5ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (17.8ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 102ms (View: 33 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 04:12:13) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.7ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (27.0ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 92ms (View: 43 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 04:13:01) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (37.7ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 95ms (View: 54 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 04:13:11) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 128ms (View: 1 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 04:13:52) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (1.5ms)
+Rendered shared/_category (8.3ms)
+Rendered pages/_main_content (2.1ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 20ms (View: 17 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 04:15:39) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.8ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (48.3ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 206ms (View: 128 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 04:15:50) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 106ms (View: 1 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 04:17:02) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (3.7ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_index (19.8ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 51ms (View: 34 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search_ajax (for 127.0.0.1 at 2010-10-10 04:17:11) [POST]
+  Parameters: {"dong"=>"문래"}
+Completed in 40ms (View: 1 | 200 OK [http://localhost/address/search_ajax]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-10 04:24:01) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"117"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (4.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered mytemplates/_mytemplate_show (27.8ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 68ms (View: 36 | 200 OK [http://localhost/mytemplates/117?cate=&page=]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 04:25:52) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.8ms)
+Rendered shared/_category (10.2ms)
+Rendered temps/_temp_index (28.3ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 187ms (View: 179 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 04:25:54) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.2ms)
+Rendered shared/_category (8.1ms)
+Rendered temps/_temp_index (6.4ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 23ms (View: 18 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 04:25:55) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"84"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.8ms)
+Rendered shared/_category (8.6ms)
+Rendered temps/_temp_index (6.7ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.0ms)
+Completed in 25ms (View: 20 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=84]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 04:25:56) [GET]
+  Parameters: {"category_name"=>"64", "subcategory_name"=>"88"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (1.3ms)
+Rendered shared/_category (10.7ms)
+Rendered temps/_temp_index (6.9ms)
+Rendered shared/_header (0.1ms)
+Rendered shared/_footer (0.1ms)
+Completed in 28ms (View: 22 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]

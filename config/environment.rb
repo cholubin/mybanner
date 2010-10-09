@@ -80,7 +80,7 @@ Haml::Template.options[:format] = :html4
   end
 
   # 사용자별 템플릿 공개여부 결정 기능 추가 (for oneplus)
-  TEMPLATE_OPEN_FUNC_TOGGLE = true
+  TEMPLATE_OPEN_FUNC_TOGGLE = false
   
   # if HOSTING_URL == "htt://www.oneplus.asia/"
   #     TEMPLATE_OPEN_FUNC_TOGGLE = true
