@@ -1,0 +1,12 @@
+<h1>Result</h1> 
+<hr>
+<% if @addresses%>
+  <h1><%= "#{@addresses.size}"%> </h1>
+
+  <%- @addresses.each do |f|%>
+     <%= f.zipcode%> - <%= f.city %> - <%= f.si_goon_goo %> - <%= f.dong %> - <%= f.building %> - <%= f.address%>
+     <br>
+  <% end -%>  
+<hr>                  
+<% end %>
+  
