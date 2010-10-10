@@ -2,9 +2,6 @@
 
 
 /* 서브페이지 서브 메뉴, 기본 레이아웃 */
-#sub h1 { position: absolute; top: 10px; }
-#sub #header { width: 960px; height: 126px; margin: 0 auto; position: relative;}
-#sub #header #nav-menu { background-repeat: no-repeat; position: absolute; top:82px;left: 0; width: 960px; height: 44px;}
 #sub #content {	background: #fff url(/images/default/page-sub-bg.png) left 78px no-repeat; }
 #sub #submenu { position: absolute; width: 170px; left: 10px; top: 10px; padding:0;  }
 #sub #submenu h3 { padding: 40px 0 30px; text-align: center; color: #bbb; font-weight: normal; }
@@ -33,6 +30,10 @@
 #sub #design-list #template-type li.horizon { top: -26px; left: 290px;}
 #sub #design-list #template-type li a { text-indent: -5000px; width: 120px; height:26px; display: block; }
 
+
+#sub #designcart.content-layout h3 { background-image: url("/images/content/title-designcart.png"); }
+#sub #designcart.content-layout .content-description li { list-style: square;margin-left: 14px; line-height: 18px; font-size: 11px;; }
+#sub #designcart h4 { font-size: 12px; }
 
 /* 템플릿 페이지 목록 스타일 가로형 */
 #sub #design-list.horizon .article { margin: 10px 0; padding: 10px 0; }
@@ -68,8 +69,8 @@
 #sub #design-list.vertical .article li.price { top: 46px; width: 130px; left: 10px; background-image: url(/images/default/block-template-title-price.png); font-weight: bold;}
 #sub #design-list.vertical .article li.self-edit { top: 72px; left: 7px; padding: 0; }
 #sub #design-list.vertical .article li.self-edit a { display: block; text-indent: -5000px; width: 126px; height: 45px; background: url(/images/default/button-direct-edit-v.png) no-repeat center center }
-#sub #design-list.vertical .article li.self-edit a:hover { background-image: url(/images/default/button-direct-edit-v-hover.png)}
-#sub #design-list.vertical .article li.self-edit a:active { background-image: url(/images/default/button-direct-edit-v-click.png)}
+#sub #design-list.vertical .article li.self-edit a:hover { background-image: url(/images/default/button-direct-edit-hover-v.png)}
+#sub #design-list.vertical .article li.self-edit a:active { background-image: url(/images/default/button-direct-edit-click-v.png)}
 
 #sub #design-list.vertical .article li.order-edit { top: 117px; left: 7px; padding: 0; }
 #sub #design-list.vertical .article li.order-edit a { display: block; text-indent: -5000px; width: 126px; height: 35px; background: url(/images/default/button-order-edit-v.png) no-repeat center center }
@@ -77,7 +78,37 @@
 #sub #design-list.vertical .article li.order-edit a:active { background-image: url(/images/default/button-order-edit-click-v.png)}
 
 /* 편집의뢰 주문 */
+#ajaxloadpage #edit-order-form label { display: block; width: 70px; float: left; }
+#ajaxloadpage #edit-order-form .submit-button { position: absolute; left: 20px; top: 283px; width: 270px; height: 40px; font-size: 14px;}
+#ajaxloadpage #edit-order-form .description {  height: 100px; }
+#ajaxloadpage #edit-order-form p { *zoom:1; }
+#ajaxloadpage #edit-order-form p:after {content:" "; display:block; clear:both;}
+#ajaxloadpage #edit-order-form .designinfo { position: absolute; width: 270px; left: 20px; top: 100px; }
+#ajaxloadpage #edit-order-form .memo { position: absolute; width: 300px; left: 300px; top: 100px; height: 222px; }
+#ajaxloadpage #edit-order-form .memo #feedback-memo { width: 274px; height: 120px; }
+#ajaxloadpage #edit-order-form .memo #feedback-file { width: 274px; height: 20px; }
+#ajaxloadpage #edit-order-form #first-price { position: absolute; top: 230px; left: 20px; width: 270px; }
+#ajaxloadpage #edit-order-form #first-price h4 { position: absolute; font-size: 14px;  }
+#ajaxloadpage #edit-order-form #first-price p { position: absolute; font-size: 11px; margin: 0; padding: 0; }
+#ajaxloadpage #edit-order-form #first-price p.price { font-size: 14px; left: 100px; width: 170px; text-align: right;;  }
+#ajaxloadpage #edit-order-form #first-price p.comment { top: 20px; width: 270px; border-top: 1px solid #ddd; padding-top: 8px; color: #999; text-align: center; letter-spacing: -1px }
 
-#ajaxloadpage #edit-order-form .designinfo { position: absolute; width: 270px; }
-#ajaxloadpage #edit-order-form .memo { position: absolute; width: 318px; left: 310px; }
-#ajaxloadpage #edit-order-form #first-price { position: absolute; top: 300px; left: 30px; }
+/* 디자인 카트 목록 */
+
+#designcart table#designcart-list {width: 580px; height: 52px; background: url("/images/content/designcart-table-head.png") no-repeat; }
+#designcart table#designcart-list caption {width: 570px; height: 39px; line-height: 39px; background: url("/images/content/designcart-table-foot.png") no-repeat; text-align: left; position: relative; color: #555;padding-left: 10px;; }
+#designcart table#designcart-list caption .delete { position: absolute; top: 6px; left: 471px; }
+#designcart table#designcart-list thead tr { height: 52px;}
+#designcart table#designcart-list .action-select, #designcart table#designcart-list .option-select { display: none; }
+#designcart table#designcart-list td.check  { border-left: 1px solid #ddd; }
+#designcart table#designcart-list td.option  { border-right: 1px solid #ddd; }
+#designcart table#designcart-list tbody td { border-bottom: 1px solid #ddd; padding: 4px 0; height: 50px; }
+
+#designcart table#designcart-list .check  { width: 24px; text-align: center; }
+#designcart table#designcart-list .edit-type  { width:70px; text-align: center; }
+#designcart table#designcart-list .design  { width:200px; }
+#designcart table#designcart-list .size { width:60px; text-align: center; }
+#designcart table#designcart-list .price { width:60px; text-align: center; }
+#designcart table#designcart-list .date { width:53px; text-align: center; }
+#designcart table#designcart-list td.date, #designcart table#designcart-list td.size	{ font-size: 10px; font-family: tahoma}
+#designcart table#designcart-list .option  { width:113px; text-align: center; }

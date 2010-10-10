@@ -65,6 +65,12 @@ class PagesController < ApplicationController
     @menu = "home"
     render :layout => 'ajax-load-page'
   end
+ 
+  def cscenter
+  	# 고객센터 기본 화면 (정상혁 추가)
+    @title = "고객센터"
+    @menu = "home"
+  end
 
   def congratulations
   	# AJAX 팝업을 위한 레이아웃 변경

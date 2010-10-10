@@ -164,24 +164,28 @@ $(document).ready(function(){
 
 </script>
 
-<div id="designcart">
+<div id="designcart" class="content-layout">
 	<h3>디자인바구니</h3>
-	<p>작업된 품목을 관리하고, 주문하는 페이지입니다.</p>
+	<ul class="content-description">
+		<li>고객님께서 직접 편집한 디자인과 편집의뢰한 디자인이 담기는 공간입니다.</li>
+		<li>편집에 있어서 어려운 부분이 있으시면, 관리자에게 도움요청 할 수 있습니다.</li>
+		<li> 또한 원하는 소재와 후가공, 갯수를 선택하여 주문과 결제를 할 수 있습니다.</li>
+	</ul>
 <% if @mytemplates.count > 0 %>
 	<!-- <form action="### 주문 프로세스로 ###" method="post" id="design-list"> -->
 	<%#= form_for :myorders, :url => { :action => "create_order" } do |f| %>	
 		<h4><span class="step">Step 1.</span> 디자인 목록, 검토 </h4>
-		<table>
-			<caption>주문할 항목과 옵션을 선택해주세요. <a href="#" class="delete">선택한 항목 삭제</a></caption>
+		<table id="designcart-list" cellpadding="0" cellspacing="0" border="0">
+			<caption>주문할 항목과 옵션을 선택해주세요. <a href="#" class="delete"><img src="/images/content/button-select-del-out.png" alt="선택한 항목 삭제" width="103" height="26" /></a></caption>
 			<thead>
 				<tr>
-					<th class="check" id="chk_all">check</th>
-					<th>작업구분</th>
-					<th>디자인 품목</th>
-					<th>사이즈</th>
-					<th>가격</th>
-					<th>수정일</th>
-					<th>기능</th>
+					<th class="check" id="chk_all"></th>
+					<th class="edit-type">작업구분</th>
+					<th class="design">디자인 품목</th>
+					<th class="size">사이즈</th>
+					<th class="price">가격</th>
+					<th class="date">수정일</th>
+					<th class="option">옵션선택</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -198,18 +202,20 @@ $(document).ready(function(){
 				%>
 				<tr id="<%= my.id.to_s %>" class="item">
 					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
-					<td class="edit-type"><%= my.job_code %></td>
-					<td class="design" onClick="location.href='/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>'"><%= Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? %><%="/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil%><span class="design-code">(<%= sn_num %>)</span> <span><%= my.feedback_code %></span></td>
-					<td class="size"><%= my.size %></td>
-					<td class="price"><%= Temp.get(my.temp_id).price %></td>
-					<td class="date"><%= my.updated_at.strftime('%Y-%m-%d') %></td>
-					<td class="action">
-						<h5>이 품목을...</h5>
+					<td class="edit-type"><%=(my.job_code == 0)?"직접편집":"편집의뢰" %></td>
+					<td class="design"><%= Category.get(my.category.to_i).name if !Category.get(my.category.to_i).nil? %><%="/"+Subcategory.get(my.subcategory.to_i).name if Subcategory.get(my.subcategory.to_i) != nil%><span class="design-code">(<%= sn_num %>)</span><br/><span><%= my.feedback_code %></span>
+					<div class="action-select">
 						<ul>
+							<a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a>
 							<li class="edit"><a href="### 웹탑 ###" onClick="popup('<%= my.id.to_s %>');">편집</a></li>
-							<li class="options"><a href="### 옵션 선택 창 ###">옵션 선택해주세요.</a></li>
 							<li class="delete"><a href="### 삭제 ###" id="del_<%= my.id.to_s %>">삭제</a></li>
 						</ul>
+					</div></td>
+					<td class="size"><%= my.size %></td>
+					<td class="price"><%= Temp.get(my.temp_id).price %></td>
+					<td class="date"><%= my.updated_at.strftime('%y.%m.%d') %></td>
+					<td class="option">
+						<img src="/images/content/button-option-select-out.png" alt="button-option-select-out" width="103" height="27" class="button" />
 						<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 시작 -->
 						<div class="option-select">
 							<h5>옵션 선택</h5>
@@ -261,8 +267,8 @@ $(document).ready(function(){
 		<h4>총 주문 금액</h4>
 		<!-- jQuery로 처리할 예정입니다. -->
 		<p class="price">00,000원</p>
+		<input id="order" type="button" value="선택한 항목 주문하기">
 	</div>
-	<input id="order" type="button" value="선택한 항목 주문하기">
 	<!-- <input type="submit" class="order" value="선택한 항목 주문하기"/>-->
 	<%#= end %>
 <% end %>

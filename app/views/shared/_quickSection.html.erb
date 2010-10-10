@@ -8,8 +8,8 @@
 						<li class="login-id"><%= current_user.name %></li>
 						<li class="login-name"><%= current_user.userid %></li>
 						<li class="logout"><a href="/logout">로그아웃</a></li>
-						<li class="webhard"><a href="/myimages">내 이미지하드</a></li>
-						<li class="user-edit"><a href="/users/<%= current_user.id %>/edit">정보수정</a></li>
+						<li class="webhard"><a href="/myimages" class="ajax-myimages">내 이미지하드</a></li>
+						<li class="user-edit"><a href="/users/<%= current_user.id %>/edit" class="ajax-edit">정보수정</a></li>
 					</ul>
 				</div>
 				<div id="work-summary">
@@ -43,7 +43,7 @@
 							<input type="submit" value="로그인" class="submit-button">
 					</fieldset>
 				<% end %>
-				<p class="signup-message"><a href="/users/new">회원가입</a> 무료 회원 가입하시고, 웹 편집 기능을 사용해보세요. </p>
+				<p class="signup-message"><a href="/users/new" class="ajax-sign-up">회원가입</a> 무료 회원 가입하시고, 웹 편집 기능을 사용해보세요. </p>
 				<!-- login end -->
 <% end %>
 			</div>

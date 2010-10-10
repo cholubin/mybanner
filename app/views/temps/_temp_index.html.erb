@@ -40,11 +40,11 @@ $(document).ready(function(){
 			<li class="size"><span>사이즈 :</span> <%= my.size %></li>
 			<li class="price"><span>가격 :</span> <%=my.price%></li>
 			<% if signed_in? %>
-			<li  class="self-edit"><a id="<%= my.id.to_s %>">직접편집하기</a><%#= link_to "직접편집하기", '/temps?temp_id='+my.id.to_s+'&edit=y', :confirm => '디자인바구니에 담으며 바로 편집하시겠습니까?',  :method => :post %></li>
-			<li class="order-edit"><a href="/pages/editorder">편집의뢰하기</a></li>
+			<li class="self-edit"><%= link_to "직접편집하기", '/mytemplates?temp_id='+my.id.to_s+'&edit=y', :confirm => '디자인바구니에 담으며 바로 편집하시겠습니까?',  :method => :post %></li>
+			<li class="order-edit"><a href="/pages/editorder" class="ajax-edit-order">편집의뢰하기</a></li>
 			<%else %>
-			<li class="self-edit"><a href="/login">직접편집하기</a></li>
-			<li class="order-edit"><a href="/login">편집의뢰하기</a></li>
+			<li class="self-edit"><a href="/login" class="ajax-sign-in">직접편집하기</a></li>
+			<li class="order-edit"><a href="/login" class="ajax-sign-in">편집의뢰하기</a></li>
 			<%end %>
 		</ul>
 		</div>

@@ -5,13 +5,15 @@ hr { display: none}
 img { border: 0 }
 h5 { font-size: 12px; font-weight: normal; }
 
-body { background: center top repeat-x; color: #333; font-size: 9pt; font-family: NanumGothicOTF, NanumGothic, AppleGothic, dotum, sans-serif; margin: 0;}
+body { background: center top repeat-x; color: #555; font-size: 12px; font-family: NanumGothicOTF, NanumGothic, AppleGothic, dotum, sans-serif; margin: 0;}
 a:link { text-decoration: none; color: #333; }
 a:visited { text-decoration: none; color: #666; }
 a:hover { text-decoration: none; color: #67991a; }
 a:active { text-decoration: none; color: #b0681b; }
-input { line-height: 20px; height: 20px; border: 1px solid #999; border-bottom-color:#ccc; border-right-color:#ccc; padding: 0 3px; font-size:12px; font-family:sans-serif; background:url(/images/default/input-text-bg.png) center center}
+input, textarea { border: 1px solid #999; border-bottom-color:#ccc; border-right-color:#ccc; font-size:12px; font-family: NanumGothicOTF, NanumGothic, AppleGothic, dotum, sans-serif; background: white url(/images/default/input-text-bg.png) center top repeat-x; }
+input { line-height: 20px; height: 20px; padding: 0 3px; background-position: left center ; }
 input.submit-button { font-weight: bold; font-size: 12px;border: 1px solid #666; color: white; text-shadow: 0 -1px #333; border-top-color: #999; border-left-color: #999; background: url('/images/default/form-button-bg.png'); height: 24px; cursor: pointer; }
+caption { font-size: 11px; color: #999; caption-side: bottom; text-align: right; }
 
 /* 헤더  시작*/
 
@@ -23,14 +25,14 @@ h1 { position: absolute; top: 36px; }
 #header #nav-menu h2 { display: none }
 #header #nav-menu ul { background: url(/images/default/nav-button-background.png) no-repeat 180px 0px; width: 960px; height: 44px;}
 #header #nav-menu li { display: block; position: absolute;  }
-#header #nav-menu li.company { top: 9px; left: 31px; }
+#header #nav-menu li.guide { top: 9px; left: 31px; }
 #header #nav-menu li.template { top: 9px; left: 210px; }
 #header #nav-menu li.designcart { top: 9px; left: 390px; }
 #header #nav-menu li.order-delivery { top: 9px; left: 570px; }
 #header #nav-menu li.cscenter { top: 9px; left: 810px}
 #header #nav-menu li a { display: block; text-indent: -9999px; background-repeat: no-repeat}
-#header #nav-menu li.company a { background-image:url(/images/default/nav-button-company-out.png); width: 115px; height: 28px;}
-#header #nav-menu li.company a:hover { background-image:url(/images/default/nav-button-company-in.png);}
+#header #nav-menu li.guide a { background-image:url(/images/default/nav-button-guide-out.png); width: 115px; height: 28px;}
+#header #nav-menu li.guide a:hover { background-image:url(/images/default/nav-button-guide-in.png);}
 #header #nav-menu li.template a { background-image:url(/images/default/nav-button-template-out.png); width: 180px; height: 35px;}
 #header #nav-menu li.template a:hover { background-image:url(/images/default/nav-button-template-in.png)}
 #header #nav-menu li.designcart a { background-image:url(/images/default/nav-button-designcart-out.png);width: 180px; height: 35px;}
@@ -58,7 +60,8 @@ h1 { position: absolute; top: 36px; }
 
 /* 팝업윈도우 */
 
-#popup-view { border: 1px solid #999;}
+#popup-view { border: 1px solid #999; display: none; background-color: White; position: absolute; z-index:100; overflow:hidden}
+#popup-closeButton { display:none; background-image: url('/images/default/button-close.png'); position: absolute;z-index:110;width:52px;height:20px;cursor:pointer}
 #ajaxloadpage { background: url("/images/default/block-popup-bg.png") repeat-x left top; padding: 0 20px; }
 #ajaxloadpage h3 { line-height: 59px; font-size: 18px;}
 #ajaxloadpage p { margin: 0; padding: 12px 0; }
@@ -67,8 +70,9 @@ h1 { position: absolute; top: 36px; }
 #ajaxloadpage fieldset p:after {content:" "; display:block; clear:both;}
 #ajaxloadpage legend { display: none; }
 #ajaxloadpage #login-form label { width: 80px; display: block; }
-#ajaxloadpage #login-form .signup { display: block; width: 156px;height: 45px; text-indent: -5000px; background:url(/images/default/button-signup.png) ;}
-
+#ajaxloadpage #login-form .user-sign-up { display: block; width: 156px;height: 45px; text-indent: -5000px; background:url(/images/default/button-signup.png) ;}
+#ajaxloadpage #login-form input { width: 180px; }
+#ajaxloadpage #login-form input.submit-button { width: 188px; }
 #ajaxloadpage #signup-form .info {  width: 300px; padding: 10px 0; }
 #ajaxloadpage #signup-form .info label { width: 100px; display: block; float: left;line-height: 22px; }
 #ajaxloadpage #signup-form #user-id { width: 80px; }
@@ -77,16 +81,17 @@ h1 { position: absolute; top: 36px; }
 #ajaxloadpage #signup-form #user-repassword { width: 130px; }
 #ajaxloadpage #signup-form #user-email { width: 160px; }
 
-#ajaxloadpage #signup-form .agree { position: absolute; width: 282px; height: 200px; overflow: auto; top: 106px; left: 337px; line-height: 140%; font-size: 11px; letter-spacing: -1px; padding: 0 10px 10px; color: #999 }
+#ajaxloadpage #signup-form .agree { position: absolute; width: 282px; height: 218px; overflow: auto; top: 98px; left: 337px; line-height: 150%; font-size: 11px; padding: 0 10px 10px; color: #999; background: white; }
 #ajaxloadpage #signup-form .agree h2 {  line-height: 30px; padding: 0 10px; border-bottom: 1px solid #ccc; font-size: 12px; }
 #ajaxloadpage #signup-form .submit-button { position: absolute; top: 298px ;  left: 20px; width: 302px; height: 30px;}
 
 #ajaxloadpage #edit-user-form label {display: block; width: 110px; line-height: 22px; float: left; }
-#ajaxloadpage #edit-user-form .submit-button { position: absolute; top: 289px; left: 20px; width: 360px; height: 30px; }
-#ajaxloadpage #edit-user-form .withdraw {  display: block; position: absolute; top: 121px; left: 304px;  width: 52px; text-align: center; border: 1px solid #333; border-color: #ccc #999 #999 #ccc; background: url(/images/default/form-button-bg-white.png); color: #666; padding: 0 7px; line-height: 22px;}
+#ajaxloadpage #edit-user-form .submit-button { position: absolute; top: 289px; left: 20px; width: 320px; height: 30px; }
+#ajaxloadpage #edit-user-form input { width: 180px; }
+#ajaxloadpage #edit-user-form .withdraw {  display: block; position: absolute; top: 121px; left: 260px;  width: 52px; text-align: center; border: 1px solid #333; border-color: #ccc #999 #999 #ccc; background: url(/images/default/form-button-bg-white.png); color: #666; padding: 0 7px; line-height: 22px;}
 #ajaxloadpage #edit-user-form .withdraw:hover { color: #666; font-weight: bold; }
-#ajaxloadpage #user-withdraw-form fieldset input { height: 14px; }
-#ajaxloadpage #user-withdraw-form fieldset p { line-height: 14px; margin: 0; padding: 2px 10px; }
+#ajaxloadpage #user-withdraw-form fieldset input { height: 10px; border: none; background: none; }
+#ajaxloadpage #user-withdraw-form fieldset p { line-height: 20px; margin: 0; padding: 2px 10px; }
 #ajaxloadpage #user-withdraw-form .submit-button { display: block; position: absolute; top: 266px; left: 20px; line-height: 24px; width: 324px; text-align: center; border: 1px solid #333; border-color: #ccc #999 #999 #ccc; background: url(/images/default/form-button-bg-white.png); color: #666; padding: 0 7px; }
 #ajaxloadpage #user-withdraw-form .submit-button:hover { color: #666; font-weight: bold; }
 
@@ -94,7 +99,7 @@ h1 { position: absolute; top: 36px; }
 /* 컨텐츠 섹션 시작 */
 
 #content { width: 960px; margin: 0 auto; position: relative; overflow: visible; background-color: white;}
-#main .content-layout { padding: 10px 190px; width: 580px; min-height: 600px; height: auto !important; height: 600px; }
+#main .content-layout { padding: 10px 190px 30px; width: 580px; min-height: 600px; height: auto !important; height: 600px; }
 
 /* > 사이드 섹션 시작 */
 #content .sideblock { background: url(/images/default/block-side-bg.png) no-repeat left bottom; }
@@ -109,6 +114,27 @@ h1 { position: absolute; top: 36px; }
 #content #category ul li ul li { display: inline-block; font-size: 12px; padding: 0;margin: 2px; padding:0 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
 #content #category ul li ul li:hover { background: #67991a; } #content #category ul li ul li:hover a { color: white;}
 #content #category ul li ul li:active { background: #b0681b; } #content #category ul li ul li:active a { color: white;}
+
+/* 메인 이미지 */
+#main-button { padding: 6px 1px; *zoom:1;}
+#main-button:after {content:" "; display:block; clear:both;}
+#main-button li { float: left; width: 182px; height: 54px; background: no-repeat left top; display:table; margin: 0 0 0 8px;cursor: pointer; }
+#main-button li.applegreen { background-image: url('/images/main/button-main-applegreen.png'); }
+#main-button li.deepgreen { background-image: url('/images/main/button-main-deepgreen.png'); }
+#main-button li.deepgray { background-image: url('/images/main/button-main-deepgray.png'); }
+#main-button li span { display:table-cell; vertical-align:middle; padding: 12px; text-align: center; color: white; text-shadow: 1px 1px #666; font-weight: bold; }
+#main-image { position: relative; width: 580px; height: 326px; line-height: 326px; color: #ccc; background: #eee; text-align: center; }
+#main-image img { position: absolute; top: 0; left: 0; display: none; z-index: 1; }
+#main-notice, #main-qna { position: relative;width: 400px; padding-top: 18px; height: 118px; }
+#main-notice {  border-bottom: 1px solid #ddd; }
+#main-notice h3, #main-qna h3 { position: absolute; width: 100px; line-height: 20px; font-size: 14px; }
+#main-notice ul, #main-qna ul { padding-left: 100px; }
+#main-notice ul li, #main-qna ul li { position: relative; height: 20px; line-height: 20px; margin-bottom: 7px;;;overflow: hidden; }
+#main-notice .date, #main-qna .date { position: absolute; top: 0px; right: 0px; color: #bbb; font-size: 9px; font-family: tahoma; height: 20px; width: 60px; text-align: right; background-image: url("/images/main/main-date-bg.png"); }
+#main-etcmenu { position: absolute; top: 410px; left: 610px; }
+#main-etcmenu h3 { display: none; }
+#main-etcmenu li { margin-bottom: 5px; }
+
 
 /* 로그인 */
 #content #quick-section { position: absolute; width: 170px; top : 10px;right: 10px; }
@@ -129,12 +155,12 @@ h1 { position: absolute; top: 36px; }
 #content #info ul li { position: absolute; display: block; padding: 3px 5px;  border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
 #content #info .login-id { width: 111px; text-align: center; font-weight: bold; font-size: 16px; top: 34px; left: 40px; text-shadow: 0 1px white; }
 #content #info .login-name { width: 111px; text-align: center; font-size: 12px; top: 53px; left: 40px; text-shadow: 0 1px white; }
-#content #info .logout, #content #info .webhard, #content #info .user-edit { width: 48px; text-align: center; border: 1px solid #333; border-color: #ccc #333 #333 #ccc; background: url(/images/default/form-button-bg.png); }
+#content #info .logout, #content #info .webhard, #content #info li.user-edit { width: 48px; text-align: center; border: 1px solid #333; border-color: #ccc #333 #333 #ccc; background: url(/images/default/form-button-bg.png); }
 #content #info a { text-shadow: 0 -1px #333; color:white; font-size:11px}
 #content #info a:hover { font-weight: bold;}
 #content #info .logout { top: 105px; left:101px; }
 #content #info .webhard { top: 80px; left:40px;  width: 109px;  background: url(/images/default/form-button-bg-black.png);}
-#content #info .user-edit { top: 105px; left:40px;}
+#content #info li.user-edit { top: 105px; left:40px;}
 #content #work-summary h3 { background: none; text-align: center; text-shadow:none; color: #aaa; padding: 3px 0; font-size: 11px; }
 #content #work-summary { position: absolute; width: 150px; top: 140px; left: 9px; background-color: white; border: 1px solid #ccc; border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
 #content #work-summary li { letter-spacing: -1px;width: 130px; height: 13px; padding: 6px 0; border-top: 1px solid #e6e6e6; margin: 0 auto; font-size: 11px; }
@@ -160,7 +186,23 @@ h1 { position: absolute; top: 36px; }
 
 /* 푸더 섹션 시작 */
 
-#footer { width: 960px; margin: 0 auto}
+#footer { background: url("/images/default/copyright-footer-bg.png"); padding: 10px 10px 20px;}
+#footer-wrap { background: white; border: 1px solid #999; width: 940px; margin: 0 auto; position: relative; height: 80px; border-radius:8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; }
+#footer-wrap h2 { position: absolute; top: 10px; left: 10px; }
+#footer-wrap p { position: absolute;height: 22px; line-height: 22px; background: no-repeat left center; font-style: normal; margin: 0;}
+#footer-wrap p.address { top: 30px; left: 180px; padding: 0 0 0 60px;  background-image: url("/images/default/copyright-address.png"); }
+#footer-wrap p.telephone { top: 50px; left: 183px; padding: 0 0 0 66px;  background-image: url("/images/default/copyright-phone.png"); }
+#footer-wrap p.fax { top: 50px; left: 363px; padding: 0 0 0 34px;  background-image: url("/images/default/copyright-fax.png"); }
+#footer-wrap p.email { top: 10px; left: 770px; }
+#footer-wrap h3 { display: none; }
+#footer-wrap ul { position: absolute; width: 580px; border-bottom: 1px solid #ddd; line-height: 22px; *zoom:1; left: 180px; top: 4px; padding-left: 5px; }
+#footer-wrap ul:after {content:""; display:block; clear:both;}
+#footer-wrap ul li {  float: left; padding: 0 40px 0 0; line-height: 22px; height: 22px;background: no-repeat left center; }
+#footer-wrap ul li strong { display: none; }
+#footer-wrap ul li.business-num1 { background-image: url("/images/default/copyright-business-num1.png"); padding-left: 78px }
+#footer-wrap ul li.business-num2 { background-image: url("/images/default/copyright-business-num2.png"); padding-left: 78px }
+#footer-wrap ul li.privacy { background-image: url("/images/default/copyright-privacy.png"); padding-left: 98px }
+
 #help-popup { position: absolute; width: 179px; height: 88px; padding: 22px 15px 25px 15px; background: url(/images/default/nav-help-popup.png); top: 0; left: 0; color: white; text-shadow: 0px 1px black; display: none; }
 #help-popup h3 { width: 163px; padding: 0 8px; line-height: 31px; }
 #help-popup p { margin: 0; width: 163px; padding: 6px 8px 0; }

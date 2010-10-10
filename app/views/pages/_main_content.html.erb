@@ -1,13 +1,40 @@
-<%
-	## 차후 쉬운 활용을 위한 블록 구분
-	@mytemplates_namecard_best = Temp.all(:category => "명함").best
-    @mytemplates_banner_best = Temp.all(:category => "현수막").best
-
-    @freeboards = Freeboard.all(:limit => 4, :order => :created_at.desc)
-    @notices = Notice.all(:limit => 4, :order => :created_at.desc)  
-%>
-
 <div id="main-content" class="content-layout">
-	<h4>메인 페이지</h4>
-	<p>메인페이지는 마지막 날 작업예정</p>
+	<ul id="main-button">
+		<li class="applegreen button"><span>차세대 웹편집솔루션을 소개합니다. 오오오오오ㅗ</span></li>
+		<li class="deepgreen button"><span>교회 현수막 디자인 다량 추가!</span></li>
+		<li class="deepgray button"><span>시연에 응해주셔서 감사합니다.</span></li>
+	</ul>
+	<div id="main-image">
+		페이지를 불러오는 중입니다. 잠시만 기다려주세요.
+		<img class="image" src="/images/main/main-image-1.jpg" />
+		<img class="image" src="/images/main/main-image-2.jpg" />
+		<img class="image" src="/images/main/main-image-3.jpg" />
+	</div>
+	<div id="main-notice">
+		<h3>공지사항</h3>
+		<ul>
+			<li>안녕하세요. Web Top Banner입니다. <span class="date">2010-10-11</span></li>
+			<li>Web Top Banner만의 기능을 아세요?  <span class="date">2010-10-11</span></li>
+			<li>홈페이지+웹편집+웹하드+주문시스템=웹탑밖에 없습니다. <span class="date">2010-10-11</span></li>
+			<li>시연해주셔서 감사합니다. <span class="date">2010-10-11</span></li>
+		</ul>
+	</div>
+	<div id="main-qna">
+		<h3>질문과 답변</h3>
+		<ul>
+			<li>안녕하세요. Web Top Banner입니다. <span class="date">2010-10-11</span></li>
+			<li>Web Top Banner만의 기능을 아세요?  <span class="date">2010-10-11</span></li>
+			<li>홈페이지+웹편집+웹하드+주문시스템= 웹탑밖에 없습니다.<span class="date">2010-10-11</span></li>
+			<li>시연해주셔서 감사합니다. <span class="date">2010-10-11</span></li>
+		</ul>
+	</div>
+	<div id="main-etcmenu">
+		<h3>그외 메뉴</h3>
+		<ul>
+			<li class="guide"><a href="/pages/guide"><img src="/images/main/button-etc-manual-out.png" alt="button-etc-manual" width="160" height="54" /></a></li>
+			<li class="faq"><a href="/faqs"><img src="/images/main/button-etc-faq-out.png" alt="button-etc-faq" width="160" height="54" /></a></li>
+			<li class="material"><a href="/pages/material"><img src="/images/main/button-etc-material-out.png" alt="button-etc-material" width="160" height="54" /></a></li>
+		</ul>
+	</div>
+
 </div>
