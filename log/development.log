@@ -62169,3 +62169,52 @@ ActionController::UnknownAction (No action responded to sitemap. Actions: about,
   /Users/fooleaf/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
 
 Rendering rescues/layout (not_found)
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 21:25:03) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (75.1ms)
+Rendered shared/_category (6.9ms)
+Rendered pages/_main_content (0.7ms)
+Rendered shared/_header (0.5ms)
+Rendered shared/_footer (0.5ms)
+Completed in 1006ms (View: 120 | 200 OK [http://localhost/]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-10 21:25:09) [POST]
+  Parameters: {"authenticity_token"=>"vVQ2+lItM9sYIM1c5UhLn45CgPe5JYQ06RBfGIfzttY=", "session"=>{"uri"=>"", "userid"=>"jaigouk", "password"=>"5425"}}
+Rendering template within layouts/ajax-load-page
+Rendering sessions/errormsg
+Completed in 15ms (View: 11 | 200 OK [http://localhost/sessions]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-10 21:25:17) [POST]
+  Parameters: {"authenticity_token"=>"vVQ2+lItM9sYIM1c5UhLn45CgPe5JYQ06RBfGIfzttY=", "session"=>{"uri"=>"", "userid"=>"demo", "password"=>"demo"}}
+Redirected to http://localhost:3000/
+Completed in 195ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 21:25:17) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (0.8ms)
+Rendered shared/_category (5.9ms)
+Rendered pages/_main_content (0.0ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 10ms (View: 8 | 200 OK [http://localhost/]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 21:25:23) [GET]
+  Parameters: {"dong"=>"삼성동"}
+
+ActionController::RoutingError (No route matches "/address/search" with {:method=>:get}):
+  haml (3.0.21) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.21) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/jaigouk/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/jaigouk/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/jaigouk/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
