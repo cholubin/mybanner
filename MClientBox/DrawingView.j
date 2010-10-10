@@ -133,6 +133,16 @@ gSideRight = 2;
 	[self setNeedsDisplay:YES];
 }
 
+- (CPArray)selectedFrameList
+{
+	return mSelectedFrameList
+}
+
+- (id)selectedFrame
+{
+	return [mSelectedFrameList objectAtIndex:0];
+}
+
 - (void)resetCreateFrame
 {
 	mCreateFrame = nil;
@@ -425,7 +435,16 @@ gSideRight = 2;
 	if(![[self superview] editMode])
 		return;
 	if(![mEditController isWindowVisible]) {
-		if([mEditController selectedTool] == 1) {  // 1: box create tool
+		if([mEditController selectedTool] == 1) {  // 1: image box create tool
+			var lPtInWindow = [anEvent locationInWindow];
+			var lPtInView = [self convertPoint:lPtInWindow fromView:nil];
+			[mSelectedFrameList removeAllObjects];
+			mCreateFrame = CGRectMake(lPtInView.x, lPtInView.y, 0, 0);
+			mResizeRect = CGRectMake(lPtInView.x, lPtInView.y, 0, 0);
+			[self setNeedsDisplay:YES];
+			return;
+		}
+		if([mEditController selectedTool] == 2) {  // 1: text box create tool
 			var lPtInWindow = [anEvent locationInWindow];
 			var lPtInView = [self convertPoint:lPtInWindow fromView:nil];
 			[mSelectedFrameList removeAllObjects];
@@ -760,7 +779,12 @@ gSideRight = 2;
 		var spreadIdx = [mEditController currentSpreadIndex];
 		var infostr = [CPString stringWithFormat:@"%d__SPREAD__%@",spreadIdx,framestr];
 		[[ProgressWindow sharedWindow] show];
-		[mEditController sendCreateRequestAndRefresh:@"MakeGraphic" data:infostr];
+		if([mEditController selectedTool] == 1) {
+			[mEditController sendCreateRequestAndRefresh:@"MakeGraphic" data:infostr];
+		}
+		else if([mEditController selectedTool] == 2) {
+			[mEditController sendCreateRequestAndRefresh:@"MakeTextGraphic" data:infostr];
+		}
 		//mCreateFrame = nil;
 		//[mEditController selectSelectionTool];
 	}

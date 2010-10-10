@@ -1,6 +1,7 @@
 # encoding: utf-8
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  
 end
 
 def get_current_url
@@ -17,7 +18,7 @@ def sanitize_filename(filename)
     # Finally, replace all non alphanumeric, underscore or periods with underscore
     name.gsub! /[^ㄱ-ㅎ가-힣0-9A-Za-z\w\.\-]/u, '_'
     # name.gsub! /[^\x{AC00}-\x{D7A3}]/, '_'    
-    
+
   end
 end
 
@@ -27,7 +28,7 @@ def sanitize_filename_restrict(filename)
    # NOTE: File.basename doesn't work right with Windows paths on Unix
    # get only the filename, not the whole path
    name.gsub! /^.*(\\|\/)/, ''
- 
+
    # Finally, replace all non alphanumeric, underscore or periods with underscore
    #            name.gsub! /[^\w\.\-]/, '_'
    #            Basically strip out the non-ascii alphabets too and replace with x. You don't want all _ :)
@@ -38,3 +39,4 @@ end
 def puts_message(message)
   puts "=======================================================\n" + message + "\n======================================================="
 end
+

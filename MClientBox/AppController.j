@@ -17,8 +17,11 @@ var SliderToolbarItemIdentifier = "SliderToolbarItemIdentifier",
     TestToolIdentifier = "TestToolIdentifier",
     SelectionToolIdentifier = "SelectionToolIdentifier",
     CreateRectBoxIdentifier = "CreateRectBoxIdentifier";
+    CreateTextBoxIdentifier = "CreateTextBoxIdentifier";
     UseGridIdentifier = "UseGridIdentifier",
-    UseGuideIdentifier = "UseGuideIdentifier";
+    UseGuideIdentifier = "UseGuideIdentifier",
+    CharStyleIdentifier = "CharStyleIdentifier",
+    FontSizeIdentifier = "FontSizeIdentifier";
 //var CreateRectBoxIdentifier = "CreateRectBoxIdentifier";
 
 // /user_files/demo/article_templates/4bf3a840317d491a82000137.mlayoutP
@@ -40,10 +43,13 @@ gDocItemSizeHeight = 90;
     @outlet CPScrollView mScrollView;
 	@outlet CPCollectionView mSpreadListView;
 	@outlet CPPopupButton mPopupButton;
+	@outlet CPPopupButton mCharStyleButton;
+	@outlet CPPopupButton mFontSizeButton;
 	@outlet EditController mEditController;
 	
 	CPArray toolItemImagesNormal;
 	CPArray toolItemImagesSelect;
+	CPArray mCharImageList;
 	CPImage mUseGuideImage;
 	CPImage mUseGuideImageSelected;
 	CPImage mUseGridImage;
@@ -73,6 +79,7 @@ gDocItemSizeHeight = 90;
 {
 	mBoolSelectedByUser = YES;
 	//[CPBundle loadCibNamed:@"Main" owner:[CPApplication sharedApplication]];
+	mCharImageList = [[CPArray alloc] init];
 	toolItemImagesNormal = [[CPArray alloc] init];
 	toolItemImagesSelect = [[CPArray alloc] init];
 	
@@ -84,6 +91,10 @@ gDocItemSizeHeight = 90;
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/imgboxHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/textbox.png" size:CPSizeMake(30, 25)];
+	[toolItemImagesNormal addObject:lNormalImg];
+	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/textboxHighlighted.png" size:CPSizeMake(30, 25)];
+	[toolItemImagesSelect addObject:lSelectImg];
 	mSelectedTool = 0;
 	
 	mUseGuideImage = [[CPImage alloc] initWithContentsOfFile:"Resources/guideline.png" size:CPSizeMake(30, 25)];
@@ -94,11 +105,10 @@ gDocItemSizeHeight = 90;
    var theWindow = [[CPWindow alloc] initWithContentRect:CGRectMakeZero() styleMask:CPBorderlessBridgeWindowMask];
         contentView = [theWindow contentView];
      mToolbar = [[CPToolbar alloc] initWithIdentifier:"Photos"];
-	[mToolbar setDelegate:self];
+	// [mToolbar setDelegate:self];
 	[mToolbar setVisible:true];
 	[theWindow setToolbar:mToolbar];
 	[theWindow setAcceptsMouseMovedEvents:YES];
-
 
 	if(location.protocol === "file:") {
 		gBaseURL = gDefBaseURL; //"http://10.0.1.2:3000";
@@ -454,6 +464,28 @@ gDocItemSizeHeight = 90;
 	}
 }
 
+- (void)loadChatStyleList:(CPString)data
+{
+	debugger;
+	var lStyleList = [data componentsSeparatedByString:@"\n"];
+	var i, icnt = [lStyleList count];
+	for(i=0;i<icnt;i++) {
+		var lCharStyleName = [lStyleList objectAtIndex:i];
+		if([lCharStyleName length] == 0)
+			continue;
+		 var lCharPreviewPath = [CPString stringWithFormat:@"%@/web/CharStyles/%@",mCurDocPath,lCharStyleName];
+		 var lCharImg = [[CPImage alloc] initWithContentsOfFile:lCharPreviewPath size:CPSizeMake(120, 24)];
+		// var lItem = [[CPMenuItem alloc] init];
+		// [lItem setImage:lCharImg];
+		// [mCharStyleButton addItem:lItem];
+		// [lItem release];
+		// [lCharImg release];
+//		[mCharStyleButton addItemWithTitle:lCharStyleName];
+		
+		[mCharImageList addObject:lCharImg];
+	}
+	[mToolbar setDelegate:self];
+}
 
 - (void)loadDocumentInfos:(CPString)data
 {
@@ -461,6 +493,9 @@ gDocItemSizeHeight = 90;
 	if([lInfoList count] >= 2) {
 		[self loadStyleList:[lInfoList objectAtIndex:0]];
 		[self loadFrameList:[lInfoList objectAtIndex:1]];
+		if([lInfoList count] >= 3) {
+			[self loadChatStyleList:[lInfoList objectAtIndex:2]];
+		}
 	}
 	else {
 		[self loadFrameList:[lInfoList objectAtIndex:0]];
@@ -500,7 +535,7 @@ gDocItemSizeHeight = 90;
 - (void)resetToolButtons
 {
 	var i = 0;
-	for(i=0;i<2;i++) {
+	for(i=0;i<3;i++) {
 		var toolbarItem = [[mToolbar items] objectAtIndex:i];
         var image = [toolItemImagesNormal objectAtIndex:i];
         var highlighted = [toolItemImagesSelect objectAtIndex:i];
@@ -546,6 +581,27 @@ gDocItemSizeHeight = 90;
 		[sender setImage:mUseGridImage];
 	}	
 	[[mSpreadView drawingView] setNeedsDisplay:YES];
+}
+
+- (@action)changeCharStyle:(id)sender
+{
+	var idx = [sender indexOfSelectedItem];
+	var gid = [[[mEditController drawingView] selectedFrame] GID];
+	var charstyle_str = gid + "__GIDSEP__" + idx;
+	[mEditController sendJSONRequestAndRefresh:@"SetCharStyle" data:charstyle_str];
+
+}
+
+- (@action)changeFontSize:(id)sender
+{
+	debugger;
+	var size_str = [[sender selectedItem] title];
+	if(size_str == " 0")
+		return;
+	var gid = [[[mEditController drawingView] selectedFrame] GID];
+	var charstyle_str = gid + "__GIDSEP__" + size_str;
+	[mEditController sendJSONRequestAndRefresh:@"ChangeFontSize" data:charstyle_str];
+	[sender selectItemAtIndex:15];
 }
 
 - (void)selectSelectionTool
@@ -614,7 +670,9 @@ gDocItemSizeHeight = 90;
 
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
-   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CPToolbarSpaceItemIdentifier, UseGuideIdentifier, UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, SliderToolbarItemIdentifier];
+   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
+ UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, FontSizeIdentifier, 
+ CharStyleIdentifier, SliderToolbarItemIdentifier];
 }
 //this delegate method returns the actual toolbar item for the given identifier
 
@@ -638,6 +696,55 @@ gDocItemSizeHeight = 90;
         [toolbarItem setMinSize:CGSizeMake(100, 24)];
         [toolbarItem setMaxSize:CGSizeMake(100, 24)];
         [toolbarItem setLabel:"Scale"];
+    }
+    else if (anItemIdentifier == CharStyleIdentifier)
+    {
+		mCharStyleButton = [[CPPopUpButton alloc] initWithFrame:CGRectMake(0, 0, 150, 24)];
+		[mCharStyleButton removeAllItems];
+		var i, icnt = [mCharImageList count];
+		for(i=0;i<icnt;i++) {
+			var lCharImg = [mCharImageList objectAtIndex:i];
+			var lItem = [[CPMenuItem alloc] init];
+			[lItem setImage:lCharImg];
+			[mCharStyleButton addItem:lItem];
+			[lItem release];
+			[lCharImg release];
+		}
+		
+        [mCharStyleButton setTarget:self];
+		[mCharStyleButton setAction:@selector(changeCharStyle:)];
+		
+        [toolbarItem setTarget:self];
+      	[toolbarItem setView:mCharStyleButton];
+        [toolbarItem setMinSize:CGSizeMake(150, 24)];
+        [toolbarItem setMaxSize:CGSizeMake(150, 24)];
+        [toolbarItem setLabel:"CharStyle"];
+    }
+    else if (anItemIdentifier == FontSizeIdentifier)
+    {
+		mFontSizeButton = [[CPPopUpButton alloc] initWithFrame:CGRectMake(0, 0, 80, 24)];
+		[mFontSizeButton removeAllItems];
+		var i;
+		var m = -15
+		for(i=0;i<31;i++) {
+			var sign_str = " ";
+			if(m > 0) 
+				sign_str = "+";
+			//else if(m < 0) 
+			//	sign_str = "-";
+			var size_str = sign_str+m;
+			[mFontSizeButton addItemWithTitle:size_str];
+			m++;
+		}
+		
+        [mFontSizeButton setTarget:self];
+		[mFontSizeButton setAction:@selector(changeFontSize:)];
+		
+        [toolbarItem setTarget:self];
+      	[toolbarItem setView:mFontSizeButton];
+        [toolbarItem setMinSize:CGSizeMake(80, 24)];
+        [toolbarItem setMaxSize:CGSizeMake(80, 24)];
+        [toolbarItem setLabel:"Font Size"];
     }
     else if (anItemIdentifier == PDFToolbarItemIdentifier )
     {
@@ -698,11 +805,27 @@ gDocItemSizeHeight = 90;
         
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(selectTool:)];
-        [toolbarItem setLabel:"Box"];
+        [toolbarItem setLabel:"Image"];
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
         [toolbarItem setTag:1];
+    }
+    else if (anItemIdentifier == CreateTextBoxIdentifier)
+    {
+        var image = [toolItemImagesNormal objectAtIndex:2];
+        var highlighted = [toolItemImagesSelect objectAtIndex:2];
+            
+        [toolbarItem setImage:image];
+        [toolbarItem setAlternateImage:highlighted];
+        
+        [toolbarItem setTarget:self];
+        [toolbarItem setAction:@selector(selectTool:)];
+        [toolbarItem setLabel:"Text"];
+
+        [toolbarItem setMinSize:CGSizeMake(32, 32)];
+        [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+        [toolbarItem setTag:2];
     }
     else if (anItemIdentifier == UseGuideIdentifier)
     {

@@ -1,26 +1,46 @@
+<script language="javascript">
+$(document).ready(function(){
+	$('.self-edit').click(function(){
+		if (window.confirm("디자인바구니에 담으며 바로 편집하시겠습니까?")){
+			loadingView();
+			$.ajax({
+				data:'temp_id='+ event.target.id + '&edit=y', 
+				dataType:'script', 
+				type:'post', 
+				url:'/temps/create_mytemp',
+				success: function(request){
+					loadingView();
+				}
+			});
+		}
+	});
+});
+
+</script>
+
 <div id="design" class="content-layout">
 	<h3>제품/디자인보기</h3>
 	<p class="content-description">왼쪽 카테고리를 이용하여 마음에드는 제품과 디자인을 선택하세요. 또한 차세대 편집 솔루션 Web Top을 이용하여 전문지식 없어도 내용을 직접 편집하고, 그대로 인쇄 주문이 가능합니다.</p>
-	<div id="design-list" class="<%=(@subcategory_name != nil) ? "vertical" : "horizon" %>">
-		<h4><%=params[:category_name] != nil ? Category.get(params[:category_name].to_i).name : "전체"  %><%= "(" + Subcategory.get(params[:subcategory_name].to_i).name + ")" if @subcategory_name != nil %> 디자인 목록</h4>
+	<div id="design-list" class="<%=(@is_col) ? "vertical" : "horizon" %>">
+		<h4><%=(params[:category_name] != nil and params[:category_name] != "") ? Category.get(params[:category_name].to_i).name : "전체"  %><%= "(" + Subcategory.get(params[:subcategory_name].to_i).name + ")" if (@subcategory_name != nil and @subcategory_name != "") %> 디자인 목록</h4>
 		<!-- 디자인 목록 반복 시작 -->
 		<ul id="template-type">
-			<li class="horizon"><a href="### 가로 디자인 보기 ###">가로 디자인 보기 </a></li>
-			<li class="vertical"><a href="### 세로 디자인 보기 ###">세로 디자인 보기</a></li>
+			<li class="horizon"><a href="/temps?category_name=<%= params[:category_name] %>&subcategory_name=<%= params[:subcategory_name] %>&dir=row">가로 디자인 보기 </a></li>
+			<li class="vertical"><a href="/temps?category_name=<%= params[:category_name] %>&subcategory_name=<%= params[:subcategory_name] %>&dir=col">세로 디자인 보기</a></li>
 		</ul>
 <%
 @temps.each do |my|
-	temp_image_path = my.thumb_url  if my.thumb_url
-	puts_message temp_image_path %>
+	temp_image_path = my.preview_url
+%>
 		<div class="article">
-		<a class="preview"><%= "<img src='" + temp_image_path + "'>" if my.thumb_url %></a>
+		<a class="preview"><img src="<%= temp_image_path %>" width="578px"></a>
 		<ul>
 			<li class="designcode"><%= my.name %></li>
 			<li class="item"><span>품목 :</span> <%=my.category%><%= "(" + my.subcategory + ") " if my.subcategory != nil %></li>
 			<li class="size"><span>사이즈 :</span> <%= my.size %></li>
 			<li class="price"><span>가격 :</span> <%=my.price%></li>
 			<% if signed_in? %>
-			<li class="self-edit"><%= link_to "직접편집하기", '/mytemplates?temp_id='+my.id.to_s+'&edit=y', :confirm => '디자인바구니에 담으며 바로 편집하시겠습니까?',  :method => :post %></li>
+			<li  class="self-edit"><a id="<%= my.id.to_s %>">직접편집하기</a><%#= link_to "직접편집하기", '/temps?temp_id='+my.id.to_s+'&edit=y', :confirm => '디자인바구니에 담으며 바로 편집하시겠습니까?',  :method => :post %></li>
 			<li class="order-edit"><a href="/pages/editorder">편집의뢰하기</a></li>
 			<%else %>
 			<li class="self-edit"><a href="/login">직접편집하기</a></li>
@@ -62,3 +82,6 @@
 	<% end %>
 <% end %>
 </div>
+<div id="popup_m">
+</div>
+	

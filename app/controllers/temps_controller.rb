@@ -10,14 +10,27 @@ class TempsController < ApplicationController
   # GET /temps.xml
   def index
     
-    if params[:category_name] != nil
-      # @category_name = Category.get(params[:category_name].to_i).name
+    
+    if params[:category_name] != nil and params[:category_name] != ""
       @category_name = params[:category_name].to_i
     end
-    if params[:subcategory_name] != nil
-      # @subcategory_name = Subcategory.get(params[:subcategory_name].to_i).name
+    
+    if params[:subcategory_name] != nil and params[:subcategory_name] != ""
       @subcategory_name = params[:subcategory_name].to_i
     end
+    
+    dir = params[:dir]
+    
+    if dir.nil?
+      is_col = false
+    else
+      if dir == "col"
+        is_col = true
+      else
+        is_col = false
+      end  
+    end      
+    
     
     # 사용자별 템플릿 공개여부 결정 기능 추가 (for oneplus)
     if TEMPLATE_OPEN_FUNC_TOGGLE == true
@@ -42,22 +55,23 @@ class TempsController < ApplicationController
       end
     else
       if @category_name != nil and @subcategory_name != nil
-        @temps = Temp.all(:category => @category_name, :subcategory => @subcategory_name).search(params[:search], params[:page])
-        @temps_best = Temp.all(:category => @category_name).best
+        @temps = Temp.all(:is_col => is_col, :category => @category_name, :subcategory => @subcategory_name).search(params[:search], params[:page])
       elsif @category_name != nil
-        @temps = Temp.all(:category => @category_name).search(params[:search], params[:page])      
-        @temps_best = Temp.all(:category => @category_name).best
+        @temps = Temp.all(:is_col => is_col, :category => @category_name).search(params[:search], params[:page])      
       elsif  @subcategory_name != nil
-        @temps = Temp.all(:subcategory => @subcategory_name).search(params[:search], params[:page])      
+        @temps = Temp.all(:is_col => is_col, :subcategory => @subcategory_name).search(params[:search], params[:page])      
       else
-        @category_name = Category.first(:priority => 1).name
-        @temps = Temp.all(:category => @category_name).search(params[:search], params[:page])      
-        @temps_best = Temp.all(:category => @category_name).best
+        @category_id = Category.first(:priority => 1).id.to_s
+        @temps = Temp.all(:is_col => is_col, :category => @category_id).search(params[:search], params[:page])      
       end
-      @total_count = Temp.search(params[:search],"").count      
+      @total_count = Temp.all(:is_col => is_col).search(params[:search],"").count      
     end
     
+    
+    
     @categories = Category.all(:order => :priority)    
+    
+    @is_col = is_col
     
     @menu = "template"
     @board = "temp"
@@ -113,8 +127,6 @@ class TempsController < ApplicationController
     @temp = Temp.get(params[:id])
   end
 
-  # POST /temps
-  # POST /temps.xml
   def create
            
     @temp = Temp.new(params[:temp])
@@ -187,8 +199,110 @@ class TempsController < ApplicationController
 
   end
 
-  # PUT /temps/1
-  # PUT /temps/1.xml
+  def create_mytemp
+    @mytemplate = Mytemplate.new
+    @mytemplate.user_id = current_user.id  
+    @mytemplate.temp_id = params[:temp_id] 
+    @mytemplate.save
+    
+    edit = params[:edit]
+
+    copy_template_mytemp(@mytemplate, @mytemplate.temp_id)    
+    # if @mytemplate != nil && @mytemplate.save && @user.save        
+
+    if @mytemplate.save              
+      begin   
+        # 템플릿 복사와 동시에 편집하는 경우
+        if edit == "y"
+          # @doc_name = @mytemplate.file_filename.gsub(/.zip/,'')
+          @doc_name = @mytemplate.id.to_s + ".mlayoutP"       
+          @userid = current_user.userid
+          @menu = "mlayout"
+          
+          # render '/cappuccino/show_cappuccino_ui', :layout => 'cappuccino', :popup=>true
+          
+          @temp_id = @mytemplate.id
+          
+          
+          render :update do |page|
+            page.replace_html 'popup_m', :partial => 'popup_m', :object => @temp_id
+          end
+          
+                    
+        # 템플릿 복사만 하는 경우
+        else
+          redirect_to :action => 'index'          
+        end
+
+      rescue
+        flash[:error] = "Failed to process mlayout"
+        render :action => 'index'
+      end       
+    else 
+      flash[:error] = "Failed to create an mytemplate"
+      render :action => 'new'
+    end
+  end
+  
+  def copy_template_mytemp(mytemplate, temp_id)  
+
+    path = "#{RAILS_ROOT}/public/user_files/" + current_user.userid + "/article_templates"
+    
+    # 복제될 템플릿 객체 원본
+    @object_to_clone = Temp.get(temp_id) 
+    
+    # 복제된 템플릿 객체
+    @cloned_object = mytemplate
+    
+    @cloned_object.name = @object_to_clone.name
+    # @cloned_object.file_filename = @object_to_clone.file_filename
+    @cloned_object.file_filename = @cloned_object.id.to_s
+
+    @cloned_object.description = @object_to_clone.description
+    @cloned_object.temp_id = temp_id 
+    @cloned_object.user_id = current_user.id
+    mytemplate_filename = @object_to_clone.file_filename.gsub(/.zip/,'')
+    mytemplate_new_filename = @cloned_object.id.to_s + ".mlayoutP"
+
+    
+    temp_dir = path + "/" + mytemplate_filename      
+    new_temp_dir = path + "/" + mytemplate_new_filename
+
+    # while File.exist?(new_temp_dir) 
+    #   mytemplate_new_filename = mytemplate_new_filename.gsub(/.mlayoutP/,'') + "_1" + ".mlayoutP"
+    #   new_temp_dir = path + "/" + mytemplate_new_filename        
+    # end
+
+    @cloned_object.thumb_url = "/user_files/" + current_user.userid + "/article_templates/" +  mytemplate_new_filename + "/web/doc_thumb.jpg"         
+    @cloned_object.preview_url = "/user_files/" + current_user.userid + "/article_templates/" + mytemplate_new_filename + "/web/doc_preview.jpg"             
+
+    @cloned_object.category = @object_to_clone.category
+    @cloned_object.subcategory = @object_to_clone.subcategory
+
+    @cloned_object.file_filename = mytemplate_new_filename + ".zip"
+    @cloned_object.path = "#{RAILS_ROOT}/public/user_files/" + current_user.userid + "/article_templates/" + mytemplate_new_filename
+                
+    FileUtils.mkdir_p(File.dirname(new_temp_dir))   
+          
+    source_path = TEMP_PATH + mytemplate_filename
+    
+    if  RUBY_VERSION != "1.9.2"
+      source_path = source_path.force_encoding('UTF8-MAC')
+      new_temp_dir = new_temp_dir.force_encoding('UTF8-MAC')
+    end
+          
+    FileUtils.cp_r source_path, new_temp_dir  
+    #--- delete template's mjob file     
+    tmp = new_temp_dir + "/do_job.mjob"
+    FileUtils.remove_entry_secure(tmp) if File.exist?(tmp)
+    
+    @cloned_object.save
+    @object_to_clone.copy_cnt += 1
+    @object_to_clone.save
+    
+
+  end
+  
   def update
     @temp = Temp.get(params[:id])
     

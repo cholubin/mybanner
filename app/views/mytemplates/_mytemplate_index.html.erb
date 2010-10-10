@@ -27,9 +27,47 @@
 $(document).ready(function(){
 	$('#orderform').css('display','none');
 	
+	$('#address-selector').live("change",function(){
+		// $('#zip_code').val()
+		var temp_zip = $('#address-selector option:selected').val()
+		var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,4)
+		
+		$('#zip_code').val(zip_code);
+	});
+	
+	$('#zip_search').click(function(){
+		if ($('#zip_code').val() == ""){
+			alert("검색어를 입력해주세요!");
+		}else{
+			loadingView();
+			$.ajax({
+				data:'dong='+ $('#zip_code').val(), 
+				dataType:'script', 
+				type:'post', 
+				url:'/address/search_ajax',
+				success: function(request){
+					loadingView();
+					$('#zip_code').val("");
+					$('#addr_result').html(request);
+				}
+			});
+		}
+	});
+	
 	$('#order').click(function(){
-		alert("니가 주문을 눌렀냐?");
-		$('#orderform').css('display','block');
+		var temp_array = jQuery.makeArray($('.chkbox:checked'));
+		
+		var order_ids = "";
+		jQuery.each(temp_array, function(){
+			order_ids += $(this).val() + ",";
+		});
+		
+		if (order_ids == ""){
+			alert("주문할 항목을 선택해주세요!");
+		}else{
+			$('#orderform').css('display','block');
+		}
+		
 	});
 	
 	$('#order_basic').click(function(){
@@ -273,15 +311,13 @@ $(document).ready(function(){
 			<p>
 				<label for="search-address">배송주소</label>
 				<ul>
-					<li><label for="zipcode">우편번호</label> <input id="zipcode" placeholder="동/면/읍" maxlength="10" size="8" type="text"/> <input type="button" value="동/면/읍 검색"/></li>
-					<li><label for="address-selector">주소선택</label>
+					<li><label for="zipcode">우편번호</label> <input id="zip_code" placeholder="동/면/읍" maxlength="10" size="8" type="text"/> <input id="zip_search" type="button" value="동/면/읍 검색"/></li>
+					<li id="addr_result"><label for="address-selector">주소선택</label>
+						<!-- <input name="### 주소1 ###" id="address1" placeholder="시/도, 구/시, 동/면/읍" maxlength="24" size="24" type="text"/> -->
 						<select id="address-selector">
 							<option value="" selected>선택해주세요.</option>
-							<option value="">주소 직접 입력</option>
 							<option value="">-----------------</option>
-							<option value="">jQuery로 구현해놓겠습니다~</option>
 						</select>
-						<input name="### 주소1 ###" id="address1" placeholder="시/도, 구/시, 동/면/읍" maxlength="24" size="24" type="text"/>
 					</li>
 					<li><label for="address2">나머지 주소</label><input name="### 주소2 ###" id="address2" placeholder="나머지 주소" maxlength="50" size="36" type="text"/></li>
 				</ul>

@@ -72,26 +72,26 @@ class UsersController < ApplicationController
     @board = "user"
         
     @user = User.new
-    @user.userid = params[:user][:userid]
-    @user.name = params[:user][:name]
-    @user.password = params[:user][:password]
-    @user.email = params[:user][:email]
+    @user.userid = params[:userid]
+    @user.name = params[:name]
+    @user.password = params[:password]
+    @user.email = params[:email]
     
     flash[:notice] = "<ul>"
     
-    if params[:user][:userid] == ""
+    if params[:userid] == ""
       flash[:notice] += "<li>사용자 아이디를 입력하세요.</li>"
     end
 
-    if params[:user][:name] == ""
+    if params[:name] == ""
       flash[:notice] += "<li>사용자 이름을 입력하세요.</li>"      
     end
 
-    if params[:user][:password] == ""
+    if params[:password] == ""
       flash[:notice] += "<li>비밀번호를 입력하세요.</li>"      
     end
 
-    if params[:user][:email] == ""
+    if params[:email] == ""
       flash[:notice] += "<li>이메일 주소를 입력하세요.</li>"      
     end
     
@@ -102,7 +102,7 @@ class UsersController < ApplicationController
       flash[:notice] += "</ul>"     
       render 'user' 
     else
-        if not User.first(:userid => params[:user][:userid]).nil? # 아이디 중복인 경우 ========================== 
+        if not User.first(:userid => params[:userid]).nil? # 아이디 중복인 경우 ========================== 
           flash[:notice] += "<li>이미 사용하고 있는 아이디 입니다.</li>"
           flash[:notice] += "</ul>"       
           @section = "new"        
@@ -134,35 +134,38 @@ class UsersController < ApplicationController
       @board = "user"
       @section = "edit"
     
-      if params[:user][:new_password] != ""
 
-        if params[:user][:current_password] == @user.password
-          @user.password = params[:user][:new_password]
-          @user.email = parmas[:user][:email]
+      if @user.has_password?( params[:current_password])
         
+        if params[:new_password] != ""
+
+          @user.update_password(params[:new_password])
+          @user.email = params[:email]
+          
           if @user.save
-            render 'users/modificaton_finished'  
+            render :text => "수정완료"  
           else
             flash[:notice] = "오류가 발생했습니다. 다시 시도해주시기 바랍니다."
             render 'user'
           end
 
-        else
-          flash[:notice] = "비밀번호가 틀립니다! 다시입력해 주세요."
-          render 'user'
-        end    
+
+        else  #메일만 수정하는 경우       
+          @user.email = params[:email]
+
+          if @user.save
+            render :text => "수정완료" 
+          else
+            flash[:notice] = "오류가 발생했습니다. 다시 시도해주시기 바랍니다."
+            render 'user'
+          end 
+        end
       
-      else  #메일만 수정하는 경우       
-        @user.email = params[:user][:email]
-      
-        if @user.save
-          render 'users/modification_finished'  
-        else
-          flash[:notice] = "오류가 발생했습니다. 다시 시도해주시기 바랍니다."
-          render 'user'
-        end 
-           
+      else
+       render :text => "비밀번호 오류"
       end
+      
+      
       
     else
       redirect_to '/'

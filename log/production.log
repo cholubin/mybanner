@@ -526,3 +526,114 @@ Rendering rescues/layout (not_found)
 =======
 Completed in 57ms (View: 57 | 200 OK [http://ssi.fooleaf.com/]
 >>>>>>> jaigouk
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 02:19:01) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 45ms (View: 38 | 200 OK [http://localhost/]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 02:19:03) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Completed in 198ms (View: 189 | 200 OK [http://localhost/temps]
+
+
+Processing TempsController#create_mytemp (for 127.0.0.1 at 2010-10-10 02:19:07) [POST]
+  Parameters: {"temp_id"=>"54", "edit"=>"y"}
+Completed in 258ms (View: 1 | 200 OK [http://localhost/temps/create_mytemp]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:19:07) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:19:08) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:19:08) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-10-10 02:19:08) [GET]
+
+ActionController::RoutingError (No route matches "/MClientBox/com/cetrasoft/components/formatbar/Info.plist" with {:method=>:get}):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (not_found)
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:19:09) [GET]
+  Parameters: {"requested_action"=>"DocumentInfos", "docname"=>"121.mlayoutP", "userinfo"=>"0"}
+Completed in 1553ms (View: 1 | 200 OK [http://localhost/request_mlayout?requested_action=DocumentInfos&docname=121.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:19:10) [GET]
+  Parameters: {"request"=>"/article_templates/121.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 7ms (View: 2 | 200 OK [http://localhost/filelist?request=/article_templates/121.mlayoutP/web/]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:19:11) [GET]
+  Parameters: {"request"=>"/article_templates/121.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 28ms (View: 1 | 200 OK [http://localhost/filelist?request=/article_templates/121.mlayoutP/web/]
+
+
+Processing CappuccinoController#request_mlayout (for 127.0.0.1 at 2010-10-10 02:19:11) [GET]
+  Parameters: {"requested_action"=>"FrameList", "docname"=>"121.mlayoutP", "userinfo"=>"0"}
+Completed in 109ms (View: 3 | 200 OK [http://localhost/request_mlayout?requested_action=FrameList&docname=121.mlayoutP&userinfo=0]
+
+
+Processing CappuccinoController#post_mlayout (for 127.0.0.1 at 2010-10-10 02:19:25) [POST]
+  Parameters: {"requested_action"=>"ChangeFontSize", "docname"=>"121.mlayoutP", "userinfo"=>"44__GIDSEP__ -9"}
+Completed in 579ms (View: 2 | 200 OK [http://localhost/post_mlayout]
+
+
+Processing CappuccinoController#filelist (for 127.0.0.1 at 2010-10-10 02:19:25) [GET]
+  Parameters: {"request"=>"/article_templates/121.mlayoutP/web/"}
+Rendering template within layouts/no_layout
+Rendering cappuccino/filelist
+Completed in 5ms (View: 1 | 200 OK [http://localhost/filelist?request=/article_templates/121.mlayoutP/web/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:19:48) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 82ms (View: 54 | 200 OK [http://localhost/mytemplates]

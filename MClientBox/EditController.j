@@ -131,8 +131,13 @@ function TextMonitor()
 		[mDrawingView release];		
 	}
 	mDrawingView = [aView retain];
-		
 }
+
+- (var)drawingView
+{
+	return mDrawingView;
+}
+
 - (void)setNewImage:(CPImage)anImage
 {
 	var boxSize = [mImageImageView serverBoxSize];

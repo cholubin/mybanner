@@ -1,0 +1,73 @@
+= Ko_Zipcode
+
+=== Find zipcode and addresses easily
+
+주소 / 우편번호 찾는 것을 쉽게 도와드립니다. 
+ 
+== 1. 개요   
+  
+  
+  * 쇼핑몰 결제 전 배송주소 확인을 위한 라이브러리입니다.
+  * 사용자의 현재위치에 근접한 주소를 자동으로 찾아줍니다.(오차 큼)
+  * 주소, 동, 건물 이름 검색이 가능합니다.
+  * 우편번호db는 2010년 7월 데이터입니다.
+
+== 2. 사용환경
+
+  * ruby 1.9.x
+  * datamapper 0.10.2
+  * dm-migrations 0.10.2               
+  * excelsior
+  * geokit
+  * yajl-ruby
+
+== 3. 설치   
+
+먼저 불필요한 migration 파일들이 Rails.root 밑에 db/migrate에 
+있는지 확인하시고 ActiveRecord로 되어있다면 삭제해주셔야 합니다.
+또한 Rails.root 밑에 lib/tasks 디렉토리가 없다면 생성해주시기 바랍니다.
+설치는 다음과 같이 해주시면 됩니다.
+ 
+    $ gem install geokit excelsior yajl-ruby
+    $ cd rails_app
+    $ script/plugin install git@github.com:iedit/ko_zipcode.git
+    $ rake ko_zipcode:setup
+    $ rake ko_zipcode:seed
+    
+== 4. 사용법
+ 
+  http://localhost:3000/address/search?dong=삼성동
+  http://localhost:3000/address/search?address=주공아파트
+
+  vendor/plugin/ko_zipcode/views/address/search.html.erb
+  파일에 결과들이 출력되게 해놓았습니다.
+
+  json으로 데이터를 받으시려면 
+  vendor/plugin/ko_zipcode/app/address_controller.rb
+  파일을 수정해주시면 됩니다.
+    
+
+== License 
+
+(The MIT License)
+
+Copyright (c) 2008 - 2010 Jai-Gouk Kim <jaigouk@iedit.net>
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

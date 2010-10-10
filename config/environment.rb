@@ -26,23 +26,25 @@ Rails::Initializer.run do |config|
   # config.gem "warden",            :version => ">= 0.10.5"
   # config.gem "devise",            :version => ">= 1.0.7"
   
-  # config.gem "rmagick",           :version => ">=2.13.1"    
+  config.gem "rmagick",           :version => ">=2.13.1"    
   config.gem "carrierwave",       :version => ">= 0.4.4"  
   config.gem 'will_paginate',     :version => '2.3.12'
   config.gem 'dm-pager',          :version => '1.1.0'
   config.gem 'do_sqlite3',        :version => '>=0.10.1'
-  config.gem 'dm-core',           :version => '>=0.10.2'
-  config.gem 'dm-aggregates',     :version => '>=0.10.2'
-  config.gem 'dm-constraints',    :version => '>=0.10.2'
-  config.gem 'dm-timestamps',     :version => '>=0.10.2'
-  config.gem 'dm-validations',    :version => '>=0.10.2'
-  config.gem 'rails_datamapper',  :version => '>=0.10.2'
+  config.gem 'dm-core',           :version => '0.10.2'
+  config.gem 'dm-aggregates',     :version => '0.10.2'
+  config.gem 'dm-constraints',    :version => '0.10.2'
+  config.gem 'dm-timestamps',     :version => '0.10.2'
+  config.gem 'dm-validations',    :version => '0.10.2'
+  config.gem 'rails_datamapper',  :version => '0.10.2'
   config.gem 'sanitize',          :version => '>=1.2.0'  
   config.gem "rubyzip",           :lib=>"zip/zip"
   # config.gem "resque",            :version => ">= 1.4.0"
   config.gem "haml", :version => ">=3.0.4"
 
-
+  config.gem 'excelsior' 
+  config.gem 'geokit'
+    
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -66,10 +68,9 @@ end
 
 Haml::Template.options[:format] = :html4
 
-  
   if RAILS_ENV == "production" 
-   # HOSTING_URL = "http://localhost:3000/"    
-    HOSTING_URL = "http://211.35.79.133:3000/"
+    HOSTING_URL = "http://localhost:3000/"    
+#    HOSTING_URL = "http://211.35.79.132:3000/"
   end
   if RAILS_ENV == "development" 
     HOSTING_URL = "http://localhost:3000/"
@@ -77,8 +78,15 @@ Haml::Template.options[:format] = :html4
   if RAILS_ENV == "test" 
     HOSTING_URL = "http://localhost:3000/"
   end
-    
+
+  # 사용자별 템플릿 공개여부 결정 기능 추가 (for oneplus)
   TEMPLATE_OPEN_FUNC_TOGGLE = false
+  
+  # if HOSTING_URL == "htt://www.oneplus.asia/"
+  #     TEMPLATE_OPEN_FUNC_TOGGLE = true
+  # else
+  #     TEMPLATE_OPEN_FUNC_TOGGLE = false    
+  # end
     
   IMAGE_URL = "#{HOSTING_URL}" + "/user_files/images/"
   IMAGE_PATH = "#{RAILS_ROOT}" + "/public/user_files/images/"
@@ -88,5 +96,5 @@ Haml::Template.options[:format] = :html4
   TEMP_URL = "#{HOSTING_URL}" + "/templates/"  
   TEMP_PATH = "#{RAILS_ROOT}" + "/public/templates/"
 
-  
+
 

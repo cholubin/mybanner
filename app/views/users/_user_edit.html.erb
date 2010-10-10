@@ -1,17 +1,15 @@
 <div id="edit-user-form">
 <h3>정보수정</h3>
 <p>비밀번호나 이메일 주소 등 기본사항에 변동사항이 있다면, 원활한 연락을 위해 꼭 수정해주세요.</p>
-<% form_for(@user) do |f| %>
-<%= f.error_messages %>
-	<fieldset>
-		<legend>가입정보 입력</legend>
-		<p><label for="user-id">가입 아이디</label> <%= current_user.userid %></p>
-		<p><label for="user-name">성함</label> <%= current_user.name %></p>
-		<p><label for="user-password">현재 비밀번호</label> <input type="password" name="user[current_password]" placeholder="비밀번호 입력" id="user-password"/></p>
-		<p><label for="user-new-password">수정 비밀번호</label> <input type="password" name="user[new_password]" placeholder="비밀번호 재입력" id="user-new-password"/></p>
-		<p><label for="user-email">이메일 주소</label> <input type="text" name="user[email]" value="<%= @user.email %>" placeholder="<%= @user.email %>" id="user-email"/></p>
-	</fieldset>
-	<input type="submit" value="수정완료" class="submit-button"/>
-<%end%>
-	<a href="/pages/withdraw" class="withdraw">탈퇴하기</a>
+<fieldset>
+	<legend>가입정보 입력</legend>
+	<p><label for="user-id">가입 아이디</label> <%= current_user.userid %></p>
+	<input type="hidden" id="user_id" value="<%= current_user.id %>">
+	<p><label for="user-name">성함</label> <%= current_user.name %></p>
+	<p><label for="user-password">현재 비밀번호</label> <input type="password" name="user[current_password]" placeholder="비밀번호 입력" id="user-password"/></p>
+	<p><label for="user-new-password">수정 비밀번호</label> <input type="password" name="user[new_password]" placeholder="비밀번호 재입력" id="user-new-password"/></p>
+	<p><label for="user-email">이메일 주소</label> <input type="text" name="user[email]" value="<%= @user.email %>" placeholder="<%= @user.email %>" id="user-email"/></p>
+</fieldset>
+<input onClick="member_modify();" type="button" value="수정완료" class="submit-button"/>
+<a href="/pages/withdraw" class="withdraw">탈퇴하기</a>
 </div>

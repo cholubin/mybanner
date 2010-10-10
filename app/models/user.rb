@@ -37,6 +37,7 @@ class User
   has n, :mypdfs 
   has n, :jobboards
   before :save, :encrypt_password
+  before :update, :encrypt_password
   before :create, :pdf_path
   after  :save, :demo_up
 
@@ -90,6 +91,10 @@ class User
     end
     
     
+  end
+  
+  def update_password(submitted_password)
+    self.update(:encrypted_password => encrypt(submitted_password))
   end
   
   def has_password?(submitted_password)
