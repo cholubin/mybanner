@@ -1,0 +1,94 @@
+= Paygate
+
+=== Build an e-commerce app without active merchant in S.Korea! 
+
+There are various common payment methods in S.Korea and it's hard to use active merchant based app like spree. In order to build easy online shop with rails in S.Korea, I chose paygate.net as a payment system.
+
+페이게이트를 이용하여 결제를 쉽게할 수 있도록 도와줍니다. API 자체는 자바스크립트이기 때문에 사용이 쉽습니다. 기본 API 이외에 추가 된 부분은 결제방법에 따라 패러미터들을 받는 부분입니다. gem을 개선 또는 개발하기 위해서는 fork 하셔서 로컬 머신에 받으신 다음,다음의 순서롤 따라서 테스트를 먼저 하시기 바랍니다.
+
+ 
+== 1. 개요   
+
+  * paygate 결제를 사용하기 위한 라이브러리 입니다. 
+  * 실행환경은 다음과 같습니다.
+  * rails 2.3.5
+  * ruby 1.9.x
+  * datamapper 0.10.2
+  * dm-migrations 0.10.2               
+
+== 2. 설치   
+
+Production 설치는 다음과 같이 해주시면 됩니다. 
+
+    $ cd rails_app
+    $ script/plugin install git@github.com:iedit/paygate.git
+    $ rake paygate:setup RAILS_ENV="production"
+    $ script/server -e production
+        
+== 3. 설정  
+
+실행에 앞서 해줘셔야 할 설정 
+복사된 config/paygate_setting.yml 파일에서 url 설정하기   
+    
+== 4. API   
+
+요청 시 상품이름과 결제수단, 가격을 요청하면 해당 폼이 작동합니다.
+http://도메인/상품이름/결제수단/가격
+
+현재 가능한 결제 수단은 핸드폰, 카드, 계좌이체 입니다.
+단, 계좌이체는 윈도우즈 익스플로러에서만 동작합니다.
+또한 카드결제의 경우에는 1000원 이상의 가격만 결제가 가능합니다.
+
+url 구성 시
+
+
+  * 카드의 경우에는 card,  
+  * 핸드폰의 경우에는 mobile
+  * 계좌이체의 경우에는 숫자 4를 url에 넣어주시면 됩니다. 
+
+
+예) 
+
+
+  * http://localhost:3000/request_payment/솔루윈템플릿/mobile/300 
+  * http://localhost:3000/request_payment/솔루윈테스트/card/1000
+  * http://localhost:3000/request_payment/솔루윈/4/2000
+
+
+레일즈에서 사용은 플러그인이라고 생각하시면 됩니다.
+app 디렉토리에 있는 파일들은 레일즈의 app 디렉토리로 복사되지 않아도
+작동하기 때문에 MVC 코드들은 레일즈 어플리케이션의 vendor/plugins/paygate/*
+에 있다고 보시면 됩니다.
+
+== 5. 유의사항 (Rails 2.3.8인 경우) 
+
+app/controller/application_controller.rb 파일에 
+protect_from_forgery 를 
+protect_from_forgery  :except => [:process_payment] 로 
+바꿔주셔야 합니다.
+
+
+== License 
+
+(The MIT License)
+
+Copyright (c) 2008 - 2010 Jai-Gouk Kim <jaigouk@iedit.net>
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

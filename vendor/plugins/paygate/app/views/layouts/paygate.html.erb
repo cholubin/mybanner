@@ -1,0 +1,65 @@
+<html>
+<head>
+  <script src="https://api.paygate.net/ajax/common/OpenPayAPI.js" type="text/javascript"></script> 
+ 
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+
+  <%= javascript_include_tag 'translate_codes.js'%>
+  
+  <script type="text/javascript"> 
+  $(function(){  
+    var result_code = $("#err").text();
+    var result_msg = getCodeMsg(result_code);  
+    // var result_msg = result_code ;
+    $("#err").text(result_msg);
+  });
+  
+  function startPayment() {
+    doTransaction(document.PGIOForm);  
+    $('.start_processing').hide();
+  } 
+
+  function getPGIOresult() { verifyReceived(getPGIOElement('tid'),'callbacksuccess', 'callbackfail'); }
+
+  function callbacksuccess() { 
+    var replycode = getPGIOElement('replycode') ; 
+    var hashresult = getPGIOElement('hashresult');    
+    if (replycode == '0000') {      
+      
+     document.PGIOForm.action = "<%=escape_javascript(@hosting_url) %>/pay_result";
+      // + "&authenticity_token=" + encodeURIComponent(AUTH_TOKEN);    
+        
+      document.PGIOForm.submit();
+    } else {         
+      var redirect_url = "<%=escape_javascript(@hosting_url) %>/pay_result?pay_err=";
+      // var send_translated_code;
+      // send_translated_code = getCodeMsg(replycode);                        
+      window.location.href = redirect_url +"err"+"&replycode="+replycode;
+      // alert("결제가 실패했습니다. 다시 이용해주세요.") ;   
+      // alert(replycode);
+    }
+  } 
+
+  function callbackfail() { // paygate system error   
+    alert("결제 회사에 문제가 있습니다.다시 이용해주세요.");  
+  }
+  </script>
+</head>
+<body>     
+
+  <% if flash[:notice] %>
+    <div class="notice"><div id = "err"> <%= flash[:notice] %></div>
+    </div>
+  <% end %>
+  <% if flash[:error] %>
+      
+       <div class="notice"><div id = "err"><%= flash[:error] %></div> </div>
+    
+  <% end %>   
+ <%= yield %>       
+ 
+
+ 	<div id="PGIOscreen"></div>
+ </div>
+</body>
+</html>

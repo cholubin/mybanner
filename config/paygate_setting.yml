@@ -1,0 +1,11 @@
+development:
+  mid: paygatekr
+  hosting_url: http://localhost:3000
+
+test:
+  mid: paygatekr
+  hosting_url: http://localhost:3000
+
+production:
+  mid: paygatekr
+  hosting_url: http://211.35.79.140:3000

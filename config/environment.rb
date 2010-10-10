@@ -26,7 +26,7 @@ Rails::Initializer.run do |config|
   # config.gem "warden",            :version => ">= 0.10.5"
   # config.gem "devise",            :version => ">= 1.0.7"
   
-  config.gem "rmagick",           :version => ">=2.13.1"    
+  # config.gem "rmagick",           :version => ">=2.13.1"    
   config.gem "carrierwave",       :version => ">= 0.4.4"  
   config.gem 'will_paginate',     :version => '2.3.12'
   config.gem 'dm-pager',          :version => '1.1.0'
@@ -44,6 +44,7 @@ Rails::Initializer.run do |config|
 
   config.gem 'excelsior' 
   config.gem 'geokit'
+  config.gem 'state_machine', :version => '0.9.4'
     
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

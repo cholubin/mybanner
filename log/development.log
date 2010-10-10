@@ -4315,3 +4315,228 @@ Rendered temps/_temp_index (6.9ms)
 Rendered shared/_header (0.1ms)
 Rendered shared/_footer (0.1ms)
 Completed in 28ms (View: 22 | 200 OK [http://localhost/temps?category_name=64&subcategory_name=88]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-10 15:38:22) [GET]
+  Parameters: {"category_name"=>"71"}
+Rendering template within layouts/application
+Rendering temps/temp
+Rendered shared/_quickSection (18.3ms)
+Rendered shared/_category (7.1ms)
+Rendered temps/_temp_index (3.7ms)
+Rendered shared/_header (0.7ms)
+Rendered shared/_footer (0.7ms)
+Completed in 343ms (View: 95 | 200 OK [http://localhost/temps?category_name=71]
+
+
+Processing PagesController#about (for 127.0.0.1 at 2010-10-10 15:38:24) [GET]
+Rendering template within layouts/application
+Rendering pages/about
+Rendered shared/_logo (0.7ms)
+Rendered shared/_login (4.4ms)
+Rendered shared/_menu (1.4ms)
+Rendered pages/_left_sidebar (33.8ms)
+Rendered pages/_about_content (1.2ms)
+Rendered shared/_footer (0.0ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 77ms (View: 74 | 200 OK [http://localhost/pages/about]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 15:38:25) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (0.4ms)
+Rendered shared/_category (5.8ms)
+Rendered pages/_main_content (2.3ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 666ms (View: 19 | 200 OK [http://localhost/]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-10 15:38:27) [POST]
+  Parameters: {"authenticity_token"=>"3EdS7wTtdqq0HA9/4C84gqDele2vF1hr0d5e5B7+PEI=", "session"=>{"uri"=>"", "userid"=>"", "password"=>""}}
+Rendering template within layouts/ajax-load-page
+Rendering sessions/errormsg
+Completed in 14ms (View: 12 | 200 OK [http://localhost/sessions]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-10 15:38:33) [POST]
+  Parameters: {"authenticity_token"=>"3EdS7wTtdqq0HA9/4C84gqDele2vF1hr0d5e5B7+PEI=", "session"=>{"uri"=>"", "userid"=>"test1", "password"=>"test1"}}
+Rendering template within layouts/ajax-load-page
+Rendering sessions/errormsg
+Completed in 2ms (View: 1 | 200 OK [http://localhost/sessions]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-10 15:38:37) [POST]
+  Parameters: {"authenticity_token"=>"3EdS7wTtdqq0HA9/4C84gqDele2vF1hr0d5e5B7+PEI=", "session"=>{"uri"=>"", "userid"=>"demo", "password"=>"demo"}}
+Rendering template within layouts/ajax-load-page
+Rendering sessions/errormsg
+Completed in 2ms (View: 1 | 200 OK [http://localhost/sessions]
+
+
+Processing UsersController#new (for 127.0.0.1 at 2010-10-10 15:38:40) [GET]
+Rendering template within layouts/ajax-load-page
+Rendering users/user
+Rendered users/_user_new (57.6ms)
+Completed in 74ms (View: 72 | 200 OK [http://localhost/users/new]
+
+
+Processing UsersController#create (for 127.0.0.1 at 2010-10-10 15:38:53) [POST]
+  Parameters: {"userid"=>"jaigouk", "name"=>"jaigouk", "password"=>"5425", "email"=>"jaigouk@gmail.com"}
+Rendering template within layouts/ajax-load-page
+Rendering pages/congratulations
+Completed in 351ms (View: 6 | 200 OK [http://localhost/users/create]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-10 15:38:53) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Rendered shared/_quickSection (0.9ms)
+Rendered shared/_category (5.7ms)
+Rendered pages/_main_content (1.5ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 12ms (View: 10 | 200 OK [http://localhost/]
+
+
+Processing UsersController#edit (for 127.0.0.1 at 2010-10-10 15:38:56) [GET]
+  Parameters: {"id"=>"41"}
+Rendering template within layouts/ajax-load-page
+Rendering users/user
+Rendered users/_user_edit (0.8ms)
+Completed in 8ms (View: 6 | 200 OK [http://localhost/users/41/edit]
+
+
+Processing MyimagesController#index (for 127.0.0.1 at 2010-10-10 15:39:00) [GET]
+Rendering template within layouts/application
+Rendering myimages/myimage
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (2.9ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (1.3ms)
+Rendered folders/_folder (3.3ms)
+Rendered myimages/_folder (9.7ms)
+Rendered myimages/_myimage_index (77.9ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 124ms (View: 109 | 200 OK [http://localhost/myimages]
+
+
+Processing MyimagesController#index (for 127.0.0.1 at 2010-10-10 15:39:06) [GET]
+  Parameters: {"ext"=>"all", "search"=>"", "page"=>"2"}
+Rendering template within layouts/application
+Rendering myimages/myimage
+Rendered shared/_logo (0.1ms)
+Rendered shared/_login (2.2ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.1ms)
+Rendered folders/_folder (0.9ms)
+Rendered myimages/_folder (1.1ms)
+Rendered myimages/_myimage_index (5.6ms)
+Rendered shared/_footer (0.0ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 13ms (View: 10 | 200 OK [http://localhost/myimages?ext=all&search=&page=2]
+
+
+Processing MypdfsController#index (for 127.0.0.1 at 2010-10-10 15:39:12) [GET]
+Rendering template within layouts/application
+Rendering mypdfs/mypdf
+Rendered shared/_logo (0.0ms)
+Rendered shared/_login (2.3ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.0ms)
+Rendered mypdfs/_mypdf_index (103.8ms)
+Rendered shared/_footer (0.1ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 125ms (View: 120 | 200 OK [http://localhost/mypdfs]
+
+
+Processing MyimagesController#index (for 127.0.0.1 at 2010-10-10 15:39:13) [GET]
+Rendering template within layouts/application
+Rendering myimages/myimage
+Rendered shared/_logo (0.0ms)
+Rendered shared/_login (2.1ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.0ms)
+Rendered folders/_folder (0.8ms)
+Rendered myimages/_folder (1.0ms)
+Rendered myimages/_myimage_index (10.6ms)
+Rendered shared/_footer (0.0ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 18ms (View: 15 | 200 OK [http://localhost/myimages]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 15:39:14) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Rendered shared/_logo (0.0ms)
+Rendered shared/_login (38.0ms)
+Rendered shared/_menu (0.1ms)
+Rendered mytemplates/_leftsidebar (0.0ms)
+Rendered mytemplates/_mytemplate_index (4.9ms)
+Rendered shared/_footer (0.0ms)
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 147ms (View: 56 | 200 OK [http://localhost/mytemplates]
+
+
+Processing AddressController#search (for 127.0.0.1 at 2010-10-10 15:39:21) [GET]
+  Parameters: {"dong"=>"삼성동"}
+Rendering template within layouts/application
+Rendering address/search
+Rendered shared/_header (0.0ms)
+Rendered shared/_footer (0.0ms)
+Completed in 73ms (View: 38 | 200 OK [http://localhost/address/search?dong=%EC%82%BC%EC%84%B1%EB%8F%99]
+
+
+Processing CheckoutController#request_payment (for 127.0.0.1 at 2010-10-10 15:45:24) [GET]
+  Parameters: {"name"=>"솔루윈템플릿", "pay_method"=>"mobile", "total_price"=>"300"}
+
+NameError (uninitialized constant CheckoutController::PAYGATE_CONFIG):
+  vendor/plugins/paygate/app/controllers/checkout_controller.rb:51:in `load_paygate_setting'
+  haml (3.0.21) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.21) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/jaigouk/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/jaigouk/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/jaigouk/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (39.0ms)
+Rendered rescues/_request_and_response (0.9ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing CheckoutController#request_payment (for 127.0.0.1 at 2010-10-10 15:47:26) [GET]
+  Parameters: {"name"=>"솔루윈템플릿", "pay_method"=>"mobile", "total_price"=>"300"}
+Redirected to http://localhost:3000/pay?name=%EC%86%94%EB%A3%A8%EC%9C%88%ED%85%9C%ED%94%8C%EB%A6%BF&pay_method=mobile&total_price=300
+Completed in 3ms | 302 Found [http://localhost/request_payment/%EC%86%94%EB%A3%A8%EC%9C%88%ED%85%9C%ED%94%8C%EB%A6%BF/mobile/300]
+
+
+Processing CheckoutController#process_payment (for 127.0.0.1 at 2010-10-10 15:47:26) [GET]
+  Parameters: {"name"=>"솔루윈템플릿", "pay_method"=>"mobile", "total_price"=>"300"}
+
+MissingSourceFile (no such file to load -- state_machine):
+  vendor/plugins/paygate/app/models/checkout.rb:1:in `<top (required)>'
+  vendor/plugins/paygate/app/controllers/checkout_controller.rb:15:in `process_payment'
+  haml (3.0.21) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.21) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/jaigouk/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/jaigouk/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/jaigouk/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendered rescues/_trace (73.9ms)
+Rendered rescues/_request_and_response (0.9ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing CheckoutController#process_payment (for 127.0.0.1 at 2010-10-10 16:02:31) [GET]
+  Parameters: {"name"=>"솔루윈템플릿", "pay_method"=>"mobile", "total_price"=>"300"}
+Rendering template within layouts/paygate
+Rendering checkout/process_payment
+Completed in 103ms (View: 59 | 200 OK [http://localhost/pay?name=%EC%86%94%EB%A3%A8%EC%9C%88%ED%85%9C%ED%94%8C%EB%A6%BF&pay_method=mobile&total_price=300]
