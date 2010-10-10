@@ -2,6 +2,7 @@
 
 class MytemplatesController < ApplicationController
   before_filter :authenticate_user!
+  
 
   # GET /mytemplates
   # GET /mytemplates.xml
@@ -45,6 +46,20 @@ class MytemplatesController < ApplicationController
     
     @tempfolders = Tempfolder.all(:user_id => current_user.id)
     render 'mytemplate'
+  end
+
+  def mytemplate_order
+
+    @menu = "mytemplate"
+    @board = "mytemplate"
+    @section = "order"
+    
+    @tempids = params[:ids].split(",")
+
+    @total_price = params[:total_price].gsub(/원/,'').to_i
+    @pre_price = 0
+      
+    render 'mytemplate', :layout => 'ajax-load-page', :object => @tempids, :object => @total_price, :object => @pre_price
   end
   
   def update_subcategories
@@ -259,6 +274,11 @@ class MytemplatesController < ApplicationController
     bbs.user_id = current_user.id
     bbs.content = content
     bbs.feedback_code = feedback_code
+    
+    @mytemp = Mytemplate.get(mytemp_id.to_i)
+    @mytemp.feedback_code = feedback_code
+    @mytemp.save 
+    
     bbs.mytemp_id = mytemp_id
 
     if bbs.save

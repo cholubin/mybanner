@@ -7,8 +7,8 @@ num = jbbs.count
 %>
 <tr>
 	<td class="number"><%= num %></td>
-	<td class="type"><%= bbs.feedback_code %></td>
-	<td class="memo"><a href="### 내용보기 페이지로 ###">### 내용 요약 ###</a></td>
+	<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
+	<td class="memo"><a href="### 내용보기 페이지로 ###"><%= bbs.content %></a></td>
 	<td class="name"><%= User.get(bbs.user_id).name %></td>
 	<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
 	<td class="file"></td>

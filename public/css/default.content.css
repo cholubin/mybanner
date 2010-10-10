@@ -99,7 +99,7 @@
 #designcart table#designcart-list caption {width: 570px; height: 39px; line-height: 39px; background: url("/images/content/designcart-table-foot.png") no-repeat; text-align: left; position: relative; color: #555;padding-left: 10px;; }
 #designcart table#designcart-list caption .delete { position: absolute; top: 6px; left: 471px; }
 #designcart table#designcart-list thead tr { height: 52px;}
-#designcart table#designcart-list .action-select, #designcart table#designcart-list .option-select { display: none; }
+/* #designcart table#designcart-list .action-select, #designcart table#designcart-list .option-select { display: none; } */
 #designcart table#designcart-list td.check  { border-left: 1px solid #ddd; }
 #designcart table#designcart-list td.option  { border-right: 1px solid #ddd; }
 #designcart table#designcart-list tbody td { border-bottom: 1px solid #ddd; padding: 4px 0; height: 50px; }

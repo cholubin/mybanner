@@ -14,20 +14,20 @@ class Category
   property :id,           Serial
   property :name,         String, :required => true
   property :priority,     Integer, :default => 9999
-  property :sn,           String, :default => "mc"
+  # property :sn,           String, :default => "mc"
   timestamps :at
 
   has n, :subcategories
 
-  def self.up
-    if Category.first(:name => '명함') == nil
-      Category.new(:name=>'명함', :priority=>1).save
-      Category.new(:name=>'현수막', :priority=>2).save
-      Category.new(:name=>'봉투', :priority=>3).save  
-    else 
-      puts Category.first(:priority => 1).id
-    end
-  end
+  #   def self.up
+  #   if Category.first(:name => '명함') == nil
+  #     Category.new(:name=>'명함', :priority=>1).save
+  #     Category.new(:name=>'현수막', :priority=>2).save
+  #     Category.new(:name=>'봉투', :priority=>3).save  
+  #   else 
+  #     puts Category.first(:priority => 1).id
+  #   end
+  # end
 end
 
 DataMapper.auto_upgrade!

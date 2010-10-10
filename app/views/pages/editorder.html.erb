@@ -1,3 +1,22 @@
+<%
+if  params[:id] != nil
+	temp = Temp.get(params[:id].to_i)  
+	
+	
+	if temp.subcategory != nil
+		category_info = Category.get(temp.category.to_i).name + "/" + Subcategory.get(temp.subcategory.to_i).name
+		sn_info = temp.category  + "-" + temp.subcategory + "-" + temp.id.to_s
+	else
+		category_info = Category.get(temp.category.to_i).name	
+		sn_info = temp.category  + "-" + temp.id.to_s
+	end
+	
+	puts_message category_info
+	puts_message sn_info
+	
+end
+%>
+
 <div id="edit-order-form">
 	<h3>편집의뢰 신청서</h3>
 	<p class="description">고객님께서 직접 편집할 시간이 없거나, 사용법이 어려운 경우 편집의뢰를 할 수 있습니다.</p>
@@ -5,13 +24,13 @@
 		<fieldset class="designinfo">
 			<legend>디자인/사이즈 선택</legend>
 			<p>
-				<label for="order-item">품목</label> <input name="### 카테고리 ###" id="order-item" type="text" value="### 카테고리1단계 ### - ###카테고리2단계###" readonly/>
+				<label for="order-item">품목</label> <input name="category_info" id="order-item" type="text" value="<%= category_info %>" readonly/>
 			</p>
 			<p>
-				<label for="order-designcode">디자인번호</label> <input name="### 디자인번호 ###" id="order-designcode" type="text" readonly/>
+				<label for="order-designcode">디자인번호</label> <input name="sn_info" id="order-designcode" type="text" value="<%= sn_info %>" readonly/>
 			</p>
 			<p>
-				<label for="order-size-width">기본사이즈</label> <input name="### 사이즈 ###" id="order-size-width" value="500" placeholder="가로" type="number" size="4" maxlength="5"/>cm x <input name="### 사이즈 ###" id="order-size-height" value="90" placeholder="세로" type="number" size="4" maxlength="5"/>cm
+				<label for="order-size-width">기본사이즈</label> <input name="size_info_x" id="order-size-width" value="500" placeholder="가로" type="number" size="4" maxlength="5"/>cm x <input name="size_info_y" id="order-size-height" value="90" placeholder="세로" type="number" size="4" maxlength="5"/>cm
 			</p>
 		</fieldset>
 		<fieldset class="memo">

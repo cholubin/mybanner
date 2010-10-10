@@ -22,7 +22,7 @@ function loadingView() {
 	}
 }
 
-function popupView(popWidth, popHeight, url) {
+function popupView(popWidth, popHeight, url, post) {
 	if($("#popup-view").length == 0) {
 		$("<div id=\"popup-view\"></div>")
 		.css({"display":"none","background-color": "White", "position": "absolute","z-index":"100","overflow":"hidden"})
@@ -39,7 +39,7 @@ function popupView(popWidth, popHeight, url) {
 		$("#popup-closeButton").css({"top":startY+10,"left":startX+popWidth-62})
 		$("#popup-view")
 		.css({"top": startY, "left": startX, "width":popWidth, "height":popHeight})
-		.load(url+" #ajaxloadpage",function() { $(this).fadeIn("fast");$("#popup-closeButton").live("click",function(){popupView()}).fadeIn("fast");})
+		.load(url+" #ajaxloadpage",post,function() { $(this).fadeIn("fast");$("#popup-closeButton").live("click",function(){popupView()}).fadeIn("fast");})
 	} else if(popupStatus == "view" && url) {
 		startX = ($(document).width()/2)-(popWidth/2);
 		startY = ($(window).height()/2)-(popHeight/2)+$(document).scrollTop()
@@ -47,7 +47,7 @@ function popupView(popWidth, popHeight, url) {
 		$("#popup-view #ajaxloadpage").fadeOut("fast",
 		function() {
 			$("#ajaxloadpage").remove();
-			$("#popup-view").load(url+" #ajaxloadpage",
+			$("#popup-view").load(url+" #ajaxloadpage",post,
 			function() {
 				$("#popup-view #ajaxloadpage").css("display","none");
 				$("#popup-view").animate({top:startY,left:startX,width: popWidth, height: popHeight },function () { $("#popup-view #ajaxloadpage").fadeIn("fast"); $("#popup-closeButton").live("click",function(){popupView()}).fadeIn("fast"); })

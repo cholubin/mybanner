@@ -1,14 +1,15 @@
 <%
 my = @mytemplate
 
-main_category_sn = Category.get(my.category.to_i).sn
-sub_category_sn =  Subcategory.get(my.subcategory.to_i).sn
-if main_category_sn.nil?; main_category_sn = "mc"; end
-if sub_category_sn.nil?; sub_category_sn = "sc"; end
-	
-sn_num = main_category_sn + sub_category_sn + my.id.to_s
+if my.subcategory != nil
+	category_info = Category.get(my.category.to_i).name + "/" + Subcategory.get(my.subcategory.to_i).name
+	sn_num = my.category  + "-" + my.subcategory + "-" + my.id.to_s
+else
+	category_info = Category.get(my.category.to_i).name	
+	sn_num = my.category  + "-" + my.id.to_s
+end
 %>
-
+<div class="content-layout">
 <script language="javascript">
 function del_mytemp(id){
 	if (window.confirm("정말 삭제하시겠습니까?")){
@@ -35,7 +36,7 @@ $(document).ready(function(){
 		}else{
 			loadingView();
 			$.ajax({
-				data:'id=<%= my.id.to_s %>&content='+$('#feedback_memo').val()+'&feedback_code='+$('#feedback_code').val(), 
+				data:'id=<%= my.id.to_s %>&content='+$('#feedback_memo').val()+'&feedback_code='+$('input:radio[name=feedback_code]:checked').val(), 
 				dataType:'script', 
 				type:'post', 
 				url:'/mytemplates/jobboard_create',
@@ -54,14 +55,14 @@ $(document).ready(function(){
 <div id="designcart-detail">
 	<h3>디자인바구니 - 상세보기</h3>
 	<p>작업한 품목의 상세정보를 확인하고 옵션 선택을 합니다.</p>
-	<a href="javascript:history.back(-1)" class="back-list">목록으로 돌아가기</a>
+	<a href="/mytemplates">목록으로 돌아가기</a>
 	<!-- 미리보기의 가로가 길면 item-horizon, 세로가 길면 item-vertical -->
 	<div id="item-information" class="### 가로, 세로 스타일명 ###">
 		<h4>상세보기</h4>
 		<ul>
 			<li class="preview"><strong class="title">미리보기</strong> <img src="<%= my.preview_url %>" class="preview"></li>
 			<li class="type"><strong class="title">구분</strong><%= my.job_code %></li>
-			<li class="item"><strong class="title">품목</strong><%= Category.get(my.category.to_i).name %> <%= "/ " + Subcategory.get(my.subcategory.to_i).name if !Subcategory.get(my.subcategory.to_i).nil? %></li>
+			<li class="item"><strong class="title">품목</strong><%= category_info %></li>
 			<li class="designcode"><strong class="title">디자인번호</strong><%= sn_num %></li>
 			<li class="size"><strong class="title">사이즈</strong><%= my.size %></li>
 			<li class="date"><strong class="title">최종수정일</strong><%= my.updated_at.strftime('%Y-%m-%d') %></li>
@@ -127,8 +128,8 @@ $(document).ready(function(){
 				%>
 				<tr>
 					<td class="number"><%= num %></td>
-					<td class="type"><%= bbs.feedback_code %></td>
-					<td class="memo"><a href="### 내용보기 페이지로 ###">### 내용 요약 ###</a></td>
+					<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
+					<td class="memo"><a href="### 내용보기 페이지로 ###"><%= bbs.content %></a></td>
 					<td class="name"><%= User.get(bbs.user_id).name %></td>
 					<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
 					<td class="file"></td>
@@ -144,7 +145,10 @@ $(document).ready(function(){
 	<form action="### 요청사항 입력 URL ###" method="post" id="feedback-add">
 		<fieldset>
 			<legend>요청사항 입력</legend>
-			<p><label for="feedback-type">글 구분</label> <input id="feedback_code" type="radio" checked value="0">수정요청</p>
+			<p><label for="feedback-type">글 구분</label> 
+				<% Request_code.all(:gubun.like => '%user%' ).each do |r| %>
+				<input name="feedback_code" type="radio" <%= "checked" if r.code == "0" %> value="<%= r.code %>"><%= r.name %>
+				<% end %>
 			<p>
 				<label for="" id="feedback-memo">요청내용</label>
 				<textarea name="content" id="feedback_memo" placeholder="내용을 입력해주세요."></textarea>
@@ -157,4 +161,5 @@ $(document).ready(function(){
 		</fieldset>
 	</form>
 	<a href="/mytemplates" class="back-list">목록으로 돌아가기</a>
+</div>
 </div>

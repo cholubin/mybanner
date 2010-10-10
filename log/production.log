@@ -637,3 +637,123 @@ Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-10 02:19:48) [G
 Rendering template within layouts/application
 Rendering mytemplates/mytemplate
 Completed in 82ms (View: 54 | 200 OK [http://localhost/mytemplates]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-11 00:15:09) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 151ms (View: 21 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-11 00:15:56) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 39ms (View: 26 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-11 00:17:13) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"122"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 65ms (View: 24 | 200 OK [http://localhost/mytemplates/122?cate=&page=]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-11 00:26:46) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"122"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 94ms (View: 17 | 200 OK [http://localhost/mytemplates/122?cate=&page=]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-11 00:35:50) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"122"}
+Redirected to http://localhost:3000/login
+Filter chain halted as [:authenticate_user!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/mytemplates/122?cate=&page=]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-10-11 00:35:50) [GET]
+Rendering template within layouts/ajax-load-page
+Rendering sessions/session
+Completed in 140ms (View: 137 | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-10-11 00:36:00) [POST]
+  Parameters: {"authenticity_token"=>"jKPexAgYthbD+cRhjXJAob4TIlUC8arB3s+ViTkcoNA=", "session"=>{"uri"=>"", "userid"=>"cholubin", "password"=>"5972"}}
+Redirected to http://localhost:3000/
+Completed in 295ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-11 00:36:00) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 143ms (View: 72 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-11 00:36:02) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 50ms (View: 24 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-11 00:36:04) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"122"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 23ms (View: 19 | 200 OK [http://localhost/mytemplates/122?cate=&page=]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-11 00:36:12) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 14ms (View: 10 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-11 00:36:36) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"122"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 15ms (View: 13 | 200 OK [http://localhost/mytemplates/122?cate=&page=]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-11 00:36:41) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"122"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 19ms (View: 14 | 200 OK [http://localhost/mytemplates/122?cate=&page=]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-11 01:06:45) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 94ms (View: 21 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-11 01:08:31) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 79ms (View: 22 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-10-11 01:20:09) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"122"}
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 107ms (View: 67 | 200 OK [http://localhost/mytemplates/122?cate=&page=]
+
+
+Processing MytemplatesController#jobboard_create (for 127.0.0.1 at 2010-10-11 01:20:17) [POST]
+  Parameters: {"id"=>"122", "content"=>"ㅇㅇㅇ", "feedback_code"=>"3"}
+Completed in 61ms (View: 25 | 200 OK [http://localhost/mytemplates/jobboard_create]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-11 01:20:23) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 80ms (View: 17 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-11 01:20:25) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 22ms (View: 16 | 200 OK [http://localhost/mytemplates]
