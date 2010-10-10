@@ -4,10 +4,10 @@
 		<div id="nav-menu">
 			<h2>사이트 메뉴</h2>
 			<ul>
-				<li class="company"><a href="/pages/about">회사소개</a></li>
+				<li class="guide"><a href="/pages/guide">이용안내</a></li>
 				<li class="template"><a href="/temps">제품/디자인 보기</a></li>
-				<li class="designcart"><a href="/mytemplates">디자인바구니</a></li>
-				<li class="order-delivery"><a href="/myorders">접수/배송확인</a></li>
+				<li class="designcart"><a href="/mytemplates"<%=" class=\"ajax-sign-in\"" if !signed_in? %>>디자인바구니</a></li>
+				<li class="order-delivery"><a href="/myorders"<%=" class=\"ajax-sign-in\"" if !signed_in? %>>접수/배송확인</a></li>
 				<li class="cscenter"><a href="/pages/cscenter">고객센터</a></li>
 			</ul>
 		</div>

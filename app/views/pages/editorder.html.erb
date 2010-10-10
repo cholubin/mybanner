@@ -1,6 +1,6 @@
 <div id="edit-order-form">
 	<h3>편집의뢰 신청서</h3>
-	<p>고객님께서 직접 편집할 시간이 없거나, 사용법이 어려운 경우 편집의뢰를 할 수 있습니다.</p>
+	<p class="description">고객님께서 직접 편집할 시간이 없거나, 사용법이 어려운 경우 편집의뢰를 할 수 있습니다.</p>
 	<form action="### 편집의뢰 등록주소 ###" method="post">
 		<fieldset class="designinfo">
 			<legend>디자인/사이즈 선택</legend>
@@ -11,7 +11,7 @@
 				<label for="order-designcode">디자인번호</label> <input name="### 디자인번호 ###" id="order-designcode" type="text" readonly/>
 			</p>
 			<p>
-				<label for="order-size">기본사이즈</label> <input name="### 사이즈 ###" id="order-size" value="500" placeholder="가로" type="number"/>cm x <input name="### 사이즈 ###" id="order-size" value="90" placeholder="세로" type="number"/>cm
+				<label for="order-size-width">기본사이즈</label> <input name="### 사이즈 ###" id="order-size-width" value="500" placeholder="가로" type="number" size="4" maxlength="5"/>cm x <input name="### 사이즈 ###" id="order-size-height" value="90" placeholder="세로" type="number" size="4" maxlength="5"/>cm
 			</p>
 		</fieldset>
 		<fieldset class="memo">
@@ -26,9 +26,9 @@
 		<!-- 선결제 금액 필요시 -->
 		<div id="first-price">
 			<h4>선결제금액</h4>
-			<p class="price">### 선결제금액 ###원</p>
-			<p class="comment">선결제금액은 일종의 시안제작비로, 직접 편집시는 발생하지 않습니다.</p>
+			<p class="price">7,000원</p>
+			<p class="comment">선결제금액은 시안비로, <strong>직접 편집시</strong>는 발생하지 않습니다.</p>
 		</div>
-		<input type="submit" value="편집의뢰 신청">
+		<input type="submit" class="submit-button" value="편집의뢰 신청">
 	</form>
 </div>
