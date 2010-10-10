@@ -45,7 +45,7 @@ Rails::Initializer.run do |config|
   config.gem 'excelsior' 
   config.gem 'geokit'
   config.gem 'state_machine', :version => '0.9.4'
-  config.gem 'yajl-ruby', :version => '0.7.8'
+  config.gem 'yajl-ruby', :version => '0.7.8', :lib=>"yajl"
     
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
