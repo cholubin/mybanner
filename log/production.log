@@ -1432,3 +1432,28 @@ Processing MytemplatesController#index (for 127.0.0.1 at 2010-10-11 12:01:11) [G
 Rendering template within layouts/application
 Rendering mytemplates/mytemplate
 Completed in 90ms (View: 85 | 200 OK [http://localhost/mytemplates]
+
+
+Processing TempsController#index (for 127.0.0.1 at 2010-10-11 13:07:02) [GET]
+Rendering template within layouts/application
+Rendering temps/temp
+Completed in 185ms (View: 154 | 200 OK [http://localhost/temps]
+
+
+Processing PagesController#editorder (for 127.0.0.1 at 2010-10-11 13:07:05) [GET]
+  Parameters: {"id"=>"54"}
+Rendering template within layouts/ajax-load-page
+Rendering pages/editorder
+Completed in 63ms (View: 6 | 200 OK [http://localhost/pages/editorder?id=54]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-11 13:30:32) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 167ms (View: 15 | 200 OK [http://localhost/]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-10-11 13:30:33) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 15ms (View: 10 | 200 OK [http://localhost/]
