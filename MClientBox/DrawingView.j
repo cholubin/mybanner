@@ -15,6 +15,10 @@ gSideBottom = 2;
 gSideLeft = 1;
 gSideRight = 2;
 
+gLeftArrowKey = 37;
+gUpArrowKey = 38;
+gRightArrowKey = 39;
+gDownArrowKey = 40;
 
 @implementation GuideLine : CPView
 {
@@ -75,6 +79,7 @@ gSideRight = 2;
 	CGRect mResizeRect;
 	EditController mEditController;
 	CPArray mSelectedFrameList;
+	CPArray mMovingFrameList;
 	CPArray mStartFrameList;
 	
 	CPPoint mPointInView;
@@ -85,7 +90,7 @@ gSideRight = 2;
 	BOOL mDrawGuide;
 	BOOL mUseGrid;
 	BOOL mUseGuide;
-	
+	BOOL mMovingMode;
 	Knob mKnobGrabed;
 }
 
@@ -98,11 +103,13 @@ gSideRight = 2;
 		mHGuideList = [[CPArray alloc] init];
 		mSelectedFrameList = [[CPArray alloc] init];
 		mStartFrameList = [[CPArray alloc] init];
+		mMovingFrameList = [[CPArray alloc] init];
 		selectedFrame = nil;
 		mUseGrid = NO;
 		mDrawGrid = NO;
 		mUseGuide = NO;
 		mDrawGuide = NO;
+		mMovingMode = NO;
 
 //		var lRect = CPRectMake(100, 100, 100, 100);
 //		var lFrame = [[GraphicFrame alloc] initWithRect:lRect gid:0];
@@ -257,6 +264,7 @@ gSideRight = 2;
 {
 	mFocusedFrame = nil;
 	[mSelectedFrameList removeAllObjects];
+	[mMovingFrameList removeAllObjects];
 }
 - (void)drawRect:(CGRect)aRect
 {
@@ -290,7 +298,6 @@ gSideRight = 2;
 
 				// draw knobs
 				[lSelectedFrame drawKnobsOnView:self];
-				
 			}
 		}
 		if(mCreateFrame) {
@@ -302,7 +309,22 @@ gSideRight = 2;
 			[CPBezierPath setDefaultLineWidth:4];
 			[CPBezierPath strokeRect:mCreateFrame];
 		}
-		
+		if([mMovingFrameList count]) {
+			var i = 0;
+			var icnt = [mMovingFrameList count];
+			for(;i<icnt;i++) {
+				var lSelectedFrame = [mMovingFrameList objectAtIndex:i];
+				var lOrgRect = [lSelectedFrame rect];
+				var lScaledRect = [self scaledRectFrom:lOrgRect];
+				[[CPColor whiteColor] set];
+				[CPBezierPath setDefaultLineWidth:6];
+				[CPBezierPath strokeRect:lScaledRect];
+
+				[[CPColor colorWithRed:0 green:1 blue:0 alpha:0.3] set];
+				[CPBezierPath setDefaultLineWidth:4];
+				[CPBezierPath strokeRect:lScaledRect];
+			}
+		}
 		// float mGridStart;
 		// float mGridHeight;
 		// float mGridLeading;
@@ -369,9 +391,32 @@ gSideRight = 2;
         return YES; 
 } 
 
+- (void)sendSetFrameRequest
+{
+	mFrameGrabed = NO;
+	var frames_str = @"";
+	var i = 0;
+	var icnt = [mSelectedFrameList count];
+	var scaleFactor = [self scaleFactor];
+	for(;i<icnt;i++) {
+		var lSelectedFrame = [mSelectedFrameList objectAtIndex:i];
+		var lOrgRect = [lSelectedFrame rect];
+		var framestr = CPStringFromRect(lOrgRect);
+		var gid = [lSelectedFrame GID]; // mGID
+		if(i > 0) {
+			frames_str += "__GRAPHICSEP__";
+		}
+		frames_str += gid + "__GIDSEP__" + framestr;
+	}
+	
+	[[ProgressWindow sharedWindow] show];
+	[mEditController sendJSONRequestAndRefresh:@"SetFrames" data:frames_str];
+}
+
 - (void)keyDown:(CPEvent)anEvent	
 {
 	var keycode = [anEvent keyCode];
+	debugger;
 	if(keycode == 8) { // back space key
 		var frames_str = @"";
 		var i = 0;
@@ -390,6 +435,72 @@ gSideRight = 2;
 		[mEditController sendJSONRequestAndRefresh:@"DeleteGraphics" data:frames_str];
 		mFocusedFrame = nil;
 		[self setNeedsDisplay:YES];
+	}
+	else if(keycode >= 37 && keycode <= 40) { // Arrow Keys (Left,RIght,Up,Down)
+		if (!mMovingMode) {
+			mMovingMode = YES;
+			[mMovingFrameList removeAllObjects];
+			var i, icnt = [mSelectedFrameList count];
+			for(i=0;i<icnt;i++) {
+				var lSelectedFrame = [mSelectedFrameList objectAtIndex:i];
+				var lRect = [lSelectedFrame rect];
+				var lGID = [lSelectedFrame GID];
+				var lNewRect = CGRectMake(lRect.origin.x, lRect.origin.y, lRect.size.width, lRect.size.height);
+				var lMovingFrame = [[GraphicFrame alloc] initWithRect:lNewRect gid:lGID];
+				[mMovingFrameList addObject:lMovingFrame];
+			}
+		}
+		var inc = 1;
+		if([anEvent modifierFlags] == 131072)  {  // shift key only
+			inc = 10;
+		}
+		if(keycode == gLeftArrowKey) {
+			var i, icnt = [mMovingFrameList count];
+			for(i=0;i<icnt;i++) {
+				var lMovingFrame = [mMovingFrameList objectAtIndex:i];
+				var rect = [lMovingFrame rect];
+				rect.origin.x -= inc;
+			}
+		}
+		else if(keycode == gRightArrowKey) {
+			var i, icnt = [mMovingFrameList count];
+			for(i=0;i<icnt;i++) {
+				var lMovingFrame = [mMovingFrameList objectAtIndex:i];
+				var rect = [lMovingFrame rect];
+				rect.origin.x += inc;
+			}
+		}
+		else if(keycode == gUpArrowKey) {
+			var i, icnt = [mMovingFrameList count];
+			for(i=0;i<icnt;i++) {
+				var lMovingFrame = [mMovingFrameList objectAtIndex:i];
+				var rect = [lMovingFrame rect];
+				rect.origin.y -= inc;
+			}
+		}
+		else if(keycode == gDownArrowKey) {
+			var i, icnt = [mMovingFrameList count];
+			for(i=0;i<icnt;i++) {
+				var lMovingFrame = [mMovingFrameList objectAtIndex:i];
+				var rect = [lMovingFrame rect];
+				rect.origin.y += inc;
+			}
+		}
+		[self setNeedsDisplay:YES];
+	}
+	else if(keycode == 13 && mMovingMode) {
+		//[mSelectedFrameList removeAllObjects];
+		var i, icnt = [mMovingFrameList count];
+		for(i=0;i<icnt;i++) {
+			var lMovingFrame = [mMovingFrameList objectAtIndex:i];
+			var lSelectedFrame = [mSelectedFrameList objectAtIndex:i];
+			[lSelectedFrame setRect:[lMovingFrame rect]]
+//			[mSelectedFrameList addObject:lMovingFrame];
+		}
+		[mMovingFrameList removeAllObjects];
+		[self setNeedsDisplay:YES];
+		mMovingMode = NO;
+		[self sendSetFrameRequest];
 	}
 }
 
@@ -434,6 +545,11 @@ gSideRight = 2;
 	[[self window] makeFirstResponder:self];
 	if(![[self superview] editMode])
 		return;
+		
+	if([mMovingFrameList count]) {
+		return;
+	}
+		
 	if(![mEditController isWindowVisible]) {
 		if([mEditController selectedTool] == 1) {  // 1: image box create tool
 			var lPtInWindow = [anEvent locationInWindow];

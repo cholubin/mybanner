@@ -49,7 +49,7 @@ h1 { position: absolute; top: 36px; }
 #header #nav-quick a:link,#header #nav-quick a:visited { color: white; text-decoration: none; } 
 #header #nav-quick a:hover { text-decoration: underline !important }
 #header #nav-quick h3 { display: none;}
-#header #nav-quick ul { position: absolute; top: 0; right: 0; *zoom:1;}
+#header #nav-quick ul { background-image: url("/images/default/halfblack.png"); position: absolute; top: 8px; right: 0; *zoom:1; padding: 3px; border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
 #header #nav-quick ul:after {content:""; display:block; clear:both;}
 #header #nav-quick li { float: left; margin: 3px 7px; }
 
@@ -62,7 +62,8 @@ h1 { position: absolute; top: 36px; }
 
 #popup-view { border: 1px solid #999; display: none; background-color: White; position: absolute; z-index:100; overflow:hidden}
 #popup-closeButton { display:none; background-image: url('/images/default/button-close.png'); position: absolute;z-index:110;width:52px;height:20px;cursor:pointer}
-#ajaxloadpage { background: url("/images/default/block-popup-bg.png") repeat-x left top; padding: 0 20px; }
+.popup-order-view { position: absolute; z-index: 100; top: 30px; left: 20px; width: 600px; }
+#ajaxloadpage { background: url("/images/default/block-popup-bg.png") repeat-x left top white; padding: 0 20px; }
 #ajaxloadpage h3 { line-height: 59px; font-size: 18px;}
 #ajaxloadpage p { margin: 0; padding: 12px 0; }
 #ajaxloadpage fieldset { background-color: #eee; border: 1px solid #ccc; margin: 0; padding: 0; }
@@ -98,8 +99,8 @@ h1 { position: absolute; top: 36px; }
 
 /* 컨텐츠 섹션 시작 */
 
-#content { width: 960px; margin: 0 auto; position: relative; overflow: visible; background-color: white;}
-#main .content-layout { padding: 10px 190px 30px; width: 580px; min-height: 600px; height: auto !important; height: 600px; }
+#content { width: 960px; margin: 0 auto; position: relative; overflow: visible; background-color: white; min-height: 680px; height: auto !important; height: 680px;}
+#main .content-layout { padding: 10px 190px 30px; width: 580px; }
 
 /* > 사이드 섹션 시작 */
 #content .sideblock { background: url(/images/default/block-side-bg.png) no-repeat left bottom; }
@@ -111,7 +112,7 @@ h1 { position: absolute; top: 36px; }
 #content #category a.title:hover {  font-size: 16px;padding-left: 18px; background:  url(/images/default/category-title-icon-hover.png) no-repeat 2px center;  }
 #content #category ul li ul { border: 1px solid #ccc; background: white; margin: 5px 0; *zoom:1; padding: 5px; border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
 #content #category ul li ul:after {content:" "; display:block; clear:both;}
-#content #category ul li ul li { display: inline-block; font-size: 12px; padding: 0;margin: 2px; padding:0 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
+#content #category ul li ul li { display: inline-block; font-size: 11px; padding: 0;margin: 2px; padding:0 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
 #content #category ul li ul li:hover { background: #67991a; } #content #category ul li ul li:hover a { color: white;}
 #content #category ul li ul li:active { background: #b0681b; } #content #category ul li ul li:active a { color: white;}
 
@@ -197,7 +198,7 @@ h1 { position: absolute; top: 36px; }
 #footer-wrap h3 { display: none; }
 #footer-wrap ul { position: absolute; width: 580px; border-bottom: 1px solid #ddd; line-height: 22px; *zoom:1; left: 180px; top: 4px; padding-left: 5px; }
 #footer-wrap ul:after {content:""; display:block; clear:both;}
-#footer-wrap ul li {  float: left; padding: 0 40px 0 0; line-height: 22px; height: 22px;background: no-repeat left center; }
+#footer-wrap ul li {  float: left; padding: 0 30px 0 0; line-height: 22px; height: 22px;background: no-repeat left center; }
 #footer-wrap ul li strong { display: none; }
 #footer-wrap ul li.business-num1 { background-image: url("/images/default/copyright-business-num1.png"); padding-left: 78px }
 #footer-wrap ul li.business-num2 { background-image: url("/images/default/copyright-business-num2.png"); padding-left: 78px }

@@ -20,15 +20,15 @@
 	if(self) {
 	//	mImageView = [[SSIImageView alloc] initWithFrame:frame];
 		mImageView = [[CPImageView alloc] initWithFrame:frame];
-		//[mImageView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
 		[mImageView setImageScaling:CPScaleToFit];
 		[self addSubview:mImageView];
 		[mImageView release];
+		//[mImageView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
 		
 		 mDrawingView = [[DrawingView alloc] initWithFrame:frame];
-		// //[mDrawingView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
 		[self addSubview:mDrawingView];
 		[mDrawingView release];
+		// //[mDrawingView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
 		
 		mEditMode = YES;		
 		mScaleFactor = 1.0;
@@ -68,6 +68,7 @@
 
 - (void)setSpreadImage:(CPImage)anImage
 {
+	console.log("setSpreadImage");
 	if(anImage) {
 		[anImage setDelegate:self];
 	    if([anImage loadStatus] == CPImageLoadStatusCompleted)
@@ -139,11 +140,11 @@
 	lNewViewFrame.size = lNewImageFrame.size;
 	[self setFrame:lNewViewFrame];
 }
-
-- (void)imageDidLoad:(CPImage)anImage
+- (void)_imageDidLoad:(CPImage)anImage
 {
 	if(anImage != [mImageView image]) {
 		var lImageSize = [anImage size];
+		//console.log("lImageSize = "+lImageSize.width+","+lImageSize.height);
 		mImageSize = CGSizeMake(lImageSize.width, lImageSize.height);
 		// lImageSize.width = mImageSize.width * mScaleFactor;
 		// lImageSize.height = mImageSize.height * mScaleFactor;
@@ -176,11 +177,59 @@
 		
 		
 		[self setFrame:lNewViewFrame];
+		[lScrollView setNeedsDisplay:YES];
 		//[self setNeedsDisplay:YES];
 		//[self setCenter:[[self superview] center]];
     	
 	}
     [mImageView setImage:anImage];
+	[self setNeedsDisplay:YES];
+	[[ProgressWindow sharedWindow] hide];
+}
+
+- (void)imageDidLoad:(CPImage)anImage
+{
+	if(anImage != [mImageView image]) {
+		var lImageSize = [anImage size];
+		//console.log("lImageSize = "+lImageSize.width+","+lImageSize.height);
+		mImageSize = CGSizeMake(lImageSize.width, lImageSize.height);
+		//[mImageView setAutoresizingMask:CPViewWidthSizable | CPViewHeightSizable];
+
+		
+		var lSpreadSize = [mDrawingView spreadSize];
+		lImageSize.width = lSpreadSize.width * mScaleFactor;
+		lImageSize.height = lSpreadSize.height * mScaleFactor;
+		
+		var lNewImageFrame = CGRectMake(0, 0, 0, 0); 
+		lNewImageFrame.size = lImageSize;
+		
+		[mImageView setFrame:lNewImageFrame];
+		//console.log("mImageView = "+lNewImageFrame.size.width+","+lNewImageFrame.size.height);		
+		if(mDrawingView) {
+			[mDrawingView setFrame:lNewImageFrame];
+		}
+		var lNewViewFrame = [self frame];
+		lNewViewFrame.size = lNewImageFrame.size;
+		
+		var lScrollView = [self enclosingScrollView];
+		var lContentSize = [[lScrollView contentView] frame].size;
+		var xMargin = (lContentSize.width - lNewViewFrame.size.width) / 2.0;
+		var yMargin = (lContentSize.height - lNewViewFrame.size.height) / 2.0;
+		lNewViewFrame.origin.x = 0;
+		lNewViewFrame.origin.y = 0;
+		if(xMargin > 0) {
+			lNewViewFrame.origin.x = xMargin;
+		}
+		if(yMargin > 0) {
+			lNewViewFrame.origin.y = yMargin;
+		}
+		
+		
+		[self setFrame:lNewViewFrame];
+		[lScrollView setNeedsDisplay:YES];
+	}
+    [mImageView setImage:anImage];
+	[self setNeedsDisplay:YES];
 	[[ProgressWindow sharedWindow] hide];
 }
 

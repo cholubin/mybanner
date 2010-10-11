@@ -33,6 +33,11 @@ $(document).ready(function(){
 		ea = parseInt( $('#peice_'+id).val() );
 		unit_price = parseInt($('#unit_price_'+id).val());
 		$('#price_'+id).text(ea * unit_price);
+		
+		if($('#chk_'+id).attr("checked") == false){
+			$('#price_minus_'+id).val(ea * unit_price);
+			// alert($('#price_minus_'+id).val());
+		}
 		// alert(event.target.id);
 	});
 	
@@ -42,10 +47,11 @@ $(document).ready(function(){
 		// var ea = parseInt( $('#peice_'+id).val() );
 		temp_price = unit_price;
 		
+		
 		if($(this).attr("checked") == true){
 			total_price += temp_price;
 		}else{
-			total_price -= temp_price;
+			total_price -= parseInt($('#price_minus_'+id).val());
 		}
 		
 		$('#total_price').text(total_price + "원");
@@ -239,19 +245,20 @@ $(document).ready(function(){
 					end
 				%>
 				<tr id="<%= my.id.to_s %>" class="item">
-					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
+					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
 					<td class="edit-type"><%= Job_code.first(:code => my.job_code).name %></td>
 					<td class="design"><%= category_info%><br><span class="design-code">(<%= sn_num %>)</span><br/><span><%= Request_code.first(:code => my.feedback_code).name %></span>
 					<div class="action-select">
 						<ul>
-							<a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a>
-							<li class="edit"><a href="Javascript:popup('<%= my.id.to_s %>');">편집</a></li>
-							<li class="delete"><a href="### 삭제 ###" id="del_<%= my.id.to_s %>">삭제</a></li>
+							<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>"><img src="/images/content/button-cart-detail-out.png" alt="상세보기" id="button-cart-detail" width="55" height="71" /></a></li>
+							<li class="edit"><a href="### 웹탑 ###" onClick="popup('<%= my.id.to_s %>');"><img src="/images/content/button-cart-edit-out.png" alt="편집하기" id="button-cart-edit" width="55" height="71" /></a></li>
+							<li class="delete"><a href="### 삭제 ###" id="del_<%= my.id.to_s %>"><img src="/images/content/button-cart-delete-out.png" alt="삭제하기" id="button-cart-delete_<%= my.id.to_s %>" width="55" height="71" /></a></li>
 						</ul>
 					</div></td>
 					<td class="size"><%= my.size %></td>
 					<td class="price" id="price_<%= my.id.to_s %>"><%= Temp.get(my.temp_id).price %></td>
 					<input type="hidden" id="unit_price_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>">
+					<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>">
 					<td class="date"><%= my.updated_at.strftime('%y.%m.%d') %></td>
 					<td class="option">
 						<img src="/images/content/button-option-select-out.png" alt="button-option-select-out" width="103" height="27" class="button" />
@@ -262,8 +269,8 @@ $(document).ready(function(){
 								<li><label for="piece" >개수</label> <input id="peice_<%= my.id.to_s %>" name="piece[]" type="number" value="1"/>ea</li>
 								<!-- 옵션 반복 시작 -->
 								<li>
-									<label>옵션선택</label>
-									<select name="select_main_<%= my.id.to_s %>">
+									<label>소재</label>
+									<select name="select_main_<%= my.id.to_s %>" class="basic_select">
 										<option value="" selected>선택해주세요.</option>
 										<option value="">------------------</option>
 										<!-- 옵션내용 반복 시작 -->
@@ -276,6 +283,9 @@ $(document).ready(function(){
 										
 										<!-- 옵션내용 반복 끝 -->
 									</select>
+								</li>
+								<li>
+									<label>후가공</label>
 									<select name="select_sub_<%= my.id.to_s %>">
 										<option value="" selected>선택해주세요.</option>
 										<option value="">------------------</option>

@@ -21,6 +21,7 @@ var SliderToolbarItemIdentifier = "SliderToolbarItemIdentifier",
     UseGridIdentifier = "UseGridIdentifier",
     UseGuideIdentifier = "UseGuideIdentifier",
     CharStyleIdentifier = "CharStyleIdentifier",
+	ChangeTemplateSizeIdentifier = "ChangeTemplateSizeIdentifier",
     FontSizeIdentifier = "FontSizeIdentifier";
 //var CreateRectBoxIdentifier = "CreateRectBoxIdentifier";
 
@@ -46,6 +47,11 @@ gDocItemSizeHeight = 90;
 	@outlet CPPopupButton mCharStyleButton;
 	@outlet CPPopupButton mFontSizeButton;
 	@outlet EditController mEditController;
+	@outlet CPView mDocSizeView;
+	@outlet CPTextField mDocSizeField;
+	@outlet CPWindow mDocSizeWin;
+	@outlet CPTextField mDocWidthField;
+	@outlet CPTextField mDocHeightField;
 	
 	CPArray toolItemImagesNormal;
 	CPArray toolItemImagesSelect;
@@ -60,13 +66,16 @@ gDocItemSizeHeight = 90;
 	
 	CPString mCurDocPath;
 	CPString mLocalDocPath;
+	var mDocWidth;
+	var mDocHeight;
     CPURLConnection mCurDocImageListCon;
 	CPURLConnection mFrameListCon;
     CPURLConnection mDocumentInfoCon;
 	CPURLConnection mCurDocImageRefreshCon;
 	CPURLConnection mGeneratePDFCon;
 	CPURLConnection mNewPreviewCon;
-	
+	CPURLConnection mSetDocumentSizeCon;
+	CPURLConnection mSetDocumentSizeFrameListCon;
 	CPNotificationCenter		mNotiCenter;
 }
 
@@ -176,6 +185,9 @@ gDocItemSizeHeight = 90;
 	[mScrollView removeFromSuperview];
 	[contentView addSubview:mScrollView];
 	
+	[mDocSizeField setValue:CPRightTextAlignment forThemeAttribute:@"alignment"];
+	[mDocWidthField setValue:CPRightTextAlignment forThemeAttribute:@"alignment"];
+	[mDocHeightField setValue:CPRightTextAlignment forThemeAttribute:@"alignment"];
 	
 	// If use spread list view (spread_list=YES)
 	///////////////////////////////////////////////////////////////////////////
@@ -445,6 +457,7 @@ gDocItemSizeHeight = 90;
 			var lRect = CPRectMake(lLeft, lTop, lWidth, lHeight);
 			var lGFrame = [[GraphicFrame alloc] initWithRect:lRect gid:lGID];
 			[drawingView addFrame:lGFrame];
+			[lGFrame release]
 		}
 	}
 	[drawingView setNeedsDisplay:YES];
@@ -466,7 +479,6 @@ gDocItemSizeHeight = 90;
 
 - (void)loadChatStyleList:(CPString)data
 {
-	debugger;
 	var lStyleList = [data componentsSeparatedByString:@"\n"];
 	var i, icnt = [lStyleList count];
 	for(i=0;i<icnt;i++) {
@@ -484,7 +496,31 @@ gDocItemSizeHeight = 90;
 		
 		[mCharImageList addObject:lCharImg];
 	}
-	[mToolbar setDelegate:self];
+//	[mToolbar setDelegate:self];
+}
+
+- (void)loadDocumentInfoETC:(CPString)data
+{
+	var lStyleList = [data componentsSeparatedByString:@"\n"];
+	var i, icnt = [lStyleList count];
+	var info_idx = 0;
+	for(i=0;i<icnt;i++) {
+		var lInfoStr = [lStyleList objectAtIndex:i];
+		if([lInfoStr length] == 0)
+			continue;
+		if(info_idx == 0) {
+			var size = CGSizeFromString(lInfoStr);
+			if(size) {
+				mDocWidth = size.width;
+				mDocHeight = size.height;
+				[mDocWidthField setFloatValue:mDocWidth];
+				[mDocHeightField setFloatValue:mDocHeight];
+				var lSizeStr = [CPString stringWithFormat:@"%dmm X %dmm",mDocWidth,mDocHeight];
+				[mDocSizeField setStringValue:lSizeStr];
+			}
+		}
+		info_idx ++;
+	}
 }
 
 - (void)loadDocumentInfos:(CPString)data
@@ -495,11 +531,15 @@ gDocItemSizeHeight = 90;
 		[self loadFrameList:[lInfoList objectAtIndex:1]];
 		if([lInfoList count] >= 3) {
 			[self loadChatStyleList:[lInfoList objectAtIndex:2]];
+			if([lInfoList count] >= 4) {
+				[self loadDocumentInfoETC:[lInfoList objectAtIndex:3]];
+			}
 		}
 	}
 	else {
 		[self loadFrameList:[lInfoList objectAtIndex:0]];
 	}
+	[mToolbar setDelegate:self];
 }
 
 - (void)changeScale:(id)sender
@@ -514,6 +554,46 @@ gDocItemSizeHeight = 90;
 {
 	
 }
+
+- (@action)changeDocSize:(id)sender
+{
+	[mDocWidthField setFloatValue:mDocWidth];
+	[mDocHeightField setFloatValue:mDocHeight];
+	[[CPApplication sharedApplication] runModalForWindow:mDocSizeWin];
+//	[mDocSizeWin makeKeyAndOrderFront:self];
+}
+
+- (@action)applyDocSize:(id)sender
+{
+	[[CPApplication sharedApplication] stopModal]
+	[mDocSizeWin orderOut:self];
+	var new_size = CGSizeMakeZero();
+	mDocWidth = [mDocWidthField floatValue];
+	mDocHeight = [mDocHeightField floatValue];
+	new_size.width = mDocWidth;
+	new_size.height = mDocHeight;
+	var size_str = CPStringFromSize(new_size);
+	var new_SizeStr = [CPString stringWithFormat:@"%dmm X %dmm",mDocWidth,mDocHeight];
+	[mDocSizeField setStringValue:new_SizeStr];
+	[mDocSizeView setNeedsDisplay:YES];
+	[[ProgressWindow sharedWindow] show];
+	mSetDocumentSizeCon = [mEditController sendJSONRequest:@"SetDocumentSize" data:size_str  delegate:self];
+	//mIsVisible = NO;
+}
+
+- (@action)cancelDocSize:(id)sender
+{
+	[[CPApplication sharedApplication] stopModal]
+	[mDocSizeWin orderOut:self];
+	//mIsVisible = NO;
+}
+- (void)windowWillClose:(id)aWin
+{
+ 	if(aWin == mDocSizeWin) {
+		//mIsVisible = NO;
+		
+ 	}
+ }
 
 - (@action)generatePDF:(id)sender
 {
@@ -594,7 +674,6 @@ gDocItemSizeHeight = 90;
 
 - (@action)changeFontSize:(id)sender
 {
-	debugger;
 	var size_str = [[sender selectedItem] title];
 	if(size_str == " 0")
 		return;
@@ -647,6 +726,7 @@ gDocItemSizeHeight = 90;
 	}
 	else if(connection === mFrameListCon) {		
 		[self loadFrameList:data];
+		[[mSpreadView drawingView] setNeedsDisplay:YES];
 	}
 	else if( connection === mDocumentInfoCon) {
 		//alert("framelist = "+data);
@@ -660,8 +740,20 @@ gDocItemSizeHeight = 90;
 	else if( connection === mGeneratePDFCon) {  
 		[[ProgressWindow sharedWindow] hide];
 		alert("PDF generated successfully.");
+	}  
+	else if( connection === mSetDocumentSizeCon) {
+		var lSpreadIdx = [[mSpreadListView selectionIndexes] firstIndex];
+		if(lSpreadIdx >= 0) {
+			var lFilename = [mCurDocPath lastPathComponent];
+		    var lDocOpenURL = [CPString stringWithFormat:"%@/request_mlayout?requested_action=FrameList&docname=%@&userinfo=%d",gBaseURL ,lFilename,lSpreadIdx];
+		    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
+		    mSetDocumentSizeFrameListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
+		}
 	}
-	
+	else if( connection === mSetDocumentSizeFrameListCon) {  
+		[self loadFrameList:data];
+		[self refreshSpreadPreview];
+	}  
 }
 
 
@@ -671,8 +763,8 @@ gDocItemSizeHeight = 90;
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
    return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
- UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, FontSizeIdentifier, 
- CharStyleIdentifier, SliderToolbarItemIdentifier];
+ UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
+ FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
 }
 //this delegate method returns the actual toolbar item for the given identifier
 
@@ -853,7 +945,12 @@ gDocItemSizeHeight = 90;
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
         [toolbarItem setTag:11];
     }
-
+    else if (anItemIdentifier == ChangeTemplateSizeIdentifier) {
+        [toolbarItem setLabel:"Document Size"];
+      	[toolbarItem setView:mDocSizeView];
+        [toolbarItem setMinSize:CGSizeMake(221, 30)];
+        [toolbarItem setMaxSize:CGSizeMake(221, 30)];
+	}
 	
     return toolbarItem;
 }
@@ -865,6 +962,10 @@ gDocItemSizeHeight = 90;
 	    mNewPreviewCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 }
 
+- (void)refreshResize:(id)sender
+{
+	[self sendFrameListRequest];
+}
 
 -(void)collectionViewDidChangeSelection:(CPCollectionView)collectionView
 {

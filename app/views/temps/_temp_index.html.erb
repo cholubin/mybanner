@@ -16,6 +16,21 @@ $(document).ready(function(){
 	});
 });
 
+$('#req_edit_submit').live("click", function(){
+	if (window.confirm("선택하신 디자인으로 편집의뢰를 신청하시겠니까?")){
+		$.ajax({
+			data:'feedback_memo='+$('#feedback-memo').val()+'&temp_id='+ $('#tempid').val() + '&edit=req', 
+			dataType:'script', 
+			type:'post', 
+			url:'/temps/create_mytemp',
+			success: function(request){
+				alert('신청이 완료되었습니다.\n디자인바구니에서 확인하실 수 있습니다.');
+				$('#popup-closeButton').click();
+			}
+		});
+	}
+})	
+	
 </script>
 
 <div id="design" class="content-layout">
@@ -40,7 +55,7 @@ $(document).ready(function(){
 	
 %>
 		<div class="article">
-		<a class="preview"><img src="<%= temp_image_path %>" width="578px"></a>
+		<a class="preview"><img src="<%= temp_image_path %>" width="<%= (my.is_col) ? "130" : "578" %>px"></a>
 		<ul>
 			<li class="designcode"><%= code %></li>
 			<li class="item"><span>품목 :</span> <%=my.category%><%= "(" + my.subcategory + ") " if my.subcategory != nil %></li>
@@ -48,7 +63,7 @@ $(document).ready(function(){
 			<li class="price"><span>가격 :</span> <%=my.price%></li>
 			<% if signed_in? %>
 			<li  class="self-edit"><a id="<%= my.id.to_s %>">직접편집하기</a><%#= link_to "직접편집하기", '/temps?temp_id='+my.id.to_s+'&edit=y', :confirm => '디자인바구니에 담으며 바로 편집하시겠습니까?',  :method => :post %></li>
-			<li class="order-edit"><a href="/pages/editorder?id=<%= my.id.to_s %>">편집의뢰하기</a></li>
+			<li class="order-edit"><a href="/pages/editorder?id=<%= my.id.to_s %>" class="ajax-edit-order">편집의뢰하기</a></li>
 			<%else %>
 			<li class="self-edit"><a href="/login">직접편집하기</a></li>
 			<li class="order-edit"><a href="/login">편집의뢰하기</a></li>

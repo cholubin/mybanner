@@ -207,9 +207,27 @@ class TempsController < ApplicationController
     
     edit = params[:edit]
 
+    
     copy_template_mytemp(@mytemplate, @mytemplate.temp_id)    
     # if @mytemplate != nil && @mytemplate.save && @user.save        
 
+    if edit == "req"
+      @mytemplate.job_code = 1
+      feedback_memo = params[:feedback_memo]
+      
+      # jobboard 생성 
+      bbs = Jobboard.new()
+      bbs.user_id = current_user.id
+      bbs.content = feedback_memo
+      bbs.feedback_code = 0
+
+      bbs.mytemp_id = @mytemplate.id
+      bbs.save
+      
+    else
+      @mytemplate.job_code = 0
+    end
+    
     if @mytemplate.save              
       begin   
         # 템플릿 복사와 동시에 편집하는 경우
@@ -231,7 +249,7 @@ class TempsController < ApplicationController
                     
         # 템플릿 복사만 하는 경우
         else
-          redirect_to :action => 'index'          
+          render :nothing => true
         end
 
       rescue

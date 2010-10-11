@@ -72,6 +72,7 @@ function mainImageChange(num) {
 }
 
 
+
 $(function () {
 //	$("a[href=/login]").live("click", function() { popupView(250,390,$(this).attr("href")); return false });
 //	$("a[href=/users/new]").live("click", function() { popupView(660,350,$(this).attr("href")); return false });
@@ -82,6 +83,16 @@ $(function () {
 	$("#main-button li:eq(1)").click(function() { mainImageChange(1) });
 	$("#main-button li:eq(2)").click(function() { mainImageChange(2) });
 	
+	$("#designcart-list td.design").live("click",function (){ $(".action-select ul",$(this)).fadeIn("fast")});
+	$(".action-select ul").mouseleave(function() {$(this).fadeOut("fast")});
+	
+	
+	$("#designcart-list td.option img").live("click",function (){ $(".option-select ul",$(this).parent()).fadeIn("fast")});
+	$(".option-select ul").mouseleave(function() {$(this).fadeOut("fast")});
+	$(".option-select select").live("change",function() { if($("select:eq(0)",$(this).parents("ul")).val() == "" || $("select:eq(1)",$(this).parents("ul")).val() == "" || $(".piece",$(this).parents("ul")).val() == "" || $(".piece",$(this).parents("ul")).val() == 0) { $("img",$(this).parents("td.option")).attr("src","/images/content/button-option-select-out.png")} else {$("img",$(this).parents("td.option")).attr("src","/images/content/button-option-seleted-out.png")}});
+	$(".option-select .piece").live("change",function() { if($("select:eq(0)",$(this).parents("ul")).val() == "" || $("select:eq(1)",$(this).parents("ul")).val() == "" || $(".piece",$(this).parents("ul")).val() == "" || $(".piece",$(this).parents("ul")).val() == 0) { $("img",$(this).parents("td.option")).attr("src","/images/content/button-option-select-out.png")} else {$("img",$(this).parents("td.option")).attr("src","/images/content/button-option-seleted-out.png")}})
+	$(".option-select .submit-button").live("click",function() { $(this).parents("ul").fadeOut("fast")});
+	$("#designcart-list td").hover(function (){ $(this).parent().css("background-color","#eee");},function (){$(this).parent().css("background-color","#fff");  $(".action-select ul",$(this)).fadeOut("fast")});
 	$("a[href='/pages/guide']").live("click", function() { alert("현재 사용방법을 쉽게 정리한\n메뉴얼 페이지를 준비중입니다. ^-^"); return false; });
 	$("a[href='/pages/cscenter']").live("click", function() { alert("고객센터는, 각 솔루션이용 업체별 게시판, \n개인정보관리정책, 이용약관등을 명시하고 있습니다.\n현재 준비중입니다."); return false; });
 	$("body").delegate(".ajax-sign-in","click", function() { popupView(250,390,$(this).attr("href")); return false });
