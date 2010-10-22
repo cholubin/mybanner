@@ -1,3 +1,4 @@
+
 <%
 if  params[:id] != nil
 	temp = Temp.get(params[:id].to_i)  
@@ -16,11 +17,12 @@ if  params[:id] != nil
 	
 end
 %>
-
+<script type="text/javascript" src="/js/editor.js"></script>
 <div id="edit-order-form">
 	<h3>편집의뢰 신청서</h3>
 	<p class="description">고객님께서 직접 편집할 시간이 없거나, 사용법이 어려운 경우 편집의뢰를 할 수 있습니다.</p>
-	<form action="### 편집의뢰 등록주소 ###" method="post">
+	<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile"} ) do -%>
+		<input type="hidden" name="edit" value="req">
 		<fieldset class="designinfo">
 			<legend>디자인/사이즈 선택</legend>
 			<p>
@@ -36,10 +38,10 @@ end
 		<fieldset class="memo">
 			<legend>요청사항입력</legend>
 			<p>
-				<label for="feedback-memo">요청사항</label> <textarea name="### 요청사항 내용 ###" id="feedback-memo"></textarea>
+				<label for="feedback-memo">요청사항</label> <textarea name="feedback_memo" id="feedback-memo"></textarea>
 			</p>
 			<p>
-				<label for="feedback-file">파일첨부</label> <input name="###  ###" id="feedback-file" type="file"/>
+				<label for="feedback-file">파일첨부</label> <input name="feedback_file" id="feedback_file" type="file"/>
 			</p>
 		</fieldset>
 		<!-- 선결제 금액 필요시 -->
@@ -49,6 +51,6 @@ end
 			<p class="comment">선결제금액은 시안비로, <strong>직접 편집시</strong>는 발생하지 않습니다.</p>
 		</div>
 		<input id="req_edit_submit" type="button" class="submit-button" value="편집의뢰 신청">
-		<input id="tempid" type="hidden" value="<%= temp.id.to_s %>">
-	</form>
+		<input name="temp_id" id="tempid" type="hidden" value="<%= temp.id.to_s %>">
+	<%end %>
 </div>

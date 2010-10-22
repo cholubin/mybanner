@@ -4,11 +4,11 @@ class MyordersController < ApplicationController
 
   def index
     if signed_in? 
-      @menu = "home"  
+      @menu = "myorder"  
       @board = "myorder"
       @section = "index"
      
-      @mycarts = Myorder.all(:user_id => current_user.id)
+      @myorders = Myorder.all(:user_id => current_user.id, :order => [:updated_at.desc])
       render 'myorder'
     else
       redirect_to '/'
@@ -16,14 +16,15 @@ class MyordersController < ApplicationController
   end
   
   def show
-    @menu = "home"
+    @menu = "myorder"
     @board = "myorder"
     @section = "show"
     
-    @myorder = Myorder.all(:user_id => current_user.id)   
+    @myorder = Myorder.get(params[:id].to_i)   
     
     render 'myorder'    
   end
 
+  
   
 end

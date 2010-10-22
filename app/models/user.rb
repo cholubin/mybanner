@@ -30,6 +30,7 @@ class User
   
   
   has n, :mybooks
+  has n, :myorders
   has n, :mytemplates
   has n, :freeboards
   has n, :myimages

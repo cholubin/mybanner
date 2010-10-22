@@ -1,19 +1,38 @@
-<!-- 요청사항 표시 반복부분 시작 -->
+<table>
 <%
 	mytemp_id = @mytemp_id
-	jbbs = Jobboard.all(:user_id => current_user.id, :mytemp_id => mytemp_id, :order => [:created_at.desc]) 
-num = jbbs.count
-	jbbs.each do |bbs|
+	jbbs = Jobboard.all(:user_id => current_user.id, :mytemp_id => mytemp_id, :order => [:created_at.desc])
+ 
+	num = jbbs.count
+	if jbbs.count > 0
+		jbbs.each do |bbs|
+			if bbs.req_file != nil
+				file_path = "#{HOSTING_URL}user_files/#{current_user.userid}/req_files/" + bbs.req_file
+				ext_name = File.extname(bbs.req_file).gsub(".",'')
+				req_file = "<a href='#{file_path}' class='#{ext_name}'>#{bbs.original_filename}</a>"
+			else
+				req_file = ""	
+			end
 %>
+
 <tr>
 	<td class="number"><%= num %></td>
 	<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
 	<td class="memo"><a href="### 내용보기 페이지로 ###"><%= bbs.content %></a></td>
 	<td class="name"><%= User.get(bbs.user_id).name %></td>
 	<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
-	<td class="file"></td>
+	<td class="file"><%= req_file %></td>
 </tr>
 <%
-		num -= 1
-	end
+			num -= 1
+ 		end
 %>
+</table>
+<%
+ 	else
+		%>
+			<tr>
+				<td colspan="6" id="error-screen"><img src="/images/error/error-empty-comment.gif" alt="작성된 요청사항이 없습니다." width="578" height="214" /></td>
+			</tr>
+		<% end %>
+

@@ -3,9 +3,7 @@
 class MytemplatesController < ApplicationController
   before_filter :authenticate_user!
   
-
-  # GET /mytemplates
-  # GET /mytemplates.xml
+  
   def index
 
     #basic_photo 폴더링크가 없으면 생성한다.
@@ -47,6 +45,49 @@ class MytemplatesController < ApplicationController
     @tempfolders = Tempfolder.all(:user_id => current_user.id)
     render 'mytemplate'
   end
+  
+
+  def create_order
+  
+  #주문 기본정보 생성
+  @myorder = Myorder.new()
+  @myorder.total_price = params[:total_price].to_i
+  @myorder.receive_type = params[:receive_type]
+  @myorder.pay_method = params[:pay_m]
+  @myorder.receive_note = params[:receive_note]
+  @myorder.total_price = params[:total_price]
+  @myorder.receive_name = params[:receive_name]
+  @myorder.order_tel = params[:receive_tel]
+  @myorder.order_mobile = params[:receive_mobile]
+  @myorder.order_zip = params[:zip_code]
+  @myorder.order_addr1 = params[:address1]
+  @myorder.order_addr2 = params[:address2]
+  @myorder.user_id = current_user.id
+  
+  order_cnt = Myorder.all(:user_id => current_user.id).count + 1
+  #주문번호 (월일-사용자별 주문전체횟수 +1) 
+  @order_no = Date.today.strftime('%y%m%d') + "-" + order_cnt.to_s
+  
+  
+  @myorder.order_no = @order_no
+  @myorder.items = params[:ids]
+  
+
+  begin
+    if @myorder.save
+      render :text => @order_no
+    else
+      puts_message @myorder.errors.to_s
+      render :text => "주문에러!"
+    end
+  rescue
+    # puts_message @myorder.errors.to_s
+    render :text => "주문에러!"
+  end
+  
+
+  end
+
 
   def mytemplate_order
 
@@ -267,7 +308,7 @@ class MytemplatesController < ApplicationController
 
   def jobboard_create
     mytemp_id = params[:id].to_s
-    content = params[:content]
+    content = params[:feedback_memo]
     feedback_code = params[:feedback_code].to_i
 
     bbs = Jobboard.new()
@@ -282,13 +323,38 @@ class MytemplatesController < ApplicationController
     bbs.mytemp_id = mytemp_id
 
     if bbs.save
+      if params[:feedback_file] != nil
+        req_file = params[:feedback_file]
+        #파일업로드
+        dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+        FileUtils.mkdir_p dir if not File.exist?(dir)
+        ReqfileUploader.store_dir = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/req_files/"
+
+        uploader = ReqfileUploader.new
+        
+        begin
+          uploader.store!(req_file)
+
+          file_ext = File.extname(req_file.original_filename)
+          file_name = bbs.id.to_s
+          bbs.req_file = bbs.id.to_s + file_ext
+          bbs.original_filename = req_file.original_filename
+          if bbs.save
+            puts_message "첨부파일 업로드 완료!"
+          end
+        rescue
+          puts_message "첨부파일 업로드 실패!"
+        end
+      end
+      
       puts_message "요청게시글 등록완료!"
     else
       puts_message "error!"
     end
 
     @mytemp_id = mytemp_id
-    render :partial => "jbbs_body", :object => @mytemp_id
+    
+    render :partial => 'jbbs_body', :object => @mytemp_id
   end    
 
 
@@ -303,6 +369,21 @@ class MytemplatesController < ApplicationController
           if File.exist?(mytemplate.path.force_encoding('UTF8-MAC')) 
             FileUtils.remove_entry_secure mytemplate.path.force_encoding('UTF8-MAC') 
           end
+          
+          # jobboard req_file 삭제
+          req_file_dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+          @jobboards = Jobboard.all(:mytemp_id => mytemplate.id)
+          
+          if @jobboards.count > 0
+            @jobboards.each do |j|
+              if File.exist?(req_file_dir + j.req_file)
+                FileUtils.rm_rf req_file_dir + j.req_file
+              end
+            end
+            
+            @jobboards.destroy
+          end
+          
           
           if mytemplate.destroy
             puts_message "마이템플릿 삭제 완료!"
@@ -329,6 +410,25 @@ class MytemplatesController < ApplicationController
         if File.exist?(mytemplate.path.force_encoding('UTF8-MAC')) 
           FileUtils.remove_entry_secure mytemplate.path.force_encoding('UTF8-MAC') 
         end
+        
+        # jobboard req_file 삭제
+        req_file_dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+        @jobboards = Jobboard.all(:mytemp_id => mytemplate.id)
+        
+        if @jobboards.count > 0
+          @jobboards.each do |j|
+            if j.req_file != nil
+              if File.exist?(req_file_dir + j.req_file)
+                FileUtils.rm_rf req_file_dir + j.req_file
+              end
+            end
+          end
+          
+          if @jobboards.destroy
+            puts_message "jobboard 삭제완료!"
+          end
+        end
+        
       end
     rescue
       puts_message "Error! in progress of mytemplate file deletion."
@@ -341,12 +441,6 @@ class MytemplatesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  def create_order
-    puts_message "good"
-    
-    render :nothing => true
-  end   
   
   
     #::PRIVATE METHODS:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::    

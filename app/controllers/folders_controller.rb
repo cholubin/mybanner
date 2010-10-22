@@ -4,7 +4,7 @@ class FoldersController < ApplicationController
   # GET /folders
   # GET /folders.xml
   def index
-    @folders = Folder.all
+    @folders = Folder.all(:user_id => current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -39,121 +39,68 @@ class FoldersController < ApplicationController
     @folder = Folder.find(params[:id])
   end
 
-  # POST /folders
-  # POST /folders.xml
-  def create
-    @folder = Folder.new(params[:folder])
-
-    respond_to do |format|
-      if @folder.save
-        flash[:notice] = 'Folder was successfully created.'
-        format.html { redirect_to(@folder) }
-        format.xml  { render :xml => @folder, :status => :created, :location => @folder }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @folder.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-  
   def create_folder
+    folder_name = params[:folder_name]
+    
+    folder_count = Folder.all(:user_id => current_user.id, :name => folder_name).count
+    total_folder_count = Folder.all(:user_id => current_user.id).count
+    if folder_count < 1
+      if total_folder_count < 13
+        @folder = Folder.new()
+        @folder.name = folder_name
 
-    if Folder.all(:name => params[:folder_name]).count < 1
-      @folder = Folder.new()
-      @folder.name = params[:folder_name]
+        @folder.user_id = current_user.id
 
-      @folder.user_id = current_user.id
+        @folder.save
 
-      basic_path = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/images/"
-
-
-      dir = basic_path + @folder.name
-
-      if !File.exist?(dir)
-       FileUtils.mkdir_p dir if not File.exist?(dir)
-       FileUtils.chmod 0777, dir
-
-       @folder.save
+        render :text => "success_" + @folder.id.to_s
+      else
+        render :text => "fail_" + "폴더는 13개 까지만 생성하실 수 있습니다!"
       end
+      
     else
       puts_message "이미 생성된 폴더명입니다!"
-      @already_done = true
+      render :text => "fail_" + "이미 생성된 폴더명입니다!"
     end
 
-    @folders = Folder.all(:user_id => current_user.id.to_s)
          
-    render :update do |page|
-      page.replace_html 'folder', :partial => 'folder', :object => @folders, :object => @already_done
-      # page.visual_effect :Opacity, "folder", :from => 0.5, :to => 1.0, :duration => 2      
-      page.replace_html 'folder_select', :partial => 'folder_select', :object => @folders     
-    end
   end  
 
   def update_folder
         
     @folder = Folder.get(params[:folder_id].to_i)
-    ori_folder_name = @folder.name
-    ren_folder_name = params[:folder_name]    
-    @folder.name = ren_folder_name
+    folder_name = params[:folder_name]    
+
+    @folder.name = folder_name
     
-    basic_path = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/images/"
-    folder_path = basic_path + @folder.name
-
   	if @folder.save
-  	  File.rename basic_path + ori_folder_name, basic_path  + ren_folder_name #original file
-  	  
-  	  @myimages = Myimage.all(:folder => ori_folder_name)
-
-      @myimages.each do |m|
-  	    m.folder = ren_folder_name        
-  	    m.save        
-      end
-
+  	  render :text => "success"
+  	else
+  	  render :text => "fail"
     end
     
-    @folders = Folder.all(:user_id => current_user.id.to_s)
-        
-    render :update do |page|
-      page.replace_html 'folder', :partial => 'folder', :object => @folders
-      # page.visual_effect :Opacity, "folder", :from => 0.5, :to => 1.0, :duration => 2            
-      page.replace_html 'folder_select', :partial => 'folder_select', :object => @folders     
-    end    
   end    
 
   def destroy_folder
 
     folder_id = params[:folder_id]    
     @folder = Folder.get(folder_id)
-    folder_name = @folder.name
     
-    basic_path = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/images/"
-    folder_path = basic_path + @folder.name
-
-    # # basic_photo 폴더는 삭제되지 않도록 한다.
-    # if @folder.name != "basic_photo"
-      if @folder.destroy
-      
-        #폴더 삭제 ========================================================
-        if File.exist?(folder_path)
-          FileUtils.rm_rf folder_path
-        end
-      
-        #이미지 삭제 ========================================================      
-    	  @myimages = Myimage.all(:folder => folder_name)
+    if @folder.destroy
+        #이미지 폴더를 기본폴더로 바꾼다.============================================      
+    	  @myimages = Myimage.all(:folder_id => @folder.id)
         @img_cnt = @myimages.count
         @myimages.each do |m|
-    	    m.destroy        
-        end      
-      end
-    # end
-    
-    @folders = Folder.all(:user_id => current_user.id.to_s)
-
-    render :update do |page|
-      page.replace_html 'folder', :partial => 'folder', :object => @folders, :object => @img_cnt
-      # page.visual_effect :Opacity, "folder", :from => 0.5, :to => 1.0, :duration => 2            
-      page.replace_html 'folder_select', :partial => 'folder_select', :object => @folders     
+    	    m.folder_id = 9999
+    	    m.folder_name = "photo"
+        end
+        @myimages.save      
+        
+       render :text => "success"
+    else
+      render :text => "fail"   
     end
+
   end
     
 end

@@ -5,10 +5,9 @@
 			<h2>사이트 메뉴</h2>
 			<ul>
 				<li class="guide"><a href="/pages/guide">이용안내</a></li>
-				<li class="template"><a href="/temps">제품/디자인 보기</a></li>
-				<li class="designcart"><a href="/mytemplates"<%=" class=\"ajax-sign-in\"" if !signed_in? %>>디자인바구니</a></li>
-				<!-- <li class="order-delivery"><a href="/myorders"<%=" class=\"ajax-sign-in\"" if !signed_in? %>>접수/배송확인</a></li> -->
-				<li class="order-delivery"><a href="Javascript:alert('세부사항이 결정되면 결재모듈이 탑제됩니다.');">접수/배송확인</a></li>
+				<li class="template"><a href="/temps"<%=(@menu == "template")?" class=\"on\"":nil%>>제품/디자인 보기</a></li>
+				<li class="designcart"><a href="/mytemplates"<%=" class=\"ajax-sign-in\"" if !signed_in? %><%=(@menu == "mytemplate")?" class=\"on\"":nil%>>디자인바구니</a></li>
+				<li class="order-delivery"><a href="/myorders"<%=" class=\"ajax-sign-in\"" if !signed_in? %><%=(@menu == "myorder")?" class=\"on\"":nil%>>접수/배송확인</a></li>
 				<li class="cscenter"><a href="/pages/cscenter">고객센터</a></li>
 			</ul>
 		</div>
@@ -16,7 +15,8 @@
 			<h3>빠른메뉴</h3>
 			<ul>
 				<li class="order"><a href="/pages/order">직접 접수하기</a></li>
-				<li class="manual"><a href="/pages/manual">사용방법 안내</a></li>
+				<li class="manual"><a href="/pages/about">회사소개</a></li>
+				<li class="manual"><a href="/pages/map">연락처 및 오시는 길</a></li>
 				<li class="manual"><a href="/pages/sitemap">사이트맵</a></li>
 			</ul>
 		</div>

@@ -24,7 +24,9 @@ class Myimage
   property :tags,                       Text,     :lazy => [ :show ]
   property :type,                       String,   :default => "jpg"
   
-  property :folder,                     String,   :default => "photo"
+  property :folder,                String,   :default => "photo"
+  property :folder_id,                  Integer,  :default => 9999
+  property :folder_name,                String,   :default => "photo"
   
 
   timestamps :at

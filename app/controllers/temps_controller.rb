@@ -3,7 +3,7 @@ require 'zip/zip'
 require 'zip/zipfilesystem'
 
 class TempsController < ApplicationController
-     before_filter :authenticate_admin! , :only => [:new, :edit, :create, :update, :destroy]     
+     before_filter :authenticate_user!
 
      
   # GET /temps
@@ -122,10 +122,10 @@ class TempsController < ApplicationController
      render '/temps/new', :layout => false
   end
 
-  # GET /temps/1/edit
-  def edit
-    @temp = Temp.get(params[:id])
-  end
+  # # GET /temps/1/edit
+  # def edit
+  #   @temp = Temp.get(params[:id])
+  # end
 
   def create
            
@@ -204,7 +204,7 @@ class TempsController < ApplicationController
     @mytemplate.user_id = current_user.id  
     @mytemplate.temp_id = params[:temp_id] 
     @mytemplate.save
-    
+        
     edit = params[:edit]
 
     
@@ -214,15 +214,37 @@ class TempsController < ApplicationController
     if edit == "req"
       @mytemplate.job_code = 1
       feedback_memo = params[:feedback_memo]
+      @mytemplate.size_x = params[:size_info_x]
+      @mytemplate.size_y = params[:size_info_y]
+      req_file = params[:feedback_file]
       
-      # jobboard 생성 
-      bbs = Jobboard.new()
-      bbs.user_id = current_user.id
-      bbs.content = feedback_memo
-      bbs.feedback_code = 0
+      if params[:feedback_memo] != "" or params[:feedback_file] != nil
+        # jobboard 생성 
+        bbs = Jobboard.new()
+        bbs.user_id = current_user.id
+        bbs.content = feedback_memo
+        bbs.feedback_code = 0
 
-      bbs.mytemp_id = @mytemplate.id
-      bbs.save
+        bbs.mytemp_id = @mytemplate.id
+        bbs.save
+      
+        if params[:feedback_file] != nil
+          #파일업로드
+          dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+          FileUtils.mkdir_p dir if not File.exist?(dir)
+          ReqfileUploader.store_dir = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/req_files/"
+  
+          uploader = ReqfileUploader.new
+          # req_file.original_filename = "1.png"
+          uploader.store!(req_file)
+
+          file_ext = File.extname(req_file.original_filename)
+          file_name = bbs.id.to_s
+          bbs.req_file = bbs.id.to_s + file_ext
+          bbs.original_filename = req_file.original_filename
+          bbs.save
+        end
+      end
       
     else
       @mytemplate.job_code = 0
@@ -295,6 +317,7 @@ class TempsController < ApplicationController
     @cloned_object.preview_url = "/user_files/" + current_user.userid + "/article_templates/" + mytemplate_new_filename + "/web/doc_preview.jpg"             
 
     @cloned_object.category = @object_to_clone.category
+    @cloned_object.is_col = @object_to_clone.is_col
     @cloned_object.subcategory = @object_to_clone.subcategory
 
     @cloned_object.file_filename = mytemplate_new_filename + ".zip"

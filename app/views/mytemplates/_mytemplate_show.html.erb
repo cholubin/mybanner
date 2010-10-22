@@ -9,47 +9,6 @@ else
 	sn_num = my.category  + "-" + my.id.to_s
 end
 %>
-<script language="javascript">
-function del_mytemp(id){
-	if (window.confirm("정말 삭제하시겠습니까?")){
-		loadingView();
-		$.ajax({
-			data:'id='+ id, 
-			dataType:'script', 
-			type:'post', 
-			url:'/mytemplates/destroy',
-			success: function(request){
-				loadingView();
-				document.location.replace('/mytemplates');
-
-			}
-		});	
-	};
-}
-</script>
-<script language="javascript">
-$(document).ready(function(){
-	$('#req_submit').click(function(){
-		if ($('#feedback_memo').val() == ""){
-			alert("요청사항을 입력해주세요~");
-		}else{
-			loadingView();
-			$.ajax({
-				data:'id=<%= my.id.to_s %>&content='+$('#feedback_memo').val()+'&feedback_code='+$('input:radio[name=feedback_code]:checked').val(), 
-				dataType:'script', 
-				type:'post', 
-				url:'/mytemplates/jobboard_create',
-				success:function(request){
-					loadingView();
-					$('#feedback_memo').val("");
-					$('#jbbs_body').html(request);
-				}
-			});
-		}
-		
-	});
-});
-</script>
 
 <div id="designcart-detail" class="content-layout">
 	<h3>디자인바구니 <span><%=(my.job_code == 0)? "직접편집":"편집의뢰" %> - <%= category_info %> (<%= sn_num %>)</span></h3>
@@ -57,12 +16,16 @@ $(document).ready(function(){
 		<li>편집한 다지안 품목의 내용을 자세히 확인하는 페이지입니다.</li>
 		<li>편집에 어려움이 있는 경우 관리자에게 도움을 요청할 수 있습니다.</li>
 	</ul>
-	<a href="/mytemplates"><img src="/images/content/button-backlist-out.png" alt="목록으로 돌아가기" width="103" height="27" /></a>
-	<!-- 미리보기의 가로가 길면 item-horizon, 세로가 길면 item-vertical -->
-	<div id="item-information" class="### 가로, 세로 스타일명 ###">
+	<!-- 미리보기의 가로가 길면 horizon, 세로가 길면 vertical -->
+	<% puts_message my.is_col.to_s %>
+	<div id="item-information" class="<%= (my.is_col == true)? "vertical":"horizon" %>">
 		<h4>미리보기</h4>
-		<img src="<%= my.preview_url %>" class="preview" width="580px">
-		<div class="item-detail">
+		<div id="ie-overflow-fix">
+			<div id="preview-wrap">
+				<img id="preview" src="<%= my.preview_url %>">
+			</div>
+		</div>
+		<div class="item-detail-wrap">
 			<h4>상세내용</h4>
 			<ul class="item-detail">
 				<li class="type"><strong class="title">구분</strong><%=(my.job_code == 0)? "직접편집":"편집의뢰" %></li>
@@ -70,12 +33,16 @@ $(document).ready(function(){
 				<li class="designcode"><strong class="title">디자인번호</strong><%= sn_num %></li>
 				<li class="size"><strong class="title">사이즈</strong><%= my.size %></li>
 				<li class="date"><strong class="title">최종수정일</strong><%= my.updated_at.strftime('%Y-%m-%d') %></li>
-				<li class="price"><strong class="title">개별금액</strong> 30,000원</li>
+				<li class="price" id="item_price"><strong class="title">개별금액</strong> <%= Temp.get(my.temp_id).price %>원</li>
 			</ul>
 			<fieldset class="option-select_detail">
-				<legend>옵션 선택</legend>
+				<h5>옵션 선택</h5>
 				<ul>
 					<!-- 옵션 반복 시작 -->
+					<li>
+						<label>수량</label>
+						<div class="piece-wrap"><a class="minus">-</a><input id="peice_<%= my.id.to_s %>" name="piece[]" value="1" size="2" class="piece" /><a class="plus">+</a></div>
+					</li>
 					<li>
 						<label>소재</label>
 						<select name="### 옵션목록 이름 ###">
@@ -111,18 +78,22 @@ $(document).ready(function(){
 					<!-- 옵션 반복 끝 -->
 				</ul>
 			</fieldset>
-			
-			<div class="actions">
-				<h4>이 품목을..</h4>
-				<ul>
-					<!-- 작업구분이 편집의뢰일때만 -->
-					<li class="accept"><a href="### 시안확정 URL ###">시안확정</a></li>
-					<li class="edit"><a href="### 편집하기(웹탑)">편집하기</a></li>
-					<li class="delete"><a href="javascript:del_mytemp('<%= my.id %>');">삭제</a></li>
-					<li class="one-order"><a href="### 주문하기 URL ###">바로 주문하기</a></li>
-					<li class="back-list">여러항목을 주문할 경우 바구니 목록에서 주문해주세요.</li>
-				</ul>
-			</div>
+		</div>
+		<div class="actions">
+			<h4>이 품목을..</h4>
+			<ul>
+				<!-- 작업구분이 편집의뢰일때만 -->
+<% if my.job_code == 1 %>
+				<li class="accept"><a href="### 시안확정 URL ###">시안확정</a></li>
+<% else %>
+				<li class="disable"><span>직접편집입니다.</span></li>
+<% end %>
+				<li class="edit"><a href="#">편집하기</a></li>
+				<li class="delete"><a href="javascript:del_mytemp('<%= my.id %>');">삭제</a></li>
+				<li class="one-order"><a href="#" id="order-button">바로 주문하기</a></li>
+				<li class="back-list"><a class="back-list" href="/mytemplates">목록으로 돌아가기</a></li>
+				<li class="zoom-scroll"><a href="#" class="reset">크기, 위치 원래대로</a> <div id="zoom-scroll"><span>◈</span></div></li>
+			</ul>
 		</div>
 	</div>
 	<div id="feedback-list">
@@ -147,7 +118,15 @@ $(document).ready(function(){
 				<!-- 요청사항 표시 반복부분 시작 -->
 				<% 
 					num = jbbs.count
-					jbbs.each do |bbs|
+					if jbbs.count > 0
+						jbbs.each do |bbs|
+							if bbs.req_file != nil
+								file_path = "#{HOSTING_URL}user_files/#{current_user.userid}/req_files/" + bbs.req_file
+								ext_name = File.extname(bbs.req_file).gsub(".",'')
+								req_file = "<a href='#{file_path}' class='#{ext_name}'>#{bbs.original_filename}</a>"
+							else
+								req_file = ""	
+							end
 				%>
 				<tr>
 					<td class="number"><%= num %></td>
@@ -155,17 +134,23 @@ $(document).ready(function(){
 					<td class="memo"><a href="### 내용보기 페이지로 ###"><%= bbs.content %></a></td>
 					<td class="name"><%= User.get(bbs.user_id).name %></td>
 					<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
-					<td class="file"></td>
+					<td class="file"><%= req_file %></td>
 				</tr>
 				<%
-						num -= 1
-			 		end
+							num -= 1
+				 		end
+				 	else
 				%>
+					<tr>
+						<td colspan="6" id="error-screen"><img src="/images/error/error-empty-comment.gif" alt="작성된 요청사항이 없습니다." width="578" height="214" /></td>
+					</tr>
+				<% end %>
 				<!-- 요청사항 표시 반복부분 종료 -->
 			</tbody>
 		</table>
 	</div>
-	<form action="### 요청사항 입력 URL ###" method="post" id="feedback-add">
+	<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile"} ) do -%>
+		<input type="hidden" name="id" value="<%= my.id.to_s %>">
 		<fieldset>
 			<legend>요청사항 입력</legend>
 			<p class="type"><label for="feedback-type">글 구분</label> 
@@ -174,14 +159,160 @@ $(document).ready(function(){
 				<% end %>
 			<p class="memo">
 				<label for="" id="feedback-memo">요청내용</label>
-				<textarea name="content" id="feedback_memo" placeholder="내용을 입력해주세요."></textarea>
+				<textarea name="feedback_memo" id="feedback_memo" placeholder="내용을 입력해주세요."></textarea>
 			</p>
 			<p class="file">
-				<label for="" id="feedback-file">파일올리기</label>
-				<input type="file" name="### 피드백 파일 ###" id="feedback-file" />
+				<label for="" name="" id="feedback-file">파일올리기</label>
+				<input type="file" name="feedback_file" id="feedback_file" />
 			</p>
 			<input id="req_submit" type="button" value="요청사항 접수" class="submit-button"/>
 		</fieldset>
-	</form>
-	<a href="/mytemplates"><img src="/images/content/button-backlist-out.png" alt="목록으로 돌아가기" width="103" height="27" /></a>
+	<%end %>
+	<a class="back-list" href="/mytemplates">목록으로 돌아가기</a>
 </div>
+
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script language="javascript">
+function popup(doc_name) {
+       // var url = '/mlayout?doc_name='+doc_name;
+	   var url = "/MClientBox/index.html?spread_list=NO&user_path=/user_files/<%= current_user.userid %>&doc_path=/article_templates/"+ doc_name+".mlayoutP"
+	   width = screen.width;
+	   height = screen.height;
+      window.open(url ,'webtop_print','width='+width+', height='+height);
+}
+
+function del_mytemp(id){
+	if (window.confirm("정말 삭제하시겠습니까?")){
+		loadingView();
+		$.ajax({
+			data:'id='+ id, 
+			dataType:'script', 
+			type:'post', 
+			url:'/mytemplates/destroy',
+			success: function(request){
+				loadingView();
+				document.location.replace('/mytemplates');
+
+			}
+		});	
+	};
+}
+</script>
+<script language="javascript">
+// 품목별 수량 증가 감소 by fooleaf
+
+$("a.minus")
+	.live("click",
+	function() {
+		now = parseInt($(this).parents("li").find("input.piece").val());
+		if(now <= 0)
+			$(this).parents("li").find("input.piece").val(0);
+		else
+			$(this).parents("li").find("input.piece").val(now-1);
+	}
+);
+
+$("a.plus")
+	.live("click",
+	function() {
+		now = parseInt($(this).parents("li").find("input.piece").val());
+		$(this).parents("li").find("input.piece").val(now+1);
+	}
+);
+
+// 데모 주문을 위해서 임시적으로 추가
+$('#order-button').click(function(){
+	
+	popupView(696,390,"/mytemplates/mytemplate_order", { total_price: $('#item_price').text().replace(",","").replace("개별금액",""), ids: <%= my.id.to_s %>});
+	return false;
+});
+
+
+$("li.edit a").click(function () {
+	popup('<%= my.id.to_s %>');
+})
+
+$('#zip_search').live("click", function(){
+	if ($('#address-search').val() == ""){
+		alert("검색어를 입력해주세요!");
+	}else{
+		$.ajax({
+			data:'dong='+ $('#address-search').val(), 
+			dataType:'script', 
+			type:'post', 
+			url:'/address/search_ajax',
+			success: function(request){
+				$("#search-address-form").fadeOut("fast");
+				$('#addr_result').html(request).change(function(){
+					// $('#zip_code').val()
+					var temp_zip = $('#address-selector option:selected').val()
+					var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,3)
+					$('#zip_code').val(zip_code);
+				});
+			}
+		});
+		$('#address-search').val("검색중입니다.");
+	}
+});
+
+
+//요청사항 접수 게시판 =================================
+$('#req_submit').click(function(){
+	if ($('#feedback_memo').val() == ""){
+		alert("요청사항을 입력해주세요~");
+		$('#feedback_memo').focus();
+	}else{
+		loadingView();
+		$('#frmFile').ajaxForm({ 
+	        dataType:  'html', 
+			url: '/mytemplates/jobboard_create',
+	        success:   Callback_req_submit 
+		}).submit();
+	}
+	
+});
+
+function Callback_req_submit(request,state){
+	if (state == "success"){
+		loadingView();
+		$('#feedback_memo').val("");
+		$('#feedback_file').val("");
+		request = request.replace("<table>","").replace("</table>","").replace("<tbody>","").replace("</tbody>","")
+		$('#jbbs_body').html(request);
+
+
+	}
+};
+// 미리보기 확대/축소/드레그
+
+function resizePreview(val) {
+	currentWidth = $("#preview").width();
+	currentHeight = $("#preview").height();
+	currentTop = parseFloat($("#preview").css("top"));
+	currentLeft = parseFloat($("#preview").css("left"));
+	zoominWidth = defaultWidth * val;
+	zoominHeight = defaultHeight * val;
+	zoominTop = ((zoominHeight-currentHeight)/2)*-1+currentTop;
+	zoominLeft = ((zoominWidth-currentWidth)/2)*-1+currentLeft;
+	$("#preview").stop().animate({top:zoominTop,left:zoominLeft,width: zoominWidth, height: zoominHeight},0);
+}
+
+$("a.reset").click(function(){
+	$("#preview").animate({top:defaultY,left:defaultX, width: defaultWidth, height: defaultHeight});
+	$("#zoom-scroll span").animate({left:0});
+	return false;
+});
+
+$(window).load(function () {
+	defaultWidth = $("#preview").width();
+	defaultHeight = $("#preview").height();
+	defaultX = ($("#preview-wrap").width()/2)-($("#preview").width()/2)-1;
+	defaultY = ($("#preview-wrap").height()/2)-($("#preview").height()/2)-1;
+	$("#preview").css("left",defaultX);
+	$("#preview").css("top",defaultY);
+	$("#preview").fadeIn()
+	$("#preview").draggable();
+	$("#zoom-scroll span").draggable({axis: "x", containment: "parent", drag : function() { resizePreview(parseFloat($(this).css("left"))/88*2+1) }});
+});
+
+</script>

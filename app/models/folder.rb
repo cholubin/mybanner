@@ -15,6 +15,7 @@ class Folder
   property :id,           Serial
   property :name,         String
   property :user_id,      String
+  property :order,        Integer, :default => 9999
   
   timestamps :at
   

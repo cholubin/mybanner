@@ -10,7 +10,6 @@ class Mytemplate
   
   # Class Configurations ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   include DataMapper::Resource
-  
   # Attributes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   property :id,                     Serial
   property :name,                   String
@@ -32,8 +31,17 @@ class Mytemplate
   # 현수막용 
   property :is_col,                 Boolean, :default => false  
   property :size,                   String
+  property :size_x,                 String
+  property :size_y,                 String
   property :feedback_code,          Integer, :default => 0
   property :job_code,               Integer, :default => 0
+  
+  #현수막용 옵션
+  property :opt1,                   Integer
+  property :opt2,                   Integer
+  property :opt3,                   Integer
+  property :quantity,               Integer
+  
   timestamps :at
   
   belongs_to :user

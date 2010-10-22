@@ -13,11 +13,14 @@ class Jobboard
 
   
   # Attributes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  property :id,           Serial
-  property :content,      Text,     :lazy => [ :show ]
-  property :hit_cnt ,     Integer,  :default => 0
-  property :feedback_code, Integer, :default => 0
-  property :mytemp_id,    Integer
+  property :id,                 Serial
+  property :content,            Text,     :lazy => [ :show ]
+  property :hit_cnt ,           Integer,  :default => 0
+  property :feedback_code,      Integer, :default => 0
+  property :mytemp_id,          Integer
+  property :req_file,           Text
+  property :original_filename,  Text
+  
   timestamps :at
   
   belongs_to :user

@@ -10,17 +10,17 @@ a:link { text-decoration: none; color: #333; }
 a:visited { text-decoration: none; color: #666; }
 a:hover { text-decoration: none; color: #67991a; }
 a:active { text-decoration: none; color: #b0681b; }
-input, textarea { border: 1px solid #999; border-bottom-color:#ccc; border-right-color:#ccc; font-size:12px; font-family: NanumGothicOTF, NanumGothic, AppleGothic, dotum, sans-serif; background: white url(/images/default/input-text-bg.png) center top repeat-x; }
-input { line-height: 20px; height: 20px; padding: 0 3px; background-position: left center ; }
+input, textarea, select { border: 1px solid #999; border-bottom-color:#ccc; border-right-color:#ccc; font-size:12px; font-family: NanumGothicOTF, NanumGothic, AppleGothic, dotum, sans-serif; background: white url(/images/default/input-text-bg.png) center top repeat-x; }
+input, select { line-height: 20px; height: 20px; padding: 0 3px; background-position: left center ; }
 input.submit-button { font-weight: bold; font-size: 12px;border: 1px solid #666; color: white; text-shadow: 0 -1px #333; border-top-color: #999; border-left-color: #999; background: url('/images/default/form-button-bg.png'); height: 24px; cursor: pointer; }
-caption { font-size: 11px; color: #999; caption-side: bottom; text-align: right; }
-
+.caption { font-size: 11px; color: #999; caption-side: bottom; text-align: right; }
+.no-line { border: none !important; }
 /* 헤더  시작*/
 
 h1 { position: absolute; top: 36px; }
 
 /* > 메뉴 시작*/
-#header { width: 960px; height: 186px; margin: 0 auto; position: relative;}
+#header { width: 960px; height: 186px; margin: 0 auto; position: relative; z-index: 2;}
 #header #nav-menu { background-repeat: no-repeat; position: absolute; top:142px;left: 0; width: 960px; height: 44px;}
 #header #nav-menu h2 { display: none }
 #header #nav-menu ul { background: url(/images/default/nav-button-background.png) no-repeat 180px 0px; width: 960px; height: 44px;}
@@ -31,16 +31,15 @@ h1 { position: absolute; top: 36px; }
 #header #nav-menu li.order-delivery { top: 9px; left: 570px; }
 #header #nav-menu li.cscenter { top: 9px; left: 810px}
 #header #nav-menu li a { display: block; text-indent: -9999px; background-repeat: no-repeat}
-#header #nav-menu li.guide a { background-image:url(/images/default/nav-button-guide-out.png); width: 115px; height: 28px;}
-#header #nav-menu li.guide a:hover { background-image:url(/images/default/nav-button-guide-in.png);}
-#header #nav-menu li.template a { background-image:url(/images/default/nav-button-template-out.png); width: 180px; height: 35px;}
-#header #nav-menu li.template a:hover { background-image:url(/images/default/nav-button-template-in.png)}
-#header #nav-menu li.designcart a { background-image:url(/images/default/nav-button-designcart-out.png);width: 180px; height: 35px;}
-#header #nav-menu li.designcart a:hover { background-image:url(/images/default/nav-button-designcart-in.png)}
-#header #nav-menu li.order-delivery a { background-image:url(/images/default/nav-button-order-delivery-out.png); width: 180px; height: 35px;;}
-#header #nav-menu li.order-delivery a:hover { background-image:url(/images/default/nav-button-order-delivery-in.png)}
-#header #nav-menu li.cscenter a { background-image:url(/images/default/nav-button-cscenter-out.png); width: 115px; height: 28px;}
-#header #nav-menu li.cscenter a:hover { background-image:url(/images/default/nav-button-cscenter-in.png) }
+#header #nav-menu li.guide a { background-image:url(/images/default/nav-button-guide.png); width: 115px; height: 28px;}
+#header #nav-menu li.template a { background-image:url(/images/default/nav-button-template.png); width: 180px; height: 35px;}
+#header #nav-menu li.designcart a { background-image:url(/images/default/nav-button-designcart.png);width: 180px; height: 35px;}
+#header #nav-menu li.order-delivery a { background-image:url(/images/default/nav-button-order-delivery.png); width: 180px; height: 35px;;}
+#header #nav-menu li.cscenter a { background-image:url(/images/default/nav-button-cscenter.png); width: 115px; height: 28px;}
+
+/* 메뉴 hover event */
+#header #nav-menu li.guide a:hover, #header #nav-menu li.cscenter a:hover { background-position: -115px; }
+#header #nav-menu li.template a:hover, #header #nav-menu li.template a.on,#header #nav-menu li.designcart a:hover, #header #nav-menu li.designcart a.on,#header #nav-menu li.order-delivery a:hover, #header #nav-menu li.order-delivery a.on { background-position: -180px;  }
 
 /* > 메뉴 종료*/
 
@@ -72,6 +71,8 @@ h1 { position: absolute; top: 36px; }
 #ajaxloadpage legend { display: none; }
 #ajaxloadpage #login-form label { width: 80px; display: block; }
 #ajaxloadpage #login-form .user-sign-up { display: block; width: 156px;height: 45px; text-indent: -5000px; background:url(/images/default/button-signup.png) ;}
+#ajaxloadpage #login-form .user-sign-up:hover { background-position: -156px; }
+#ajaxloadpage #login-form .user-sign-up:active { background-position: -312px; }
 #ajaxloadpage #login-form input { width: 180px; }
 #ajaxloadpage #login-form input.submit-button { width: 188px; }
 #ajaxloadpage #signup-form .info {  width: 300px; padding: 10px 0; }
@@ -96,10 +97,57 @@ h1 { position: absolute; top: 36px; }
 #ajaxloadpage #user-withdraw-form .submit-button { display: block; position: absolute; top: 266px; left: 20px; line-height: 24px; width: 324px; text-align: center; border: 1px solid #333; border-color: #ccc #999 #999 #ccc; background: url(/images/default/form-button-bg-white.png); color: #666; padding: 0 7px; }
 #ajaxloadpage #user-withdraw-form .submit-button:hover { color: #666; font-weight: bold; }
 
+/* 팝업 이미지 하드 */
+#imagehard-folder p.folder { padding: 0 0 0 30px; background: url("/images/content/icon-folder.png") no-repeat 6px 0; overflow: hidden; height: 30px;line-height: 30px; font-weight: bold; margin: 0; cursor:pointer; width: 120px; }
+#imagehard-folder p.folder.on, #imagehard-folder p.folder:hover { background-position: 6px -30px; color: #67991a }
+#imagehard-folder p.folder input { width: 84px; }
+#imagehard-folder ul li p.action a.config { display: inline; text-indent: -5000px; width: 23px; height:24px; background: url("/images/content/button-folder-action.png") no-repeat left top; float: left; margin-left: 20px;}
+#imagehard-folder ul li p.action a.config:hover { background-position: -23px 0; }
+#imagehard-folder ul li p.action a.config:active { background-position: -46px 0; }
+
+#imagehard-folder ul li p.action a.edit { display: inline; text-indent: -5000px; width: 21px; height:15px; background: url("/images/content/button-mini-edit.png") no-repeat left top; margin: 4px 0 5px ; float: left; line-height: 15px;}
+#imagehard-folder ul li p.action a.edit:hover { background-position: -21px 0; }
+#imagehard-folder ul li p.action a.edit:active { background-position: -42px 0; }
+
+#imagehard p.description { position: absolute; margin: 0; padding: 0; top: 18px; left: 170px; font-size: 11px; }
+#imagehard .upload-image a { display: block; width: 62px; height: 25px; text-indent: -5000px; background: url("/images/content/button-upload.png") no-repeat; position: absolute; right: 5px; top: 3px;}
+#imagehard .upload-image a:hover { background-position: -62px 0; }
+#imagehard .upload-image a:active {  background-position: -124px 0; }
+#imagehard ul.article a.delete, #imagehard-folder ul li p.action a.delete { width: 22px; height: 15px; display: inline; display:block; margin-right: 5px; background: url("/images/content/button-mini-delete.png"); line-height: 15px; position: absolute; top: 0; right: 0; text-indent: -5000px; }
+#imagehard-folder ul li p.action a.delete { margin: 4px 0 5px;}
+#imagehard ul.article a.delete:hover, #imagehard-folder ul li p.action a.delete:hover { background-position: -22px 0; }
+#imagehard ul.article a.delete:active, #imagehard-folder ul li p.action a.delete:active { background-position: -44px 0; }
+
+
+#imagehard .folder-edit, #imagehard-list .show-memo { display: none; position: absolute; }
+#imagehard-folder h4 { display: none; }
+#imagehard-folder { position: absolute; width: 170px; top: 80px; left: 20px;}
+#imagehard-folder ul { width: 170px; border-bottom: 1px solid #ddd; }
+#imagehard-folder ul li { position: relative; width: 170px; line-height: 30px; }
+#imagehard-folder ul li p.action { position: absolute; top: 2px; right: 0; width: 43px; padding: 0; }
+
+#imagehard-folder fieldset { background: none; border: 0; padding: 12px 0 ; margin: 0; text-align: center;}
+#imagehard-folder fieldset h5, #imagehard-folder fieldset label { display: none; }
+#imagehard-folder fieldset input { width: 160px; margin: 2px auto; display: block;}
+#imagehard-folder fieldset input.submit-button { width: 168px; }
+#imagehard-list { position: absolute; width: 592px; left: 200px; top: 70px; *zoom:1; }
+#imagehard-list:after {content:" "; display:block; clear:both;}
+#imagehard-list ul.article { float: left; width: 136px; overflow: hidden; margin: 0 12px 20px 0; padding: 0; }
+#imagehard-list ul, #imagehard-list li { padding: 0; }
+#imagehard-list li.preview { padding: 0; }
+#imagehard-list li.filename { width: 136px; height: 20px; overflow: hidden; line-height: 20px; position: relative; }
+#imagehard-list li.filename a { width: 300px; display: block; }
+#imagehard-list li.filename span { position: absolute; top: 0px; right: 0px; height: 20px; width: 13px; background: url("/images/main/main-date-bg.png") left top; }
+#imagehard-list li.date { font-size: 10px; font-family: tahoma; line-height: 16px; position: relative;}
+#imagehard div.upload { position:absolute; top: 460px; left: 200px; height: 31px;width: 578px; background: #eee; border:1px solid #ddd; line-height: 31px; z-index: 33; }
+#imagehard .upload-image label { font-weight: bold; letter-spacing:-1px; padding-left: 10px; }
+#imagehard .upload-image #myimage_image_file {  width: 407px; }
+#imagehard div.pager { position: absolute; top: 504px; left: 200px; } #imagehard ul.pager {  margin: 0; }
+
 
 /* 컨텐츠 섹션 시작 */
 
-#content { width: 960px; margin: 0 auto; position: relative; overflow: visible; background-color: white; min-height: 680px; height: auto !important; height: 680px;}
+#content { width: 960px; margin: 0 auto; position: relative; z-index: 3; overflow: visible; background-color: white; min-height: 680px; height: auto !important; height: 680px;}
 #main .content-layout { padding: 10px 190px 30px; width: 580px; }
 
 /* > 사이드 섹션 시작 */
@@ -112,18 +160,19 @@ h1 { position: absolute; top: 36px; }
 #content #category a.title:hover {  font-size: 16px;padding-left: 18px; background:  url(/images/default/category-title-icon-hover.png) no-repeat 2px center;  }
 #content #category ul li ul { border: 1px solid #ccc; background: white; margin: 5px 0; *zoom:1; padding: 5px; border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
 #content #category ul li ul:after {content:" "; display:block; clear:both;}
-#content #category ul li ul li { display: inline-block; font-size: 11px; padding: 0;margin: 2px; padding:0 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
-#content #category ul li ul li:hover { background: #67991a; } #content #category ul li ul li:hover a { color: white;}
-#content #category ul li ul li:active { background: #b0681b; } #content #category ul li ul li:active a { color: white;}
+#content #category ul li ul li { display: inline; font-size: 11px; margin: 2px; }
+#content #category ul li ul li a { display: inline-block; padding:2px 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
+#content #category ul li ul li a:hover { background: #67991a; color: white;}
+#content #category ul li ul li a:active { background: #b0681b; color: white;}
 
 /* 메인 이미지 */
 #main-button { padding: 6px 1px; *zoom:1;}
 #main-button:after {content:" "; display:block; clear:both;}
-#main-button li { float: left; width: 182px; height: 54px; background: no-repeat left top; display:table; margin: 0 0 0 8px;cursor: pointer; }
+#main-button li { float: left; width: 182px; height: 54px; background: no-repeat left top; display:table; margin: 0 0 0 8px;cursor: pointer; display:inline; position: relative; }
+#main-button li span { position: absolute; display: block; width: 172px; padding: 0 5px; text-align: center; color: white; font-weight: bold; letter-spacing: -1px; text-shadow: 1px 1px #666; filter:progid:DXImageTransform.Microsoft.DropShadow(offX=1, offY=1, color='#666666')  }
 #main-button li.applegreen { background-image: url('/images/main/button-main-applegreen.png'); }
 #main-button li.deepgreen { background-image: url('/images/main/button-main-deepgreen.png'); }
 #main-button li.deepgray { background-image: url('/images/main/button-main-deepgray.png'); }
-#main-button li span { display:table-cell; vertical-align:middle; padding: 12px; text-align: center; color: white; text-shadow: 1px 1px #666; font-weight: bold; }
 #main-image { position: relative; width: 580px; height: 326px; line-height: 326px; color: #ccc; background: #eee; text-align: center; }
 #main-image img { position: absolute; top: 0; left: 0; display: none; z-index: 1; }
 #main-notice, #main-qna { position: relative;width: 400px; padding-top: 18px; height: 118px; }
@@ -185,16 +234,31 @@ h1 { position: absolute; top: 36px; }
 
 /* 컨텐츠 섹션 종료 */
 
+/* 페이징 */
+
+ul.pager { width: 580px; height: 35px; background: url("/images/default/paging-bg.png") no-repeat top left; position: relative; z-index:2; text-align: center; margin: 20px 0; padding; 0;}
+.pager li { display: inline; line-height: 35px; margin: 0; padding: 0 2px; }
+.pager .more { color: #bbb; }
+.pager .jump a { display: block; position: absolute; height: 35px; text-indent: -5000px; background: no-repeat left top; top: 0; }
+.pager .first a { width: 60px;  background-image: url("/images/default/paging-first-button.png"); left: 0;}
+.pager .previous a { width: 60px;  background-image: url("/images/default/paging-prev-button.png"); left: 60px;}
+.pager .next a { width: 60px;  background-image: url("/images/default/paging-next-button.png"); left: 459px;}
+.pager .last a { width: 60px;  background-image: url("/images/default/paging-last-button.png"); left: 519px;}
+.pager .jump a:hover { background-position: -60px; }
+.pager .jump a:active { background-position: -120px; }
+
 /* 푸더 섹션 시작 */
 
 #footer { background: url("/images/default/copyright-footer-bg.png"); padding: 10px 10px 20px;}
-#footer-wrap { background: white; border: 1px solid #999; width: 940px; margin: 0 auto; position: relative; height: 80px; border-radius:8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; }
+#footer-wrap { background: white; border: 1px solid #999; width: 940px; margin: 0 auto; position: relative; height: 80px; border-radius:8px; -webkit-border-radius: 8px; -moz-border-radius: 8px;  z-index: 1; }
 #footer-wrap h2 { position: absolute; top: 10px; left: 10px; }
 #footer-wrap p { position: absolute;height: 22px; line-height: 22px; background: no-repeat left center; font-style: normal; margin: 0;}
 #footer-wrap p.address { top: 30px; left: 180px; padding: 0 0 0 60px;  background-image: url("/images/default/copyright-address.png"); }
 #footer-wrap p.telephone { top: 50px; left: 183px; padding: 0 0 0 66px;  background-image: url("/images/default/copyright-phone.png"); }
 #footer-wrap p.fax { top: 50px; left: 363px; padding: 0 0 0 34px;  background-image: url("/images/default/copyright-fax.png"); }
 #footer-wrap p.email { top: 10px; left: 770px; }
+#footer-wrap p.email a { text-indent: -5000px; display: block; width: 162px; height: 43px; background: url("/images/default/copyright-contact-out.png"); } 
+#footer-wrap p.email a:hover { background-position: -162px; }
 #footer-wrap h3 { display: none; }
 #footer-wrap ul { position: absolute; width: 580px; border-bottom: 1px solid #ddd; line-height: 22px; *zoom:1; left: 180px; top: 4px; padding-left: 5px; }
 #footer-wrap ul:after {content:""; display:block; clear:both;}

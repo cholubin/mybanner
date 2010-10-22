@@ -1,11 +1,10 @@
 module SessionsHelper
-  
-
-  
+    
 end
+
 def sign_in(user)
     user.remember_me!
-    cookies[:remember_token] = { :value => user.remember_token, :expires => 1.hour.from_now }
+    cookies[:remember_token] = { :value => user.remember_token, :expires => 8.hour.from_now }
     self.current_user = user
 end
 
@@ -43,3 +42,4 @@ def authenticate_user!
     redirect_to '/login'
   end
 end
+

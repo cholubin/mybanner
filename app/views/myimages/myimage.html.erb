@@ -1,54 +1,69 @@
-<div id="wrapper_bg">
-	<div id="top_section">
-		<!-- 로고 =================================================================================-->
-		<%= render :partial => "/shared/logo" %>	
-		<!-- 로고 =================================================================================-->
-
-		<!-- 로그인 및 서치바 =================================================================================-->
-		<div id="login_search_section">
-			<div id="login_section" class="register">
-				<%= render :partial => "/shared/login" %>
-			</div>
-		</div>
-		<!-- 로그인 및 서치바 =================================================================================-->		
-
-		<!-- 메뉴 =================================================================================-->
-		<div id="menu_section">
-			<%= render :partial => "/shared/menu", :object => @menu%>
-		</div>
-		<!-- 메뉴 =================================================================================-->
+<div id="imagehard">
+	<h3>내 이미지 하드</h3>
+	<p class="description">이미지파일을 업로드할 수 있는 이미지하드입니다.<br/>서버 사정에 의해 연락없이 삭제될 수 있으니, 편집 및 접수 용도외의 사용은 권장하지 않습니다.</p>
+	<div id="imagehard-folder">
+		<h4>폴더 목록</h4>
+		<ul id="folder_list"><!-- 수정, 삭제 버튼은 <p class="action">안에 <a href="### URL ###" class="edit">, class="delete"로 넣어주시면 알아서 처리됩니다. -->
+			<%
+			@folders = Folder.all(:user_id => current_user.id, :order =>[:order]) 
+			@folders.each do |f|
+			%>
+			<!-- 폴더 리스트 반복 시작 -->
+			<li id="<%= f.id %>">
+				<p class="folder"><a><%= f.name %></a></p>
+				<p class="action">
+					<a class="config">관리</a>
+				</p>
+			</li>
+			<!-- 폴더 리스트 반복 끝 -->
+			<%
+			end
+			%>
+		</ul>
+		<fieldset>
+			<h5>폴더 생성</h5>
+			<form>
+				<label for="imagehard-forder-new">폴더이름</label> 
+				<input id="folder_name" type="text" placeholder="새 폴더 이름"/> 
+				<input id="folder_create_btn" type="button" value="새 폴더 생성" class="submit-button"/>
+			</form>
+		</fieldset>
 	</div>
-
-
-	<div id="main_section">
-		<!-- 사이드바  ==============================================================================-->
-		<div class="box">
-			<div class="left_section">
-				<div id="mainNav_section">
-					<%= render :partial => "/mytemplates/leftsidebar" %>
-				</div>
-			</div>
-		</div>
-		<!-- 사이드바  ==============================================================================-->		
-
-		<!-- 본문영역 =================================================================================-->
-			<div id="right_float">
-				<div class="box">
-					<div class="right_section">	
-						<!-- <right 추가 태그>	 -->
-						<div id="content_section">
-							<%= render :partial => "#{@board}_#{@section}", :object =>  @total_count %>
-						</div>
-					</div>
-				</div>
-			</div>	
-		<!-- 본문영역 =================================================================================-->
+	<div id="imagehard-list">
+		<% @myimages.each do |myimage| %>
+		<!-- 파일 목록 반복 시작 -->
+		<ul class="article">
+			<!-- 가로 세로 사이즈 136으로 제한, 현재 IMAG태그에 임의로 width=136, height=136 해놨습니다.  -->
+			<li class="preview"><a href="### 파일링크 ###" target="_blank"><img src="<%= myimage.thumb_url %>"/></a></li>
+			<li class="filename"><a href="### 파일링크 ###" target="_blank"><%= myimage.name %></a><span></span></li>
+			<li class="date"><%= myimage.created_at.strftime('%Y-%m-%d') %><a href="### 삭제링크 ###" class="delete">삭제</a></li>
+<!--        # 차후 개선버전시 용량도 추가 #
+			<li>5,123kb</li> -->
+		</ul>
+<!-- 파일 목록 반복 끝 -->
+		<%end %>
 	</div>
-		
-		<!-- 풋터  ==============================================================================-->		
-		<div id="">
-			<%= render :partial => "/shared/footer" %>
-		</div>
-		<!-- 풋터  ==============================================================================-->			
-</div>	
-
+	<div class="upload">
+		<form method="POST" enctype="multipart/form-data"  class="upload-image">
+			<label for="myimage_image_file">이미지 올리기</label> <input name="file" type="file" id="myimage_image_file">
+			<a href="### 올리기 ###">올리기</a>
+		</form>
+	</div>		
+	<div class="pager">				
+		<ul class="pager">
+			<li class="first jump"><a href="/admin/temps?sort=all&search=&page=1">First</a></li>
+			<li class="previous jump"><a href="/admin/temps?sort=all&search=&page=4">Previous</a></li>
+			<li class="more">...</li>
+			<li class="page-2"><a href="/admin/temps?sort=all&search=&page=2">2</a></li>
+			<li class="page-3"><a href="/admin/temps?sort=all&search=&page=3">3</a></li>
+			<li class="page-4"><a href="/admin/temps?sort=all&search=&page=4">4</a></li>
+			<li class="page-5 active"><a href="/admin/temps?sort=all&search=&page=5">5</a></li>
+			<li class="page-6"><a href="/admin/temps?sort=all&search=&page=6">6</a></li>
+			<li class="page-7"><a href="/admin/temps?sort=all&search=&page=7">7</a></li>
+			<li class="page-8"><a href="/admin/temps?sort=all&search=&page=8">8</a></li>
+			<li class="more">...</li>
+			<li class="next jump"><a href="/admin/temps?sort=all&search=&page=6">Next</a></li>
+			<li class="last jump"><a href="/admin/temps?sort=all&search=&page=14">Last</a></li>
+		</ul>
+	</div>
+</div>

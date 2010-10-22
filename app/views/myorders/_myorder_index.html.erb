@@ -1,6 +1,10 @@
-<div id="order-delivery">
+<div id="order-delivery" class="content-layout">
 	<h3>주문/배송확인</h3>
-	<p>주문하신 목록 페이지입니다. 주문번호 조회와 배송조회/결제정보를 확인할 수 있습니다.</p>
+	<ul class="content-description">
+		<li>주문하신 품목의 현 진행상황을 확인하며, 주문목록을 관리할 수 있습니다.</li>
+		<li>상세보기를 누르시면 주문한 품목과 배송주소, 결제정보를 볼 수 있습니다.</li>
+		<li>처리 완료된 주문은 1년 2개월동안 보관되니 꼭 참고바랍니다.</li>
+	</ul>
 <!-- 차 후 검색 기능을 위한 폼
 	<div id="order-search">
 		<form action="/" method="get">
@@ -19,68 +23,97 @@
 	</div>
 -->
 	<%
-	if !@myorders.nil?
+#	if !@myorders.nil?
 	%>
 	<div id="order-list">
 		<h4>주문 목록</h4>
-		<table>
-			<caption>완료된 주문은 1년동안 보관됩니다.<br/>주문 취소는 제작전에만 가능합니다. 특수한 상황의 경우 고객센터 전화로 연락해주세요.</caption>
-			<!-- 주문목록에 따라 반복될 부분 시작-->
-			<%
-			@myorders.each do |my|
-			%>
+		<table cellpadding="0" cellspacing="0" border="0">
 			<thead>
-				<th>주문날짜</th>
-				<th>주문내용</th>
-				<th>결제금액</th>
-				<th>진행상황</th>
-				<th>상세정보</th>
-				<th>취소</th>
+				<tr>
+					<th class="date">주문날짜</th>
+					<th class="item">주문내용</th>
+					<th class="price">결제금액</th>
+					<th class="status">진행상황</th>
+					<th class="detail">상세정보</th>
+					<th class="cancel">취소</th>
+				</tr>
 			</thead>
 			<tbody>
-				<td class="date">2010/9/1 <span>(주문번호:##########)</span></td>
+			<!-- 주문목록에 따라 반복될 부분 시작-->
+<%
+	@myorders.each do |my|
+%>
+				<tr>
+				<td class="date"><%= my.order_no %><p class="order-num"><span>주문번호:</span><%= my.updated_at.strftime('%Y-%m-%d') %></p><!-- 주문번호 : YYMMDD-001 --></td>
 				<td class="item">
 					<ul>
+						<%
+						item_array = my.items.split(",")
+						item_array.each do |i|
+							temp_id = i
+							temp = Mytemplate.get(i.to_i)  
+							category = Category.get(temp.category.to_i).name
+							
+							if temp.subcategory != nil
+								subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name
+								design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + i
+							else
+								subcategory = ""
+								design_no = temp.category.to_s  +"-"+ i	
+							end
+						%>
 						<!-- 주문 품목 반복될 부분 -->
-						<li>###카테고리1단계 ### / ### 카테고리2단계 #### <span>(### 디자인번호 ### / ### 개별가격 ### x ### 구입수량 ###)</li>
-						<li>###카테고리1단계 ### / ### 카테고리2단계 #### <span>(### 디자인번호 ### / ### 개별가격 ### x ### 구입수량 ###)</li>
-						<li>###카테고리1단계 ### / ### 카테고리2단계 #### <span>(### 디자인번호 ### / ### 개별가격 ### x ### 구입수량 ###)</li>
-						<li>###카테고리1단계 ### / ### 카테고리2단계 #### <span>(### 디자인번호 ### / ### 개별가격 ### x ### 구입수량 ###)</li>
+						<li><%= category + subcategory %> <span class="design-code">(<%= design_no %>)</span></li>
 						<!-- 주문 품목 반복될 부분 끝 -->
+						<%end %>
 					</ul>
 				</td>
-				<td class="price">### 결제금액 ###</td>
-				<td class="status">### 진행상황 ###</td>
-				<td class="detail"><a href="/myorders/<%= my.id %>">상세정보 보기</a></td>
-				<td class="cencel"><a href="### 취소링크 ###">취소</a></td>
-			</tbody>
-			<%
-			end
-			%>
+				<td class="price"><%= my.total_price.to_s %></td>
+				<td class="status">접수완료</td>
+				<td class="detail"><a href="/myorders/<%= my.id.to_s %>">상세정보 보기</a></td>
+				<td class="cancel"><a href="### 취소링크 ###" class="cancel-button">주문취소</a>
+				<!--
+				제작전 주문 취소
+				<a href="### 취소링크 ###" class="cancel-button">주문취소</a>
+				
+				제작중일 경우 취소불가, 아래 이미지 표시 ( 버튼클릭시 제작중에는 취소가 불가능합니다. 고객센터로 연락주세요.)
+				<a href="#" class="cancel-disable">취소불가</a>
+\				
+				출고 완료된 후에는 주문 삭제 아이콘으로 변경
+				<a href="### 삭제링크 ###" class="order-delete">주문삭제</a>
+				-->
+					</td>
+				</tr>
+				<%
+					end
+				%>				
+
+
 			<!-- 주문목록 끝 -->
+			</tbody>
 		</table>
+		<div class="caption">주문 취소는 제작전에만 가능합니다. 특수한 상황의 경우 고객센터 전화로 연락해주세요.</div>
 	</div>
-	<div id="order-list-page">
-	<h4>페이지 네비게이션</h4>
-		<ul>
-			<li class="first"><a href="">처음 페이지 목록</a></li>
-			<li class="prev"><a href="">이전 페이지</a></li>
-			<li class="more">...</li>
-			<li><a href="">1</a></li>
-			<li><a href="">2</a></li>
-			<li><a href="">3</a></li>
-			<li><a href="">4</a></li>
-			<li class="parent"><a href="">5</a></li>
-			<li><a href="">6</a></li>
-			<li><a href="">7</a></li>
-			<li><a href="">8</a></li>
-			<li><a href="">9</a></li>
-			<li class="more">...</li>
-			<li class="next"><a href="">다음 페이지</a></li>
-			<li class="last"><a href="">마지막 페이지 목록</a></li>
-		</ul>
-	</div>
-	<%
-	end
-	%>
+<div class="pager">				
+<ul class="pager">
+	<li class="first jump"><a href="/admin/temps?sort=all&search=&page=1">First</a></li>
+	<li class="previous jump"><a href="/admin/temps?sort=all&search=&page=4">Previous</a></li>
+	<li class="more">...</li>
+	<li class="page-2"><a href="/admin/temps?sort=all&search=&page=2">2</a></li>
+	<li class="page-3"><a href="/admin/temps?sort=all&search=&page=3">3</a></li>
+	<li class="page-4"><a href="/admin/temps?sort=all&search=&page=4">4</a></li>
+	<li class="page-5 active"><a href="/admin/temps?sort=all&search=&page=5">5</a></li>
+	<li class="page-6"><a href="/admin/temps?sort=all&search=&page=6">6</a></li>
+	<li class="page-7"><a href="/admin/temps?sort=all&search=&page=7">7</a></li>
+	<li class="page-8"><a href="/admin/temps?sort=all&search=&page=8">8</a></li>
+	<li class="more">...</li>
+	<li class="next jump"><a href="/admin/temps?sort=all&search=&page=6">Next</a></li>
+	<li class="last jump"><a href="/admin/temps?sort=all&search=&page=14">Last</a></li>
+</ul>
 </div>
+<script language="javascript">
+$(".cancel-disable").live("click",function() { alert("제작중에는 취소가 불가능합니다.\n고객센터로 상담 바랍니다."); return false });
+</script>
+</div>
+<% #end %>
+	<!--	<div id="error-screen"><img src="/images/error/error-empty-order.jpg" alt="진행된 주문, 배송정보가 없습니다." width="580" height="400" /></div>-->

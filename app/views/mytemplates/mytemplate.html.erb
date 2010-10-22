@@ -1,14 +1,17 @@
-<% if @section != "order" %><!-- 유저 섹션 시작 -->
-<%= render :partial => "/shared/quickSection" %>
-<!-- 유저 섹션 끝 -->
+<%if @section == "jbbs_body"%>
+	<%= render :partial => "#{@section}"%>
+<%else %>
+	<% if @section != "order" %><!-- 유저 섹션 시작 -->
+	<%= render :partial => "/shared/quickSection" %>
+	<!-- 유저 섹션 끝 -->
 
 
-<!-- 카테고리 섹션 시작 -->
-<%= render :partial => "/shared/category" %>
-<!-- 카테고리 섹션  끝 -->
-<%end %>
+	<!-- 카테고리 섹션 시작 -->
+	<%= render :partial => "/shared/category" %>
+	<!-- 카테고리 섹션  끝 -->
+	<%end %>
 
-<!-- 컨텐츠 섹션 시작 -->
-<%= render :partial => "#{@board}_#{@section}", :object =>  @total_count %>
-<!-- 컨텐츠 섹션 끝 -->
-							
+	<!-- 컨텐츠 섹션 시작 -->
+	<%= render :partial => "#{@board}_#{@section}", :object =>  @total_count %>
+	<!-- 컨텐츠 섹션 끝 -->
+<%end %>							

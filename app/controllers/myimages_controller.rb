@@ -39,8 +39,8 @@ class MyimagesController < ApplicationController
     
     @folders = Folder.all(:user_id => current_user.id)
 
-    render 'myimage'
-    
+    # render 'myimage'
+    render 'myimage', :layout => 'ajax-load-page'
     
   end
 

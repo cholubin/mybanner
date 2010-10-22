@@ -4,12 +4,12 @@
 <% @categories = Category.all(:order => [ :priority.asc ]) %>
 <% @categories.each do |category| %>
 				<li>
-					<a class="title" href="/temps?category_name=<%= category.id %>"<%= "class='on'" if @category_name == category.name%>><%= category.name %></a>
+					<a class="<%=(params[:category_name].to_i==category.id)?"title-on":"title"%>" href="/temps?category_name=<%= category.id %>"<%= "class='on'" if @category_name == category.name%>><%= category.name %></a>
 <% @subcategories = category.subcategories 
 if @subcategories.count !=0 %>
 					<ul>
 <% @subcategories.each do |subcategory| %>
-	<li><a class="sub-title" href="/temps?category_name=<%= category.id %>&subcategory_name=<%= subcategory.id %>"<%= " class='on'" if @subcategory_name == subcategory.name and @category_name == category.name%>><%= subcategory.name %></a></li>
+	<li<%=(params[:subcategory_name].to_i==subcategory.id)?" class=\"on\"":nil%>><a class="sub-title" href="/temps?category_name=<%= category.id %>&subcategory_name=<%= subcategory.id %>"<%= " class='on'" if @subcategory_name == subcategory.name and @category_name == category.name%>><%= subcategory.name %></a></li>
 <% end  %>
 					</ul>
 <% end %>

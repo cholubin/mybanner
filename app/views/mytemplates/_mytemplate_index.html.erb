@@ -11,110 +11,267 @@
 		title_text = Category.get(cate.to_i).name
 	end
 %>
-
+<div id="designcart" class="content-layout">
+	<h3>디자인바구니</h3>
+	<ul class="content-description">
+		<li>고객님께서 직접 편집한 디자인과 편집의뢰한 디자인이 담기는 공간입니다.</li>
+		<li>편집에 있어서 어려운 부분이 있으시면, 관리자에게 도움요청 할 수 있습니다.</li>
+		<li> 또한 원하는 소재와 후가공, 갯수를 선택하여 주문과 결제를 할 수 있습니다.</li>
+	</ul>
+<% if @mytemplates.count > 0 %>
+	<table id="designcart-list" cellpadding="0" cellspacing="0" border="0">
+		<thead>
+			<tr>
+				<th class="check" id="chk_all"><span>전체체크</span></th>
+				<th class="edit-type">구분</th>
+				<th class="design">디자인 품목</th>
+				<th class="piece">수량</th>
+				<th class="price">가격</th>
+				<th class="date">수정일</th>
+				<th class="option">옵션선택</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 디자인 항목 반복 시작 -->
+			<%
+			@temp = 1 
+			@mytemplates.each do |my| 
+				if my.subcategory != nil
+					category_info = Category.get(my.category.to_i).name + "/" + Subcategory.get(my.subcategory.to_i).name
+					sn_num = my.category  + "-" + my.subcategory + "-" + my.id.to_s
+				else
+					category_info = Category.get(my.category.to_i).name	
+					sn_num = my.category  + "-" + my.id.to_s
+				end
+			%>
+			<tr id="<%= my.id.to_s %>" class="item">
+				<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
+				<td class="edit-type">
+					<% if my.job_code == 0 %>
+					<span class="self-edit"/>직접편집</span>
+					<% else %>
+					<span class="order-edit"/>편집의뢰</span>
+					<% end %>
+				</td>
+				<td class="design"><%= category_info%><span class="design-code">(<%= sn_num %>)</span><div class="other"><%= "₩"+Temp.get(my.temp_id).price %> / <%= my.size %></div><span class="request code-<%=my.feedback_code%>"><%= Request_code.first(:code => my.feedback_code).name %></span>
+				<div class="action-select">
+					<ul>
+						<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
+						<li class="edit"><a href="#" onClick="popup('<%= my.id.to_s %>');">편집하기</a></li>
+						<li class="delete"><a href="#" id="del_<%= my.id.to_s %>">삭제하기</a></li>
+					</ul>
+				</div></td>
+				<td class="piece"><a class="minus">-</a><input id="peice_<%= my.id.to_s %>" name="piece[]" value="1" size="2" class="piece" /><a class="plus">+</a></td>
+				<td class="price" id="price_<%= my.id.to_s %>"><%= Temp.get(my.temp_id).price %>&nbsp;<input type="hidden" id="unit_price_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>"><input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>"></td>
+				<td class="date"><%= my.updated_at.strftime('%y.%m.%d') %></td>
+				<td class="option">
+					<h5><a class="select">옵션을 선택해주세요.</a></h5>
+					<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 시작 -->
+					<div class="option-select">
+						<ul>
+							<!-- 옵션 반복 시작 -->
+							<li>
+								<label>소재</label>
+								<select name="select_main_<%= my.id.to_s %>" class="basic_select">
+									<option value="" selected>선택해주세요.</option>
+									<option value="">---------------</option>
+									<!-- 옵션내용 반복 시작 -->
+									<option value="그래픽천(현수막전용원단)">그래픽천(현수막전용원단)</option>
+									<option value="페트(얇은플라스틱제질원단)">페트(얇은플라스틱제질원단)</option>
+									<option value="합성지(점착가능원단)">합성지(점착가능원단)</option>
+									<option value="PVC켈(점착가능원단)">PVC켈(점착가능원단)</option>
+									<option value="부직포(어깨띠전용원단)">부직포(어깨띠전용원단)</option>
+									<option value="폰지(디지털날염전용원단)">폰지(디지털날염전용원단)</option>
+									
+									<!-- 옵션내용 반복 끝 -->
+								</select>
+							</li>
+							<li class="no-line">
+								<label>후가공</label>
+								<select name="select_sub_<%= my.id.to_s %>">
+									<option value="" selected>선택해주세요.</option>
+									<option value="">---------------</option>
+									<!-- 옵션내용 반복 시작 -->
+									<option value="열재단">열재단</option>
+									<option value="사구아일렛">사구아일렛</option>
+									<option value="막대가공">막대가공</option>
+									<option value="봉미싱">봉미싱</option>
+									<option value="끈고리">끈고리</option>
+									<option value="사방줄미싱">사방줄미싱</option>
+									<option value="큐방">큐방</option>
+									<option value="기타">기타</option>
+									<!-- 옵션내용 반복 끝 -->
+								</select>
+							</li>
+							<!-- <li class="no-line"><a href="#" class="material">소재, 후가공 자세히 알아보기</a></li>-->
+							<li class="no-line"><input type="button" value="옵션 선택 저장" class="submit-button"/></li>
+							<!-- 옵션 반복 끝 -->
+						</ul>
+					</div>
+					<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 끝-->
+				</td>
+			</tr>
+			<% end %>
+			<!-- 디자인 항목 반복 끝 -->
+		</tbody>
+		
+	</table>
+	<div class="caption">주문할 항목과 옵션을 선택해주세요. <a href="#" class="delete">선택한 항목 삭제</a></div>
+	<div id="select_delivery">
+		<h4>배송비용</h4>
+		<p>
+			<label for="receive-type">배송방법</label>
+			<select name="### 배송방법셀렉박스이름 ###" id="receive-type">
+				<option value="" selected>선택해주세요.</option>
+				<option value="">-----------------</option>
+				<option value="일반택배">일반택배</option>
+				<option value="퀵서비스">퀵서비스</option>
+				<option value="직접수령">직접수령</option>
+			</select>
+		</p>
+		<p class="price" id="delivery_price">0원</p>
+	</div>
+	<div id="total-price">
+		<h4>총 주문 금액</h4>
+		<!-- jQuery로 처리할 예정입니다. -->
+		<p class="price" id="total_price">0원</p>
+		<input id="order" type="button" value="선택한 항목 주문하기" class="submit-button">
+	</div>
+<% else %>
+	<div id="error-screen"><img src="/images/error/error-empty-cart.jpg" alt="바구니에 담겨진 디자인이 없습니다." width="580" height="400" /></div>
+<% end %>
+</div>
 <script language="javascript">
- function popup(doc_name) {
+var total_price = 0;
+var prevOption;
+
+
+function popup(doc_name) {
        // var url = '/mlayout?doc_name='+doc_name;
-	   var url = "/MClientBox/index.html?spread_list=YES&user_path=/user_files/<%= current_user.userid %>&doc_path=/article_templates/"+ doc_name+".mlayoutP"
+	   var url = "/MClientBox/index.html?spread_list=NO&user_path=/user_files/<%= current_user.userid %>&doc_path=/article_templates/"+ doc_name+".mlayoutP"
 	   width = screen.width;
 	   height = screen.height;
       window.open(url ,'webtop_print','width='+width+', height='+height);
 }
 
-</script>
+$('.piece').change(function() {
+	id_temp = event.target.id.split("_");
+	id = id_temp[1];
+	ea = parseInt( $('#peice_'+id).val() );
+	unit_price = parseInt($('#unit_price_'+id).val());
+	
 
-<script language="javascript">
-var total_price = 0;
+	$('#price_'+id).text(ea * unit_price);
+	
+	if($('#chk_'+id).attr("checked") == false){
+		$('#price_minus_'+id).val(ea * unit_price);
+		// alert($('#price_minus_'+id).val());
+	}
+	// alert(event.target.id);
+});
 
-$(document).ready(function(){
-	$('input[name=piece[]]').blur(function(){
-		id_temp = event.target.id.split("_");
-		id = id_temp[1];
-		ea = parseInt( $('#peice_'+id).val() );
-		unit_price = parseInt($('#unit_price_'+id).val());
-		$('#price_'+id).text(ea * unit_price);
-		
-		if($('#chk_'+id).attr("checked") == false){
-			$('#price_minus_'+id).val(ea * unit_price);
-			// alert($('#price_minus_'+id).val());
-		}
-		// alert(event.target.id);
-	});
+$('.chkbox').live("click", function(){
+	id = $(this).val();
+	var unit_price = parseInt($('#price_'+id).text());
+	// var ea = parseInt( $('#peice_'+id).val() );
+	temp_price = unit_price;
 	
-	$('.chkbox').live("click", function(){
-		id = $(this).val();
-		var unit_price = parseInt($('#price_'+id).text());
-		// var ea = parseInt( $('#peice_'+id).val() );
-		temp_price = unit_price;
-		
-		
-		if($(this).attr("checked") == true){
-			total_price += temp_price;
-		}else{
-			total_price -= parseInt($('#price_minus_'+id).val());
-		}
-		
-		$('#total_price').text(total_price + "원");
-		
-	});
 	
-	$('#address-selector').live("change",function(){
-		// $('#zip_code').val()
-		var temp_zip = $('#address-selector option:selected').val()
-		var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,4)
-		
-		$('#zip_code').val(zip_code);
-	});
+	if($(this).attr("checked") == true){
+		total_price += temp_price;
+	}else{
+		total_price -= parseInt($('#price_minus_'+id).val());
+	}
 	
-	$('#zip_search').live("click", function(){
-		if ($('#zip_code').val() == ""){
-			alert("검색어를 입력해주세요!");
-		}else{
-			loadingView();
-			$.ajax({
-				data:'dong='+ $('#zip_code').val(), 
-				dataType:'script', 
-				type:'post', 
-				url:'/address/search_ajax',
-				success: function(request){
-					loadingView();
-					$('#zip_code').val("");
-					$('#addr_result').html(request);
-				}
-			});
-		}
-	});
-	
-	$('#order').click(function(){
-		var temp_array = jQuery.makeArray($('.chkbox:checked'));
+	char_total_price = total_price;
+	// 콤마찍기
+	var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+	char_total_price += '';                // 숫자를 문자열로 변환
 
-		var order_ids = "";
-		jQuery.each(temp_array, function(){
-			order_ids += $(this).val() + ",";
+	while (reg.test(char_total_price))
+	char_total_price = char_total_price.replace(reg, '$1' + ',' + '$2');
+	$('#total_price').text(char_total_price + "원");
+	
+});
+
+$('#zip_search').live("click", function(){
+	if ($('#address-search').val() == ""){
+		alert("검색어를 입력해주세요!");
+	}else{
+		$.ajax({
+			data:'dong='+ $('#address-search').val(), 
+			dataType:'script', 
+			type:'post', 
+			url:'/address/search_ajax',
+			success: function(request){
+				$("#search-address-form").fadeOut("fast");
+				$('#addr_result').html(request).change(function(){
+					// $('#zip_code').val()
+					var temp_zip = $('#address-selector option:selected').val()
+					var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,3)
+					$('#zip_code').val(zip_code);
+				});
+			}
 		});
+		$('#address-search').val("검색중입니다.");
+	}
+});
 
-		if (order_ids == ""){
-			alert("주문할 항목을 선택해주세요!");
-		}else{
-			loadingView();
-			$.ajax({
-				data:'total_price='+$('#total_price').text()+'&ids='+ order_ids, 
-				dataType:'script', 
-				type:'post', 
-				url:'/mytemplates/mytemplate_order',
-				success: function(request){
-					loadingView();
-					popupView(500,670,"/mytemplates/mytemplate_order", { total_price: $('#total_price').text(), ids: order_ids});
-				}
-				
-			});
-		
-		}
+$('#order').click(function(){
+	var temp_array = jQuery.makeArray($('.chkbox:checked'));
 
+	var order_ids = "";
+	jQuery.each(temp_array, function(){
+		order_ids += $(this).val() + ",";
 	});
+
+	if (order_ids == ""){
+		alert("주문할 항목을 선택해주세요!");
+	}else{
+		popupView(696,390,"/mytemplates/mytemplate_order", { total_price: $('#total_price').text().replace(",",""), ids: order_ids});
+	}
+
+});
+
+$('#order_basic').click(function(){
+	alert("니가 결재창을 눌렀냐?");
+	var temp_array = jQuery.makeArray($('.chkbox:checked'));
+	// $("input:checkbox:checked").each(function(){
+	// 	temp_array += $(this).val() + ",";
+	// });
+	var del_ids = "";
+	jQuery.each(temp_array, function(){
+		del_ids += $(this).val() + ",";
+	})
 	
-	$('#order_basic').click(function(){
-		alert("니가 결재창을 눌렀냐?");
+	if (del_ids == ""){
+		alert("주문할 항목을 선택해주세요!");
+	}else{
+		if (window.confirm("결재를 진행하시겠습니까?")){
+			loadingView();
+			// $.ajax({
+			// 					data:'ids='+ del_ids, 
+			// 					dataType:'script', 
+			// 					type:'post', 
+			// 					url:'/mytemplates/destroy_selection',
+			// 					success: function(request){
+			// 						jQuery.each(temp_array, function(){
+			// 							$('#'+$(this).val()).remove();
+			// 						})
+			// 						loadingView();
+			// 					}
+			// 				});	
+		}
+		
+	}
+});
+
+$('#chk_all').click(function(){
+	$('.chkbox').click();
+});
+
+$('.delete').click(function(){
+	if (event.target.id == ""){
 		var temp_array = jQuery.makeArray($('.chkbox:checked'));
 		// $("input:checkbox:checked").each(function(){
 		// 	temp_array += $(this).val() + ",";
@@ -125,201 +282,120 @@ $(document).ready(function(){
 		})
 		
 		if (del_ids == ""){
-			alert("주문할 항목을 선택해주세요!");
+			alert("삭제할 항목을 선택해주세요!");
 		}else{
-			if (window.confirm("결재를 진행하시겠습니까?")){
-				loadingView();
-				// $.ajax({
-				// 					data:'ids='+ del_ids, 
-				// 					dataType:'script', 
-				// 					type:'post', 
-				// 					url:'/mytemplates/destroy_selection',
-				// 					success: function(request){
-				// 						jQuery.each(temp_array, function(){
-				// 							$('#'+$(this).val()).remove();
-				// 						})
-				// 						loadingView();
-				// 					}
-				// 				});	
-			}
-			
-		}
-	});
-	
-	$('#chk_all').click(function(){
-		$('.chkbox').click();
-	});
-	
-	$('.delete').click(function(){
-		if (event.target.id == ""){
-			var temp_array = jQuery.makeArray($('.chkbox:checked'));
-			// $("input:checkbox:checked").each(function(){
-			// 	temp_array += $(this).val() + ",";
-			// });
-			var del_ids = "";
-			jQuery.each(temp_array, function(){
-				del_ids += $(this).val() + ",";
-			})
-			
-			if (del_ids == ""){
-				alert("삭제할 항목을 선택해주세요!");
-			}else{
-				if (window.confirm("정말 삭제하시겠습니까?")){
-					loadingView();
-					$.ajax({
-						data:'ids='+ del_ids, 
-						dataType:'script', 
-						type:'post', 
-						url:'/mytemplates/destroy_selection',
-						success: function(request){
-							jQuery.each(temp_array, function(){
-								$('#'+$(this).val()).remove();
-							})
-							loadingView();
-						}
-					});	
-				}
-				
-			}
-
-				
-		}else{
-			var temp_id = event.target.id.split("_");
-			var id = temp_id[1];
 			if (window.confirm("정말 삭제하시겠습니까?")){
 				loadingView();
 				$.ajax({
-					data:'id='+ id, 
+					data:'ids='+ del_ids, 
 					dataType:'script', 
 					type:'post', 
-					url:'/mytemplates/destroy',
+					url:'/mytemplates/destroy_selection',
 					success: function(request){
-						$('#'+id).remove();
+						jQuery.each(temp_array, function(){
+							$('#'+$(this).val()).remove();
+						})
 						loadingView();
-
 					}
 				});	
-			};	
+			}
+			
 		}
-		
-	});
-});	
+
+			
+	}else{
+		var temp_id = event.target.id.split("_");
+		var id = temp_id[1];
+		if (window.confirm("정말 삭제하시겠습니까?")){
+			loadingView();
+			$.ajax({
+				data:'id='+ id, 
+				dataType:'script', 
+				type:'post', 
+				url:'/mytemplates/destroy',
+				success: function(request){
+					$('#'+id).remove();
+					loadingView();
+
+				}
+			});	
+		};	
+	}
+	
+});
+
+// 품목별 수량 증가 감소 by fooleaf
+$("a.minus")
+	.live("click",
+	function() {
+		now = parseInt($(this).parents("tr").find("input.piece").val());
+		if(now <= 0)
+			$(this).parents("tr").find("input.piece").val(0);
+		else
+			$(this).parents("tr").find("input.piece").val(now-1);
+	}
+);
+
+$("a.plus")
+	.live("click",
+	function() {
+		now = parseInt($(this).parents("tr").find("input.piece").val());
+		$(this).parents("tr").find("input.piece").val(now+1);
+	}
+);
+
+
+// 디자인바구니 액션 by fooleaf
+$("#designcart-list td.design")
+	.live("click",
+	function (){
+		$(".action-select ul",$(this)).slideDown("fast")
+	}
+);
+
+$(".action-select ul")
+	.mouseleave(
+	function() {
+		$(this).slideUp("fast");
+	}
+);
+
+$("#designcart-list td")
+	.hover(
+	function (){
+		$(this).parents("tr").find("td.design").css("background-color","#eee");
+		$(this).parent().css("background-color","#eee");
+	},
+	function (){
+		$(this).parents("tr").find("td.design").css("background-color","#fff");
+		$(this).parent().css("background-color","#fff");
+		$(".action-select ul",$(this)).slideUp("fast");
+	}
+);
+
+// 디자인 바구니 옵션 관련 액션 by fooleaf
+$("#designcart-list td.option h5")
+	.live("click",
+	function (){
+		if($(this).parents("td.option").find(".option-select ul").css("display") == "none") {
+			if(prevOption != null)
+				prevOption.slideUp("fast");
+			$(this).parents("td.option").find(".option-select ul").slideDown("fast")
+			prevOption = $(this).parents("td.option").find(".option-select ul");
+		}
+		else {
+			$(this).parents("td.option").find(".option-select ul").slideUp("fast");
+			prevOption = null;
+		}
+	}
+);
+$(".option-select ul")
+	.mouseleave(
+	function() {
+		/*$(this).fadeOut("fast")*/
+	}
+);
+$(".option-select").delegate("select","change",function() { if($(this).parents("ul").find("select:eq(0)").val() == "" || $(this).parents("ul").find("select:eq(1)").val() == "") { $(this).parents("td.option").find("h5").html("<a class=\"select\">옵션을 선택해주세요.</a>")} else { $(this).parents("td.option").find("h5").html("<a class=\"selected\">옵션 선택 완료.</a>")}});
+$(".option-select .submit-button").live("click",function() { $(this).parents("ul").slideUp("fast"); prevOption = null;});
 
 </script>
-
-<div id="designcart" class="content-layout">
-	<h3>디자인바구니</h3>
-	<ul class="content-description">
-		<li>고객님께서 직접 편집한 디자인과 편집의뢰한 디자인이 담기는 공간입니다.</li>
-		<li>편집에 있어서 어려운 부분이 있으시면, 관리자에게 도움요청 할 수 있습니다.</li>
-		<li> 또한 원하는 소재와 후가공, 갯수를 선택하여 주문과 결제를 할 수 있습니다.</li>
-	</ul>
-<% if @mytemplates.count > 0 %>
-	<!-- <form action="### 주문 프로세스로 ###" method="post" id="design-list"> -->
-	<%#= form_for :myorders, :url => { :action => "create_order" } do |f| %>	
-		<h4><span class="step">Step 1.</span> 디자인 목록, 검토 </h4>
-		<table id="designcart-list" cellpadding="0" cellspacing="0" border="0">
-			<caption>주문할 항목과 옵션을 선택해주세요. <a href="#" class="delete"><img src="/images/content/button-select-del-out.png" alt="선택한 항목 삭제" width="103" height="26" /></a></caption>
-			<thead>
-				<tr>
-					<th class="check" id="chk_all"></th>
-					<th class="edit-type">작업구분</th>
-					<th class="design">디자인 품목</th>
-					<th class="size">사이즈</th>
-					<th class="price">가격</th>
-					<th class="date">수정일</th>
-					<th class="option">옵션선택</th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- 디자인 항목 반복 시작 -->
-				<%
-				@temp = 1 
-				@mytemplates.each do |my| 
-					if my.subcategory != nil
-						category_info = Category.get(my.category.to_i).name + "/" + Subcategory.get(my.subcategory.to_i).name
-						sn_num = my.category  + "-" + my.subcategory + "-" + my.id.to_s
-					else
-						category_info = Category.get(my.category.to_i).name	
-						sn_num = my.category  + "-" + my.id.to_s
-					end
-				%>
-				<tr id="<%= my.id.to_s %>" class="item">
-					<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
-					<td class="edit-type"><%= Job_code.first(:code => my.job_code).name %></td>
-					<td class="design"><%= category_info%><br><span class="design-code">(<%= sn_num %>)</span><br/><span><%= Request_code.first(:code => my.feedback_code).name %></span>
-					<div class="action-select">
-						<ul>
-							<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>"><img src="/images/content/button-cart-detail-out.png" alt="상세보기" id="button-cart-detail" width="55" height="71" /></a></li>
-							<li class="edit"><a href="### 웹탑 ###" onClick="popup('<%= my.id.to_s %>');"><img src="/images/content/button-cart-edit-out.png" alt="편집하기" id="button-cart-edit" width="55" height="71" /></a></li>
-							<li class="delete"><a href="### 삭제 ###" id="del_<%= my.id.to_s %>"><img src="/images/content/button-cart-delete-out.png" alt="삭제하기" id="button-cart-delete_<%= my.id.to_s %>" width="55" height="71" /></a></li>
-						</ul>
-					</div></td>
-					<td class="size"><%= my.size %></td>
-					<td class="price" id="price_<%= my.id.to_s %>"><%= Temp.get(my.temp_id).price %></td>
-					<input type="hidden" id="unit_price_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>">
-					<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>">
-					<td class="date"><%= my.updated_at.strftime('%y.%m.%d') %></td>
-					<td class="option">
-						<img src="/images/content/button-option-select-out.png" alt="button-option-select-out" width="103" height="27" class="button" />
-						<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 시작 -->
-						<div class="option-select">
-							<h5>옵션 선택</h5>
-							<ul>
-								<li><label for="piece" >개수</label> <input id="peice_<%= my.id.to_s %>" name="piece[]" type="number" value="1"/>ea</li>
-								<!-- 옵션 반복 시작 -->
-								<li>
-									<label>소재</label>
-									<select name="select_main_<%= my.id.to_s %>" class="basic_select">
-										<option value="" selected>선택해주세요.</option>
-										<option value="">------------------</option>
-										<!-- 옵션내용 반복 시작 -->
-										<option value="그래픽천(현수막전용원단)">그래픽천(현수막전용원단)</option>
-										<option value="페트(얇은플라스틱제질원단)">페트(얇은플라스틱제질원단)</option>
-										<option value="합성지(점착가능원단)">합성지(점착가능원단)</option>
-										<option value="PVC켈(점착가능원단)">PVC켈(점착가능원단)</option>
-										<option value="부직포(어깨띠전용원단)">부직포(어깨띠전용원단)</option>
-										<option value="폰지(디지털날염전용원단)">폰지(디지털날염전용원단)</option>
-										
-										<!-- 옵션내용 반복 끝 -->
-									</select>
-								</li>
-								<li>
-									<label>후가공</label>
-									<select name="select_sub_<%= my.id.to_s %>">
-										<option value="" selected>선택해주세요.</option>
-										<option value="">------------------</option>
-										<!-- 옵션내용 반복 시작 -->
-										<option value="열재단">열재단</option>
-										<option value="사구아일렛">사구아일렛</option>
-										<option value="막대가공">막대가공</option>
-										<option value="봉미싱">봉미싱</option>
-										<option value="끈고리">끈고리</option>
-										<option value="사방줄미싱">사방줄미싱</option>
-										<option value="큐방">큐방</option>
-										<option value="기타">기타</option>
-										<!-- 옵션내용 반복 끝 -->
-									</select>
-								</li>
-								<!-- 옵션 반복 끝 -->
-							</ul>
-						</div>
-						<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 끝-->
-					</td>
-				</tr>
-				<% end %>
-				<!-- 디자인 항목 반복 끝 -->
-			</tbody>
-		</table>
-		
-	<div id="total-price">
-		<h4>총 주문 금액</h4>
-		<!-- jQuery로 처리할 예정입니다. -->
-		<p class="price" id="total_price">00,000원</p>
-		<input id="order" type="button" value="선택한 항목 주문하기" class="submit-button">
-	</div>
-	<!-- <input type="submit" class="order" value="선택한 항목 주문하기"/>-->
-	<%#= end %>
-<% end %>
-</div>
-

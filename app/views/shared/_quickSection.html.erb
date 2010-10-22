@@ -8,8 +8,7 @@
 						<li class="login-id"><%= current_user.name %></li>
 						<li class="login-name"><%= current_user.userid %></li>
 						<li class="logout"><a href="/logout">로그아웃</a></li>
-						<!-- <li class="webhard"><a href="/myimages" class="ajax-myimages">내 이미지하드</a></li> -->
-						<li class="webhard"><a href="Javascript:alert('현재 멀티업로드 시스템으로 모듈 변경중입니다!')" class="ajax-myimages">내 이미지하드</a></li>
+						<li class="webhard"><a href="/myimages" class="ajax-myimages">내 이미지하드</a></li>
 						<li class="user-edit"><a href="/users/<%= current_user.id %>/edit" class="ajax-edit">정보수정</a></li>
 					</ul>
 				</div>

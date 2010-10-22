@@ -12,24 +12,26 @@ class Myorder
   include DataMapper::Resource
   
   # Attributes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  property :id,           Serial
-  property :order_no,     String
-  property :tatal_price,  Integer
-  property :pre_price,    Integer
-  property :left_price,   Integer
+  property :id,             Serial
+  property :order_no,       String
+  property :total_price,    Integer
+  property :pre_price,      Integer
+  property :left_price,     Integer
 
   # 주문자 정보 
-  property :order_name,   String
-  property :order_tel,     String
-  property :order_mobile,  String
-  property :order_zip,     String
-  property :order_addr1,   String
-  property :order_addr2,   String
+  property :receive_type,   String
+  property :receive_name,   String
+  property :receive_note,   Text
+  property :pay_method,     String
+  property :order_name,     String
+  property :order_tel,      String
+  property :order_mobile,   String
+  property :order_zip,      String
+  property :order_addr1,    String
+  property :order_addr2,    String
+  property :user_id,        Integer
+  property :items,          String
   
-  property :name,         String
-  property :user_id,      String
-  property :folder_name,  String
-  property :order,        Integer,  :default => 1
   timestamps :at
 
   belongs_to :user

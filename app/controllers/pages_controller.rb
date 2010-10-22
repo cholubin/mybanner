@@ -28,68 +28,103 @@ class PagesController < ApplicationController
       Job_code.up
     end
     #=====================================
-    
-    
-    
-
-  end
-
-  def contact
-    @title  = "contact"
-    @menu = "contact"
-  end
-
-  def about
-    @title = "about"
-    @menu = "about" 
-    @categories = Category.all(:order => [:priority])
 
   end
   
-  def tutorial
-    @title = "tutorial"
-    @menu = "tutorial"
-    @categories = Category.all(:order => [:priority])
+  # 이용안내 페이지 (이용안내는 메인 메뉴로 속함)
+  
+  def guide
+    @title = "동영상 튜토리얼"
+    @menu = "guide"
+    @section = "home"
+  end
+  
+  # 주문관련 페이지들
 
-  end
-  
-  def test
-    @title = "test"
-    @menu = "home"
-  end
-  
- 
   def editorder
   	# 편집의뢰 페이지 ( AJAX 페이지 )
-    @title = "가입완료"
-    @menu = "home"
+    @title = "편집의뢰"
     render :layout => 'ajax-load-page'
   end
- 
+
+  # 회사소개 페이지들 (회사소개 @menu = "company")
+
+  def about
+    @title = "회사소개"
+    @menu = "company" 
+    @section = "about"
+  end
+  
+  def map
+    @title = "연락처/오시는길"
+    @menu = "company" 
+    @section = "map"
+  end
+  
+  # 고객센터 페이지들 (회사소개 @menu = "cscenter")
+  
   def cscenter
   	# 고객센터 기본 화면 (정상혁 추가)
     @title = "고객센터"
-    @menu = "home"
+    @menu = "cscenter"
+    @section = "home"
   end
 
+  def policy
+    @title = "개인정보/이용정책 안내"
+    @menu = "cscenter"
+    @section = "policy"
+  end
+
+  def sitemap
+    @title = "사이트 맵"
+    @menu = "cscenter"
+    @section = "sitemap"
+  end
+ 
+  # 결과 페이지 ( AJAX로 로딩 )
+
   def congratulations
-  	# AJAX 팝업을 위한 레이아웃 변경
     @title = "가입완료"
-    @menu = "home"
+    # AJAX 팝업을 위한 레이아웃 변경
     render :layout => 'ajax-load-page'
   end
   
   def withdraw
-  	# AJAX 팝업을 위한 레이아웃 변경
     if signed_in?
       @users = current_user
-      @menu = "home"
       @board = "user"
       @section = "withdraw"
+      # AJAX 팝업을 위한 레이아웃 변경
       #render 'users/user'
       render :layout => 'ajax-load-page'
     else
       redirect_to '/' 
     end
   end 
+  
+  def myimage
+    if signed_in?
+      @users = current_user
+
+      # AJAX 팝업을 위한 레이아웃 변경
+      render :layout => 'ajax-load-page'
+    else
+      redirect_to '/' 
+    end
+  end 
+  
+  # Web Top Banner에서 사용안하는 페이지
+  
+  def contact
+    @title  = "contact"
+    @menu = "contact"
+  end
+
+  def tutorial
+    @title = "동영상 튜토리얼"
+    @menu = "tutorial"
+    @categories = Category.all(:order => [:priority])
+
+  end
 end
