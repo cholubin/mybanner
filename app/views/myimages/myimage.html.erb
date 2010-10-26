@@ -4,21 +4,30 @@
 	<div id="imagehard-folder">
 		<h4>폴더 목록</h4>
 		<ul id="folder_list"><!-- 수정, 삭제 버튼은 <p class="action">안에 <a href="### URL ###" class="edit">, class="delete"로 넣어주시면 알아서 처리됩니다. -->
-			<%
-			@folders = Folder.all(:user_id => current_user.id, :order =>[:order]) 
-			@folders.each do |f|
-			%>
-			<!-- 폴더 리스트 반복 시작 -->
-			<li id="<%= f.id %>">
-				<p class="folder"><a><%= f.name %></a></p>
-				<p class="action">
-					<a class="config">관리</a>
-				</p>
+			<!-- 기본폴더 (photo) -->
+			<li id="photo">
+				<p class="folder on"><a>photo</a></p>
 			</li>
-			<!-- 폴더 리스트 반복 끝 -->
-			<%
-			end
-			%>
+			
+			<div id="sortables">
+				
+				<!-- 기본폴더 (photo) -->
+				<%
+				@folders = Folder.all(:user_id => current_user.id, :order =>[:order]) 
+				@folders.each do |f|
+				%>
+				<!-- 폴더 리스트 반복 시작 -->
+				<li id="<%= f.id %>">
+					<p class="folder"><a><%= f.name %></a></p>
+					<p class="action">
+						<a class="config">관리</a>
+					</p>
+				</li>
+				<!-- 폴더 리스트 반복 끝 -->
+				<%
+				end
+				%>
+			</div>
 		</ul>
 		<fieldset>
 			<h5>폴더 생성</h5>
@@ -29,41 +38,47 @@
 			</form>
 		</fieldset>
 	</div>
-	<div id="imagehard-list">
-		<% @myimages.each do |myimage| %>
-		<!-- 파일 목록 반복 시작 -->
-		<ul class="article">
-			<!-- 가로 세로 사이즈 136으로 제한, 현재 IMAG태그에 임의로 width=136, height=136 해놨습니다.  -->
-			<li class="preview"><a href="### 파일링크 ###" target="_blank"><img src="<%= myimage.thumb_url %>"/></a></li>
-			<li class="filename"><a href="### 파일링크 ###" target="_blank"><%= myimage.name %></a><span></span></li>
-			<li class="date"><%= myimage.created_at.strftime('%Y-%m-%d') %><a href="### 삭제링크 ###" class="delete">삭제</a></li>
-<!--        # 차후 개선버전시 용량도 추가 #
-			<li>5,123kb</li> -->
-		</ul>
-<!-- 파일 목록 반복 끝 -->
-		<%end %>
-	</div>
-	<div class="upload">
-		<form method="POST" enctype="multipart/form-data"  class="upload-image">
-			<label for="myimage_image_file">이미지 올리기</label> <input name="file" type="file" id="myimage_image_file">
-			<a href="### 올리기 ###">올리기</a>
-		</form>
-	</div>		
-	<div class="pager">				
-		<ul class="pager">
-			<li class="first jump"><a href="/admin/temps?sort=all&search=&page=1">First</a></li>
-			<li class="previous jump"><a href="/admin/temps?sort=all&search=&page=4">Previous</a></li>
-			<li class="more">...</li>
-			<li class="page-2"><a href="/admin/temps?sort=all&search=&page=2">2</a></li>
-			<li class="page-3"><a href="/admin/temps?sort=all&search=&page=3">3</a></li>
-			<li class="page-4"><a href="/admin/temps?sort=all&search=&page=4">4</a></li>
-			<li class="page-5 active"><a href="/admin/temps?sort=all&search=&page=5">5</a></li>
-			<li class="page-6"><a href="/admin/temps?sort=all&search=&page=6">6</a></li>
-			<li class="page-7"><a href="/admin/temps?sort=all&search=&page=7">7</a></li>
-			<li class="page-8"><a href="/admin/temps?sort=all&search=&page=8">8</a></li>
-			<li class="more">...</li>
-			<li class="next jump"><a href="/admin/temps?sort=all&search=&page=6">Next</a></li>
-			<li class="last jump"><a href="/admin/temps?sort=all&search=&page=14">Last</a></li>
-		</ul>
+	<div id="imagehard-wrap">
+		<div id="imagehard-list">
+			<% @myimages.each do |myimage| %>
+			<!-- 파일 목록 반복 시작 -->
+			<ul class="article" id="<%= myimage.id.to_s %>">
+				<!-- 가로 세로 사이즈 136으로 제한, 현재 IMAG태그에 임의로 width=136, height=136 해놨습니다.  -->
+				<li class="preview"><a href="/myimages/show_myimage/<%=myimage.id.to_s %>" target="_blank"><img src="<%= myimage.thumb_url %>"/></a></li>
+				<li class="filename"><a href="### 파일링크 ###" target="_blank"><%= myimage.name %></a><span></span></li>
+				<li class="date"><%= myimage.created_at.strftime('%Y-%m-%d') %><a class="delete img">삭제</a></li>
+	<!--        # 차후 개선버전시 용량도 추가 #
+				<li>5,123kb</li> -->
+			</ul>
+	<!-- 파일 목록 반복 끝 -->
+			<%end %>
+		</div>
+		<fieldset id="imagehard_search">
+			<p class="search_ext">
+				<label for="image_search_type">이미지 확장자별 보기</label>
+				<select name="_ext" id="image_search_type">
+					<option value='all'>전체보기</option>
+					<%@exts.each do |e| %>
+						<option value="<%= e %>" <%= "selected" if e == params[:ext] %>><%= e.upcase %></option>
+					<%end %>
+				</select>
+			</p>
+			<p class="search_val">
+				<label for="image_search_val">검색</label>
+				<input name="search" id="image_search_val" type="text" value="<%= params[:search] %>"/><input id="image_search_submit_btn" type="submit" value="검색" class="submit-button"/>
+			</p>
+		</fieldset>
+		<div class="upload">
+			<% form_tag({:action => ''}, {:multipart => true, :id => "imgFile", :class => "upload-image"} ) do -%>
+				<input type="hidden" name="myimage_folder_id" id="myimage_folder_id">
+				<label for="myimage_image_file">이미지 올리기</label> <input name="myimage_image_file" type="file" id="myimage_image_file">
+				<a id="imgUpload_btn">올리기</a>
+			<% end%>
+		</div>
+		<div class="pager">				
+			<%ext = "all" %>
+			<%= @myimages.pager.to_html "/myimages?ext=#{ext}&search=#{params[:search]}" %>
+			<%#= @myimages.pager.to_html "Javascript:alert('test'); /myimages?" %>
+		</div>
 	</div>
 </div>

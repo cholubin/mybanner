@@ -62,40 +62,42 @@ h1 { position: absolute; top: 36px; }
 #popup-view { border: 1px solid #999; display: none; background-color: White; position: absolute; z-index:100; overflow:hidden}
 #popup-closeButton { display:none; background-image: url('/images/default/button-close.png'); position: absolute;z-index:110;width:52px;height:20px;cursor:pointer}
 .popup-order-view { position: absolute; z-index: 100; top: 30px; left: 20px; width: 600px; }
-#ajaxloadpage { background: url("/images/default/block-popup-bg.png") repeat-x left top white; padding: 0 20px; }
-#ajaxloadpage h3 { line-height: 59px; font-size: 18px;}
-#ajaxloadpage p { margin: 0; padding: 12px 0; }
-#ajaxloadpage fieldset { background-color: #eee; border: 1px solid #ccc; margin: 0; padding: 0; }
-#ajaxloadpage fieldset p { margin: 0; padding: 5px 10px; *zoom:1; line-height: 22px; }
-#ajaxloadpage fieldset p:after {content:" "; display:block; clear:both;}
-#ajaxloadpage legend { display: none; }
-#ajaxloadpage #login-form label { width: 80px; display: block; }
-#ajaxloadpage #login-form .user-sign-up { display: block; width: 156px;height: 45px; text-indent: -5000px; background:url(/images/default/button-signup.png) ;}
-#ajaxloadpage #login-form .user-sign-up:hover { background-position: -156px; }
-#ajaxloadpage #login-form .user-sign-up:active { background-position: -312px; }
-#ajaxloadpage #login-form input { width: 180px; }
-#ajaxloadpage #login-form input.submit-button { width: 188px; }
-#ajaxloadpage #signup-form .info {  width: 300px; padding: 10px 0; }
-#ajaxloadpage #signup-form .info label { width: 100px; display: block; float: left;line-height: 22px; }
-#ajaxloadpage #signup-form #user-id { width: 80px; }
-#ajaxloadpage #signup-form #user-name { width: 80px; }
-#ajaxloadpage #signup-form #user-password { width: 130px; }
-#ajaxloadpage #signup-form #user-repassword { width: 130px; }
-#ajaxloadpage #signup-form #user-email { width: 160px; }
+#popup-view #ajaxloadpage { background: url("/images/default/block-popup-bg.png") repeat-x left top white; padding: 0 20px; }
 
-#ajaxloadpage #signup-form .agree { position: absolute; width: 282px; height: 218px; overflow: auto; top: 98px; left: 337px; line-height: 150%; font-size: 11px; padding: 0 10px 10px; color: #999; background: white; }
-#ajaxloadpage #signup-form .agree h2 {  line-height: 30px; padding: 0 10px; border-bottom: 1px solid #ccc; font-size: 12px; }
-#ajaxloadpage #signup-form .submit-button { position: absolute; top: 298px ;  left: 20px; width: 302px; height: 30px;}
+/* My Comment */
+#popup-view h3 { line-height: 59px; font-size: 18px;}
+#popup-view p { margin: 0; padding: 12px 0; }
+#popup-view fieldset { background-color: #eee; border: 1px solid #ccc; margin: 0; padding: 0; }
+#popup-view fieldset p { margin: 0; padding: 5px 10px; *zoom:1; line-height: 22px; }
+#popup-view fieldset p:after {content:" "; display:block; clear:both;}
+#popup-view legend { display: none; }
+#popup-view #login-form label { width: 80px; display: block; }
+#popup-view #login-form .user-sign-up { display: block; width: 156px;height: 45px; text-indent: -5000px; background:url(/images/default/button-signup.png) ;}
+#popup-view #login-form .user-sign-up:hover { background-position: -156px; }
+#popup-view #login-form .user-sign-up:active { background-position: -312px; }
+#popup-view #login-form input { width: 180px; }
+#popup-view #login-form input.submit-button { width: 188px; }
+#popup-view #signup-form .info {  width: 300px; padding: 10px 0; }
+#popup-view #signup-form .info label { width: 100px; display: block; float: left;line-height: 22px; }
+#popup-view #signup-form #user-id { width: 80px; }
+#popup-view #signup-form #user-name { width: 80px; }
+#popup-view #signup-form #user-password { width: 130px; }
+#popup-view #signup-form #user-repassword { width: 130px; }
+#popup-view #signup-form #user-email { width: 160px; }
 
-#ajaxloadpage #edit-user-form label {display: block; width: 110px; line-height: 22px; float: left; }
-#ajaxloadpage #edit-user-form .submit-button { position: absolute; top: 289px; left: 20px; width: 320px; height: 30px; }
-#ajaxloadpage #edit-user-form input { width: 180px; }
-#ajaxloadpage #edit-user-form .withdraw {  display: block; position: absolute; top: 121px; left: 260px;  width: 52px; text-align: center; border: 1px solid #333; border-color: #ccc #999 #999 #ccc; background: url(/images/default/form-button-bg-white.png); color: #666; padding: 0 7px; line-height: 22px;}
-#ajaxloadpage #edit-user-form .withdraw:hover { color: #666; font-weight: bold; }
-#ajaxloadpage #user-withdraw-form fieldset input { height: 10px; border: none; background: none; }
-#ajaxloadpage #user-withdraw-form fieldset p { line-height: 20px; margin: 0; padding: 2px 10px; }
-#ajaxloadpage #user-withdraw-form .submit-button { display: block; position: absolute; top: 266px; left: 20px; line-height: 24px; width: 324px; text-align: center; border: 1px solid #333; border-color: #ccc #999 #999 #ccc; background: url(/images/default/form-button-bg-white.png); color: #666; padding: 0 7px; }
-#ajaxloadpage #user-withdraw-form .submit-button:hover { color: #666; font-weight: bold; }
+#popup-view #signup-form .agree { position: absolute; width: 282px; height: 218px; overflow: auto; top: 98px; left: 337px; line-height: 150%; font-size: 11px; padding: 0 10px 10px; color: #999; background: white; }
+#popup-view #signup-form .agree h2 {  line-height: 30px; padding: 0 10px; border-bottom: 1px solid #ccc; font-size: 12px; }
+#popup-view #signup-form .submit-button { position: absolute; top: 298px ;  left: 20px; width: 302px; height: 30px;}
+
+#popup-view #edit-user-form label {display: block; width: 110px; line-height: 22px; float: left; }
+#popup-view #edit-user-form .submit-button { position: absolute; top: 289px; left: 20px; width: 320px; height: 30px; }
+#popup-view #edit-user-form input { width: 180px; }
+#popup-view #edit-user-form .withdraw {  display: block; position: absolute; top: 121px; left: 260px;  width: 52px; text-align: center; border: 1px solid #333; border-color: #ccc #999 #999 #ccc; background: url(/images/default/form-button-bg-white.png); color: #666; padding: 0 7px; line-height: 22px;}
+#popup-view #edit-user-form .withdraw:hover { color: #666; font-weight: bold; }
+#popup-view #user-withdraw-form fieldset input { height: 10px; border: none; background: none; }
+#popup-view #user-withdraw-form fieldset p { line-height: 20px; margin: 0; padding: 2px 10px; }
+#popup-view #user-withdraw-form .submit-button { display: block; position: absolute; top: 266px; left: 20px; line-height: 24px; width: 324px; text-align: center; border: 1px solid #333; border-color: #ccc #999 #999 #ccc; background: url(/images/default/form-button-bg-white.png); color: #666; padding: 0 7px; }
+#popup-view #user-withdraw-form .submit-button:hover { color: #666; font-weight: bold; }
 
 /* 팝업 이미지 하드 */
 #imagehard-folder p.folder { padding: 0 0 0 30px; background: url("/images/content/icon-folder.png") no-repeat 6px 0; overflow: hidden; height: 30px;line-height: 30px; font-weight: bold; margin: 0; cursor:pointer; width: 120px; }
@@ -130,7 +132,7 @@ h1 { position: absolute; top: 36px; }
 #imagehard-folder fieldset h5, #imagehard-folder fieldset label { display: none; }
 #imagehard-folder fieldset input { width: 160px; margin: 2px auto; display: block;}
 #imagehard-folder fieldset input.submit-button { width: 168px; }
-#imagehard-list { position: absolute; width: 592px; left: 200px; top: 70px; *zoom:1; }
+#imagehard-list { position: absolute; width: 592px; left: 200px; top: 110px; *zoom:1; }
 #imagehard-list:after {content:" "; display:block; clear:both;}
 #imagehard-list ul.article { float: left; width: 136px; overflow: hidden; margin: 0 12px 20px 0; padding: 0; }
 #imagehard-list ul, #imagehard-list li { padding: 0; }
@@ -139,11 +141,39 @@ h1 { position: absolute; top: 36px; }
 #imagehard-list li.filename a { width: 300px; display: block; }
 #imagehard-list li.filename span { position: absolute; top: 0px; right: 0px; height: 20px; width: 13px; background: url("/images/main/main-date-bg.png") left top; }
 #imagehard-list li.date { font-size: 10px; font-family: tahoma; line-height: 16px; position: relative;}
-#imagehard div.upload { position:absolute; top: 460px; left: 200px; height: 31px;width: 578px; background: #eee; border:1px solid #ddd; line-height: 31px; z-index: 33; }
+#imagehard div.upload { position:absolute; top: 504px; left: 200px; height: 33px;width: 580px; line-height: 31px; z-index: 33; }
 #imagehard .upload-image label { font-weight: bold; letter-spacing:-1px; padding-left: 10px; }
 #imagehard .upload-image #myimage_image_file {  width: 407px; }
-#imagehard div.pager { position: absolute; top: 504px; left: 200px; } #imagehard ul.pager {  margin: 0; }
+#imagehard div.pager { position: absolute; top: 460px; left: 200px; } #imagehard ul.pager {  margin: 0; }
 
+#imagehard_preview, #imagehard_preview input{ color: white; }
+#imagehard_preview h2 { display: none; }
+#imagehard_preview h3 { position: absolute; width: 180px; left: 540px; top: 150px; font-size: 14px; font-weight: bold;line-height: 140%; letter-spacing: -1px; }
+#imagehard_preview #preview_image { position: absolute; top: 15px; left: 15px; width: 510px; height: 510px; line-height: 520px; overflow: hidden;  text-align: center;}
+#imagehard_preview #preview_image img { border: 1px solid black; max-height: 508px; max-width: 508px; width: expression( this.clientWidth > 507 ? "508px" : "auto" ); height: expression( this.clientHeight > 507 ? "508px" : "auto" ); }
+#imagehard_preview ul { position: absolute; top: 340px; left: 540px; width: 180px; }
+#imagehard_preview ul li { padding: 0 0 8px; position: relative; }
+#imagehard_preview ul li a { display: block; text-indent: -5000px;  }
+#imagehard_preview ul li.download a, #imagehard_preview ul li.delete a { width: 180px; background: no-repeat left top; }
+#imagehard_preview ul li.download a { background-image: url("/images/content/button-download-original.png"); height: 35px }
+#imagehard_preview ul li.delete a { background-image: url("/images/content/button-image-delete.png");height: 27px; }
+#imagehard_preview ul li.download a:hover, #imagehard_preview ul li.delete a:hover { background-position: -180px 0; }
+#imagehard_preview ul li.download a:active, #imagehard_preview ul li.delete a:active {  background-position: -360px 0; }
+#imagehard_preview ul input { background-image: url("/images/default/form-input-bg-black.png"); border: 1px solid black; border-color: black #666 #666 black; }
+#imagehard_preview ul li.change_file label, #imagehard_preview ul li.move_file label { 
+display: block; margin: 0 0 2px; line-height: 20px; }
+#imagehard_preview ul li.change_file input, #imagehard_preview ul li.move_file select { width: 124px; }
+#imagehard_preview ul li.change_file a , #imagehard_preview ul li.move_file a { width: 41px; height: 27px; background: url("/images/content/button-image-change.png") no-repeat left top; position: absolute;right: 0px; top: 21px;}
+#imagehard_preview ul li.change_file a:hover , #imagehard_preview ul li.move_file a:hover { background-position: -41px; }
+#imagehard_preview ul li.change_file a:active , #imagehard_preview ul li.move_file a:active { background-position: -82px; }
+
+#imagehard_search { width: 580px; position: absolute; top: 60px; left: 200px; background: transparent!important;  border-bottom: 1px solid #ddd; border-width: 0 0 1px 0 !important; height: 30px;}
+#imagehard_search p { position: absolute; margin: 0; padding: 0!important; top: 0; line-height: 30px !important; }
+#imagehard_search label { font-weight: bold; }
+#imagehard_search p.search_val { right: 0; }
+#imagehard_search input { border: 0; background: none; margin: 0; padding: 0; vertical-align:middle;}
+#imagehard_search #image_search_val { background: url("/images/content/input-search.png");width: 166px; height: 22px; line-height: 22px; padding-left: 30px; font-size: 11px; }
+#imagehard_search .submit-button { background: url("/images/content/input-search-button.png");width: 31px; height: 22px; text-indent: -5000px;  }
 
 /* 컨텐츠 섹션 시작 */
 
@@ -246,6 +276,15 @@ ul.pager { width: 580px; height: 35px; background: url("/images/default/paging-b
 .pager .last a { width: 60px;  background-image: url("/images/default/paging-last-button.png"); left: 519px;}
 .pager .jump a:hover { background-position: -60px; }
 .pager .jump a:active { background-position: -120px; }
+
+/* 웹탑 에디터 */
+#editor_header { height: 31px; background: url("/images/editor/header-bg.png") repeat-x; }
+#editor_header h2 { text-indent: -5000px; width: 345px; height: 31px; background: url("/images/editor/header-tab.png") no-repeat; }
+#editor_header a#back_to_home { display: block; width: 216px; height: 27px; background: url("/images/editor/button-back-home.png") no-repeat left top; text-indent: -5000px;position: absolute; top: 4px; right: 0; }
+#editor_header a#back_to_home:hover { background-position: -216px 0; }
+#editor_header a#back_to_home:active { background-position: -432px 0; }
+#editor_footer { background: url("/images/editor/footer-bg.png"); height: 44px; }
+#editor_footer img { display: block; margin: 0 auto; }
 
 /* 푸더 섹션 시작 */
 

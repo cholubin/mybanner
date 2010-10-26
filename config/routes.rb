@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :temps
   # map.resources :temps, :only => [:index, :show]
-  map.resources :myimages
+  # map.resources :myimages
 
   map.resources :mycarts
   map.resources :sessions, :only => [:new, :create, :destory]

@@ -23,11 +23,10 @@
 		<thead>
 			<tr>
 				<th class="check" id="chk_all"><span>전체체크</span></th>
-				<th class="edit-type">구분</th>
+				<th class="date">작업일</th>
 				<th class="design">디자인 품목</th>
 				<th class="piece">수량</th>
 				<th class="price">가격</th>
-				<th class="date">수정일</th>
 				<th class="option">옵션선택</th>
 			</tr>
 		</thead>
@@ -46,14 +45,8 @@
 			%>
 			<tr id="<%= my.id.to_s %>" class="item">
 				<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
-				<td class="edit-type">
-					<% if my.job_code == 0 %>
-					<span class="self-edit"/>직접편집</span>
-					<% else %>
-					<span class="order-edit"/>편집의뢰</span>
-					<% end %>
-				</td>
-				<td class="design"><%= category_info%><span class="design-code">(<%= sn_num %>)</span><div class="other"><%= "₩"+Temp.get(my.temp_id).price %> / <%= my.size %></div><span class="request code-<%=my.feedback_code%>"><%= Request_code.first(:code => my.feedback_code).name %></span>
+				<td class="date"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="request code-<%=my.feedback_code%>"><%= Request_code.first(:code => my.feedback_code).name %></a><%= my.updated_at.strftime('%y.%m.%d') %></td>
+				<td class="design <%= my.job_code == 0 ? "self-edit":"order-edit"%>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= sn_num %></span></a> <div class="other">단가: <%= Temp.get(my.temp_id).price %>원, <%= my.size %></div>
 				<div class="action-select">
 					<ul>
 						<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
@@ -63,7 +56,6 @@
 				</div></td>
 				<td class="piece"><a class="minus">-</a><input id="peice_<%= my.id.to_s %>" name="piece[]" value="1" size="2" class="piece" /><a class="plus">+</a></td>
 				<td class="price" id="price_<%= my.id.to_s %>"><%= Temp.get(my.temp_id).price %>&nbsp;<input type="hidden" id="unit_price_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>"><input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>"></td>
-				<td class="date"><%= my.updated_at.strftime('%y.%m.%d') %></td>
 				<td class="option">
 					<h5><a class="select">옵션을 선택해주세요.</a></h5>
 					<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 시작 -->
@@ -233,36 +225,37 @@ $('#order').click(function(){
 
 });
 
-$('#order_basic').click(function(){
-	alert("니가 결재창을 눌렀냐?");
+$('#order_basic').live("click", function(){
 	var temp_array = jQuery.makeArray($('.chkbox:checked'));
-	// $("input:checkbox:checked").each(function(){
-	// 	temp_array += $(this).val() + ",";
-	// });
-	var del_ids = "";
+	var order_item = "";
+
 	jQuery.each(temp_array, function(){
-		del_ids += $(this).val() + ",";
+		order_item += $(this).val() + ",";
 	})
 	
-	if (del_ids == ""){
+	if (order_item == ""){
 		alert("주문할 항목을 선택해주세요!");
 	}else{
-		if (window.confirm("결재를 진행하시겠습니까?")){
+		if ($('#receive-type option:selected').val() == ""){
+			alert('배송방법을 선택해주세요!');
+			return false;
+		}else{
 			loadingView();
-			// $.ajax({
-			// 					data:'ids='+ del_ids, 
-			// 					dataType:'script', 
-			// 					type:'post', 
-			// 					url:'/mytemplates/destroy_selection',
-			// 					success: function(request){
-			// 						jQuery.each(temp_array, function(){
-			// 							$('#'+$(this).val()).remove();
-			// 						})
-			// 						loadingView();
-			// 					}
-			// 				});	
+			$.ajax({
+				data:'pay_m='+$('input:radio:checked').val()+'&total_price='+$('#order_total_price').val()+'&receive-note='+$('#receive-note').val()+'&address2='+$('#address2').val()+'&address1='+$('#address-selector option:selected').text()+'&zip_code='+$('#zip_code').val()+'&receive_mobile='+$('#receive-mobile').val()+'&receive_tel='+$('#receive-tel').val()+'&receive_name='+$('#receive-name').val()+'&receive_type='+$('#receive-type option:selected').val()+'&ids='+ order_item, 
+				dataType:'script', 
+				type:'post', 
+				url:'/mytemplates/create_order',
+				success: function(request){
+					loadingView();
+					if(request != "주문에러!"){
+						alert("주문번호: "+request+" 주문절차가 정상적으로 처리되었습니다!");	
+					}else{
+						alert("주문진행시 문제가 발생하였습니다! 관리자에게 문의하여 주시기 바랍니다.");	
+					}
+				}
+			});
 		}
-		
 	}
 });
 
@@ -346,10 +339,11 @@ $("a.plus")
 
 
 // 디자인바구니 액션 by fooleaf
-$("#designcart-list td.design")
+$("#designcart-list a.item")
 	.live("click",
 	function (){
-		$(".action-select ul",$(this)).slideDown("fast")
+		$(this).parents("td.design").find(".action-select ul").slideDown("fast");
+		return false;
 	}
 );
 

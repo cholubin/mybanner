@@ -40,7 +40,7 @@ class User
   before :save, :encrypt_password
   before :update, :encrypt_password
   before :create, :pdf_path
-  after  :save, :demo_up
+  # after  :save, :demo_up
 
   def pdf_path
 

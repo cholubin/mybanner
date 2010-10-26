@@ -13,19 +13,18 @@ class Myimage
   mount_uploader :image_file, MyimageUploader
   
   # Attributes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  property :image_file,                 Text,     :default => "no_image"
-  property :image_filename,             String,   :length => 200  
-  property :image_thumb_filename,       String,   :length => 200    
-  property :image_filename_encoded,     String,   :length => 200
-      
   property :id,                         Serial
   property :name,                       String
   property :description,                Text,     :lazy => [ :show ]
   property :tags,                       Text,     :lazy => [ :show ]
   property :type,                       String,   :default => "jpg"
-  
-  property :folder,                String,   :default => "photo"
-  property :folder_id,                  Integer,  :default => 9999
+
+  property :image_file,                 Text,     :default => "no_image"
+  property :image_filename,             String,   :length => 200  
+  property :image_thumb_filename,       String,   :length => 200    
+
+  # property :folder,                     String,   :default => "photo"
+  property :folder_id,                  Integer
   property :folder_name,                String,   :default => "photo"
   
 
@@ -40,7 +39,26 @@ class Myimage
   end
 
   def self.search(search, page)
-      (Myimage.all(:name.like => "%#{search}%") | Myimage.all(:tags.like => "%#{search}%")).page :page => page, :per_page => 10
+      (Myimage.all(:name.like => "%#{search}%") | Myimage.all(:tags.like => "%#{search}%")).page :page => page, :per_page => 12
+  end
+  
+  def self.filter_by(ext, folder_id)
+    
+    puts_message ext.to_s
+    puts_message folder_id.to_s
+      if ext == "all"
+        if folder_id == "photo"
+          Myimage.all(:folder_name => folder_id.to_s)
+        else
+          Myimage.all(:folder_id => folder_id.to_i)
+        end
+      else
+        if folder_id == "photo"
+          Myimage.all(:type => ext, :folder_name => folder_id.to_s)
+        else
+          Myimage.all(:type => ext, :folder_id => folder_id.to_i)
+        end
+      end
   end
   
   def set_dir
@@ -51,19 +69,19 @@ class Myimage
   
   def url
     if not self.user.nil?
-      "#{HOSTING_URL}" + "user_files/#{self.user.userid}/images/#{self.folder}/#{self.image_filename}"
+      "#{HOSTING_URL}" + "user_files/#{self.user.userid}/images/photo/#{self.image_filename}"
     end
   end
 
   def thumb_url
     if not self.user.nil?
-      "#{HOSTING_URL}" + "user_files/#{self.user.userid}/images/#{self.folder}/Thumb/#{self.image_thumb_filename}"
+      "#{HOSTING_URL}" + "user_files/#{self.user.userid}/images/photo/Thumb/#{self.image_thumb_filename}"
     end
   end
 
   def preview_url
     if not self.user.nil?
-      "#{HOSTING_URL}" + "user_files/#{self.user.userid}/images/#{self.folder}/Preview/#{self.image_thumb_filename}"
+      "#{HOSTING_URL}" + "user_files/#{self.user.userid}/images/photo/Preview/#{self.image_thumb_filename}"
     end
   end
 

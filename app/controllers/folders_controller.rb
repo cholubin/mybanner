@@ -39,13 +39,30 @@ class FoldersController < ApplicationController
     @folder = Folder.find(params[:id])
   end
 
+  def update_folder_order
+    folder_id = params[:folder_id].split(',')
+    
+    if !folder_id.nil? 
+      i = 1
+      folder_id.each do |s|
+        folder = Folder.get(s.to_i)
+        folder.order = i
+        folder.save
+        i += 1
+      end
+    end
+
+    puts_message "folder sorting has finished!"
+    render :nothing => true
+  end
+  
   def create_folder
     folder_name = params[:folder_name]
     
     folder_count = Folder.all(:user_id => current_user.id, :name => folder_name).count
     total_folder_count = Folder.all(:user_id => current_user.id).count
     if folder_count < 1
-      if total_folder_count < 13
+      if total_folder_count < 12
         @folder = Folder.new()
         @folder.name = folder_name
 
@@ -55,7 +72,7 @@ class FoldersController < ApplicationController
 
         render :text => "success_" + @folder.id.to_s
       else
-        render :text => "fail_" + "폴더는 13개 까지만 생성하실 수 있습니다!"
+        render :text => "fail_" + "폴더는 12개 까지만 생성하실 수 있습니다!"
       end
       
     else

@@ -1,0 +1,19 @@
+		<div id="submenu">
+<% if @menu == "company" %>
+			<h3>회사소개</h3>
+			<ul>
+				<li><a class="<%=(@section == "about")?"title-on":"title"%>" href="/pages/about">회사소개</a></li>
+				<li><a class="<%=(@section == "map")?"title-on":"title"%>" href="/pages/map">연락처/오시는길</a></li>
+			</ul>
+<% else  %>
+			<h3>고객센터</h3>
+			<ul>
+				<li><a class="<%=(@section == "home")?"title-on":"title"%>" href="/pages/cscenter">고객센터 첫페이지</a></li>
+				<li><a class="<%=(@section == "cscenter")?"title-on":"title"%>" href="/notices">공지사항</a></li>
+				<li><a class="<%=(@section == "notices")?"title-on":"title"%>" href="/qnaboard">질문과 답변</a></li>
+				<li><a class="<%=(@section == "qnaboard")?"title-on":"title"%>" href="/faqs">자주 묻는 질문</a></li>
+				<li><a class="<%=(@section == "policy")?"title-on":"title"%>" href="/pages/policy">개인정보/이용정책</a></li>
+				<li><a class="<%=(@section == "sitemap")?"title-on":"title"%>" href="/pages/sitemap">사이트맵</a></li>
+			</ul>
+<% end %>
+		</div>
