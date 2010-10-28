@@ -201,8 +201,25 @@ class MyimagesController < ApplicationController
 
   end
 
-  # PUT /myimages/1
-  # PUT /myimages/1.xml
+  def update_folder
+    myimage_id = params[:myimage_id].to_i
+    folder_id = params[:folder_id]
+    @myimage = Myimage.get(myimage_id)
+    
+    if folder_id == "photo"
+      @myimage.folder_id = nil
+      @myimage.folder_name = "photo"
+    else
+      @myimage.folder_id = folder_id.to_i
+      @myimage.folder_name = Folder.get(folder_id).name
+    end
+    
+    if @myimage.save
+      render :nothing => true
+    end
+    
+  end
+  
   def update_name
     myimage_id = params[:myimage_id].to_i
     myimage_name = params[:filename]

@@ -5,12 +5,17 @@
 	<div id="delivery-section">
 		<div id="delivery-select">
 			<label for="receive-type">배송방법 선택</label>
-			<select name="receive_type" id="receive-type">
+			<select name="receive_type" id="receive-type2">
 				<option value="" selected>선택해주세요.</option>
 				<option value="">-----------------</option>
-				<option value="일반택배">일반택배</option>
-				<option value="퀵서비스">퀵서비스</option>
-				<option value="직접수령">직접수령</option>
+				<% 
+				@delivery = Basicinfo.all(:category => "delivery", :order => [:order])
+				@delivery.each do |d|	
+				%>
+				<option value="<%= d.code %>" price="<%= d.price %>"><%= d.name %></option>
+				<%
+				end
+				%>
 			</select>
 		</div>
 		<fieldset id="delivery-receiver">

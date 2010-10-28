@@ -55,7 +55,10 @@
 					</ul>
 				</div></td>
 				<td class="piece"><a class="minus">-</a><input id="peice_<%= my.id.to_s %>" name="piece[]" value="1" size="2" class="piece" /><a class="plus">+</a></td>
-				<td class="price" id="price_<%= my.id.to_s %>"><%= Temp.get(my.temp_id).price %>&nbsp;<input type="hidden" id="unit_price_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>"><input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= Temp.get(my.temp_id).price %>"></td>
+				<td class="price" id="price_<%= my.id.to_s %>"><%= my.price %></td>
+				<input type="hidden" id="tmp_total_price" value="0">
+				<input type="hidden" class="unit_price" id="unit_price_<%= my.id.to_s %>" value="<%= my.price %>">
+				<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= my.price %>">
 				<td class="option">
 					<h5><a class="select">옵션을 선택해주세요.</a></h5>
 					<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 시작 -->
@@ -113,12 +116,17 @@
 		<h4>배송비용</h4>
 		<p>
 			<label for="receive-type">배송방법</label>
-			<select name="### 배송방법셀렉박스이름 ###" id="receive-type">
+			<select name="### 배송방법셀렉박스이름 ###" id="receive-type1">
 				<option value="" selected>선택해주세요.</option>
 				<option value="">-----------------</option>
-				<option value="일반택배">일반택배</option>
-				<option value="퀵서비스">퀵서비스</option>
-				<option value="직접수령">직접수령</option>
+				<% 
+				@delivery = Basicinfo.all(:category => "delivery", :order => [:order])
+				@delivery.each do |d|	
+				%>
+				<option value="<%= d.code %>" price="<%= d.price %>"><%= d.name %></option>
+				<%
+				end
+				%>
 			</select>
 		</p>
 		<p class="price" id="delivery_price">0원</p>
@@ -146,46 +154,48 @@ function popup(doc_name) {
       window.open(url ,'webtop_print','width='+width+', height='+height);
 }
 
-$('.piece').change(function() {
-	id_temp = event.target.id.split("_");
+$('.piece').change(function(event) {
+	id_temp = $(event.target).attr("id").split("_");
 	id = id_temp[1];
-	ea = parseInt( $('#peice_'+id).val() );
-	unit_price = parseInt($('#unit_price_'+id).val());
-	
 
-	$('#price_'+id).text(ea * unit_price);
-	
-	if($('#chk_'+id).attr("checked") == false){
-		$('#price_minus_'+id).val(ea * unit_price);
-		// alert($('#price_minus_'+id).val());
+	$chkbox = $('#chk_'+id);
+	if($chkbox.attr("checked") == false){
+		if( parseInt($('#peice_'+id).val()) < 1 ){
+			$('#peice_'+id).val("1");
+		}
+		current_unit = $('#peice_'+id).val();
+		unit_price = $('#unit_price_'+id).val();
+		tmp_total_price = parseInt(current_unit) * parseInt(unit_price);
+		$(event.target).parents("tr").find("td.price").html(tmp_total_price);
+	}else{
+		alert("품목이 선택되어진 상태에서는 수량을 변동할 수 없습니다! \n체크박스의 체크를 해제하시고 시도해주세요!");
+		return false;
 	}
-	// alert(event.target.id);
 });
 
-$('.chkbox').live("click", function(){
+$('.chkbox').live("click", function(event){
 	id = $(this).val();
-	var unit_price = parseInt($('#price_'+id).text());
-	// var ea = parseInt( $('#peice_'+id).val() );
-	temp_price = unit_price;
-	
+	var price = parseInt($(event.target).parents("tr").find("td.price").html());
+ 	tmp_total_price = parseInt($('#total_price').text().replace("원","").replace(",",""));
 	
 	if($(this).attr("checked") == true){
-		total_price += temp_price;
+		tmp_total_price += price;
+		$('#peice_'+id).attr("disabled", true);
 	}else{
-		total_price -= parseInt($('#price_minus_'+id).val());
+		tmp_total_price -= price;
+		$('#peice_'+id).attr("disabled", false);
 	}
-	
-	char_total_price = total_price;
-	// 콤마찍기
-	var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
-	char_total_price += '';                // 숫자를 문자열로 변환
 
-	while (reg.test(char_total_price))
-	char_total_price = char_total_price.replace(reg, '$1' + ',' + '$2');
-	$('#total_price').text(char_total_price + "원");
+	$('#tmp_total_price').val(tmp_total_price);
+	$('#total_price').html(to_comma(tmp_total_price) + "원");
 	
 });
-
+$('#address-search').live("keydown", function(event){
+	if(event.keyCode == 13){
+		$('#zip_search').click();
+		return false;
+	}	
+})
 $('#zip_search').live("click", function(){
 	if ($('#address-search').val() == ""){
 		alert("검색어를 입력해주세요!");
@@ -220,36 +230,83 @@ $('#order').click(function(){
 	if (order_ids == ""){
 		alert("주문할 항목을 선택해주세요!");
 	}else{
-		popupView(696,390,"/mytemplates/mytemplate_order", { total_price: $('#total_price').text().replace(",",""), ids: order_ids});
+		popupView(696,390,"/mytemplates/mytemplate_order", { total_price: $('#total_price').text().replace(",",""), ids: order_ids}, function(){
+			$type_val = $('#receive-type1 option:selected').val();
+			if($type_val != ""){
+				$('#receive-type2 option').each(function(){
+					if($(this).val() == $type_val){
+						$(this).attr("selected", true);
+					}
+				});
+			}
+		} );
 	}
 
 });
 
+function to_comma(price){
+	char_price = price;
+	// 콤마찍기
+	var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+	char_price += '';                // 숫자를 문자열로 변환
+
+	while (reg.test(char_price))
+	char_price = char_price.replace(reg, '$1' + ',' + '$2');
+	
+	return char_price;
+}
+
+$('#receive-type1').live("change",function(){
+	if($('#receive-type1 option:selected').val() != ""){
+		delivery_price = parseInt($('#receive-type1 option:selected').attr("price"));
+	}else{
+		delivery_price = 0;
+	}
+	$('#delivery_price').html(to_comma(delivery_price) + "원");
+	current_total_price = parseInt($('#tmp_total_price').val());
+	$('#total_price').html(to_comma(current_total_price + delivery_price) + "원");
+
+});
+
+$('#receive-type2').live("change",function(){
+	$type_val = $('#receive-type2 option:selected').val();
+	$('#receive-type1 option').each(function(){
+		if($(this).val() == $type_val){
+			$(this).attr("selected", true);
+		}
+	});
+});
+
+// 최종 주문하기 버튼 클릭시 프로세스 ==========================================
 $('#order_basic').live("click", function(){
 	var temp_array = jQuery.makeArray($('.chkbox:checked'));
 	var order_item = "";
-
+	var item_unit = "";
 	jQuery.each(temp_array, function(){
 		order_item += $(this).val() + ",";
+		item_unit += $('#peice_'+order_item).val() + ",";
 	})
 	
 	if (order_item == ""){
 		alert("주문할 항목을 선택해주세요!");
 	}else{
-		if ($('#receive-type option:selected').val() == ""){
+		if ($('#receive-type1 option:selected').val() == ""){
 			alert('배송방법을 선택해주세요!');
 			return false;
 		}else{
 			loadingView();
 			$.ajax({
-				data:'pay_m='+$('input:radio:checked').val()+'&total_price='+$('#order_total_price').val()+'&receive-note='+$('#receive-note').val()+'&address2='+$('#address2').val()+'&address1='+$('#address-selector option:selected').text()+'&zip_code='+$('#zip_code').val()+'&receive_mobile='+$('#receive-mobile').val()+'&receive_tel='+$('#receive-tel').val()+'&receive_name='+$('#receive-name').val()+'&receive_type='+$('#receive-type option:selected').val()+'&ids='+ order_item, 
+				data:'item_unit='+item_unit+'&pay_m='+$('input:radio:checked').val()+'&total_price='+$('#order_total_price').val()+'&receive-note='+$('#receive-note').val()+'&address2='+$('#address2').val()+'&address1='+$('#address-selector option:selected').text()+'&zip_code='+$('#zip_code').val()+'&receive_mobile='+$('#receive-mobile').val()+'&receive_tel='+$('#receive-tel').val()+'&receive_name='+$('#receive-name').val()+'&receive_type='+$('#receive-type1 option:selected').val()+'&ids='+ order_item, 
 				dataType:'script', 
 				type:'post', 
 				url:'/mytemplates/create_order',
 				success: function(request){
 					loadingView();
 					if(request != "주문에러!"){
-						alert("주문번호: "+request+" 주문절차가 정상적으로 처리되었습니다!");	
+						alert("주문번호: "+request+" \n주문절차가 정상적으로 처리되었습니다!");	
+						$('#popup-closeButton').click();
+						$('.chkbox:checked').parents("tr").remove();
+						
 					}else{
 						alert("주문진행시 문제가 발생하였습니다! 관리자에게 문의하여 주시기 바랍니다.");	
 					}
@@ -266,9 +323,6 @@ $('#chk_all').click(function(){
 $('.delete').click(function(){
 	if (event.target.id == ""){
 		var temp_array = jQuery.makeArray($('.chkbox:checked'));
-		// $("input:checkbox:checked").each(function(){
-		// 	temp_array += $(this).val() + ",";
-		// });
 		var del_ids = "";
 		jQuery.each(temp_array, function(){
 			del_ids += $(this).val() + ",";
@@ -321,19 +375,43 @@ $('.delete').click(function(){
 $("a.minus")
 	.live("click",
 	function() {
-		now = parseInt($(this).parents("tr").find("input.piece").val());
-		if(now <= 0)
-			$(this).parents("tr").find("input.piece").val(0);
-		else
-			$(this).parents("tr").find("input.piece").val(now-1);
+		$id = $(this).parents("tr").attr("id");
+		$chkbox = $('#chk_'+$id);
+		if($chkbox.attr("checked") == false){
+			now = parseInt($(this).parents("tr").find("input.piece").val());
+			if(now <= 1){
+				$(this).parents("tr").find("input.piece").val(1);
+			}
+			else{
+				$(this).parents("tr").find("input.piece").val(now-1);
+			}
+
+			current_unit = $(this).parents("tr").find("input.piece").val();
+			unit_price = $('#unit_price_'+$id).val()
+			total_price = parseInt(current_unit) * parseInt(unit_price);
+			$(this).parents("tr").find("td.price").html(total_price);
+		}else{
+			alert("품목이 선택되어진 상태에서는 수량을 변동할 수 없습니다! \n체크박스의 체크를 해제하시고 시도해주세요!")
+		}
+			
 	}
 );
 
 $("a.plus")
 	.live("click",
 	function() {
-		now = parseInt($(this).parents("tr").find("input.piece").val());
-		$(this).parents("tr").find("input.piece").val(now+1);
+		$id = $(this).parents("tr").attr("id");
+		$chkbox = $('#chk_'+$id);
+		if($chkbox.attr("checked") == false){
+			now = parseInt($(this).parents("tr").find("input.piece").val());
+			$(this).parents("tr").find("input.piece").val(now+1);
+			current_unit = $(this).parents("tr").find("input.piece").val();
+			unit_price = $('#unit_price_'+$id).val()
+			total_price = parseInt(current_unit) * parseInt(unit_price);
+			$(this).parents("tr").find("td.price").html(total_price);
+		}else{
+			alert("품목이 선택되어진 상태에서는 수량을 변동할 수 없습니다! \n체크박스의 체크를 해제하시고 시도해주세요!");
+		}
 	}
 );
 

@@ -22,7 +22,7 @@ end
 		<h4>미리보기</h4>
 		<div id="ie-overflow-fix">
 			<div id="preview-wrap">
-				<img id="preview" src="<%= my.preview_url %>">
+				<img id="preview" src="<%= my.preview_url + "?" + Time.now.to_f.to_s %>">
 			</div>
 		</div>
 		<div class="item-detail-wrap">
@@ -101,73 +101,70 @@ end
 		jbbs = Jobboard.all(:user_id => current_user.id, :mytemp_id => my.id, :order => [:created_at.desc]) 
 	%>	
 		<h4>요청사항/처리 목록</h4>
-		<table cellpadding="0" cellspacing="0" border="0">
-			
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>구분</th>
-					<th>내용</th>
-					<th>작성자</th>
-					<th>요청날짜</th>
-					<th>파일</th>
-				</tr>
-			</thead>
-			
-			<tbody id="jbbs_body">
-				<!-- 요청사항 표시 반복부분 시작 -->
-				<% 
-					num = jbbs.count
-					if jbbs.count > 0
-						jbbs.each do |bbs|
-							if bbs.req_file != nil
-								file_path = "#{HOSTING_URL}user_files/#{current_user.userid}/req_files/" + bbs.req_file
-								ext_name = File.extname(bbs.req_file).gsub(".",'')
-								req_file = "<a href='#{file_path}' class='#{ext_name}'>#{bbs.original_filename}</a>"
-							else
-								req_file = ""	
-							end
-				%>
-				<tr>
-					<td class="number"><%= num %></td>
-					<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
-					<td class="memo"><a href="### 내용보기 페이지로 ###"><%= bbs.content %></a></td>
-					<td class="name"><%= User.get(bbs.user_id).name %></td>
-					<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
-					<td class="file"><%= req_file %></td>
-				</tr>
-				<%
-							num -= 1
-				 		end
-				 	else
-				%>
+		<div id="request_board">
+			<table cellpadding="0" cellspacing="0" border="0">				<thead>
 					<tr>
-						<td colspan="6" id="error-screen"><img src="/images/error/error-empty-comment.gif" alt="작성된 요청사항이 없습니다." width="578" height="214" /></td>
+						<th>작성날짜</th>
+						<th>구분</th>
+						<th>내용</th>
+						<th>작성자</th>
+						<th>파일</th>
+						<th>삭제</th>
 					</tr>
-				<% end %>
-				<!-- 요청사항 표시 반복부분 종료 -->
-			</tbody>
-		</table>
+				</thead>
+				
+				<tbody>
+					<!-- 요청사항 표시 반복부분 시작 -->
+					<% 
+						num = jbbs.count
+						if jbbs.count > 0
+							jbbs.each do |bbs|
+								if bbs.req_file != nil
+									file_path = "#{HOSTING_URL}user_files/#{current_user.userid}/req_files/" + bbs.req_file
+									ext_name = File.extname(bbs.req_file).gsub(".",'')
+									req_file = "<a href='#{file_path}' class='#{ext_name}'>#{bbs.original_filename}</a>"
+								else
+									req_file = ""	
+								end
+					%>
+					<tr>
+						<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
+						<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
+						<td class="memo"><a><%= bbs.content.gsub("\n","<br>") %></a></td>
+						<td class="name"><%= User.get(bbs.user_id).name %></td>
+						<td class="file"><%= req_file %></td>
+						<td class="delete"><a id="del_<%= bbs.id.to_s %>" href="">삭제</a></td>
+					</tr>
+					<%
+								num -= 1
+					 		end
+					 	else
+					%>
+						<tr>
+							<td colspan="6" id="error-screen"><img src="/images/error/error-empty-comment.gif" alt="작성된 요청사항이 없습니다." width="578" height="214" /></td>
+						</tr>
+					<% end %>
+					<!-- 요청사항 표시 반복부분 종료 -->
+				</tbody>
+			</table>
+		</div>
+		<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile", :class => "feedback-add"} ) do -%>
+			<input type="hidden" name="id" value="<%= my.id.to_s %>">
+			<input type="hidden" name="feedback_code" value="" id="feedback_code">
+			<fieldset>
+				<legend>요청사항 입력</legend>
+				<p class="memo">
+					<label for="feedback_memo"><strong>요청내용</strong> <span>편집에 어려운 점이 있거나, 궁금한 점이 있으면 아래 공간에 글을 작성해주세요.</span></label>
+					<textarea name="feedback_memo" id="feedback_memo" placeholder="내용을 입력해주세요."></textarea>
+				</p>
+				<p class="file">
+					<label for="feedback_file">파일올리기</label>
+					<input type="file" name="feedback_file" id="feedback_file" />
+				</p>
+				<p class="comment_submit"><a href="#" class="request">요청 작성</a> <a href="#" class="normal">일반글 작성</a> <a href="#" class="suspend">보류 신청</a></p>
+			</fieldset>
+		<%end %>
 	</div>
-	<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile"} ) do -%>
-		<input type="hidden" name="id" value="<%= my.id.to_s %>">
-		<fieldset>
-			<legend>요청사항 입력</legend>
-			<p class="type"><label for="feedback-type">글 구분</label> 
-				<% Request_code.all(:gubun.like => '%user%' ).each do |r| %>
-				<input name="feedback_code" type="radio" <%= "checked" if r.code == "0" %> value="<%= r.code %>"><%= r.name %>
-				<% end %>
-			<p class="memo">
-				<label for="" id="feedback-memo">요청내용</label>
-				<textarea name="feedback_memo" id="feedback_memo" placeholder="내용을 입력해주세요."></textarea>
-			</p>
-			<p class="file">
-				<label for="" name="" id="feedback-file">파일올리기</label>
-				<input type="file" name="feedback_file" id="feedback_file" />
-			</p>
-			<input id="req_submit" type="button" value="요청사항 접수" class="submit-button"/>
-		</fieldset>
-	<%end %>
 	<a class="back-list" href="/mytemplates">목록으로 돌아가기</a>
 </div>
 
@@ -199,6 +196,23 @@ function del_mytemp(id){
 </script>
 <script language="javascript">
 // 품목별 수량 증가 감소 by fooleaf
+$('tbody tr td.delete').live("click", function(event){
+	if (window.confirm("정말 삭제하시겠습니까?")){
+		bbs_id = $(event.target).attr("id").replace("del_","");
+		$.ajax({
+			data:'bbs_id='+bbs_id, 
+			dataType:'script', 
+			type:'post', 
+			url:'/mytemplates/jobboard_delete',
+			success: function(request){
+				$('#request_board').html(request);
+			}
+		});
+		return false;
+	}else{
+		return false;
+	}
+});
 
 $("a.minus")
 	.live("click",
@@ -256,17 +270,31 @@ $('#zip_search').live("click", function(){
 
 
 //요청사항 접수 게시판 =================================
-$('#req_submit').click(function(){
+$(".comment_submit").click(function(){
 	if ($('#feedback_memo').val() == ""){
 		alert("요청사항을 입력해주세요~");
 		$('#feedback_memo').focus();
+		return false;
 	}else{
 		loadingView();
+		switch($(event.target).attr("class")) {
+			case "request":
+				$("#feedback_code").val("0");
+			break;
+			case "normal":
+				$("#feedback_code").val("6");
+			break;
+			case "suspend":
+				$("#feedback_code").val("3");
+			break;
+		}
+		
 		$('#frmFile').ajaxForm({ 
 	        dataType:  'html', 
 			url: '/mytemplates/jobboard_create',
 	        success:   Callback_req_submit 
 		}).submit();
+		return false;
 	}
 	
 });
@@ -276,13 +304,9 @@ function Callback_req_submit(request,state){
 		loadingView();
 		$('#feedback_memo').val("");
 		$('#feedback_file').val("");
-		request = request.replace("<table>","").replace("</table>","").replace("<tbody>","").replace("</tbody>","")
-		$('#jbbs_body').html(request);
-
-
+		$('#request_board').html(request);
 	}
-};
-// 미리보기 확대/축소/드레그
+};// 미리보기 확대/축소/드레그
 
 function resizePreview(val) {
 	currentWidth = $("#preview").width();

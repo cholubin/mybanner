@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class SessionsController < ApplicationController
-  layout "ajax-load-page"
 
   def new
     @menu = "home"
@@ -21,13 +20,13 @@ class SessionsController < ApplicationController
     
     @menu = "board"
     @board = "session"
-    @section = "new"
+    @section = "create"
 
     
     if params[:session][:userid] == "" or params[:session][:password] == ""
       flash.now[:error] = "아이디와 비밀번호를 모두 입력해 주세요!"        
       # 에러메세지 표시를 위한 수정 > render 'session'
-      render 'errormsg'
+      render 'errormsg', :layout => 'ajax-load-page'
     else
       
       @user = User.first(:userid => params[:session][:userid])
@@ -38,7 +37,7 @@ class SessionsController < ApplicationController
                              
         if user.nil? 
           flash.now[:error] = "아이디와 비밀번호가 일치하지 않습니다!"
-          render 'errormsg'
+          render 'errormsg', :layout => 'ajax-load-page'
           
         else
           
@@ -58,7 +57,7 @@ class SessionsController < ApplicationController
         
       else
         flash.now[:error] = "존재하지 않는 회원아이디 입니다!"
-        render 'errormsg'      
+        render 'errormsg'  , :layout => 'ajax-load-page'    
       end
       
     end

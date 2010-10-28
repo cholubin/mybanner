@@ -1,57 +1,3 @@
-<% if signed_in? %> 
-
-<script type="text/javascript" src="/js/jquery.form.js"></script>
-<script type="text/javascript" src="/js/editor.js"></script>	
-
-<script type="text/javascript">
-		//ajax오류시 메세지 나오게함
-		$(document).ajaxError(function(info,xhr){
-			if(xhr.status==500)
-				alert("데이터 저장시 오류가 발생하였습니다.");
-			}
-		);
-</script>
-
-
-<script language="javascript">
-$(document).ready(function(){
-	$('.self-edit').click(function(){
-		if (window.confirm("디자인바구니에 담으며 바로 편집하시겠습니까?")){
-			loadingView();
-			$.ajax({
-				data:'temp_id='+ event.target.id + '&edit=y', 
-				dataType:'script', 
-				type:'post', 
-				url:'/temps/create_mytemp',
-				success: function(request){
-					loadingView();
-				}
-			});
-		}
-	});
-	$('#req_edit_submit').live("click", function(){
-		if (window.confirm("선택하신 디자인으로 편집의뢰를 신청하시겠습니까?")){
-			// /js/editor.js 에서 처리한다!
-			FileUpload();
-			
-			// 			$.ajax({
-			// 	data:'feedback_memo='+$('#feedback-memo').val()+'&temp_id='+ $('#tempid').val() + '&edit=req', 
-			// 	dataType:'script', 
-			// 	type:'post', 
-			// 	url:'/temps/create_mytemp',
-			// 	success: function(request){
-			// 		alert('신청이 완료되었습니다.\n디자인바구니에서 확인하실 수 있습니다.');
-			// 		$('#popup-closeButton').click();
-			// 	}
-			// });
-		}
-	});
-});
-<% end %>
-
-	
-</script>
-
 <div id="design" class="content-layout">
 	<h3>제품/디자인보기</h3>
 	<p class="content-description">왼쪽 카테고리를 이용하여 마음에드는 제품과 디자인을 선택하세요. 또한 차세대 편집 솔루션 Web Top을 이용하여 전문지식 없어도 내용을 직접 편집하고, 그대로 인쇄 주문이 가능합니다.</p>
@@ -71,18 +17,18 @@ floatClear = 0
 	else
 		code = my.category  + "-" + my.id.to_s
 	end
-
-	if !my.is_col
 %>
 		<div class="article">
-		<a class="preview"><img src="<%= temp_image_path %>" width="578"></a>
-		<ul>
+		<ul class="head">
+			<li class="item"><span>품목 :</span> <%= Category.get(my.category).name%><%= "/" + Subcategory.get(my.subcategory).name if my.subcategory != nil %></li>
 			<li class="designcode"><%= code %></li>
-			<li class="item"><span>품목 :</span> <%=my.category%><%= "(" + my.subcategory + ") " if my.subcategory != nil %></li>
-			<li class="size"><span>사이즈 :</span> <%= my.size %></li>
-			<li class="price"><span>가격 :</span> <%=my.price%></li>
+		</ul>
+		<div class="preview"><img src="<%= temp_image_path %>" width="<%= !@is_col ? "578" : "139" %>"></div>
+		<ul class="foot">
+			<li class="size"><span>기본 :</span> <%= my.size %></li>
+			<li class="price"><span>가격 :</span> <%=my.price%>원</li>
 			<% if signed_in? %>
-			<li  class="self-edit"><a id="<%= my.id.to_s %>">직접편집하기</a><%#= link_to "직접편집하기", '/temps?temp_id='+my.id.to_s+'&edit=y', :confirm => '디자인바구니에 담으며 바로 편집하시겠습니까?',  :method => :post %></li>
+			<li class="self-edit" id="<%= my.id.to_s %>"><a href="#">직접편집하기</a><%#= link_to "직접편집하기", '/temps?temp_id='+my.id.to_s+'&edit=y', :confirm => '디자인바구니에 담으며 바로 편집하시겠습니까?',  :method => :post %></li>
 			<li class="order-edit"><a href="/pages/editorder?id=<%= my.id.to_s %>" class="ajax-edit-order">편집의뢰하기</a></li>
 			<%else %>
 			<li class="self-edit"><a href="/login" class="ajax-sign-in">직접편집하기</a></li>
@@ -91,27 +37,6 @@ floatClear = 0
 		</ul>
 		</div>
 <%
-	else
-%>
-		<div class="article">
-		<ul>
-			<li class="designcode"><%= code %></li>
-			<li class="item"><span>품목 :</span> <%=my.category%><%= "(" + my.subcategory + ") " if my.subcategory != nil %></li>
-			<li class="size"><span>사이즈 :</span> <%= my.size %></li>
-			<li class="price"><span>가격 :</span> <%=my.price%></li>
-			<% if signed_in? %>
-			<li  class="self-edit"><a id="<%= my.id.to_s %>">직접편집하기</a><%#= link_to "직접편집하기", '/temps?temp_id='+my.id.to_s+'&edit=y', :confirm => '디자인바구니에 담으며 바로 편집하시겠습니까?',  :method => :post %></li>
-			<li class="order-edit"><a href="/pages/editorder?id=<%= my.id.to_s %>" class="ajax-edit-order">편집의뢰하기</a></li>
-			<%else %>
-			<li class="self-edit"><a href="/login" class="ajax-sign-in">직접편집하기</a></li>
-			<li class="order-edit"><a href="/login" class="ajax-sign-in">편집의뢰하기</a></li>
-			<%end %>
-		</ul>
-		<a class="preview"><img src="<%= temp_image_path %>" width="139"></a>
-		</div>
-<%
-	end
-	
 	floatClear = floatClear+1;
 	
 	if floatClear == 4
@@ -124,6 +49,17 @@ end
 %>
 		<!-- 디자인 반복 끝-->
 	</div>
+	<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>
+	<fieldset id="search-form">
+		<legend>디자인 검색</legend>
+		<ul>
+			<li><input type="radio" name="###검색항목이름###" id="radio_code" value="designcode"><label for="radio_code">디자인 코드</label></li>
+			<li><input type="radio" name="###검색항목이름###" id="radio_tag" value="tag"><label for="radio_tag">태그</label></li>
+		</ul>
+		<p><input name="search" id="search_val" type="text"/><input type="submit" value="검색" class="submit-button"/></p>
+	</fieldset>
+	<% end %>
+
 <% if @temps.count > 0 %>
 <!-- 페이지 네비게이션 pager -->
 <%
@@ -144,15 +80,52 @@ end
     <%else %>
       <%= Temp.all().isopen(current_user.userid).search(params[:search], params[:page]).pager.to_html "/temps?search=#{params[:search]}" %>      
     <% end 
-end%>
-<!-- 검색폼 -->
-<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>
-	<fieldset>
-		<legend>디자인 검색</legend>
-		<p><label for="search">디자인 코드</label><%= text_field_tag :search, params[:search] %><%= submit_tag("검색") %></p>
-	</fieldset>
-	<% end %>
+end
+end %>
+<div id="popup_m"></div>
+</div>
+<% if signed_in? %> 
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script type="text/javascript" src="/js/editor.js"></script>	
+<script type="text/javascript">
+		//ajax오류시 메세지 나오게함
+		$(document).ajaxError(function(info,xhr){
+			if(xhr.status==500)
+				alert("데이터 저장시 오류가 발생하였습니다.");
+			}
+		);
+</script>
+<script language="javascript">
+$('.self-edit').click(function(){
+if (window.confirm("디자인바구니에 담으며 바로 편집하시겠습니까?")){
+		loadingView();
+		$.ajax({
+			data:'temp_id='+ $(this).attr("id") + '&edit=y', 
+			dataType:'script', 
+			type:'post', 
+			url:'/temps/create_mytemp',
+			success: function(request){
+				openWebTopEditor("<%= current_user.userid %>",get_temps_id,"/mytemplates/"+get_temps_id);
+				loadingView();
+			}
+		});
+		return false;
+	}
+});
+$('#req_edit_submit').live("click", function(){
+	if (window.confirm("선택하신 디자인으로 편집의뢰를 신청하시겠니까?")){
+		FileUpload();
+/*		$.ajax({
+			data:'feedback_memo='+$('#feedback-memo').val()+'&temp_id='+ $('#tempid').val() + '&edit=req', 
+			dataType:'script', 
+			type:'post', 
+			url:'/temps/create_mytemp',
+			success: function(request){
+				alert('신청이 완료되었습니다.\n디자인바구니에서 확인하실 수 있습니다.');
+				$('#popup-closeButton').click();
+			}
+		});*/
+	}
+});
+</script>
 <% end %>
-</div>
-<div id="popup_m">
-</div>

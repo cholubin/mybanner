@@ -1,4 +1,16 @@
-<table>
+<table cellpadding="0" cellspacing="0" border="0">
+	<thead>
+		<tr>
+			<th>작성날짜</th>
+			<th>구분</th>
+			<th>내용</th>
+			<th>작성자</th>
+			<th>파일</th>
+			<th>삭제</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 <%
 	mytemp_id = @mytemp_id
 	jbbs = Jobboard.all(:user_id => current_user.id, :mytemp_id => mytemp_id, :order => [:created_at.desc])
@@ -14,25 +26,23 @@
 				req_file = ""	
 			end
 %>
-
-<tr>
-	<td class="number"><%= num %></td>
-	<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
-	<td class="memo"><a href="### 내용보기 페이지로 ###"><%= bbs.content %></a></td>
-	<td class="name"><%= User.get(bbs.user_id).name %></td>
-	<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
-	<td class="file"><%= req_file %></td>
-</tr>
+		<tr>
+			<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
+			<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
+			<td class="memo"><a><%= bbs.content.gsub("\n","<br>") %></a></td>
+			<td class="name"><%= User.get(bbs.user_id).name %></td>
+			<td class="file"><%= req_file %></td>
+			<td class="delete"><a id="del_<%= bbs.id.to_s %>" href="#">삭제</a></td>
+		</tr>
 <%
 			num -= 1
  		end
+else
 %>
-</table>
-<%
- 	else
-		%>
-			<tr>
-				<td colspan="6" id="error-screen"><img src="/images/error/error-empty-comment.gif" alt="작성된 요청사항이 없습니다." width="578" height="214" /></td>
-			</tr>
-		<% end %>
+		<tr>
+			<td colspan="6" id="error-screen"><img src="/images/error/error-empty-comment.gif" alt="작성된 요청사항이 없습니다." width="578" height="214" /></td>
+		</tr>
+<% end %>
 
+	</tbody>
+</table>

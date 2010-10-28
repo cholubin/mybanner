@@ -295,6 +295,7 @@ class TempsController < ApplicationController
     @cloned_object = mytemplate
     
     @cloned_object.name = @object_to_clone.name
+    @cloned_object.price = @object_to_clone.price
     # @cloned_object.file_filename = @object_to_clone.file_filename
     @cloned_object.file_filename = @cloned_object.id.to_s
 
@@ -619,6 +620,7 @@ class TempsController < ApplicationController
     puts @object_to_clone.id
     @cloned_object = Mytemplate.new
     @cloned_object.name = @object_to_clone.name
+    @cloned_object.price = @object_to_clone.price
     @cloned_object.file_filename = @object_to_clone.file_filename
     puts @cloned_object.file_filename
     

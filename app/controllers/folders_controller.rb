@@ -61,7 +61,7 @@ class FoldersController < ApplicationController
     
     folder_count = Folder.all(:user_id => current_user.id, :name => folder_name).count
     total_folder_count = Folder.all(:user_id => current_user.id).count
-    if folder_count < 1
+    if folder_count < 1 and folder_name != "photo"
       if total_folder_count < 12
         @folder = Folder.new()
         @folder.name = folder_name

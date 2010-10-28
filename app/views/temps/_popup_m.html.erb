@@ -1,11 +1,3 @@
 <script language="javascript">
- function popup(doc_name) {
-       // var url = '/mlayout?doc_name='+doc_name;
-	   var url = "/MClientBox/index.html?spread_list=YES&user_path=/user_files/<%= current_user.userid %>&doc_path=/article_templates/"+ doc_name+".mlayoutP"
-	   width = screen.width;
-	   height = screen.height;
-      window.open(url ,'webtop_print','width='+width+', height='+height);
-}
-
-popup('<%= @temp_id %>')
+var get_temps_id = "<%= @temp_id %>";
 </script>

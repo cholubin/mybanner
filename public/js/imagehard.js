@@ -218,13 +218,15 @@ $(document).ready(function(){
 									$(this).remove();
 								});
 							}
-							
+							$('#quick_preview_closeButton').click();
 						}else{
 							alert("이미지 삭제중 문제가 발생했습니다! \n다시한번 시도해주시기 바랍니다.");
 						};
 						
 					}
 				});
+			}else{
+				return false;
 			}
 		};
 	});
@@ -257,7 +259,7 @@ $(document).ready(function(){
 
 
 function imgUpload(){
-
+	loadingView();
 	$folder_id = $('p.folder.on').parents("li").attr("id");
 	$('#myimage_folder_id').val($folder_id);
 	
@@ -293,6 +295,7 @@ function Callback_imgUpload(request,state){
 	}
 	
 	if (state == "success"){
+		loadingView();
 		$('#myimage_image_file').val("");
 		$("#imagehard-list").hide()
 							.prepend(request)
@@ -302,7 +305,7 @@ function Callback_imgUpload(request,state){
 }
 
 //페이징 =======================================================================================
-$(".pager a").live("click",
+$("#imagehard .pager a").live("click",
 	function() {
 		$this_list = $(this);
 		$("#imagehard-list").fadeOut("slow",function() {
@@ -384,50 +387,71 @@ $('#imagehard_preview').live("click", function(event){
 			// 		return false;
 	};
 	
+	// 이미지 삭제 =================================================================
 	if($(event.target).is('li.delete a')){
-		$('#quick_preview_closeButton').click();
-		$('#'+$myimage_id).children('li.date').children('a.delete.img').click();
 		
-		return false;
+		$('#'+$myimage_id).children('li.date').children('a.delete.img').click();
 	};
 
+	// 이미지 이름 변경  =============================================================
 	if($(event.target).is('li.change_file a')){
-		$filename = $('#change_file').val();
-		if($filename == ""){
+		$filename = $('#change_file');
+		if($filename.val() == ""){
 			alert("변경하실 파일명을 입력해 주세요!");
+			$filename.focus()
 			return false;
 		}else{
 			$.ajax({
-				data:'filename='+$filename+'&myimage_id='+$myimage_id, 
+				data:'filename='+$filename.val()+'&myimage_id='+$myimage_id, 
 				dataType:'html', 
 				type:'post', 
 				url:'/myimages/update_name',
 				success: function(request){
-					$('#imagehard_preview h3').html($filename);
-					
-					$sel_type = $('#image_search_type option:selected').val();
-					$search_val = $('#image_search_val').val();
-					if($('li.active').length > 0){
-						$page_num = parseInt($('li.active').attr("className").replace(" active","").replace("page-",""));
-					}else{
-						$page_num = 1;
-					}
-					$folder_id = $('p.folder.on').parents("li").attr("id");
-					$("#imagehard-list").fadeOut("fast",function() {
-						$("#imagehard-wrap").load("/myimages?ext="+$sel_type+"&search="+$search_val+"&page="+$page_num+"&myimage_folder_id="+ $folder_id +" #imagehard-wrap", function(){
-							$("#imagehard-list").hide().fadeIn("slow");	
-						});
-					});
+					$('#imagehard_preview h3').html($filename.val());
+					$filename.val("");
+					current_page_reload();
 				}
 			});
 			return false;
 		}
-		
 	};
 
-	
+	// 폴더명 변경 ====================================================
 	if($(event.target).is('li.move_file a')){
-		alert("폴더명 변경!");
+		$folder_id = $('#move_file option:selected').val();
+		$.ajax({
+			data:'folder_id='+$folder_id+'&myimage_id='+$myimage_id, 
+			dataType:'html', 
+			type:'post', 
+			url:'/myimages/update_folder',
+			success: function(request){
+				current_page_reload();
+				alert("폴더가 변경되었습니다!");
+			}
+		});
 		return false;
 	};
+});
+
+function current_page_reload(){
+	$sel_type = $('#image_search_type option:selected').val();
+	$search_val = $('#image_search_val').val();
+	if($('li.active').length > 0){
+		$page_num = parseInt($('li.active').attr("className").replace(" active","").replace("page-",""));
+	}else{
+		$page_num = 1;
+	}
+	$folder_id = $('p.folder.on').parents("li").attr("id");
+	$("#imagehard-list").fadeOut("fast",function() {
+		$("#imagehard-wrap").load("/myimages?ext="+$sel_type+"&search="+$search_val+"&page="+$page_num+"&myimage_folder_id="+ $folder_id +" #imagehard-wrap", function(){
+			$("#imagehard-list").hide().fadeIn("slow");	
+		});
+	});
+};
+
+$('#change_file').live("keydown", function(event){
+	if(event.keyCode == 13){
+		$('li.change_file a').click();
+		return false;
+	}
 });

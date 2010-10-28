@@ -31,6 +31,7 @@ class Mytemplate
   # 현수막용 
   property :is_col,                 Boolean, :default => false  
   property :size,                   String
+  property :price,                  String
   property :size_x,                 String
   property :size_y,                 String
   property :feedback_code,          Integer, :default => 0
@@ -41,6 +42,8 @@ class Mytemplate
   property :opt2,                   Integer
   property :opt3,                   Integer
   property :quantity,               Integer
+  #현재 주문진행 여부 (진행중이면 디자인바구니에서 빼고 주문이 취소되거나 끝나면 다시 되롤릴 용도)
+  property :in_order,               Boolean, :default => false
   
   timestamps :at
   

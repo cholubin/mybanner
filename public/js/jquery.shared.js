@@ -62,13 +62,16 @@ function popupView(popWidth, popHeight, url, post, callback) {
 	}
 	if($("#popup-view").length == 0) {
 		$("<div id=\"popup-view\"></div>")
-		.css({"display":"none","background-color": "White", "position": "absolute","z-index":"100","overflow":"hidden"})
-		.mousedown(function(){$(document).mousemove(function(e){return false;});})
 		.appendTo('body');
 		$("<a id=\"popup-closeButton\"></a>")
-		.css({"display":"none", "background-image": "url('/images/default/button-close.png')", "position": "absolute","z-index":"110","width":"52px","height":"20px","cursor":"pointer"})
 		.appendTo('body');
 	}
+	$("#popup-view")
+	.css({"display":"none","background-color": "White", "position": "absolute","z-index":"100","overflow":"hidden"})
+	.mousedown(function(){$(document).mousemove(function(e){return false;});})
+	$("#popup-closeButton")
+	.css({"display":"none", "background-image": "url('/images/default/button-close.png')", "position": "absolute","z-index":"110","width":"52px","height":"20px","cursor":"pointer"})
+	
 	if(!popupStatus && url) {
 		loadingView();
 		popupStatus = "view"
@@ -111,23 +114,31 @@ function mainImageChange(num) {
 	}
 }
 
-function openWebTopEditor(user,id) {
+function openWebTopEditor(user,id,href) {
 	if($("#webTopEditor").length == 0) {
-		$("<div id=\"webTopEditor\"></div>")
+		$("<div id=\"webTopEditor\"><div id=\"editor_header\"><h2>WebTop Editor</h2><a href=\"#\" id=\"back_to_home\">저장하고 홈페이지로 돌아가기.</a></div></div>")
 		.css({"display":"none","background-color": "White" ,"position": "absolute","width":"100%", "z-index":"150","overflow":"hidden","top":"0","left":"0"})
 		.mousedown(function(){$(document).mousemove(function(e){return false;});})
 		.appendTo('body');
-
-//		$("<a id=\"popup-closeButton\"></a>")
-//		.css({"display":"none", "background-image": "url('/images/default/button-close.png')", "position": "absolute","z-index":"110","width":"52px","height":"20px","cursor":"pointer"})
-//		.appendTo('body');
 	}
 
-	var url = "/MClientBox/index.html?spread_list=YES&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"
-	$("#webTopEditor").html("<iframe id=\"wrapper\" src=\""+url+"\" width=\"100%\" height=\"100%\" border=\"0\" style=\"border:0\">").css("display","block");
-	$("#header").fadeOut().remove();
-	$("#content").fadeOut().remove();
-	$("#footer").fadeOut().remove();
+	var url = "/MClientBox/index.html?spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"
+
+	$("<iframe id=\"webTop_iFrame\" src=\""+url+"\" width=\"100%\" border=\"0\" frameborder=\"0\"/>").css({"display":"block","border":"0","height":$(window).height()-75}).appendTo("#webTopEditor");
+	$("<div id=\"editor_footer\"><img src=\"/images/editor/footer.png\" width=\"960\" height=\"34\"/></div>").appendTo("#webTopEditor");
+	$("#webTopEditor").css({"display":"block","height":$(window).height()});
+	href = (href == null)?"/":href;
+	$("#back_to_home").attr("href",href)
+
+	// 리사이즈시 자동으로 사이즈 변경	
+	$(window).resize(function() {
+		$("#webTopEditor").css("height",$(window).height());
+		$("#webTop_iFrame").css("height",$(window).height()-75);
+	})
+	$("body").css("background","#63828c");
+	$("#header").remove();
+	$("#content").remove();
+	$("#footer").remove();
 
 }
 

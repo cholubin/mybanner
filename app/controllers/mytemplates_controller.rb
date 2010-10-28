@@ -11,6 +11,7 @@ class MytemplatesController < ApplicationController
     # if not File.exist?(user_path)
     #   puts %x[ln -s "#{RAILS_ROOT}/public/basic_photo/" "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/images/basic_photo"]
     # end
+    Basicinfo.up
         
     @menu = "mytemplate"
     @board = "mytemplate"
@@ -33,13 +34,13 @@ class MytemplatesController < ApplicationController
     
 
     if cate == "all" and folder == "all"
-      @mytemplates = Mytemplate.all(:user_id => current_user.id, :order => [:created_at.desc]).search(params[:search], params[:page])                   
+      @mytemplates = Mytemplate.all(:in_order => false, :user_id => current_user.id, :order => [:created_at.desc]).search(params[:search], params[:page])                   
     elsif cate == "all" and folder != "all"
-      @mytemplates = Mytemplate.all(:folder => Tempfolder.get(folder).name, :user_id => current_user.id, :order => [:created_at.desc]).search(params[:search], params[:page])                                   
+      @mytemplates = Mytemplate.all(:in_order => false, :folder => Tempfolder.get(folder).name, :user_id => current_user.id, :order => [:created_at.desc]).search(params[:search], params[:page])                                   
     elsif cate != "all" and folder == "all"
-      @mytemplates = Mytemplate.all(:category => cate, :user_id => current_user.id, :order => [:created_at.desc]).search(params[:search], params[:page])                                   
+      @mytemplates = Mytemplate.all(:in_order => false, :category => cate, :user_id => current_user.id, :order => [:created_at.desc]).search(params[:search], params[:page])                                   
     elsif cate != "all" and folder != "all"
-      @mytemplates = Mytemplate.all(:folder => Tempfolder.get(folder).name, :category => cate, :user_id => current_user.id, :order => [:created_at.desc]).search(params[:search], params[:page])                           
+      @mytemplates = Mytemplate.all(:in_order => false, :folder => Tempfolder.get(folder).name, :category => cate, :user_id => current_user.id, :order => [:created_at.desc]).search(params[:search], params[:page])                           
     end
     
     @tempfolders = Tempfolder.all(:user_id => current_user.id)
@@ -71,7 +72,16 @@ class MytemplatesController < ApplicationController
   
   @myorder.order_no = @order_no
   @myorder.items = params[:ids]
+  item_unit = params[:item_unit].split(",")
   
+  index = 0
+  @myorder.items.split(",").each do |my|
+    mytemp = Mytemplate.get(my.to_i)
+    mytemp.in_order = true
+    mytemp.quantity = item_unit[index]
+    mytemp.save
+    index += 1
+  end
 
   begin
     if @myorder.save
@@ -125,12 +135,66 @@ class MytemplatesController < ApplicationController
     
     @categories = Category.all(:order => :priority)   
     @mytemplate = Mytemplate.get(params[:id])
+
+    job_done = @mytemplate.path + "/web/done.txt"
     
+    if File.exists?(job_done) then
+       FileUtils.remove_entry(job_done)
+     end
+     
+    make_contens_xml(@mytemplate)
+    erase_job_done_file_temp(@mytemplate)
     @category_name = @mytemplate.category
     @subcategory_name = @mytemplate.subcategory
     render 'mytemplate'    
   end
 
+  def make_contens_xml(temp) 
+    
+    path = temp.path
+    njob = path + "/do_job.mJob"
+    mjob_file= <<-EOF
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+    	<key>Action</key>
+    	<string>MakeContentsXML</string>
+    	<key>DocPath</key>
+    	<string>#{path}</string>   
+     <key>ID</key>
+    	<string>#{temp.id}</string>     	
+    </dict>
+    </plist>
+    </xml>
+    EOF
+    
+
+     mjob = path + "/do_job.mJob" 
+     
+ 
+     
+     File.open(mjob,'w') { |f| f.write mjob_file }    
+
+     if File.exists?(mjob)
+        system "open #{mjob}"
+      end 
+       
+    puts_message "make_contens_xml finished"
+  end
+  
+  def erase_job_done_file_temp(temp)        
+    job_done = temp.path + "/web/done.txt" 
+
+    loop do 
+     break if File.exists?(job_done)
+    end
+
+    FileUtils.remove_entry(job_done)
+
+    puts_message "erase_job_done_file"
+   end
+   
   # GET /mytemplates/new
   # GET /mytemplates/new.xml
   def new
@@ -305,7 +369,28 @@ class MytemplatesController < ApplicationController
     end
   end
 
-
+  def jobboard_delete
+    bbs_id = params[:bbs_id].to_i
+    @bbs = Jobboard.get(bbs_id)
+    @mytemp_id = @bbs.mytemp_id
+    
+    # jobboard req_file 삭제
+    req_file_dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+    
+    if @bbs.req_file != nil and File.exist?(req_file_dir + @bbs.req_file)
+      FileUtils.rm_rf req_file_dir + @bbs.req_file
+    end
+      
+    if @bbs.destroy
+      puts_message "요청 게시글 삭제 완료!"
+      
+      render :partial => 'jbbs_body', :object => @mytemp_id
+    else
+      puts_message "요청글 게시판 삭제 실패!"
+    end
+          
+  end
+  
   def jobboard_create
     mytemp_id = params[:id].to_s
     content = params[:feedback_memo]
@@ -362,37 +447,37 @@ class MytemplatesController < ApplicationController
     @ids = params[:ids].split(",")
     
     @ids.each do |id|
-      mytemplate = Mytemplate.get(id.to_i)
+      @mytemplate = Mytemplate.get(id.to_i)
       
-      begin
-        if mytemplate != nil
-          if File.exist?(mytemplate.path.force_encoding('UTF8-MAC')) 
-            FileUtils.remove_entry_secure mytemplate.path.force_encoding('UTF8-MAC') 
-          end
-          
-          # jobboard req_file 삭제
-          req_file_dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
-          @jobboards = Jobboard.all(:mytemp_id => mytemplate.id)
-          
-          if @jobboards.count > 0
-            @jobboards.each do |j|
-              if File.exist?(req_file_dir + j.req_file)
-                FileUtils.rm_rf req_file_dir + j.req_file
-              end
+        # jobboard req_file 삭제
+        req_file_dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+        
+        @jobboards = Jobboard.all(:user_id => current_user.id, :mytemp_id => @mytemplate.id)
+        
+        if @jobboards.count > 0
+          @jobboards.each do |j|
+            if j.req_file != nil and File.exist?(req_file_dir + j.req_file)
+              FileUtils.rm_rf req_file_dir + j.req_file
             end
-            
-            @jobboards.destroy
           end
           
-          
-          if mytemplate.destroy
-            puts_message "마이템플릿 삭제 완료!"
+          if @jobboards.destroy
+            puts_message "요청게시판 삭제 완료!"
+          else
+            puts_message "요청게시판 삭제 실패!"
           end
         end
-      rescue
-        puts_message "Error! in progress of mytemplate file deletion."
-      end
-
+        
+        
+        if @mytemplate.destroy
+          if File.exist?(@mytemplate.path.force_encoding('UTF8-MAC')) 
+            FileUtils.remove_entry_secure @mytemplate.path.force_encoding('UTF8-MAC') 
+          end
+          
+          puts_message "마이템플릿 삭제 완료!"
+        else
+          puts_message "마이템플릿 삭제 실패!!!"
+        end
     end
     
     render :nothing => true
@@ -513,6 +598,7 @@ class MytemplatesController < ApplicationController
       @cloned_object = mytemplate
       
       @cloned_object.name = @object_to_clone.name
+      @cloned_object.price = @object_to_clone.price
       # @cloned_object.file_filename = @object_to_clone.file_filename
       @cloned_object.file_filename = @cloned_object.id.to_s
 

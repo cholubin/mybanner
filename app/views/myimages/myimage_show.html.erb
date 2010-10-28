@@ -13,7 +13,7 @@
 			<% @folders = Folder.all(:user_id => current_user.id, :order => [:order]) 
 				@folders.each do |f|
 			%>
-				<option value="<%= f.id %>"><%= f.name %></option>
+				<option value="<%= f.id %>" <%= "selected" if @myimage.folder_name == f.name %>><%= f.name %></option>
 			<%end %>
 			</select>
 			<a>폴더 이동</a></li>
