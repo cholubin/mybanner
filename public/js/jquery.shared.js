@@ -185,7 +185,17 @@ $(function () {
 	$("body").delegate(".ajax-sign-in","click", function() { popupView(250,390,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-sign-up","click", function() { popupView(660,350,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-edit","click", function() { popupView(360,330,$(this).attr("href")); return false }); 
-	$("body").delegate(".ajax-myimages","click", function() { popupView(798,554,$(this).attr("href")); return false }); // 차후 김현수 과장과 합칠때 확인 할것!
+	$("body").delegate(".ajax-myimages","click", function() { 
+		popupView(798,554,$(this).attr("href"), function(){
+			$("#sortables").sortable({
+			   update: function(event, ui) { 
+				update_folder_order();
+				}
+			  }).addTouch();
+		} ); 
+		return false 
+	});
+	
 	$("body").delegate("li.preview a","click",function() { quickPreview(740,540,$(this).attr("href"),"ajaxloadpage"); return false })
 	$("body").delegate(".ajax-withdraw","click", function() { popupView(380,310,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-edit-order","click", function() { popupView(620,340,$(this).attr("href")); return false });

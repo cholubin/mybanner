@@ -71,7 +71,7 @@ end
 Haml::Template.options[:format] = :html4
 
   if RAILS_ENV == "production" 
-    HOSTING_URL = "http://localhost:3000/"    
+    HOSTING_URL = "http://10.0.1.16:3000/"    
 #    HOSTING_URL = "http://211.35.79.132:3000/"
   end
   if RAILS_ENV == "development" 

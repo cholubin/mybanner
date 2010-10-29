@@ -5,6 +5,7 @@
 <script type="text/javascript" src="/js/jScrollPane/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="/js/jScrollPane/jquery.em.js"></script>
 <script type="text/javascript" src="/js/jScrollPane/jScrollPane.js"></script>
+<script type="text/javascript" src="/js/jquery.ui.ipad.js"></script>
 
 <link href="/css/admin/layout.css" rel="stylesheet" type="text/css" />
 <div id="category-list">
@@ -146,6 +147,7 @@ $(document).ready(function(){
 	<% end %>	
 });
 
+
   $("#sortables").sortable({
    update: function(event, ui) { 
 	<%= remote_function(:url  => {:action => "category_order_update"},:with => "'category_id='+result_category()") %>
@@ -164,7 +166,7 @@ $(document).ready(function(){
 	   update: function(event, ui) { 
 		<%= remote_function(:url  => {:action => "subcategory_order_update"},:with => "'category_id=#{category.id.to_s}&subcategory_id='+result_category_#{category.id.to_s}()") %>
 		}
-	});
+	}).addTouch();
 
 	 $(function() {
 	    $("#sortables_<%= category.id.to_s %>").sortable({axis: 'y' });
@@ -203,7 +205,8 @@ $(document).ready(function(){
 	  var result = new Array();
 	  result = $('#sortables').sortable('toArray');
 	  return result;
-	}	
+	};	
+	
  </script>
 
 <div id="created_category"></div>
