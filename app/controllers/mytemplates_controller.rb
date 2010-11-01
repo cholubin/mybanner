@@ -50,7 +50,7 @@ class MytemplatesController < ApplicationController
   def design_confirm
     mytemp_id = params[:mytemp_id].to_i
     @mytemp = Mytemplate.get(mytemp_id)
-    @mytemp.design_confirmed = true
+    @mytemp.job_code = 3 # job_code
     if @mytemp.save
       render :nothing => true
     end

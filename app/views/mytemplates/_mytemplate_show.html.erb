@@ -84,11 +84,11 @@ end
 			<ul>
 				<!-- 작업구분이 편집의뢰일때만 -->
 				<% if my.job_code == 1 %>
-					<li class="accept"><a id="design_confirm" href="">시안확정</a></li>
-				<% else %>
+					<li class="accept" id="design_confirm_section"><a id="design_confirm" href="">시안확정</a></li>
+				<% elsif my.job_code == 3 %>
 					<li class="disable"><span>직접편집입니다.</span></li>
 				<% end %>
-				<li class="edit"><a href="#">편집하기</a></li>
+				<li class="edit"><a href="<%= "javascript:alert('시안이 확정된 상태에서는 편집하실 수 없습니다!');return false;" if my.job_code == 3%>">편집하기</a></li>
 				<li class="delete"><a href="javascript:del_mytemp('<%= my.id %>');">삭제</a></li>
 				<li class="one-order"><a href="#" id="order-button">바로 주문하기</a></li>
 				<li class="back-list"><a class="back-list" href="/mytemplates">목록으로 돌아가기</a></li>
@@ -242,7 +242,9 @@ $('#order-button').click(function(){
 
 
 $("li.edit a").click(function () {
-	popup('<%= my.id.to_s %>');
+	<%if my.job_code != 3 %>
+		popup('<%= my.id.to_s %>');
+	<%end %>
 })
 
 $('#zip_search').live("click", function(){
@@ -346,7 +348,9 @@ $('#design_confirm').click(function(){
 			type:'post', 
 			url:'/mytemplates/design_confirm',
 			success: function(request){
-				
+				html_str = "<span>직접변집입니다.</span>";
+				$('#design_confirm_section').removeClass("accept").addClass("disable");
+				$('#design_confirm_section').html(html_str);
 			}
 		});
 	}else{

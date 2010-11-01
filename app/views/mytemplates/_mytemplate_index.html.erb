@@ -44,7 +44,7 @@
 				end
 			%>
 			<tr id="<%= my.id.to_s %>" class="item">
-				<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
+				<td class="check"><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>" <%= "disabled" if my.job_code == 1 %>/></td>
 				<td class="date"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="request code-<%=my.feedback_code%>"><%= Request_code.first(:code => my.feedback_code).name %></a><%= my.updated_at.strftime('%y.%m.%d') %></td>
 				<td class="design <%= my.job_code == 0 ? "self-edit":"order-edit"%>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= sn_num %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>
 				<div class="action-select">
@@ -176,7 +176,7 @@ $('.piece').change(function(event) {
 $('.chkbox').live("click", function(event){
 	id = $(this).val();
 	var price = parseInt($(event.target).parents("tr").find("td.price").html());
- 	tmp_total_price = parseInt($('#total_price').text().replace("원","").replace(",",""));
+ 	tmp_total_price = parseInt($('#total_price').html().replace("원","").replace(",",""));
 	
 	if($(this).attr("checked") == true){
 		tmp_total_price += price;
@@ -358,7 +358,28 @@ $('#order_basic').live("click", function(){
 });
 
 $('#chk_all').click(function(){
-	$('.chkbox').click();
+	
+	$('.chkbox:enabled').each(function(){
+		id = $(this).val();
+		
+		var price = parseInt($(this).parents("tr").find("td.price").html());
+	 	tmp_total_price = parseInt($('#total_price').html().replace("원","").replace(",",""));
+
+		if($(this).attr("checked") == true){
+			tmp_total_price -= price;
+			$('#peice_'+id).attr("disabled", false);
+			$(this).attr("checked", false)
+		}else{
+			tmp_total_price += price;
+			$('#peice_'+id).attr("disabled", true);
+			$(this).attr("checked", true)
+		}
+
+		$('#tmp_total_price').val(tmp_total_price);
+		$('#total_price').html(to_comma(tmp_total_price) + "원");
+		
+	})
+	// $('.chkbox').click();
 });
 
 $('.delete').click(function(){
