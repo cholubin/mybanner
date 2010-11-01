@@ -44,8 +44,6 @@ class Myimage
   
   def self.filter_by(ext, folder_id)
     
-    puts_message ext.to_s
-    puts_message folder_id.to_s
       if ext == "all"
         if folder_id == "photo"
           Myimage.all(:folder_name => folder_id.to_s)

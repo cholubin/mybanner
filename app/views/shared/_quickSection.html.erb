@@ -15,10 +15,17 @@
 				<div id="work-summary">
 					<h3>진행상태 요약</h3>
 					<ul>
-						
+						<%
+						mytemp_ing = Mytemplate.all(:user_id => current_user.id, :in_order => false).count
+						if mytemp_ing > 0
+							mytemp_ing = mytemp_ing.to_s + "건"
+						else
+							mytemp_ing = "없음"
+						end
+						%>
 						<li><strong>시안확인요청</strong> <span>1건</span></li>
 						<li><strong>파일에러</strong> <span class="none">없음</span></li>
-						<li><strong>디자인바구니</strong> <span>2건</span></li>
+						<li><strong>디자인바구니</strong> <span><%= mytemp_ing %></span></li>
 						<li><strong>입금요청</strong> <span>1건</span></li>
 						<li><strong>제작중</strong> <span>1건</span></li>
 						<li><strong>최근출고완료</strong> <span>3건</span></li>

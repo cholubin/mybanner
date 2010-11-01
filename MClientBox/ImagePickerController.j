@@ -80,7 +80,8 @@ gThumbSizeHeight = 100;
 	var category = [mCategoryPopup titleOfSelectedItem];
 	[mCategoryPopup setEnabled:NO];
 
-    var lDocWebImageURL = [CPString stringWithFormat:"%@/filelist?request=/images/%@/",gBaseURL ,category];
+    var lDocWebImagePathStr = [CPString stringWithFormat:"%@/filelist?request=/images/%@/",gBaseURL ,category];
+	var lDocWebImageURL = [CPURL URLWithString:lDocWebImagePathStr];
     var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
     mImageListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 }

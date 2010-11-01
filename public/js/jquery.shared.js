@@ -190,7 +190,8 @@ $(function () {
 			$("#sortables").sortable({
 			   update: function(event, ui) { 
 				update_folder_order();
-				}
+				},
+				axis: 'y' 
 			  }).addTouch();
 		} ); 
 		return false 

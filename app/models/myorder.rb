@@ -36,6 +36,11 @@ class Myorder
 
   belongs_to :user
   # has n, :myordersubs
+  
+  def self.search(search, page)
+      Myorder.all(:order_no.like => "%#{search}%").page :page => page, :per_page => 6
+  end
+  
 end
 
 DataMapper.auto_upgrade!

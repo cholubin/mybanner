@@ -1,3 +1,4 @@
+<%if @myorder != nil %>
 <div id="order-detail" class="content-layout">
 	<h3>주문 상세보기</h3>
 	<div id="order-product-list">
@@ -65,7 +66,7 @@
 			<h4>받는 사람</h4>
 			<ul>
 				<li class="name"><strong>수령인</strong> <span><%= @myorder.receive_name %></span><!-- 수령자 성함 --></li>
-				<li class="phone"><strong>연락처</strong> <span><%= @myorder.order_tel %> /<%=  @myorder.order_mobile %>e </span><!-- 수령자 연락처1, 2 --></li>
+				<li class="phone"><strong>연락처</strong> <span><%= @myorder.order_tel %> /<%=  @myorder.order_mobile %> </span><!-- 수령자 연락처1, 2 --></li>
 			</ul>
 		</div>
 		<div class="delivery">
@@ -84,10 +85,11 @@
 				<li class="type"><strong>결제방법</strong>  <span><%= @myorder.pay_method %></span><!-- ### 결제방법(신용카드일 경우 전표번호 또는 결제 한 카드 앞 4자리 표시)) ###--></li>
 				<li class="type-detail"><strong>결제상세</strong> <span></span></li>
 				<li class="price"><strong>주문금액</strong>  <span><%= @myorder.total_price %>원</span><!-- ### 총주문금액 ### --></li>
-				<li class="first-price"><strong>선결제금액</strong>  <span class="none">##없음</span><!-- 선결제 금액 --></li>
-				<li class="last-price"><strong>결제금액</strong>  <span>###225,000원</span><!--### 총주문금액 - 선결제금액 = 결제금액 ### --></li>
+				<li class="first-price"><strong>선결제금액</strong>  <span class="none"><%= @myorder.pre_price if @myorder.pre_price != nil %></span><!-- 선결제 금액 --></li>
+				<li class="last-price"><strong>결제금액</strong>  <span></span><!--### 총주문금액 - 선결제금액 = 결제금액 ### --></li>
 			</ul>
 		</div>
 	</div>
 	<div class="caption"><a href="/myorders" class="back-list">목록으로 돌아가기</a></div>
 </div>
+<%end %>

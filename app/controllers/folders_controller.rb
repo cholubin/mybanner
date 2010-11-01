@@ -57,7 +57,7 @@ class FoldersController < ApplicationController
   end
   
   def create_folder
-    folder_name = params[:folder_name]
+    folder_name = sanitize_filename(params[:folder_name])
     
     folder_count = Folder.all(:user_id => current_user.id, :name => folder_name).count
     total_folder_count = Folder.all(:user_id => current_user.id).count
@@ -68,9 +68,15 @@ class FoldersController < ApplicationController
 
         @folder.user_id = current_user.id
 
-        @folder.save
-
-        render :text => "success_" + @folder.id.to_s
+        if @folder.save
+          folder_path =  "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/images/"+folder_name
+          if not File.exist?(folder_path)
+            puts %x[ln -s "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/images/photo" "#{folder_path}"]
+          end
+          
+          puts_message folder_name
+          render :text => "success" + "/#/" + @folder.id.to_s + "/##/"+ folder_name
+        end
       else
         render :text => "fail_" + "폴더는 12개 까지만 생성하실 수 있습니다!"
       end
@@ -86,11 +92,21 @@ class FoldersController < ApplicationController
   def update_folder
         
     @folder = Folder.get(params[:folder_id].to_i)
-    folder_name = params[:folder_name]    
+    
+    original_folder_path =  "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/images/"+@folder.name
+    
+    rename_folder_name = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/images/"+sanitize_filename(params[:folder_name])
 
-    @folder.name = folder_name
+    @folder.name = sanitize_filename(params[:folder_name])
     
   	if @folder.save
+  	  File.rename original_folder_path, rename_folder_name
+  	  
+  	  @myimages = Myimage.all(:user_id => current_user.id, :folder_id => @folder.id)
+  	  @myimages.each do |my|
+  	    my.folder_name = @folder.name
+  	    my.save
+  	  end
   	  render :text => "success"
   	else
   	  render :text => "fail"
@@ -104,6 +120,12 @@ class FoldersController < ApplicationController
     @folder = Folder.get(folder_id)
     
     if @folder.destroy
+      
+      folder_path =  "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/images/"+@folder.name
+      if File.exist?(folder_path)
+        FileUtils.rm_rf folder_path
+      end
+      
         #이미지 폴더를 기본폴더로 바꾼다.============================================      
     	  @myimages = Myimage.all(:folder_id => @folder.id)
         @img_cnt = @myimages.count

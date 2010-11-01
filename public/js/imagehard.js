@@ -11,13 +11,15 @@ $(document).ready(function(){
 				type:'post', 
 				url:'/folders/create_folder',
 				success: function(request){
-					result_tmp = request.split("_");
+					result_tmp = request.split("/#/");
 					result = result_tmp[0]; // success
-					message = result_tmp[1];
+					message_tmp = result_tmp[1].split("/##/");
+					message = message_tmp[0];
+					sanitized_folder_name = message_tmp[1];
 					
 					if(result == "success"){
 						html_str = "<li id='"+message+"'>" +
-							"<p class='folder'><a>"+$('#folder_name').val()+"</a></p>" +
+							"<p class='folder'><a>"+sanitized_folder_name+"</a></p>" +
 							"<p class='action'>" +
 							"<a class='config'>관리</a>" +
 							"</p>" +
@@ -49,11 +51,11 @@ $(document).ready(function(){
 			$myli = $(event.target).parents("li");
 			$edit_btn = $myli.children("p.action").children('a.edit');
 
-			edit_folder($edit_btn);
+			edit_folder($edit_btn, false);
 		}
 	});
 	
-	function edit_folder(event_target){
+	function edit_folder(event_target, fold){
 		myli = event_target.parents("li");
 		folder_id = myli.attr("id");
 		// folder = $(event.target).parents("li").children("p.folder").children("input");
@@ -66,21 +68,33 @@ $(document).ready(function(){
 		}
 		parent_action_p = event_target.parents("p.action");
 		parent_folder_p = event_target.parents("li").children("p.folder");
-		$.ajax({
-			data:'folder_name='+folder_name+'&folder_id='+ folder_id, 
-			dataType:'html', 
-			type:'post', 
-			url:'/folders/update_folder',
-			success: function(request){
-				$.data(myli, "clicked", "");
-				html_action_str = "<a class='config'>관리</a>";
-				html_folder_str = "<a>"+folder_name+"</a>";
-				myli.fadeOut("fast");
-				parent_action_p.html(html_action_str);
-				parent_folder_p.html(html_folder_str);
-				myli.fadeIn("slow");
-			}
-		});
+		
+		if(fold == false){
+			$.ajax({
+				data:'folder_name='+folder_name+'&folder_id='+ folder_id, 
+				dataType:'html', 
+				type:'post', 
+				url:'/folders/update_folder',
+				success: function(request){
+					$.data(myli, "clicked", "");
+					html_action_str = "<a class='config'>관리</a>";
+					html_folder_str = "<a>"+folder_name+"</a>";
+					myli.fadeOut("fast");
+					parent_action_p.html(html_action_str);
+					parent_folder_p.html(html_folder_str);
+					myli.fadeIn("slow");
+				}
+			});
+		}else{
+			$.data(myli, "clicked", "");
+			html_action_str = "<a class='config'>관리</a>";
+			html_folder_str = "<a>"+folder_name+"</a>";
+			myli.fadeOut("fast");
+			parent_action_p.html(html_action_str);
+			parent_folder_p.html(html_folder_str);
+			myli.fadeIn("slow");
+		}
+		
 	}
 	
 	// 폴더관리 ==================================================
@@ -107,21 +121,16 @@ $(document).ready(function(){
 				});
 			});
 			
-			// $.ajax({
-			// 			data:'myimage_folder_id='+$folder_id, 
-			// 			dataType:'html', 
-			// 			type:'post', 
-			// 			url:'/myimages/get_list',
-			// 			success: function(request){
-			// 				$("#imagehard-list").html(request);
-			// 			}
-			// 		});
-			
 		};
 		// 설정버튼을 클릭한 경우 ====================================
 		if($(event.target).is('a.config')){
+			tmp_finder = $('#sortables').find('a.edit');
+			if(tmp_finder.length > 0){
+				edit_folder(tmp_finder, true);
+			}
+				
 			myli = $(event.target).parents("li");
-			myli_id = myli.attr("id")
+			myli_id = myli.attr("id");
 			parent_action_p = $(event.target).parents("p.action");
 			parent_folder_p = $(event.target).parents("li").children("p.folder");
 			folder_name = $(event.target).parents("li").children("p.folder").children("a").html();
@@ -133,12 +142,13 @@ $(document).ready(function(){
 			html_folder_str = "<input type='text' id='edit_folder_name' value='"+ folder_name +"'>";
 			parent_action_p.html(html_action_str);
 			parent_folder_p.html(html_folder_str);
+			
 		};
 		
 		
 		// 수정버튼을 클릭한 경우 ====================================
 		if($(event.target).is('a.edit')){
-			edit_folder($(event.target));
+			edit_folder($(event.target), false);
 		};
 		
 		// 폴더 삭제버튼을 클릭한 경우 ====================================
@@ -154,7 +164,7 @@ $(document).ready(function(){
 					url:'/folders/destroy_folder',
 					success: function(request){
 						if(request == "success"){
-							myli.fadeOut("slow").delay(300);
+							myli.fadeOut("slow").delay(300).remove();
 							
 							$("#imagehard-list").fadeOut("fast",function() {
 								$("#imagehard-wrap").load("/myimages?myimage_folder_id=photo" +" #imagehard-wrap", function(){
@@ -277,8 +287,6 @@ function imgUpload(){
 function Callback_imgUpload(request,state){
 	myimage_count = $('#imagehard-list ul.article').length;
 	if (myimage_count == 12){
-		// $last_ul = $('#imagehard-list ul.article:eq(11)');
-		// $last_ul.remove();
 		//현재 선택된 페이지 (Active)
 		if ($('li.active').length > 0){
 			page_num = parseInt($('li.active').attr("className").replace(" active","").replace("page-",""));	

@@ -83,11 +83,11 @@ end
 			<h4>이 품목을..</h4>
 			<ul>
 				<!-- 작업구분이 편집의뢰일때만 -->
-<% if my.job_code == 1 %>
-				<li class="accept"><a href="### 시안확정 URL ###">시안확정</a></li>
-<% else %>
-				<li class="disable"><span>직접편집입니다.</span></li>
-<% end %>
+				<% if my.job_code == 1 %>
+					<li class="accept"><a id="design_confirm" href="">시안확정</a></li>
+				<% else %>
+					<li class="disable"><span>직접편집입니다.</span></li>
+				<% end %>
 				<li class="edit"><a href="#">편집하기</a></li>
 				<li class="delete"><a href="javascript:del_mytemp('<%= my.id %>');">삭제</a></li>
 				<li class="one-order"><a href="#" id="order-button">바로 주문하기</a></li>
@@ -338,4 +338,20 @@ $(window).load(function () {
 	$("#zoom-scroll span").draggable({axis: "x", containment: "parent", drag : function() { resizePreview(parseFloat($(this).css("left"))/88*2+1) }});
 });
 
+$('#design_confirm').click(function(){
+	if(window.confirm("시안을 확정하시겠습니까?")){
+		$.ajax({
+			data:'mytemp_id=<%=my.id%>', 
+			dataType:'script', 
+			type:'post', 
+			url:'/mytemplates/design_confirm',
+			success: function(request){
+				
+			}
+		});
+	}else{
+		return false;
+	}
+	return false;
+})
 </script>

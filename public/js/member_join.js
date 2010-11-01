@@ -12,7 +12,6 @@ function input_check(string) {
  } 
 }
 
-
 function member_join(){
 
 	if ($('#user-id').val() == "") {
@@ -118,7 +117,23 @@ function member_modify(){
 			}
 		});	
 	};
-	
-
 }
 
+$('#user-id').live("change",function(){
+	$.ajax({
+		data:'user_id='+$('#user-id').val(), 
+		dataType:'script', 
+		type:'post', 
+		url:'/users/check_id',
+		success: function(request){
+			if (request == "dup"){
+				$('#id_check').html("이미 사용중!");
+				$('#user-id').val("");
+				$('#user-id').focus();
+			}else{
+				$('#id_check').html("사용가능!");
+			}
+			
+		}
+	});
+});

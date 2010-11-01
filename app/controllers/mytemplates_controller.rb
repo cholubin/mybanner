@@ -47,12 +47,19 @@ class MytemplatesController < ApplicationController
     render 'mytemplate'
   end
   
+  def design_confirm
+    mytemp_id = params[:mytemp_id].to_i
+    @mytemp = Mytemplate.get(mytemp_id)
+    @mytemp.design_confirmed = true
+    if @mytemp.save
+      render :nothing => true
+    end
+  end
 
   def create_order
   
   #주문 기본정보 생성
   @myorder = Myorder.new()
-  @myorder.total_price = params[:total_price].to_i
   @myorder.receive_type = params[:receive_type]
   @myorder.pay_method = params[:pay_m]
   @myorder.receive_note = params[:receive_note]
@@ -64,6 +71,7 @@ class MytemplatesController < ApplicationController
   @myorder.order_addr1 = params[:address1]
   @myorder.order_addr2 = params[:address2]
   @myorder.user_id = current_user.id
+  # @myorder.total_price = params[:total_price].to_i
   
   order_cnt = Myorder.all(:user_id => current_user.id).count + 1
   #주문번호 (월일-사용자별 주문전체횟수 +1) 
@@ -75,14 +83,18 @@ class MytemplatesController < ApplicationController
   item_unit = params[:item_unit].split(",")
   
   index = 0
+  @temp_price = 0
   @myorder.items.split(",").each do |my|
     mytemp = Mytemplate.get(my.to_i)
     mytemp.in_order = true
-    mytemp.quantity = item_unit[index]
+    mytemp.quantity = item_unit[index].to_i
+    @temp_price += (mytemp.quantity * mytemp.price.to_i)
     mytemp.save
     index += 1
   end
 
+  delivery_price = Basicinfo.first(:category => "delivery", :code => @myorder.receive_type).price
+  @myorder.total_price = @temp_price + delivery_price
   begin
     if @myorder.save
       render :text => @order_no

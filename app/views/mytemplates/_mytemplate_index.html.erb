@@ -46,7 +46,7 @@
 			<tr id="<%= my.id.to_s %>" class="item">
 				<td class="check"><!-- 편집의뢰의 경우 시안확정을 해야 체크할 수 있음. input태그에  disabled 처리하면 될듯합니다. --><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>"/></td>
 				<td class="date"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="request code-<%=my.feedback_code%>"><%= Request_code.first(:code => my.feedback_code).name %></a><%= my.updated_at.strftime('%y.%m.%d') %></td>
-				<td class="design <%= my.job_code == 0 ? "self-edit":"order-edit"%>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= sn_num %></span></a> <div class="other">단가: <%= Temp.get(my.temp_id).price %>원, <%= my.size %></div>
+				<td class="design <%= my.job_code == 0 ? "self-edit":"order-edit"%>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= sn_num %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>
 				<div class="action-select">
 					<ul>
 						<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
@@ -275,6 +275,18 @@ $('#receive-type2').live("change",function(){
 			$(this).attr("selected", true);
 		}
 	});
+	
+	if($('#receive-type2 option:selected').val() != ""){
+		delivery_price = parseInt($('#receive-type2 option:selected').attr("price"));
+	}else{
+		delivery_price = 0;
+	}
+	$('#delivery_price').html(to_comma(delivery_price) + "원");
+	current_total_price = parseInt($('#tmp_total_price').val());
+	$('#total_price').html(to_comma(current_total_price + delivery_price) + "원");
+	$('#order_total_price').html(to_comma(current_total_price + delivery_price) + "원");
+	$('#left_order_total_price').html(to_comma(current_total_price + delivery_price) + "원");
+	
 });
 
 // 최종 주문하기 버튼 클릭시 프로세스 ==========================================
@@ -290,29 +302,58 @@ $('#order_basic').live("click", function(){
 	if (order_item == ""){
 		alert("주문할 항목을 선택해주세요!");
 	}else{
-		if ($('#receive-type1 option:selected').val() == ""){
+		if($('#receive-type1 option:selected').val() == ""){
 			alert('배송방법을 선택해주세요!');
 			return false;
-		}else{
-			loadingView();
-			$.ajax({
-				data:'item_unit='+item_unit+'&pay_m='+$('input:radio:checked').val()+'&total_price='+$('#order_total_price').val()+'&receive-note='+$('#receive-note').val()+'&address2='+$('#address2').val()+'&address1='+$('#address-selector option:selected').text()+'&zip_code='+$('#zip_code').val()+'&receive_mobile='+$('#receive-mobile').val()+'&receive_tel='+$('#receive-tel').val()+'&receive_name='+$('#receive-name').val()+'&receive_type='+$('#receive-type1 option:selected').val()+'&ids='+ order_item, 
-				dataType:'script', 
-				type:'post', 
-				url:'/mytemplates/create_order',
-				success: function(request){
-					loadingView();
-					if(request != "주문에러!"){
-						alert("주문번호: "+request+" \n주문절차가 정상적으로 처리되었습니다!");	
-						$('#popup-closeButton').click();
-						$('.chkbox:checked').parents("tr").remove();
-						
-					}else{
-						alert("주문진행시 문제가 발생하였습니다! 관리자에게 문의하여 주시기 바랍니다.");	
-					}
-				}
-			});
 		}
+		
+		if($('#receive-name').val() == ""){
+			alert("받으실분의 성함을 입력해주세요!");
+			$('#receive-name').focus();
+			return false;
+		}
+		
+		if($('#receive-tel').val() == ""){
+			alert("일반 전화번호를 입력해주세요!");
+			$('#receive-tel').focus();
+			return false;
+		}
+
+		if($('#receive-mobile').val() == ""){
+			alert("모바일(핸드폰) 번호를 입력해주세요!");
+			$('#receive-mobile').focus();
+			return false;
+		}
+		
+		if($('#zip_code').val() == "" || $('#address2').val() == ""){
+			alert("배송주소를 입력해주세요!");
+			if($('#zip_code').val() == ""){
+				$('#address-search').focus();
+			}else{
+				$('#address2').focus();
+			}
+			return false;
+		}
+		
+		loadingView();
+		$.ajax({
+			data:'item_unit='+item_unit+'&pay_m='+$('input:radio:checked').val()+'&total_price='+$('#order_total_price').val()+'&receive-note='+$('#receive-note').val()+'&address2='+$('#address2').val()+'&address1='+$('#address-selector option:selected').text()+'&zip_code='+$('#zip_code').val()+'&receive_mobile='+$('#receive-mobile').val()+'&receive_tel='+$('#receive-tel').val()+'&receive_name='+$('#receive-name').val()+'&receive_type='+$('#receive-type1 option:selected').val()+'&ids='+ order_item, 
+			dataType:'script', 
+			type:'post', 
+			url:'/mytemplates/create_order',
+			success: function(request){
+				loadingView();
+				if(request != "주문에러!"){
+					alert("주문번호: "+request+" \n주문절차가 정상적으로 처리되었습니다!");	
+					$('#popup-closeButton').click();
+					$('.chkbox:checked').parents("tr").remove();
+					
+				}else{
+					alert("주문진행시 문제가 발생하였습니다! 관리자에게 문의하여 주시기 바랍니다.");	
+				}
+			}
+		});
+
 	}
 });
 

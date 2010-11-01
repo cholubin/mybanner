@@ -200,8 +200,10 @@ class CappuccinoController < ApplicationController
     puts_message "filelist start"   
     
     user = current_user
+    # request = params[:request].force_encoding('UTF-8')
     request = params[:request].force_encoding('UTF-8')
-    puts request
+    puts_message "Request!!!! " + params[:request]
+    
     if user and check_existance_of_path(request)    
      if request == nil
        @file_names = 'error'
@@ -259,11 +261,28 @@ class CappuccinoController < ApplicationController
       @file_name = "error"
     end
     
+    
     if not @file_names == nil
-      @file_names.delete_if{|f| f =~ /^(\.)(.*)/}
-      @file_names.each{|f| @output << f + "\n"}
-      @file_names = @output 
-      @access_url = ""
+      puts_message "잘라낸 주소!!" + path[0,7]
+      if path[0,8] ==  "/images/"
+        if path == "/images/" or path == "/images/basic_photo/"
+          @file_names.delete_if{|f| f =~ /^(\.)(.*)/}
+          @file_names.each{|f| @output << f + "\n"}
+          @file_names = @output 
+          @access_url = ""
+        else
+          puts_message "폴더명 ===>" + path.gsub("/images/","").gsub("/","")
+          @file_names = Myimage.all(:user_id => current_user.id, :folder_name => path.gsub("/images/","").gsub("/",""))
+          @file_names.each{|f| @output << f.image_filename + "\n"; puts_message f.image_filename}
+          @file_names = @output 
+          @access_url = ""
+        end
+      else
+        @file_names.delete_if{|f| f =~ /^(\.)(.*)/}
+        @file_names.each{|f| @output << f + "\n"}
+        @file_names = @output 
+        @access_url = ""
+      end
      else
        @file_names = "error"
        @access_url = ""

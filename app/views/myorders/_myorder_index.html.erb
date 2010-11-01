@@ -94,26 +94,12 @@
 		</table>
 		<div class="caption">주문 취소는 제작전에만 가능합니다. 특수한 상황의 경우 고객센터 전화로 연락해주세요.</div>
 	</div>
-<div class="pager">				
-<ul class="pager">
-	<li class="first jump"><a href="/admin/temps?sort=all&search=&page=1">First</a></li>
-	<li class="previous jump"><a href="/admin/temps?sort=all&search=&page=4">Previous</a></li>
-	<li class="more">...</li>
-	<li class="page-2"><a href="/admin/temps?sort=all&search=&page=2">2</a></li>
-	<li class="page-3"><a href="/admin/temps?sort=all&search=&page=3">3</a></li>
-	<li class="page-4"><a href="/admin/temps?sort=all&search=&page=4">4</a></li>
-	<li class="page-5 active"><a href="/admin/temps?sort=all&search=&page=5">5</a></li>
-	<li class="page-6"><a href="/admin/temps?sort=all&search=&page=6">6</a></li>
-	<li class="page-7"><a href="/admin/temps?sort=all&search=&page=7">7</a></li>
-	<li class="page-8"><a href="/admin/temps?sort=all&search=&page=8">8</a></li>
-	<li class="more">...</li>
-	<li class="next jump"><a href="/admin/temps?sort=all&search=&page=6">Next</a></li>
-	<li class="last jump"><a href="/admin/temps?sort=all&search=&page=14">Last</a></li>
-</ul>
+<div class="pager">
+	<%= @myorders.pager.to_html "/myorders?search=#{params[:search]}" %>
 </div>
 <script language="javascript">
 $(".cancel-disable").live("click",function() { alert("제작중에는 취소가 불가능합니다.\n고객센터로 상담 바랍니다."); return false });
 </script>
 </div>
-<% #end %>
+
 	<!--	<div id="error-screen"><img src="/images/error/error-empty-order.jpg" alt="진행된 주문, 배송정보가 없습니다." width="580" height="400" /></div>-->

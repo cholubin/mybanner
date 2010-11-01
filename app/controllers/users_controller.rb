@@ -64,8 +64,17 @@ class UsersController < ApplicationController
     
   end
 
-  # POST /users
-  # POST /users.xml
+  def check_id
+    input_user_id =  params[:user_id]
+    user_cnt = User.all(:userid => input_user_id).count
+    
+    if user_cnt > 0
+      render :text => "dup"
+    else
+      render :text => "non_dup"
+    end
+  end
+  
   def create
 
     @menu = "home"
