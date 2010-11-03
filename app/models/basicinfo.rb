@@ -22,6 +22,16 @@ class Basicinfo
   timestamps :at
 
   def self.up
+    if Basicinfo.all(:category => "job_process").count < 1
+      Basicinfo.new(:code => "0", :name => "처리중", :category => "job_process", :info => "", :order => 1).save
+      Basicinfo.new(:code => "1", :name => "처리완료", :category => "job_process", :info => "", :order => 2).save
+      Basicinfo.new(:code => "2", :name => "파일에러", :category => "job_process", :info => "", :order => 3).save
+      Basicinfo.new(:code => "3", :name => "보류", :category => "job_process", :info => "", :order => 4).save
+      Basicinfo.new(:code => "4", :name => "선입금대기", :category => "job_process", :info => "", :order => 5).save
+      Basicinfo.new(:code => "5", :name => "선입금확인", :category => "job_process", :info => "", :order => 6).save
+      Basicinfo.new(:code => "6", :name => "일반글", :category => "job_process", :info => "작업과 상관없는 일반적인 내용의 글", :order => 6).save
+    end
+    
     if Basicinfo.all(:category => "job_request").count < 1
       Basicinfo.new(:code => "0", :name => "직접편집", :category => "job_request", :info => "사용자가 직접편집으로 디자인바구니에 넣은경우", :order => 1).save
       Basicinfo.new(:code => "1", :name => "편집요청", :category => "job_request", :info => "사용자가 편집의뢰로 주문하여 디자인바구니에 넣은 경우", :order => 2).save
@@ -31,7 +41,7 @@ class Basicinfo
     
     if Basicinfo.all(:category => "delivery").count < 1
       Basicinfo.new(:code => "0", :name => "일반택배", :category => "delivery", :price => 3000, :order => 1).save
-      Basicinfo.new(:code => "1", :name => "퀵서비스", :category => "delivery", :price => 10000, :order => 2).save
+      Basicinfo.new(:code => "1", :name => "퀵서비스(착불)", :category => "delivery", :price => 0, :order => 2).save
       Basicinfo.new(:code => "2", :name => "직접수령", :category => "delivery", :price => 0, :order => 3).save
     end
     
@@ -39,4 +49,4 @@ class Basicinfo
   
 end
 
-# DataMapper.auto_upgrade!
+DataMapper.auto_upgrade!

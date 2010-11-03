@@ -15,53 +15,8 @@
 	end
 %>
 
-<%if @mytemplate.category == "명함"%>
-
-<table>
-		<tr width="450" height="260">
-            <td width="400" class="imgmargin"><%= "<img width='342' src='" + temp_image_path + "'>" %></td>
-			<td width="280px">
-				<table width="250">
-					<tr>
-						<td width="250" height="35" class="table_t4" colspan="2" ><%= @mytemplate.name %></td>
-		
-					</tr>
-
-					<tr class="table_t5">
-						<td width="70" class="table_t5">등록일</td>
-						<td  width="180" class="table_t5"><%= @mytemplate.created_at.strftime('%Y-%m-%d') %></td>
-					</tr>
-	
-					<tr>
-						<td width="70" class="table_t5">가격</td>
-						<td width="180" class="table_t5_bold"><%= Temp.get(@mytemplate.temp_id).price %></td>
-					</tr>
-					
-					<tr>
-						<td colspan="2" width="250" class="table_t5_underline"></td>
-					</tr>
-	
-					<tr>
-						<td width="70" class="table_t5">사이즈</td>
-						<td width="180" class="table_t5"><%= Temp.get(@mytemplate.temp_id).size %></td>
-					</tr>
-	
-					<tr>
-						<td width="70" class="table_t5">태그</td>
-						<td width="180" class="table_t5"><%= Temp.get(@mytemplate.temp_id).tags %></td>
-					</tr>
-					<tr>
-						<td colspan="2" width="250" class="table_t5_underline"></td>
-					</tr>
-				</table>
-			</td>
-        </tr>
-
-</table>
 
 
-
-<%elsif @mytemplate.category == "현수막"%>
 <table>
 		<tr width="730" height="220">
             <td class="imgmargin_banner" colspan="2">
@@ -117,8 +72,88 @@
 
 </table>
 
-<%end%>
+
 <div id="line_bottom5"></div>	
+
+<%
+	jbbs = Jobboard.all(:mytemp_id => @mytemplate.id, :order => [:created_at.desc]) 
+%>	
+	<h4>요청사항/처리 목록</h4>
+	<div id="request_board">
+		<table cellpadding="0" cellspacing="0" border="0">				<thead>
+				<tr>
+					<th>작성날짜</th>
+					<th>구분</th>
+					<th>내용</th>
+					<th>작성자</th>
+					<th>파일</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<!-- 요청사항 표시 반복부분 시작 -->
+				<% 
+					num = jbbs.count
+					if jbbs.count > 0
+						jbbs.each do |bbs|
+							if bbs.req_file != nil
+								file_path = "#{HOSTING_URL}user_files/#{current_user.userid}/req_files/" + bbs.req_file
+								ext_name = File.extname(bbs.req_file).gsub(".",'')
+								req_file = "<a href='#{file_path}' class='#{ext_name}'>#{bbs.original_filename}</a>"
+							else
+								req_file = ""	
+							end
+				%>
+				<tr>
+					<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
+					<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
+					<td class="memo"><a><%= bbs.content.gsub("\n","<br>") %></a></td>
+					<td class="name">
+						<%if bbs.admin != true %>
+							<%= User.get(bbs.user_id).name %>
+						<%else %>
+							<%= "관리자" %>
+						<%end %>
+					</td>
+					<td class="file"><%= req_file %></td>
+					<td class="delete"><a id="del_<%= bbs.id.to_s %>" href="">삭제</a></td>
+				</tr>
+				<%
+							num -= 1
+				 		end
+				 	else
+				%>
+					<tr>
+						<td colspan="6" id="error-screen"><img src="/images/error/error-empty-comment.gif" alt="작성된 요청사항이 없습니다." width="578" height="214" /></td>
+					</tr>
+				<% end %>
+				<!-- 요청사항 표시 반복부분 종료 -->
+			</tbody>
+		</table>
+	</div>
+	<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile", :class => "feedback-add"} ) do -%>
+		<input type="hidden" name="id" value="<%= @mytemplate.id.to_s %>">
+		<input type="hidden" name="feedback_code" value="" id="feedback_code">
+		<fieldset>
+			<legend>요청사항 입력</legend>
+			<p class="memo">
+				<label for="feedback_memo"><strong>요청내용</strong> <span>편집에 어려운 점이 있거나, 궁금한 점이 있으면 아래 공간에 글을 작성해주세요.</span></label>
+				<textarea name="feedback_memo" id="feedback_memo" placeholder="내용을 입력해주세요."></textarea>
+			</p>
+			<p class="file">
+				<label for="feedback_file">파일올리기</label>
+				<input type="file" name="feedback_file" id="feedback_file" />
+			</p>
+			<p class="comment_submit">
+				<a href="#" class="done">처리완료</a> 
+				<a href="#" class="normal">일반글 작성</a> 
+				<a href="#" class="suspend">보류처리</a>
+				<a href="#" class="file_error">파일오류</a> 
+			</p>
+		</fieldset>
+	<%end %>
+</div>
 <table>
 	<tr>
 		<td width="727" align="right">
@@ -128,3 +163,47 @@
 		</td>
 	</tr>
 </table>
+
+<script>
+//요청사항 접수 게시판 =================================
+$(".comment_submit").click(function(){
+	if ($('#feedback_memo').val() == ""){
+		alert("요청사항을 입력해주세요~");
+		$('#feedback_memo').focus();
+		return false;
+	}else{
+		// loadingView();
+		switch($(event.target).attr("class")) {
+			case "done":
+				$("#feedback_code").val("1");
+			break;
+			case "normal":
+				$("#feedback_code").val("6");
+			break;
+			case "suspend":
+				$("#feedback_code").val("3");
+			break;
+			case "file_error":
+				$("#feedback_code").val("2");
+			break;
+		}
+		
+		$('#frmFile').ajaxForm({ 
+	        dataType:  'html', 
+			url: '/admin/mytemplates/jobboard_create',
+	        success:   Callback_req_submit 
+		}).submit();
+		return false;
+	}
+	
+});
+
+function Callback_req_submit(request,state){
+	if (state == "success"){
+		// loadingView();
+		$('#feedback_memo').val("");
+		$('#feedback_file').val("");
+		$('#request_board').html(request);
+	}
+};
+</script>

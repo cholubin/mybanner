@@ -154,8 +154,8 @@ class MytemplatesController < ApplicationController
        FileUtils.remove_entry(job_done)
      end
      
-    make_contens_xml(@mytemplate)
-    erase_job_done_file_temp(@mytemplate)
+    # make_contens_xml(@mytemplate)
+    # erase_job_done_file_temp(@mytemplate)
     @category_name = @mytemplate.category
     @subcategory_name = @mytemplate.subcategory
     render 'mytemplate'    

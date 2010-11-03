@@ -52,6 +52,14 @@ class Mytemplate
     
   before :create, :file_path
 
+  def self.fc_filter(fcode)
+    if fcode == "all"
+      Mytemplate.all
+    else
+      Mytemplate.all(:feedback_code => fcode)
+    end
+  end
+  
   def self.search(search, page)
       Mytemplate.all(:name.like => "%#{search}%").page :page => page, :per_page => 12
   end

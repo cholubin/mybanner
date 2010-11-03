@@ -8,6 +8,7 @@ class PagesController < ApplicationController
      #Category.up
      #Subcategory.up
     # 
+    Basicinfo.up
     
     @title  = "home"
     @menu = "home"

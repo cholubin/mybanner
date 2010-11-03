@@ -84,9 +84,9 @@
 			<ul>
 				<li class="type"><strong>결제방법</strong>  <span><%= @myorder.pay_method %></span><!-- ### 결제방법(신용카드일 경우 전표번호 또는 결제 한 카드 앞 4자리 표시)) ###--></li>
 				<li class="type-detail"><strong>결제상세</strong> <span></span></li>
-				<li class="price"><strong>주문금액</strong>  <span><%= @myorder.total_price %>원</span><!-- ### 총주문금액 ### --></li>
+				<li class="price"><strong>주문금액</strong>  <span><%= @myorder.total_price %>원</span> (기본금액)<!-- ### 총주문금액 ### --></li>
 				<li class="first-price"><strong>선결제금액</strong>  <span class="none"><%= @myorder.pre_price if @myorder.pre_price != nil %></span><!-- 선결제 금액 --></li>
-				<li class="last-price"><strong>결제금액</strong>  <span></span><!--### 총주문금액 - 선결제금액 = 결제금액 ### --></li>
+				<li class="last-price"><strong>결제금액</strong>  <span><font color=red>상기 주문금액은 기본금액으로 사이즈변경 및 옵션에 따른 가격상담이 필요합니다!</font></span><!--### 총주문금액 - 선결제금액 = 결제금액 ### --></li>
 			</ul>
 		</div>
 	</div>

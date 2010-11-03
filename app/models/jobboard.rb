@@ -20,6 +20,7 @@ class Jobboard
   property :mytemp_id,          Integer
   property :req_file,           Text
   property :original_filename,  Text
+  property :admin,              Boolean, :default => false
   
   timestamps :at
   

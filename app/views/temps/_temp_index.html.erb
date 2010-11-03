@@ -113,19 +113,15 @@ if (window.confirm("디자인바구니에 담으며 바로 편집하시겠습니
 	}
 });
 $('#req_edit_submit').live("click", function(){
-	if (window.confirm("선택하신 디자인으로 편집의뢰를 신청하시겠니까?")){
-		FileUpload();
-/*		$.ajax({
-			data:'feedback_memo='+$('#feedback-memo').val()+'&temp_id='+ $('#tempid').val() + '&edit=req', 
-			dataType:'script', 
-			type:'post', 
-			url:'/temps/create_mytemp',
-			success: function(request){
-				alert('신청이 완료되었습니다.\n디자인바구니에서 확인하실 수 있습니다.');
-				$('#popup-closeButton').click();
-			}
-		});*/
+	if($('#feedback-memo').val() != ""){
+		if (window.confirm("선택하신 디자인으로 편집의뢰를 신청하시겠니까?")){
+			FileUpload();
+		}
+	}else{
+		alert("요청사항을 입력해주세요!");
+		$('#feedback-memo').focus();
 	}
+	
 });
 </script>
 <% end %>

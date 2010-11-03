@@ -45,7 +45,7 @@
 			%>
 			<tr id="<%= my.id.to_s %>" class="item">
 				<td class="check"><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>" <%= "disabled" if my.job_code == 1 %>/></td>
-				<td class="date"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="request code-<%=my.feedback_code%>"><%= Request_code.first(:code => my.feedback_code).name %></a><%= my.updated_at.strftime('%y.%m.%d') %></td>
+				<td class="date"><a class="request code-<%=my.feedback_code%>"><%= Basicinfo.first(:category => "job_process", :code => my.feedback_code).name %></a><%= my.updated_at.strftime('%y.%m.%d') %></td>
 				<td class="design <%= my.job_code == 0 ? "self-edit":"order-edit"%>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= sn_num %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>
 				<div class="action-select">
 					<ul>
@@ -344,6 +344,7 @@ $('#order_basic').live("click", function(){
 			success: function(request){
 				loadingView();
 				if(request != "주문에러!"){
+					alert("주문시 표시된 결제금액은 기본금액입니다! 옵션 선택에 따른 추가 금액에 대해선 관리자와 상담해주시기 바랍니다!");
 					alert("주문번호: "+request+" \n주문절차가 정상적으로 처리되었습니다!");	
 					$('#popup-closeButton').click();
 					$('.chkbox:checked').parents("tr").remove();

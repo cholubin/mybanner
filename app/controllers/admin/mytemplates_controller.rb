@@ -12,6 +12,11 @@ class Admin::MytemplatesController < ApplicationController
     @board = "mytemplate"
     @section = "index"
     
+    if params[:fc] == nil or params[:fc] == "all"
+      feedback_code = "all"
+    else
+      feedback_code = params[:fc]
+    end
     # @temp = Mytemplate.first(:id => 2)
     #    @temp.destroy
     
@@ -19,11 +24,13 @@ class Admin::MytemplatesController < ApplicationController
     @subcategory_name = params[:subcategory_name]
 
     if params[:userid] != nil
-      @mytemplates = Mytemplate.all(:user_id => params[:userid], :order => [:created_at.desc]).search2(params[:search],params[:page])
-      @total_count = Mytemplate.all(:user_id => params[:userid]).search2(params[:search],"").count
+        @mytemplates = Mytemplate.all(:user_id => params[:userid], :order => [:created_at.desc]).fc_filter(feedback_code).search2(params[:search],params[:page])
+        @total_count = Mytemplate.all(:user_id => params[:userid]).search2(params[:search],"").count
+        @subtotal_count = @mytemplates.count
     else
-      @mytemplates = Mytemplate.all(:order => [:created_at.desc]).search2(params[:search],params[:page])
+      @mytemplates = Mytemplate.all(:order => [:created_at.desc]).search2(params[:search],params[:page]).fc_filter(feedback_code)
       @total_count = Mytemplate.all.search2(params[:search],"").count
+      @subtotal_count = @mytemplates.count
     end
     
     @categories = Category.all(:order => :priority)    
@@ -56,11 +63,63 @@ class Admin::MytemplatesController < ApplicationController
     @section = "show"
     
     @categories = Category.all(:order => :priority)   
-    @mytemplate = Mytemplate.get(params[:id])
+    @mytemplate = Mytemplate.get(params[:id].to_i)
     
     render 'mytemplate'    
   end
 
+  def jobboard_create
+    mytemp_id = params[:id].to_s
+    content = params[:feedback_memo]
+    feedback_code = params[:feedback_code].to_i
+
+    bbs = Jobboard.new()
+    bbs.user_id = current_admin.id
+    bbs.content = content
+    bbs.feedback_code = feedback_code
+    
+    @mytemp = Mytemplate.get(mytemp_id.to_i)
+    @mytemp.feedback_code = feedback_code
+    @mytemp.save 
+    
+    bbs.mytemp_id = mytemp_id
+    bbs.admin = true
+
+    if bbs.save
+      if params[:feedback_file] != nil
+        req_file = params[:feedback_file]
+        #파일업로드
+        dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+        FileUtils.mkdir_p dir if not File.exist?(dir)
+        ReqfileUploader.store_dir = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/req_files/"
+
+        uploader = ReqfileUploader.new
+        
+        begin
+          uploader.store!(req_file)
+
+          file_ext = File.extname(req_file.original_filename)
+          file_name = bbs.id.to_s
+          bbs.req_file = bbs.id.to_s + file_ext
+          bbs.original_filename = req_file.original_filename
+          if bbs.save
+            puts_message "첨부파일 업로드 완료!"
+          end
+        rescue
+          puts_message "첨부파일 업로드 실패!"
+        end
+      end
+      
+      puts_message "요청게시글 등록완료!"
+    else
+      puts_message "error!"
+    end
+
+    @mytemp_id = mytemp_id
+    
+    render :partial => 'jbbs_body', :object => @mytemp_id
+  end
+  
   # GET /mytemplates/new
   # GET /mytemplates/new.xml
   def new
