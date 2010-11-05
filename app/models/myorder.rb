@@ -32,6 +32,9 @@ class Myorder
   property :user_id,        Integer
   property :items,          String
   
+  #주문상태 
+  property :status,         Integer
+  
   timestamps :at
 
   belongs_to :user

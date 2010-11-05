@@ -52,13 +52,22 @@ class Mytemplate
     
   before :create, :file_path
 
-  def self.fc_filter(fcode)
-    if fcode == "all"
+  def self.fc_filter(fcode,jcode)
+
+    if fcode == "all" and jcode == "all"
       Mytemplate.all
-    else
+      
+    elsif fcode == "all" and jcode != "all"
+      Mytemplate.all(:job_code => jcode)
+      
+    elsif fcode != "all" and jcode =="all"
       Mytemplate.all(:feedback_code => fcode)
+      
+    elsif fcode != "all" and jcode != "all"
+      Mytemplate.all(:feedback_code => fcode, :job_code => jcode)
     end
   end
+
   
   def self.search(search, page)
       Mytemplate.all(:name.like => "%#{search}%").page :page => page, :per_page => 12

@@ -1,0 +1,15 @@
+<html>
+<head>
+	<title>webTop Helper</title>
+	<script type="text/javascript" src="/js/jquery-1.4.2.js"></script>
+</head>
+<body>
+<span id="next">잘되나?</span>
+<script  type="text/javascript">
+	$("#next").css("color","red").click(function() {
+		alert("gg")
+		$(top.document).find("#webTop_Helper").animate({ height: '300px'})
+	})
+</script>
+</body>
+</html>

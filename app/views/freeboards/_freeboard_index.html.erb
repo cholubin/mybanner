@@ -1,78 +1,75 @@
-<%= stylesheet_link_tag '/css/paginate.css' %>
-<div id="feature_wrapper">
-	<h2>자유게시판</h2>
-		<p1>	웹탑프린트샵 자유게시판입니다.
-		</p1>
-<br><br>
-
-	</div>
-<!-- <copy> -->
-	<table class="board_table">
-	    <thead class="board_thead">
-	        <tr>
-	            <th class="board_thead" width="60px">번호 </th>
-	            <td class="board_thead" width="465px"><center>제목</center></td>
-				<td class="board_thead" width="80px"><center>작성자</center></td>
-	            <td class="board_thead" width="80px"><center>등록일</center></td>
-	            <td class="board_thead" width="65px"><center>조회</center></td>
-
-	        </tr>
-	    </thead>
-	 
-	    <tbody class="board_tbody">
-			<% 	if params[:page].to_i == 0 or params[:page].to_i == 1
-					@temp_page = 0
-				else
-					@temp_page = params[:page].to_i - 1
-				end
-				@page_num = @total_count - (10 * @temp_page) %>
-				
-
-			<% @freeboard.each do |freeboard| %>
-	        <tr class="table_b","board_tbody">
-	            <th class="board_tbody" width="60px"><%= @page_num %></th>
-	            <td title="<%= freeboard.title if freeboard.title.length > 90 %>" class="board_tbody" width="465px"><a href="/freeboards/<%=freeboard.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= entitle(freeboard) %></a></td>
-				<td class="board_tbody" width="80px"><center><%= User.first(:id => freeboard.user_id).name %></center></td>
-	            <td class="board_tbody" width="80px"><center><%= freeboard.created_at.strftime('%Y-%m-%d') %></center></td>
-	            <td class="board_tbody" width="65px"><center><%= freeboard.hit_cnt %></center></td>
-
-	        </tr>
-	        <% @page_num -= 1
-			end %>
-	        
-	    </tbody>
-	</table>
-	   
-
-	<div id="line_bottom1"></div>
-	<br>
-
-		<!-- dm-pager Pagination -->
-		<table width="730" >
-		<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>			
-			<tr>
-				<td width="230">&nbsp;</td>
-				<td width="350" style="align:center">
-					<div class="pager">
-					<%=Freeboard.search(params[:search], params[:page]).pager.to_html "/freeboards?search=#{params[:search]}" %>
-					</div>
-				</td>
-				<td width="150" align="right">
-					<%if signed_in? %>
-						<a href="/freeboards/new"><img src="images/board/write.jpg"></a>					
-					<%else%>
-						<a href="/login?uri=/freeboards/new"><img src="images/board/write.jpg"></a>
-					<%end%>
-				</td>
-			</tr>
-			
-			<tr height="10">
-				<td align="center" colspan="3">
-					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/board/search.jpg", :align => "absmiddle") %>	
-				</td>
-			</tr>
-		<% end %>			
+<div id="qnaboard" class="content-layout">
+	<h3>질문과 답변 게시판</h3>
+	<ul class="content-description">
+		<li>사이트 이용 및 사용에 궁금한 점이 있으면 글을 남겨주세요. </li>
+		<li>공개적인 공간이기 때문에 개인정보를 포함한 질문은 전화나 이메일로 해주시기 바랍니다.</li>
+	</ul>
+	<div class="board_list">
+		<table class="board" border="0" cellpadding="0" cellspacing="0">
+		    <thead>
+		        <tr>
+		            <th class="id">번호</th>
+		            <th class="subject"><center>제목</center></th>
+					<th class="author"><center>작성자</center></th>
+		            <th class="date"><center>등록일</center></th>
+		            <th class="count"><center>조회</center></th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    <% if @total_count >= 1 %>
+				<% 	if params[:page].to_i == 0 or params[:page].to_i == 1
+						@temp_page = 0
+					else
+						@temp_page = params[:page].to_i - 1
+					end
+					@page_num = @total_count - (10 * @temp_page) %>
+					
+	
+				<% @freeboard.each do |freeboard| %>
+		        <tr>
+		            <td class="id"><%= @page_num %></td>
+		            <td class="subject" title="<%= freeboard.title if freeboard.title.length > 90 %>"><a href="/freeboards/<%=freeboard.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= entitle(freeboard) %></a></td>
+					<td class="author"><%= User.first(:id => freeboard.user_id).name %></td>
+		            <td class="date"><%= freeboard.created_at.strftime('%Y.%m.%d') %></td>
+		            <td class="count"><%= freeboard.hit_cnt %></td>
+		        </tr>
+		        <% @page_num -= 1
+				end %>
+			<% else %>
+				<tr>
+					<td colspan="5" class="empty"><img src="/images/error/error-empty-qna.jpg" alt="작성된 질문글이 없습니다. / 궁금한 사항이 있으시면 부담없이 글남겨주세요. 빠른시간내에 답변드리겠습니다. 감사합니다." width="578" height="400" /></td>
+				</tr>
+			<% end%>
+		    </tbody>
 		</table>
-		
-
-						
+		<div class="actions">
+			<h4>게시판 동작</h4>
+			<%if signed_in? %>
+			<a href="/freeboards/new" class="new">새로운 글 작성</a>
+			<%else%>
+			<a href="/login?uri=/freeboards/new" class="new ajax-sign-in">새로운 글 작성</a>
+			<%end%>
+		</div>
+	</div>
+	<div class="board_nav">
+		<div class="pager">
+		<%=Freeboard.search(params[:search], params[:page]).pager.to_html "/freeboards?search=#{params[:search]}" %>
+		</div>
+		<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>
+		<fieldset id="search-form">
+			<legend>디자인 검색</legend>
+			<p><%= text_field_tag :search, params[:search],{:id=>"search_val" } %><input type="submit" value="검색" class="submit-button"/></p>
+		</fieldset>
+		<% end %>
+	</div>
+</div>
+<script type="text/javascript">
+$("tbody tr").hover(
+	function () {
+		$(this).find("td").css("background-color","#eee");
+	},
+	function () {
+		$(this).find("td").css("background-color","#fff");
+	}
+);
+</script>

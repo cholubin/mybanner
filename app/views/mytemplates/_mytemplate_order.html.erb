@@ -61,10 +61,13 @@
 		<fieldset id="select-payment">
 			<h4>결제방법 선택</h4>
 			<ul>
-				<li class="user"><input type="radio" name="pay_m" id="user" value="온라인입금" checked/> <label for="user">직접 계좌이체</label></li>
-				<li class="realtime"><input disabled type="radio" name="pay_m" id="payment-realtime" value="계좌이체"/> <label for="payment-realtime">실시간 계좌이체</label>	</li>
+				<% pms = Basicinfo.all(:category => "pay_method", :order => [:order]) %>
+				<% pms.each do |p| %>
+					<li class="user"><input type="radio" name="pay_m" id="user" value="<%= p.code %>" <%= "checked" if p.is_default == true %> <%= "disabled" if p.disable == true %>/> <label for="user"><%= p.name %></label></li>
+				<%end %>
+				<!-- <li class="realtime"><input disabled type="radio" name="pay_m" id="payment-realtime" value="계좌이체"/> <label for="payment-realtime">실시간 계좌이체</label>	</li>
 				<li class="credit"><input disabled type="radio" name="pay_m" id="payment-credit" value="카드결제"/> <label for="payment-credit">신용카드</label></li>
-				<li class="mobile"><input disabled type="radio" name="pay_m" id="payment-mobile" value="휴대폰결제"/> <label for="payment-mobile">휴대폰</label></li>
+				<li class="mobile"><input disabled type="radio" name="pay_m" id="payment-mobile" value="휴대폰결제"/> <label for="payment-mobile">휴대폰</label></li> -->
 			</ul>
 		</fieldset>
 		<input id="order_basic" type="submit" class="submit-button" value="주문하기"/>

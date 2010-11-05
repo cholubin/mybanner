@@ -1,0 +1,6 @@
+/* @override http://mac.fooleaf.com:3000/css/skin.purplenight.css */
+
+body { background-image: url(/images/skin.purplenight/background.jpg); background-color: #f3eef3; background-position: center 0; }
+#header #nav-menu { background: none  }
+#site_logo { position: absolute; top: 48px; width: 960px;}
+#site_logo img { display: block; margin: 0 auto; }

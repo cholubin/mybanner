@@ -70,6 +70,7 @@ class MytemplatesController < ApplicationController
   @myorder.order_zip = params[:zip_code]
   @myorder.order_addr1 = params[:address1]
   @myorder.order_addr2 = params[:address2]
+  @myorder.status = 0 #접수완료 코드 (Basicinfo)
   @myorder.user_id = current_user.id
   # @myorder.total_price = params[:total_price].to_i
   
@@ -153,9 +154,13 @@ class MytemplatesController < ApplicationController
     if File.exists?(job_done) then
        FileUtils.remove_entry(job_done)
      end
+    
+     @reload = params[:reload]
+     if @reload == "yes"
+       make_contens_xml(@mytemplate)
+       erase_job_done_file_temp(@mytemplate)
+     end
      
-    # make_contens_xml(@mytemplate)
-    # erase_job_done_file_temp(@mytemplate)
     @category_name = @mytemplate.category
     @subcategory_name = @mytemplate.subcategory
     render 'mytemplate'    
@@ -454,6 +459,44 @@ class MytemplatesController < ApplicationController
     render :partial => 'jbbs_body', :object => @mytemp_id
   end    
 
+  def update_option
+    mytemp_id = params[:id].to_i
+    @mytemp = Mytemplate.get(mytemp_id)
+    
+    if params[:opt1] == ""
+      @mytemp.opt1 = nil
+    else
+      @mytemp.opt1 = params[:opt1].to_i
+    end
+    
+    if params[:opt2] == ""
+      @mytemp.opt2 = nil
+    else
+      @mytemp.opt2 = params[:opt2].to_i
+    end
+    
+    puts_message "@mytemp.opt1.to_s:::"+@mytemp.opt1.to_s
+    puts_message "@mytemp.opt2.to_s:::"+@mytemp.opt2.to_s
+    
+    if @mytemp.save
+      render :nothing => true
+    else
+      puts_message "옵션을 업데이트 하는 도중 오류가 발생했습니다!"
+    end
+  end
+  
+  def update_quantity
+    mytemp_id = params[:id].to_i
+    quantity= params[:quantity]
+    
+    @mytemp = Mytemplate.get(mytemp_id)
+    @mytemp.quantity = quantity
+    if @mytemp.save
+      render :nothing => true
+    else
+      puts_message "수량을 업데이트 하는 도중 오류가 발생했습니다!"
+    end
+  end
 
   def destroy_selection
     @ids = params[:ids].split(",")

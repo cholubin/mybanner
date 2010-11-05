@@ -6,20 +6,28 @@ class Admin::MyimagesController < ApplicationController
   # GET /myimages
   # GET /myimages.xml
   def index
+    @menu = "mytemplate"
+    @board = "myimage"
+    @section = "index"
+
       #확장자별 소팅
-      ext = params[:ext]
-      
-      @menu = "mytemplate"
-      @board = "myimage"
-      @section = "index"
-    
-      if ext == "all" or ext == nil or ext == ""
-        @myimages = Myimage.all(:order => [:created_at.desc]).search_user(params[:search], params[:page])   
-        @total_count = Myimage.all(:order => [:created_at.desc]).search_user(params[:search], params[:page]).count   
+      if params[:ext] == nil or params[:ext] == "all"
+        ext = "all"
+      end
+
+      if ext == "all"
+        @myimages = Myimage.all.search(params[:search], params[:page])   
+        @total_count = Myimage.all.search(params[:search], "").count
       else
-        puts_message ext
-        @myimages = Myimage.all(:type => ext, :order => [:created_at.desc]).search_user(params[:search], params[:page])           
-        @total_count = Myimage.all(:type => ext, :order => [:created_at.desc]).search_user(params[:search], params[:page]).count
+        @myimages = Myimage.all(:type => ext, :order => [:created_at.desc]).search(params[:search], params[:page])           
+        @total_count = Myimage.all(:type => ext, :order => [:created_at.desc]).search(params[:search], "").count
+      end
+      
+      
+      i = 1
+      @myimages.each do |dd|
+        puts_message i.to_s
+        i += 1
       end
       
       render 'myimage'

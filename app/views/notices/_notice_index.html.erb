@@ -1,29 +1,29 @@
-<%= stylesheet_link_tag '/css/paginate.css' %>
-<div id="feature_wrapper">
-	<h2>공지사항</h2>
-		<p1>	웹탑프린트샵 공지사항입니다.
-		</p1>
-<br><br>
-
-	</div>
-<!-- <copy> -->
-		<table class="board_table">
-		    <thead class="board_thead">
+<div id="notices" class="content-layout">
+	<h3>공지사항</h3>
+	<ul class="content-description">
+		<li>고객 편의를 위한 사이트 이용안내 및 알림 사항을 모아놓은 게시판입니다.</li>
+		<li>목록의 제목을 눌러보시면 자세히 볼 수 있습니다.</li>
+	</ul>
+	<div class="board_list">
+		<table class="board" border="0" cellpadding="0" cellspacing="0">
+		    <thead>
 		        <tr>
-		            <th class="board_thead" width="60px">번호 </th>
-		            <td class="board_thead" width="545px"><center>제목</center></td>
-		            <td class="board_thead" width="80px"><center>등록일</center></td>
-		            <td class="board_thead" width="65px"><center>조회</center></td>
+		            <th class="id">번호</th>
+		            <th class="subject"><center>제목</center></th>
+					<th class="author"><center>작성자</center></th>
+		            <th class="date"><center>등록일</center></th>
+		            <th class="count"><center>조회</center></th>
 		        </tr>
 		    </thead>
-
-		    <tbody class="board_tbody">
+		    <tbody>
+		    <% if @notices_notice.count >= 1 && @notices_news.count >= 1 %>
 				<% @notices_notice.each do |notice| %>
-				<tr>
-		            <td class="table_f" width="60px"><center><img src="images/board/news_icon.gif"></center></td>
-		            <td class="table_f" width="545px"><a href="/notices/<%=notice.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= notice.title %></a></td>
-		            <td class="table_g" width="80px"><center><%= notice.created_at.strftime('%Y-%m-%d') %></center></td>
-		            <td class="table_g" width="65px"><center><%= notice.hit_cnt %></center></td>
+		        <tr>
+		            <td class="id">-</td>
+		            <td class="subject notice" title="<%= notice.title if notice.title.length > 90 %>"><a href="/notices/<%=notice.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= notice.title %></a></td>
+					<td class="author">관리자</td>
+		            <td class="date"><%= notice.created_at.strftime('%Y.%m.%d') %></td>
+		            <td class="count"><%= notice.hit_cnt %></td>
 		        </tr>
 				<%end %>
 				<% 	if params[:page].to_i == 0 or params[:page].to_i == 1
@@ -34,37 +34,44 @@
 					@page_num = @total_count - (10 * @temp_page) %>
 
 
-				<% @notices_news.each do |news| %>			
-		        <tr class="table_b","board_tbody">
-		            <th class="board_tbody" width="60px"><%= @page_num %></th>
-		            <td class="board_tbody" width="545px"><a href="/notices/<%=news.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= news.title %></a></td>
-		            <td class="board_tbody" width="80px"><center><%= news.created_at.strftime('%Y-%m-%d') %></center></td>
-		            <td class="board_tbody" width="65px"><center><%= news.hit_cnt %></center></td>
-
+				<% @notices_news.each do |news| %>
+		        <tr>
+		            <td class="id"><%= @page_num %></td>
+		            <td class="subject" title="<%= news.title if news.title.length > 90 %>"><a href="/notices/<%=news.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= news.title %></a></td>
+					<td class="author">관리자</td>
+		            <td class="date"><%= news.created_at.strftime('%Y.%m.%d') %></td>
+		            <td class="count"><%= news.hit_cnt %></td>
 		        </tr>
 		        <% @page_num -= 1
 				end %>
+			<% else %>
+				<tr>
+					<td colspan="5" class="empty"><img src="/images/error/error-empty-notice.jpg" alt="작성된 공지사항이 없습니다." width="578" height="400" /></td>
+				</tr>
+			<% end%>
+
 		    </tbody>
 		</table>
-
-		<div id="line_bottom1"></div>
-
-
-
-		<table width="730" >
-		<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>			
-			<tr>
-				<td>
-					<div class="pager">
-					<%=Notice.search(params[:search], params[:page]).pager.to_html "/notices?search=#{params[:search]}" %>
-					</div>
-				</td>
-			</tr>
-			
-			<tr height="10">
-				<td align="right" >
-					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/board/search.jpg", :align => "absmiddle") %>	
-				</td>
-			</tr>
-		<% end %>			
-		</table>
+	</div>
+	<div class="board_nav">
+		<div class="pager">
+		<%=Notice.search(params[:search], params[:page]).pager.to_html "/freeboards?search=#{params[:search]}" %>
+		</div>
+		<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>
+		<fieldset id="search-form">
+			<legend>디자인 검색</legend>
+			<p><%= text_field_tag :search, params[:search],{:id=>"search_val" } %><input type="submit" value="검색" class="submit-button"/></p>
+		</fieldset>
+		<% end %>
+	</div>
+</div>
+<script type="text/javascript">
+$("tbody tr").hover(
+	function () {
+		$(this).find("td").css("background-color","#eee");
+	},
+	function () {
+		$(this).find("td").css("background-color","#fff");
+	}
+);
+</script>

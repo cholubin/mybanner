@@ -120,6 +120,10 @@ function TextMonitor()
 	return mIsVisible; //[mmInspectorWin isKeyWindow];
 }
 
+- (void)setModalMode:(BOOL)flag
+{
+	mIsVisible = flag;
+}
 - (id)styledTextEditView
 {
 	return mXMLInspectorView;
@@ -161,11 +165,15 @@ function TextMonitor()
 {
 	[self setImagePath:aImagePath];
 	if(aImagePath) {
-		var lExtLen = [[mImagePath pathExtension] length];
+		var ext = [mImagePath pathExtension];
+		var lExtLen = [ext length];
+		var lPreviewExt = ".jpg";
+		if([[ext lowercaseString] isEqualToString:@"eps"] || [[ext lowercaseString] isEqualToString:@"pdf"]) 
+			lPreviewExt = ".png";
 		var lImgPathNoExt = [mImagePath substringToIndex:[mImagePath length]-lExtLen-1];
 		var lImgName = [lImgPathNoExt lastPathComponent];
 		var lOrgPath = [lImgPathNoExt stringByDeletingLastPathComponent];
-		var lPreviewPath = gBaseURL + lOrgPath + "/Preview/"+lImgName+".jpg";
+		var lPreviewPath = gBaseURL + lOrgPath + "/Preview/"+lImgName+lPreviewExt;
 		var lImage = [[CPImage alloc] initWithContentsOfFile:lPreviewPath];
 		[mImageImageView setImage:lImage];
 		[lImage release];
@@ -178,11 +186,16 @@ function TextMonitor()
 - (void)setNewImagePathToImageView:(CPString)aImagePath
 {
 	[self setImagePath:aImagePath];
-	var lExtLen = [[mImagePath pathExtension] length];
+	var ext = [mImagePath pathExtension];
+	var lExtLen = [ext length];
+	var lPreviewExt = ".jpg";
+	if([[ext lowercaseString] isEqualToString:@"eps"] || [[ext lowercaseString] isEqualToString:@"pdf"]) 
+		lPreviewExt = ".png";
+	
 	var lImgPathNoExt = [mImagePath substringToIndex:[mImagePath length]-lExtLen-1];
 	var lImgName = [lImgPathNoExt lastPathComponent];
 	var lOrgPath = [lImgPathNoExt stringByDeletingLastPathComponent];
-	var lPreviewPath = gBaseURL + lOrgPath + "/Preview/"+lImgName+".jpg";
+	var lPreviewPath = gBaseURL + lOrgPath + "/Preview/"+lImgName+lPreviewExt;
 	var lImage = [[CPImage alloc] initWithContentsOfFile:lPreviewPath];
 	if(lImage) {
 	 	[lImage setDelegate:self];
@@ -226,7 +239,7 @@ function TextMonitor()
 	return retstr;
 }
 
-- (CPURLConnection)sendJSONRequest:(CPString)command data:(CPString)datastr 
+- (CPURLConnection)sendJSONRequest:(CPString)command data:(CPString)datastr delegate:(var)dele
 {
     var lDocOpenURL = [CPString stringWithFormat:"%@/post_mlayout",gBaseURL];
   	var JSONString = '{"requested_action":"'+command+'","docname":"'+mDocumentName+'","userinfo":"'+datastr+'"}';
@@ -237,8 +250,13 @@ function TextMonitor()
 	[lRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"] ;
 	[lRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"] ;
 
-    var lConnection = [CPURLConnection connectionWithRequest:lRequest delegate:self];
+    var lConnection = [CPURLConnection connectionWithRequest:lRequest delegate:dele];
 	return lConnection;
+}
+
+- (CPURLConnection)sendJSONRequest:(CPString)command data:(CPString)datastr
+{
+	return [self sendJSONRequest:command data:datastr delegate:self];
 }
 
 - (void)sendJSONRequestAndRefresh:(CPString)command data:(CPString)datastr

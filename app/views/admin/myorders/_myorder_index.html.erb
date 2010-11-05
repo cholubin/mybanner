@@ -1,0 +1,143 @@
+<%= stylesheet_link_tag '/css/paginate.css' %>
+<div id="feature_wrapper">
+		<p1>전체 주문 리스트 입니다.</p1>
+		<% if ! flash[:notice].nil? %>
+			<br>
+			<span class="error_message_small"><%= flash[:notice].to_s %></span>
+		<% end %>		
+<br><br>
+
+	</div>
+	
+	<% form_tag :action => :deleteSelection, :method => 'post' do %>			
+	
+	<table class="board_table">
+	    <thead class="board_thead">
+	        <tr>
+	            <th class="board_thead" width="40px">번호</th>
+				<th class="board_thead" width="40px">상태</th>
+	            <td class="board_thead" width="100px"><center>주문날짜</center></td>
+				<td class="board_thead" width="120px"><center>아이템</center></td>
+	            <td class="board_thead" width="50px"><center>총 주문금액 </center></td>
+	            <td class="board_thead" width="50px"><center>사용자(아이디/이름)</center></td>
+				<td class="board_thead" width="30px"><center>삭제</center></td>
+	        </tr>
+	    </thead>
+	 
+	    <tbody class="board_tbody">
+			<% 	if params[:page].to_i == 0 or params[:page].to_i == 1
+					@temp_page = 0
+				else
+					@temp_page = params[:page].to_i - 1
+				end
+				@page_num = @total_count - (6 * @temp_page) %>
+				
+
+			<% @myorders.each do |myorder| %>
+	        <tr class="table_b","board_tbody">
+	            <th class="board_tbody" /><%= @page_num %></th>
+				<th class="board_tbody" />
+					<%@stats = Basicinfo.all(:category=>"order_process") %>
+					<select class="sel_status" id="sel_status_<%= myorder.id %>">
+						<%@stats.each do |s| %>
+						<option value="<%= s.code %>" <%= "selected" if s.code == myorder.status %>><%= s.name %></option>
+						<%end %>
+					</select>
+				</th>
+	            <td class="board_tbody" /><center><%= myorder.updated_at.strftime('%Y-%m-%d') %></center></td>
+				<td class="board_tbody" />
+					<ul onClick="location.href='/admin/myorders/<%= myorder.id.to_s %>'" style="cursor:hand;">
+						<%
+						puts_message myorder.items
+						item_array = myorder.items.split(",")
+						item_array.each do |i|
+							temp_id = i
+							temp = Mytemplate.get(i.to_i)  
+							category = Category.get(temp.category.to_i).name
+							
+							if temp.subcategory != nil
+								subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name
+								design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + temp_id
+							else
+								subcategory = ""
+								design_no = temp.category.to_s  + "-" + temp_id	
+							end
+						%>
+						<!-- 주문 품목 반복될 부분 -->
+						<li><%= category + subcategory %> <span class="design-code">(<%= design_no %>)</span></li>
+						<!-- 주문 품목 반복될 부분 끝 -->
+						<%end %>
+					</ul>
+				</td>
+				<td class="board_tbody" /><center><%= myorder.total_price.to_s %></center></td>
+	            <td class="board_tbody" />
+					<% user_id = User.get(myorder.user_id).userid
+					   user_name = User.get(myorder.user_id).name
+					%>
+					<center><a href="/admin/users/<%= myorder.user_id %>"><%= "#{user_name}(#{user_id})" %></a></center>
+				</td>
+				<td class="board_tbody" /><center><input type="checkbox" name="chk[<%= myorder.id %>]"></center></td>
+	        </tr>
+	        <% @page_num -= 1
+			end %>
+	        <tr>
+				<td colspan="7">
+					<div id="line_bottom1"></div>
+				</td>
+			</tr>
+	    </tbody>
+	
+	</table>
+	   
+
+	
+	<br>
+
+		<!-- dm-pager Pagination -->
+		<table width="800px" >
+			<tr>
+				<td width="230">&nbsp;</td>
+				<td width="350" style="align:center">
+					<div class="pager">
+					<%=@myorders.search(params[:search], params[:page]).pager.to_html "/admin/myorders?search=#{params[:search]}" %>
+					</div>
+				</td>
+				<td width="150" align="right">
+					<% if @total_count > 0 %>
+						<%= image_submit_tag('/images/admin/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+			<tr height="10">
+				<td align="center" colspan="3">
+					<% if @total_count > 0 %>
+						<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>								
+					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/admin/search.jpg", :align => "absmiddle") %>	
+						<% end %>
+					<% end %>
+				</td>
+			</tr>
+					
+		</table>
+		
+
+<script language="Javascript">
+$('select').live("change", function(event){
+	$order_id = $(event.target).attr("id").replace("sel_status_","");
+	$selected_val = $("select option:selected").val();
+	$selected_text = $("select option:selected").text();
+
+	$.ajax({
+		data:'status='+$selected_val+'&order_id='+$order_id, 
+		dataType:'script', 
+		type:'post', 
+		url:'/admin/myorders/update_status',
+		success: function(request){
+			alert("상태가 " + "[" + $selected_text + "]" + " 으로 변경되었습니다!");
+		}
+	});
+
+})
+</script>						
+

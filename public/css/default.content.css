@@ -1,17 +1,24 @@
 /* @override http://mac.fooleaf.com:3000/css/default.content.css */
 
 div#error-screen { margin: 40px 0; }
+#faqs #error-screen { margin: 0; border: 1px solid #ddd; border-width: 0 1px 0 1px; }
 td#error-screen { margin: 0; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
 #sub .content-description { margin: 15px 0 20px; border: 1px solid #ddd; padding: 10px; background: #eee; }
 #sub .content-description li { list-style: square;margin-left: 14px; line-height: 18px; font-size: 11px; }
 table span.design-code {font-size: 9px; font-family: tahoma; color: #aaa; font-weight: normal !important; }
 table th { text-shadow: 0 1px #eee }
-a.back-list{ display: inline-block; width: 102px; height: 27px; background: url("/images/content/button-backlist.png") left top no-repeat; text-indent: -5000px; }
+a.back-list{ display: block; width: 102px; height: 27px; background: url("/images/content/button-backlist.png") left top no-repeat; text-indent: -5000px; }
 a.back-list:hover { background-position: -102px 0; }
 a.back-list:active { background-position: -204px 0; }
-#designcart .caption, #order-list .caption, #order-detail .caption {width: 570px; height: 39px; line-height: 39px; background: url("/images/content/designcart-table-foot.png") no-repeat; text-align: left; position: relative; color: #555;padding-left: 10px;; }
+
+a.back-article{ display: block; width: 102px; height: 27px; background: url("/images/board/button-back-article.png") left top no-repeat; text-indent: -5000px; }
+a.back-article:hover { background-position: -102px 0; }
+a.back-article:active { background-position: -204px 0; }
+
+#designcart .caption, #order-list .caption, #order-detail .caption, .board_article .actions, #faqs .actions {width: 570px; height: 39px; line-height: 39px; background: url("/images/content/designcart-table-foot.png") no-repeat; text-align: left; position: relative; color: #555;padding-left: 10px;; }
+.actions p { margin: 0; }
 div.clear { clear: both; }
-thead th, ul.head li { filter:progid:DXImageTransform.Microsoft.DropShadow(offX=0, offY=1, color='#ececec'); text-shadow: 0 1px #fff; }
+thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Microsoft.DropShadow(offX=0, offY=1, color='#ececec'); text-shadow: 0 1px #fff; }
 
 /* 서브페이지 서브 메뉴, 기본 레이아웃 */
 #sub #content {	background: #fff url(/images/content/page-sub-bg.png) left 78px no-repeat; }
@@ -28,7 +35,7 @@ thead th, ul.head li { filter:progid:DXImageTransform.Microsoft.DropShadow(offX=
 #sub #submenu ul li ul li a { display: inline-block; padding:2px 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
 #sub #submenu ul li ul li a:hover, #sub #submenu ul li ul li.on a { background: #67991a; color: #67991a; color: white; }
 #sub #submenu ul li ul li a:active { background: #b0681b;color: white; }
-#sub .content-layout { padding: 10px 190px; width: 580px; min-height: 600px; height: auto !important; height: 600px; }
+#sub .content-layout { padding: 10px 190px 30px; width: 580px; min-height: 600px; height: auto !important; height: 600px; }
 #sub .content-layout h3 { width:580px; height: 30px; padding-top:39px; text-indent:-5000px; background-repeat: no-repeat; background-position: left 29px;}
 
 
@@ -83,7 +90,7 @@ thead th, ul.head li { filter:progid:DXImageTransform.Microsoft.DropShadow(offX=
 #sub #design-list.vertical { *zoom:0 }
 #sub #design-list.vertical:after {content:" "; display:block; clear:both;}
 
-#sub #search-form {  border: 0; padding: 30px 0;  margin: 0; text-align: center;}
+#sub #search-form {  border: 0; padding: 5px 0 20px;  margin: 0; text-align: center;}
 #sub #search-form p { margin: 5px; padding: 0; text-align: center; }
 #sub #search-form input { border: 0; background: none; margin: 0; padding: 0; vertical-align:middle;}
 #sub #search-form legend { display: none; }
@@ -397,3 +404,116 @@ thead th, ul.head li { filter:progid:DXImageTransform.Microsoft.DropShadow(offX=
 #order-detail .caption { position: relative; }
 #order-detail .caption a { display: block; position: absolute; text-indent: -5000px; }
 #order-detail .caption a.back-list { top: 6px; left: 6px; }
+
+
+/* 게시판 리스트 */
+#qnaboard.content-layout h3 { background-image: url("/images/content/title-qnaboard.png"); }
+#notices.content-layout h3 { background-image: url("/images/content/title-notices.png"); }
+#faqs.content-layout h3 { background-image: url("/images/content/title-faqs.png"); }
+.board_list { background: url("/images/content/table-comment-bottom.png") no-repeat left bottom; padding-bottom: 19px; }
+table.board { background: url("/images/content/table-comment-top.png") no-repeat left top; width: 580px; }
+table.board th { height: 32px; }
+table.board td { height: 30px; border-bottom: 1px solid #ddd; }
+table.board td.id { width: 46px;  text-align: center; border-left: 1px solid #ddd; font-size: 10px; font-family: tahoma; color: #999;}
+table.board td.id img { display: block;margin: 0 auto; }
+table.board td.subject { width: 284px; padding-left: 30px; background: url("/images/board/icon-question.png") no-repeat 4px 4px; }
+table.board td.subject.notice { background: url("/images/board/icon-notice-text.png") left 50% no-repeat; padding-left: 35px;  width: 279px;}
+table.board td.author { width: 100px; text-align: center; }
+table.board td.date { width: 100px; text-align: center; font-size: 11px;}
+table.board td.count { width: 50px; text-align: center; border-right: 1px solid #ddd;} 
+table.board td.empty { border: 1px solid #ddd; border-width: 0 1px 0 1px }
+table.board td.empty img {display: block}
+.board_list div.actions { height: 26px; line-height: 26px; background: #eee; border: 1px solid #ddd; border-width: 0 1px 0 1px; padding: 2px 10px; }
+div.actions h4 { display: none; }
+
+/* 게시판 글보기 */
+.board_article { background: url("/images/content/block-design-detail-top.png") no-repeat left top; position: relative; padding-top: 39px;}
+.board_article .article_info { background: #eee; border: 1px solid #ddd; border-top: none; line-height: 30px; padding: 0 10px; position: relative; height: 30px;}
+.board_article .article_info li { display: inline; }
+.board_article .article_info li.date { position: absolute; top: 0px; right: 10px; }
+.board_article h4.subject { padding: 10px 0 5px; font-size: 12px; border-bottom: 1px solid #ddd;margin-bottom: 10px; padding-left: 30px; background: url("/images/board/icon-question.png") no-repeat 4px 6px;  overflow: hidden; }
+.board_article .article_content {  border: 1px solid #ddd; border-top: none; padding: 10px 10px 20px; }
+.board_article .article_content div { padding: 0 30px; line-height: 150%; }
+.board_article .article_content p { margin: 15px 0; }
+
+/* 코멘트 관련 스타일 */
+.comment_list { border: 1px solid #ddd; border-width: 0 1px 0 1px; }
+.comment_list .comment_article {  padding: 10px 10px; border-top: 1px solid #fff; border-bottom: 1px solid #ddd; position: relative; background: #eee url("/images/board/block-comment-bg.png") repeat-x left top;}
+.comment_list .comment_article li.author { position: absolute; top: 14px; font-size: 11px; }
+.comment_list .comment_article li.date { position: absolute; top: 30px; font-size: 11px; color: #aaa; }
+.comment_list .comment_article li.delete { position: absolute; top: 50px; }
+.comment_list .comment_article li.delete a { width: 22px; height: 15px; display: block; text-indent: -5000px; background: url("/images/content/button-mini-delete.png"); }
+.comment_list .comment_article li.comment { padding: 0 10px 0 100px; min-height: 56px; height:auto !important; height:56px; line-height: 140%; }
+
+.comment_list fieldset { margin: 0; padding: 0; border: 0; background: #eee; padding:15px 20px 10px; border-top: 1px solid #fff; }
+.comment_list fieldset h5 { display: none; }
+.comment_list fieldset .actions { width: 213px; height: 31px; margin: 10px auto 0;  background: none; padding: 0; }
+.comment_list fieldset .actions:after {content:" "; display:block; clear:both;}
+.comment_list fieldset .comment label { font-weight: bold; }
+.comment_list fieldset .comment span { font-size: 11px; color: #999; letter-spacing: -1px; font-weight: normal; }
+.comment_list fieldset .comment textarea { height: 120px; width: 530px; margin: 10px 0 0;display: block; }
+.board_article #top_actions { position: absolute; top: 0; background: none; }
+.board_article div.actions li { position: absolute; }
+.board_article div.actions li.back-list { top: 7px; left: 8px; }
+.board_article div.actions li.edit { top: 7px; left: 483px; }
+.board_article div.actions li.delete { top: 7px; left: 528px; }
+
+
+/* 게시판 버튼 처리 부분 */
+div.actions a.new {  width: 102px ;  height: 26px ; background: url("/images/board/button-new.png") no-repeat left top; display: block; text-indent: -5000px; margin: 0 0  0 auto;}
+div.actions a.new:hover { background-position: -102px 0 }
+div.actions a.new:active { background-position: -204px 0 }
+div.actions .edit a { width: 43px;  height: 26px; background: url("/images/board/button-edit.png") no-repeat; display: block; text-indent: -5000px; }
+div.actions .delete a { width: 43px ;  height: 26px ; background: url("/images/board/button-delete.png") no-repeat; display: block; text-indent: -5000px; }
+div.actions .edit a:hover, div.actions .delete a:hover { background-position: -43px 0; }
+div.actions .edit a:active, div.actions .delete a:active {  background-position: -86px 0; }
+div.actions a.submit_button  { display: block; text-indent: -5000px; width:122px; height: 31px; background: url("/images/board/button-submit.png") no-repeat left top; float: left; }
+div.actions a input { display: none; }
+fieldset .actions { width: 213px; *zoom: 1; margin: 0 auto;}
+fieldset .actions:after {content:" "; display:block; clear:both;}
+div.actions a.submit_button:hover { background-position: 0 -31px; }
+div.actions a.submit_button:active { background-position: 0 -62px; }
+div.actions a.reset_button  { display: block; text-indent: -5000px; width:91px; height: 31px; background: url("/images/board/button-submit.png") no-repeat -122px top; float: left; }
+div.actions a.reset_button:hover { background-position: -122px -31px; }
+div.actions a.reset_button:active { background-position: -122px -62px; }
+
+
+/* 글쓰기 */
+.new_form fieldset, .edit_form fieldset {  border: 0; margin: 0; padding: 0; }
+.new_form h4, .edit_form h4 { font-size: 12px; line-height: 39px; padding: 0 10px; width: 560px; background: url("/images/content/block-design-detail-top.png") no-repeat left top; height: 39px; }
+.new_form p, .edit_form p, .new_form div.actions, .edit_form div.actions { margin: 0; padding: 0 0 10px; border: 1px solid #ddd; border-width: 0 1px 0 1px; padding: 5px 20px 5px; background: #eee;}
+.new_form div.wrap, .edit_form div.wrap { background: url("/images/content/table-comment-bottom.png") left bottom no-repeat; padding-bottom: 19px; }
+.new_form div.actions, .edit_form div.actions{ padding: 0 182px 10px 183px; }
+.new_form label, .edit_form label { display: block; font-weight: bold; line-height: 24px; }
+.new_form .subject, .edit_form .subject { width: 530px; }
+.new_form .content, .edit_form .content { width: 530px; height: 240px; line-height: 140%; }
+
+/* 자주 묻는 질문 답변*/
+
+#faqs_category { 
+	background: url("/images/content/designcart-table-head.png") no-repeat left top; height: 52px; padding: 0 6px;
+}
+#faqs_category { *zoom: 1;  }
+#faqs_category:after {content:" "; display:block; clear:both;}
+#faqs_category li {  display: block; float: left;  }
+#faqs_category li a { display: block;  width: 69px; height: 43px; font-size: 11px; font-weight: bold; background: url("/images/board/button-faq-category.png"); position: relative; margin: 5px 0 4px; }
+#faqs_category li a:hover { background-position: -69px 0; }
+#faqs_category li a:active { background-position: -138px 0; }
+#faqs_category li a:active span { padding-top: 2px; }
+#faqs_category li span { position: absolute; display: block; text-align: center; width:69px; cursor: pointer;}
+#faqs_list p.question, #faqs_list p.answer { margin: 0; padding: 0; border: 1px solid #ddd; border-top: none; padding: 0 20px 0 90px; }
+#faqs_list p.question { background: url("/images/board/icon-faq-question.png") no-repeat 12px 8px;; line-height: 36px; }
+#faqs_list p.answer { background: #eee url("/images/board/icon-faq-answer.png") no-repeat -53px 0; line-height: 150%; padding:12px 20px 24px 90px ; }
+#faqs .actions a.new { display: block; margin: 0; position: absolute; top: 6px; right: 7px; }
+
+
+#tos, #policy { line-height: 150%; }
+#tos h4, #policy h4 { padding: 10px; color: #333; border: 1px solid #ccc; }
+#tos h5, #policy h5 { font-size: 12px; font-weight: bold; margin: 16px 0 16px 12px ; }
+#tos ol, #tos ul, #tos p, #policy ol, #policy ul, #policy p { border-bottom: 1px solid #ddd; padding-bottom: 16px; margin: 16px 0; }
+#tos p, #policy p { padding-left: 12px;; }
+#tos ol li, #policy ol li { list-style-type: decimal; margin: 8px 0 8px 30px; }
+#tos ul li, #policy ul li { list-style-type: disc; margin: 8px 0 8px 30px; }
+#tos ol li ol,#tos ol li ul,  #policy ol li ol, #policy ol li ul {  background: #eee; border: 1px solid #ddd; padding: 5px 10px; margin: 5px 0; }
+#tos ol li ol li, #policy ol li ol li { list-style-type: lower-latin; margin: 1px 0 1px 20px; font-size: 11px; }
+#tos ol li ul li, #policy ol li ul li { list-style-type: circle; margin: 1px 0 1px 20px; font-size: 11px; }

@@ -8,11 +8,11 @@
 <% else  %>
 			<h3>고객센터</h3>
 			<ul>
-				<li><a class="<%=(@section == "home")?"title-on":"title"%>" href="/pages/cscenter">고객센터 첫페이지</a></li>
-				<li><a class="<%=(@section == "cscenter")?"title-on":"title"%>" href="/notices">공지사항</a></li>
-				<li><a class="<%=(@section == "notices")?"title-on":"title"%>" href="/qnaboard">질문과 답변</a></li>
-				<li><a class="<%=(@section == "qnaboard")?"title-on":"title"%>" href="/faqs">자주 묻는 질문</a></li>
-				<li><a class="<%=(@section == "policy")?"title-on":"title"%>" href="/pages/policy">개인정보/이용정책</a></li>
+				<li><a class="<%=(@board == "notice")?"title-on":"title"%>" href="/notices">공지사항</a></li>
+				<li><a class="<%=(@board == "freeboard")?"title-on":"title"%>" href="/freeboards">질문과 답변</a></li>
+				<li><a class="<%=(@board == "faq")?"title-on":"title"%>" href="/faqs">자주 묻는 질문</a></li>
+				<li><a class="<%=(@section == "tos")?"title-on":"title"%>" href="/pages/tos">사이트 이용약관</a></li>
+				<li><a class="<%=(@section == "policy")?"title-on":"title"%>" href="/pages/policy">개인정보 보호정책</a></li>
 				<li><a class="<%=(@section == "sitemap")?"title-on":"title"%>" href="/pages/sitemap">사이트맵</a></li>
 			</ul>
 <% end %>

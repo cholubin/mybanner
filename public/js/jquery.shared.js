@@ -114,26 +114,83 @@ function mainImageChange(num) {
 	}
 }
 
+function openWebTopHelper() {
+	if($("#webtop_helper").length == 0) {
+		$("<iframe id='webtop_helper' border='0' frameborder='0'>")
+		.css({"diplay":"block","background":"white","border":"1px solid #555","position":"absolute","top":$(window).height()/2,"left":$(window).width()/2})
+		.hide()
+		.appendTo("#webTopEditor")
+	}
+	if($("#webtop_helper").css("display") == "none")
+		$("#webtop_helper").attr("src","about:blank").css({"width":0,"height":0,"top":$(window).height()/2,"left":$(window).width()/2}).show().animate({"top":($(window).height()/2)-185,"left":($(window).width()/2)-215, "width":430, "height":291},function() { $("#webtop_helper").attr("src","/webtop_helper/") });
+	else
+		alert("이미 사용방법이 화면에 표시중입니다.")
+}
+
+function openWebTopEditor_user(user,id,href) {
+	if($("#webTopEditor").length == 0) {
+		$("<div id=\"webTopEditor\"><div id=\"editor_header\"><h2>WebTop Editor</h2><a href=\"#\" id=\"back_to_home\">저장하고 홈페이지로 돌아가기.</a></div></div>")
+		.css({"display":"none","background-color": "White" ,"position": "absolute","width":"100%", "z-index":"150","overflow":"hidden","top":"0","left":"0"})
+		.mousedown(function(){$(document).mousemove(function(e){return false;});})
+		.bind("contextmenu",function(e) { return false })
+		.appendTo('body');
+	}
+
+	$("<iframe id=\"webtop_iframe\" width=\"100%\" border=\"0\" frameborder=\"0\"/>")
+	.css({"display":"block","border":"0","height":$(window).height()-75})
+	.appendTo("#webTopEditor");
+	$("<div id=\"editor_footer\"><img src=\"/images/editor/footer.png\" width=\"960\" height=\"34\"/></div>")
+	.appendTo("#webTopEditor");
+	$("<a href='#'></a>").css({"display":"block","position":"absolute","width":"145px","height":"21px","top":"10px","left":"180px"}).click(function() { openWebTopHelper(); }).appendTo("#webTopEditor");;
+	$("#webTopEditor").css({"display":"block","height":$(window).height()});
+	$("#back_to_home").attr("href",(href == null)?"/":href)
+	
+	// 리사이즈시 사이즈시 자동으로 사이즈 변경	
+	$(window).resize(function() {
+		$("#webTopEditor").css("height",$(window).height());
+		$("#webtop_iframe").css("height",$(window).height()-75);
+	})
+	
+	var url = "/MClientBox/index.html?pdf_button=no&spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"	
+	$("#webtop_iframe").attr("src",url);
+	$("#webtop_iframe").load(function(){
+		if(getCookie("hide-tutorial") == "false" || getCookie("hide-tutorial") == "") openWebTopHelper();
+	})
+	$("body").css("background","#63828c");
+	$("#header").remove();
+	$("#content").remove();
+	$("#footer").remove();
+
+}
+
 function openWebTopEditor(user,id,href) {
 	if($("#webTopEditor").length == 0) {
 		$("<div id=\"webTopEditor\"><div id=\"editor_header\"><h2>WebTop Editor</h2><a href=\"#\" id=\"back_to_home\">저장하고 홈페이지로 돌아가기.</a></div></div>")
 		.css({"display":"none","background-color": "White" ,"position": "absolute","width":"100%", "z-index":"150","overflow":"hidden","top":"0","left":"0"})
 		.mousedown(function(){$(document).mousemove(function(e){return false;});})
+		.bind("contextmenu",function(e) { return false })
 		.appendTo('body');
 	}
 
-	var url = "/MClientBox/index.html?spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"
-
-	$("<iframe id=\"webTop_iFrame\" src=\""+url+"\" width=\"100%\" border=\"0\" frameborder=\"0\"/>").css({"display":"block","border":"0","height":$(window).height()-75}).appendTo("#webTopEditor");
-	$("<div id=\"editor_footer\"><img src=\"/images/editor/footer.png\" width=\"960\" height=\"34\"/></div>").appendTo("#webTopEditor");
+	$("<iframe id=\"webtop_iframe\" width=\"100%\" border=\"0\" frameborder=\"0\"/>")
+	.css({"display":"block","border":"0","height":$(window).height()-75})
+	.appendTo("#webTopEditor");
+	$("<div id=\"editor_footer\"><img src=\"/images/editor/footer.png\" width=\"960\" height=\"34\"/></div>")
+	.appendTo("#webTopEditor");
+	$("<a href='#'></a>").css({"display":"block","position":"absolute","width":"145px","height":"21px","top":"10px","left":"180px"}).click(function() { openWebTopHelper(); }).appendTo("#webTopEditor");;
 	$("#webTopEditor").css({"display":"block","height":$(window).height()});
-	href = (href == null)?"/":href;
-	$("#back_to_home").attr("href",href)
-
-	// 리사이즈시 자동으로 사이즈 변경	
+	$("#back_to_home").attr("href",(href == null)?"/":href)
+	
+	// 리사이즈시 사이즈시 자동으로 사이즈 변경	
 	$(window).resize(function() {
 		$("#webTopEditor").css("height",$(window).height());
-		$("#webTop_iFrame").css("height",$(window).height()-75);
+		$("#webtop_iframe").css("height",$(window).height()-75);
+	})
+	
+	var url = "/MClientBox/index.html?spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"	
+	$("#webtop_iframe").attr("src",url);
+	$("#webtop_iframe").load(function(){
+		if(getCookie("hide-tutorial") == "false" || getCookie("hide-tutorial") == "") openWebTopHelper();
 	})
 	$("body").css("background","#63828c");
 	$("#header").remove();
@@ -176,7 +233,57 @@ function quickPreview(popWidth, popHeight, url, content_id) {
 	
 }
 
+// 임시 퍼포먼스용 CSS바꾸기
 
+function skin(change) {
+	now_skin = getCookie("skin");
+	
+	if(!now_skin) {
+		setCookie("skin","cloud","1");
+	} else if(change == true) {
+		switch(now_skin) {
+			case "modern":
+				$("#site_logo img").attr({"src":"/images/skin.cloud/default_logo.png"})
+				$("#skin_css").attr("href","/css/skin.cloud.css");
+				setCookie("skin","cloud","1");
+			break;
+			case "cloud":
+				$("#site_logo img").attr({"src":"/images/skin.grace/default_logo.png"})
+				$("#skin_css").attr("href","/css/skin.grace.css");
+				setCookie("skin","grace","1");
+			break;
+			case "grace":
+				$("#site_logo img").attr({"src":"/images/skin.purplenight/default_logo.png"})
+				$("#skin_css").attr("href","/css/skin.purplenight.css");
+				setCookie("skin","purplenight","1");
+			break;
+			case "purplenight":
+				$("#site_logo img").attr({"src":"/images/skin.modern/default_logo.png"})
+				$("#skin_css").attr("href","/css/skin.modern.css");
+				setCookie("skin","modern","1");
+			break;
+		}
+	} else {
+		switch(now_skin) {
+			case "cloud":
+				$("#site_logo img").attr({"src":"/images/skin.cloud/default_logo.png"})
+				$("#skin_css").attr("href","/css/skin.cloud.css");
+			break;
+			case "grace":
+				$("#site_logo img").attr({"src":"/images/skin.grace/default_logo.png"})
+				$("#skin_css").attr("href","/css/skin.grace.css");
+			break;
+			case "purplenight":
+				$("#site_logo img").attr({"src":"/images/skin.purplenight/default_logo.png"})
+				$("#skin_css").attr("href","/css/skin.purplenight.css");
+			break;
+			case "modern":
+				$("#site_logo img").attr({"src":"/images/skin.modern/default_logo.png"})
+				$("#skin_css").attr("href","/css/skin.modern.css");
+			break;
+		}
+	}
+}
 $(function () {
 	// 메인 페이지 이미지 교체 액션
 	$("#main-button li:eq(0)").click(function() { mainImageChange(0) });
@@ -185,21 +292,12 @@ $(function () {
 	$("body").delegate(".ajax-sign-in","click", function() { popupView(250,390,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-sign-up","click", function() { popupView(660,350,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-edit","click", function() { popupView(360,330,$(this).attr("href")); return false }); 
-	$("body").delegate(".ajax-myimages","click", function() { 
-		popupView(798,554,$(this).attr("href"), function(){
-			$("#sortables").sortable({
-			   update: function(event, ui) { 
-				update_folder_order();
-				},
-				axis: 'y' 
-			  }).addTouch();
-		} ); 
-		return false 
-	});
-	
+	$("body").delegate(".ajax-myimages","click", function() { popupView(798,554,$(this).attr("href")); return false }); // 차후 김현수 과장과 합칠때 확인 할것!
 	$("body").delegate("li.preview a","click",function() { quickPreview(740,540,$(this).attr("href"),"ajaxloadpage"); return false })
 	$("body").delegate(".ajax-withdraw","click", function() { popupView(380,310,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-edit-order","click", function() { popupView(620,340,$(this).attr("href")); return false });
+	$(".tempskin").click(function() { skin(1) });
+	skin();
 	$.preloadCssImages();
 });
 

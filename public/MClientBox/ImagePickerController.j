@@ -80,7 +80,8 @@ gThumbSizeHeight = 100;
 	var category = [mCategoryPopup titleOfSelectedItem];
 	[mCategoryPopup setEnabled:NO];
 
-    var lDocWebImageURL = [CPString stringWithFormat:"%@/filelist?request=/images/%@/",gBaseURL ,category];
+    var lDocWebImagePathStr = [CPString stringWithFormat:"%@/filelist?request=/images/%@/",gBaseURL ,category];
+	var lDocWebImageURL = [CPURL URLWithString:lDocWebImagePathStr];
     var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
     mImageListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 }
@@ -94,9 +95,12 @@ gThumbSizeHeight = 100;
 		return;
 	if([lFilename isEqualToString:ext])
 		return;
+	var lThumbExt = ".jpg";
+	if([[ext lowercaseString] isEqualToString:@"eps"] || [[ext lowercaseString] isEqualToString:@"pdf"]) 
+		lThumbExt = ".png";
 	var lCategory = [mCategoryPopup titleOfSelectedItem];
 	var lImageName = [lFilename substringToIndex:[lFilename length] - [ext length] - 1];
-	lImageName = lImageName + ".jpg";
+	lImageName = lImageName + lThumbExt;
     var lImagePath = [CPString stringWithString:gUserPath+"/images/"+lCategory+"/"+lFilename];
     var lImageThumbPath = [CPString stringWithString:gBaseURL+gUserPath+"/images/"+lCategory+"/Thumb/"+lImageName];
     var lThumbImage = [[CPImage alloc] initWithContentsOfFile:lImageThumbPath];
@@ -194,7 +198,11 @@ gThumbSizeHeight = 100;
 			return;
 		}
 		var lImageName = [lFilename substringToIndex:[lFilename length] - [ext length] - 1];
-		var lPreviewFilename = lImageName + ".jpg";
+		var lPreviewExt = ".jpg";
+		if([[ext lowercaseString] isEqualToString:@"eps"] || [[ext lowercaseString] isEqualToString:@"pdf"]) 
+			lPreviewExt = ".png";
+		
+		var lPreviewFilename = lImageName + lPreviewExt;
 		var lImageFolder = [lImagePath stringByDeletingLastPathComponent];
 		
 	    var lImagePreviewPath = gBaseURL + lImageFolder+"/Preview/"+lPreviewFilename;

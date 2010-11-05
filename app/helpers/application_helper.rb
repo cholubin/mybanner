@@ -8,9 +8,6 @@ def get_current_url
   request.request_uri  
 end
 
-
-
-
 # 파일명을 안전하게 변환한다. 한글파일명을 위해 UTF-8 코드는 살려둔다. 
 def sanitize_filename(filename)
   filename.force_encoding('UTF-8')

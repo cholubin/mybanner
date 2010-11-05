@@ -24,7 +24,7 @@
 		    <tbody class="board_tbody">
 				<% @notices_notices.each do |notice| %>
 				<tr>
-		            <td class="table_f" width="60px"><center><img src="/images/board/news_icon.gif"></center></td>
+		            <td class="table_f" width="60px"><center><img src="/images/admin/news_icon.gif"></center></td>
 		            <td class="table_f" width="520px"><a href="/admin/notices/<%=notice.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= notice.title %></a></td>
 		            <td class="table_g" width="80px"><center><%= notice.created_at.strftime('%Y-%m-%d') %></center></td>
 		            <td class="table_g" width="65px"><center><%= notice.hit_cnt %></center></td>
@@ -65,8 +65,8 @@
 				</div>
 			</td>
 			<td width="150" align="right">
-				<a href="/admin/notices/new"><img src="/images/board/write.jpg"></a>					
-				<%= image_submit_tag('/images/board/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
+				<a href="/admin/notices/new"><img src="/images/admin/write.jpg"></a>					
+				<%= image_submit_tag('/images/admin/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
 			</td>
 		</tr>
 		<% end %>
@@ -74,7 +74,7 @@
 			<tr height="10" align="center">
 				<td align="right" >
 						<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>			
-					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/board/search.jpg", :align => "absmiddle") %>	
+					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/admin/search.jpg", :align => "absmiddle") %>	
 						<% end %>			
 				</td>
 			</tr>

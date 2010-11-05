@@ -110,7 +110,7 @@
 					</div>
 				</td>
 				<td width="150" align="right">
-						<%= image_submit_tag('/images/board/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
+						<%= image_submit_tag('/images/admin/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
 				</td>
 			</tr>
 			<% end %>
@@ -121,7 +121,7 @@
 								sort_value = "all"
 							end %>
 						<input type="hidden" name="sort" value="<%= sort_value %>">
-					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/board/search.jpg", :align => "absmiddle") %>	
+					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/admin/search.jpg", :align => "absmiddle") %>	
 						<% end %>
 				</td>
 			</tr>

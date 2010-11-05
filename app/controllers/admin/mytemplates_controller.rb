@@ -17,6 +17,13 @@ class Admin::MytemplatesController < ApplicationController
     else
       feedback_code = params[:fc]
     end
+    
+    if params[:jc] == nil or params[:jc] == "all"
+      job_code = "all"
+    else
+      job_code = params[:jc]
+    end
+    
     # @temp = Mytemplate.first(:id => 2)
     #    @temp.destroy
     
@@ -24,12 +31,12 @@ class Admin::MytemplatesController < ApplicationController
     @subcategory_name = params[:subcategory_name]
 
     if params[:userid] != nil
-        @mytemplates = Mytemplate.all(:user_id => params[:userid], :order => [:created_at.desc]).fc_filter(feedback_code).search2(params[:search],params[:page])
+        @mytemplates = Mytemplate.all(:user_id => params[:userid], :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search2(params[:search],params[:page])
         @total_count = Mytemplate.all(:user_id => params[:userid]).search2(params[:search],"").count
         @subtotal_count = @mytemplates.count
     else
-      @mytemplates = Mytemplate.all(:order => [:created_at.desc]).search2(params[:search],params[:page]).fc_filter(feedback_code)
-      @total_count = Mytemplate.all.search2(params[:search],"").count
+      @mytemplates = Mytemplate.all(:in_order => false, :order => [:created_at.desc]).search2(params[:search],params[:page]).fc_filter(feedback_code,job_code)
+      @total_count = Mytemplate.all(:in_order => false).search2(params[:search],"").count
       @subtotal_count = @mytemplates.count
     end
     
@@ -61,13 +68,69 @@ class Admin::MytemplatesController < ApplicationController
     @menu = "user"
     @board = "mytemplate"
     @section = "show"
-    
+
     @categories = Category.all(:order => :priority)   
-    @mytemplate = Mytemplate.get(params[:id].to_i)
+    @mytemplate = Mytemplate.get(params[:mytempid].to_i)
+        
+    @reload = params[:reload]
+    if @reload == "yes"
+      job_done = @mytemplate.path + "/web/done.txt" 
+      if File.exists?(job_done)
+        FileUtils.remove_entry(job_done)
+      end
+      
+      make_contens_xml(@mytemplate)
+      erase_job_done_file_temp(@mytemplate)
+    end
     
     render 'mytemplate'    
   end
 
+  def make_contens_xml(temp) 
+    
+    path = temp.path
+    njob = path + "/do_job.mJob"
+    mjob_file= <<-EOF
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+    	<key>Action</key>
+    	<string>MakeContentsXML</string>
+    	<key>DocPath</key>
+    	<string>#{path}</string>   
+     <key>ID</key>
+    	<string>#{temp.id}</string>     	
+    </dict>
+    </plist>
+    </xml>
+    EOF
+
+     mjob = path + "/do_job.mJob" 
+     
+     File.open(mjob,'w') { |f| f.write mjob_file }    
+
+     if File.exists?(mjob)
+        system "open #{mjob}"
+      end 
+       
+    puts_message "make_contens_xml finished"
+  end
+  
+  def erase_job_done_file_temp(temp)        
+    job_done = temp.path + "/web/done.txt" 
+
+    loop do 
+      puts "기다리는 중!"
+     break if File.exists?(job_done)
+    end
+
+    FileUtils.remove_entry(job_done)
+
+    puts_message "erase_job_done_file"
+   end
+   
+   
   def jobboard_create
     mytemp_id = params[:id].to_s
     content = params[:feedback_memo]
@@ -232,6 +295,28 @@ class Admin::MytemplatesController < ApplicationController
     end
   end
 
+  def jobboard_delete
+    bbs_id = params[:bbs_id].to_i
+    @bbs = Jobboard.get(bbs_id)
+    @mytemp_id = @bbs.mytemp_id
+    
+    # jobboard req_file 삭제
+    req_file_dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+    
+    if @bbs.req_file != nil and File.exist?(req_file_dir + @bbs.req_file)
+      FileUtils.rm_rf req_file_dir + @bbs.req_file
+    end
+      
+    if @bbs.destroy
+      puts_message "요청 게시글 삭제 완료!"
+      
+      render :partial => 'jbbs_body', :object => @mytemp_id
+    else
+      puts_message "요청글 게시판 삭제 실패!"
+    end
+          
+  end
+  
   # DELETE /mytemplates/1
   # DELETE /mytemplates/1.xml
   def destroy

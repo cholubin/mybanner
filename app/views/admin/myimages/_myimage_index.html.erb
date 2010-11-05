@@ -37,7 +37,7 @@
 	        <tr>
 	            <th class="board_thead" width="60px">번호 </th>
 	            <td class="board_thead" width="100px"><center>썸네일</center></td>
-				<td class="board_thead" width="80px"><center>제목</center></td>
+				<td class="board_thead" width="120px"><center>제목</center></td>
 	            <td class="board_thead" width="80px"><center>사용자 아이디 </center></td>
 	            <td class="board_thead" width="65px"><center>사용자 이름</center></td>
 				<td class="board_thead" width="30px"><center>삭제</center></td>
@@ -45,13 +45,13 @@
 	    </thead>
 	 
 	    <tbody class="board_tbody">
-			<% 	if params[:page].to_i == 0 or params[:page].to_i == 1
+			<% 	
+				if params[:page].to_i == 0 or params[:page].to_i == 1
 					@temp_page = 0
 				else
 					@temp_page = params[:page].to_i - 1
 				end
-				@page_num = @total_count - (6 * @temp_page) %>
-				
+				@page_num = @total_count - (12 * @temp_page) %>
 
 			<% @myimages.each do |myimage| %>
 	        <tr class="table_b","board_tbody" onClick="location.href='/admin/myimages/<%= myimage.id.to_s %>'" style="cursor:hand;">
@@ -78,12 +78,23 @@
 				<td width="230">&nbsp;</td>
 				<td width="350" style="align:center">
 					<div class="pager">
-					<%=Myimage.search_user(params[:search], params[:page]).pager.to_html "/admin/myimages?search=#{params[:search]}" %>
+						<%
+						if params[:ext] == nil or params[:ext] == "all"
+							ext = "all"
+						else
+							ext = params[:ext]
+						end
+						%>
+						<%if ext == "all"%>
+					        <%= Myimage.search(params[:search], params[:page]).pager.to_html "/admin/myimages?ext=#{ext}&search=#{params[:search]}" %>   
+					    <%else %>
+					        <%= Myimage.all(:type => params[:ext]).search(params[:search], params[:page]).pager.to_html "/admin/myimages?ext=#{ext}&search=#{params[:search]}" %>           
+					    <%end%>	
 					</div>
 				</td>
 				<td width="150" align="right">
 					<% if @total_count > 0 %>
-						<%= image_submit_tag('/images/board/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
+						<%= image_submit_tag('/images/admin/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
 					<% end %>
 				</td>
 			</tr>
@@ -92,7 +103,7 @@
 				<td align="center" colspan="3">
 					<% if @total_count > 0 %>
 						<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>								
-					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/board/search.jpg", :align => "absmiddle") %>	
+					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/admin/search.jpg", :align => "absmiddle") %>	
 						<% end %>
 					<% end %>
 				</td>

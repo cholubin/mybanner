@@ -1,0 +1,134 @@
+<%if @myorder != nil %>
+<div id="order-detail" class="content-layout">
+	<h3>주문 상세보기</h3>
+	<div id="order-product-list">
+		<h4>주문 상품</h4>
+		<table cellpadding="0" cellspacing="0" border="0">
+			<thead>
+				<tr>
+					<th class="work-type">작업구분</th>
+					<th class="item">품목</th>
+					<th class="size">사이즈</th>
+					<th class="piece">수량</th>
+					<th class="price">가격</th>
+					<th class="option">PDF</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+				item_array = @myorder.items.split(",")
+				item_array.each do |i|
+					temp_id = i
+					temp = Mytemplate.get(i.to_i)  
+					category = Category.get(temp.category.to_i).name
+					
+					if temp.subcategory != nil
+						subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name
+						design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + i
+					else
+						subcategory = ""
+						design_no = temp.category.to_s  + "-" + i	
+					end
+					
+					if temp.size_x != nil and temp.size_y != nil
+						size = temp.size_x + "cm x " + temp.size_y + "cm"
+					else
+						size = "0cm x 0cm" 
+					end
+					
+					unit_price = temp.price
+				%>
+				<!-- 주문 품목 갯수에 따른 반복 -->
+				<% 	if !temp.preview_url.nil?
+						temp_image_path = temp.preview_url
+					else
+						temp_image_path = temp.thumb_url		
+					end
+				%>
+				<tr>
+					<td colspan="6">
+						<center>
+							<img width="700" src="<%= temp_image_path +"?"+ Time.now.to_f.to_s %>" style="cursor:hand;" onClick="Javascript:openWebTopEditor('<%= User.get(temp.user_id).userid %>','<%= temp.id %>','/admin/myorders/<%= @myorder.id %>?reload=yes&mytempid=<%= temp.id %>');" >
+						</center>
+					</td>
+				</tr>
+				<tr>
+					<td class="work-type">직접작업<!-- 작업 타입 --></td>
+					<td class="item">
+						<%= category+subcategory %><!-- 1단계 카테고리 / 2단계 카테고리 --><span class="design-code">(<%= design_no %><!-- 디자인번호 -->)</span>
+						<br>
+							- <%= Basicinfo.first(:category=>"option1", :code=>temp.opt1).name %><br>
+						    - <%= Basicinfo.first(:category=>"option2", :code=>temp.opt2).name %>
+					</td>
+					<td class="size"><%= size %> <!-- 가로사이즈 cm x 세로 사이즈 cm --></td>
+					<td class="piece"><%= temp.quantity %>ea <!-- 갯수 ea --></td>
+					<td class="price"><%= (temp.quantity * unit_price.to_i).to_s %>원<!-- 개별가격 * 갯수 --><span>(개별: <%= unit_price %>원)<!-- 개별가격 --></span></td>
+					<td>
+						<%
+						pdf_path = temp.path + "/web/document.pdf"
+						is_there_pdf = File.exists?(pdf_path)
+						%>
+						<input <%= "onClick=\"download_pdf('#{temp.id}');\"" if is_there_pdf == true %> type="button" value="PDF다운" style="cursor:hand" <%= "disabled title='편집기에서 pdf파일을 생성하시면 다운로드 버튼이 활성화됩니다.'" if !is_there_pdf %>>
+					</td>
+				</tr>
+				<!-- 주문 품목에 따른 반복 -->
+				<%end %>
+				
+			</tbody>
+		</table>
+	</div>
+	<div id="order-information">
+		<div class="receiver">
+			<h4>받는 사람</h4>
+			<ul>
+				<li class="name"><strong>수령인</strong> <span><%= @myorder.receive_name %></span><!-- 수령자 성함 --></li>
+				<li class="phone"><strong>연락처</strong> <span><%= @myorder.order_tel %> /<%=  @myorder.order_mobile %> </span><!-- 수령자 연락처1, 2 --></li>
+			</ul>
+		</div>
+		<div class="delivery">
+			<h4>배송정보</h4>
+			<ul>
+				<li class="type"><strong>배송방법</strong> <span><%= Basicinfo.first(:category=>"delivery", :code => @myorder.receive_type.to_i).name %></span><!-- 배송방법 --></li>
+				<li class="type"><strong>배송상세</strong> <span></span><!-- 배송방법 --></li>
+				<li class="address"><strong>우편번호</strong> <span><%= @myorder.order_zip %></span><!-- 주소 --></li>
+				<li class="address"><strong>배송주소</strong> <span><%= @myorder.order_addr1 + " " + @myorder.order_addr2 %></span><!-- 주소 --></li>
+				<li class="comment"><strong>요구사항</strong> <span><%= @myorder.receive_note %></span><!-- 요구사항 --></li>
+			</ul>
+		</div>
+		<div class="payment">
+			<h4>결제정보</h4>
+			<ul>
+				<li class="type"><strong>결제방법</strong>  <span><%= Basicinfo.first(:category => "pay_method", :code => @myorder.pay_method).name %></span><!-- ### 결제방법(신용카드일 경우 전표번호 또는 결제 한 카드 앞 4자리 표시)) ###--></li>
+				<li class="type-detail"><strong>결제상세</strong> <span></span></li>
+				<li class="price"><strong>주문금액</strong>  <span><%= @myorder.total_price %>원</span> (기본금액)<!-- ### 총주문금액 ### --></li>
+				<li class="first-price"><strong>선결제금액</strong>  <span class="none"><%= @myorder.pre_price if @myorder.pre_price != nil %></span><!-- 선결제 금액 --></li>
+				<li class="last-price"><strong>결제금액</strong>  <span><font color=red>상기 주문금액은 기본금액으로 사이즈변경 및 옵션에 따른 가격상담이 필요합니다!</font></span><!--### 총주문금액 - 선결제금액 = 결제금액 ### --></li>
+			</ul>
+		</div>
+	</div>
+	<div class="caption"><a href="/admin/myorders" class="back-list">목록으로 돌아가기</a></div>
+	
+	<input type="button" value="목록" sytle="cursor:hand; text-align:right" onclick="location.href='/admin/myorders'">
+</div>
+
+<%end %>
+
+
+<script language="Javascript">
+function download_pdf(temp_id){
+	$tempid = temp_id;
+	
+	// $.ajax({
+	// 	data:'temp_id='+$tempid, 
+	// 	dataType:'script', 
+	// 	type:'post', 
+	// 	url:'/admin/myorders/pdf_download',
+	// 	success: function(request){
+	// 		
+	// 	}
+	// });
+	
+	location.href = '/admin/myordersubs/pdf_download?temp_id='+$tempid;
+	return false;
+}
+</script>

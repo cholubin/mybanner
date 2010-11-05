@@ -62,7 +62,7 @@ class Temp
   end
 
   def self.search2(search, page)
-      Temp.all(:conditions => {:name.like => "%#{search}%"}).page :page => page, :per_page => 6
+      Temp.all(:conditions => {:name.like => "%#{search}%"}).page :page => page, :per_page => 12
   end
 
   

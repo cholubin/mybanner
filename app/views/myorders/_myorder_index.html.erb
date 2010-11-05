@@ -49,17 +49,18 @@
 					<ul>
 						<%
 						item_array = my.items.split(",")
-						item_array.each do |i|
-							temp_id = i
-							temp = Mytemplate.get(i.to_i)  
+						item_array.each do |item|
+							temp_id = item
+							temp = Mytemplate.get(item.to_i)  
 							category = Category.get(temp.category.to_i).name
 							
 							if temp.subcategory != nil
 								subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name
-								design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + i
+								design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + temp_id
 							else
 								subcategory = ""
-								design_no = temp.category.to_s  +"-"+ i	
+								# design_no = temp.category.to_s  +"-"+ item
+								design_no = temp.category.to_s + "-" + temp_id
 							end
 						%>
 						<!-- 주문 품목 반복될 부분 -->
@@ -69,7 +70,7 @@
 					</ul>
 				</td>
 				<td class="price"><%= my.total_price.to_s %><br><font color=red>(가격상담 요!)</font></td>
-				<td class="status">접수완료</td>
+				<td class="status"><%= Basicinfo.first(:category=>"order_process", :code => my.status).name %></td>
 				<td class="detail"><a href="/myorders/<%= my.id.to_s %>">상세정보 보기</a></td>
 				<td class="cancel"><a href="### 취소링크 ###" class="cancel-button">주문취소</a>
 				<!--

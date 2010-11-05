@@ -17,47 +17,60 @@
 			}
 		}
 	</script>
-	
-
-		<div id="feature_wrapper">
-			<h2>FAQ 자주 묻는 질문</h2>
-				<p1>	웹탑프린트샵을 이용하시면서, 자주 문의하시는 질문들을 모았습니다.<br> 
-					상세한 상담을 원하시거나 부족한 답변이 있으시면, 고객지원팀으로 문의 주시기 바랍니다.<br>
-					 웹탑프린트샵 고객지원팀: 02-3406-7000
-				</p1>
-			<TABLE id="board_1">
-			    <TR>
-			    	<TD class="table_d"><a href="#">  전체 </TD>
-					<TD class="table_d"><a href="#"> 회원가입</TD>
-					<TD class="table_d"><a href="#"> 템플릿관련</TD>
-			    </TR>
-		    </TABLE>
-
-				  <div id="line_top"></div>
-		          <% 	@i = 0
-						@faqs.each do |faq| %>		               
-	               <!-- 여기가 반복구간이에요 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::		 -->
-				    <div id="menu_title">
-						<a href="javascript:menu(<%= @i %>);"> <img src="images/board/help-icon.jpg">&nbsp;<%= faq.question %></a>
-					</div>
-					<Div id="submenu" style="DISPLAY:none">
-						<%= faq.answer %>
-					
-					</Div>
-					  <div id="line_under"></div>
-				<!-- 여기가 반복구간이에요 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::		 -->
-				<% @i+=1
-				   end %>
-
-				    
-					  <div id="line_under"></div>
-				
-				
-					<div id="line_bottom"></div>
-		                  
-
-		               
+<div id="faqs" class="content-layout">
+	<h3>자주 묻는 질문</h3>
+	<ul class="content-description">
+		<li>저희 사이트를 운영하면서, 자주 문의하시는 질문들을 모았습니다.</li>
+		<li>상세한 상담을 원하시거나 부족한 답변이 있으시면, <a href="/freeboards">질문과 답변</a> 또는, 메일로 문의 주시기 바랍니다.</li>
+	</ul>
+	<div id="faqs_category">
+		<ul>
+			<li><a href="#1"><span>전체</span></a></li>
+		</ul>
+	</div>
+<%if @faqs.count >= 1 %>
+	<div id="faqs_list">
+	<% @faqs.each do |faq| %>
+		<div id="article_<%=faq.id%>" class="article">
+			<p class="question"><%= faq.question %></p>
+			<p class="answer"><%= faq.answer %></p>
 		</div>
-		
+	<% end %>	
+	</div>
+<% else %>
+	<div id="error-screen">
+		<img src="/images/error/error-empty-faq.jpg" alt="등록된 자주 묻는 질문이 없습니다. / 모니터링을 통하여 자주 묻는 질문을 모아서 정확한 답변과 함께 정리해놓겠습니다." width="578" height="400" />
+	</div>
+<% end %>
+	<div class="actions">
+		<p>답변이 없는 경우 질문과 답변에 남겨주시면 빠른 시간 내에 답변 해드리겠습니다.
+		<% if signed_in? %>
+		<a href="/freeboards/new" class="new">질문과 답변</a>
+		<% else %>
+		<a href="/login?uri=/freeboards/new" class="new ajax-sign-in">질문과 답변</a>
+		<% end %>
+		</p>
+	</div>
+        
+</div>
 
-
+<script type="text/javascript">
+	$("#faqs_category li a span").css("top", function() { return 22-(parseInt($(this).height())/2)} )
+	if($(".article").size() >= "10") {
+		$(".article .answer").hide();
+		$(".article .question")
+		.hover(
+			function(){
+				$(this).css("background-color","#f6f6f6")
+			}, function() {
+				$(this).css("background-color","#fff")
+			})
+		.css("cursor","pointer")
+		.click(function() {
+			if($(this).parents("div.article").find("p.answer").css("display") == "none")
+				$(this).parents("div.article").find("p.answer").slideDown()
+			else
+				$(this).parents("div.article").find("p.answer").slideUp()
+		})
+	}
+</script>

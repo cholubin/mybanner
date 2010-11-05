@@ -27,7 +27,7 @@
 						design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + i
 					else
 						subcategory = ""
-						design_no = temp.category.to_s  +"-"+ i	
+						design_no = temp.category.to_s  + "-" + i	
 					end
 					
 					if temp.size_x != nil and temp.size_y != nil
@@ -82,7 +82,7 @@
 		<div class="payment">
 			<h4>결제정보</h4>
 			<ul>
-				<li class="type"><strong>결제방법</strong>  <span><%= @myorder.pay_method %></span><!-- ### 결제방법(신용카드일 경우 전표번호 또는 결제 한 카드 앞 4자리 표시)) ###--></li>
+				<li class="type"><strong>결제방법</strong>  <span><%= Basicinfo.first(:category => "pay_method", :code => @myorder.pay_method).name %></span><!-- ### 결제방법(신용카드일 경우 전표번호 또는 결제 한 카드 앞 4자리 표시)) ###--></li>
 				<li class="type-detail"><strong>결제상세</strong> <span></span></li>
 				<li class="price"><strong>주문금액</strong>  <span><%= @myorder.total_price %>원</span> (기본금액)<!-- ### 총주문금액 ### --></li>
 				<li class="first-price"><strong>선결제금액</strong>  <span class="none"><%= @myorder.pre_price if @myorder.pre_price != nil %></span><!-- 선결제 금액 --></li>

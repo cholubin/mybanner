@@ -203,6 +203,7 @@ class TempsController < ApplicationController
     @mytemplate = Mytemplate.new
     @mytemplate.user_id = current_user.id  
     @mytemplate.temp_id = params[:temp_id] 
+    @mytemplate.quantity = 1
     @mytemplate.save
         
     edit = params[:edit]

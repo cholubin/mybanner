@@ -65,7 +65,7 @@
 				</td>
 				<td width="150" align="right">
 					<% if @total_count > 0 %>
-						<%= image_submit_tag('/images/board/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
+						<%= image_submit_tag('/images/admin/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
 					<% end %>
 				</td>
 			</tr>
@@ -73,7 +73,7 @@
 			<tr height="10">
 				<td align="center" colspan="3">
 						<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>								
-					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/board/search.jpg", :align => "absmiddle") %>	
+					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/admin/search.jpg", :align => "absmiddle") %>	
 						<% end %>
 				</td>
 			</tr>

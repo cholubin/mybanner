@@ -27,7 +27,18 @@
 		count_delay = Mytemplate.all(:feedback_code => 3).count
 	%>
 	총 <%= @total_count.to_s %>건 (작업요청(처리중): <%= count_ing %>건 / 처리완료: <%= count_done %>건 / 파일오류: <%= count_file_error %>건 / 보류: <%= count_delay %>건)
-	<span style="margin: 0 0 0 190">
+	<span style="margin: 0 0 0 200">
+		<select id="sel_jobcode" onChange="javascript:goPage();">
+			<option value="all">전체</option>
+			<%
+			jcodes = Basicinfo.all(:category => "job_request") 
+			jcodes.each do |jc|
+			%>
+			<option value="<%= jc.code %>" <%= "selected" if jc.code == params[:jc] %>><%= jc.name %></option>
+			<%
+			end
+			%>
+		</select>
 		<select id="sel_feedback" onChange="javascript:goPage();">
 			<option value="all">전체</option>
 			<%
@@ -44,12 +55,12 @@
 	    <thead class="board_thead">
 	        <tr>
 	            <th class="board_thead" width="40px"><center>번호</center></th>
-				<th class="board_thead" width="40px"><center>상태</center></th>
+				<th class="board_thead" width="60px"><center>구분</center></th>
+				<th class="board_thead" width="60px"><center>상태</center></th>
 	            <td class="board_thead" width="120px"><center>썸네일</center></td>
-				<td class="board_thead" width="150px"><center>템플릿명</center></td>
-	            <td class="board_thead" width="150px"><center>카테고리/서브카테고리</center></td>
+	            <td class="board_thead" width="120px"><center>카테고리/서브카테고리</center></td>
 	            <td class="board_thead" width="65px"><center>등록일</center></td>	
-				<td class="board_thead" width="80px"><center>소유자</center></td>
+				<td class="board_thead" width="60px"><center>소유자</center></td>
 				<td class="board_thead" width="30px"><center>삭제</center></td>				
 	        </tr>
 	    </thead>
@@ -60,7 +71,7 @@
 				else
 					@temp_page = params[:page].to_i - 1
 				end
-				@page_num = @subtotal_count - (6 * @temp_page) %>
+				@page_num = @subtotal_count - (12 * @temp_page) %>
 				
 
 			<% @mytemplates.each do |mytemplate| %>
@@ -68,14 +79,26 @@
 			<% temp_image_path = mytemplate.thumb_url  if mytemplate.thumb_url%>			
 			
 	        <tr class="table_b","board_tbody">
-	            <th class="board_tbody" width="40px"><%= @page_num %></th>
-				<th class="board_tbody" width="40px"><%= Basicinfo.first(:category => "job_process", :code => mytemplate.feedback_code).name %></th>
-	            <td class="board_tbody" width="120px"><center><a href="/admin/mytemplates/<%= mytemplate.id.to_s %>?search=<%= params[:search] %>&userid=<%= params[:userid] %>&page=<%= params[:page] %>"><%= "<img src='" + temp_image_path + "'>" if mytemplate.thumb_url %></a></center></td>
-				<td class="board_tbody" width="150px"><center><a href="/admin/mytemplates/<%= mytemplate.id.to_s %>?search=<%= params[:search] %>&userid=<%= params[:userid] %>&page=<%= params[:page] %>"><%= mytemplate.name %></a></center></td>
-				<td class="board_tbody" width="150px"><center><%= Category.get(mytemplate.category).name%>/<%= Subcategory.get(mytemplate.subcategory).name if mytemplate.subcategory != nil %></center></td>
-	            <td class="board_tbody" width="65px"><center><%= mytemplate.created_at.strftime('%Y-%m-%d') %></center></td>
-	            <td class="board_tbody" width="80px"><center><%= User.get(mytemplate.user_id).userid %><br>(<%= User.get(mytemplate.user_id).name %>)</center></td>
-				<td class="board_tbody" width="30px"><center><input type="checkbox" name="chk[<%= mytemplate.id %>]"></center></td>
+	            <th class="board_tbody" /><%= @page_num %></th>
+				<th class="board_tbody" /><%= Basicinfo.first(:category=>"job_request", :code=>mytemplate.job_code).name %></th>
+				<th class="board_tbody" /><%= Basicinfo.first(:category => "job_process", :code => mytemplate.feedback_code).name %></th>
+	            <td class="board_tbody" /><center><a href="/admin/mytemplates/<%= mytemplate.id.to_s %>?search=<%= params[:search] %>&userid=<%= params[:userid] %>&page=<%= params[:page] %>"><%= "<img src='" + temp_image_path + "'>" if mytemplate.thumb_url %></a></center></td>
+				<td class="board_tbody" />
+					<center>
+						<%
+						if mytemplate.subcategory != nil
+							code = mytemplate.category  + "-" + mytemplate.subcategory + "-" + mytemplate.id.to_s
+						else
+							code = mytemplate.category  + "-" + mytemplate.id.to_s
+						end
+						%>
+						<%= mytemplate.name + "<br>" if mytemplate.name != nil %>
+						<%= Category.get(mytemplate.category).name%>/<%= Subcategory.get(mytemplate.subcategory).name if mytemplate.subcategory != nil %>
+						<%= "<br>"+code %>
+					</center></td>
+	            <td class="board_tbody" /><center><%= mytemplate.created_at.strftime('%Y-%m-%d') %></center></td>
+	            <td class="board_tbody" /><center><%= User.get(mytemplate.user_id).userid %><br>(<%= User.get(mytemplate.user_id).name %>)</center></td>
+				<td class="board_tbody" /><center><input type="checkbox" name="chk[<%= mytemplate.id %>]"></center></td>
 	        </tr>
 	        <% @page_num -= 1
 			end %>
@@ -94,21 +117,21 @@
 				<td width="350" style="align:center">
 					<div class="pager">
 					<%if params[:userid] != nil  %>
-						<%=Mytemplate.all(:user_id => params[:userid].to_i).fc_filter(params[:fc]).search2(params[:search], params[:page]).pager.to_html "/admin/mytemplates?userid=#{params[:userid]}&search=#{params[:search]}" %>					
+						<%=Mytemplate.all(:user_id => params[:userid].to_i).fc_filter(params[:fc],params[:jc]).search2(params[:search], params[:page]).pager.to_html "/admin/mytemplates?userid=#{params[:userid]}&search=#{params[:search]}" %>					
 					<%else %>
-						<%=Mytemplate.fc_filter(params[:fc]).search2(params[:search], params[:page]).pager.to_html "/admin/mytemplates?search=#{params[:search]}" %>					
+						<%=Mytemplate.fc_filter(params[:fc],params[:jc]).search2(params[:search], params[:page]).pager.to_html "/admin/mytemplates?search=#{params[:search]}" %>					
 					<%end %>
 					</div>
 				</td>
 				<td width="150" align="right">
-						<%= image_submit_tag('/images/board/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
+						<%= image_submit_tag('/images/admin/delete.jpg', { :onclick => 'return confirm(\'정말 삭제하시겠습니까?\');' }) %>				
 				</td>
 			</tr>
 			<% end %>
 			<tr height="10">
 				<td align="center" colspan="3">
 						<% form_tag request.path + "?page=#{params[:page]}", :method => 'get' do %>								
-					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/board/search.jpg", :align => "absmiddle") %>	
+					    <%= text_field_tag :search, params[:search] %><%= image_submit_tag("/images/admin/search.jpg", :align => "absmiddle") %>	
 						<% end %>
 				</td>
 			</tr>
@@ -119,7 +142,8 @@
 <script>
 function goPage(){
 	$fc = $('#sel_feedback option:selected').val();
-	window.location.replace("/admin/mytemplates?fc="+$fc);
+	$jc = $('#sel_jobcode option:selected').val();
+	window.location.replace("/admin/mytemplates?jc="+$jc+"&fc="+$fc);
 }
 </script>
 

@@ -13,7 +13,7 @@
 	<tbody>
 <%
 	mytemp_id = @mytemp_id
-	jbbs = Jobboard.all(:user_id => current_user.id, :mytemp_id => mytemp_id, :order => [:created_at.desc])
+	jbbs = Jobboard.all(:mytemp_id => mytemp_id, :order => [:created_at.desc])
  
 	num = jbbs.count
 	if jbbs.count > 0
@@ -30,9 +30,19 @@
 			<td class="date"><%= bbs.updated_at.strftime('%Y-%m-%d') %></td>
 			<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
 			<td class="memo"><a><%= bbs.content.gsub("\n","<br>") %></a></td>
-			<td class="name"><%= User.get(bbs.user_id).name %></td>
+			<td class="name">
+				<%if bbs.user_id == current_user.id %>
+					<%= User.get(bbs.user_id).name %>
+				<%else%>
+					<%= "관리자" %>
+				<%end %>
+			</td>
 			<td class="file"><%= req_file %></td>
-			<td class="delete"><a id="del_<%= bbs.id.to_s %>" href="#">삭제</a></td>
+			<td class="delete">
+				<%if bbs.user_id == current_user.id %>
+					<a id="del_<%= bbs.id.to_s %>" href="">삭제</a>
+				<%end %>
+			</td>
 		</tr>
 <%
 			num -= 1

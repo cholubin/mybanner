@@ -1,43 +1,36 @@
-		<% form_for(@freeboard) do |f| %>
-<div id="feature_wrapper">
-	<h2>자유게시판</h2>
-		<p1>	웹탑프린트샵 자유게시판입니다.</p1>
-		<span class="error_message"><%= "<br><br>"+flash[:notice] %></span>
-<br><br>
-
-	</div>
-<!-- <copy> -->
-	<table class="board_table">
- 	
-	    <thead class="board_thead">
-	        <tr>
-				<td class="board_thead" width="60px"><center> 제목 </center></td>
-	            <td width="700">
-		<input style="width:613px" name="freeboard[title]" maxlength="100" type="text" value="포스트 제목을 입력하세요 (100글자 이내)" onfocus="if(this.value == '포스트 제목을 입력하세요 (100글자 이내)') this.value=''" size="" onblur="if(this.value == '') this.value='포스트 제목을 입력하세요 (100글자 이내)';"/>
-					</td>
-				
-	        </tr>
-			
-	    </thead>
-	 
-	    <tbody class="board_tbody">
-			
-	        <tr>
-	            <td colspan="2" class="table_c">
-					<center>
-					<textarea name="freeboard[content]"  rows="22" cols="85"><%= @content if @content != nil %></textarea>
-					</center>
-				</td>
-	        </tr>
-	    </tbody>
-	
-	</table>
-	
-	<div id="line_bottom1"></div>
-	<br>	
-		<div id="button_wrapper">
-			<%= image_submit_tag("/images/board/submit.jpg") %>
-		</div>		
-
-	<% end %>	
-
+<div id="qnaboard" class="content-layout">
+	<h3>질문과 답변</h3>
+	<ul class="content-description">
+		<li>사이트 이용 및 사용에 궁금한 점이 있으면 글을 남겨주세요. </li>
+		<li>공개적인 공간이기 때문에 개인정보를 포함한 질문은 전화나 이메일로 해주시기 바랍니다.</li>
+		<li>웹 편집기능에 관련한 질문은 디자인바구니의 상세보기 페이지에서 질문, 요청해주시면 더 빠르게 답변과 처리가 가능합니다.</li>
+		<li>질문 내용을 자세하게 작성해주시면 더욱 자세한 답변을 받을 수 있습니다.</li>
+	</ul>
+	<hr/>
+	<% form_for @freeboard,:html =>{ :class => "new_form"} do |f| %>
+	<fieldset>
+		<h4>게시물 작성</h4>
+		<div class="wrap">
+			<p><label for="board_subject">제목</label><input name="freeboard[title]" maxlength="100" type="text" placeholder="제목을 입력하세요. (100글자 이내)" id="board_subject" class="subject" value="<%= @subject if @subject != nil %>"/></p>
+			<p><label for="board_content">내용</label><textarea name="freeboard[content]" placeholder="내용을 입력하세요." id="board_content" class="content"><%= @content if @content != nil %></textarea></p>	
+			<div class="actions">
+				<a href="#등록하기" class="submit_button"><input type="submit" value="등록하기"/></a>
+				<a href="#다시쓰기"class="reset_button"><input type="reset" value="다시쓰기"/></a>
+			</div>
+		</div>
+	</fieldset>
+	<% end %>
+	<p><a href="/freeboards?search=<%=params[:search]%>&page=<%=params[:page]%>" class="back-list">목록으로 돌아가기</a></p>
+</div>
+<script type="text/javascript">
+$(".submit_button").click(function() {
+	$(this).parents("form").submit();
+	return false;
+})
+$(".reset_button").click(function() {
+	$("form").each(function() {
+		this.reset();
+	});
+	return false;
+})
+</script>

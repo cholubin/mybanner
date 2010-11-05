@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :notices
   map.resources :freeboards, :users
   map.resources :users, :has_many => :freeboards
-    map.resources :users, :has_many => :jobboards
+  map.resources :users, :has_many => :jobboards
   map.resources :faqs
   # map.resources :articles
 

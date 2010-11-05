@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+	<title>Web Top 편집기 도움말</title> 
+	<style type="text/css">
+		html {overflow: hidden}
+		body { margin: 0; padding: 0; }
+		.section { position: absolute; background-repeat: no-repeat; }
+		
+		#sectionArea { display: none }
+		
+		#welcome { width: 430px; height: 291px; background-image: url(images/block-welcome.jpg); }
+		#selector { width: 340px; height: 450px; background-image: url(images/block-selector.gif); }
+		#addbox { width: 340px; height: 326px; background-image: url(images/block-addbox.gif); }
+		#guide { width: 340px; height: 230px; background-image: url(images/block-guide.gif); }
+		#detail { width: 633px; height: 304px; background-image: url(images/block-detail.gif); }
+		
+		#tutorial-start { top: 163px; left: 173px; width: 244px; height: 81px; background-image: url(images/button-tutorial-start.png); text-indent: -5000px}
+		#tutorial-start:hover { background-position: -244px 0; }
+		#tutorial-start:active { background-position: -488px 0; }
+		#tutorial-close { top: 249px; left: 328px; width: 89px; height: 33px; background-image: url(images/button-tutorial-close.png); text-indent: -5000px}
+		#tutorial-close:hover { background-position: -89px 0; }
+		#tutorial-close:active { background-position: -178px 0; }
+		#hide-one-month { position: absolute; top: 255px; left: 186px; }
+		
+		.action {
+			display: block;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 38px;
+			border-top: 1px solid #ddd;
+			background-color: #eee;
+		}
+		
+		.prev {
+			display: block;
+			position: absolute;
+			bottom: 7px;
+			left: 10px;
+			text-indent: -5000px;
+			width: 77px;
+			height: 26px;
+			background: url("images/button-prev.png") no-repeat left top;
+		}
+		.next, .end {
+			display: block;
+			position: absolute;
+			bottom: 7px;
+			right: 10px;
+			text-indent: -5000px;
+			width: 77px;
+			height: 26px;
+			background: url("images/button-next.png") no-repeat left top;
+		}
+		
+		.end {
+			background: url("images/button-end.png") no-repeat left top;
+		}
+		
+		.popup-close {
+			position: absolute;
+			display: block;
+			top: 10px;
+			right: 10px;
+			background: url("/images/default/button-close.png") no-repeat left top;
+			width:52px;
+			height:20px;
+			text-indent: -5000px;
+		}
+		
+		.next:hover, .prev:hover, .end:hover { background-position: -77px 0}
+		.next:active, .prev:active, .end:active { background-position: -154px 0}
+		
+		.image { position: absolute; display: block; background: no-repeat left top; left: 17px;}
+		
+		#image-mouseover { top: 105px; }
+		#image-size { top: 205px; }
+		#image-editcontent1 { top: 305px; }
+		#image-addbox { top: 83px; }
+		#image-editcontent2 { top: 182px; }
+		#image-guide { top: 83px; }
+		
+	</style>
+	<script type="text/javascript" src="/js/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="/js/javascript.cookie.js"></script>
+<!--[if IE 6]>
+	<script src="/js/DD_belatedPNG-min.js"></script>
+	<script>DD_belatedPNG.fix('.next, .prev, #tutorial-start, #tutorial-close, .popup-close');</script>
+<![endif]-->
+</head>
+<body>
+<div id="contentArea" class="content">
+	<div></div>
+</div>
+
+<div id="sectionArea">
+	<div id="welcome" class="section">
+		<a id="tutorial-start" class="image" href="#">사용방법 보기</a>
+		<input name="hide-one-month" id="hide-one-month" type="checkbox"/>
+		<a id="tutorial-close" class="image" href="#">도움말 닫기</a>
+		<a class="popup-close" href="#">닫기</a>
+	</div>
+	
+	<div id="selector" class="section">
+		<img id="image-mouseover" class="image" src="images/image-mouseover.gif" alt="상자위에 마우스를 올리면 테두리가 붉은색으로 변합니다." width="86" height="86" />
+		<img id="image-size" class="image" src="images/image-size.gif" alt="각 모서리의 회색 꼭지점을 움직이면 사이즈를 변경할 수 있습니다." width="86" height="86" />
+		<img id="image-editcontent1" class="image" src="images/image-editcontent.gif" alt="상자를 두번클릭하면 안에 내용을 변경할 수 있습니다." width="86" height="86" />
+		<div class="action">
+			<a href="#" class="next">다음설명보기</a>
+		</div>
+		<a class="popup-close" href="#">닫기</a>
+	</div>
+	
+	<div id="addbox" class="section">
+		<img id="image-addbox" class="image" src="images/image-addbox.gif" alt="드래그를 하면 상자를 추가할 수 있습니다." width="86" height="86" />
+		<img id="image-editcontent2" class="image" src="images/image-editcontent.gif" alt="상자를 두번클릭하면 안에 내용을 변경할 수 있습니다." width="86" height="86" />
+		<div class="action">
+			<a href="#" class="prev">이전설명보기</a>
+			<a href="#" class="next">다음설명보기</a>
+		</div>
+		<a class="popup-close" href="#">닫기</a>
+	</div>
+	
+	<div id="guide" class="section">
+		<img id="image-guide" class="image" src="images/image-guide.gif" alt="편집시 도움이 되는 그리드를 화면에 표시합니다." width="86" height="86" />
+		<div class="action">
+			<a href="#" class="prev">이전설명보기</a>
+			<a href="#" class="next">다음설명보기</a>
+		</div>
+		<a class="popup-close" href="#">닫기</a>
+	</div>
+	
+	<div id="detail" class="section">
+		<div class="action">
+			<a href="#" class="prev">이전설명보기</a>
+			<a href="#" class="end">사용방법 종료</a>
+		</div>
+		<a class="popup-close" href="#">닫기</a>
+	</div>
+</div>
+	<script type="text/javascript">
+		var nowTutorial = 0;
+		var section = new Array('#welcome','#selector','#addbox','#guide','#detail');
+		var positionLeft = new Array("","10","50","180","right")
+		
+		webtop_helper = $(top.document).find("#webtop_helper");
+		
+		if(getCookie("hide-tutorial")=="true")
+			$("#hide-one-month").click()
+		
+		$("#contentArea").delegate(".next, #tutorial-start","click",function(event) {
+			if(positionLeft[nowTutorial+1] == "right") {
+				webtop_helper.animate({ top:100, left:$(top.document).width()-parseInt($(section[nowTutorial+1]).css('width'))-30, width: $(section[nowTutorial+1]).css('width'),height: $(section[nowTutorial+1]).css('height')})
+			} else
+				webtop_helper.animate({ top:100, left:positionLeft[nowTutorial+1], width: $(section[nowTutorial+1]).css('width'),height: $(section[nowTutorial+1]).css('height')})
+			$(section[nowTutorial]).fadeOut("fast",function() {
+				$(this).appendTo("#sectionArea");$(section[nowTutorial+1]).hide().appendTo("#contentArea").fadeIn("fast");nowTutorial++;
+			})
+		})
+		
+		$("#contentArea").delegate(".prev","click",function() {
+			webtop_helper.animate({ top:100, left:positionLeft[nowTutorial-1], width: $(section[nowTutorial-1]).css('width'),height: $(section[nowTutorial-1]).css('height')})
+			$(section[nowTutorial]).fadeOut("fast",function() {
+				$(this).appendTo("#sectionArea");$(section[nowTutorial-1]).hide().appendTo("#contentArea").fadeIn("fast");nowTutorial--;
+			})
+			return false;
+		})
+		$("#contentArea").delegate(".popup-close, #tutorial-close, .end","click",function() {
+			$(section[nowTutorial])
+			.fadeOut("fast",function() {
+				topCenterPoint = parseInt(webtop_helper.css("top"))+(webtop_helper.height()/2);
+				leftCenterPoint = parseInt(webtop_helper.css("left"))+(webtop_helper.width()/2);
+				webtop_helper.animate({top:topCenterPoint,left:leftCenterPoint,width:0,height:0},function() { $(this).hide(); })
+			});
+			return false;
+		})
+		
+		$("#hide-one-month").change(function() {
+			if($(this).attr("checked"))
+				setCookie("hide-tutorial","true",30)
+			else
+				setCookie("hide-tutorial","false",30)
+		})
+		
+		$(window).load(function() {
+			$("#welcome").hide().appendTo("#contentArea").fadeIn("fast");
+		})
+	</script>
+</body>
+</html>

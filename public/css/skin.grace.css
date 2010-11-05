@@ -1,0 +1,6 @@
+/* @override http://mac.fooleaf.com:3000/css/skin.grace.css */
+
+body { background-image: url(/images/skin.grace/background.jpg); background-color: #e5e5e5; background-position: center top; }
+#header #nav-menu { background: none;  }
+#site_logo { position: absolute; top: 46px; width: 960px;}
+#site_logo img { display: block; margin: 0 auto; }
