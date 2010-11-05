@@ -50,7 +50,7 @@
 				<div class="action-select">
 					<ul>
 						<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
-						<li class="edit"><a href="#" onClick="openWebTopEditor_user('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>');">편집하기</a></li>
+						<li class="edit"><a href="#" onClick="openWebTopEditor_user('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>?reload=yes');">편집하기</a></li>
 						<li class="delete"><a href="#" id="del_<%= my.id.to_s %>">삭제하기</a></li>
 					</ul>
 				</div></td>

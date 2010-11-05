@@ -105,7 +105,7 @@ if (window.confirm("디자인바구니에 담으며 바로 편집하시겠습니
 			type:'post', 
 			url:'/temps/create_mytemp',
 			success: function(request){
-				openWebTopEditor_user("<%= current_user.userid %>",get_temps_id,"/mytemplates/"+get_temps_id);
+				openWebTopEditor_user("<%= current_user.userid %>",get_temps_id,"/mytemplates/"+get_temps_id+"?reload=yes");
 				loadingView();
 			}
 		});
