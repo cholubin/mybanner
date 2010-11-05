@@ -70,7 +70,7 @@ class Admin::MytemplatesController < ApplicationController
     @section = "show"
 
     @categories = Category.all(:order => :priority)   
-    @mytemplate = Mytemplate.get(params[:mytempid].to_i)
+    @mytemplate = Mytemplate.get(params[:id].to_i)
         
     @reload = params[:reload]
     if @reload == "yes"
