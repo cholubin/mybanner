@@ -21,10 +21,10 @@
 	
 	<% form_tag :action => :deleteSelection, :method => 'post' do %>			
 	<%
-		count_ing = Mytemplate.all(:feedback_code => 0).count
-		count_done = Mytemplate.all(:feedback_code => 1).count
-		count_file_error = Mytemplate.all(:feedback_code => 2).count
-		count_delay = Mytemplate.all(:feedback_code => 3).count
+		count_ing = Mytemplate.all(:in_order => false, :feedback_code => 0).count
+		count_done = Mytemplate.all(:in_order => false, :feedback_code => 1).count
+		count_file_error = Mytemplate.all(:in_order => false, :feedback_code => 2).count
+		count_delay = Mytemplate.all(:in_order => false, :feedback_code => 3).count
 	%>
 	총 <%= @total_count.to_s %>건 (작업요청(처리중): <%= count_ing %>건 / 처리완료: <%= count_done %>건 / 파일오류: <%= count_file_error %>건 / 보류: <%= count_delay %>건)
 	<span style="margin: 0 0 0 200">
