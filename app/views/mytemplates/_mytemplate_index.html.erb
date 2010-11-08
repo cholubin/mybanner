@@ -64,7 +64,7 @@
 						<% elsif my.job_code == 1 %>
 						<li class="request"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>#feedback-list">요청하기</a></li>
 						<% else %>
-						<li class="accept"><a >시안확정</a></li>
+						<li class="request-disable"><span >시안확정</span></li>
 						<% end %>
 						<li class="delete"><a href="#" id="del_<%= my.id.to_s %>">삭제하기</a></li>
 					</ul>

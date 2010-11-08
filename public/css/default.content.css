@@ -158,6 +158,8 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 .action-select li.edit a { background: url("/images/content/button-cart-edit.png"); }
 .action-select li.request { left: 91px; }
 .action-select li.request a { background: url("/images/content/button-cart-request.png"); }
+.action-select li.request-disable { left: 91px; }
+.action-select li.request-disable span { display: block; text-indent: -5000px; width: 55px; height: 71px; background: url("/images/content/button-cart-request.png") -165px 0; }
 .action-select li.delete { left: 155px; }
 .action-select li.delete a { background: url("/images/content/button-cart-delete.png"); }
 .action-select li.close { top: 18px !important; left: 166px; }
