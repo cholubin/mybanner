@@ -131,6 +131,7 @@
 				<!-- 요청사항 표시 반복부분 종료 -->
 			</tbody>
 		</table>
+	</div>
 	<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile", :class => "feedback-add"} ) do -%>
 		<input type="hidden" name="id" value="<%= @mytemplate.id.to_s %>">
 		<input type="hidden" name="feedback_code" value="" id="feedback_code">
@@ -154,7 +155,6 @@
 			</p>
 		</fieldset>
 	<%end %>
-	</div>
 </div>
 <table>
 	<tr>
