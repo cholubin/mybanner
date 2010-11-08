@@ -74,21 +74,17 @@ end
 			<h4>이 품목을..</h4>
 			<ul>
 				<!-- 작업구분이 편집의뢰일때만 -->
-				<% if my.job_code == 0 %>
-					<li class="disable"><span>직접편집입니다.</span></li>
-				<% elsif my.job_code == 1 %>
-					<li class="accept" id="design_confirm_section"><a id="design_confirm" href="#">시안확정</a></li>
+				<% if my.job_code == 1 %>
+					<li class="accept" id="design_confirm_section"><a id="design_confirm" href="">시안확정</a></li>
 				<% elsif my.job_code == 3 %>
-					<li class="accept-cancel" id="design_confirm_section"><a id="design_confirm" href="#">시안확정취소</a></li>
-				<% end %>
-				<% if my.job_code == 0 %>
-				<li class="edit"><a href="#">편집하기</a></li>
+					<li class="disable"><span>직접편집입니다.</span></li>
+				<% else %>
+					<li class="edit"><a href="#">편집하기</a></li>
 				<% end %>
 				<li class="delete"><a href="javascript:del_mytemp('<%= my.id %>');">삭제</a></li>
 				<li class="one-order"><a href="#" id="order-button">바로 주문하기</a></li>
 				<li class="back-list"><a class="back-list" href="/mytemplates">목록으로 돌아가기</a></li>
 				<li class="zoom-scroll"><a href="#" class="reset">크기, 위치 원래대로</a> <div id="zoom-scroll"><span>◈</span></div></li>
-				<li class="zoom_message">아래 그림을 두번 클릭하면 크게 볼 수 있습니다.</li>
 			</ul>
 		</div>
 	</div>
@@ -176,6 +172,24 @@ end
 </div>
 
 <script language="javascript">
+$('.opt').live("change", function(event){
+	$id = <%= my.id %>;
+	// if( $(this).attr("id") == "select_main_"+$id){
+	// 	alert("1");
+	// }else if( $(this).attr("id") == "select_sub_"+$id ){
+	// 	alert("2")
+	// }
+	
+	$opt1 = $('#select_main_'+$id + ' option:selected').val();
+	$opt2 = $('#select_sub_'+$id + ' option:selected').val();
+	
+	$.ajax({
+		data:'opt1='+$opt1+'&opt2='+$opt2+'&id='+ $id, 
+		dataType:'script', 
+		type:'post', 
+		url:'/mytemplates/update_option'
+	});
+});
 
 function popup(doc_name) {
        // var url = '/mlayout?doc_name='+doc_name;
@@ -266,75 +280,22 @@ $("a.plus")
 );
 
 // 데모 주문을 위해서 임시적으로 추가
-$('#order-button').live("click", function(){
-	order_item = "<%= my.id.to_s %>";
-	item_unit = $('#piece').val();
+$('#order-button').click(function(){
 	
-	if (order_item == ""){
-		alert("주문할 항목을 선택해주세요!");
-	}else{
-		if($('#receive-type1 option:selected').val() == ""){
-			alert('배송방법을 선택해주세요!');
-			return false;
-		}
-		
-		if($('#receive-name').val() == ""){
-			alert("받으실분의 성함을 입력해주세요!");
-			$('#receive-name').focus();
-			return false;
-		}
-		
-		if($('#receive-tel').val() == ""){
-			alert("일반 전화번호를 입력해주세요!");
-			$('#receive-tel').focus();
-			return false;
-		}
-
-		if($('#receive-mobile').val() == ""){
-			alert("모바일(핸드폰) 번호를 입력해주세요!");
-			$('#receive-mobile').focus();
-			return false;
-		}
-		
-		if($('#zip_code').val() == "" || $('#address2').val() == ""){
-			alert("배송주소를 입력해주세요!");
-			if($('#zip_code').val() == ""){
-				$('#address-search').focus();
-			}else{
-				$('#address2').focus();
-			}
-			return false;
-		}
-		
-		loadingView();
-		$.ajax({
-			data:'item_unit='+item_unit+'&pay_m='+$('input:radio:checked').val()+'&total_price='+$('#order_total_price').val()+'&receive-note='+$('#receive-note').val()+'&address2='+$('#address2').val()+'&address1='+$('#address-selector option:selected').text()+'&zip_code='+$('#zip_code').val()+'&receive_mobile='+$('#receive-mobile').val()+'&receive_tel='+$('#receive-tel').val()+'&receive_name='+$('#receive-name').val()+'&receive_type='+$('#receive-type1 option:selected').val()+'&ids='+ order_item, 
-			dataType:'script', 
-			type:'post', 
-			url:'/mytemplates/create_order',
-			success: function(request){
-				loadingView();
-				if(request != "주문에러!"){
-					alert("주문시 표시된 결제금액은 기본금액입니다! 옵션 선택에 따른 추가 금액에 대해선 관리자와 상담해주시기 바랍니다!");
-					alert("주문번호: "+request+" \n주문절차가 정상적으로 처리되었습니다!");	
-					$('#popup-closeButton').click();
-					$('.chkbox:checked').parents("tr").remove();
-					
-				}else{
-					alert("주문진행시 문제가 발생하였습니다! 관리자에게 문의하여 주시기 바랍니다.");	
-				}
-			}
-		});
-
-	}
+	popupView(696,390,"/mytemplates/mytemplate_order", { total_price: $('#item_price').text().replace(",","").replace("개별금액",""), ids: <%= my.id.to_s %>});
+	return false;
 });
 
-<%if my.job_code == 0 %>
+
 $("li.edit a").click(function () {
-		openWebTopEditor('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>');
+	<%if my.job_code != 3 %>
+		openWebTopEditor_user('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>?reload=yes');
 		return false
+	<% else %>
+		alert('시안이 확정된 상태에서는 편집하실 수 없습니다!');
+		return false;
+	<% end %>
 })
-<% end %>
 
 $('#zip_search').live("click", function(){
 	if ($('#address-search').val() == ""){
@@ -426,14 +387,6 @@ $(window).load(function () {
 	$("#preview").css("top",defaultY);
 	$("#preview").fadeIn()
 	$("#preview").draggable();
-	$("#preview").dblclick(function() { 
-		if($("#item-information").attr("class") == "horizon") {
-			ratio = 850/defaultWidth;
-			previewWidth = 850;
-			previewHeight = defaultHeight*ratio;
-			quickPreview(previewWidth+40,previewHeight+40,Array("image",$(this).attr("src"),previewWidth,previewHeight))
-		}
-	});
 	$("#zoom-scroll span").draggable({axis: "x", containment: "parent", drag : function() { resizePreview(parseFloat($(this).css("left"))/88*2+1) }});
 });
 

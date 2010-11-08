@@ -46,25 +46,45 @@
 			<tr id="<%= my.id.to_s %>" class="item">
 				<td class="check"><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>" <%= "disabled" if my.job_code == 1 %>/></td>
 				<td class="date"><a class="request code-<%=my.feedback_code%>"><%= Basicinfo.first(:category => "job_process", :code => my.feedback_code).name %></a><%= my.updated_at.strftime('%y.%m.%d') %></td>
-				<td class="design <%= my.job_code == 0 ? "self-edit": my.job_code == 3 ?"order-edit-accept":"order-edit"%>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= sn_num %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>
+				<% 
+				if my.job_code == 0 
+					add_class = "self-edit"
+				elsif my.job_code == 1
+					add_class = "order-edit"
+				else
+					add_class = "order-edit-accept"
+				end
+				%>
+				<td class="design <%= add_class %>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= sn_num %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>
 				<div class="action-select">
 					<ul>
 						<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
 						<% if my.job_code == 0 %>
 						<li class="edit"><a href="#" onClick="openWebTopEditor('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>');">편집하기</a></li>
-						<% else %>
+						<% elsif my.job_code == 1 %>
 						<li class="request"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>#feedback-list">요청하기</a></li>
+						<% else %>
+						<li class="accept"><a >시안확정</a></li>
 						<% end %>
 						<li class="delete"><a href="#" id="del_<%= my.id.to_s %>">삭제하기</a></li>
 					</ul>
 				</div></td>
-				<td class="piece"><a class="minus">-</a><input id="peice_<%= my.id.to_s %>" name="piece[]" value="1" size="2" class="piece" /><a class="plus">+</a></td>
-				<td class="price" id="price_<%= my.id.to_s %>"><%= my.price %></td>
-				<td class="option">					
-					<input type="hidden" id="tmp_total_price" value="0"/>
-					<input type="hidden" class="unit_price" id="unit_price_<%= my.id.to_s %>" value="<%= my.price %>"/>
-					<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= my.price %>"/>
-					<h5><a class="select">옵션을 선택해주세요.</a></h5>
+				<td class="piece"><a class="minus">-</a><input id="peice_<%= my.id.to_s %>" name="piece[]" value="<%= my.quantity %>" size="2" class="piece" /><a class="plus">+</a></td>
+				<td class="price num" id="price_<%= my.id.to_s %>">
+					<%= my.price.to_i * my.quantity %>
+				</td>
+				<input type="hidden" id="tmp_total_price" value="0">
+				<input type="hidden" class="unit_price" id="unit_price_<%= my.id.to_s %>" value="<%= my.price %>">
+				<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= my.price %>">
+				<td class="option">
+					<% 
+					if my.opt1 != nil or my.opt2 != nil 
+						sel_str = "selected"
+					else
+						sel_str = "select"
+					end
+					%>
+					<h5><a class="<%= sel_str %>">옵션을 선택해주세요.</a></h5>
 					<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 시작 -->
 					<div class="option-select">
 						<ul>
@@ -322,7 +342,6 @@ $('#order_basic').live("click", function(){
 		order_item += $(this).val() + ",";
 		item_unit += $('#peice_'+order_item).val() + ",";
 	})
-	
 	
 	if (order_item == ""){
 		alert("주문할 항목을 선택해주세요!");
