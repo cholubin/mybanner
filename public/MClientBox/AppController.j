@@ -63,6 +63,7 @@ gDocItemSizeHeight = 90;
 	CPToolbar mToolbar;
 	var mSelectedTool;
 	BOOL mBoolSelectedByUser;
+	BOOL mBoolUsePDFBtn;
 	
 	CPString mCurDocPath;
 	CPString mLocalDocPath;
@@ -129,6 +130,11 @@ gDocItemSizeHeight = 90;
 	gUserPath = [args objectForKey:@"user_path"];
 	if(!gUserPath) {
 		alert("No 'user_path' parameter.");
+	}
+	var lUsePDFBtn = [args objectForKey:@"pdf_button"];
+	mBoolUsePDFBtn = YES;
+	if([[lUsePDFBtn lowercaseString] isEqualToString:@"no"]) {
+		mBoolUsePDFBtn = NO;
 	}
  	mLocalDocPath = [args objectForKey:@"doc_path"];
 	if(!mLocalDocPath) {
@@ -762,9 +768,16 @@ gDocItemSizeHeight = 90;
 
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
-   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
- UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
- FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
+	if(mBoolUsePDFBtn) {
+	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
+	 UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
+	 FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
+	}
+	else {
+	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
+	 UseGridIdentifier, CPToolbarSpaceItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
+	 FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
+	}
 }
 //this delegate method returns the actual toolbar item for the given identifier
 
