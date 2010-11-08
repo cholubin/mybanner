@@ -37,7 +37,7 @@ function loadingView() {
 		startY = ($(window).height()/2)-(120/2)+$(document).scrollTop();
 		$("#loading-icon").css({"position": "absolute","top":startY,"left":startX}).show()
 		$("#modal-bg")
-			.css({"width": "100%", "height": $(document).height()})
+			.css({"width": "100%","min-width":"960px", "height": $(document).height()})
 			.stop().fadeTo(0,"0.2")
 	} else {
 		if(popupStatus) {
@@ -74,7 +74,7 @@ function popupView(popWidth, popHeight, url, post, callback) {
 	
 	if(!popupStatus && url) {
 		loadingView();
-		popupStatus = "view"
+		popupStatus = Array("view",popWidth,popHeight)
 		startX = ($(document).width()/2)-(popWidth/2);
 		startY = ($(window).height()/2)-(popHeight/2)+$(document).scrollTop();
 		if(startY < 20) startY = 20;
@@ -82,7 +82,7 @@ function popupView(popWidth, popHeight, url, post, callback) {
 		$("#popup-view")
 		.css({"top": startY, "left": startX, "width":popWidth, "height":popHeight})
 		.load(url+" #ajaxloadpage",post,function(responseText, textStatus, XMLHttpRequest) { $(this).fadeIn("fast");$("#popup-closeButton").live("click",function(){popupView()}).fadeIn("fast"); if(typeof(callback) == "function") callback(responseText, textStatus, XMLHttpRequest);})
-	} else if(popupStatus == "view" && url) {
+	} else if(popupStatus[0] == "view" && url) {
 		startX = ($(document).width()/2)-(popWidth/2);
 		startY = ($(window).height()/2)-(popHeight/2)+$(document).scrollTop()
 		$("#popup-closeButton").fadeOut("fast",function() {$("#popup-closeButton").css({"top":startY+10,"left":startX+popWidth-62})})
@@ -96,7 +96,7 @@ function popupView(popWidth, popHeight, url, post, callback) {
 				if(typeof(callback) == "function") callback(responseText, textStatus, XMLHttpRequest);
 			})
 		})
-	} else if(popupStatus == "view" && !url) {
+	} else if(popupStatus[0] == "view" && !url) {
 		popupStatus = null;
 		$("#popup-view").fadeOut("fast")
 		$("#popup-closeButton").fadeOut("fast")
@@ -146,6 +146,7 @@ function openWebTopEditor_user(user,id,href) {
 	$("#back_to_home").attr("href",(href == null)?"/":href)
 	
 	// 리사이즈시 사이즈시 자동으로 사이즈 변경	
+
 	$(window).resize(function() {
 		$("#webTopEditor").css("height",$(window).height());
 		$("#webtop_iframe").css("height",$(window).height()-75);
@@ -212,9 +213,9 @@ function quickPreview(popWidth, popHeight, url, content_id) {
 		.css({"display":"none", "background-image": "url('/images/default/button-close.png')", "position": "absolute","z-index":"141","width":"52px","height":"20px","cursor":"pointer"})
 		.appendTo('body');
 	}
-	if(!quickViewStatus && url) {
+	if(!quickViewStatus && url) {			
 		loadingView();
-		quickViewStatus = "view";
+		quickViewStatus = Array("view",popWidth,popHeight);
 		startX = ($(document).width()/2)-(popWidth/2);
 		startY = ($(window).height()/2)-(popHeight/2)+$(document).scrollTop();
 		if(startY < 20) startY = 20;
@@ -223,14 +224,64 @@ function quickPreview(popWidth, popHeight, url, content_id) {
 		.css({"top": startY, "left": startX, "width":popWidth, "height":popHeight});
 		$("#quick_preview")
 		.css({"top": startY, "left": startX, "width":popWidth, "height":popHeight})
-		.load(url+" #"+content_id, function(responseText, textStatus, XMLHttpRequest) { $("#loading-icon").fadeOut();$("#quick_preview_bg").fadeTo("fast","0.80",function() { $("#modal-bg").click(function() { quickPreview() } );$("#quick_preview").fadeIn("fast"); });$("#quick_preview_closeButton").live("click",function(){quickPreview()}).fadeIn("fast");})
-	} else if(quickViewStatus == "view"){
+		
+		if(typeof(url) == "string") {
+			$("#quick_preview").load(url+" #"+content_id, function(responseText, textStatus, XMLHttpRequest) {
+				$("#loading-icon").fadeOut();
+				$("#quick_preview_bg").fadeTo("fast","0.80",function() { 
+					$("#modal-bg").click(function() { quickPreview() } );
+					$("#quick_preview").fadeIn("fast");
+				});
+				$("#quick_preview_closeButton").live("click",function(){
+					quickPreview()
+				}).fadeIn("fast");
+			})
+		} else if(url[0] == "image") {
+			$("#loading-icon").fadeOut();
+			$("#quick_preview_bg").fadeTo("fast","0.80",function() {
+				$("#modal-bg").click(function() { quickPreview() } );
+				$("#quick_preview")
+					.html("<img src='"+url[1]+"'/ width='"+url[2]+"' height='"+url[3]+"'>")
+					.css({"display":"block","padding":"20px","-ms-interpolation-mode":"bicubic"})
+					.bind("contextmenu",function(e) { return false })
+					.hide().fadeIn("fast");
+			})
+			$("#quick_preview_closeButton").live("click",function(){
+				quickPreview()
+			}).fadeIn("fast");			
+		}
+	} else if(quickViewStatus[0] == "view"){
 		quickViewStatus = null;
 		loadingView();
 		$("#modal-bg").click(function() {return false});
 		$("#quick_preview").fadeOut("fast",function() { $("#quick_preview_bg").fadeOut("fast"); $("#quick_preview_closeButton").fadeOut("fast"); });
 	}
 	
+}
+
+function repositionViews() {
+	if(loadingStatus != null) {
+		startX = ($(document).width()/2)-(91/2);
+		startY = ($(window).height()/2)-(120/2)+$(document).scrollTop();
+		$("#loading-icon").css({"top":startY,"left":startX})
+	}
+	if(popupStatus != null) {
+		startX = ($(document).width()/2)-(popupStatus[1]/2);
+		startY = ($(window).height()/2)-(popupStatus[2]/2)+$(document).scrollTop();
+		if(startY < 20) startY = 20;
+		
+		$("#popup-closeButton").css({"top":startY+10,"left":startX+popupStatus[1]-62})
+		$("#popup-view").css({"top": startY, "left": startX})
+	}
+	if(quickViewStatus != null) {
+		startX = ($(document).width()/2)-(quickViewStatus[1]/2);
+		startY = ($(window).height()/2)-(quickViewStatus[2]/2)+$(document).scrollTop();
+		if(startY < 20) startY = 20;
+		
+		$("#quick_preview_closeButton").css({"top":startY+10,"left":startX+quickViewStatus[1]-62})
+		$("#quick_preview_bg").css({"top": startY, "left": startX});
+		$("#quick_preview").css({"top": startY, "left": startX})	
+	}
 }
 
 // 임시 퍼포먼스용 CSS바꾸기
@@ -290,7 +341,28 @@ $(function () {
 	$("#main-button li:eq(1)").click(function() { mainImageChange(1) });
 	$("#main-button li:eq(2)").click(function() { mainImageChange(2) });
 	$("body").delegate(".ajax-sign-in","click", function() { popupView(250,390,$(this).attr("href")); return false });
-	$("body").delegate(".ajax-sign-up","click", function() { popupView(660,350,$(this).attr("href")); return false });
+	$("body").delegate(".ajax-sign-up","click", function() {
+		popupView(660,350,$(this).attr("href"),function() {
+			$("#signup_tos_title").click(function() {
+				if(!$("#signup_tos_content #tos_content").length)
+					$("#signup_tos_content").load("/pages/tos #tos_content");
+				$("#signup_tos_content").toggle(); 
+				if($("#signup_tos_content").css("display") != "none")
+					$(this).css("background-position","left bottom")
+				else
+					$(this).css("background-position","left top")
+			})
+			$("#signup_policy_title").click(function() {
+				if(!$("#signup_policy_content #tos_content").length)
+					$("#signup_policy_content").load("/pages/tos #tos_content");
+				$("#signup_policy_content").toggle(); 
+				if($("#signup_policy_content").css("display") != "none")
+					$(this).css("background-position","left bottom")
+				else
+					$(this).css("background-position","left top")
+			})
+		}
+	);return false});
 	$("body").delegate(".ajax-edit","click", function() { popupView(360,330,$(this).attr("href")); return false }); 
 	$("body").delegate(".ajax-myimages","click", function() { popupView(798,554,$(this).attr("href")); return false }); // 차후 김현수 과장과 합칠때 확인 할것!
 	$("body").delegate("li.preview a","click",function() { quickPreview(740,540,$(this).attr("href"),"ajaxloadpage"); return false })
@@ -299,8 +371,11 @@ $(function () {
 	$(".tempskin").click(function() { skin(1) });
 	skin();
 	$.preloadCssImages();
+	$.localScroll();
 });
 
 $(window).load(function() {
 	mainImageChange(0);
 })
+$(window).resize(function() { repositionViews() })
+$(window).scroll(function() { repositionViews() })

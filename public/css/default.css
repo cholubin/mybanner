@@ -9,12 +9,14 @@ body { background: center top repeat-x; color: #555; font-size: 12px; font-famil
 a:link { text-decoration: none; color: #333; }
 a:visited { text-decoration: none; color: #666; }
 a:hover { text-decoration: none; color: #67991a; }
-a:active { text-decoration: none; color: #b0681b; }
+a:active { text-decoration: none; color: #b0681b;outline: none;}
 input, textarea, select { border: 1px solid #999; border-bottom-color:#ccc; border-right-color:#ccc; font-size:12px; font-family: NanumGothicOTF, NanumGothic, AppleGothic, dotum, sans-serif; background: white url(/images/default/input-text-bg.png) center top repeat-x; }
 input, select { line-height: 20px; height: 20px; padding: 0 3px; background-position: left center ; }
 input.submit-button { font-weight: bold; font-size: 12px;border: 1px solid #666; color: white; text-shadow: 0 -1px #333; border-top-color: #999; border-left-color: #999; background: url('/images/default/form-button-bg.png'); height: 24px; cursor: pointer; }
 .caption { font-size: 11px; color: #999; caption-side: bottom; text-align: right; }
 .no-line { border: none !important; }
+:-moz-any-link:focus {  outline: none; }
+
 /* 헤더  시작*/
 
 h1 { position: absolute; top: 36px; }
@@ -80,6 +82,7 @@ h1 { position: absolute; top: 36px; }
 #popup-view #signup-form .info {  width: 300px; padding: 10px 0; }
 #popup-view #signup-form .info label { width: 100px; display: block; float: left;line-height: 22px; }
 #popup-view #signup-form #user-id { width: 80px; }
+#popup-view #signup-form #id_check { padding: 0 10px; font-weight: bold; font-size: 11px; }
 #popup-view #signup-form #user-name { width: 80px; }
 #popup-view #signup-form #user-password { width: 130px; }
 #popup-view #signup-form #user-repassword { width: 130px; }
@@ -88,8 +91,13 @@ h1 { position: absolute; top: 36px; }
 #popup-view #signup-form .agree { position: absolute; width: 302px; height: 220px; overflow: auto; top: 98px; left: 337px; line-height: 150%; font-size: 12px; padding: 0;background: white; border:  1px solid #ccc; }
 #popup-view #signup-form .submit-button { position: absolute; top: 290px;  left: 20px; width: 302px; height: 30px;}
 #popup-view #signup-form div.agree dl { margin: 0; padding: 0; }
+<<<<<<< HEAD
+#popup-view #signup-form div.agree dt { font-weight: bold; height: 34px; line-height: 34px; background: url("/images/content/block-list-head.png") repeat-x; padding-left: 30px; cursor: pointer; }
+#popup-view #signup-form div.agree dd { padding: 0 10px 10px; margin: 0; font-size: 11px; color: #999; border-bottom: 1px solid #ccc; display: none;}
+=======
 #popup-view #signup-form div.agree dt { font-weight: bold; height: 34px; line-height: 34px; background: url("/images/content/block-list-head.png") repeat-x; padding-left: 30px;  }
 #popup-view #signup-form div.agree dd { padding: 0 10px 10px; margin: 0; font-size: 11px; color: #999; border-bottom: 1px solid #ccc;}
+>>>>>>> 455f8eb066a9812a2e8d675d8a17bb4f7570928c
 #popup-view #signup-form div.description { padding: 0 14px 10px; }
 #popup-view #signup-form div.description p { padding: 14px 0 0; }
 
@@ -235,7 +243,7 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 #content #myinfo .signup-message a:hover { color: #333; font-weight: bold; }
 
 /* 내정보 관리 */
-#content #info { width: 170px; height: 334px;; background: url(/images/default/block-myinfo-bg.png) no-repeat 1px 26px; position: relative; }
+#content #info { width: 170px; height: 280px;; background: url(/images/default/block-myinfo-bg.png) no-repeat 1px 26px; position: relative; }
 #content #info ul li { position: absolute; display: block; padding: 3px 5px;  border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
 #content #info .login-id { width: 111px; text-align: center; font-weight: bold; font-size: 16px; top: 34px; left: 40px; text-shadow: 0 1px white; }
 #content #info .login-name { width: 111px; text-align: center; font-size: 12px; top: 53px; left: 40px; text-shadow: 0 1px white; }
@@ -245,7 +253,7 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 #content #info .logout { top: 105px; left:101px; }
 #content #info .webhard { top: 80px; left:40px;  width: 109px;  background: url(/images/default/form-button-bg-black.png);}
 #content #info li.user-edit { top: 105px; left:40px;}
-#content #work-summary h3 { background: none; text-align: center; text-shadow:none; color: #aaa; padding: 3px 0; font-size: 11px; }
+#content #work-summary h3 { display: none; }
 #content #work-summary { position: absolute; width: 150px; top: 140px; left: 9px; background-color: white; border: 1px solid #ccc; border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
 #content #work-summary li { letter-spacing: -1px;width: 130px; height: 13px; padding: 6px 0; border-top: 1px solid #e6e6e6; margin: 0 auto; font-size: 11px; }
 #content #work-summary li .none { color: #ccc; }
@@ -256,7 +264,7 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 #content #quick-link h3 { display: none;}
 
 /*그외 정보 */
-#content #quick-information { letter-spacing: -1px; border-radius:6px; -webkit-border-radius: 6px; -moz-border-radius: 6px; margin: 6px 0; border: 1px solid #ccc; padding: 9px; width: 150px; }
+#content #quick-information, #recommend_browser .wrap { letter-spacing: -1px; border-radius:6px; -webkit-border-radius: 6px; -moz-border-radius: 6px; margin: 6px 0; border: 1px solid #ccc; padding: 9px; width: 150px; }
 #content #quick-information li { width: 110px;padding: 0 0 0 40px; height:60px; line-height: 140%; background-repeat: no-repeat; background-position: left 4px}
 #content #quick-information li h4 {  font-size: 12px; }
 #content #quick-information li p { margin: 0; padding: 5px 0 5px;  font-size: 11px;}
@@ -315,4 +323,37 @@ ul.pager { width: 580px; height: 35px; background: url("/images/default/paging-b
 #help-popup h3 { width: 163px; padding: 0 8px; line-height: 31px; }
 #help-popup p { margin: 0; width: 163px; padding: 6px 8px 0; }
 
+/*브라우저 추천 */
+
+#recommend_browser { display: block; line-height: 150%; }
+#recommend_browser .wrap {  background: white url(/images/default/input-text-bg.png) center top repeat-x; }
+#recommend_browser h4 { font-size: 12px; }
+#recommend_browser p { font-size: 11px; }
+#recommend_browser ul { padding: 0 10px !important }
+#recommend_browser li { letter-spacing: 0; font-weight: bold; padding: 4px 0  8px 28px!important; }
+#recommend_browser li.safari {  background: url("/images/default/icon-apple-safari.png") no-repeat 0 0; }
+#recommend_browser li.chrome { background: url("/images/default/icon-google-chrome.png") no-repeat 0 0; }
+#recommend_browser li.firefox { background: url("/images/default/icon-mozilla-firefox.png") no-repeat 0 0; }
+
+/* 약관 스타일 */
+#tos_content, #policy_content { line-height: 150%; }
+#tos_content h4, #policy_content h4 { padding: 10px; color: #333; border: 1px solid #ccc;margin-top: 10px; }
+#tos_content h5, #policy_content h5 { font-size: 12px; font-weight: bold; margin: 16px 0 16px 12px ; }
+#tos_content ol, #tos_content ul, #tos_content p, #policy_content ol, #policy_content ul, #policy_content p { border-bottom: 1px solid #ddd; padding-bottom: 16px; margin: 16px 0; }
+#tos_content p, #policy_content p { padding-left: 12px;; }
+#tos_content ol li, #policy_content ol li { list-style-type: decimal; margin: 8px 0 8px 30px; }
+#tos_content ul li, #policy_content ul li { list-style-type: disc; margin: 8px 0 8px 30px; }
+#tos_content ol li ol,#tos_content ol li ul,  #policy_content ol li ol, #policy_content ol li ul {  background: #eee; border: 1px solid #ddd; padding: 5px 10px; margin: 5px 0; }
+#tos_content ol li ol li, #policy_content ol li ol li { list-style-type: lower-latin; margin: 1px 0 1px 20px; font-size: 11px; }
+#tos_content ol li ul li, #policy_content ol li ul li { list-style-type: circle; margin: 1px 0 1px 20px; font-size: 11px; }
+
+
 /* 푸더 섹션 시작 */
+#sitemap {  width: 900px; margin: 0 auto; *zoom :1; padding: 30px 40px 20px 20px; border-top: 1px solid #ccc; background: url("/images/default/block-gray-gradation.png") #f4f4f4 repeat-x left  top;}
+#sitemap:after {content:" "; display:block; clear:both;}
+#sitemap h5 { font-weight: bold; font-size: 12px; padding: 0 0 5px; }
+#sitemap  div { display: inline; float: left; width: 160px;margin-left: 20px;;; }
+#sitemap ul {padding-top: 5px; }
+#sitemap li { padding: 5px 0 5px; }
+
+#sitemap .design li, #sitemap .cart li, #sitemap .delivery li { padding: 6px 10px; background: white; border: 1px solid #ccc; line-height: 160%; }

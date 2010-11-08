@@ -131,42 +131,39 @@
 				<!-- 요청사항 표시 반복부분 종료 -->
 			</tbody>
 		</table>
-		</div>
-		<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile", :class => "feedback-add"} ) do -%>
-			<input type="hidden" name="id" value="<%= @mytemplate.id.to_s %>">
-			<input type="hidden" name="feedback_code" value="" id="feedback_code">
-			<fieldset>
-				<legend>요청사항 입력</legend>
-				<p class="memo">
-					<label for="feedback_memo"><strong>요청내용</strong> <span>편집에 어려운 점이 있거나, 궁금한 점이 있으면 아래 공간에 글을 작성해주세요.</span></label>
-					<textarea name="feedback_memo" id="feedback_memo" placeholder="내용을 입력해주세요."></textarea>
-				</p>
-				<!-- <p class="file">
-					<label for="feedback_file">파일올리기</label>
-					<input type="file" name="feedback_file" id="feedback_file" />
-				</p> -->
-				<p class="comment_submit">
-					<a href="#" class="done">처리완료</a> 
-					<a href="#" class="normal">일반글 작성</a> 
-					<a href="#" class="file_error">파일에러</a>
-					<a href="#" class="suspend">보류처리</a>
-					<a href="#" class="contract_payment">선입금 요청</a>
-					<a href="#" class="contract_ok">선입금 확인</a>
-				</p>
-			</fieldset>
-		<%end %>
+	<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile", :class => "feedback-add"} ) do -%>
+		<input type="hidden" name="id" value="<%= @mytemplate.id.to_s %>">
+		<input type="hidden" name="feedback_code" value="" id="feedback_code">
+		<fieldset>
+			<legend>요청사항 입력</legend>
+			<p class="memo">
+				<label for="feedback_memo"><strong>요청내용</strong> <span>편집에 어려운 점이 있거나, 궁금한 점이 있으면 아래 공간에 글을 작성해주세요.</span></label>
+				<textarea name="feedback_memo" id="feedback_memo" placeholder="내용을 입력해주세요."></textarea>
+			</p>
+			<p class="file">
+				<label for="feedback_file">파일올리기</label>
+				<input type="file" name="feedback_file" id="feedback_file" />
+			</p>
+			<p class="comment_submit">
+				<a href="#" class="done">처리완료</a> 
+				<a href="#" class="normal">일반글 작성</a> 
+				<a href="#" class="file_error">파일에러</a>
+				<a href="#" class="suspend">보류처리</a>
+				<a href="#" class="contract_payment">선입금 요청</a>
+				<a href="#" class="contract_ok">선입금 확인</a>
+			</p>
+		</fieldset>
+	<%end %>
 	</div>
-
-	<table>
-		<tr>
-			<td width="727" align="right">
-				<a href="/admin/mytemplates?search=<%=params[:search]%>&page=<%=params[:page]%>">
-					<img src="/images/admin/list.jpg">
-				</a>			
-			</td>
-		</tr>
-	</table>
-
+</div>
+<table>
+	<tr>
+		<td width="727" align="right">
+			<a href="/admin/mytemplates?search=<%=params[:search]%>&page=<%=params[:page]%>">
+				<img src="/images/board/list.jpg">
+			</a>			
+		</td>
+	</tr>
 <script>
 $('tbody tr td.delete').live("click", function(event){
 	if (window.confirm("정말 삭제하시겠습니까?")){

@@ -7,30 +7,44 @@ class Admin::MyordersController < ApplicationController
 # GET /mytemplates.xml
 def index
 
+  if params[:stat] == nil or params[:stat] == "" or params[:stat] == "all"
+    @status = "all"
+    
+  else
+    @status = params[:stat].to_i
+  end
+  
+  
   @menu = "myorder"
   @board = "myorder"
   @section = "index"
   
+  if @status == "all"
     @myorders = Myorder.all.search(params[:search],params[:page])
     @total_count = @myorders.count
+  else
+    @myorders = Myorder.all(:status => @status).search(params[:search],params[:page])
+    @total_count = @myorders.all(:status => @status).count
+  end
   
   
   render 'myorder'
 end
 
-  def pdf_download
-    temp_id = params[:temp_id].to_i
-    @mytemp = Mytemplate.get(temp_id)
+
+def pdf_download
+  temp_id = params[:temp_id].to_i
+  @mytemp = Mytemplate.get(temp_id)
+
+  if File.exists?(@mytemp.path = "/web/document.pdf")
+    @pdf_path = @mytemp.path = "/web/document.pdf"
   
-    if File.exists?(@mytemp.path = "/web/document.pdf")
-      @pdf_path = @mytemp.path = "/web/document.pdf"
-    
-      @type = "application/" + @myimage.type
-    
-    send_file @pdf_path, :filename => @mytemp.id + "." + @mytemp.type, :type => @type, :stream => "false", :disposition =>
-    'attachment'
-    
-  end
+    @type = "application/" + @myimage.type
+  
+  send_file @pdf_path, :filename => @mytemp.id + "." + @mytemp.type, :type => @type, :stream => "false", :disposition =>
+  'attachment'
+  
+end
   
   
 end
@@ -117,6 +131,7 @@ def update_status
     puts_message "주문정보의 상태가 정상적으로 변경되었습니다."
   else
     puts_message "주문정보의 상태 변경중 오류가 발생했습니다."
+    puts_message @myorder.errors.to_s
   end
   
   render :nothing => true

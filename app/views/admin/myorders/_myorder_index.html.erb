@@ -11,6 +11,19 @@
 	
 	<% form_tag :action => :deleteSelection, :method => 'post' do %>			
 	
+	<div style="width:800; text-align:right;padding:0 0 5 0">
+	상태: <select class="filter_status" id="sel_status" style="margin:0 0 0 0px">
+		<option value="all">전체</option>
+		<%
+		@stats = Basicinfo.all(:category => "order_process") 
+		@stats.each do |s|
+		%>
+		<option value="<%= s.code %>" <%= "selected" if s.code == params[:stat] %>><%= s.name %></option>
+		<%
+		end
+		%>
+	</select>
+	</div>
 	<table class="board_table">
 	    <thead class="board_thead">
 	        <tr>
@@ -37,11 +50,11 @@
 	        <tr class="table_b","board_tbody">
 	            <th class="board_tbody" /><%= @page_num %></th>
 				<th class="board_tbody" />
-					<%@stats = Basicinfo.all(:category=>"order_process") %>
 					<select class="sel_status" id="sel_status_<%= myorder.id %>">
 						<%@stats.each do |s| %>
-						<option value="<%= s.code %>" <%= "selected" if s.code == myorder.status %>><%= s.name %></option>
+						<option value="<%= s.code %>" <%= "selected" if s.code.to_i == myorder.status %>><%= s.name %></option>
 						<%end %>
+						<%puts_message myorder.status.to_s %>
 					</select>
 				</th>
 	            <td class="board_tbody" /><center><%= myorder.updated_at.strftime('%Y-%m-%d') %></center></td>
@@ -124,20 +137,27 @@
 
 <script language="Javascript">
 $('select').live("change", function(event){
-	$order_id = $(event.target).attr("id").replace("sel_status_","");
-	$selected_val = $("select option:selected").val();
-	$selected_text = $("select option:selected").text();
+	target = $(event.target);
+	if($(event.target).attr("class") == "sel_status"){
+		$order_id = $(event.target).attr("id").replace("sel_status_","");
+		$selected_val = $(event.target).attr("option","selected").val();
+		$selected_text = $("select option:selected").text();
 
-	$.ajax({
-		data:'status='+$selected_val+'&order_id='+$order_id, 
-		dataType:'script', 
-		type:'post', 
-		url:'/admin/myorders/update_status',
-		success: function(request){
-			alert("상태가 " + "[" + $selected_text + "]" + " 으로 변경되었습니다!");
-		}
-	});
+		$.ajax({
+			data:'status='+$selected_val+'&order_id='+$order_id, 
+			dataType:'script', 
+			type:'post', 
+			url:'/admin/myorders/update_status',
+			success: function(request){
+				alert("상태가 " + "[" + $selected_text + "]" + " 으로 변경되었습니다!");
+			}
+		});
+	}else{
+		$stat = $('#sel_status option:selected').val();
+		window.location.replace("/admin/myorders?stat="+$stat);
+	}
 
 })
+
 </script>						
 

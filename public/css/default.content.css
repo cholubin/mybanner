@@ -35,7 +35,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #sub #submenu ul li ul li a { display: inline-block; padding:2px 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
 #sub #submenu ul li ul li a:hover, #sub #submenu ul li ul li.on a { background: #67991a; color: #67991a; color: white; }
 #sub #submenu ul li ul li a:active { background: #b0681b;color: white; }
-#sub .content-layout { padding: 10px 190px 30px; width: 580px; min-height: 600px; height: auto !important; height: 600px; }
+#sub .content-layout { padding: 10px 190px 30px; width: 580px; min-height: 650px; height: auto !important; height: 650px; }
 #sub .content-layout h3 { width:580px; height: 30px; padding-top:39px; text-indent:-5000px; background-repeat: no-repeat; background-position: left 29px;}
 
 
@@ -144,6 +144,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #designcart table#designcart-list td.design .other { font-size: 11px; color: #999; }
 #designcart table#designcart-list td.design.self-edit { background-image: url("/images/content/icon-worktype-self.png");  }
 #designcart table#designcart-list td.design.order-edit { background-image: url("/images/content/icon-worktype-order.png") }
+#designcart table#designcart-list td.design.order-edit-accept { background-image: url("/images/content/icon-worktype-order-accept.png") }
 #designcart table#designcart-list td.design a.item { font-weight: bold; cursor: pointer; }
 #designcart table#designcart-list td.design a:hover { text-decoration: underline; color: #333; }
 #designcart table#designcart-list td.price { color: #333; }
@@ -155,6 +156,8 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 .action-select li.detail a { background: url("/images/content/button-cart-detail.png"); }
 .action-select li.edit { left: 91px; }
 .action-select li.edit a { background: url("/images/content/button-cart-edit.png"); }
+.action-select li.request { left: 91px; }
+.action-select li.request a { background: url("/images/content/button-cart-request.png"); }
 .action-select li.delete { left: 155px; }
 .action-select li.delete a { background: url("/images/content/button-cart-delete.png"); }
 .action-select li.close { top: 18px !important; left: 166px; }
@@ -192,7 +195,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #designcart #total-price .price { position: absolute; top: 10px; left:260px; font-size: 14px; margin: 0; height: 30px; line-height: 30px; width: 100px;  text-align: right;padding-right: 10px; border-right: 1px solid #ddd; }
 #designcart #total-price .submit-button { position: absolute; top: 10px; left: 380px; width: 188px; height: 30px;}
 
-#designcart-list .request { display: block; text-indent: -5000px; width: 47px; height: 16px; background:url("/images/content/block-status.png") no-repeat; line-height: 16px; margin: 0 auto; }
+#designcart-list .date .request { display: block; text-indent: -5000px; width: 47px; height: 16px; background:url("/images/content/block-status.png") no-repeat; line-height: 16px; margin: 0 auto; }
 #designcart-list .request.code-0 { background-position: 0 0; }
 #designcart-list .request.code-1 { background-position: 0 -16px; }
 #designcart-list .request.code-2 { background-position: 0 -32px; }
@@ -216,15 +219,18 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #designcart-detail div.actions li.edit a { background: url("/images/content/button-detail-edit.png"); width: 72px; height: 32px; }
 #designcart-detail div.actions li.delete a { background: url("/images/content/button-detail-delete.png"); width: 72px; height: 32px; }
 #designcart-detail div.actions li.accept a { background: url("/images/content/button-accept.png"); width: 189px; height: 44px; }
+#designcart-detail div.actions li.accept-cancel a { background: url("/images/content/button-accept-cancel.png"); width: 189px; height: 44px; }
 #designcart-detail div.actions li.disable span { background: url("/images/content/button-accept-disable.png"); width: 189px; height: 44px; }
 #designcart-detail div.actions li.one-order a { background: url("/images/content/button-one-order.png"); width: 292px; height: 44px; }
+#item-information.horizon div.actions li.zoom_message { top: 13px;left: 160px; width: 260px; text-align: center; font-size: 11px;}
+#item-information.vertical div.actions li.zoom_message { display: none; }
 
-#designcart-detail div.actions li.edit a:hover,#designcart-detail div.actions li.delete a:hover { background-position: -72px; }
-#designcart-detail div.actions li.edit a:active, #designcart-detail div.actions li.delete a:active { background-position: -144px; }
-#designcart-detail div.actions li.accept a:hover { background-position: -189px; }
-#designcart-detail div.actions li.accept a:active { background-position: -378px; }
-#designcart-detail div.actions li.one-order a:hover { background-position: -292px; }
-#designcart-detail div.actions li.one-order a:active { background-position: -584px; }
+#designcart-detail div.actions li.edit a:hover,#designcart-detail div.actions li.delete a:hover { background-position: -72px 0; }
+#designcart-detail div.actions li.edit a:active, #designcart-detail div.actions li.delete a:active { background-position: -144px 0; }
+#designcart-detail div.actions li.accept a:hover, #designcart-detail div.actions li.accept-cancel a:hover { background-position: -189px 0; }
+#designcart-detail div.actions li.accept a:active, #designcart-detail div.actions li.accept-cancel a:active { background-position: -378px 0; }
+#designcart-detail div.actions li.one-order a:hover { background-position: -292px 0; }
+#designcart-detail div.actions li.one-order a:active { background-position: -584px 0; }
 #item-information div.actions li.edit {  top: 4px; left: 426px; }
 #item-information div.actions li.delete {  top: 4px; left: 500px; }
 #designcart-detail div.actions #zoom-scroll { position: absolute; width: 104px; height: 23px;}
@@ -238,7 +244,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #item-information .item-detail-wrap .option-select_detail{ padding: 10px; padding:0; border:0; margin: 0; }
 
 /* 디자인 상세보기 가로형 */
-#item-information.horizon div.actions li.accept, #item-information.horizon div.actions li.disable {  top: 494px; left: 40px; }
+#item-information.horizon div.actions li.accept,#item-information.horizon div.actions li.accept-cancel, #item-information.horizon div.actions li.disable {  top: 494px; left: 40px; }
 #item-information.horizon div.actions li.one-order { top: 494px; left: 252px; }
 #item-information.horizon div.actions #zoom-scroll {  top: 3px; left: 139px; }
 #item-information.horizon div.actions li.zoom-scroll { width: 267px; background: url("/images/content/block-zoom-scroll.png") no-repeat 125px 3px; top: 326px; left: 286px; }
@@ -250,7 +256,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #item-information.horizon .item-detail-wrap .option-select_detail { left: 270px; top: 55px; width: 300px; position: absolute;}
 
 /* 디자인 상세보기 세로형 */
-#item-information.vertical div.actions li.accept, #item-information.vertical div.actions li.disable {  top: 632px; left: 40px; }
+#item-information.vertical div.actions li.accept, #item-information.vertical div.actions li.accept-cancel, #item-information.vertical div.actions li.disable {  top: 632px; left: 40px; }
 #item-information.vertical div.actions li.one-order { top: 632px; left: 252px; }
 #item-information.vertical div.actions li.zoom-scroll { width: 227px; background: url("/images/content/block-zoom-scroll.png") no-repeat 80px 3px; top: 70px; left: 340px;}
 #item-information.vertical div.actions #zoom-scroll { top: 3px; left: 93px; }
@@ -405,6 +411,18 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #order-detail .caption a { display: block; position: absolute; text-indent: -5000px; }
 #order-detail .caption a.back-list { top: 6px; left: 6px; }
 
+/* 그외 페이지 제목 */
+#guide-page h3 { background-image: url("/images/content/title-guide.png"); }
+#policy h3 { background-image: url("/images/content/title-policy.png"); }
+#tos h3 { background-image: url("/images/content/title-tos.png"); }
+#about-page h3 { background-image: url("/images/content/title-about.png"); }
+#contact-info h3 { background-image: url("/images/content/title-map.png"); }
+
+/* 연락처, 오시는 길 */
+#contact-info { *zoom: 1; }
+#contact-info:after {content:" "; display:block; clear:both;}
+#contact-info #address, #contact-info #contact, #contact-info #business-hour { width: 172px; padding: 10px 10px;  float: left; line-height: 170%; display: inline; height: 120px;margin: 10px 0 ; border-left: 1px solid #ccc} 
+
 
 /* 게시판 리스트 */
 #qnaboard.content-layout h3 { background-image: url("/images/content/title-qnaboard.png"); }
@@ -505,15 +523,3 @@ div.actions a.reset_button:active { background-position: -122px -62px; }
 #faqs_list p.question { background: url("/images/board/icon-faq-question.png") no-repeat 12px 8px;; line-height: 36px; }
 #faqs_list p.answer { background: #eee url("/images/board/icon-faq-answer.png") no-repeat -53px 0; line-height: 150%; padding:12px 20px 24px 90px ; }
 #faqs .actions a.new { display: block; margin: 0; position: absolute; top: 6px; right: 7px; }
-
-
-#tos, #policy { line-height: 150%; }
-#tos h4, #policy h4 { padding: 10px; color: #333; border: 1px solid #ccc; }
-#tos h5, #policy h5 { font-size: 12px; font-weight: bold; margin: 16px 0 16px 12px ; }
-#tos ol, #tos ul, #tos p, #policy ol, #policy ul, #policy p { border-bottom: 1px solid #ddd; padding-bottom: 16px; margin: 16px 0; }
-#tos p, #policy p { padding-left: 12px;; }
-#tos ol li, #policy ol li { list-style-type: decimal; margin: 8px 0 8px 30px; }
-#tos ul li, #policy ul li { list-style-type: disc; margin: 8px 0 8px 30px; }
-#tos ol li ol,#tos ol li ul,  #policy ol li ol, #policy ol li ul {  background: #eee; border: 1px solid #ddd; padding: 5px 10px; margin: 5px 0; }
-#tos ol li ol li, #policy ol li ol li { list-style-type: lower-latin; margin: 1px 0 1px 20px; font-size: 11px; }
-#tos ol li ul li, #policy ol li ul li { list-style-type: circle; margin: 1px 0 1px 20px; font-size: 11px; }

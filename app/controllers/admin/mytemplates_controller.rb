@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 class Admin::MytemplatesController < ApplicationController
     layout 'admin_layout'
     before_filter :authenticate_admin!    
