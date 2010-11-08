@@ -60,7 +60,7 @@
 					<ul>
 						<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
 						<% if my.job_code == 0 %>
-						<li class="edit"><a href="#" onClick="openWebTopEditor('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>');">편집하기</a></li>
+						<li class="edit"><a href="#" onClick="openWebTopEditor_user('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>');">편집하기</a></li>
 						<% elsif my.job_code == 1 %>
 						<li class="request"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>#feedback-list">요청하기</a></li>
 						<% else %>
