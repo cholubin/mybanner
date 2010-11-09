@@ -3,7 +3,6 @@
 class PagesController < ApplicationController
 
   def home
-    
     #DB가 완전히 초기화 된 상태에서는 /users/new 를 가장 먼저 방문!    
      #Category.up
      #Subcategory.up

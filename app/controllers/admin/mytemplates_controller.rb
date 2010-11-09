@@ -3,8 +3,6 @@ class Admin::MytemplatesController < ApplicationController
     layout 'admin_layout'
     before_filter :authenticate_admin!    
     
-  # GET /mytemplates
-  # GET /mytemplates.xml
   def index
 
     @menu = "user"
@@ -23,15 +21,12 @@ class Admin::MytemplatesController < ApplicationController
       job_code = params[:jc]
     end
     
-    # @temp = Mytemplate.first(:id => 2)
-    #    @temp.destroy
-    
     @category_name = params[:category_name]
     @subcategory_name = params[:subcategory_name]
 
     if params[:userid] != nil
-        @mytemplates = Mytemplate.all(:user_id => params[:userid], :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search2(params[:search],params[:page])
-        @total_count = Mytemplate.all(:user_id => params[:userid]).search2(params[:search],"").count
+        @mytemplates = Mytemplate.all(:in_order => false, :user_id => params[:userid], :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search2(params[:search],params[:page])
+        @total_count = Mytemplate.all(:in_order => false, :user_id => params[:userid]).search2(params[:search],"").count
         @subtotal_count = @mytemplates.count
     else
       @mytemplates = Mytemplate.all(:in_order => false, :order => [:created_at.desc]).search2(params[:search],params[:page]).fc_filter(feedback_code,job_code)
@@ -48,6 +43,8 @@ class Admin::MytemplatesController < ApplicationController
     render 'mytemplate'
   end
   
+  
+  
   def update_subcategories
       # updates subcategories based on (main)category selected
       
@@ -61,8 +58,6 @@ class Admin::MytemplatesController < ApplicationController
       end
   end
   
-  # GET /mytemplates/1
-  # GET /mytemplates/1.xml
   def show
     @menu = "user"
     @board = "mytemplate"
@@ -94,6 +89,8 @@ class Admin::MytemplatesController < ApplicationController
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
     <dict>
+      <key>WebRootPath</key>
+      <string>#{M_ROOT}</string>
     	<key>Action</key>
     	<string>MakeContentsXML</string>
     	<key>DocPath</key>
@@ -316,8 +313,7 @@ class Admin::MytemplatesController < ApplicationController
           
   end
   
-  # DELETE /mytemplates/1
-  # DELETE /mytemplates/1.xml
+
   def destroy
     mytemplate = Mytemplate.get(params[:id])
     close_document(mytemplate)
@@ -357,7 +353,7 @@ class Admin::MytemplatesController < ApplicationController
     redirect_to(admin_mytemplates_url)  
    end
      
-    #::PRIVATE METHODS:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::    
+# PRIVATE METHODS:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::    
   private  
 
     def check_done_txt(mytemplate) 
@@ -510,6 +506,8 @@ class Admin::MytemplatesController < ApplicationController
       <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
       <plist version="1.0">
       <dict>
+        <key>WebRootPath</key>
+        <string>#{M_ROOT}</string>
       	<key>Action</key>
       	<string>RefreshXML</string>
       	<key>DocPath</key>
@@ -542,6 +540,8 @@ class Admin::MytemplatesController < ApplicationController
       <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
       <plist version="1.0">
       <dict>
+        <key>WebRootPath</key>
+        <string>#{M_ROOT}</string>
       	<key>Action</key>
       	<string>CloseDocument</string>
       	<key>DocPath</key>
@@ -569,6 +569,8 @@ class Admin::MytemplatesController < ApplicationController
       <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
       <plist version="1.0">
       <dict>
+        <key>WebRootPath</key>
+        <string>#{M_ROOT}</string>
       	<key>Action</key>
       	<string>SaveDocumentPDF</string>
       	<key>DocPath</key>

@@ -21,13 +21,22 @@
 	
 	<% form_tag :action => :deleteSelection, :method => 'post' do %>			
 	<%
+	if params[:userid] != nil
+		count_normal = Mytemplate.all(:user_id => params[:userid], :in_order => false, :feedback_code => 6).count
+		count_ing = Mytemplate.all(:user_id => params[:userid], :in_order => false, :feedback_code => 0).count
+		count_done = Mytemplate.all(:user_id => params[:userid], :in_order => false, :feedback_code => 1).count
+		count_file_error = Mytemplate.all(:user_id => params[:userid], :in_order => false, :feedback_code => 2).count
+		count_delay = Mytemplate.all(:user_id => params[:userid], :in_order => false, :feedback_code => 3).count
+	else
+		count_normal = Mytemplate.all(:in_order => false, :feedback_code => 6).count
 		count_ing = Mytemplate.all(:in_order => false, :feedback_code => 0).count
 		count_done = Mytemplate.all(:in_order => false, :feedback_code => 1).count
 		count_file_error = Mytemplate.all(:in_order => false, :feedback_code => 2).count
 		count_delay = Mytemplate.all(:in_order => false, :feedback_code => 3).count
+	end
 	%>
-	총 <%= @total_count.to_s %>건 (작업요청(처리중): <%= count_ing %>건 / 처리완료: <%= count_done %>건 / 파일오류: <%= count_file_error %>건 / 보류: <%= count_delay %>건)
-	<span style="margin: 0 0 0 200">
+	총 <%= @total_count.to_s %>건 (작업요청(처리중): <%= count_ing %>건 / 처리완료: <%= count_done %>건 / 파일오류: <%= count_file_error %>건 / 보류: <%= count_delay %>건 / 일반: <%= count_normal %>건)
+	<span style="margin: 0 0 0 125">
 		<select id="sel_jobcode" onChange="javascript:goPage();">
 			<option value="all">전체</option>
 			<%
@@ -111,7 +120,7 @@
 	<br>
 
 		<!-- dm-pager Pagination -->
-		<table width="730" >
+		<table width="800" >
 			<tr>
 				<td width="230">&nbsp;</td>
 				<td width="350" style="align:center">

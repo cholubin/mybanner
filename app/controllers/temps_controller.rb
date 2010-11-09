@@ -437,6 +437,8 @@ class TempsController < ApplicationController
       <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
       <plist version="1.0">
       <dict>
+        <key>WebRootPath</key>
+        <string>#{M_ROOT}</string>
       	<key>Action</key>
       	<string>CloseDocument</string>
       	<key>DocPath</key>
@@ -544,6 +546,8 @@ class TempsController < ApplicationController
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
     <dict>
+      <key>WebRootPath</key>
+      <string>#{M_ROOT}</string>
     	<key>Action</key>
     	<string>MakeContentsXML</string>
     	<key>DocPath</key>

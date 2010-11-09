@@ -13,28 +13,36 @@ class Admin::MyimagesController < ApplicationController
       #확장자별 소팅
       if params[:ext] == nil or params[:ext] == "all"
         ext = "all"
+      else
+        ext = params[:ext]
       end
 
-      if ext == "all"
-        @myimages = Myimage.all.search(params[:search], params[:page])   
-        @total_count = Myimage.all.search(params[:search], "").count
+      if params[:userid] != nil and params[:userid] != ""
+        if ext == "all"
+          @myimages = Myimage.all(:user_id => params[:userid].to_i).search(params[:search], params[:page])   
+          @total_count = Myimage.all(:user_id => params[:userid].to_i).search(params[:search], "").count
+        else
+          @myimages = Myimage.all(:user_id => params[:userid].to_i, :type => ext, :order => [:created_at.desc]).search(params[:search], params[:page])           
+          @total_count = Myimage.all(:user_id => params[:userid].to_i,:type => ext, :order => [:created_at.desc]).search(params[:search], "").count
+        end
+        
+        @exts = repository(:default).adapter.select('SELECT distinct type FROM myimages WHERE user_id = '+ params[:userid])
+        
       else
-        @myimages = Myimage.all(:type => ext, :order => [:created_at.desc]).search(params[:search], params[:page])           
-        @total_count = Myimage.all(:type => ext, :order => [:created_at.desc]).search(params[:search], "").count
+        if ext == "all"
+          @myimages = Myimage.all.search(params[:search], params[:page])   
+          @total_count = Myimage.all.search(params[:search], "").count
+        else
+          @myimages = Myimage.all(:type => ext, :order => [:created_at.desc]).search(params[:search], params[:page])           
+          @total_count = Myimage.all(:type => ext, :order => [:created_at.desc]).search(params[:search], "").count
+        end
+        
+        @exts = repository(:default).adapter.select('SELECT distinct type FROM myimages')
       end
-      
-      
-      i = 1
-      @myimages.each do |dd|
-        puts_message i.to_s
-        i += 1
-      end
-      
+
       render 'myimage'
   end
 
-  # GET /myimages/1
-  # GET /myimages/1.xml
   def show
       @menu = "user"
       @board = "myimage"

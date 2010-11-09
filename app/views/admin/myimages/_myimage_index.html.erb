@@ -20,14 +20,12 @@
 
 	%>
 
-	<div align="right" style="padding:0 175 5 0">
-		확장자별: <select name="_ext" onChange="location.href='/admin/myimages?ext='+document.all._ext.value;">
+	<div align="right" style="padding:0 105 5 0">
+		확장자별: <select name="_ext" onChange="location.href='/admin/myimages?userid=<%= params[:userid] %>&ext='+document.all._ext.value;">
 			<option value="all" <%= "selected" if ext == "all" %>>전체</option>				
-			<option value="pdf" <%= "selected" if ext == "pdf" %>>PDF</option>							
-			<option value="jpg" <%= "selected" if ext == "jpg" %>>JPG</option>
-			<option value="eps" <%= "selected" if ext == "eps" %>>EPS</option>						
-			<option value="gif" <%= "selected" if ext == "gif" %>>GIF</option>
-			<option value="tif" <%= "selected" if ext == "tif" %>>TIF</option>			
+			<%@exts.each do |ex| %>
+				<option value="<%= ex %>" <%= "selected" if params[:ext] == ex %>><%= ex.upcase %></option>
+			<%end %>
 		</select>	
 	</div>
 	
@@ -73,7 +71,7 @@
 	<br>
 
 		<!-- dm-pager Pagination -->
-		<table width="730" >
+		<table width="800" >
 			<tr>
 				<td width="230">&nbsp;</td>
 				<td width="350" style="align:center">
@@ -85,11 +83,19 @@
 							ext = params[:ext]
 						end
 						%>
-						<%if ext == "all"%>
-					        <%= Myimage.search(params[:search], params[:page]).pager.to_html "/admin/myimages?ext=#{ext}&search=#{params[:search]}" %>   
-					    <%else %>
-					        <%= Myimage.all(:type => params[:ext]).search(params[:search], params[:page]).pager.to_html "/admin/myimages?ext=#{ext}&search=#{params[:search]}" %>           
-					    <%end%>	
+						<%if params[:userid] != nil and params[:userid] != "" %>
+							<%if ext == "all"%>
+						        <%= Myimage.all(:user_id => params[:userid].to_i).search(params[:search], params[:page]).pager.to_html "/admin/myimages?userid=#{params[:userid]}&ext=#{ext}&search=#{params[:search]}" %>   
+						    <%else %>
+						        <%= Myimage.all(:user_id => params[:userid].to_i, :type => params[:ext]).search(params[:search], params[:page]).pager.to_html "/admin/myimages?userid=#{params[:userid]}&ext=#{ext}&search=#{params[:search]}" %>           
+						    <%end%>
+						<%else %>
+							<%if ext == "all"%>
+						        <%= Myimage.search(params[:search], params[:page]).pager.to_html "/admin/myimages?userid=#{params[:userid]}&ext=#{ext}&search=#{params[:search]}" %>   
+						    <%else %>
+						        <%= Myimage.all(:type => params[:ext]).search(params[:search], params[:page]).pager.to_html "/admin/myimages?userid=#{params[:userid]}&ext=#{ext}&search=#{params[:search]}" %>           
+						    <%end%>
+						<%end %>
 					</div>
 				</td>
 				<td width="150" align="right">

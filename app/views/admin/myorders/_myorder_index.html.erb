@@ -1,6 +1,17 @@
 <%= stylesheet_link_tag '/css/paginate.css' %>
 <div id="feature_wrapper">
-		<p1>전체 주문 리스트 입니다.</p1>
+		<%if params[:userid] != nil and params[:userid] != "" %>
+			<% 
+			if User.get(params[:userid].to_i) != nil  
+				user_name = User.get(params[:userid].to_i).name
+				userid = User.get(params[:userid].to_i).userid
+			end
+			%>
+			<p1><%= user_name %>(<%= userid %>) 고객님의  주문 리스트 입니다.</p1>
+		<%else %>
+			<p1>전체 주문 리스트 입니다.</p1>
+		<%end %>
+		
 		<% if ! flash[:notice].nil? %>
 			<br>
 			<span class="error_message_small"><%= flash[:notice].to_s %></span>
@@ -112,7 +123,11 @@
 				<td width="230">&nbsp;</td>
 				<td width="350" style="align:center">
 					<div class="pager">
-					<%=@myorders.search(params[:search], params[:page]).pager.to_html "/admin/myorders?search=#{params[:search]}" %>
+					<%if params[:userid] != nil and params[:userid] != "" %>
+						<%=@myorders.all(:user_id => params[:userid].to_i).search(params[:search], params[:page]).pager.to_html "/admin/myorders?search=#{params[:search]}" %>
+					<%else %>
+						<%=@myorders.search(params[:search], params[:page]).pager.to_html "/admin/myorders?search=#{params[:search]}" %>
+					<%end %>
 					</div>
 				</td>
 				<td width="150" align="right">
