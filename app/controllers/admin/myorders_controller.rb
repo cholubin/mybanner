@@ -19,13 +19,24 @@ def index
   @board = "myorder"
   @section = "index"
   
-  if @status == "all"
-    @myorders = Myorder.all.search(params[:search],params[:page])
-    @total_count = @myorders.count
+  if params[:userid] != nil and params[:userid] != ""
+    if @status == "all"
+      @myorders = Myorder.all(:user_id => params[:userid].to_i).search(params[:search],params[:page])
+      @total_count = @myorders.all(:user_id => params[:userid].to_i).count
+    else
+      @myorders = Myorder.all(:user_id => params[:userid].to_i, :status => @status).search(params[:search],params[:page])
+      @total_count = @myorders.all(:user_id => params[:userid].to_i, :status => @status).count
+    end
   else
-    @myorders = Myorder.all(:status => @status).search(params[:search],params[:page])
-    @total_count = @myorders.all(:status => @status).count
+    if @status == "all"
+      @myorders = Myorder.all.search(params[:search],params[:page])
+      @total_count = @myorders.count
+    else
+      @myorders = Myorder.all(:status => @status).search(params[:search],params[:page])
+      @total_count = @myorders.all(:status => @status).count
+    end
   end
+  
   
   
   render 'myorder'
