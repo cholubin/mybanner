@@ -10,13 +10,13 @@
 			<key>filename</key>
 			<string>EditController.j</string>
 			<key>lastUsed</key>
-			<date>2010-10-29T08:50:00Z</date>
+			<date>2010-11-05T06:11:14Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>AppController.j</string>
 			<key>lastUsed</key>
-			<date>2010-11-03T14:20:42Z</date>
+			<date>2010-11-10T02:06:33Z</date>
 			<key>selected</key>
 			<true/>
 		</dict>
@@ -28,7 +28,7 @@
 			<key>filename</key>
 			<string>DrawingView.j</string>
 			<key>lastUsed</key>
-			<date>2010-10-29T08:47:08Z</date>
+			<date>2010-11-05T06:04:20Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -40,13 +40,13 @@
 			<key>filename</key>
 			<string>ImagePickerController.j</string>
 			<key>lastUsed</key>
-			<date>2010-11-01T06:31:13Z</date>
+			<date>2010-11-05T06:04:22Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>ImageTrimmer.j</string>
 			<key>lastUsed</key>
-			<date>2010-10-29T08:35:19Z</date>
+			<date>2010-11-05T06:04:53Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -74,29 +74,29 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>25</integer>
+				<integer>115</integer>
 				<key>line</key>
-				<integer>656</integer>
+				<integer>380</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>640</integer>
+			<integer>363</integer>
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>112</integer>
 				<key>line</key>
-				<integer>656</integer>
+				<integer>380</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>120</integer>
 				<key>line</key>
-				<integer>657</integer>
+				<integer>380</integer>
 			</dict>
 		</dict>
 		<key>DrawingView.j</key>
@@ -148,29 +148,29 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>64</integer>
+				<integer>51</integer>
 				<key>line</key>
-				<integer>250</integer>
+				<integer>170</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>232</integer>
+			<integer>153</integer>
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>5</integer>
 				<key>line</key>
-				<integer>249</integer>
+				<integer>170</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>51</integer>
 				<key>line</key>
-				<integer>251</integer>
+				<integer>170</integer>
 			</dict>
 		</dict>
 		<key>ImagePickerController.j</key>

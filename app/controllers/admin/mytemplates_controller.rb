@@ -43,7 +43,58 @@ class Admin::MytemplatesController < ApplicationController
     render 'mytemplate'
   end
   
-  
+  def publish
+    @mytemplate = Mytemplate.get(params[:id].to_i)   
+    erase_job_done_file(@mytemplate)       
+    check_job_done_and_publish(@mytemplate) 
+    close_document(@mytemplate)  
+    erase_job_done_file(@mytemplate)
+    move_to_mypdf(@mytemplate)
+    redirect_to :action => 'index'
+  end
+
+  def move_to_mypdf(mytemplate)
+    puts_message "move_to_mypdf start!"
+    
+    
+    
+    mypdf = Mypdf.new
+    mypdf.name = mytemplate.name
+    mypdf.pdf_filename = mytemplate.file_filename.gsub(/.mlayoutP.zip/,'.pdf')
+    mypdf.user_id = mytemplate.user_id
+
+    if mypdf.save
+      puts_message "PDF파일 저장 완료!"
+    else
+      puts_message "PDF파일 저장 실패!"
+    end
+    
+    
+    
+    #중복파일명 처리 
+    while File.exist?(mypdf.basic_path + mypdf.pdf_filename) 
+      mypdf.pdf_filename = mypdf.pdf_filename.gsub(/.pdf/,'') + "_1" + ".pdf"
+    end
+    
+    source_path = @mytemplate.pdf_path
+    destination_dir = mypdf.basic_path + mypdf.pdf_filename
+    
+    puts_message "source_path::"+source_path
+    puts_message "destination_dir::" + destination_dir
+    
+    FileUtils.cp_r source_path, destination_dir
+    
+    #Thumbnail 생성 
+    thumb_image_name = mypdf.pdf_filename.gsub(/.pdf/,'') + "_t" + ".jpg"
+    preview_image_name = mypdf.pdf_filename.gsub(/.pdf/,'') + "_p" + ".jpg"
+    
+	  puts %x[#{RAILS_ROOT}"/lib/thumbup" #{mypdf.basic_path + mypdf.pdf_filename} #{mypdf.basic_path + preview_image_name} 0.5 #{mypdf.basic_path + thumb_image_name} 128]            	      
+    
+    mypdf.save
+    # puts_message @mytemplate.pdf_path
+    # puts_message @mytemplate.pdf    
+    puts_message "move_to_mypdf end!"    
+  end
   
   def update_subcategories
       # updates subcategories based on (main)category selected
@@ -116,14 +167,23 @@ class Admin::MytemplatesController < ApplicationController
   def erase_job_done_file_temp(temp)        
     job_done = temp.path + "/web/done.txt" 
 
-    loop do 
-      puts "기다리는 중!"
-     break if File.exists?(job_done)
-    end
+    time_after_3_seconds = Time.now + 3.seconds     
+     while Time.now < time_after_3_seconds
+       break if File.exists?(job_done)
+     end
 
-    FileUtils.remove_entry(job_done)
+     if !File.exists?(job_done)
+        pid = `ps -c -eo pid,comm | grep MLayout`.to_s
+        pid = pid.gsub(/MLayout 2/,'').gsub(' ', '')
+        system "kill #{pid}"     
+        puts_message "MLayout was killed!!!!! ============"
+      else
+        FileUtils.remove_entry(job_done)
+        puts_message "There is job done file of PDF file making!"
+      end
 
     puts_message "erase_job_done_file"
+    
    end
    
    
@@ -205,20 +265,6 @@ class Admin::MytemplatesController < ApplicationController
     render 'mytemplate'
   end
 
-  def publish
-    puts_message params[:id]
-    @mytemplate = Mytemplate.first(:file_filename => params[:id] + ".mlayoutP.zip", :user_id => current_user.id)   
-    # @temp = Temp.find(@article.temp_id)
-    # reset_imgs(@article)      
-    erase_job_done_file(@mytemplate)       
-    # generate_xml(@article)
-    check_job_done_and_publish(@mytemplate) 
-    # check_jpg_and_process_thumbnail(@article)  
-    close_document(@mytemplate)  
-    erase_job_done_file(@mytemplate)
-    flash[:notice] = "Your PDF file is ready!"
-    redirect_to :action => 'index'
-  end
 
   # POST /mytemplates
   # POST /mytemplates.xml
@@ -591,11 +637,19 @@ class Admin::MytemplatesController < ApplicationController
     end    
 
     def set_pdf_path(mytemplate)
-      pdf = "#{RAILS_ROOT}" + "/public/user_files/" + current_user.userid + "/mytemplate_templates/" + "#{mytemplate.file_filename.gsub(/.zip/,'')}" +"/web/document.pdf"
-      url = "#{HOSTING_URL}" + "/user_files/" + current_user.userid + "/mytemplate_templates/" + "#{mytemplate.file_filename.gsub(/.zip/,'')}" +"/web/document.pdf" 
+      puts_message "set_pdf_path Start!"
+      userid = User.get(mytemplate.user_id).userid
+      
+      pdf = "#{RAILS_ROOT}" + "/public/user_files/" + userid + "/article_templates/" + "#{mytemplate.file_filename.gsub(/.zip/,'')}" +"/web/document.pdf"
+      url = "#{HOSTING_URL}" + "/user_files/" + userid + "/article_templates/" + "#{mytemplate.file_filename.gsub(/.zip/,'')}" +"/web/document.pdf" 
       mytemplate.pdf = url 
       mytemplate.pdf_path = pdf
-      mytemplate.save  
+      if mytemplate.save
+        puts_message "pdf_path saved!"
+      else
+        puts_message "pdf_path save failed!"
+      end
+      puts_message "set_pdf_path Finished!" 
     end
 
 

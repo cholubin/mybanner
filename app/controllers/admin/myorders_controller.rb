@@ -121,15 +121,28 @@ end
   def erase_job_done_file_temp(temp)        
     job_done = temp.path + "/web/done.txt" 
 
-    loop do 
-      puts "기다리는 중!"
-     break if File.exists?(job_done)
-    end
+    time_after_3_seconds = Time.now + 3.seconds     
+     while Time.now < time_after_3_seconds
+       break if File.exists?(job_done)
+     end
 
-    FileUtils.remove_entry(job_done)
+     if !File.exists?(job_done)
+        pid = `ps -c -eo pid,comm | grep MLayout`.to_s
+        pid = pid.gsub(/MLayout 2/,'').gsub(' ', '')
+        system "kill #{pid}"     
+        puts_message "MLayout was killed!!!!! ============"
+      else
+        FileUtils.remove_entry(job_done)
+        puts_message "There is job done file of PDF file making!"
+      end
 
     puts_message "erase_job_done_file"
  end
+ 
+ 
+ 
+ 
+ 
  
 
 def update_status

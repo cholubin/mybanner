@@ -64,6 +64,7 @@ gDocItemSizeHeight = 90;
 	var mSelectedTool;
 	BOOL mBoolSelectedByUser;
 	BOOL mBoolUsePDFBtn;
+	BOOL mAdminUser;
 	
 	CPString mCurDocPath;
 	CPString mLocalDocPath;
@@ -133,8 +134,14 @@ gDocItemSizeHeight = 90;
 	}
 	var lUsePDFBtn = [args objectForKey:@"pdf_button"];
 	mBoolUsePDFBtn = YES;
-	if([[lUsePDFBtn lowercaseString] isEqualToString:@"no"]) {
+	if(lUsePDFBtn && [[lUsePDFBtn lowercaseString] isEqualToString:@"no"]) {
 		mBoolUsePDFBtn = NO;
+	}
+	
+	var lAdminUser = [args objectForKey:@"admin"];
+	mAdminUser = NO;
+	if(lAdminUser && [[lAdminUser lowercaseString] isEqualToString:@"yes"]) {
+		mAdminUser = YES;
 	}
  	mLocalDocPath = [args objectForKey:@"doc_path"];
 	if(!mLocalDocPath) {
@@ -365,10 +372,18 @@ gDocItemSizeHeight = 90;
 	return theWindow;
 }
 
+- (BOOL)adminUser
+{
+	return mAdminUser;
+}
+
 - (void)sendCurDocImageListRequest
 {
 	var lFilename = [mLocalDocPath lastPathComponent];
-	var lDocWebImageURL = [CPString stringWithFormat:"%@/filelist?request=%@/web/",gBaseURL, mLocalDocPath];
+	var lFileList_CMD = @"filelist";
+	if(mAdminUser) 
+		lFileList_CMD = @"admin_filelist";
+	var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=%@/web/",gBaseURL,lFileList_CMD, mLocalDocPath];
 	var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
 	mCurDocImageListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];	
 }
@@ -377,8 +392,11 @@ gDocItemSizeHeight = 90;
 {
 	var lSpreadIdx = [[mSpreadListView selectionIndexes] firstIndex];
 	if(lSpreadIdx >= 0) {
+		var lRequest_CMD = @"request_mlayout";
+		if(mAdminUser)
+			lRequest_CMD = @"admin_request_mlayout";
 		var lFilename = [mCurDocPath lastPathComponent];
-	    var lDocOpenURL = [CPString stringWithFormat:"%@/request_mlayout?requested_action=DocumentInfos&docname=%@&userinfo=%d",gBaseURL ,lFilename,lSpreadIdx];
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=DocumentInfos&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
 	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 	    mDocumentInfoCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	}
@@ -390,7 +408,10 @@ gDocItemSizeHeight = 90;
 	var lSpreadIdx = [[mSpreadListView selectionIndexes] firstIndex];
 	if(lSpreadIdx >= 0) {
 		var lFilename = [mCurDocPath lastPathComponent];
-	    var lDocOpenURL = [CPString stringWithFormat:"%@/request_mlayout?requested_action=FrameList&docname=%@&userinfo=%d",gBaseURL ,lFilename,lSpreadIdx];
+		var lRequest_CMD = @"request_mlayout";
+		if(mAdminUser)
+			lRequest_CMD = @"admin_request_mlayout";
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=FrameList&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
 	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 	    mFrameListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	}
@@ -611,7 +632,10 @@ gDocItemSizeHeight = 90;
 		var lFilenameNoExt = [lFilename substringToIndex:[lFilename length]-lExtLen-1];
 	
 		var lDocumentID = [lFilenameNoExt lastPathComponent];
-	    var lDocOpenURL = [CPString stringWithFormat:"%@/publish/%@",gBaseURL ,lDocumentID];
+		var lPublish_CMD = @"publish";
+		if(mAdminUser)
+			lPublish_CMD = @"admin_publish";
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@/%@",gBaseURL ,lPublish_CMD, lDocumentID];
 	   	var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 		[[ProgressWindow sharedWindow] show];
 	  	mGeneratePDFCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
@@ -700,7 +724,10 @@ gDocItemSizeHeight = 90;
 }
 - (void)refreshSpreadListView
 {
-    var lDocWebImageURL = [CPString stringWithFormat:"%@/filelist?request=%@/web/",gBaseURL, mLocalDocPath];
+	var lFileList_CMD = @"filelist";
+	if(mAdminUser) 
+		lFileList_CMD = @"admin_filelist";
+    var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=%@/web/",gBaseURL,lFileList_CMD, mLocalDocPath];
     var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
     mCurDocImageRefreshCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 }
@@ -751,7 +778,10 @@ gDocItemSizeHeight = 90;
 		var lSpreadIdx = [[mSpreadListView selectionIndexes] firstIndex];
 		if(lSpreadIdx >= 0) {
 			var lFilename = [mCurDocPath lastPathComponent];
-		    var lDocOpenURL = [CPString stringWithFormat:"%@/request_mlayout?requested_action=FrameList&docname=%@&userinfo=%d",gBaseURL ,lFilename,lSpreadIdx];
+			var lRequest_CMD = @"request_mlayout";
+			if(mAdminUser)
+				lRequest_CMD = @"admin_request_mlayout";
+		    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=FrameList&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
 		    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 		    mSetDocumentSizeFrameListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 		}
@@ -970,9 +1000,12 @@ gDocItemSizeHeight = 90;
 
 - (void)refreshSpreadPreview
 {
-	    var lDocWebImageURL = [CPString stringWithFormat:"%@/filelist?request=%@/web/",gBaseURL, mLocalDocPath];
-	    var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
-	    mNewPreviewCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
+	var lFileList_CMD = @"filelist";
+	if(mAdminUser) 
+		lFileList_CMD = @"admin_filelist";
+    var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=%@/web/",gBaseURL, lFileList_CMD, mLocalDocPath];
+    var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
+    mNewPreviewCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 }
 
 - (void)refreshResize:(id)sender

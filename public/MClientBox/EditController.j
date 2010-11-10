@@ -241,7 +241,11 @@ function TextMonitor()
 
 - (CPURLConnection)sendJSONRequest:(CPString)command data:(CPString)datastr delegate:(var)dele
 {
-    var lDocOpenURL = [CPString stringWithFormat:"%@/post_mlayout",gBaseURL];
+	var lPost_CMD = @"post_mlayout";
+	if([mAppController adminUser]) {
+		lPost_CMD = @"admin_post_mlayout";
+	}
+    var lDocOpenURL = [CPString stringWithFormat:"%@/%@",gBaseURL, lPost_CMD];
   	var JSONString = '{"requested_action":"'+command+'","docname":"'+mDocumentName+'","userinfo":"'+datastr+'"}';
 	
     var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
@@ -389,7 +393,10 @@ function TextMonitor()
 
 - (void)drawingView:(DrawingView)aDrawingView frameSelected:(GraphicFrame)aFrame
 {
-    var lDocOpenURL = [CPString stringWithFormat:"%@/request_mlayout?requested_action=GetContentsJSON&docname=%@&userinfo=%d",gBaseURL ,mDocumentName,[aFrame GID]];
+	var lRequest_CMD = @"request_mlayout";
+	if([mAppController adminUser])
+		lRequest_CMD = @"admin_request_mlayout";
+    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=GetContentsJSON&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, mDocumentName,[aFrame GID]];
     var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
     mGetContentsCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	mIsVisible = YES;

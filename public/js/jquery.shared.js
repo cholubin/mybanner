@@ -188,7 +188,7 @@ function openWebTopEditor(user,id,href) {
 		$("#webtop_iframe").css("height",$(window).height()-75);
 	})
 	
-	var url = "/MClientBox/index.html?spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"	
+	var url = "/MClientBox/index.html?admin=yes&spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"	
 	$("#webtop_iframe").attr("src",url);
 	$("#webtop_iframe").load(function(){
 		if(getCookie("hide-tutorial") == "false" || getCookie("hide-tutorial") == "") openWebTopHelper();
