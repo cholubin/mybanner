@@ -73,7 +73,7 @@
 				<td class="price num" id="price_<%= my.id.to_s %>">
 					<%= my.price.to_i * my.quantity %>
 				</td>
-				<input type="hidden" id="tmp_total_price" value="0">
+				<input type="hidden" id="tmp_total_price" value="<%= my.price * my.quantity %>">
 				<input type="hidden" class="unit_price" id="unit_price_<%= my.id.to_s %>" value="<%= my.price %>">
 				<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= my.price %>">
 				<td class="option">

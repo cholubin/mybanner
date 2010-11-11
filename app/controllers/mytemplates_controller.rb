@@ -80,19 +80,39 @@ class MytemplatesController < ApplicationController
   
   
   @myorder.order_no = @order_no
+  
   @myorder.items = params[:ids]
-  item_unit = params[:item_unit].split(",")
   
   index = 0
   @temp_price = 0
-  @myorder.items.split(",").each do |my|
-    mytemp = Mytemplate.get(my.to_i)
+  if params[:direct] == "yes"
+    mytemp = Mytemplate.get(@myorder.items.to_i)
     mytemp.in_order = true
-    mytemp.quantity = item_unit[index].to_i
+    mytemp.quantity = params[:item_unit].to_i
     @temp_price += (mytemp.quantity * mytemp.price.to_i)
-    mytemp.save
-    index += 1
+    if mytemp.save
+      puts_message "주문항목 저장 완료!"
+    else
+      puts_message "주문항목 저장 실패!"
+    end
+    
+  else
+    item_unit = params[:item_unit].split(",")
+    
+    @myorder.items.split(",").each do |my|
+      mytemp = Mytemplate.get(my.to_i)
+      mytemp.in_order = true
+      mytemp.quantity = item_unit[index].to_i
+      @temp_price += (mytemp.quantity * mytemp.price.to_i)
+      if mytemp.save
+        puts_message "주문항목 저장 완료!"
+      else
+        puts_message "주문항목 저장 실패!"
+      end
+      index += 1
+    end
   end
+  
 
   delivery_price = Basicinfo.first(:category => "delivery", :code => @myorder.receive_type).price
   @myorder.total_price = @temp_price + delivery_price
@@ -119,7 +139,6 @@ class MytemplatesController < ApplicationController
     @section = "order"
     
     @tempids = params[:ids].split(",")
-
     @total_price = params[:total_price].gsub(/원/,'').to_i
     @pre_price = 0
       

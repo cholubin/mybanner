@@ -17,7 +17,9 @@ end
 		<li>편집에 어려움이 있는 경우 관리자에게 도움을 요청할 수 있습니다.</li>
 	</ul>
 	<!-- 미리보기의 가로가 길면 horizon, 세로가 길면 vertical -->
-	<% puts_message my.is_col.to_s %>
+	<input type="hidden" id="tmp_total_price" value="0">
+	<input type="hidden" class="unit_price" id="unit_price_<%= my.id.to_s %>" value="<%= my.price %>">
+	
 	<div id="item-information" class="<%= (my.is_col == true)? "vertical":"horizon" %>">
 		<h4>미리보기</h4>
 		<div id="ie-overflow-fix">
@@ -415,5 +417,123 @@ $('#design_confirm_section').delegate('#design_confirm','click',function(){
 		return false;
 	}
 	return false;
+});
+
+// 최종 주문하기 버튼 클릭시 프로세스 ==========================================
+$('#order_basic').live("click", function(){
+	var order_item = "<%= my.id.to_s %>";
+	var item_unit = $('#peice_' + order_item).val();
+
+	if (order_item == ""){
+		alert("주문할 항목을 선택해주세요!");
+	}else{
+		if($('#receive-type2 option:selected').val() == ""){
+			alert('배송방법을 선택해주세요!');
+			return false;
+		}
+		
+		if($('#receive-name').val() == ""){
+			alert("받으실분의 성함을 입력해주세요!");
+			$('#receive-name').focus();
+			return false;
+		}
+		
+		if($('#receive-tel').val() == ""){
+			alert("일반 전화번호를 입력해주세요!");
+			$('#receive-tel').focus();
+			return false;
+		}
+
+		if($('#receive-mobile').val() == ""){
+			alert("모바일(핸드폰) 번호를 입력해주세요!");
+			$('#receive-mobile').focus();
+			return false;
+		}
+		
+		if($('#zip_code').val() == "" || $('#address2').val() == ""){
+			alert("배송주소를 입력해주세요!");
+			if($('#zip_code').val() == ""){
+				$('#address-search').focus();
+			}else{
+				$('#address2').focus();
+			}
+			return false;
+		}
+		
+		loadingView();
+		$.ajax({
+			data:'direct=yes&item_unit='+item_unit+'&pay_m='+$('input:radio:checked').val()+'&total_price='+$('#order_total_price').val()+'&receive-note='+$('#receive-note').val()+'&address2='+$('#address2').val()+'&address1='+$('#address-selector option:selected').text()+'&zip_code='+$('#zip_code').val()+'&receive_mobile='+$('#receive-mobile').val()+'&receive_tel='+$('#receive-tel').val()+'&receive_name='+$('#receive-name').val()+'&receive_type='+$('#receive-type2 option:selected').val()+'&ids='+ order_item, 
+			dataType:'script', 
+			type:'post', 
+			url:'/mytemplates/create_order',
+			success: function(request){
+				loadingView();
+				if(request != "주문에러!"){
+					alert("주문시 표시된 결제금액은 기본금액입니다! 옵션 선택에 따른 추가 금액에 대해선 관리자와 상담해주시기 바랍니다!");
+					alert("주문번호: "+request+" \n주문절차가 정상적으로 처리되었습니다!");	
+					$('#popup-closeButton').click();
+					window.location.replace("/mytemplates");
+				}else{
+					alert("주문진행시 문제가 발생하였습니다! 관리자에게 문의하여 주시기 바랍니다.");	
+				}
+			}
+		});
+
+	}
+});
+
+$('#receive-type2').live("change",function(){
+	
+	if($('#receive-type2 option:selected').val() != ""){
+		delivery_price = parseInt($('#receive-type2 option:selected').attr("price"));
+	}else{
+		delivery_price = 0;
+	}
+	current_total_price = parseInt($('#current_total_price').val());
+	$('#total_price').html(to_comma(current_total_price + delivery_price) + "원");
+	$('#order_total_price').html(to_comma(current_total_price + delivery_price) + "원");
+	$('#left_order_total_price').html(to_comma(current_total_price + delivery_price) + "원");
+	
+});
+
+function to_comma(price){
+	char_price = price;
+	// 콤마찍기
+	var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+	char_price += '';                // 숫자를 문자열로 변환
+
+	while (reg.test(char_price))
+	char_price = char_price.replace(reg, '$1' + ',' + '$2');
+	
+	return char_price;
+}
+
+$('#address-search').live("keydown", function(event){
+	if(event.keyCode == 13){
+		$('#zip_search').click();
+		return false;
+	}	
 })
+$('#zip_search').live("click", function(){
+	if ($('#address-search').val() == ""){
+		alert("검색어를 입력해주세요!");
+	}else{
+		$.ajax({
+			data:'dong='+ $('#address-search').val(), 
+			dataType:'script', 
+			type:'post', 
+			url:'/address/search_ajax',
+			success: function(request){
+				$("#search-address-form").fadeOut("fast");
+				$('#addr_result').html(request).change(function(){
+					// $('#zip_code').val()
+					var temp_zip = $('#address-selector option:selected').val()
+					var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,3)
+					$('#zip_code').val(zip_code);
+				});
+			}
+		});
+		$('#address-search').val("검색중입니다.");
+	}
+});
 </script>
