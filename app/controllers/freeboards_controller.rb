@@ -6,19 +6,13 @@ class FreeboardsController < ApplicationController
   # GET /freeboards
   # GET /freeboards.xml
   def index
-    @freeboard = Freeboard.search(params[:search], params[:page])
-    # puts @articles.inspect
-    # puts @articles.count
-    @total_count = Freeboard.search(params[:search],"").count
-      
     @menu = "board"
     @board = "freeboard"
     @section = "index"
-
-    # respond_to do |format|
-    #   format.html # index.html.erb
-    #   format.xml  { render :xml => @notices }
-    # end
+    
+    @freeboard = Freeboard.search(params[:search], params[:page])
+    @total_count = Freeboard.search(params[:search],"").count
+    
     render 'freeboard'
   end
 
@@ -35,6 +29,8 @@ class FreeboardsController < ApplicationController
       @menu = "board"
       @board = "freeboard"
       @section = "show"
+      
+      @comments = Comment.all(:board => "freeboard", :order => [:updated_at])
       
       render 'freeboard'
     
@@ -78,8 +74,47 @@ class FreeboardsController < ApplicationController
     
   end
 
-  # POST /freeboards
-  # POST /freeboards.xml
+  def destroy_comment
+    comment_id = params[:comment_id].to_i
+    
+    @comment = Comment.get(comment_id)
+    
+    if @comment.user_id == current_user.id
+      if @comment.destroy
+        render :text => "success!"
+      else
+        render :text => "failed!"
+      end
+    
+    else
+      render :text => "자신의 덧글만 삭제하실 수 있습니다!"
+    end
+    
+    
+  end
+
+  def create_comment
+    board = params[:board]
+    board_id = params[:board_id].to_i
+    content = params[:content]
+    
+    @comment = Comment.new
+    @comment.board = board
+    @comment.board_id = board_id
+    @comment.content = content
+    @comment.user_id = current_user.id
+    @comment.user_name = User.get(current_user.id).name
+    @comment.is_admin = false
+    
+    if @comment.save
+      @comm = @comment
+      render :partial => "comment", :object => @comm
+    else
+      render :text => "failed!" 
+    end
+    
+  end
+  
   def create
     @board = "freeboard"
     @section = "new"
@@ -133,8 +168,27 @@ class FreeboardsController < ApplicationController
     end
   end
 
-  # DELETE /freeboards/1
-  # DELETE /freeboards/1.xml
+  def destroy_article
+    board_id = params[:board_id].to_i
+    
+    @freeboard = Freeboard.get(board_id)
+    
+    if @freeboard.user_id == current_user.id
+      if @freeboard.destroy
+        @comments = Comment.all(:board => "freeboard", :board_id => board_id)
+        if @comments.destroy
+          render :text => "freeboard article destroy success!"
+        end
+      else
+        render :text => "freeboard article destroy failed!"
+      end
+      
+    else
+      render :text => "This article can be deleted only by owner!"
+    end
+    
+  end
+  
   def destroy
     @freeboard = Freeboard.get(params[:id])
     

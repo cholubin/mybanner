@@ -18,44 +18,24 @@
 				<li class="back-list"><a href="/freeboards?search=<%=params[:search]%>&page=<%=params[:page]%>" class="back-list">목록으로 돌아가기</a></li>
 				<% if signed_in? && current_user.id == @freeboard.user_id %>
 				<li class="edit"><%= link_to "수정", edit_freeboard_path(@freeboard.id)+"?search="+params[:search]+"&page="+params[:page] %></li>
-				<li class="delete"><%= link_to "삭제", freeboard_path, :confirm => '정말 삭제하시겠습니까?', :method => :delete %></li>
-				<% else %>
-				<li class="edit"><a href="#">수정</a></li>
-				<li class="delete"><a href="#">삭제</a></li>
-				<% end %>
+				<li class="delete"><a id="article_delete_btn">삭제</a></li>
+				<%end %>
 			</ul>
 		</div>
+		<div class="comment_list" id="comment_list">
+			
+			<% @comments.each do |comm| %>
+			<ul class="comment_article" id="comment_article_<%= comm.id.to_s %>">
+				<li class="author"><%= comm.user_name %></li>
+				<li class="date"><%= comm.updated_at.strftime('%Y-%m-%d') %></li>
+				<li class="comment"><%= comm.content.gsub("\n","<br>") %></li>
+				<% if comm.user_id == current_user.id %>
+				<li id="del_<%= comm.id %>" class="delete"><a href="#삭제">삭제</a></li>
+				<%end %>
+			</ul>
+			<%end %>
+		</div>
 		<div class="comment_list">
-			<ul class="comment_article">
-				<li class="author">궁자라장</li>
-				<li class="date">2010.06.02</li>
-				<li class="comment">M서버의 웹편집 기능이 부여된 B2B, B2C 템플릿 스토어 입니다. 웹탑프린트샵의 다양한 템플릿 중 원하는 디자인을 선택 하셔서 즉시 텍스트 정보를 수정하여 완성품을 확인 하실 수 있습니다. 누구나 인터넷을 통하여 자신의 컴퓨터(PC)에서 편집 프로그램과 폰트, 이미지가 없어도 쉽게 디자인 할 수 있습니다. M서버의 웹편집 기능이 부여된 B2B, B2C 템플릿 스토어 입니다.</li>
-				<li class="delete"><a href="#삭제">삭제</a></li>
-			</ul>
-			<ul class="comment_article">
-				<li class="author">궁자라장</li>
-				<li class="date">2010.06.02</li>
-				<li class="comment">M서버의 웹편집 기능이 부여된 B2B, B2C 템플릿 스토어 입니다. 웹탑프린트샵의 다양한 템플릿 중 원하는 디자인을 선택 하셔서 즉시 텍스트 정보를 수정하여 완성품을 확인 하실 수 있습니다. 누구나 인터넷을 통하여 자신의 컴퓨터(PC)에서 편집 프로그램과 폰트, 이미지가 없어도 쉽게 디자인 할 수 있습니다. M서버의 웹편집 기능이 부여된 B2B, B2C 템플릿 스토어 입니다.</li>
-				<li class="delete"><a href="#삭제">삭제</a></li>
-			</ul>
-			<ul class="comment_article">
-				<li class="author">궁자라장</li>
-				<li class="date">2010.06.02</li>
-				<li class="comment">M서버의 웹편집 기능이 부여된 B2B, B2C 템플릿 스토어 입니다. 웹탑프린트샵의 다양한 템플릿 중 원하는 디자인을 선택 하셔서 즉시 텍스트 정보를 수정하여 완성품을 확인 하실 수 있습니다. 누구나 인터넷을 통하여 자신의 컴퓨터(PC)에서 편집 프로그램과 폰트, 이미지가 없어도 쉽게 디자인 할 수 있습니다. M서버의 웹편집 기능이 부여된 B2B, B2C 템플릿 스토어 입니다.</li>
-				<li class="delete"><a href="#삭제">삭제</a></li>
-			</ul>
-			<ul class="comment_article">
-				<li class="author">궁자라장</li>
-				<li class="date">2010.06.02</li>
-				<li class="comment">M서버의 웹편집 기능이 부여된 B2B, B2C 템플릿 스토어 입니다. 웹탑프린트샵의 다양한 템플릿 중 원하는 디자인을 선택 하셔서 즉시 텍스트 정보를 수정하여 완성품을 확인 하실 수 있습니다. 누구나 인터넷을 통하여 자신의 컴퓨터(PC)에서 편집 프로그램과 폰트, 이미지가 없어도 쉽게 디자인 할 수 있습니다. M서버의 웹편집 기능이 부여된 B2B, B2C 템플릿 스토어 입니다.</li>
-				<li class="delete"><a href="#삭제">삭제</a></li>
-			</ul>
-			<ul class="comment_article">
-				<li class="author">궁자라장</li>
-				<li class="date">2010.06.02</li>
-				<li class="comment">그냥 해</li>
-				<li class="delete"><a href="#삭제">삭제</a></li>
-			</ul>
 			<form>
 			<fieldset>
 				<h5>댓글 작성 </h5>
@@ -66,23 +46,78 @@
 				<div class="actions"><a href="#등록하기" class="submit_button"><input type="submit" value="등록하기"/></a><a href="#다시쓰기" class="reset_button"><input type="reset" value="다시쓰기"/></a></div>
 			</fieldset>
 			</form>
+			
+			<div class="actions">
+				<h4>게시판 동작</h4>
+				<ul>
+					<% if signed_in? && current_user.id == @freeboard.user_id %>
+					<li class="edit"><%= link_to "수정", edit_freeboard_path(@freeboard.id)+"?search="+params[:search]+"&page="+params[:page] %></li>
+					<li id="article_delete_btn" class="delete"><a id="article_delete_btn">삭제</a></li>
+					<% end %>
+				</ul>
+			</div>
 		</div>
-		<div class="actions">
-			<h4>게시판 동작</h4>
-			<ul>
-				<% if signed_in? && current_user.id == @freeboard.user_id %>
-				<li class="edit"><%= link_to "수정", edit_freeboard_path(@freeboard.id)+"?search="+params[:search]+"&page="+params[:page] %></li>
-				<li class="delete"><%= link_to "삭제", freeboard_path, :confirm => '정말 삭제하시겠습니까?', :method => :delete %></li>
-				<% else %>
-				<li class="edit"><a href="#">수정</a></li>
-				<li class="delete"><a href="#">삭제</a></li>
-				<% end %>
-			</ul>
-		</div>
+		
 	</div>
 	<p><a href="/freeboards?search=<%=params[:search]%>&page=<%=params[:page]%>" class="back-list">목록으로 돌아가기</a></p>
 </div>
 <script type="text/javascript">
-	$(".actions a").click(function() { alert("자신의 글이 아니면 수정, 삭제가 불가능 합니다."); return false })
+	$('.submit_button').click(function(){
+		if($('#comment').val() == ""){
+			alert("내용을 입력해 주세요!");
+			$('#comment').focus();
+		}else{
+			$.ajax({
+				data:'board=freeboard&board_id=<%= @freeboard.id.to_s %>&content='+$('#comment').val(), 
+				dataType:'script', 
+				type:'post', 
+				url:'/freeboards/create_comment',
+				success: function(request){
+					$('#comment').val("");
+					$('#comment_list').append(request);
+				}
+			});
+		}
+		
+	});
+	
+	$('.delete').live("click", function(event){
+		if( $(event.target).attr("id") == "article_delete_btn" ){
+			$board_id = "<%= @freeboard.id.to_s %>";
+			
+			if(window.confirm("정말 글을 삭제하시겠습니까?")){
+				$.ajax({
+					data:'board_id='+$board_id, 
+					dataType:'script', 
+					type:'post', 
+					url:'/freeboards/destroy_article',
+					success: function(request){
+						window.location.replace("/freeboards");
+					}
+				});
+			}else{
+				return false;
+			}
+			
+		}else{
+			$comment_id = $(this).attr("id").replace("del_","");
+
+			if(window.confirm("정말 덧글을 삭제하시겠습니까?")){
+				$.ajax({
+					data:'comment_id='+$comment_id, 
+					dataType:'script', 
+					type:'post', 
+					url:'/freeboards/destroy_comment',
+					success: function(request){
+						$('#comment_article_'+$comment_id).slideUp("slow").remove();
+					}
+				});
+			}else{
+				return false;
+			}
+		}
+		
+	})
+	
 </script>
 
