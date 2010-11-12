@@ -11,7 +11,6 @@
 					<th class="size">사이즈</th>
 					<th class="piece">수량</th>
 					<th class="price">가격</th>
-					<th class="option">옵션</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,29 +36,55 @@
 					end
 					
 					unit_price = temp.price
+					
+					# 작업 구분 by fooleaf
+					if temp.job_code == 0
+						add_class = "self-edit"
+						job_type = "사용자 편집"
+					else
+						add_class = "order-edit"
+						job_type = "편집 의뢰"
+					end
 				%>
 				<!-- 주문 품목 갯수에 따른 반복 -->
 				<tr>
-					<td class="work-type">직접작업<!-- 작업 타입 --></td>
-					<td class="item"><%= category+subcategory %><!-- 1단계 카테고리 / 2단계 카테고리 --><span class="design-code">(<%= design_no %><!-- 디자인번호 -->)</span><br/><a href="### 미리보기 JPG파일 주소 ###" class="preview">미리보기</a></td>
+					<td class="work-type <%= add_class%>"><%=job_type%></td>
+					<td class="item">
+						<p><%= category+subcategory %> <span class="design-code">(<%= design_no %>)</span></p>
+						<p class="option">현수막천/링마감</p>
+						<p class="preview"><img src="<%= temp.preview_url%>"/><a href="<%= temp.preview_url%>" class="button">미리보기</a></p></td>
 					<td class="size"><%= size %> <!-- 가로사이즈 cm x 세로 사이즈 cm --></td>
 					<td class="piece"><%= temp.quantity %>ea <!-- 갯수 ea --></td>
 					<td class="price"><%= (temp.quantity * unit_price.to_i).to_s %>원<!-- 개별가격 * 갯수 --><span>(개별: <%= unit_price %>원)<!-- 개별가격 --></span></td>
-					<td class="option">
-						<h5>옵션</h5>
-						<ul>
-							<!-- 옵션갯수에 따른 반복 -->
-							<li><strong>소재<!-- 옵션 제목 --></strong> 현수막천<!-- 옵션 내용 --></li>
-							<li><strong>후가공<!-- 옵션 제목 --></strong> 링마감<!-- 옵션 내용 --></li>
-							<!-- 옵션갯수에 따른 반복 -->
-						</ul>
-					</td>
 				</tr>
 				<!-- 주문 품목에 따른 반복 -->
 				<%end %>
 				
 			</tbody>
 		</table>
+	</div>
+	<div id="order-status">
+		<h4>주문 진행상태</h4>
+		<ul>
+	<%
+	i = 0
+	while i<=6 do
+		if i == @myorder.status
+		%>
+			<li class='present'><span>현재:</span><strong><%= Basicinfo.first(:category=>"order_process", :code => i).name %></strong></li>		
+		<%
+		elsif i == @myorder.status-1
+		%>
+			<li class='prev'><span>이전:</span><%= Basicinfo.first(:category=>"order_process", :code => i).name %></li>		
+		<%		
+		elsif i == @myorder.status+1
+		%>
+			<li class='next'><span>다음:</span><%= Basicinfo.first(:category=>"order_process", :code => i).name %></li>		
+		<%
+		end
+		i+=1
+	end %>
+		</ul>
 	</div>
 	<div id="order-information">
 		<div class="receiver">
@@ -93,3 +118,19 @@
 	<div class="caption"><a href="/myorders" class="back-list">목록으로 돌아가기</a></div>
 </div>
 <%end %>
+<script type="text/javascript">
+$(".preview a").attr("class","disable");
+$(window).load(function() {
+	$(".preview a").attr("class","button");
+	$(".preview .button").click(function() { 
+		preview_img = $(this).parents(".preview").find("img");
+		defaultWidth = preview_img.width();
+		defaultHeight = preview_img.height();
+		previewWidth = parseInt($(document).width())-200;
+		ratio = previewWidth/defaultWidth;
+		previewHeight = defaultHeight*ratio;
+		quickPreview(previewWidth+40,previewHeight+40,Array("image",preview_img.attr("src"),previewWidth,previewHeight))
+		return false;
+	});
+})
+</script>

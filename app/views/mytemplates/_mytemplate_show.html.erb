@@ -19,7 +19,7 @@ end
 	<!-- 미리보기의 가로가 길면 horizon, 세로가 길면 vertical -->
 	<input type="hidden" id="tmp_total_price" value="0">
 	<input type="hidden" class="unit_price" id="unit_price_<%= my.id.to_s %>" value="<%= my.price %>">
-	
+
 	<div id="item-information" class="<%= (my.is_col == true)? "vertical":"horizon" %>">
 		<h4>미리보기</h4>
 		<div id="ie-overflow-fix">
@@ -87,6 +87,7 @@ end
 				<li class="one-order"><a href="#" id="order-button">바로 주문하기</a></li>
 				<li class="back-list"><a class="back-list" href="/mytemplates">목록으로 돌아가기</a></li>
 				<li class="zoom-scroll"><a href="#" class="reset">크기, 위치 원래대로</a> <div id="zoom-scroll"><span>◈</span></div></li>
+				<li class="zoom_message">아래 그림을 클릭하면 크게 볼 수 있습니다.</li>
 			</ul>
 		</div>
 	</div>
@@ -299,29 +300,6 @@ $("li.edit a").click(function () {
 	<% end %>
 })
 
-$('#zip_search').live("click", function(){
-	if ($('#address-search').val() == ""){
-		alert("검색어를 입력해주세요!");
-	}else{
-		$.ajax({
-			data:'dong='+ $('#address-search').val(), 
-			dataType:'script', 
-			type:'post', 
-			url:'/address/search_ajax',
-			success: function(request){
-				$("#search-address-form").fadeOut("fast");
-				$('#addr_result').html(request).change(function(){
-					// $('#zip_code').val()
-					var temp_zip = $('#address-selector option:selected').val()
-					var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,3)
-					$('#zip_code').val(zip_code);
-				});
-			}
-		});
-		$('#address-search').val("검색중입니다.");
-	}
-});
-
 
 //요청사항 접수 게시판 =================================
 $(".comment_submit").click(function(){
@@ -385,10 +363,14 @@ $(window).load(function () {
 	defaultHeight = $("#preview").height();
 	defaultX = ($("#preview-wrap").width()/2)-($("#preview").width()/2)-1;
 	defaultY = ($("#preview-wrap").height()/2)-($("#preview").height()/2)-1;
-	$("#preview").css("left",defaultX);
-	$("#preview").css("top",defaultY);
-	$("#preview").fadeIn()
-	$("#preview").draggable();
+	$("#preview").css({"left":defaultX,"top":defaultY}).fadeIn().draggable().click(function() { 
+		if($("#item-information").attr("class") == "horizon") {
+			previewWidth = parseInt($(document).width())-120;
+			ratio = previewWidth/defaultWidth;
+			previewHeight = defaultHeight*ratio;
+			quickPreview(previewWidth+40,previewHeight+40,Array("image",$(this).attr("src"),previewWidth,previewHeight))
+		}
+	});
 	$("#zoom-scroll span").draggable({axis: "x", containment: "parent", drag : function() { resizePreview(parseFloat($(this).css("left"))/88*2+1) }});
 });
 
@@ -417,7 +399,8 @@ $('#design_confirm_section').delegate('#design_confirm','click',function(){
 		return false;
 	}
 	return false;
-});
+})
+
 
 // 최종 주문하기 버튼 클릭시 프로세스 ==========================================
 $('#order_basic').live("click", function(){
@@ -472,9 +455,9 @@ $('#order_basic').live("click", function(){
 					alert("주문시 표시된 결제금액은 기본금액입니다! 옵션 선택에 따른 추가 금액에 대해선 관리자와 상담해주시기 바랍니다!");
 					alert("주문번호: "+request+" \n주문절차가 정상적으로 처리되었습니다!");	
 					$('#popup-closeButton').click();
-					window.location.replace("/mytemplates");
+					window.location.replace("/myorders");
 				}else{
-					alert("주문진행시 문제가 발생하였습니다! 관리자에게 문의하여 주시기 바랍니다.");	
+					alert("주문진행시 문제가 발생하였습니다!\n관리자에게 문의하여 주시기 바랍니다.");	
 				}
 			}
 		});
@@ -514,6 +497,7 @@ $('#address-search').live("keydown", function(event){
 		return false;
 	}	
 })
+
 $('#zip_search').live("click", function(){
 	if ($('#address-search').val() == ""){
 		alert("검색어를 입력해주세요!");
@@ -527,13 +511,18 @@ $('#zip_search').live("click", function(){
 				$("#search-address-form").fadeOut("fast");
 				$('#addr_result').html(request).change(function(){
 					// $('#zip_code').val()
-					var temp_zip = $('#address-selector option:selected').val()
-					var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,3)
-					$('#zip_code').val(zip_code);
+					if($('#address-selector option:selected').val() == "research"){
+						$('#address-search').val("");
+						$("#search-address-form").fadeIn("fast");
+						$('#address-search').focus();
+					}else{
+						var temp_zip = $('#address-selector option:selected').val();
+						var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,3)
+						$('#zip_code').val(zip_code);
+					}
 				});
 			}
 		});
-		$('#address-search').val("검색중입니다.");
 	}
 });
 </script>

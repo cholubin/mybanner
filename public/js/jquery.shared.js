@@ -165,6 +165,8 @@ function openWebTopEditor_user(user,id,href) {
 }
 
 function openWebTopEditor(user,id,href) {
+	$("body *").remove();
+	$("body").css({"margin":"0","padding":"0"})
 	if($("#webTopEditor").length == 0) {
 		$("<div id=\"webTopEditor\"><div id=\"editor_header\"><h2>WebTop Editor</h2><a href=\"#\" id=\"back_to_home\">저장하고 홈페이지로 돌아가기.</a></div></div>")
 		.css({"display":"none","background-color": "White" ,"position": "absolute","width":"100%", "z-index":"150","overflow":"hidden","top":"0","left":"0"})
@@ -194,9 +196,6 @@ function openWebTopEditor(user,id,href) {
 		if(getCookie("hide-tutorial") == "false" || getCookie("hide-tutorial") == "") openWebTopHelper();
 	})
 	$("body").css("background","#63828c");
-	$("#header").remove();
-	$("#content").remove();
-	$("#footer").remove();
 
 }
 

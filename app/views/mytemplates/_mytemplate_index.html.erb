@@ -73,7 +73,7 @@
 				<td class="price num" id="price_<%= my.id.to_s %>">
 					<%= my.price.to_i * my.quantity %>
 				</td>
-				<input type="hidden" id="tmp_total_price" value="<%= my.price * my.quantity %>">
+				<input type="hidden" id="tmp_total_price" value="0">
 				<input type="hidden" class="unit_price" id="unit_price_<%= my.id.to_s %>" value="<%= my.price %>">
 				<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= my.price %>">
 				<td class="option">
@@ -151,8 +151,9 @@
 		<h4>총 주문 금액</h4>
 		<!-- jQuery로 처리할 예정입니다. -->
 		<p class="price" id="total_price">0원</p>
-		<input id="order" type="button" value="선택한 항목 주문하기" class="submit-button">
+		<p class="temp">현재 금액은 기본금액으로 사이즈변경 및<br/>옵션에 따른 <strong>가격상담이 필요</strong>합니다!</p>
 	</div>
+	<p><a href="#" id="order">선택한 항목 주문하기</a></p>
 <% else %>
 	<div id="error-screen"><img src="/images/error/error-empty-cart.jpg" alt="바구니에 담겨진 디자인이 없습니다." width="580" height="400" /></div>
 <% end %>
@@ -285,6 +286,7 @@ $('#order').click(function(){
 			}
 		} );
 	}
+	return false
 
 });
 

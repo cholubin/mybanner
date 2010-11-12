@@ -5,7 +5,7 @@
 <% @categories.each do |category| %>
 				<li>
 					<a class="<%=(params[:category_name].to_i==category.id)?"title-on":"title"%>" href="/temps?category_name=<%= category.id %>"<%= "class='on'" if @category_name == category.name%>><%= category.name %></a>
-<% @subcategories = category.subcategories 
+<% @subcategories = category.subcategories.all(:order => [ :priority.asc ])
 if @subcategories.count !=0 %>
 					<ul>
 <% @subcategories.each do |subcategory| %>

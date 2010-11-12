@@ -1,4 +1,4 @@
-/* @override http://mac.fooleaf.com:3000/css/default.content.css */
+/* @override http://localhost:3000/css/default.content.css */
 
 div#error-screen { margin: 40px 0; }
 #faqs #error-screen { margin: 0; border: 1px solid #ddd; border-width: 0 1px 0 1px; }
@@ -187,14 +187,18 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #designcart table#designcart-list .option-select select { font-size: 11px; }
 
 #designcart #select_delivery { position: relative; margin: 10px 0 5px; padding: 10px; border: 1px solid #ccc; height: 20px; line-height: 20px;}
-#designcart #select_delivery h4 { font-size: 12px; }
-#designcart #select_delivery p { position: absolute; top: 10px; left: 380px; margin: 0; padding: 0; width: 188px; height: 20px; line-height: 20px;}
-#designcart #select_delivery p.price { left: 172px; border-right: 1px solid #ddd; text-align: right; padding-right: 10px; }
+#designcart #select_delivery h4 { position: absolute; font-size: 12px; top: 10px; left: 208px; }
+#designcart #select_delivery p { position: absolute; top: 10px; left: 10px; margin: 0; padding: 0; width: 188px; height: 20px; line-height: 20px; border-right: 1px solid #ddd;}
+#designcart #select_delivery p.price { left: 380px; text-align: right; padding-right: 10px; border: none; }
 #designcart #select_delivery select { width: 134px; }
+#designcart #order { display: block; width: 292px; height: 46px; text-indent: -5000px; margin: 0 auto; background:url("/images/content/button-select-order.png"); }
+#designcart #order:hover { background-position: -292px 0; }
+#designcart #order:active { background-position: -584px 0; }
 
 #designcart #total-price { background-color: #eee; position: relative; margin: 5px 0 10px; padding: 10px; border: 1px solid #ccc; height: 30px; }
-#designcart #total-price h4 { position: absolute; top: 10px; left: 10px; font-size: 14px;line-height: 30px; }
-#designcart #total-price .price { position: absolute; top: 10px; left:260px; font-size: 14px; margin: 0; height: 30px; line-height: 30px; width: 100px;  text-align: right;padding-right: 10px; border-right: 1px solid #ddd; }
+#designcart #total-price .temp { position: absolute; top:9px; left: 10px; padding: 0; margin: 0;width: 188px; font-size: 11px; letter-spacing: -1px; line-height: 15px; text-align: center;  border-right: 1px solid #ddd; }
+#designcart #total-price h4 { position: absolute; top: 10px; left: 208px; font-size: 14px;line-height: 30px; }
+#designcart #total-price .price { position: absolute; top: 10px; left:438px; font-size: 14px; margin: 0; height: 30px; line-height: 30px; width: 130px;  text-align: right;padding-right: 10px; }
 #designcart #total-price .submit-button { position: absolute; top: 10px; left: 380px; width: 188px; height: 30px;}
 
 #designcart-list .date .request { display: block; text-indent: -5000px; width: 47px; height: 16px; background:url("/images/content/block-status.png") no-repeat; line-height: 16px; margin: 0 auto; }
@@ -372,7 +376,9 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #order-delivery #order-list td.item { text-align: left; }
 #order-delivery #order-list td.cancel { border-right: 1px solid #ddd; }
 #order-delivery #order-list td.price { font-size: 11px; }
-#order-delivery td.item li { padding-left: 20px; line-height: 24px; background: url("/images/content/icon-cartlist-document.gif") no-repeat 0 2px; }
+#order-delivery td.item li { padding-left: 20px; line-height: 24px; background: no-repeat 0 2px; }
+#order-delivery td.item li.self-edit { background-image: url("/images/content/icon-small-self-edit.png"); }
+#order-delivery td.item li.order-edit { background-image: url("/images/content/icon-small-order-edit.png"); }
 
 #order-delivery .detail a, #order-delivery .cancel-button, #order-delivery .cancel-disable,#order-delivery .order-delete { display: block; text-indent: -5000px; width: 43px; height: 50px; }
 #order-delivery .detail a { background: url("/images/content/button-order-detail.png"); }
@@ -386,17 +392,28 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #order-detail #order-product-list h4{ display: none; }
 #order-detail #order-product-list table {width: 580px; height: 52px; background: url("/images/content/designcart-table-head.png") no-repeat; }
 #order-detail #order-product-list thead tr { height: 52px;}
-#order-detail #order-product-list th.work-type { width: 70px; }
+#order-detail #order-product-list th.work-type { width: 100px; }
 #order-detail #order-product-list th.item { width: 200px; }
-#order-detail #order-product-list th.size { width: 90px; }
-#order-detail #order-product-list th.piece { width: 60px; }
-#order-detail #order-product-list th.price { width: 100px; }
-#order-detail #order-product-list th.option { width: 60px; }
-#order-detail #order-product-list tbody td { height: 50px; }
+#order-detail #order-product-list th.size { width: 100px; }
+#order-detail #order-product-list th.piece { width: 80px; }
+#order-detail #order-product-list th.price { width: 120px; }
+#order-detail #order-product-list tbody td { height: 56px; }
 #order-detail #order-product-list td { text-align: center; border-bottom: 1px solid #ddd; }
+#order-detail #order-product-list td.work-type { text-indent: -5000px; background: no-repeat 50% 50%; }
+#order-detail #order-product-list td.work-type.order-edit { background-image: url("/images/content/icon-worktype-order.png"); }
+#order-detail #order-product-list td.work-type.self-edit { background-image: url("/images/content/icon-worktype-self.png"); }
+#order-detail #order-product-list td.item p { margin: 0; }
+#order-detail #order-product-list td.item .option { display: inline; font-size: 11px; color: #999; }
 #order-detail #order-product-list td.work-type { border-left: 1px solid #ddd; }
-#order-detail #order-product-list td.option { border-right: 1px solid #ddd; }
-#order-detail #order-product-list td.item { text-align: left; }
+#order-detail #order-product-list td.price { border-right: 1px solid #ddd; }
+#order-detail #order-product-list td.item { text-align: left; padding: 4px 0 ; }
+#order-detail #order-product-list .preview { padding: 0; margin: 0; }
+#order-detail #order-product-list .preview img { position: absolute; top: -5000px; }
+#order-detail #order-product-list .preview a { display: block; text-indent: -5000px; width: 70px; height: 19px;  }
+#order-detail #order-product-list .preview a.disable { background: url("/images/content/button-preview-disable.png") }
+#order-detail #order-product-list .preview a.button { background: url("/images/content/button-preview.png"); }
+#order-detail #order-product-list .preview a.button:hover { background-position: -70px 0; }
+#order-detail #order-product-list .preview a.button:active { background-position: -140px 0; }
 #order-detail #order-product-list td.size, #order-detail #order-product-list td.piece { font-size: 10px; font-family: tahoma;}
 #order-detail #order-product-list td.price span { display: block; font-size: 11px; color: #aaa; }
 #order-detail #order-product-list td.option ul {  display: none; }
@@ -407,6 +424,14 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #order-information .receiver h4 { background: url("/images/content/icon-orderform-receiver.png") no-repeat 8px center; }
 #order-information .delivery h4 { background: url("/images/content/icon-orderform-delivery.png") no-repeat 6px center; }
 #order-information .payment h4 { background: url("/images/content/icon-orderform-payment.png") no-repeat 7px 2px}
+#order-status ul { margin: 0; padding: 0; height: 80px; background: url("/images/content/block-order-status.png") no-repeat; border: 1px solid #ddd; border-width: 0 1px; position: relative;}
+#order-status li { margin: 0; padding: 0; width: 148px;position: absolute; display: block; text-align: center;  top: 24px; line-height: 34px;}
+#order-status li span { display: none; }
+#order-status li.present { font-size: 14px; font-weight: bold; left: 216px; top: 30px; line-height: 28px;}
+#order-status li.next { color: #999; left: 364px;}
+#order-status li.prev { color: #999; left: 68px;}
+#order-status h4 { display: none; }
+
 #order-information li { padding: 4px 0; }
 #order-information li strong { display: inline-block; width: 120px; padding-right: 14px;  text-align: right; }
 #order-detail .caption { position: relative; }

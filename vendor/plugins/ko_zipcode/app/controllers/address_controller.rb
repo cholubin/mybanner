@@ -17,9 +17,10 @@ class AddressController < ApplicationController
     @addresses = Address.search(params)    
     
     select_str = "<label for='address-selector'>주소선택</label>" +
-                "<select id='address-selector'>" +
-			          "<option value='' selected>선택해주세요.</option>" +
-			          "<option value=''>-----------------</option>"
+              "<select id='address-selector'>" +
+			        "<option value='' selected>선택해주세요.</option>" +
+			        "<option value='research'>재검색</option>" +
+			        "<option value=''>-----------------</option>"
 		
     str = ""
     @addresses.each do |f|
@@ -30,8 +31,7 @@ class AddressController < ApplicationController
   		
 		
 		select_str = select_str + str + "</select>"
-
-		
+    
     render :text => select_str
   end
 end

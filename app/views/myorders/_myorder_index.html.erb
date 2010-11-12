@@ -62,9 +62,16 @@
 								# design_no = temp.category.to_s  +"-"+ item
 								design_no = temp.category.to_s + "-" + temp_id
 							end
+					
+							# 작업 구분 by fooleaf
+							if temp.job_code == 0
+								add_class = "self-edit"
+							else
+								add_class = "order-edit"
+							end
 						%>
 						<!-- 주문 품목 반복될 부분 -->
-						<li><%= category + subcategory %> <span class="design-code">(<%= design_no %>)</span></li>
+						<li class="<%= add_class %>"><%= category + subcategory %> <span class="design-code">(<%= design_no %>)</span></li>
 						<!-- 주문 품목 반복될 부분 끝 -->
 						<%end %>
 					</ul>

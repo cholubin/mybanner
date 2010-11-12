@@ -1,0 +1,8 @@
+/* 웹탑 에디터 */
+#editor_header { height: 31px; background: url("/images/editor/header-bg.png") repeat-x; }
+#editor_header h2 { text-indent: -5000px; width: 499px; height: 31px; background: url("/images/editor/header-tab.png") no-repeat; margin: 0}
+#editor_header a#back_to_home { display: block; width: 216px; height: 27px; background: url("/images/editor/button-back-home.png") no-repeat left top; text-indent: -5000px;position: absolute; top: 4px; right: 0; }
+#editor_header a#back_to_home:hover { background-position: -216px 0; }
+#editor_header a#back_to_home:active { background-position: -432px 0; }
+#editor_footer { background: url("/images/editor/footer-bg.png") no-repeat center top; height: 44px; }
+#editor_footer img { display: block; margin: 0 auto; }
