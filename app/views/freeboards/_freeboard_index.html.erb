@@ -26,9 +26,17 @@
 					
 	
 				<% @freeboard.each do |freeboard| %>
+				<%
+				comm_cnt = Comment.all(:board => "freeboard", :board_id => freeboard.id).count
+				if comm_cnt > 0 
+					comm_str = "["+comm_cnt.to_s+"]"
+				else
+					comm_str = ""
+				end
+				%>
 		        <tr>
 		            <td class="id"><%= @page_num %></td>
-		            <td class="subject" title="<%= freeboard.title if freeboard.title.length > 90 %>"><a href="/freeboards/<%=freeboard.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= entitle(freeboard) %></a></td>
+		            <td class="subject" title="<%= freeboard.title if freeboard.title.length > 90 %>"><a href="/freeboards/<%=freeboard.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= entitle(freeboard) %> <%= comm_str %></a></td>
 					<td class="author"><%= User.first(:id => freeboard.user_id).name %></td>
 		            <td class="date"><%= freeboard.created_at.strftime('%Y.%m.%d') %></td>
 		            <td class="count"><%= freeboard.hit_cnt %></td>

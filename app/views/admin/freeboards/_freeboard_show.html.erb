@@ -2,7 +2,6 @@
 		<p1>웹탑프린트샵 자유게시판입니다.</p1>
 		<br><br>
 </div>
-<!-- <copy> -->
 	<table class="board_table">
 	    <thead class="board_thead">
 	        <tr>
@@ -11,7 +10,6 @@
 	            <td class="board_thead" width="70px"><%= @freeboard.created_at.strftime('%Y-%m-%d') %></td>
 				</tr>
 	    </thead>
-	 
 	    <tbody class="board_tbody">
 	        <tr>
 	            <td colspan="3" class="table_c">
@@ -19,15 +17,11 @@
 						<%= simple_format(@freeboard.content) %>
 					</div>
 				</td>
-				
-	            
-
 	        </tr>
-	       
 	    </tbody>
 	</table>
 	<div id="line_bottom1"></div>
-	<table width="732">
+	<table width="800">
 		<tr>
 			<td colspan="3" height="15">
 			 </tr>
@@ -42,3 +36,64 @@
 
 			</tr>
 	</table>
+	
+	<%if @comms.count > 0 %>
+		<p1>덧글</p1>
+		<div id="line_bottom1"></div>
+		<table class="board_table">
+
+		    <tbody class="board_tbody">
+				<% @comms.each do |comm| %>
+		        <tr id="comm_tr_<%= comm.id.to_s %>">
+					<td>
+						<%= comm.user_name %><br>
+						<%= comm.updated_at.strftime('%Y-%m-%d') %><br>
+						<input class="comm_del" id="comm_del_<%= comm.id.to_s %>" type="button" value="삭제">
+					</td>
+		            <td colspan="2" class="table_c">
+						<div class="notice_contents">
+							<%= simple_format(comm.content) %>
+						</div>
+					</td>
+		        </tr>
+				<%end %>
+				
+				
+		    </tbody>
+			
+		</table>
+	<%end %>
+	
+	<div class="comment_list">
+		<fieldset>
+			<h5>댓글 작성 </h5>
+			<div class="comment">
+				<label for="comment">댓글내용 <span>댓글을 작성하여 내용을 보충하거나, 답변을 등록할 수 있습니다.</span></label>
+				<textarea id="comment" name="comment" ></textarea>
+			</div>
+			<div class="actions"><a href="#등록하기" class="submit_button">
+				<input type="submit" value="등록하기"/></a>
+			</div>
+		</fieldset>
+	</div>
+	
+<script language="Javascript">	
+$('.comm_del').click(function(event){
+	$board_id = <%= @freeboard.id.to_s %>;
+	$comm_id = $(this).attr("id").replace("comm_del_","");
+
+	if( window.confirm("정말 덧글을 삭제하시겠습니까?") ){
+		$.ajax({
+			data:'comm_id='+$comm_id, 
+			dataType:'script', 
+			type:'post', 
+			url:'/admin/freeboards/comm_destroy',
+			success: function(request){
+				$('#comm_tr_'+$comm_id).remove();
+			}
+		});
+	}else{
+		return false;
+	}
+})
+</script>

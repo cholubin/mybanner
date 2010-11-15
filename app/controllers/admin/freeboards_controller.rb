@@ -30,6 +30,9 @@ class Admin::FreeboardsController < ApplicationController
       @board = "freeboard"
       @section = "show"
       
+      @comms = Comment.all(:board => "freeboard", :board_id => @freeboard.id)
+      
+      
       render 'freeboard'
     
     else
@@ -38,16 +41,31 @@ class Admin::FreeboardsController < ApplicationController
 
   end
 
-
-
-  # DELETE /freeboards/1
-  # DELETE /freeboards/1.xml
+  def comm_destroy
+    comm_id = params[:comm_id].to_i
+    
+    @comm = Comment.get(comm_id)
+    if @comm.destroy
+      puts_message "덧글이 성공적으로 삭제되었습니다!"
+      render :text => "success!"
+    else
+      puts_message "덧글의 삭제도중 오류가 발생했습니다!"
+      render :text => "failed!"
+    end
+    
+  end
+  
   def destroy
     @freeboard = Freeboard.get(params[:id])
-    
+    board_id = @freeboard.id
     # session check
     if signed_in? && @freeboard.user_id == current_user.id
-      @freeboard.destroy
+      if @freeboard.destroy
+        @comments = Comment.all(:board => "freeboard", :board_id => board_id)
+        if @comments.count > 0
+          @comments.destroy
+        end
+      end
     end
 
     respond_to do |format|
