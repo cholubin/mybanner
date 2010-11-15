@@ -1,0 +1,13 @@
+<% comm = @comm %>
+<tr id="comm_tr_<%= comm.id.to_s %>">
+	<td>
+		관리자<br>
+		<%= comm.updated_at.strftime('%Y-%m-%d') %><br>
+		<input class="comm_del" id="comm_del_<%= comm.id.to_s %>" type="button" value="삭제">
+	</td>
+    <td colspan="2" class="table_c">
+		<div class="notice_contents">
+			<%= simple_format(comm.content) %>
+		</div>
+	</td>
+</tr>

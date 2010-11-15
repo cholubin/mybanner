@@ -41,6 +41,28 @@ class Admin::FreeboardsController < ApplicationController
 
   end
 
+  def create_comment
+    board = "freeboard"
+    board_id = params[:board_id].to_i
+    content = params[:content]
+    
+    @comment = Comment.new
+    @comment.board = board
+    @comment.board_id = board_id
+    @comment.content = content
+    @comment.user_id = current_admin.id
+    @comment.is_admin = true
+    @comment.user_name = Myadmin.get(current_admin.id).name
+    
+    if @comment.save
+      @comm = @comment
+      render :partial => "comment", :object => @comm
+    else
+      render :text => "failed!" 
+    end
+    
+  end
+  
   def comm_destroy
     comm_id = params[:comm_id].to_i
     

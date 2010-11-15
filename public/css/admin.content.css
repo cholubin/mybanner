@@ -1,16 +1,9 @@
 /* 코멘트 관련 스타일 */
-.comment_list { border: 1px solid #ddd; border-width: 0 1px 0 1px; }
-.comment_list .comment_article {  padding: 10px 10px; border-top: 1px solid #fff; border-bottom: 1px solid #ddd; position: relative; background: #eee url("/images/board/block-comment-bg.png") repeat-x left top;}
-.comment_list .comment_article li.author { position: absolute; top: 14px; font-size: 11px; }
-.comment_list .comment_article li.date { position: absolute; top: 30px; font-size: 11px; color: #aaa; }
-.comment_list .comment_article li.delete { position: absolute; top: 50px; }
-.comment_list .comment_article li.delete a { width: 22px; height: 15px; display: block; text-indent: -5000px; background: url("/images/content/button-mini-delete.png"); }
-.comment_list .comment_article li.comment { padding: 0 10px 0 100px; min-height: 56px; height:auto !important; height:56px; line-height: 140%; }
 
-.comment_list fieldset { margin: 0; padding: 0; border: 0; background: #eee; padding:15px 20px 10px; border-top: 1px solid #fff; }
+.comment_list fieldset { width:770px; background: #333333; padding:15px 20px 10px 0px; border: 2px solid #92B64F; }
 .comment_list fieldset h5 { display: none; }
-.comment_list fieldset .actions { width: 213px; height: 31px; margin: 10px auto 0;  background: none; padding: 0; }
+.comment_list fieldset .actions { text-align:right; width:700px; height: 31px; margin: 10px auto 0;  background: none; padding: 0; }
 .comment_list fieldset .actions:after {content:" "; display:block; clear:both;}
-.comment_list fieldset .comment label { font-weight: bold; }
+.comment_list fieldset .comment label { padding: 0 0 0 20px; font-weight: bold; }
 .comment_list fieldset .comment span { font-size: 11px; color: #999; letter-spacing: -1px; font-weight: normal; }
-.comment_list fieldset .comment textarea { height: 120px; width: 530px; margin: 10px 0 0;display: block; }
+.comment_list fieldset .comment textarea { height: 120px; width: 750px; margin: 10px 0 10 20px;display: block; }

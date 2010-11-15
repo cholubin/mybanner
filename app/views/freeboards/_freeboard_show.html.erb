@@ -26,10 +26,17 @@
 			
 			<% @comments.each do |comm| %>
 			<ul class="comment_article" id="comment_article_<%= comm.id.to_s %>">
-				<li class="author"><%= comm.user_name %></li>
+				<%
+				if comm.is_admin == true
+					writer_name = "<B>관리자</B>"
+				else
+					writer_name = comm.user_name + "("+User.get(comm.user_id).userid+")"
+				end 
+				%>
+				<li class="author"><%= writer_name %></li>
 				<li class="date"><%= comm.updated_at.strftime('%Y-%m-%d') %></li>
 				<li class="comment"><%= comm.content.gsub("\n","<br>") %></li>
-				<% if comm.user_id == current_user.id %>
+				<% if comm.user_id == current_user.id and comm.is_admin == false%>
 				<li id="del_<%= comm.id %>" class="delete"><a href="#삭제">삭제</a></li>
 				<%end %>
 			</ul>

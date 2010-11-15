@@ -40,6 +40,7 @@
 	<%if @comms.count > 0 %>
 		<p1>덧글</p1>
 		<div id="line_bottom1"></div>
+		
 		<table class="board_table">
 
 		    <tbody class="board_tbody">
@@ -57,8 +58,6 @@
 					</td>
 		        </tr>
 				<%end %>
-				
-				
 		    </tbody>
 			
 		</table>
@@ -71,14 +70,14 @@
 				<label for="comment">댓글내용 <span>댓글을 작성하여 내용을 보충하거나, 답변을 등록할 수 있습니다.</span></label>
 				<textarea id="comment" name="comment" ></textarea>
 			</div>
-			<div class="actions"><a href="#등록하기" class="submit_button">
-				<input type="submit" value="등록하기"/></a>
+			<div class="actions"><a class="submit_button">
+				<input id="comm_submit_btn" type="button" value="등록하기"/></a>
 			</div>
 		</fieldset>
 	</div>
 	
 <script language="Javascript">	
-$('.comm_del').click(function(event){
+$('.comm_del').live("click", function(){
 	$board_id = <%= @freeboard.id.to_s %>;
 	$comm_id = $(this).attr("id").replace("comm_del_","");
 
@@ -94,6 +93,27 @@ $('.comm_del').click(function(event){
 		});
 	}else{
 		return false;
+	}
+});
+
+
+$('#comm_submit_btn').click(function(){
+	$board_id = <%= @freeboard.id.to_s %>;
+	
+	if( $('#comment').val() == "" ){
+		alert("내용을 입력하세요!");
+		$('#comment').focus();
+		
+	}else{
+		$.ajax({
+			data:'content='+$('#comment').val()+'&board_id='+$board_id, 
+			dataType:'script', 
+			type:'post', 
+			url:'/admin/freeboards/create_comment',
+			success: function(request){
+				$('.board_tbody').append(request);
+			}
+		});
 	}
 })
 </script>
