@@ -52,8 +52,13 @@
 						item_array.each do |item|
 							temp_id = item
 							temp = Mytemplate.get(item.to_i)  
-							if Category.get(temp.category.to_i) != nil
-								category = Category.get(temp.category.to_i).name
+							
+							if temp.category != nil
+								if Category.get(temp.category.to_i) != nil
+									category = Category.get(temp.category.to_i).name
+								else
+									category = ""
+								end
 							else
 								category = ""
 							end
