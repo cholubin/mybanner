@@ -94,16 +94,25 @@
 	            <td class="board_tbody" /><center><a href="/admin/mytemplates/<%= mytemplate.id.to_s %>?search=<%= params[:search] %>&userid=<%= params[:userid] %>&page=<%= params[:page] %>"><%= "<img src='" + temp_image_path + "'>" if mytemplate.thumb_url %></a></center></td>
 				<td class="board_tbody" />
 					<center>
-						<%
-						if mytemplate.subcategory != nil
-							code = mytemplate.category  + "-" + mytemplate.subcategory + "-" + mytemplate.id.to_s
+						<% 
+						if mytemplate.category != nil and mytemplate.subcategory != nil
+							if Category.get(mytemplate.category) != nil and Subcategory.get(mytemplate.subcategory) != nil
+								category_str = Category.get(mytemplate.category).name + "<br>" + Subcategory.get(mytemplate.subcategory).name
+							else
+								category_str = ""
+							end
+						elsif mytemplate.category != nil and mytemplate.subcategory == nil
+							if Category.get(mytemplate.category) != nil
+								category_str = Category.get(mytemplate.category).name
+							else
+								category_str = ""
+							end
 						else
-							code = mytemplate.category  + "-" + mytemplate.id.to_s
+							category_str = ""
 						end
 						%>
 						<%= mytemplate.name + "<br>" if mytemplate.name != nil %>
-						<%= Category.get(mytemplate.category).name%>/<%= Subcategory.get(mytemplate.subcategory).name if mytemplate.subcategory != nil %>
-						<%= "<br>"+code %>
+						<%= category_str %>
 					</center></td>
 	            <td class="board_tbody" /><center><%= mytemplate.created_at.strftime('%Y-%m-%d') %></center></td>
 	            <td class="board_tbody" /><center><%= User.get(mytemplate.user_id).userid %><br>(<%= User.get(mytemplate.user_id).name %>)</center></td>

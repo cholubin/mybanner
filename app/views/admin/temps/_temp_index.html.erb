@@ -37,7 +37,7 @@
 	            <td class="board_thead" width="80px"><center>카테고리</center></td>
 	            <td class="board_thead" width="65px"><center>서브카테고리</center></td>
 	            <td class="board_thead" width="65px"><center>등록일</center></td>	
-				<td class="board_thead" width="70px"><center>복제수/조회수</center></td>
+				<td class="board_thead" width="70px"><center>복제수</center></td>
 				<td class="board_thead" width="30px"><center>삭제</center></td>				
 	        </tr>
 	    </thead>
@@ -76,7 +76,7 @@
 													</center>
 				</td>								
 	            <td class="board_tbody" width="65px"><center><%= temp.created_at.strftime('%Y-%m-%d') %></center></td>
-	            <td class="board_tbody" width="70px"><center><%= temp.copy_cnt.to_s+"/"+temp.hit_cnt.to_s %></center></td>
+	            <td class="board_tbody" width="70px"><center><%= temp.copy_cnt.to_s %></center></td>
 				<td class="board_tbody" width="30px"><center><input type="checkbox" name="chk[<%= temp.id %>]"></center></td>
 	        </tr>
 	        <% @page_num -= 1
@@ -90,7 +90,7 @@
 	<br>
 
 		<!-- dm-pager Pagination -->
-		<table width="730" >
+		<table width="800" >
 			<tr>
 				<td width="580" style="align:center">
 					<div class="pager">
