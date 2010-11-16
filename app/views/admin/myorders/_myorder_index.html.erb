@@ -77,7 +77,7 @@
 						item_array.each do |i|
 							temp_id = i
 							temp = Mytemplate.get(i.to_i)  
-							if Category.get(temp.category.to_i) != nil
+							if Mytemplate.get(i.to_i) != nil and Category.get(temp.category.to_i) != nil
 								category = Category.get(temp.category.to_i).name
 							else
 								category = ""
@@ -93,8 +93,7 @@
 								end
 							else
 								subcategory = ""
-								# design_no = temp.category.to_s  +"-"+ item
-								design_no = temp.category.to_s + "-" + temp_id
+								design_no = temp.category.to_s  + "-" + temp_id	
 							end
 						%>
 						<!-- 주문 품목 반복될 부분 -->
