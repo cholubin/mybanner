@@ -83,7 +83,7 @@
 								category = ""
 							end
 							
-							if temp.subcategory != nil
+							if Mytemplate.get(i.to_i) != nil and temp.subcategory != nil
 								if Subcategory.get(temp.subcategory.to_i) != nil
 									subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name
 									design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + temp_id
