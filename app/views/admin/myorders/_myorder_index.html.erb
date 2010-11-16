@@ -133,9 +133,9 @@
 				<td width="350" style="align:center">
 					<div class="pager">
 					<%if params[:userid] != nil and params[:userid] != "" %>
-						<%=@myorders.all(:user_id => params[:userid].to_i).search(params[:search], params[:page]).pager.to_html "/admin/myorders?search=#{params[:search]}" %>
+						<%=Myorder.all(:user_id => params[:userid].to_i).search(params[:search], params[:page]).pager.to_html "/admin/myorders?userid=#{params[:userid]}&search=#{params[:search]}" %>
 					<%else %>
-						<%=@myorders.search(params[:search], params[:page]).pager.to_html "/admin/myorders?search=#{params[:search]}" %>
+						<%=Myorder.all().search(params[:search], params[:page]).pager.to_html "/admin/myorders?search=#{params[:search]}" %>
 					<%end %>
 					</div>
 				</td>
