@@ -1,0 +1,26 @@
+<% dl = @delivery %>
+<table class="board_table">
+    <thead class="delivery">
+        <tr>
+            <th class="board_thead" width="250px"><center>구분</center></th>
+            <td class="board_thead" width="400px"><center>가격</center></td>
+			<td class="board_thead" width="150px"><center><input type="button" class="save_all" value="배송정보 저장"></center></td>
+        </tr>
+    </thead>
+
+    <tbody class="delivery">
+        <%
+		@delivery.each do |dl|
+		%>
+		<tr class = "delivery_tr">
+            <td class="board_tbody" width="250px"><input type="text" class="gubun" id="gubun_<%= dl.id %>" value="<%= dl.name %>" style="width:250px;"></td>
+            <td class="board_tbody" width="400px"><input type="text" class="val" id="price_<%= dl.id %>" style="width:400px;" value="<%= dl.price %>"></td>
+			<td class="board_tbody" width="150px">
+				<center>
+					<input class="save" id="<%= dl.id %>" type="button" value="저장" style="display:none;">
+					<input class="del" id="del_<%= dl.id %>" type="button" value="삭제">
+				</center></td>
+        </tr>
+		<%end %>
+    </tbody>
+</table>

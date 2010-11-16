@@ -69,6 +69,53 @@ class Admin::AdmininfosController < ApplicationController
     
   end
   
+  def save_deliveries
+    category = params[:category]
+  	id = params[:ids]
+  	price = params[:price]
+  	name = params[:name]
+  	
+  	ids = id.split(",")
+  	prices = price.split("$$")
+  	names = name.split(",")
+  	
+  	puts_message "ids::::::::::" + ids.length.to_s
+  	i = 0
+  	ids.each do |id|
+  	  if id != nil and id != "" and id != "##"
+  	    delivery = Basicinfo.get(id.to_i)
+    	  delivery.name = names[i]
+    	  delivery.price = prices[i].gsub(",","").gsub("원","")
+    	  
+	    else
+	      delivery = Basicinfo.new
+	      order_max = Basicinfo.first(:category => category, :order => [:order.desc]).order + 1
+	      code_max = order_max.to_s
+	      
+	      delivery.order = order_max
+	      delivery.code = code_max
+	      delivery.category = category
+	      delivery.name = names[i]
+    	  delivery.price = prices[i].gsub(",","").gsub("원","")
+    	  
+    	  puts_message "여기!!!"
+      end
+      
+      if delivery.save
+  	    puts_message "배송정보 저장 성공!"
+  	  else
+  	    puts_message "배송정보 저장 실패!"
+  	  end
+  	  
+  	  i += 1
+  	end
+  	
+  	@delivery = Basicinfo.all(:category => "delivery", :order => [:order])  
+  	
+  	render :partial => "delivery_table"
+    
+  end
+  
   def save_admininfos
      category = params[:category]
      id = params[:ids]

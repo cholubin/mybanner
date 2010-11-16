@@ -52,11 +52,20 @@
 						item_array.each do |item|
 							temp_id = item
 							temp = Mytemplate.get(item.to_i)  
-							category = Category.get(temp.category.to_i).name
+							if Category.get(temp.category.to_i) != nil
+								category = Category.get(temp.category.to_i).name
+							else
+								category = ""
+							end
 							
 							if temp.subcategory != nil
-								subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name
-								design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + temp_id
+								if Subcategory.get(temp.subcategory.to_i) != nil
+									subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name
+									design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + temp_id
+								else
+									subcategory = ""
+									design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + temp_id
+								end
 							else
 								subcategory = ""
 								# design_no = temp.category.to_s  +"-"+ item

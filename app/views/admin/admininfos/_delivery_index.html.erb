@@ -3,34 +3,58 @@
 	<br>
 </div>
 
-<table class="board_table">
-    <thead class="delivery">
-        <tr>
-            <th class="board_thead" width="250px"><center>구분</center></th>
-            <td class="board_thead" width="400px"><center>가격</center></td>
-			<td class="board_thead" width="150px"><center><input type="button" class="save_all" value="배송정보 저장"></center></td>
-        </tr>
-    </thead>
+<div id="table_content">
+	<table class="board_table">
+	    <thead class="delivery">
+	        <tr>
+	            <th class="board_thead" width="250px"><center>구분</center></th>
+	            <td class="board_thead" width="400px"><center>가격</center></td>
+				<td class="board_thead" width="150px"><center><input type="button" class="save_all" value="배송정보 저장"></center></td>
+	        </tr>
+	    </thead>
  
-    <tbody class="delivery">
-        <%
-		@delivery.each do |dl|
-		%>
-		<tr>
-            <td class="board_tbody" width="250px"><input type="text" class="gubun" id="gubun_<%= dl.id %>" value="<%= dl.name %>" style="width:250px;"></td>
-            <td class="board_tbody" width="400px"><input type="text" class="val" id="price_<%= dl.id %>" style="width:400px;" value="<%= dl.price %>"></td>
-			<td class="board_tbody" width="150px"><center><input class="save" id="<%= dl.id %>" type="button" value="저장"></center></td>
-        </tr>
-		<%end %>
-    </tbody>
-</table>
-
-
+	    <tbody class="delivery">
+	        <%
+			@delivery.each do |dl|
+			%>
+			<tr class = "delivery_tr">
+	            <td class="board_tbody" width="250px"><input type="text" class="gubun" id="gubun_<%= dl.id %>" value="<%= dl.name %>" style="width:250px;"></td>
+	            <td class="board_tbody" width="400px"><input type="text" class="val" id="price_<%= dl.id %>" style="width:400px;" value="<%= dl.price %>"></td>
+				<td class="board_tbody" width="150px">
+					<center>
+						<input class="save" id="<%= dl.id %>" type="button" value="저장" style="display:none;">
+						<input class="del" id="del_<%= dl.id %>" type="button" value="삭제">
+					</center></td>
+	        </tr>
+			<%end %>
+	    </tbody>
+	</table>
+</div>
+<div style="width:800px; text-align:left;padding:5 0 0 0;">
+	<input type="button" id="add_item" value="항목추가">
+</div>
 
 <br><br>
 <br><br>
 
 <script language="Javascript">
+$('.del').live("click",function(){
+	if(window.confirm("정말 삭제하시겠습니까?")){
+		$id = 
+	}else{
+		return false;
+	}
+});
+
+$('#add_item').click(function(){
+	var $str = "<tr class = 'delivery_tr'><td class='board_tbody' width='250px'><input type='text' class='gubun' id='gubun_' value='' style='width:250px;'></td>" +
+        "<td class='board_tbody' width='400px'><input type='text' class='val' id='price_' style='width:400px;' value=''></td>" +
+		"<td class='board_tbody' width='150px'><center><input class='save' id='##' type='button' value='저장'></center></td></tr>"
+    
+	$('tbody.delivery').append($str);
+});
+
+//개별 저장 ==================================================
 $('.save').live("click",function(event){
 	$category = $(this).parents('tbody').attr("class");
 	$id = $(this).attr("id");
@@ -54,23 +78,42 @@ $('.save').live("click",function(event){
 	}
 })
 
-$('.save_all').click(function(){
+$('.save_all').live("click",function(event){
 	$category = $(this).parents('thead').attr("class");
 	$ids = "";
-	$contents = "";
+	$prices = "";
+	$gubun = "";
 	$('tbody.'+$category+' input.val').each(function(){
-		$id = $(this).attr("id").replace($category + "_","");
-		$ids += $id + ","
-		$contents += $('#'+$category+'_'+$id).val() + "$$";
+		$id = $(this).parents('tr.delivery_tr').find('input.save').attr("id");
+		$ids += $id + ",";
+
+		if($(this).parents('tr.delivery_tr').find('input.gubun').val() == ""){
+			alert("항목명을 입력해주세요!");
+			$(this).parents('tr.delivery_tr').find('input.gubun').focus();
+			return false;
+		}else{
+			$gubun += $(this).parents('tr.delivery_tr').find('input.gubun').val() + ",";
+		}
+		
+		if($(this).parents('tr.delivery_tr').find('input.val').val() == ""){
+			alert("가격을 입력해주세요!");
+			$(this).parents('tr.delivery_tr').find('input.val').focus();
+			return false;
+		}else{
+			$prices += $(this).parents('tr.delivery_tr').find('input.val').val() + "$$";
+		}
+		
+		
 	})
 	
 	$.ajax({
-		data:'category='+$category+'&contents='+$contents+'&ids='+$ids, 
+		data:'name='+$gubun+'&price='+$prices+'&category='+$category+'&ids='+$ids, 
 		dataType:'script', 
 		type:'post', 
-		url:'/admin/admininfos/save_admininfos',
+		url:'/admin/admininfos/save_deliveries',
 		success: function(request){
-			alert("저장이 완료되었습니다!");
+			$('#table_content').html(request);
+			alert("배송정보의 저장이 완료되었습니다!");
 		}
 	});
 })
