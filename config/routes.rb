@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.resources :mytemplates, :only => [:index, :show]
 
   map.namespace :admin do |admin|
-      admin.resources :folders, :mypdfs, :users, :temps, :categories, :notices, :freeboards, :myadmins, :faqs, :mytemplates, :myimages, :myorders, :coppuccinos
+      admin.resources :folders, :mypdfs, :users, :temps, :categories, :notices, :freeboards, :myadmins, :faqs, :mytemplates, :myimages, :myorders, :coppuccinos, :admininfos
   end 
   
   
