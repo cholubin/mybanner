@@ -5,7 +5,7 @@ class Admin::AdmininfosController < ApplicationController
 
   def index
     @menu = "admininfo"
-    @board = "admininfo"
+    @board = "basicinfo"
     @section = "index"
       
     @basicinfos = Admininfo.all(:category => "basic_info", :order => [:order])
@@ -14,6 +14,59 @@ class Admin::AdmininfosController < ApplicationController
     @logos = Admininfo.all(:category => "logo", :order => [:order])
     
     render 'admin/admininfos/admininfo', :layout => false
+  end
+  
+  
+  def delivery_index
+    @menu = "admininfo"
+    @board = "delivery"
+    @section = "index"
+      
+    @delivery = Basicinfo.all(:category => "delivery", :order => [:order])
+    
+    render 'admin/admininfos/admininfo', :layout => false
+  end
+  
+  def save_delivery
+    category = params[:category]
+  	id = params[:id]
+  	price = params[:price].gsub(",","").gsub("원","")
+  	gubun = params[:gubun]
+  	
+  	if id == "" or id == nil
+  	  @delivery = Basicinfo.new
+  	  max_order = Basicinfo.first(:category => category, :order => [:order.desc]).order + 1
+  	  max_code = Basicinfo.first(:category => category, :order => [:order.desc]).code.to_i + 1
+  	  @delivery.order = max_order
+  	  @delivery.code = max_code.to_s
+  	  
+  	  @delivery.category = category
+  	  @delivery.price = price
+  	  @delivery.name = gubun
+  	  
+  	  if @delivery.save
+  	    puts_message "배송정보 저장 성공!"
+  	    render :text => "success"
+  	  else
+  	    puts_message "배송정보 저장 실패!"
+  	    render :text => "failed"
+  	  end
+  	  
+	  else
+	    @delivery = Basicinfo.get(id.to_i)
+	    
+  	  @delivery.price = price
+  	  @delivery.name = gubun
+  	  
+  	  if @delivery.save
+  	    puts_message "배송정보 저장 성공!"
+  	    render :text => "success"
+  	  else
+  	    puts_message "배송정보 저장 실패!"
+  	    render :text => "failed"
+  	  end
+    end
+    
   end
   
   def save_admininfos

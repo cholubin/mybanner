@@ -36,11 +36,21 @@
 			@temp = 1 
 			@mytemplates.each do |my| 
 				if my.subcategory != nil
-					category_info = Category.get(my.category.to_i).name + "/" + Subcategory.get(my.subcategory.to_i).name
-					sn_num = my.category  + "-" + my.subcategory + "-" + my.id.to_s
+					if Category.get(my.category.to_i) != nil and Subcategory.get(my.subcategory.to_i) != nil
+						category_info = Category.get(my.category.to_i).name + "/" + Subcategory.get(my.subcategory.to_i).name
+						sn_num = my.category  + "-" + my.subcategory + "-" + my.id.to_s
+					else
+						category_info = "분류정보 없음"
+						sn_num = my.category  + "-" + my.subcategory + "-" + my.id.to_s
+					end
 				else
-					category_info = Category.get(my.category.to_i).name	
-					sn_num = my.category  + "-" + my.id.to_s
+					if Category.get(my.category.to_i) != nil
+						category_info = Category.get(my.category.to_i).name	
+						sn_num = my.category  + "-" + my.id.to_s
+					else
+						category_info = "분류정보 없음"
+						sn_num = my.category  + "-" + my.id.to_s
+					end
 				end
 			%>
 			<tr id="<%= my.id.to_s %>" class="item">

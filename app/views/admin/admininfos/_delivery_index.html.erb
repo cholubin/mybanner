@@ -1,0 +1,77 @@
+<div id="feature_wrapper">
+	<p1>배송정보</p1>
+	<br>
+</div>
+
+<table class="board_table">
+    <thead class="delivery">
+        <tr>
+            <th class="board_thead" width="250px"><center>구분</center></th>
+            <td class="board_thead" width="400px"><center>가격</center></td>
+			<td class="board_thead" width="150px"><center><input type="button" class="save_all" value="배송정보 저장"></center></td>
+        </tr>
+    </thead>
+ 
+    <tbody class="delivery">
+        <%
+		@delivery.each do |dl|
+		%>
+		<tr>
+            <td class="board_tbody" width="250px"><input type="text" class="gubun" id="gubun_<%= dl.id %>" value="<%= dl.name %>" style="width:250px;"></td>
+            <td class="board_tbody" width="400px"><input type="text" class="val" id="price_<%= dl.id %>" style="width:400px;" value="<%= dl.price %>"></td>
+			<td class="board_tbody" width="150px"><center><input class="save" id="<%= dl.id %>" type="button" value="저장"></center></td>
+        </tr>
+		<%end %>
+    </tbody>
+</table>
+
+
+
+<br><br>
+<br><br>
+
+<script language="Javascript">
+$('.save').live("click",function(event){
+	$category = $(this).parents('tbody').attr("class");
+	$id = $(this).attr("id");
+	$price = $('#price_'+$id).val();
+	$gubun = $('#gubun_'+$id).val();
+	
+	if ($gubun == ""){
+		alert("배송항목을 입력해 주세요!");
+		$('#gubun'+$id).val().focus();
+		return false;
+	}else{
+		$.ajax({
+			data:'category='+$category+'&id='+$id+'&price='+$price+'&gubun='+$gubun, 
+			dataType:'script', 
+			type:'post', 
+			url:'/admin/admininfos/save_delivery',
+			success: function(request){
+				alert("저장이 완료되었습니다!");
+			}
+		});
+	}
+})
+
+$('.save_all').click(function(){
+	$category = $(this).parents('thead').attr("class");
+	$ids = "";
+	$contents = "";
+	$('tbody.'+$category+' input.val').each(function(){
+		$id = $(this).attr("id").replace($category + "_","");
+		$ids += $id + ","
+		$contents += $('#'+$category+'_'+$id).val() + "$$";
+	})
+	
+	$.ajax({
+		data:'category='+$category+'&contents='+$contents+'&ids='+$ids, 
+		dataType:'script', 
+		type:'post', 
+		url:'/admin/admininfos/save_admininfos',
+		success: function(request){
+			alert("저장이 완료되었습니다!");
+		}
+	});
+})
+</script>
