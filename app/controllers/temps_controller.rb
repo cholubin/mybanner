@@ -61,8 +61,7 @@ class TempsController < ApplicationController
       elsif  @subcategory_name != nil
         @temps = Temp.all(:is_col => is_col, :subcategory => @subcategory_name).search(params[:search], params[:page])      
       else
-        @category_id = Category.first(:priority => 1).id.to_s
-        @temps = Temp.all(:is_col => is_col, :category => @category_id).search(params[:search], params[:page])      
+        @temps = Temp.all(:is_col => is_col).search(params[:search], params[:page])      
       end
       @total_count = Temp.all(:is_col => is_col).search(params[:search],"").count      
     end
