@@ -22,7 +22,7 @@ class Basicinfo
   property :disable,      Boolean, :default => false
   property :is_default,   Boolean, :default => false
   timestamps :at
-
+  
   def self.up
     if Basicinfo.all(:category => "order_process").count < 1
       Basicinfo.new(:code => "0", :name => "접수완료", :category => "order_process", :info => "최초 주문상태", :order => 1).save

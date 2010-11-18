@@ -89,7 +89,7 @@ class Admin::AdmininfosController < ApplicationController
     	  
 	    else
 	      delivery = Basicinfo.new
-	      order_max = Basicinfo.first(:category => category, :order => [:order.desc]).order + 1
+	      order_max = Basicinfo.all(:category => category).count + 1
 	      code_max = order_max.to_s
 	      
 	      delivery.order = order_max
@@ -153,6 +153,19 @@ class Admin::AdmininfosController < ApplicationController
        puts_message "저장실패!"
        render :text => "failed"
      end
+  end
+  
+  def destroy_delivery
+    category = params[:category]
+    id = params[:id]
+    
+    @delivery = Basicinfo.get(id)
+    
+    if @delivery.destroy
+      render :text => "success"
+    else
+      render :text => "failed"
+    end
   end
   
 end

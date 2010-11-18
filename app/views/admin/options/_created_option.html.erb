@@ -1,0 +1,34 @@
+<%
+option = @option %>
+<script>
+var html_str = "<li id='cate_<%= option.id.to_s %>' class='main-category-list'>" +
+				"<h4 id='cate_name_<%= option.id.to_s %>'><%= option.name %></h4>" +
+				"<p class='main-category-action'><a id='cate-edit_<%= option.id.to_s %>' class='edit'>수정</a><a id='cate-del_<%= option.id.to_s %>' class='delete'>삭제</a></p>"+
+				"<ul id='sortables_<%= option.id.to_s %>'>"+
+				"</ul>"+
+				"<fieldset class='sub-write-form'>"+ 
+					"<legend>서브 카테고리 추가</legend>"+
+					"<label for='suboption-write_<%= option.id.to_s %>'>카테고리명</label>"+
+					"<input type='text' name='suboption_name' id='suboption-write_<%= option.id.to_s %>' class='textfield'  placeholder='서브 카테고리명 입력'/>"+
+					"<input id='add_suboption_<%= option.id.to_s %>' class='submit' type='button' value='추가'/>"+
+				"</fieldset>"+
+				"</li>";
+
+$('#sortables').prepend(html_str);
+
+$('#main-category-write').val("");
+
+$('#add_suboption_<%= option.id.to_s %>').click(function() {
+	if ($('#suboption-write_<%= option.id.to_s %>').val() == ""){
+		alert("카테고리명을 입력하세요~");
+	}else{
+		$.ajax({
+			data:'option_id=<%= option.id.to_s %>&suboption_name='+ $('#suboption-write_<%= option.id.to_s %>').val(), 
+			dataType:'script', 
+			type:'post', 
+			url:'/admin/categories/add_suboption'
+		});	
+	}
+});
+				
+</script>

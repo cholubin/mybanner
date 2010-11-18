@@ -26,7 +26,7 @@
 						<input class="del" id="del_<%= dl.id %>" type="button" value="삭제">
 					</center></td>
 	        </tr>
-			<%end %>
+			<%end%>
 	    </tbody>
 	</table>
 </div>
@@ -38,9 +38,24 @@
 <br><br>
 
 <script language="Javascript">
-$('.del').live("click",function(){
+$('.del').live("click",function(event){
 	if(window.confirm("정말 삭제하시겠습니까?")){
-		$id = 
+		$id = $(this).attr("id").replace("del_","");
+		
+		if( $id == ""){
+			$(this).parents('tr.delivery_tr').remove();
+		}else{
+			$.ajax({
+				data:'category=delivery&id='+$id ,
+				dataType:'script', 
+				type:'post', 
+				url:'/admin/admininfos/destroy_delivery',
+				success: function(request){
+					$(event.target).parents('tr.delivery_tr').remove();
+				}
+			});
+		}
+		
 	}else{
 		return false;
 	}
@@ -49,7 +64,8 @@ $('.del').live("click",function(){
 $('#add_item').click(function(){
 	var $str = "<tr class = 'delivery_tr'><td class='board_tbody' width='250px'><input type='text' class='gubun' id='gubun_' value='' style='width:250px;'></td>" +
         "<td class='board_tbody' width='400px'><input type='text' class='val' id='price_' style='width:400px;' value=''></td>" +
-		"<td class='board_tbody' width='150px'><center><input class='save' id='##' type='button' value='저장'></center></td></tr>"
+		"<td class='board_tbody' width='150px'><center><input class='save' id='##' type='button' value='저장' style='display:none;'>"+
+		"<input class='del' id='del_' type='button' value='삭제'></center></td></tr>"
     
 	$('tbody.delivery').append($str);
 });

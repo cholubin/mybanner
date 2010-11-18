@@ -15,7 +15,7 @@ class Admininfo
   property :id,           Serial
   property :code,         String
   property :name,         String
-  property :content,      String
+  property :content,      Text
   property :info,         Text
   property :order,        Integer
   property :category,     String
@@ -54,6 +54,7 @@ class Admininfo
       Admininfo.new(:code => "2", :name => "책임자 이메일", :category => "agreement", :content => "", :info => "", :order => 3).save
       Admininfo.new(:code => "3", :name => "책임자 전화번호", :category => "agreement", :content => "", :info => "", :order => 4).save
       Admininfo.new(:code => "4", :name => "책임자 팩스번호", :category => "agreement", :content => "", :info => "", :order => 5).save
+      Admininfo.new(:code => "5", :name => "개인정보약관 제정일", :category => "agreement", :content => "", :info => "", :order => 6).save
     end
     
     # 결제 설정 ========================================================================================================

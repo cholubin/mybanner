@@ -1,0 +1,33 @@
+<%
+option_id = @option_id
+optionsub = @optionsub %>
+<script>
+var html_str = "<li id='subcate_<%= optionsub.id.to_s %>' class='sub-category-list'>"+
+				"<h5 id='subcate_name_<%= optionsub.id.to_s %>'><%= optionsub.name %></h5>"+
+				"<p class='sub-category-action'><a id='subcate-edit_<%= optionsub.id.to_s %>'"+ "class='edit'>수정</a><a id='subcate-del_<%= optionsub.id.to_s %>' class='delete'>삭제</a></p>"+
+				"</li>";
+$('#sortables_<%= option_id %>').append(html_str);
+
+$('#optionsub-write_<%= @option_id %>').val("");
+
+$("#sortables_<%= option_id.to_s %>").sortable({
+   update: function(event, ui) { 
+	<%= remote_function(:url  => {:action => "optionsub_order_update"},:with => "'option_id=#{option_id.to_s}&optionsub_id='+result_option_#{option_id.to_s}()") %>
+	}
+});
+
+ $(function() {
+    $("#sortables_<%= option_id.to_s %>").sortable({axis: 'y' });
+ });
+				
+function result_option_<%= option_id.to_s %>(){
+  var result = new Array();
+  result = $('#sortables_<%= option_id.to_s %>').sortable('toArray');
+  return result;
+}
+				
+</script>
+
+
+
+

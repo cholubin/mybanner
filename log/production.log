@@ -1457,3 +1457,60 @@ Processing PagesController#home (for 127.0.0.1 at 2010-10-11 13:30:33) [GET]
 Rendering template within layouts/application
 Rendering pages/home
 Completed in 15ms (View: 10 | 200 OK [http://localhost/]
+
+
+Processing Admin::AdmininfosController#index (for 127.0.0.1 at 2010-11-18 12:24:32) [GET]
+Rendering admin/admininfos/admininfo
+Completed in 28ms (View: 22 | 200 OK [http://localhost/admin/admininfos]
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2010-11-18 12:24:35) [GET]
+Rendering admin/options/option
+
+ActionView::TemplateError (Missing template /admin/optoins/_option_index.erb in view path app/views:vendor/plugins/paygate/app/views:vendor/plugins/ko_zipcode/app/views) on line #46 of app/views/admin/options/option.html.erb:
+43: 				<div class="box">
+44: 						<div id="admin_contents">
+45: 							<div id="admincontents_wrapper">
+46: 								<%= render :partial => "/admin/optoins/#{@board}_#{@section}" %>
+47: 							</div>
+48: 						</div>
+49: 					</div>
+
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/admin/options/option.html.erb:46
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/admin/options_controller.rb:14:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2010-11-18 12:25:33) [GET]
+Rendering admin/options/option
+
+ActionView::TemplateError (Missing template /admin/optoins/_option_index.erb in view path app/views:vendor/plugins/paygate/app/views:vendor/plugins/ko_zipcode/app/views) on line #46 of app/views/admin/options/option.html.erb:
+43: 				<div class="box">
+44: 						<div id="admin_contents">
+45: 							<div id="admincontents_wrapper">
+46: 								<%= render :partial => "/admin/optoins/#{@board}_#{@section}" %>
+47: 							</div>
+48: 						</div>
+49: 					</div>
+
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/admin/options/option.html.erb:46
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/admin/options_controller.rb:14:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)

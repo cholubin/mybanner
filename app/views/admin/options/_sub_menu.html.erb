@@ -1,0 +1,5 @@
+<ul id="nav">
+	<li><a <%= "Class=\"on\"" if @board == "basicinfo" %> href="/admin/admininfos">기본정보</a></li>
+	<li><a <%= "Class=\"on\"" if @section == "delivery" %> href="/admin/admininfos/delivery_index">배송정보</a></li>
+	<li><a <%= "Class=\"on\"" if @section == "option" %> href="/admin/options">옵션정보</a></li>
+</ul>
