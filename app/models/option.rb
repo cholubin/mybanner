@@ -13,7 +13,7 @@ class Option
   # Attributes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   property :id,           Serial
   property :name,         String 
-  property :order,        Integer
+  property :priority,     Integer
 
   timestamps :at
 end

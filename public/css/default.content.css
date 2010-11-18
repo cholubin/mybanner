@@ -408,7 +408,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #order-detail #order-product-list td.price { border-right: 1px solid #ddd; }
 #order-detail #order-product-list td.item { text-align: left; padding: 4px 0 ; }
 #order-detail #order-product-list .preview { padding: 0; margin: 0; }
-#order-detail #order-product-list .preview img { position: absolute; top: -5000px; }
+#order-detail #order-product-list .preview img { position: absolute; top: -5000px; left: -5000px }
 #order-detail #order-product-list .preview a { display: block; text-indent: -5000px; width: 70px; height: 19px;  }
 #order-detail #order-product-list .preview a.disable { background: url("/images/content/button-preview-disable.png") }
 #order-detail #order-product-list .preview a.button { background: url("/images/content/button-preview.png"); }

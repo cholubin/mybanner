@@ -365,16 +365,24 @@ $(function () {
 	$("body").delegate(".ajax-edit","click", function() { popupView(360,330,$(this).attr("href")); return false }); 
 	$("body").delegate(".ajax-myimages","click", function() { popupView(798,554,$(this).attr("href")); return false }); // 차후 김현수 과장과 합칠때 확인 할것!
 	$("body").delegate("li.preview a","click",function() { quickPreview(740,540,$(this).attr("href"),"ajaxloadpage"); return false })
-	$("body").delegate(".ajax-withdraw","click", function() { popupView(380,310,$(this).attr("href")); return false });
+	$("body").delegate(".withdraw","click", function() { popupView(380,310,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-edit-order","click", function() { popupView(620,340,$(this).attr("href")); return false });
 	$(".tempskin").click(function() { skin(1) });
+	
 	skin();
 	$.preloadCssImages();
-	$.localScroll();
 });
 
 $(window).load(function() {
+	// 메인이미지 로드
 	mainImageChange(0);
+	
+	
+	// 제품카테고리 영역이 컨텐츠 영역을 넘을때 컨텐츠 크기 늘려주기
+	if($("#category").length == 1 && $(".content-layout").height() <= $("#category").height())
+		$(".content-layout").css("cssText","height :"+($("#category").height()-10)+"px !important");
+	else if($(".content-layout").height() <= $("#submenu").height())
+		$(".content-layout").css("cssText","height :"+($("#submenu").height()-10)+"px !important");
 })
 $(window).resize(function() { repositionViews() })
 $(window).scroll(function() { repositionViews() })

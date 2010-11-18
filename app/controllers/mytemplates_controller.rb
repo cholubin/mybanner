@@ -495,20 +495,11 @@ class MytemplatesController < ApplicationController
     mytemp_id = params[:id].to_i
     @mytemp = Mytemplate.get(mytemp_id)
     
-    if params[:opt1] == ""
-      @mytemp.opt1 = nil
+    if params[:option] == ""
+      @mytemp.option = nil
     else
-      @mytemp.opt1 = params[:opt1].to_i
+      @mytemp.option = params[:option]
     end
-    
-    if params[:opt2] == ""
-      @mytemp.opt2 = nil
-    else
-      @mytemp.opt2 = params[:opt2].to_i
-    end
-    
-    puts_message "@mytemp.opt1.to_s:::"+@mytemp.opt1.to_s
-    puts_message "@mytemp.opt2.to_s:::"+@mytemp.opt2.to_s
     
     if @mytemp.save
       render :nothing => true

@@ -88,7 +88,7 @@
 				<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= my.price %>">
 				<td class="option">
 					<% 
-					if my.opt1 != nil or my.opt2 != nil 
+					if my.option != nil
 						sel_str = "selected"
 					else
 						sel_str = "select"
@@ -98,32 +98,30 @@
 					<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 시작 -->
 					<div class="option-select">
 						<ul>
-							<!-- 옵션 반복 시작 -->
+							<%
+							i = 0 
+							if my.option != nil
+								myopt_array = my.option.split(",") 
+							else
+								myopt_array = "$$$$$"
+							end
+							%>
+							<%Option.all(:order => [:priority]).each do |opt| %>
 							<li>
-								<label>소재</label>
-								<select id="select_main_<%= my.id.to_s %>" class="basic_select">
+								<label><%= opt.name %></label>
+								<select class="opt" id="select_<%= my.id %>">
 									<option value="" selected>선택해주세요.</option>
-									<option value="">---------------</option>
-									<%opt1 = Basicinfo.all(:category=>"option1") %>
-									<%opt1.each do |opt1| %>
-										<option value="<%= opt1.code %>" <%= "selected" if opt1.code.to_i == my.opt1 %>><%= opt1.name %></option>
-									<%end %>
-									
-									
-									<!-- 옵션내용 반복 끝 -->
+									<option value="">------------------</option>
+									<%Optionsub.all(:option_id => opt.id).each do |optsub| %>
+										<option value="<%= optsub.id %>" <%= "selected" if optsub.id.to_i == myopt_array[i].to_i %>><%= optsub.name %></option>
+									<%
+									end %>
 								</select>
 							</li>
-							<li class="no-line">
-								<label>후가공</label>
-								<select id="select_sub_<%= my.id.to_s %>">
-									<option value="" selected>선택해주세요.</option>
-									<option value="">---------------</option>
-									<%opt2 = Basicinfo.all(:category=>"option2") %>
-									<%opt2.each do |opt2| %>
-										<option value="<%= opt2.code %>" <%= "selected" if opt2.code.to_i == my.opt2 %>><%= opt2.name %></option>
-									<%end %>
-								</select>
-							</li>
+							
+							<%
+								i += 1
+							end %>
 							<!-- <li class="no-line"><a href="#" class="material">소재, 후가공 자세히 알아보기</a></li>-->
 							<li class="no-line"><input id="option_save_<%= my.id.to_s %>" type="button" value="옵션 선택 저장" class="submit-button option_save"/></li>
 							<!-- 옵션 반복 끝 -->
@@ -190,12 +188,15 @@ function popup(doc_name) {
       window.open(url ,'webtop_print','width='+width+', height='+height);
 }
 $('.option_save').live("click", function(event){
-	$id = $(this).attr("id").replace("option_save_","");
-	$opt1 = $('#select_main_'+$id + ' option:selected').val();
-	$opt2 = $('#select_sub_'+$id + ' option:selected').val();
+	var $id = $(this).attr("id").replace("option_save_","");
+	var $option = "";
+	
+	$('.opt').each(function(){
+		$option += $(this).find("option:selected").val() + ","
+	})
 	
 	$.ajax({
-		data:'opt1='+$opt1+'&opt2='+$opt2+'&id='+ $id, 
+		data:'option='+$option+'&id='+ $id, 
 		dataType:'script', 
 		type:'post', 
 		url:'/mytemplates/update_option'

@@ -38,18 +38,18 @@
 	</div>
 	<div id="footer">
 		<div id="footer-wrap">
-			<h2><img src="/images/default/copyright-default-logo.png" alt="copyright-default-logo" width="160" height="60" alt="###사이트제목###" /></h2>
+			<h2><img src="/images/default/copyright-default-logo.png" alt="<%= Admininfo.first(:category => "basic_info", :name => "회사명").content %>" width="160" height="60" alt="###사이트제목###" /></h2>
 			<address>
-				<p class="address">서울특별시 중구 충무로2가 49-17 조양빌딩 10층</p>
-				<p class="telephone">02-3406-7058</p>
-				<p class="fax">02-3406-7060</p>
-				<p class="email"><a href="mailto:dev@iedit.net">관리자에게 이메일 보내기</a></p>
+				<p class="address"><%= Admininfo.first(:category => "basic_info", :name => "회사주소").content %></p>
+				<p class="telephone"><%= Admininfo.first(:category => "basic_info", :name => "전화번호").content %></p>
+				<p class="fax"><%= Admininfo.first(:category => "basic_info", :name => "팩스번호").content %></p>
+				<p class="email"><a href="mailto:<%= Admininfo.first(:category => "basic_info", :name => "대표 이메일주소").content %>">관리자에게 이메일 보내기</a></p>
 			</address>
 			<h3>그외 정보</h3>
 			<ul>
-				<li class="business-num1"><strong>사업자등록번호 : </strong>123-34-15359</li>
-				<li class="business-num2"><strong>통신판매업번호 : </strong>중구1234-12호</li>
-				<li class="privacy"><strong>개인정보관리책임자 : </strong>정발산</li>
+				<li class="business-num1"><strong>사업자등록번호 : </strong><%= Admininfo.first(:category => "basic_info", :name => "사업자등록번호").content %></li>
+				<li class="business-num2"><strong>통신판매업번호 : </strong><%= Admininfo.first(:category => "basic_info", :name => "통신판매업번호").content %></li>
+				<li class="privacy"><strong>개인정보관리책임자 : </strong><%= Admininfo.first(:category => "agreement", :name => "책임자 성명").content %></li>
 			</ul>
 		</div>
 	</div>

@@ -63,26 +63,27 @@ class Basicinfo
       Basicinfo.new(:code => "2", :name => "신용카드", :category => "pay_method", :info => "신용카드로 결제하는 경우", :order => 3, :disable => true).save
       Basicinfo.new(:code => "3", :name => "휴대폰", :category => "pay_method", :info => "휴대폰으로 결제하는 경우", :order => 4, :disable => true).save
     end
-    
-    if Basicinfo.all(:category => "option1").count < 1
-      Basicinfo.new(:code => "0", :name => "그래픽천(현수막전용원단)", :category => "option1", :info => "", :order => 1).save
-      Basicinfo.new(:code => "1", :name => "페트(얇은플라스틱제질원단)", :category => "option1", :info => "", :order => 2).save
-      Basicinfo.new(:code => "2", :name => "합성지(점착가능원단)", :category => "option1", :info => "", :order => 3).save
-      Basicinfo.new(:code => "3", :name => "PVC켈(점착가능원단)", :category => "option1", :info => "", :order => 4).save
-      Basicinfo.new(:code => "4", :name => "부직포(어깨띠전용원단)", :category => "option1", :info => "", :order => 5).save
-      Basicinfo.new(:code => "5", :name => "폰지(디지털날염전용원단)", :category => "option1", :info => "", :order => 6).save
-    end
-    
-    if Basicinfo.all(:category => "option2").count < 1
-      Basicinfo.new(:code => "0", :name => "열재단", :category => "option2", :info => "", :order => 1).save
-      Basicinfo.new(:code => "1", :name => "사구아일렛", :category => "option2", :info => "", :order => 2).save
-      Basicinfo.new(:code => "2", :name => "막대가공", :category => "option2", :info => "", :order => 3).save
-      Basicinfo.new(:code => "3", :name => "봉미싱", :category => "option2", :info => "", :order => 4).save
-      Basicinfo.new(:code => "4", :name => "끈고리", :category => "option2", :info => "", :order => 5).save
-      Basicinfo.new(:code => "5", :name => "사방줄미싱", :category => "option2", :info => "", :order => 6).save
-      Basicinfo.new(:code => "6", :name => "큐방", :category => "option2", :info => "", :order => 7).save
-      Basicinfo.new(:code => "7", :name => "기타", :category => "option2", :info => "", :order => 8).save
-    end
+
+    # option, optoinsub 테이블로 처리 
+    # if Basicinfo.all(:category => "option1").count < 1
+    #   Basicinfo.new(:code => "0", :name => "그래픽천(현수막전용원단)", :category => "option1", :info => "", :order => 1).save
+    #   Basicinfo.new(:code => "1", :name => "페트(얇은플라스틱제질원단)", :category => "option1", :info => "", :order => 2).save
+    #   Basicinfo.new(:code => "2", :name => "합성지(점착가능원단)", :category => "option1", :info => "", :order => 3).save
+    #   Basicinfo.new(:code => "3", :name => "PVC켈(점착가능원단)", :category => "option1", :info => "", :order => 4).save
+    #   Basicinfo.new(:code => "4", :name => "부직포(어깨띠전용원단)", :category => "option1", :info => "", :order => 5).save
+    #   Basicinfo.new(:code => "5", :name => "폰지(디지털날염전용원단)", :category => "option1", :info => "", :order => 6).save
+    # end
+    # 
+    # if Basicinfo.all(:category => "option2").count < 1
+    #   Basicinfo.new(:code => "0", :name => "열재단", :category => "option2", :info => "", :order => 1).save
+    #   Basicinfo.new(:code => "1", :name => "사구아일렛", :category => "option2", :info => "", :order => 2).save
+    #   Basicinfo.new(:code => "2", :name => "막대가공", :category => "option2", :info => "", :order => 3).save
+    #   Basicinfo.new(:code => "3", :name => "봉미싱", :category => "option2", :info => "", :order => 4).save
+    #   Basicinfo.new(:code => "4", :name => "끈고리", :category => "option2", :info => "", :order => 5).save
+    #   Basicinfo.new(:code => "5", :name => "사방줄미싱", :category => "option2", :info => "", :order => 6).save
+    #   Basicinfo.new(:code => "6", :name => "큐방", :category => "option2", :info => "", :order => 7).save
+    #   Basicinfo.new(:code => "7", :name => "기타", :category => "option2", :info => "", :order => 8).save
+    # end
     
   end
   

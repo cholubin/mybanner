@@ -58,19 +58,17 @@
 						<%= category+subcategory %><!-- 1단계 카테고리 / 2단계 카테고리 --><span class="design-code">(<%= design_no %><!-- 디자인번호 -->)</span>
 						<br>
 						<%
-						if temp.opt1 != nil and temp.opt1 != ""
-							opt1 = Basicinfo.first(:category=>"option1", :code=>temp.opt1).name
-						else
-							opt1 = "선택없음"
-						end 
-						if temp.opt2 != nil and temp.opt2 != ""
-							opt2 = Basicinfo.first(:category=>"option2", :code=>temp.opt2).name
-						else
-							opt2 = "선택없음"
+						if temp.option != nil
+							opt_array = temp.option.split(",")
 						end
+						option_str = ""
+						opt_array.each do |opt|
+							opt = Optionsub.get(opt.to_i).name
+							option_str += "- " + opt + "<br>"
+						end
+						
 						%>
-							- <%= opt1 %><br>
-						    - <%= opt2 %>
+							<%= option_str %>
 					</td>
 					<td class="size"><%= size %> <!-- 가로사이즈 cm x 세로 사이즈 cm --></td>
 					<td class="piece"><%= temp.quantity %>ea <!-- 갯수 ea --></td>

@@ -1514,3 +1514,167 @@ ActionView::TemplateError (Missing template /admin/optoins/_option_index.erb in 
     /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
 
 Rendering rescues/layout (internal_server_error)
+
+
+Processing Admin::OptionsController#add_option (for 127.0.0.1 at 2010-11-18 17:34:38) [POST]
+  Parameters: {"option_name"=>"소재"}
+
+NoMethodError (undefined method `order=' for #<Option:0x00000104de2158>):
+  app/controllers/admin/options_controller.rb:195:in `add_option'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing Admin::OptionsController#add_option (for 127.0.0.1 at 2010-11-18 17:35:09) [POST]
+  Parameters: {"option_name"=>"소재"}
+
+NoMethodError (undefined method `order=' for #<Option:0x00000104e2eda0>):
+  app/controllers/admin/options_controller.rb:195:in `add_option'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing Admin::OptionsController#add_option (for 127.0.0.1 at 2010-11-18 17:35:10) [POST]
+  Parameters: {"option_name"=>"소재"}
+
+NoMethodError (undefined method `order=' for #<Option:0x00000104712ac8>):
+  app/controllers/admin/options_controller.rb:195:in `add_option'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#show (for 127.0.0.1 at 2010-11-18 18:37:45) [GET]
+  Parameters: {"cate"=>"", "page"=>"", "id"=>"410"}
+Redirected to http://localhost:3000/login
+Filter chain halted as [:authenticate_user!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/mytemplates/410?cate=&page=]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-11-18 18:37:45) [GET]
+Rendering template within layouts/application
+Rendering sessions/session
+Completed in 141ms (View: 138 | 200 OK [http://localhost/login]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-11-18 18:37:46) [GET]
+Redirected to http://localhost:3000/login
+Filter chain halted as [:authenticate_user!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/mytemplates]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2010-11-18 18:37:46) [GET]
+Redirected to http://localhost:3000/login
+Filter chain halted as [:authenticate_user!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/myorders]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-11-18 18:37:46) [GET]
+Rendering template within layouts/application
+Rendering sessions/session
+Completed in 50ms (View: 50 | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-11-18 18:37:46) [GET]
+Rendering template within layouts/application
+Rendering sessions/session
+Completed in 62ms (View: 62 | 200 OK [http://localhost/login]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-11-18 18:37:53) [POST]
+  Parameters: {"authenticity_token"=>"gTyM1NkIDFg5LmFMbS+TtWdN8NRPGBoh6ChWONY4/9w=", "session"=>{"uri"=>"", "userid"=>"cholubin", "password"=>"5972"}}
+Redirected to http://localhost:3000/
+Completed in 162ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-11-18 18:37:53) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 55ms (View: 41 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-11-18 18:38:00) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+
+ActionView::TemplateError (undefined method `opt1' for #<Mytemplate:0x00000103a062b8>) on line #91 of app/views/mytemplates/_mytemplate_index.html.erb:
+88: 				<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= my.price %>">
+89: 				<td class="option">
+90: 					<% 
+91: 					if my.opt1 != nil or my.opt2 != nil 
+92: 						sel_str = "selected"
+93: 					else
+94: 						sel_str = "select"
+
+    app/views/mytemplates/_mytemplate_index.html.erb:91:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `block in each'
+    extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+    extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:37
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:15
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:47:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2010-11-18 18:38:57) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+
+ActionView::TemplateError (undefined method `opt1' for #<Mytemplate:0x0000010382dc78>) on line #91 of app/views/mytemplates/_mytemplate_index.html.erb:
+88: 				<input type="hidden" id="price_minus_<%= my.id.to_s %>" value="<%= my.price %>">
+89: 				<td class="option">
+90: 					<% 
+91: 					if my.opt1 != nil or my.opt2 != nil 
+92: 						sel_str = "selected"
+93: 					else
+94: 						sel_str = "select"
+
+    app/views/mytemplates/_mytemplate_index.html.erb:91:in `block in _run_erb_app47views47mytemplates47_mytemplate_index46html46erb_locals_mytemplate_index_object'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:509:in `block in each'
+    extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `block in each'
+    extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+    extlib (0.9.15) lib/extlib/lazy_array.rb:413:in `each'
+    /Users/cholubin/.rvm/gems/ruby-1.9.1-p378/gems/dm-core-0.10.2/lib/dm-core/collection.rb:506:in `each'
+    app/views/mytemplates/_mytemplate_index.html.erb:37
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/views/mytemplates/mytemplate.html.erb:15
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    haml (3.0.4) lib/haml/helpers/action_view_mods.rb:13:in `render_with_haml'
+    app/controllers/mytemplates_controller.rb:47:in `index'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+    <internal:prelude>:8:in `synchronize'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+    /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)

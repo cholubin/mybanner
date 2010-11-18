@@ -9,7 +9,7 @@ class Admin::OptionsController < ApplicationController
     @board = "option"
     @section = "index"
       
-    @options = Option.all(:order => [ :order])
+    @options = Option.all(:order => [ :priority])
 
      render 'admin/options/option', :layout => false
   end
@@ -24,7 +24,7 @@ class Admin::OptionsController < ApplicationController
     @section = "show"
         
     @option = Option.get(params[:id])
-    @optionsubs = @option.optionsubs.all(:order => [ :order.asc ])
+    @optionsubs = @option.optionsubs.all(:order => [ :priority.asc ])
     
      render 'admin/options/option', :layout => false
   end
@@ -37,7 +37,7 @@ class Admin::OptionsController < ApplicationController
     @section = "new"
       
     @option = Option.new
-    @select_main_option = Option.all(:order => [ :order.asc ])  
+    @select_main_option = Option.all(:order => [ :priority.asc ])  
 
      render 'admin/options/option'
   end
@@ -60,7 +60,7 @@ class Admin::OptionsController < ApplicationController
     if params[:options][:name] != "" and params[:options][:sub_name] == ""
       @option = Option.new
       @option.name = params[:options][:name]
-      @option.order = params[:options][:order].to_i
+      @option.priority = params[:options][:priority].to_i
       
       if @option.save
         flash[:notice] = 'Main option was successfully created.'
@@ -73,7 +73,7 @@ class Admin::OptionsController < ApplicationController
       @option = Option.get(params[:options][:main_option].to_i)
       @sub_option = @Optionsub.new
       @sub_option.name = params[:options][:sub_name]
-      @sub_option.order = params[:options][:sub_order].to_i
+      @sub_option.priority = params[:options][:sub_order].to_i
 
       if @sub_option.save
         flash[:notice] = 'Sub option was successfully created.'
@@ -98,7 +98,7 @@ class Admin::OptionsController < ApplicationController
     @option = Option.get(params[:id])
     
     @option.name = params[:option][:name]
-    @option.order = params[:option][:order].to_i
+    @option.priority = params[:option][:priority].to_i
         
       if @option.save
         redirect_to (admin_option_url)
@@ -143,11 +143,13 @@ class Admin::OptionsController < ApplicationController
     if !option_id.nil? 
       i = 1
       option_id.each do |c|
-        temp = c.split('_')
-        option = Option.get(temp[1].to_i)
-        option.order = i
-        option.save
-        i += 1
+        id = c.gsub("opt_","").to_i
+        if Option.get(id) != nil
+          option = Option.get(id)
+          option.priority = i
+          option.save
+          i += 1
+        end
       end
     end
 
@@ -157,14 +159,15 @@ class Admin::OptionsController < ApplicationController
 
   def optionsub_order_update
     optionsub_id = params[:optionsub_id].split(',')
-    @option = Option.get(params[:option_id].to_i)
+    @option = Option.get(params[:option_id].gsub("sortables_","").to_i)
+    puts_message @option.name
     
     if !optionsub_id.nil? 
       i = 1
       optionsub_id.each do |s|
         temp = s.split('_')
         optionsub = Optionsub.get(temp[1].to_i)
-        optionsub.order = i
+        optionsub.priority = i
         optionsub.save
         
         i += 1
@@ -178,18 +181,18 @@ class Admin::OptionsController < ApplicationController
   def add_option
     option_name = params[:option_name]
     
-    options = Option.all(:order => [:order])
+    options = Option.all(:order => [:priority])
 
     i = 2
     options.each do |c|
-      c.order = i
+      c.priority = i
       c.save
       i += 1
     end
     
     option = Option.new()
     option.name = option_name
-    option.order = 1
+    option.priority = 1
     option.save
     
     @option = option
@@ -209,7 +212,7 @@ class Admin::OptionsController < ApplicationController
 
     max_order = Optionsub.all(:option_id => @option.id).count
         
-    @optionsub.order = max_order + 1
+    @optionsub.priority = max_order + 1
     @optionsub.name = optionsub_name
     
     if @optionsub.save

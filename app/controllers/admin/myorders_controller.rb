@@ -174,9 +174,7 @@ def deleteSelection
       mytemp = Mytemplate.get(item.to_i)
       mytemp.feedback_code = 0
       mytemp.job_code = 1
-      mytemp.opt1 = nil
-      mytemp.opt2 = nil
-      mytemp.opt3 = nil
+      mytemp.option = nil
       # mytemp.size_x = nil
       # mytemp.size_y = nil
       mytemp.quantity = 1
