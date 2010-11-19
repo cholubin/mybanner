@@ -38,8 +38,6 @@ class Admin::MytemplatesController < ApplicationController
       @mytemplates = Mytemplate.all(:in_order => false, :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search(params[:search],page)
       @total_count = Mytemplate.all(:in_order => false).search(params[:search],"").count
       @subtotal_count = @mytemplates.count
-      
-      puts_message 
     end
     
     @categories = Category.all(:order => :priority)    
