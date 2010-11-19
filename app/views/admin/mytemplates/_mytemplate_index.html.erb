@@ -1,14 +1,14 @@
 <link href="/css/paginate.css" media="screen" rel="stylesheet" type="text/css" />
 
 <%
-	if params[:userid] != nil
+	if params[:userid] != nil and params[:userid] != ""
 		userid = params[:userid]
 		user = User.get(userid.to_i)
 	end
  %>
 <div id="feature_wrapper">
 		<p1>사용들자들이 선택한 템플릿 관리 페이지 입니다.</p1><br>
-		<%if params[:userid] != nil %>
+		<%if params[:userid] != nil and params[:userid] != "" %>
 			<p2><%= user.userid + "("+user.name+") 고객님의 템플릿입니다." if user.name != nil%><p2>
 		<%end %>
 		<% if ! flash[:notice].nil? %>
@@ -21,7 +21,7 @@
 	
 	<% form_tag :action => :deleteSelection, :method => 'post' do %>			
 	<%
-	if params[:userid] != nil
+	if params[:userid] != nil and params[:userid] != ""
 		count_normal = Mytemplate.all(:user_id => params[:userid], :in_order => false, :feedback_code => 6).count
 		count_ing = Mytemplate.all(:user_id => params[:userid], :in_order => false, :feedback_code => 0).count
 		count_done = Mytemplate.all(:user_id => params[:userid], :in_order => false, :feedback_code => 1).count
@@ -43,7 +43,7 @@
 			jcodes = Basicinfo.all(:category => "job_request") 
 			jcodes.each do |jc|
 			%>
-			<option value="<%= jc.code %>" <%= "selected" if jc.code == params[:jc] %>><%= jc.name %></option>
+			<option value="<%= jc.code %>" <%= "selected" if jc.code == params[:jc].to_i %>><%= jc.name %></option>
 			<%
 			end
 			%>
@@ -80,7 +80,9 @@
 				else
 					@temp_page = params[:page].to_i - 1
 				end
-				@page_num = @subtotal_count - (12 * @temp_page) %>
+				
+				@page_num = @total_count - (12 * @temp_page)
+			%>
 				
 
 			<% @mytemplates.each do |mytemplate| %>
@@ -143,11 +145,7 @@
 				<td width="230">&nbsp;</td>
 				<td width="350" style="align:center">
 					<div class="pager">
-					<%if params[:userid] != nil  %>
-						<%=Mytemplate.all(:user_id => params[:userid].to_i).fc_filter(params[:fc],params[:jc]).search2(params[:search], params[:page]).pager.to_html "/admin/mytemplates?userid=#{params[:userid]}&search=#{params[:search]}" %>					
-					<%else %>
-						<%=Mytemplate.fc_filter(params[:fc],params[:jc]).search2(params[:search], params[:page]).pager.to_html "/admin/mytemplates?search=#{params[:search]}" %>					
-					<%end %>
+						<%= @mytemplates.pager.to_html("/admin/mytemplates?userid=#{params[:userid]}&search=#{params[:search]}")  %>					
 					</div>
 				</td>
 				<td width="150" align="right">

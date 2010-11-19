@@ -21,16 +21,22 @@ class Admin::MytemplatesController < ApplicationController
       job_code = params[:jc]
     end
     
+    if params[:page] == nil or params[:page] == ""
+      page = 1
+    else
+      page = params[:page].to_i
+    end
+    
     @category_name = params[:category_name]
     @subcategory_name = params[:subcategory_name]
 
-    if params[:userid] != nil
-        @mytemplates = Mytemplate.all(:in_order => false, :user_id => params[:userid], :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search2(params[:search],params[:page])
-        @total_count = Mytemplate.all(:in_order => false, :user_id => params[:userid]).search2(params[:search],"").count
+    if params[:userid] != nil and params[:userid] != ""
+        @mytemplates = Mytemplate.all(:in_order => false, :user_id => params[:userid], :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search(params[:search],page)
+        @total_count = Mytemplate.all(:in_order => false, :user_id => params[:userid]).search(params[:search],"").count
         @subtotal_count = @mytemplates.count
     else
-      @mytemplates = Mytemplate.all(:in_order => false, :order => [:created_at.desc]).search2(params[:search],params[:page]).fc_filter(feedback_code,job_code)
-      @total_count = Mytemplate.all(:in_order => false).search2(params[:search],"").count
+      @mytemplates = Mytemplate.all(:in_order => false, :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search(params[:search],page)
+      @total_count = Mytemplate.all(:in_order => false).search(params[:search],"").count
       @subtotal_count = @mytemplates.count
     end
     
