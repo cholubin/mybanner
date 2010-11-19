@@ -54,15 +54,17 @@
 				end
 			%>
 			<tr id="<%= my.id.to_s %>" class="item">
-				<td class="check"><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>" <%= "disabled" if my.job_code == 1 %>/></td>
+				<td class="check"><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>" <%= "disabled" if my.job_code == 1 and my.job_status == Basicinfo.first(:category => "job_status", :name => "시안미확정").code %>/></td>
 				<td class="date"><a class="request code-<%=my.feedback_code%>"><%= Basicinfo.first(:category => "job_process", :code => my.feedback_code).name %></a><%= my.updated_at.strftime('%y.%m.%d') %></td>
 				<% 
 				if my.job_code == 0 
 					add_class = "self-edit"
 				elsif my.job_code == 1
-					add_class = "order-edit"
-				else
-					add_class = "order-edit-accept"
+					if my.job_status == Basicinfo.first(:category => "job_status", :name => "시안미확정").code
+						add_class = "order-edit"
+					else
+						add_class = "order-edit-accept"
+					end
 				end
 				%>
 				<td class="design <%= add_class %>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= sn_num %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>

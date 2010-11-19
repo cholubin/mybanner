@@ -90,7 +90,16 @@
 	        <tr class="table_b","board_tbody">
 	            <th class="board_tbody" /><%= @page_num %></th>
 				<th class="board_tbody" /><%= Basicinfo.first(:category=>"job_request", :code=>mytemplate.job_code).name %></th>
-				<th class="board_tbody" /><%= Basicinfo.first(:category => "job_process", :code => mytemplate.feedback_code).name %></th>
+				<th class="board_tbody" />
+					<%
+					if mytemplate.job_code == 1
+						job_status = "<br>("+Basicinfo.first(:category => "job_status", :code => mytemplate.job_status).name+")"
+					else
+						job_status = ""
+					end  
+					%>
+					<%= Basicinfo.first(:category => "job_process", :code => mytemplate.feedback_code).name + job_status%>
+				</th>
 	            <td class="board_tbody" /><center><a href="/admin/mytemplates/<%= mytemplate.id.to_s %>?search=<%= params[:search] %>&userid=<%= params[:userid] %>&page=<%= params[:page] %>"><%= "<img src='" + temp_image_path + "'>" if mytemplate.thumb_url %></a></center></td>
 				<td class="board_tbody" />
 					<center>

@@ -34,8 +34,15 @@ class Mytemplate
   property :price,                  String
   property :size_x,                 String
   property :size_y,                 String
+
+  # 템플릿 관련 피드백 게시판 코드 
   property :feedback_code,          Integer, :default => 0
+  
+  # 직접편집, 편집의뢰 
   property :job_code,               Integer, :default => 0
+  
+  # 시안 미확정, 확정 
+  property :job_status,             Integer, :default => 0
   
   #현수막용 옵션
   property :option,                 String

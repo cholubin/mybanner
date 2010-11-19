@@ -63,7 +63,7 @@
 				<th class="board_tbody" />
 					<select class="sel_status" id="sel_status_<%= myorder.id %>">
 						<%@stats.each do |s| %>
-						<option value="<%= s.code %>" <%= "selected" if s.code.to_i == myorder.status %>><%= s.name %></option>
+						<option value="<%= s.code %>" <%= "selected" if s.code == myorder.status %>><%= s.name %></option>
 						<%end %>
 						<%puts_message myorder.status.to_s %>
 					</select>

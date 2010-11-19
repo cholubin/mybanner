@@ -49,8 +49,14 @@ class MytemplatesController < ApplicationController
   
   def design_confirm
     mytemp_id = params[:mytemp_id].to_i
+    has_confirm = params[:has_confirm]
+    
     @mytemp = Mytemplate.get(mytemp_id)
-    @mytemp.job_code = 3 # job_code
+    if has_confirm == "y"
+      @mytemp.job_status = Basicinfo.first(:category => "job_status", :name => "시안확정").code
+    else
+      @mytemp.job_status = Basicinfo.first(:category => "job_status", :name => "시안미확정").code
+    end
     if @mytemp.save
       render :nothing => true
     end

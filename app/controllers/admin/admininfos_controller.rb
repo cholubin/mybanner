@@ -36,7 +36,7 @@ class Admin::AdmininfosController < ApplicationController
   	if id == "" or id == nil
   	  @delivery = Basicinfo.new
   	  max_order = Basicinfo.first(:category => category, :order => [:order.desc]).order + 1
-  	  max_code = Basicinfo.first(:category => category, :order => [:order.desc]).code.to_i + 1
+  	  max_code = Basicinfo.first(:category => category, :order => [:order.desc]).code + 1
   	  @delivery.order = max_order
   	  @delivery.code = max_code.to_s
   	  

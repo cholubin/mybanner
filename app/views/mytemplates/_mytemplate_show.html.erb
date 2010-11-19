@@ -77,10 +77,15 @@ end
 			<h4>이 품목을..</h4>
 			<ul>
 				<!-- 작업구분이 편집의뢰일때만 -->
+				<% puts_message "job_code::::" + my.job_code.to_s %>
+				<% puts_message "job_code::::" + my.job_status.to_s %>
+				
 				<% if my.job_code == 1 %>
-					<li class="accept" id="design_confirm_section"><a id="design_confirm" href="">시안확정</a></li>
-				<% elsif my.job_code == 3 %>
-					<li class="disable"><span>직접편집입니다.</span></li>
+					<% if my.job_status == Basicinfo.first(:category => "job_status", :name => "시안미확정").code %>
+						<li class="accept" id="design_confirm_section"><a id="design_confirm" href="">시안확정</a></li>
+					<% elsif  my.job_status == Basicinfo.first(:category => "job_status", :name => "시안확정").code %>
+						<li class="accept-cancel" id="design_confirm_section"><a id="design_confirm" href="#">시안확정 취소</a></li>
+					<% end %>
 				<% else %>
 					<li class="edit"><a href="#">편집하기</a></li>
 				<% end %>
@@ -374,16 +379,18 @@ $(window).load(function () {
 
 $('#design_confirm_section').delegate('#design_confirm','click',function(){
 	if($('#design_confirm_section').attr("class") == "accept") {
-		confirm_msg = "시안을 확정하시겠습니까?";
+		confirm_msg = "시안을 확정하시겠습니까? \n시안을 확정하시면 주문을 하실 수 있습니다.";
 		change_class = "accept-cancel";
+		has_confirm = "y";
 	} else {
 		confirm_msg = "시안을 확정을 취소하겠습니까?";
 		change_class = "accept";
+		has_confirm = "n";
 	}
 
 	if(window.confirm(confirm_msg)){
 		$.ajax({
-			data:'mytemp_id=<%=my.id%>', 
+			data:'has_confirm='+has_confirm+'&mytemp_id=<%=my.id%>', 
 			dataType:'script', 
 			type:'post', 
 			url:'/mytemplates/design_confirm',
