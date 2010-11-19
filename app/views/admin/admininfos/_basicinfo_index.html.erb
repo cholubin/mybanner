@@ -123,7 +123,7 @@ $('.save').live("click",function(event){
 	
 	if ($content == ""){
 		alert("내용을 입력해 주세요!");
-		$('#'+$category+'_'+$code).focus();
+		$('#'+$category+'_'+$id).focus();
 		return false;
 	}else{
 		$.ajax({
