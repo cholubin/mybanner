@@ -268,33 +268,39 @@ class Admin::TempsController < ApplicationController
         end
       end
       
-      # filename renaming ======================================================================
-      file_name = @temp.file_filename_encoded
-      
-      if file_name
-
-       if  File.exist?(file_path + file_name)
-        	File.rename file_path + file_name, file_path  + @temp.file_filename #original file
-        	@temp.zip_file = file_path  + @temp.file_filename
-        end
-      end      
-      # filename renaming ======================================================================
-              
-      begin
-        unzip_uploaded_file(@temp)
-        puts_message "unzip_uploaded_file finished!"
+      if params[:temp][:file] != nil
         
-        make_contens_xml(@temp) 
-        puts_message "make_contens_xml finished!"
+        # filename renaming ======================================================================
+        file_name = @temp.file_filename_encoded
+      
+        if file_name
+
+         if  File.exist?(file_path + file_name)
+          	File.rename file_path + file_name, file_path  + @temp.file_filename #original file
+          	@temp.zip_file = file_path  + @temp.file_filename
+          end
+        end      
+        # filename renaming ======================================================================
+              
+        begin
+          unzip_uploaded_file(@temp)
+          puts_message "unzip_uploaded_file finished!"
+        
+          make_contens_xml(@temp) 
+          puts_message "make_contens_xml finished!"
                   
-        erase_job_done_file(@temp)
-        puts_message "erase_job_done_file finished!"
+          erase_job_done_file(@temp)
+          puts_message "erase_job_done_file finished!"
                 
-        flash[:notice] = 'Temp was successfully created.'
-        redirect_to admin_temps_path
-      rescue
-        flash[:notice] = "failed to upload."  
-        puts "\n============================== \n error while processing \n ============================== \n"
+          flash[:notice] = 'Temp was successfully modified!'
+          redirect_to admin_temps_path
+        rescue
+          flash[:notice] = "failed to upload."  
+          puts "\n============================== \n error while processing \n ============================== \n"
+          redirect_to admin_temps_path
+        end
+      else
+        flash[:notice] = 'Temp was successfully modified'
         redirect_to admin_temps_path
       end
 
