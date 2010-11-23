@@ -31,8 +31,8 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #sub #submenu a.title:hover, #sub #submenu a.title-on {  background:  url(/images/content/submenu-title-icon-hover.png) no-repeat 2px center; color: #67991a; }
 #sub #submenu ul li ul { border: 1px solid #ccc; background: white; margin: 5px 0; *zoom:1; padding: 5px; border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
 #sub #submenu ul li ul:after {content:" "; display:block; clear:both;}
-#sub #submenu ul li ul li { display: inline; font-size: 11px; margin: 2px; }
-#sub #submenu ul li ul li a { display: inline-block; padding:2px 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
+#sub #submenu ul li ul li { font-size: 11px; margin: 4px 4px; padding: 0; text-align: center; }
+#sub #submenu ul li ul li a { display: block; width: 100%; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
 #sub #submenu ul li ul li a:hover, #sub #submenu ul li ul li.on a { background: #67991a; color: #67991a; color: white; }
 #sub #submenu ul li ul li a:active { background: #b0681b;color: white; }
 #sub .content-layout { padding: 10px 190px 30px; width: 580px; min-height: 650px; height: auto !important; height: 650px; }
@@ -180,10 +180,10 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #designcart table#designcart-list td.option h5 a:active { background-position: -124px; }
 #designcart table#designcart-list .option-select { position: relative; width: 70px; z-index: 99; }
 #designcart table#designcart-list .option-select ul { display: none; position: absolute; background: white; border-top: none;top:14px; left: -201px; padding: 5px 30px 25px; z-index: 99; width: 233px; height: 130px; background: url("/images/content/block-optionselect-bg.png")}
-#designcart table#designcart-list .option-select li { text-align: left; *zoom:1; line-height: 39px; border-bottom: 1px solid #ddd; }
+#designcart table#designcart-list .option-select li { text-align: left; *zoom:1; line-height: 29px; border-bottom: 1px solid #ddd; }
 #designcart table#designcart-list .option-select li:after {content:" "; display:block; clear:both;}
-#designcart table#designcart-list .option-select label { width: 40px; display: inline; text-align: right; float: left; padding-right: 14px; line-height: 39px;}
-#designcart table#designcart-list .option-select .submit-button { width: 100%; height: 32px; }
+#designcart table#designcart-list .option-select label { width: 40px; display: inline; text-align: right; float: left; padding-right: 14px; line-height: 29px;}
+#designcart table#designcart-list .option-select .submit-button { width: 233px; height: 30px; position: absolute; top: 96px; }
 #designcart table#designcart-list .option-select select { font-size: 11px; }
 
 #designcart #select_delivery { position: relative; margin: 10px 0 5px; padding: 10px; border: 1px solid #ccc; height: 20px; line-height: 20px;}
@@ -250,8 +250,8 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #item-information .item-detail-wrap .option-select_detail{ padding: 10px; padding:0; border:0; margin: 0; }
 
 /* 디자인 상세보기 가로형 */
-#item-information.horizon div.actions li.accept,#item-information.horizon div.actions li.accept-cancel, #item-information.horizon div.actions li.disable {  top: 494px; left: 40px; }
-#item-information.horizon div.actions li.one-order { top: 494px; left: 252px; }
+#item-information.horizon div.actions li.accept,#item-information.horizon div.actions li.accept-cancel, #item-information.horizon div.actions li.disable {  top: 514px; left: 40px; }
+#item-information.horizon div.actions li.one-order { top: 514px; left: 252px; }
 #item-information.horizon div.actions #zoom-scroll {  top: 3px; left: 139px; }
 #item-information.horizon div.actions li.zoom-scroll { width: 267px; background: url("/images/content/block-zoom-scroll.png") no-repeat 125px 3px; top: 326px; left: 286px; }
 #item-information.horizon div.actions li.zoom-scroll a.reset { background: url("/images/content/button-reset-size.png"); width: 115px; height: 28px; } 

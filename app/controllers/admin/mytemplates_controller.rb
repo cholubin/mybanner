@@ -173,8 +173,8 @@ class Admin::MytemplatesController < ApplicationController
   def erase_job_done_file_temp(temp)        
     job_done = temp.path + "/web/done.txt" 
 
-    time_after_3_seconds = Time.now + 3.seconds     
-     while Time.now < time_after_3_seconds
+    time_after_5_seconds = Time.now + 5.seconds     
+     while Time.now < time_after_5_seconds
        break if File.exists?(job_done)
      end
 

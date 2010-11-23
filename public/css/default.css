@@ -1,4 +1,6 @@
-/* @override http://mac.fooleaf.com:3000/css/default.css */
+/* @override 
+	http://localhost:3000/css/default.css
+*/
 
 h1,h2,h3,h4,h5,h6,ul, ol, li, form  { margin: 0; padding: 0; list-style: none}
 hr { display: none}
@@ -197,8 +199,8 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 #content #category a.title:hover {  font-size: 16px;padding-left: 18px; background:  url(/images/default/category-title-icon-hover.png) no-repeat 2px center;  }
 #content #category ul li ul { border: 1px solid #ccc; background: white; margin: 5px 0; *zoom:1; padding: 5px; border-radius:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px;}
 #content #category ul li ul:after {content:" "; display:block; clear:both;}
-#content #category ul li ul li { display: inline; font-size: 11px; margin: 2px; }
-#content #category ul li ul li a { display: inline-block; padding:2px 5px; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
+#content #category ul li ul li {  font-size: 11px; margin: 4px 4px; padding: 0; text-align: center;  }
+#content #category ul li ul li a { display: block; width: 100%; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
 #content #category ul li ul li a:hover { background: #67991a; color: white;}
 #content #category ul li ul li a:active { background: #b0681b; color: white;}
 

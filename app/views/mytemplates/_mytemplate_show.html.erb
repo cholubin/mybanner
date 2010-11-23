@@ -31,7 +31,8 @@ end
 			<h4>상세내용</h4>
 			<ul class="item-detail">
 				<li class="type"><strong class="title">구분</strong><%=(my.job_code == 0)? "직접편집":"편집의뢰" %></li>
-				<li class="item"><strong class="title">품목</strong><%= category_info %></li>
+				<li class="item"><strong class="title">품목</strong><%= Category.get(my.category.to_i).name %></li>
+				<li class="item"><strong class="title">상세품목</strong><%= Subcategory.get(my.subcategory.to_i).name %></li>
 				<li class="designcode"><strong class="title">디자인번호</strong><%= sn_num %></li>
 				<li class="size"><strong class="title">사이즈</strong><%= my.size %></li>
 				<li class="date"><strong class="title">최종수정일</strong><%= my.updated_at.strftime('%Y-%m-%d') %></li>
