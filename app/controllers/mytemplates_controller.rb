@@ -231,8 +231,8 @@ class MytemplatesController < ApplicationController
     job_done = temp.path + "/web/done.txt" 
 
   
-    time_after_3_seconds = Time.now + 3.seconds     
-    while Time.now < time_after_3_seconds
+    time_after_4_seconds = Time.now + 4.seconds     
+    while Time.now < time_after_4_seconds
       break if File.exists?(job_done)
     end
     
@@ -245,7 +245,9 @@ class MytemplatesController < ApplicationController
       puts_message "There is job done file of PDF file making!"
     end
     
-    FileUtils.remove_entry(job_done)
+    if File.exists?(job_done)
+      FileUtils.remove_entry(job_done)
+    end
 
     puts_message "erase_job_done_file"
    end
