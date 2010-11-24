@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   def home
     Basicinfo.up
     Admininfo.up
+    Request_code.up
     
     @title  = "home"
     @menu = "home"
