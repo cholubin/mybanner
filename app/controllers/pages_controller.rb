@@ -3,24 +3,8 @@
 class PagesController < ApplicationController
 
   def home
-    #DB가 완전히 초기화 된 상태에서는 /users/new 를 가장 먼저 방문!    
-     #Category.up
-     #Subcategory.up
-    # 
     Basicinfo.up
     Admininfo.up
-    
-    if Admininfo.all(:category => "agreement", :code => 5).count < 1
-      temp = Admininfo.new
-      temp.category = "agreement"
-      temp.code = 5
-      temp.name = "개인정보약관 제정일"
-      temp.save
-    elif Admininfo.all(:category => "agreement", :code => 5).count == 1
-      temp = Admininfo.all(:category => "agreement", :code => 5)
-      temp.name = "개인정보약관 제정일"
-      temp.save
-    end
     
     @title  = "home"
     @menu = "home"
