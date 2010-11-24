@@ -113,7 +113,7 @@
 						<%if bbs.admin != true %>
 							<%= User.get(bbs.user_id).name %>
 						<%else %>
-							<%= "관리자" %>
+							<%= "<img src='/images/admin/admin_icon.png'>" %>
 						<%end %>
 					</td>
 					<td class="file"><%= req_file %></td>
@@ -134,6 +134,7 @@
 	</div>
 	<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile", :class => "feedback-add"} ) do -%>
 		<input type="hidden" name="id" value="<%= @mytemplate.id.to_s %>">
+		<input type="hidden" name="user_id" value="<%= @mytemplate.user_id.to_s %>">
 		<input type="hidden" name="feedback_code" value="" id="feedback_code">
 		<fieldset>
 			<legend>요청사항 입력</legend>

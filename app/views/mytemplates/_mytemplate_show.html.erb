@@ -137,7 +137,7 @@ end
 							<%if bbs.user_id == current_user.id %>
 								<%= User.get(bbs.user_id).name %>
 							<%else%>
-								<%= "관리자" %>
+								<%= "<img src='/images/admin/admin_icon.png'>" %>
 							<%end %>
 							
 						</td>

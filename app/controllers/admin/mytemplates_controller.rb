@@ -194,12 +194,13 @@ class Admin::MytemplatesController < ApplicationController
    
    
   def jobboard_create
+    user_id = params[:user_id]
     mytemp_id = params[:id].to_s
     content = params[:feedback_memo]
     feedback_code = params[:feedback_code].to_i
 
     bbs = Jobboard.new()
-    bbs.user_id = current_admin.id
+    bbs.user_id = user_id
     bbs.content = content
     bbs.feedback_code = feedback_code
     

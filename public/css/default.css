@@ -345,3 +345,13 @@ ul.pager { width: 580px; height: 35px; background: url("/images/default/paging-b
 #sitemap li { padding: 5px 0 5px; }
 
 #sitemap .design li, #sitemap .cart li, #sitemap .delivery li { padding: 6px 10px; background: white; border: 1px solid #ccc; line-height: 160%; }
+
+
+/* 메세지 띄우기 */
+
+#nav_message { position: absolute; background: url("/images/default/block-nav-message.png"); display: none; top: -68px; left: 0; height: 68px; width: 100%; z-index: 200;}
+#nav_message div.message { width: 960px; margin: 0 auto; text-align: center; padding: 10px 0; }
+#nav_message .complate { display: block; text-indent: -5000px; background: url("/images/default/block-nav-message-complate.png") no-repeat; width: 485px; height: 33px; margin: 0 auto; }
+#nav_message a.today_hide { position: absolute; display: block; top: 13px; right: 10px; width: 129px; height: 27px; background: url("/images/default/button-today-not-show.png") no-repeat 0 0; text-indent: -5000px;  }
+#nav_message a.today_hide:hover { background-position: -129px 0; }
+#nav_message a.today_hide:active { background-position: -258px 0; }

@@ -383,6 +383,12 @@ $(window).load(function() {
 		$(".content-layout").css("cssText","height :"+($("#category").height()-10)+"px !important");
 	else if($(".content-layout").height() <= $("#submenu").height())
 		$(".content-layout").css("cssText","height :"+($("#submenu").height()-10)+"px !important");
+		
+	// #nav_message div.message에 내용이 있을경우 보여주기
+	if($("#nav_message div.message a").length && getCookie("nav_message_hide") == false) {
+		$("#nav_message").show().animate({ top:0 })
+		$("#nav_message .today_hide").click(function() { setCookie("nav_message_hide","86400");$("#nav_message").animate({ top:-68 },function() { $(this).hide() }) }) 
+	}
 })
 $(window).resize(function() { repositionViews() })
 $(window).scroll(function() { repositionViews() })
