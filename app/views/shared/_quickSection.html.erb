@@ -15,11 +15,11 @@
 				<div id="work-summary">
 					<h3>진행상태 요약</h3>
 					<ul>
-						<li class="no-line"><strong>작업확인요청</strong> <span>1건</span></li>
-						<li><strong>파일에러</strong> <span class="none">없음</span></li>
-						<li><strong>입금요청</strong> <span>1건</span></li>
-						<li><strong>제작중</strong> <span>1건</span></li>
-						<li><strong>최근출고완료</strong> <span>3건</span></li>
+						<li class="no-line"><strong>접수완료</strong> <span><%= Myorder.all(:user_id => current_user.id, :status => Basicinfo.first(:category => "order_process", :name => "접수완료").code).count %>건</span></li>
+						<li><strong>입금요청</strong> <span><%= Myorder.all(:user_id => current_user.id, :status => Basicinfo.first(:category => "order_process", :name => "입금(결제)대기").code).count %>건</span></li>
+						<li><strong>제작중</strong> <span><%= Myorder.all(:user_id => current_user.id, :status => Basicinfo.first(:category => "order_process", :name => "제작중").code).count %>건</span></li>
+						<li><strong>제작완료</strong> <span><%= Myorder.all(:user_id => current_user.id, :status => Basicinfo.first(:category => "order_process", :name => "제작완료").code).count %>건</span></li>
+						<li><strong>배송중</strong> <span><%= Myorder.all(:user_id => current_user.id, :status => Basicinfo.first(:category => "order_process", :name => "배송중").code).count %>건</span></li>
 					</ul>
 				</div>
 				<!--myinfo end -->

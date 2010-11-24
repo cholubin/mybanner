@@ -147,7 +147,9 @@
 				<td width="230">&nbsp;</td>
 				<td width="350" style="align:center">
 					<div class="pager">
-						<%= @mytemplates.pager.to_html("/admin/mytemplates?userid=#{params[:userid]}&search=#{params[:search]}")  %>					
+						<%if @mytemplates.count > 0 %>
+							<%= @mytemplates.pager.to_html("/admin/mytemplates?userid=#{params[:userid]}&search=#{params[:search]}")  %>					
+						<%end %>
 					</div>
 				</td>
 				<td width="150" align="right">

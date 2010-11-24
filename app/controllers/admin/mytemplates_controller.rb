@@ -31,12 +31,12 @@ class Admin::MytemplatesController < ApplicationController
     @subcategory_name = params[:subcategory_name]
 
     if params[:userid] != nil and params[:userid] != ""
-        @mytemplates = Mytemplate.all(:in_order => false, :user_id => params[:userid], :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search(params[:search],page)
-        @total_count = Mytemplate.all(:in_order => false, :user_id => params[:userid]).search(params[:search],"").count
+        @mytemplates = Mytemplate.all(:in_order => false, :user_id => params[:userid], :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search_admin(params[:search],page)
+        @total_count = Mytemplate.all(:in_order => false, :user_id => params[:userid]).search_admin(params[:search],"").count
         @subtotal_count = @mytemplates.count
     else
-      @mytemplates = Mytemplate.all(:in_order => false, :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search(params[:search],page)
-      @total_count = Mytemplate.all(:in_order => false).search(params[:search],"").count
+      @mytemplates = Mytemplate.all(:in_order => false, :order => [:created_at.desc]).fc_filter(feedback_code,job_code).search_admin(params[:search],page)
+      @total_count = Mytemplate.all(:in_order => false).search_admin(params[:search],"").count
       @subtotal_count = @mytemplates.count
     end
     

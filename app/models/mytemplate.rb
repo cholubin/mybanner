@@ -78,6 +78,10 @@ class Mytemplate
       Mytemplate.all(:name.like => "%#{search}%")
       # Mytemplate.all(:name.like => "%#{search}%").page( :page => page, :per_page => 12)
   end
+
+  def self.search_admin(search, page)
+      Mytemplate.all(:name.like => "%#{search}%").page( :page => page, :per_page => 12)
+  end
   
 
   def file_path   
