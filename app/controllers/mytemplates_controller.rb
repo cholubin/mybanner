@@ -465,7 +465,7 @@ class MytemplatesController < ApplicationController
     bbs.mytemp_id = mytemp_id
 
     if bbs.save
-      if params[:feedback_file] != nil
+      if params[:feedback_file] != nil and params[:feedback_file] != ""
         req_file = params[:feedback_file]
         #파일업로드
         dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
@@ -474,7 +474,6 @@ class MytemplatesController < ApplicationController
 
         uploader = ReqfileUploader.new
         
-        begin
           uploader.store!(req_file)
 
           file_ext = File.extname(req_file.original_filename)
@@ -483,10 +482,13 @@ class MytemplatesController < ApplicationController
           bbs.original_filename = req_file.original_filename
           if bbs.save
             puts_message "첨부파일 업로드 완료!"
+            puts_message "이미지 하드에도 업로드 진행!"
+            
+            @myimage = Myimage.new()
+            @myimage.user_id = current_user.id
+            
+            add_myimage(@myimage, params[:feedback_file])
           end
-        rescue
-          puts_message "첨부파일 업로드 실패!"
-        end
       end
       
       puts_message "요청게시글 등록완료!"
@@ -499,6 +501,43 @@ class MytemplatesController < ApplicationController
     render :partial => 'jbbs_body', :object => @mytemp_id
   end    
 
+  def add_myimage(myimage, myimage_image_file)
+    @myimage = myimage
+    @myimage.user_id = current_user.id
+    
+    
+    @myimage.folder_name = "photo"
+
+    image_path = @myimage.image_path
+
+    @myimage.image_file = myimage_image_file      
+    @temp_filename = sanitize_filename(myimage_image_file.original_filename)
+
+    ext_name = File.extname(@temp_filename)      
+    @myimage.type = ext_name.gsub(".",'') 
+    @myimage.name = myimage_image_file.original_filename.gsub(ext_name,"")
+      
+    if @myimage.save  
+      file_name = @myimage.id.to_s
+      @myimage.image_filename = file_name + ext_name
+
+      if ext_name == ".eps" or ext_name == ".pdf"
+        @myimage.image_thumb_filename = file_name + ".png"
+        puts %x[#{RAILS_ROOT}"/lib/thumbup" #{image_path + "/" + @myimage.image_filename} #{image_path + "/preview/" + file_name + ".png"} 0.5 #{image_path + "/thumb/" + file_name + ".png"} 128]
+      else
+        @myimage.image_thumb_filename = file_name + ".jpg"
+        puts %x[#{RAILS_ROOT}"/lib/thumbup" #{image_path + "/" + @myimage.image_filename} #{image_path + "/preview/" + file_name + ".jpg"} 0.5 #{image_path + "/thumb/" + file_name + ".jpg"} 128]            	  
+      end
+
+      if @myimage.save
+        puts_message "이미지 하드 저장 완료!"
+      else
+        puts_message "이미지 하드 저장 실패!"
+      end
+    end
+  end
+  
+  
   def update_option
     mytemp_id = params[:id].to_i
     @mytemp = Mytemplate.get(mytemp_id)
