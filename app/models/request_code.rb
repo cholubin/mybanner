@@ -35,9 +35,6 @@ class Request_code
       Request_code.new(:code => "4", :name => "선입금대기", :info => "맨 마지막 글이 관리자의 입금대기 글인 경우").save
       Request_code.new(:code => "5", :name => "선입금확인", :info => "맨마지막 글이 관리자의 입금완료 글인 경우").save
       Request_code.new(:code => "6", :name => "일반글", :info => "일반글", :gubun => "user,admin").save
-
-    else 
-      puts Request_code.first(:priority => 1).id
     end
   end
 
