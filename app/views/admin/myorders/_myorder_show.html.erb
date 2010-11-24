@@ -58,14 +58,18 @@
 						<%= category+subcategory %><!-- 1단계 카테고리 / 2단계 카테고리 --><span class="design-code">(<%= design_no %><!-- 디자인번호 -->)</span>
 						<br>
 						<%
-						if temp.option != nil
+						if temp.option != nil and temp.option != ""
 							opt_array = temp.option.split(",")
+							
+							option_str = ""
+							opt_array.each do |opt|
+								opt = Optionsub.get(opt.to_i).name
+								option_str += "- " + opt + "<br>"
+							end
+						else
+							option_str = "옵션선택 없음"
 						end
-						option_str = ""
-						opt_array.each do |opt|
-							opt = Optionsub.get(opt.to_i).name
-							option_str += "- " + opt + "<br>"
-						end
+						
 						
 						%>
 							<%= option_str %>
