@@ -165,7 +165,7 @@ $('select').live("change", function(event){
 	if($(event.target).attr("class") == "sel_status"){
 		$order_id = $(event.target).attr("id").replace("sel_status_","");
 		$selected_val = $(event.target).attr("option","selected").val();
-		$selected_text = $("select option:selected").text();
+		$selected_text = $(event.target).find("option:selected").text();
 
 		$.ajax({
 			data:'status='+$selected_val+'&order_id='+$order_id, 
