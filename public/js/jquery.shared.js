@@ -122,7 +122,7 @@ function openWebTopHelper() {
 		.appendTo("#webTopEditor")
 	}
 	if($("#webtop_helper").css("display") == "none")
-		$("#webtop_helper").attr("src","about:blank").css({"width":0,"height":0,"top":$(window).height()/2,"left":$(window).width()/2}).show().animate({"top":($(window).height()/2)-185,"left":($(window).width()/2)-215, "width":430, "height":291},function() { $("#webtop_helper").attr("src","/webtop_helper/") });
+		$("#webtop_helper").attr("src","about:blank").css({"width":0,"height":0,"top":$(window).height()/2,"left":$(window).width()/2}).show().animate({"top":($(window).height()/2)-185,"left":($(window).width()/2)-215, "width":430, "height":291},function() { $("#webtop_helper").attr("src","/webtop_helper/index.html") });
 	else
 		alert("이미 사용방법이 화면에 표시중입니다.")
 }
