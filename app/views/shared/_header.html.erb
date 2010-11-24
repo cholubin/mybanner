@@ -23,9 +23,7 @@
 	</div>
 	<div id="nav_message">
 		<%
-		puts_message Jobboard.all(:user_id => current_user.id, :feedback_code => Basicinfo.first(:category => "job_process", :name => "처리완료").code).count.to_s
-		puts_message Basicinfo.first(:category => "job_process", :name => "처리완료").code.to_s
-		if Jobboard.all(:user_id => current_user.id, :feedback_code => Basicinfo.first(:category => "job_process", :name => "처리완료").code).count > 0
+		if Mytemplate.all(:user_id => current_user.id, :feedback_code => Basicinfo.first(:category => "job_process", :name => "처리완료").code).count > 0
 			status_str = "<a href='/mytemplates' class='complate'>편집의뢰한 항목이 처리되었습니다. 디자인 바구니에서 확인해주세요.</a>"
 		else
 			status_str = ""
