@@ -10,7 +10,7 @@ class PagesController < ApplicationController
     Basicinfo.up
     Admininfo.up
     
-    if Admininfo.all(:category => "agreement", :code => 5).count < 0
+    if Admininfo.all(:category => "agreement", :code => 5).count < 1
       temp = Admininfo.new
       temp.category = "agreement"
       temp.code = 5
