@@ -10,6 +10,18 @@ class PagesController < ApplicationController
     Basicinfo.up
     Admininfo.up
     
+    if Admininfo.all(:category => "agreement", :code => 5).count < 0
+      temp = Admininfo.new
+      temp.category = "agreement"
+      temp.code = 5
+      temp.name = "개인정보약관 제정일"
+      temp.save
+    elif Admininfo.all(:category => "agreement", :code => 5).count == 1
+      temp = Admininfo.all(:category => "agreement", :code => 5)
+      temp.name = "개인정보약관 제정일"
+      temp.save
+    end
+    
     @title  = "home"
     @menu = "home"
     
