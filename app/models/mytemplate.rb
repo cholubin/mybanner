@@ -75,7 +75,8 @@ class Mytemplate
 
   
   def self.search(search, page)
-      Mytemplate.all(:name.like => "%#{search}%").page( :page => page, :per_page => 12)
+      Mytemplate.all(:name.like => "%#{search}%")
+      # Mytemplate.all(:name.like => "%#{search}%").page( :page => page, :per_page => 12)
   end
   
 
