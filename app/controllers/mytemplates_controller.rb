@@ -94,6 +94,8 @@ class MytemplatesController < ApplicationController
   if params[:direct] == "yes"
     mytemp = Mytemplate.get(@myorder.items.to_i)
     mytemp.in_order = true
+    mytemp.job_status = 0
+    mytemp.feedback_code = 0
     mytemp.quantity = params[:item_unit].to_i
     @temp_price += (mytemp.quantity * mytemp.price.to_i)
     if mytemp.save
@@ -108,6 +110,9 @@ class MytemplatesController < ApplicationController
     @myorder.items.split(",").each do |my|
       mytemp = Mytemplate.get(my.to_i)
       mytemp.in_order = true
+      mytemp.job_status = 0
+      mytemp.feedback_code = 0
+      
       mytemp.quantity = item_unit[index].to_i
       @temp_price += (mytemp.quantity * mytemp.price.to_i)
       if mytemp.save
@@ -221,7 +226,7 @@ class MytemplatesController < ApplicationController
      File.open(mjob,'w') { |f| f.write mjob_file }    
 
      if File.exists?(mjob)
-        system "open #{mjob}"
+        system "open -a /Applications/MLayout_#{M_PORT}.app #{mjob}"
       end 
        
     puts_message "make_contens_xml finished"
@@ -847,7 +852,7 @@ class MytemplatesController < ApplicationController
       
       if File.exist?(path)
         File.open(close_job_file,'w') { |f| f.write close_xml } 
-        system "open #{close_job_file}"
+        system "open -a /Applications/MLayout_#{M_PORT}.app #{close_job_file}"
       else
         puts_message "해당 템플릿은 이미 삭제된 상태입니다."
       end
@@ -884,7 +889,7 @@ class MytemplatesController < ApplicationController
       njob = target_template.path + "/publish_job.mJob" 
       File.open(njob,'w') { |f| f.write xml_file }    
       # process_index_thumbnail(target_template.path) 
-      system "open #{njob}"
+      system "open -a /Applications/MLayout_#{M_PORT}.app #{njob}"
       
 
       goal = goal + "/web/document.pdf"

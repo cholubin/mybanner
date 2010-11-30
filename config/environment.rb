@@ -99,5 +99,6 @@ Haml::Template.options[:format] = :html4
 
   # M용 WebRoot
   M_ROOT = RAILS_ROOT + "/public" 
+  M_PORT = 3000
 
 

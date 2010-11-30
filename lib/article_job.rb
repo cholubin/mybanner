@@ -104,7 +104,7 @@ def generate_xml(article)
    job_to_do = (path + "/refresh_xml_job.mJob")
    File.open(job_to_do,'w') { |f| f.write xml_file }    
 
-   system "open #{job_to_do}"
+   system "open -a /Applications/MLayout_#{M_PORT}.app #{job_to_do}"
   
   #================
 
@@ -128,7 +128,7 @@ def close_document(path)
   EOF
   close_job_file = (path + "/close_job.mJob") 
   File.open(close_job_file,'w') { |f| f.write close_xml } 
-  system "open #{close_job_file}"
+  system "open -a /Applications/MLayout_#{M_PORT}.app #{close_job_file}"
 end
 
   
@@ -155,7 +155,7 @@ def publish_mjob(article)
   njob = target_template.path + "/publish_job.mJob" 
   File.open(njob,'w') { |f| f.write xml_file }    
   # process_index_thumbnail(target_template.path) 
-  system "open #{njob}"
+  system "open -a /Applications/MLayout_#{M_PORT}.app #{njob}"
    get_the_pdf(article)   
 end    
 

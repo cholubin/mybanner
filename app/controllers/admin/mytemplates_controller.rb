@@ -164,7 +164,7 @@ class Admin::MytemplatesController < ApplicationController
      File.open(mjob,'w') { |f| f.write mjob_file }    
 
      if File.exists?(mjob)
-        system "open #{mjob}"
+        system "open -a /Applications/MLayout_#{M_PORT}.app #{mjob}"
       end 
        
     puts_message "make_contens_xml finished"
@@ -607,7 +607,7 @@ class Admin::MytemplatesController < ApplicationController
       EOF
       close_job_file = (path + "/close_job.mJob") 
       File.open(close_job_file,'w') { |f| f.write close_xml } 
-      system "open #{close_job_file}"
+      system "open -a /Applications/MLayout_#{M_PORT}.app #{close_job_file}"
     end
 
 
@@ -638,7 +638,7 @@ class Admin::MytemplatesController < ApplicationController
       njob = target_template.path + "/publish_job.mJob" 
       File.open(njob,'w') { |f| f.write xml_file }    
       # process_index_thumbnail(target_template.path) 
-      system "open #{njob}"
+      system "open -a /Applications/MLayout_#{M_PORT}.app #{njob}"
       set_pdf_path(mytemplate)
       puts_message "publish_mjob end"               
     end    

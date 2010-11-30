@@ -112,7 +112,7 @@ def make_contens_xml(temp)
    File.open(mjob,'w') { |f| f.write mjob_file }    
 
    if File.exists?(mjob)
-      system "open #{mjob}"
+      system "open -a /Applications/MLayout_#{M_PORT}.app #{mjob}"
     end 
      
   puts_message "make_contens_xml finished"
