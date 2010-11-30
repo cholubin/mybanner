@@ -185,7 +185,7 @@ class CappuccinoController < ApplicationController
      end
      
      if !File.exists?(job_done)
-       pid = `ps -c -eo pid,comm | grep MLayout`.to_s
+       pid = `ps -c -eo pid,comm | grep MLayout`.to_s.gsub("MLayout","MLayout_#{M_PORT}")
        pid = pid.gsub(/MLayout 2/,'').gsub(' ', '')
        system "kill #{pid}"     
        puts_message "Mlayout was killed!!!!! ============"
