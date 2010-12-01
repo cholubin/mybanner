@@ -179,8 +179,8 @@ class Admin::MytemplatesController < ApplicationController
      end
 
      if !File.exists?(job_done)
-        pid = `ps -c -eo pid,comm | grep MLayout`.to_s.gsub("MLayout","MLayout_#{M_PORT}")
-        pid = pid.gsub(/MLayout 2/,'').gsub(' ', '')
+        pid = `ps -c -eo pid,comm | grep MLayout_#{M_PORT}`.to_s
+        pid = pid.gsub("MLayout_#{M_PORT}",'').gsub(' ', '')
         system "kill #{pid}"     
         puts_message "MLayout was killed!!!!! ============"
       else

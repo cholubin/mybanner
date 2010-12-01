@@ -98,6 +98,7 @@ class MytemplatesController < ApplicationController
     mytemp.feedback_code = 0
     mytemp.quantity = params[:item_unit].to_i
     @temp_price += (mytemp.quantity * mytemp.price.to_i)
+    
     if mytemp.save
       puts_message "주문항목 저장 완료!"
     else
@@ -242,8 +243,8 @@ class MytemplatesController < ApplicationController
     end
     
     if !File.exists?(job_done)
-      pid = `ps -c -eo pid,comm | grep MLayout`.to_s.gsub("MLayout","MLayout_#{M_PORT}")
-      pid = pid.gsub(/MLayout 2/,'').gsub(' ', '')
+      pid = `ps -c -eo pid,comm | grep MLayout_#{M_PORT}`.to_s
+      pid = pid.gsub("MLayout_#{M_PORT}",'').gsub(' ', '')
       system "kill #{pid}"     
       puts_message "MLayout was killed!!!!! ============"
     else
@@ -920,8 +921,8 @@ class MytemplatesController < ApplicationController
       end
       
       if !File.exists?(job_done)
-        pid = `ps -c -eo pid,comm | grep MLayout`.to_s.gsub("MLayout","MLayout_#{M_PORT}")
-        pid = pid.gsub(/MLayout 2/,'').gsub(' ', '')
+        pid = `ps -c -eo pid,comm | grep MLayout_#{M_PORT}`.to_s
+        pid = pid.gsub("MLayout_#{M_PORT}",'').gsub(' ', '')
         system "kill #{pid}"     
         puts_message "MLayout was killed!!!!! ============"
       else

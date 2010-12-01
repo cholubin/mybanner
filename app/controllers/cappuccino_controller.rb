@@ -18,7 +18,6 @@ class CappuccinoController < ApplicationController
     
     filename = Mytemplate.get(params[:doc_name].to_i).file_filename.gsub(/.mlayoutP.zip/,'')
     
-    puts_message Mytemplate.get(params[:doc_name].to_i).file_filename.gsub(/.mlayoutP.zip/,'')
     # 파일명이 아이디와 동일하지 않는 경우 처리 (후에는 삭제처리 한다.)
     if params[:doc_name] != filename
       my = Mytemplate.get(params[:doc_name].to_i)
@@ -137,6 +136,10 @@ class CappuccinoController < ApplicationController
      File.open(job_to_do,'w') { |f| f.write xml_file }    
      erase_job_done_file(mytemplate)
      system "open -a /Applications/MLayout_#{M_PORT}.app #{job_to_do}"
+     
+     puts_message "여기!!!!!!!!!!!!!!!!!!"
+     puts_message "open -a /Applications/MLayout_#{M_PORT}.app #{job_to_do}"
+     
      check_done(mytemplate)   
 
     puts_message "request_mlayout end"        
@@ -185,8 +188,8 @@ class CappuccinoController < ApplicationController
      end
      
      if !File.exists?(job_done)
-       pid = `ps -c -eo pid,comm | grep MLayout`.to_s.gsub("MLayout","MLayout_#{M_PORT}")
-       pid = pid.gsub(/MLayout 2/,'').gsub(' ', '')
+       pid = `ps -c -eo pid,comm | grep MLayout_#{M_PORT}`.to_s
+       pid = pid.gsub("MLayout_#{M_PORT}",'').gsub(' ', '')
        system "kill #{pid}"     
        puts_message "Mlayout was killed!!!!! ============"
      end
