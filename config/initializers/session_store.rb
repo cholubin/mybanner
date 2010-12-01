@@ -5,7 +5,7 @@
 # Make sure the secret is at least 30 characters and all random, 
 # no regular words or you'll be exposed to dictionary attacks.
 ActionController::Base.session = {
-  :key         => '_kr_address_rails_cap_session',
+  :key         => '_kr_address_rails_cap_session_#{Rails.root}',
   :secret      => 'de88c6c1537a4f5e7d8853a62fa39e7451ae0147f7b14db3cdce7b02eae3a5c1c80a8f3edb517c1004ca4d20390adc2b7fe4c383221550f47a9e17e7012eee61'
 }
 
