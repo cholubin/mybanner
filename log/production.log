@@ -1678,3 +1678,44 @@ ActionView::TemplateError (undefined method `opt1' for #<Mytemplate:0x0000010382
     /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
 
 Rendering rescues/layout (internal_server_error)
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-12-01 14:04:42) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 369ms (View: 281 | 200 OK [http://localhost/]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-12-01 14:04:47) [POST]
+  Parameters: {"authenticity_token"=>"5njlrXZISuYlqhThH+5OolUi+wkJ9fpMA+pzOZK66Zw=", "session"=>{"uri"=>"", "userid"=>"cholubin", "password"=>"5972"}}
+Redirected to http://localhost:3000/
+Completed in 289ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-12-01 14:04:47) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 182ms (View: 170 | 200 OK [http://localhost/]
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-12-01 14:05:06) [GET]
+Redirected to http://localhost:3000/
+Completed in 0ms | 302 Found [http://localhost/logout]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-12-01 14:05:06) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 143ms (View: 132 | 200 OK [http://localhost/]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-12-01 14:05:14) [POST]
+  Parameters: {"authenticity_token"=>"xrRTBker4mT+al6V6nsU+EFjGBI+F9pwbUfs7lG5Pj4=", "session"=>{"uri"=>"", "userid"=>"cholubin", "password"=>"5972"}}
+Redirected to http://localhost:3000/
+Completed in 43ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-12-01 14:05:15) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 72ms (View: 61 | 200 OK [http://localhost/]
