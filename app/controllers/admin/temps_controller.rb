@@ -441,7 +441,7 @@ class Admin::TempsController < ApplicationController
       EOF
       close_job_file = (temp.path + "/close_job.mJob") 
       File.open(close_job_file,'w') { |f| f.write close_xml } 
-      system "open #{close_job_file}"
+      system "open -a /Applications/MLayout_#{M_PORT}.app #{close_job_file}"
     end
 
      def find_user
@@ -560,7 +560,7 @@ class Admin::TempsController < ApplicationController
      File.open(mjob,'w') { |f| f.write mjob_file }    
 
     if File.exists?(mjob)
-        system "open #{mjob}"
+        system "open -a /Applications/MLayout_#{M_PORT}.app #{mjob}"
     end 
     
     time_after_15_seconds = Time.now + 15.seconds     

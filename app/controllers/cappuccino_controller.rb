@@ -137,9 +137,6 @@ class CappuccinoController < ApplicationController
      erase_job_done_file(mytemplate)
      system "open -a /Applications/MLayout_#{M_PORT}.app #{job_to_do}"
      
-     puts_message "여기!!!!!!!!!!!!!!!!!!"
-     puts_message "open -a /Applications/MLayout_#{M_PORT}.app #{job_to_do}"
-     
      check_done(mytemplate)   
 
     puts_message "request_mlayout end"        

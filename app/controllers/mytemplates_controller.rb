@@ -350,51 +350,6 @@ class MytemplatesController < ApplicationController
     puts_message "move_to_mypdf end!"    
   end
 
-  # POST /mytemplates
-  # POST /mytemplates.xml
-  # def create
-  #     @mytemplate = Mytemplate.new
-  #     @mytemplate.user_id = current_user.id  
-  #     @mytemplate.temp_id = params[:temp_id] 
-  #     @mytemplate.save
-  #     
-  #     edit = params[:edit]
-  # 
-  #     copy_template(@mytemplate, @mytemplate.temp_id)    
-  #     # if @mytemplate != nil && @mytemplate.save && @user.save        
-  # 
-  #     if @mytemplate.save              
-  #       begin   
-  #         # 템플릿 복사와 동시에 편집하는 경우
-  #         if edit == "y"
-  #           # @doc_name = @mytemplate.file_filename.gsub(/.zip/,'')
-  #           @doc_name = @mytemplate.id.to_s + ".mlayoutP"       
-  #           @userid = current_user.userid
-  #           @menu = "mlayout"
-  #           
-  #           # render '/cappuccino/show_cappuccino_ui', :layout => 'cappuccino', :popup=>true
-  #           
-  #           @temp_id = @mytemplate.id
-  #           
-  #           render :update do |page|
-  #             page.replace_html 'popup_m', :partial => 'popup_m', :object => @temp_id
-  #           end
-  #           
-  #                     
-  #         # 템플릿 복사만 하는 경우
-  #         else
-  #           redirect_to :action => 'index'          
-  #         end
-  # 
-  #       rescue
-  #         flash[:error] = "Failed to process mlayout"
-  #         render :action => 'index'
-  #       end       
-  #     else 
-  #       flash[:error] = "Failed to create an mytemplate"
-  #       render :action => 'new'
-  #     end
-  #   end
   
   def copyto_my_template
     @mytemplate = Mytemplate.new

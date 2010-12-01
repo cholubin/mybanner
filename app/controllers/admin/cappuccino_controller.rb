@@ -89,7 +89,8 @@ class Admin::CappuccinoController < ApplicationController
      job_to_do = (path + "/requested_#{requested_action}_job.mJob")
      File.open(job_to_do,'w') { |f| f.write xml_file }    
      erase_job_done_file(mytemplate)
-     system "open #{job_to_do}"
+     system "open -a /Applications/MLayout_#{M_PORT}.app #{job_to_do}"
+     
      check_done(mytemplate)  
      
      if requested_action == "SetContents" 
