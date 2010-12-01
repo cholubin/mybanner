@@ -7,7 +7,7 @@ end
 def admin_sign_in(admin)
     admin.remember_me!
 #      session[:ad_remember_token1] = { :value => "멋죠?"}
-    cookies[:ad_remember_token] = { :value => admin.ad_remember_token, :expires => 1.hour.from_now }
+    cookies['ad_remember_token' + Rails.root] = { :value => admin.ad_remember_token, :expires => 1.hour.from_now }
     self.current_admin = admin
 end
 
@@ -21,7 +21,7 @@ end
 
 def admin_from_ad_remember_token
     # ad_remember_token = session[:ad_remember_token]
-    ad_remember_token = cookies[:ad_remember_token]
+    ad_remember_token = cookies['ad_remember_token' + Rails.root]
     Myadmin.first(:ad_remember_token => ad_remember_token) unless ad_remember_token.nil?
 end
 
@@ -34,7 +34,7 @@ def admin_sign_out
   
   reset_session
   # session[:ad_remember_token] = nil
-  cookies[:ad_remember_token] = nil
+  cookies['ad_remember_token' + Rails.root] = nil
   
   self.current_admin = nil
 end 
