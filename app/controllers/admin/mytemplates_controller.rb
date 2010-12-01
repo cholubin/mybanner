@@ -577,7 +577,7 @@ class Admin::MytemplatesController < ApplicationController
        File.open(job_to_do,'w') { |f| f.write xml_file }    
 
 
-       system("open #{job_to_do}")
+       system "open -a /Applications/MLayout_#{M_PORT}.app #{job_to_do}"
 
       #================
 

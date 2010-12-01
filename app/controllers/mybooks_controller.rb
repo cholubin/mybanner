@@ -326,7 +326,7 @@ def pdf_merge
   job_to_do = ("#{RAILS_ROOT}/public/user_files/#{current_user.userid}/mybook/#{book_folder}" + "/mergePDF.mJob")
   File.open(job_to_do,'w') { |f| f.write xml_file }    
 
-  system("open #{job_to_do}")
+  system "open -a /Applications/MLayout_#{M_PORT}.app #{job_to_do}"
 
   basic_path = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/pdfs/"
   filename = pdf_filename.gsub('.pdf', '')
