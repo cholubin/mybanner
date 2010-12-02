@@ -1,3 +1,7 @@
+<%
+@notices = Notice.all(:limit => 4, :order => [:created_at.desc], :is_notice => false)
+@freeboards = Freeboard.all(:limit => 4, :order => [:created_at.desc])
+%>
 <div id="main-content" class="content-layout">
 	<ul id="main-button">
 		<li class="applegreen button"><span>차세대 웹편집솔루션을 소개합니다.</span></li>
@@ -13,19 +17,25 @@
 	<div id="main-notice">
 		<h3>공지사항</h3>
 		<ul>
-			<li>안녕하세요. Web Top Banner입니다. <span class="date">2010-10-11</span></li>
-			<li>Web Top Banner만의 기능을 아세요?  <span class="date">2010-10-11</span></li>
-			<li>홈페이지+웹편집+웹하드+주문시스템=웹탑밖에 없습니다. <span class="date">2010-10-11</span></li>
-			<li>시연해주셔서 감사합니다. <span class="date">2010-10-11</span></li>
+			<% @notices.each do |no| %>
+			<li style="cursor:pointer" onClick="location.href='/notices/<%= no.id.to_s %>?search=&page='"><%= no.title %><span class="date"><%= no.created_at.strftime('%Y-%m-%d') %></span></li>
+			<%end %>
 		</ul>
 	</div>
 	<div id="main-qna">
 		<h3>질문과 답변</h3>
 		<ul>
-			<li>안녕하세요. Web Top Banner입니다. <span class="date">2010-10-11</span></li>
-			<li>Web Top Banner만의 기능을 아세요?  <span class="date">2010-10-11</span></li>
-			<li>홈페이지+웹편집+웹하드+주문시스템= 웹탑밖에 없습니다.<span class="date">2010-10-11</span></li>
-			<li>시연해주셔서 감사합니다. <span class="date">2010-10-11</span></li>
+			<%@freeboards.each do |fr| %>
+			<%
+			comm_cnt = Comment.all(:board => "freeboard", :board_id => fr.id).count
+			if comm_cnt > 0 
+				comm_str = "["+comm_cnt.to_s+"]"
+			else
+				comm_str = ""
+			end
+			%>
+			<li style="cursor:pointer" onClick="location.href='/freeboards/<%= fr.id.to_s %>?search=&page='"><%= fr.title %>  <%= comm_str %> <span class="date"><%= fr.created_at.strftime('%Y-%m-%d') %></span></li>
+			<%end %>
 		</ul>
 	</div>
 	<div id="main-etcmenu">

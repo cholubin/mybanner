@@ -54,8 +54,10 @@ class MytemplatesController < ApplicationController
     @mytemp = Mytemplate.get(mytemp_id)
     if has_confirm == "y"
       @mytemp.job_status = Basicinfo.first(:category => "job_status", :name => "시안확정").code
+      @mytemp.design_confirmed = true
     else
       @mytemp.job_status = Basicinfo.first(:category => "job_status", :name => "시안미확정").code
+      @mytemp.design_confirmed = false
     end
     if @mytemp.save
       render :nothing => true
@@ -420,8 +422,12 @@ class MytemplatesController < ApplicationController
     bbs.feedback_code = feedback_code
     
     @mytemp = Mytemplate.get(mytemp_id.to_i)
-    @mytemp.feedback_code = feedback_code
-    @mytemp.save 
+    
+    if feedback_code != Basicinfo.first(:category => "job_process", :name => "일반글").code
+      @mytemp.feedback_code = feedback_code
+      @mytemp.save 
+    end
+    
     
     bbs.mytemp_id = mytemp_id
 
@@ -528,7 +534,48 @@ class MytemplatesController < ApplicationController
       puts_message "수량을 업데이트 하는 도중 오류가 발생했습니다!"
     end
   end
+  
+  def destroy_order
+    order_id = params[:order_id].to_i
+    myorder = Myorder.get(order_id)
+    myorder.user_del = true
+    
+    if myorder.save
+      mytempid_array = myorder.items.split(",")
+      mytempid_array.each do |mytemp_id|
+        mytemp = Mytemplate.get(mytemp_id.to_i)
+        mytemp.in_order = false
+        mytemp.feedback_code = 0
+        mytemp.save
+      end
+      
+      render :text => "success"
+    else
+      puts_message "사용자 주문삭제 실패!"
+    end
+  end
 
+  def cancel_order
+    order_id = params[:order_id].to_i
+    myorder = Myorder.get(order_id)
+
+    mytempid_array = myorder.items.split(",")
+    mytempid_array.each do |mytemp_id|
+      mytemp = Mytemplate.get(mytemp_id.to_i)
+      mytemp.in_order = false
+      mytemp.feedback_code = 0
+      mytemp.design_confirmed = false
+      mytemp.save
+    end
+    
+    if myorder.destroy
+      render :text => "success"
+    else
+      puts_message "사용자 주문취소 실패!"
+    end
+  end
+  
+  
   def destroy_selection
     @ids = params[:ids].split(",")
     

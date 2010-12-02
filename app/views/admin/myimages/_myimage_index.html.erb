@@ -31,6 +31,7 @@
 	
 	
 	<table class="board_table">
+		<input type="hidden" id="all_checked" value="false">
 	    <thead class="board_thead">
 	        <tr>
 	            <th class="board_thead" width="60px">번호 </th>
@@ -38,7 +39,7 @@
 				<td class="board_thead" width="120px"><center>제목</center></td>
 	            <td class="board_thead" width="80px"><center>사용자 아이디 </center></td>
 	            <td class="board_thead" width="65px"><center>사용자 이름</center></td>
-				<td class="board_thead" width="30px"><center>삭제</center></td>
+				<td class="board_thead" width="30px"><center class="check_all" style="cursor:hand;">선택</center></td>
 	        </tr>
 	    </thead>
 	 
@@ -52,13 +53,13 @@
 				@page_num = @total_count - (12 * @temp_page) %>
 
 			<% @myimages.each do |myimage| %>
-	        <tr class="table_b","board_tbody" onClick="location.href='/admin/myimages/<%= myimage.id.to_s %>'" style="cursor:hand;">
+	        <tr class="table_b","board_tbody" >
 	            <th class="board_tbody" width="60px"><%= @page_num %></th>
 	            <td class="board_tbody" width="1px"><center><a href="/admin/myimages/<%=myimage.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%=image_tag myimage.thumb_url %></a></center></td>
 				<td class="board_tbody" width="80px"><center><%= myimage.name %></center></td>
 				<td class="board_tbody" width="80px"><center><%= User.first(:id => myimage.user_id).userid %></center></td>
 	            <td class="board_tbody" width="80px"><center><%= User.first(:id => myimage.user_id).name %></center></td>
-				<td class="board_tbody" width="30px"><center><input type="checkbox" name="chk[<%= myimage.id %>]"></center></td>
+				<td class="board_tbody" width="30px"><center><input class="chk_box" type="checkbox" name="chk[<%= myimage.id %>]"></center></td>
 	        </tr>
 	        <% @page_num -= 1
 			end %>

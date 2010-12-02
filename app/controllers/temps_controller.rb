@@ -31,39 +31,38 @@ class TempsController < ApplicationController
       end  
     end      
     
-    
     # 사용자별 템플릿 공개여부 결정 기능 추가 (for oneplus)
     if TEMPLATE_OPEN_FUNC_TOGGLE == true
       if signed_in?
         if @category_name != nil and @subcategory_name != nil
-          @temps = Temp.all(:category => @category_name, :subcategory => @subcategory_name).isopen(current_user.userid).search(params[:search], params[:page])
+          @temps = Temp.all(:category => @category_name, :subcategory => @subcategory_name).isopen(current_user.userid).search(params[:search], params[:page], params[:search_gubun])
           @temps_best = Temp.all(:category => @category_name).best
         elsif @category_name != nil
-          @temps = Temp.all(:category => @category_name).isopen(current_user.userid).search(params[:search], params[:page])      
+          @temps = Temp.all(:category => @category_name).isopen(current_user.userid).search(params[:search], params[:page],params[:search_gubun])      
           @temps_best = Temp.all(:category => @category_name).best
         elsif  @subcategory_name != nil
-          @temps = Temp.all(:subcategory => @subcategory_name).isopen(current_user.userid).search(params[:search], params[:page])      
+          @temps = Temp.all(:subcategory => @subcategory_name).isopen(current_user.userid).search(params[:search], params[:page],params[:search_gubun])      
         else
           @category_name = Category.first(:priority => 1).name
-          @temps = Temp.all(:category => @category_name).isopen(current_user.userid).search(params[:search], params[:page])      
+          @temps = Temp.all(:category => @category_name).isopen(current_user.userid).search(params[:search], params[:page],params[:search_gubun])      
           @temps_best = Temp.all(:category => @category_name).best
         end
-        @total_count = Temp.search(params[:search],"").isopen(current_user.userid).count    
+        @total_count = Temp.search(params[:search],"",params[:search_gubun]).isopen(current_user.userid).count    
       else
         @temps = Temp.all(:id => '9999999')
         @total_count = 0
       end
     else
       if @category_name != nil and @subcategory_name != nil
-        @temps = Temp.all(:is_col => is_col, :category => @category_name, :subcategory => @subcategory_name).search(params[:search], params[:page])
+        @temps = Temp.all(:is_col => is_col, :category => @category_name, :subcategory => @subcategory_name).search(params[:search], params[:page],params[:search_gubun])
       elsif @category_name != nil
-        @temps = Temp.all(:is_col => is_col, :category => @category_name).search(params[:search], params[:page])      
+        @temps = Temp.all(:is_col => is_col, :category => @category_name).search(params[:search], params[:page],params[:search_gubun])      
       elsif  @subcategory_name != nil
-        @temps = Temp.all(:is_col => is_col, :subcategory => @subcategory_name).search(params[:search], params[:page])      
+        @temps = Temp.all(:is_col => is_col, :subcategory => @subcategory_name).search(params[:search], params[:page],params[:search_gubun])      
       else
-        @temps = Temp.all(:is_col => is_col).search(params[:search], params[:page])      
+        @temps = Temp.all(:is_col => is_col).search(params[:search], params[:page],params[:search_gubun])      
       end
-      @total_count = Temp.all(:is_col => is_col).search(params[:search],"").count      
+      @total_count = Temp.all(:is_col => is_col).search(params[:search],"",params[:search_gubun]).count      
     end
     
     
@@ -156,7 +155,17 @@ class TempsController < ApplicationController
         
     respond_to do |format|
       if @temp.save
-
+        
+        if @temp.subcategory != nil
+      		code = @temp.category  + "-" + @temp.subcategory + "-" + @temp.id.to_s
+      	else
+      		code = @temp.category  + "-" + @temp.id.to_s
+      	end
+      	
+        @temp.design_code = code
+        @temp.save
+        puts_message "Design_code::::::::" + @temp.design_code
+        
         # filename renaming ======================================================================
         file_name = @temp.file_filename_encoded
         
@@ -242,7 +251,17 @@ class TempsController < ApplicationController
           file_name = bbs.id.to_s
           bbs.req_file = bbs.id.to_s + file_ext
           bbs.original_filename = req_file.original_filename
-          bbs.save
+          
+          if bbs.save
+            puts_message "첨부파일 업로드 완료!"
+            puts_message "이미지 하드에도 업로드 진행!"
+            
+            @myimage = Myimage.new()
+            @myimage.user_id = current_user.id
+            
+            add_myimage(@myimage, params[:feedback_file])
+          end
+          
         end
       end
       
@@ -284,6 +303,42 @@ class TempsController < ApplicationController
     end
   end
   
+  def add_myimage(myimage, myimage_image_file)
+    @myimage = myimage
+    @myimage.user_id = current_user.id
+    
+    
+    @myimage.folder_name = "photo"
+
+    image_path = @myimage.image_path
+
+    @myimage.image_file = myimage_image_file      
+    @temp_filename = sanitize_filename(myimage_image_file.original_filename)
+
+    ext_name = File.extname(@temp_filename)      
+    @myimage.type = ext_name.gsub(".",'') 
+    @myimage.name = myimage_image_file.original_filename.gsub(ext_name,"")
+      
+    if @myimage.save  
+      file_name = @myimage.id.to_s
+      @myimage.image_filename = file_name + ext_name
+
+      if ext_name == ".eps" or ext_name == ".pdf"
+        @myimage.image_thumb_filename = file_name + ".png"
+        puts %x[#{RAILS_ROOT}"/lib/thumbup" #{image_path + "/" + @myimage.image_filename} #{image_path + "/preview/" + file_name + ".png"} 0.5 #{image_path + "/thumb/" + file_name + ".png"} 128]
+      else
+        @myimage.image_thumb_filename = file_name + ".jpg"
+        puts %x[#{RAILS_ROOT}"/lib/thumbup" #{image_path + "/" + @myimage.image_filename} #{image_path + "/preview/" + file_name + ".jpg"} 0.5 #{image_path + "/thumb/" + file_name + ".jpg"} 128]            	  
+      end
+
+      if @myimage.save
+        puts_message "이미지 하드 저장 완료!"
+      else
+        puts_message "이미지 하드 저장 실패!"
+      end
+    end
+  end
+  
   def copy_template_mytemp(mytemplate, temp_id)  
 
     path = "#{RAILS_ROOT}/public/user_files/" + current_user.userid + "/article_templates"
@@ -317,6 +372,7 @@ class TempsController < ApplicationController
     @cloned_object.thumb_url = "/user_files/" + current_user.userid + "/article_templates/" +  mytemplate_new_filename + "/web/doc_thumb.jpg"         
     @cloned_object.preview_url = "/user_files/" + current_user.userid + "/article_templates/" + mytemplate_new_filename + "/web/doc_preview.jpg"             
 
+    @cloned_object.design_code = @object_to_clone.design_code
     @cloned_object.category = @object_to_clone.category
     @cloned_object.is_col = @object_to_clone.is_col
     @cloned_object.subcategory = @object_to_clone.subcategory

@@ -31,6 +31,7 @@ class Myorder
   property :order_addr2,    String
   property :user_id,        Integer
   property :items,          String
+  property :user_del,       Boolean, :default => false
   
   #주문상태 
   property :status,         Integer

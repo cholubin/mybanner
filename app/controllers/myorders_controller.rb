@@ -8,7 +8,7 @@ class MyordersController < ApplicationController
       @board = "myorder"
       @section = "index"
      
-      @myorders = Myorder.all(:user_id => current_user.id, :order => [:updated_at.desc]).search(params[:search], params[:page])
+      @myorders = Myorder.all(:user_del => false, :user_id => current_user.id, :order => [:updated_at.desc]).search(params[:search], params[:page])
       render 'myorder'
     else
       redirect_to '/'

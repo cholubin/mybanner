@@ -36,6 +36,7 @@
 	</select>
 	</div>
 	<table class="board_table">
+		<input type="hidden" id="all_checked" value="false">
 	    <thead class="board_thead">
 	        <tr>
 	            <th class="board_thead" width="40px">번호</th>
@@ -44,7 +45,7 @@
 				<td class="board_thead" width="120px"><center>아이템</center></td>
 	            <td class="board_thead" width="50px"><center>총 주문금액 </center></td>
 	            <td class="board_thead" width="50px"><center>사용자(아이디/이름)</center></td>
-				<td class="board_thead" width="30px"><center>삭제</center></td>
+				<td class="board_thead" width="30px"><center class="check_all" style="cursor:hand;">선택</center></td>
 	        </tr>
 	    </thead>
 	 
@@ -109,7 +110,7 @@
 					%>
 					<center><a href="/admin/users/<%= myorder.user_id %>"><%= "#{user_name}(#{user_id})" %></a></center>
 				</td>
-				<td class="board_tbody" /><center><input type="checkbox" name="chk[<%= myorder.id %>]"></center></td>
+				<td class="board_tbody" /><center><input class="chk_box" type="checkbox" name="chk[<%= myorder.id %>]"></center></td>
 	        </tr>
 	        <% @page_num -= 1
 			end %>

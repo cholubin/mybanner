@@ -40,6 +40,7 @@ class Temp
   property :category,               String
   property :subcategory,            String
   property :tags,                   Text
+  property :design_code,            String
   property :hit_cnt,                Integer, :default => 0
   property :copy_cnt,               Integer, :default => 0  
   property :is_best,                Boolean, :default => false  
@@ -57,8 +58,16 @@ class Temp
   
   before :create, :file_path
 
-  def self.search(search, page)
+  def self.search(search, page, gubun)
+    if gubun == "name"
       Temp.all(:conditions => {:name.like => "%#{search}%"}).page :page => page, :per_page => 12
+    elsif gubun == "designcode"
+      Temp.all(:conditions => {:design_code.like => "%#{search}%"}).page :page => page, :per_page => 12
+    elsif gubun == "tag"
+      Temp.all(:conditions => {:tag.like => "%#{search}%"}).page :page => page, :per_page => 12
+    else
+      Temp.all.page :page => page, :per_page => 12
+    end
   end
 
   def self.search2(search, page)

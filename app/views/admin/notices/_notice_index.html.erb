@@ -11,13 +11,14 @@
 
 	<% form_tag '/admin/notices/deleteSelection', :method => 'post' do %>			
 		<table class="board_table">
+			<input type="hidden" id="all_checked" value="false">
 		    <thead class="board_thead">
 		        <tr>
 		            <th class="board_thead" width="60px">번호 </th>
 		            <td class="board_thead" width="520px"><center>제목</center></td>
 		            <td class="board_thead" width="80px"><center>등록일</center></td>
 		            <td class="board_thead" width="65px"><center>조회</center></td>
-		            <td class="board_thead" width="30px"><center>삭제</center></td>			
+		            <td class="board_thead" width="30px"><center class="check_all" style="cursor:hand;">선택</center></td>			
 		        </tr>
 		    </thead>
 
@@ -45,7 +46,7 @@
 		            <td class="board_tbody" width="520px"><a href="/admin/notices/<%=news.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= news.title %></a></td>
 		            <td class="board_tbody" width="80px"><center><%= news.created_at.strftime('%Y-%m-%d') %></center></td>
 		            <td class="board_tbody" width="65px"><center><%= news.hit_cnt %></center></td>
-					<td class="board_tbody" width="30px"><center><input type="checkbox" name="chk[<%= news.id %>]"></center></td>
+					<td class="board_tbody" width="30px"><center><input class="chk_box" type="checkbox" name="chk[<%= news.id %>]"></center></td>
 		        </tr>
 		        <% @page_num -= 1
 				end %>
@@ -56,7 +57,7 @@
 
 
 
-		<table width="730" >
+		<table width="800" >
 		<tr>
 			<td width="230">&nbsp;</td>
 			<td width="350" style="align:center">

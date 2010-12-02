@@ -10,18 +10,16 @@
 		        <tr>
 		            <th class="id">번호</th>
 		            <th class="subject"><center>제목</center></th>
-					<th class="author"><center>작성자</center></th>
 		            <th class="date"><center>등록일</center></th>
 		            <th class="count"><center>조회</center></th>
 		        </tr>
 		    </thead>
 		    <tbody>
-		    <% if @notices_notice.count >= 1 && @notices_news.count >= 1 %>
+		    <% if @notices_notice.count >= 1 || @notices_news.count >= 1 %>
 				<% @notices_notice.each do |notice| %>
 		        <tr>
 		            <td class="id">-</td>
 		            <td class="subject notice" title="<%= notice.title if notice.title.length > 90 %>"><a href="/notices/<%=notice.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= notice.title %></a></td>
-					<td class="author">관리자</td>
 		            <td class="date"><%= notice.created_at.strftime('%Y.%m.%d') %></td>
 		            <td class="count"><%= notice.hit_cnt %></td>
 		        </tr>
@@ -38,7 +36,6 @@
 		        <tr>
 		            <td class="id"><%= @page_num %></td>
 		            <td class="subject" title="<%= news.title if news.title.length > 90 %>"><a href="/notices/<%=news.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= news.title %></a></td>
-					<td class="author">관리자</td>
 		            <td class="date"><%= news.created_at.strftime('%Y.%m.%d') %></td>
 		            <td class="count"><%= news.hit_cnt %></td>
 		        </tr>

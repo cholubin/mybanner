@@ -9,3 +9,21 @@ function to_comma(price){
 	
 	return char_price;
 }
+
+
+$('.check_all').live("click", function(){
+	if ( $('#all_checked').val() == "false" ){
+		
+		$('.chk_box').each(function(){
+			$(this).attr("checked", true);
+		})
+		
+		$('#all_checked').val("true");
+	}else{
+		$('.chk_box').each(function(){
+			$(this).attr("checked", false);
+		})
+		
+		$('#all_checked').val("false");
+	}
+})

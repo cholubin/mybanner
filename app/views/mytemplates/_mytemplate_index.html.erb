@@ -22,7 +22,7 @@
 	<table id="designcart-list" cellpadding="0" cellspacing="0" border="0">
 		<thead>
 			<tr>
-				<th class="check" id="chk_all"><span>전체체크</span></th>
+				<th class="check" id="chk_all"><span style="cursor:pointer;">전체체크</span></th>
 				<th class="date">작업일</th>
 				<th class="design">디자인 품목</th>
 				<th class="piece">수량</th>
@@ -38,18 +38,14 @@
 				if my.subcategory != nil
 					if Category.get(my.category.to_i) != nil and Subcategory.get(my.subcategory.to_i) != nil
 						category_info = Category.get(my.category.to_i).name + "/" + Subcategory.get(my.subcategory.to_i).name
-						sn_num = my.category  + "-" + my.subcategory + "-" + my.id.to_s
 					else
 						category_info = "분류정보 없음"
-						sn_num = my.category  + "-" + my.subcategory + "-" + my.id.to_s
 					end
 				else
 					if Category.get(my.category.to_i) != nil
 						category_info = Category.get(my.category.to_i).name	
-						sn_num = my.category  + "-" + my.id.to_s
 					else
 						category_info = "분류정보 없음"
-						sn_num = my.category  + "-" + my.id.to_s
 					end
 				end
 			%>
@@ -67,7 +63,7 @@
 					end
 				end
 				%>
-				<td class="design <%= add_class %>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= sn_num %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>
+				<td class="design <%= add_class %>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= my.design_code %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>
 				<div class="action-select">
 					<ul>
 						<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
@@ -267,9 +263,15 @@ $('#zip_search').live("click", function(){
 				$("#search-address-form").fadeOut("fast");
 				$('#addr_result').html(request).change(function(){
 					// $('#zip_code').val()
-					var temp_zip = $('#address-selector option:selected').val()
-					var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,3)
-					$('#zip_code').val(zip_code);
+					if($('#address-selector option:selected').val() == "research"){
+						$('#address-search').val("");
+						$("#search-address-form").fadeIn("fast");
+						$('#address-search').focus();
+					}else{
+						var temp_zip = $('#address-selector option:selected').val();
+						var zip_code = temp_zip.substr(0,3) + "-" + temp_zip.substr(3,3)
+						$('#zip_code').val(zip_code);
+					}
 				});
 			}
 		});

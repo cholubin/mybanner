@@ -29,6 +29,7 @@
 		</tr>
 	</table>
 	<table class="board_table">
+		<input type="hidden" id="all_checked" value="false">
 	    <thead class="board_thead">
 	        <tr>
 	            <th class="board_thead" width="60px">번호</th>
@@ -38,7 +39,7 @@
 	            <td class="board_thead" width="65px"><center>서브카테고리</center></td>
 	            <td class="board_thead" width="65px"><center>등록일</center></td>	
 				<td class="board_thead" width="70px"><center>복제수</center></td>
-				<td class="board_thead" width="30px"><center>삭제</center></td>				
+				<td class="board_thead" width="30px"><center class="check_all" style="cursor:hand;">선택</center></td>				
 	        </tr>
 	    </thead>
 	 
@@ -56,6 +57,7 @@
 			<% temp_image_path = temp.thumb_url  if temp.thumb_url%>			
 			
 	        <tr class="table_b","board_tbody">
+				
 	            <th class="board_tbody" width="60px"><%= @page_num %></th>
 	            <td class="board_tbody" width="120px"><center><a href="/admin/temps/<%=temp.id%>?search=<%=params[:search]%>&page=<%=params[:page]%>"><%= "<img src='" + temp_image_path + "'>" if temp.thumb_url %></a></center></td>
 				<td class="board_tbody" width="80px"><center><%= temp.name %></center></td>
@@ -77,7 +79,7 @@
 				</td>								
 	            <td class="board_tbody" width="65px"><center><%= temp.created_at.strftime('%Y-%m-%d') %></center></td>
 	            <td class="board_tbody" width="70px"><center><%= temp.copy_cnt.to_s %></center></td>
-				<td class="board_tbody" width="30px"><center><input type="checkbox" name="chk[<%= temp.id %>]"></center></td>
+				<td class="board_tbody" width="30px"><center><input class="chk_box" type="checkbox" name="chk[<%= temp.id %>]"></center></td>
 	        </tr>
 	        <% @page_num -= 1
 			end %>
@@ -127,4 +129,3 @@
 			</tr>
 					
 		</table>
-		

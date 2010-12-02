@@ -30,7 +30,7 @@ class FreeboardsController < ApplicationController
       @board = "freeboard"
       @section = "show"
       
-      @comments = Comment.all(:board => "freeboard", :order => [:updated_at])
+      @comments = Comment.all(:board => "freeboard", :board_id => params[:id].to_i, :order => [:updated_at])
       
       render 'freeboard'
     

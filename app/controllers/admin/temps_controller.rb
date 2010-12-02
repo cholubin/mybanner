@@ -122,7 +122,17 @@ class Admin::TempsController < ApplicationController
         
     respond_to do |format|
       if @temp.save
-
+        
+        if @temp.subcategory != nil
+      		code = @temp.category  + "-" + @temp.subcategory + "-" + @temp.id.to_s
+      	else
+      		code = @temp.category  + "-" + @temp.id.to_s
+      	end
+      	
+        @temp.design_code = code
+        @temp.save
+        puts_message "Design_code::::::::" + @temp.design_code
+        
         # 원플러스용 사용자별 템플릿 공개 혀용 
         temp_id = @temp.id
         user_list = params[:user_list].split(',')

@@ -50,6 +50,7 @@ class Mytemplate
   #현재 주문진행 여부 (진행중이면 디자인바구니에서 빼고 주문이 취소되거나 끝나면 다시 되롤릴 용도)
   property :in_order,               Boolean, :default => false
   property :design_confirmed,       Boolean, :default => false
+  property :design_code,            String
   
   timestamps :at
   

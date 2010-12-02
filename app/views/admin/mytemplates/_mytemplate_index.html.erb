@@ -63,6 +63,7 @@
 		</span>
 	</div>
 	<table class="board_table">
+		<input type="hidden" id="all_checked" value="false">
 	    <thead class="board_thead">
 	        <tr>
 	            <th class="board_thead" width="40px"><center>번호</center></th>
@@ -72,7 +73,7 @@
 	            <td class="board_thead" width="120px"><center>카테고리/서브카테고리</center></td>
 	            <td class="board_thead" width="65px"><center>등록일</center></td>	
 				<td class="board_thead" width="60px"><center>소유자</center></td>
-				<td class="board_thead" width="30px"><center>삭제</center></td>				
+				<td class="board_thead" width="30px"><center class="check_all" style="cursor:hand;">선택</center></td>				
 	        </tr>
 	    </thead>
 	 
@@ -129,7 +130,7 @@
 					</center></td>
 	            <td class="board_tbody" /><center><%= mytemplate.created_at.strftime('%Y-%m-%d') %></center></td>
 	            <td class="board_tbody" /><center><%= User.get(mytemplate.user_id).userid %><br>(<%= User.get(mytemplate.user_id).name %>)</center></td>
-				<td class="board_tbody" /><center><input type="checkbox" name="chk[<%= mytemplate.id %>]"></center></td>
+				<td class="board_tbody" /><center><input class="chk_box" type="checkbox" name="chk[<%= mytemplate.id %>]"></center></td>
 	        </tr>
 	        <% @page_num -= 1
 			end %>
@@ -147,9 +148,9 @@
 				<td width="230">&nbsp;</td>
 				<td width="350" style="align:center">
 					<div class="pager">
-						<%if @mytemplates.count > 0 %>
+						
 							<%= @mytemplates.pager.to_html("/admin/mytemplates?userid=#{params[:userid]}&search=#{params[:search]}")  %>					
-						<%end %>
+						
 					</div>
 				</td>
 				<td width="150" align="right">

@@ -43,7 +43,7 @@
 <%
 	@myorders.each do |my|
 %>
-				<tr>
+				<tr id="tr_<%= my.id.to_s %>">
 				<td class="date"><%= my.order_no %><p class="order-num"><span>주문번호:</span><%= my.updated_at.strftime('%Y-%m-%d') %></p><!-- 주문번호 : YYMMDD-001 --></td>
 				<td class="item">
 					<ul>
@@ -93,7 +93,18 @@
 				<td class="price"><%= my.total_price.to_s %><br><font color=red>(가격상담 요!)</font></td>
 				<td class="status"><%= Basicinfo.first(:category=>"order_process", :code => my.status).name %></td>
 				<td class="detail"><a href="/myorders/<%= my.id.to_s %>">상세정보 보기</a></td>
-				<td class="cancel"><a href="### 취소링크 ###" class="cancel-button">주문취소</a>
+				<td class="cancel">
+					<%
+					if my.status < 3 #제작전에는 취소 가능 
+					%>
+					<a href="### 취소링크 ###" class="cancel-button" id="cancel_<%= my.id.to_s %>">주문취소</a>
+					<%elsif my.status > 2 %>
+						<%if my.status < 5 %>
+							<a href="#" class="cancel-disable">취소불가</a>
+						<%elsif my.status > 4 %>
+							<a href="### 삭제링크 ###" class="order-delete" id="del_<%= my.id.to_s %>">주문삭제</a>
+						<%end %>
+					<%end %>
 				<!--
 				제작전 주문 취소
 				<a href="### 취소링크 ###" class="cancel-button">주문취소</a>
@@ -121,6 +132,40 @@
 </div>
 <script language="javascript">
 $(".cancel-disable").live("click",function() { alert("제작중에는 취소가 불가능합니다.\n고객센터로 상담 바랍니다."); return false });
+$(".order-delete").live("click",function(){
+	if(window.confirm("정말 주문을 삭제하시겠습니까?")){
+		var $id = $(this).attr("id").replace("del_","");
+		$.ajax({
+			data:'order_id='+$(this).attr("id").replace("del_",""), 
+			dataType:'script', 
+			type:'post', 
+			url:'/mytemplates/destroy_order',
+			success: function(request){
+				$("#tr_"+$id).remove();
+			}
+		});
+	}else{
+		return false;
+	}
+})
+
+$(".cancel-button").live("click",function(){
+	if(window.confirm("정말 주문을 취소하시겠습니까?")){
+		var $id = $(this).attr("id").replace("cancel_","");
+		$.ajax({
+			data:'order_id='+$(this).attr("id").replace("cancel_",""), 
+			dataType:'script', 
+			type:'post', 
+			url:'/mytemplates/cancel_order',
+			success: function(request){
+				$("#tr_"+$id).remove();
+			}
+		});
+	}else{
+		return false;
+	}
+})
+
 </script>
 </div>
 

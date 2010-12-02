@@ -78,9 +78,6 @@ end
 			<h4>이 품목을..</h4>
 			<ul>
 				<!-- 작업구분이 편집의뢰일때만 -->
-				<% puts_message "job_code::::" + my.job_code.to_s %>
-				<% puts_message "job_code::::" + my.job_status.to_s %>
-				
 				<% if my.job_code == 1 %>
 					<% if my.job_status == Basicinfo.first(:category => "job_status", :name => "시안미확정").code %>
 						<li class="accept" id="design_confirm_section"><a id="design_confirm" href="">시안확정</a></li>
@@ -134,7 +131,7 @@ end
 						<td class="type"><%= Request_code.first(:code => bbs.feedback_code).name %></td>
 						<td class="memo"><a><%= bbs.content.gsub("\n","<br>") %></a></td>
 						<td class="name">
-							<%if bbs.user_id == current_user.id %>
+							<%if bbs.admin == false and bbs.user_id == current_user.id %>
 								<%= User.get(bbs.user_id).name %>
 							<%else%>
 								<%= "<img src='/images/admin/admin_icon.png'>" %>
@@ -143,7 +140,7 @@ end
 						</td>
 						<td class="file"><%= req_file %></td>
 						<td class="delete">
-							<%if bbs.user_id == current_user.id %>
+							<%if bbs.admin == false and bbs.user_id == current_user.id %>
 								<a id="del_<%= bbs.id.to_s %>" href="">삭제</a>
 							<%end %>
 						</td>

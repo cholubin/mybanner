@@ -173,11 +173,11 @@ def deleteSelection
     item_array.each do |item|
       mytemp = Mytemplate.get(item.to_i)
       mytemp.feedback_code = 0
-      mytemp.job_code = 1
-      mytemp.option = nil
+      # mytemp.job_code = 1
+      # mytemp.option = nil
       # mytemp.size_x = nil
       # mytemp.size_y = nil
-      mytemp.quantity = 1
+      # mytemp.quantity = 1
       # mytemp.price = nil
       mytemp.in_order = false
       mytemp.design_confirmed = false
