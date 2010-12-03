@@ -112,6 +112,12 @@ class PagesController < ApplicationController
     end
   end 
   
+  # 구글 크롬 프레임 추천 페이지
+  def recommend_chrome
+    @title = "크롬 프레임 추천"
+    render :layout => 'ajax-load-page'
+  end
+
   # Web Top Banner에서 사용안하는 페이지
   
   def contact

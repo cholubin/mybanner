@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko"><head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
 	<meta name="DC.creator" content="성도GL/솔루윈, SSI team"/>
 	<meta name="geo.placename" content="Seoul, Korea Republic of"/>
 	<meta name="geo.region" content="KO-KR"/>
 	<meta name="description" content="이 사이트는 성도GL/솔루윈의 Web Top PrintShop 솔루션을 이용하여 만들어진, 웹에서 편집/교정을 할 수 있는 웹사이트입니다."/>
 	<meta name="keywords" content="<%= Admininfo.first(:category => "basic_info", :name => "브라우저 검색어").content %>"/>
-	<meta name="viewport" content="width=960" /> 
+	<meta name="viewport" content="width=960" />
 	
 	<title><%= Admininfo.first(:category => "basic_info", :name => "사이트명").content %></title> 
 	
@@ -24,7 +25,11 @@
 	<script type="text/javascript" src="/js/member_join.js"></script>
 	<script type="text/javascript" src="/js/imagehard.js"></script>		
 	<script type="text/javascript" src="/js/jquery.form.js"></script>
-	
+<!-- GCF Install script -->
+<!--[if IE]>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+<![endif]-->
+<!-- IE6 PNG patch -->
 <!--[if IE 6]>
 	<script src="/js/DD_belatedPNG-min.js"></script>
 	<script>DD_belatedPNG.fix('img, #nav-menu, #nav-menu ul, #nav-menu a, .option-select ul, .action-select ul, .date, #nav-quick ul, .actions a,.actions span, .caption a, .self-edit a, .order-edit a');</script>
@@ -32,7 +37,7 @@
 <![endif]-->
 </head>
 <body id="<%=(@menu == "home")?"main":"sub" %>">
-<%= render :partial => "/shared/header", :object => @menu %>	
+<%= render :partial => "/shared/header" %>	
 <hr/>
 	<div id="content">
 <%= yield %>

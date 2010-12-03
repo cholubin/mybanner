@@ -127,44 +127,27 @@ function openWebTopHelper() {
 		alert("이미 사용방법이 화면에 표시중입니다.")
 }
 
-function openWebTopEditor_user(user,id,href) {
-	if($("#webTopEditor").length == 0) {
-		$("<div id=\"webTopEditor\"><div id=\"editor_header\"><h2>WebTop Editor</h2><a href=\"#\" id=\"back_to_home\">저장하고 홈페이지로 돌아가기.</a></div></div>")
-		.css({"display":"none","background-color": "White" ,"position": "absolute","width":"100%", "z-index":"150","overflow":"hidden","top":"0","left":"0"})
-		.mousedown(function(){$(document).mousemove(function(e){return false;});})
-		.bind("contextmenu",function(e) { return false })
-		.appendTo('body');
-	}
 
-	$("<iframe id=\"webtop_iframe\" width=\"100%\" border=\"0\" frameborder=\"0\"/>")
-	.css({"display":"block","border":"0","height":$(window).height()-75})
-	.appendTo("#webTopEditor");
-	$("<div id=\"editor_footer\"><img src=\"/images/editor/footer.png\" width=\"960\" height=\"34\"/></div>")
-	.appendTo("#webTopEditor");
-	$("<a href='#'></a>").css({"display":"block","position":"absolute","width":"145px","height":"21px","top":"10px","left":"180px"}).click(function() { openWebTopHelper(); }).appendTo("#webTopEditor");;
-	$("#webTopEditor").css({"display":"block","height":$(window).height()});
-	$("#back_to_home").attr("href",(href == null)?"/":href)
-	
-	// 리사이즈시 사이즈시 자동으로 사이즈 변경	
-
-	$(window).resize(function() {
-		$("#webTopEditor").css("height",$(window).height());
-		$("#webtop_iframe").css("height",$(window).height()-75);
-	})
-	
-	var url = "/MClientBox/index.html?pdf_button=no&spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"	
-	$("#webtop_iframe").attr("src",url);
-	$("#webtop_iframe").load(function(){
-		if(getCookie("hide-tutorial") == "false" || getCookie("hide-tutorial") == "") openWebTopHelper();
-	})
-	$("body").css("background","#63828c");
-	$("#header").remove();
-	$("#content").remove();
-	$("#footer").remove();
-
+function openWebTopEditor_user(user,id,href,etc) {
+	var nowloaction = window.location.href;
+    var ua = navigator.userAgent;
+    var ieRe = /MSIE (\S+); Windows NT/;
+    // Windows version check, Internet Explorer version Check
+	if( (ua.indexOf("NT 5.2") != -1 || ua.indexOf("NT 5.1") != -1 || ua.indexOf("NT 5.0") != -1) && ieRe.test(ua)) {
+		popupView(860,435,"/pages/recommend_chrome", function() {
+			$("#button .accept").click(function() { $("#chrome_install").show(); return false; });
+			$("#button .decline").click(function() { openWebTopEditor(user,id,href,etc+"&pdf_button=no"); return false; });
+			CFInstall.check({
+				mode: "inline", // the default
+				url: "http://www.google.com/chromeframe/eula.html",
+				node: "chrome_install",
+				oninstall: function() { alert("크롬 프레임 적용을 위해, \n페이지를 새로고침 하겠습니다."); window.location.replace(nowloaction);}
+			});
+		})
+	} else openWebTopEditor(user,id,href,etc+"&pdf_button=no");
 }
 
-function openWebTopEditor(user,id,href) {
+function openWebTopEditor(user,id,href,etc) {
 	$("body *").remove();
 	$("body").css({"margin":"0","padding":"0"})
 	if($("#webTopEditor").length == 0) {
@@ -190,7 +173,8 @@ function openWebTopEditor(user,id,href) {
 		$("#webtop_iframe").css("height",$(window).height()-75);
 	})
 	
-	var url = "/MClientBox/index.html?admin=yes&spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"	
+	if(!etc) etc = "&admin=yes";
+	var url = "/MClientBox/index.html?"+etc+"&spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"	
 	$("#webtop_iframe").attr("src",url);
 	$("#webtop_iframe").load(function(){
 		if(getCookie("hide-tutorial") == "false" || getCookie("hide-tutorial") == "") openWebTopHelper();
@@ -391,4 +375,3 @@ $(window).load(function() {
 	}
 })
 $(window).resize(function() { repositionViews() })
-$(window).scroll(function() { repositionViews() })
