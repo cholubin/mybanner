@@ -27,9 +27,9 @@ class Admininfo
     
     # 메인화면  =================================================================================================================
     if Admininfo.all(:category => "main_display").count < 1
-      Admininfo.new(:code => "1", :name => "왼쪽", :category => "main_display", :content => "차세대 웹편집솔루션을 소개합니다.", :info => "", :file_name => "a.jpg", :order => 1).save
-      Admininfo.new(:code => "2", :name => "가운데", :category => "main_display", :content => "교회 현수막 디자인 다량 추가!", :info => "", :file_name => "b.jpg", :order => 2).save
-      Admininfo.new(:code => "3", :name => "오른쪽", :category => "main_display", :content => "시연에 응해주셔서 감사합니다.", :info => "", :file_name => "c.jpg", :order => 3).save
+      Admininfo.new(:code => "1", :name => "왼쪽", :category => "main_display", :content => "차세대 웹편집솔루션을 소개합니다.", :info => "grey", :file_name => "a.jpg", :order => 1).save
+      Admininfo.new(:code => "2", :name => "가운데", :category => "main_display", :content => "교회 현수막 디자인 다량 추가!", :info => "grey", :file_name => "b.jpg", :order => 2).save
+      Admininfo.new(:code => "3", :name => "오른쪽", :category => "main_display", :content => "시연에 응해주셔서 감사합니다.", :info => "grey", :file_name => "c.jpg", :order => 3).save
     end
     # 이미지 =================================================================================================================
     if Admininfo.all(:category => "logo").count < 1
