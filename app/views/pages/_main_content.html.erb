@@ -4,15 +4,16 @@
 %>
 <div id="main-content" class="content-layout">
 	<ul id="main-button">
-		<li class="applegreen button"><span>차세대 웹편집솔루션을 소개합니다.</span></li>
-		<li class="deepgreen button"><span>교회 현수막 디자인 다량 추가!</span></li>
-		<li class="deepgray button"><span>시연에 응해주셔서 감사합니다.</span></li>
+		<%@main_disp = Admininfo.all(:category => "main_display", :order => [:code])%>
+		<%@main_disp.each do |m| %>
+		<li class="<%= m.info %> button"><span><%= m.content %></span></li>
+		<%end %>
 	</ul>
 	<div id="main-image">
 		페이지를 불러오는 중입니다. 잠시만 기다려주세요.
-		<img class="image" src="/images/main/main-image-1.jpg" />
-		<img class="image" src="/images/main/main-image-2.jpg" />
-		<img class="image" src="/images/main/main-image-3.jpg" />
+		<%@main_disp.each do |m| %>
+		<img class="image" src="/images/admin/main/<%= m.file_name %>" />
+		<%end %>
 	</div>
 	<div id="main-notice">
 		<h3>공지사항</h3>

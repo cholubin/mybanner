@@ -12,6 +12,7 @@ class Admin::AdmininfosController < ApplicationController
     @agreements = Admininfo.all(:category => "agreement", :order => [:order])
     @payments = Admininfo.all(:category => "payment", :order => [:order])
     @logos = Admininfo.all(:category => "logo", :order => [:order])
+    @main_disp = Admininfo.all(:category => "main_display", :order => [:order])
     
     render 'admin/admininfos/admininfo', :layout => false
   end
@@ -113,6 +114,52 @@ class Admin::AdmininfosController < ApplicationController
   	@delivery = Basicinfo.all(:category => "delivery", :order => [:order])  
   	
   	render :partial => "delivery_table"
+    
+  end
+  
+  def save_admininfos_main_display
+    id = params[:id].to_i
+    text = params[:text] 
+    color = params[:color]
+
+    @info = Admininfo.get(id)
+    @info.content = text
+    @info.info = color
+    
+    if @info.save
+      if params[:file] != nil and params[:file] != ""
+        
+        del_path = "#{RAILS_ROOT}/public/images/admin/main/#{@info.file_name}"
+        if File.exists?(del_path)
+          FileUtils.remove_entry_secure(del_path)
+        end
+        
+        file = params[:file]
+        dir = "#{RAILS_ROOT}/public/images/admin/main/"
+        puts_message dir
+        
+        FileUtils.mkdir_p dir if not File.exist?(dir)
+        MaindisplayUploader.store_dir = dir
+        
+        uploader = MaindisplayUploader.new
+        
+        uploader.store!(file)
+
+        file_ext = File.extname(file.original_filename)
+        file_name = @info.id.to_s
+        @info.file_name = @info.id.to_s + file_ext
+        
+        if @info.save
+          render :text => "success"
+        else
+          render :text => "fail"
+        end
+      end
+      
+    else
+      render :text => "fail"
+    end
+    
     
   end
   

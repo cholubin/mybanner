@@ -46,7 +46,7 @@ class Admin::MyadminsController < ApplicationController
     @board = "admin"
     @section = "edit"
     
-    @myadmin = Myadmin.get(params[:id])
+    @myadmin = Myadmin.get(params[:id].to_i)
 
     render 'myadmin'    
   end
@@ -112,17 +112,19 @@ class Admin::MyadminsController < ApplicationController
   # PUT /myadmins/1.xml
   def update
     @myadmin = Myadmin.get(params[:id])
-
-    respond_to do |format|
-      if @myadmin.update_attributes(params[:myadmin])
-        flash[:notice] = 'Myadmin was successfully updated.'
-        format.html { redirect_to(@myadmin) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @myadmin.errors, :status => :unprocessable_entity }
-      end
+    
+    if params[:email] != nil and params[:email] != ""
+      @myadmin.email = params[:email]
     end
+    
+    if params[:new_password] != nil and params[:new_password] != ""
+      @myadmin.password = params[:new_password]
+    end
+    
+    if @myadmin.save
+      redirect_to(@myadmin)
+    end
+    
   end
 
   # DELETE /myadmins/1

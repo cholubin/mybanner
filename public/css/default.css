@@ -209,9 +209,23 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 #main-button:after {content:" "; display:block; clear:both;}
 #main-button li { float: left; width: 182px; height: 54px; background: no-repeat left top; display:table; margin: 0 0 0 8px;cursor: pointer; display:inline; position: relative; }
 #main-button li span { position: absolute; display: block; width: 172px; padding: 0 5px; text-align: center; color: white; font-weight: bold; letter-spacing: -1px; text-shadow: 1px 1px #666; filter:progid:DXImageTransform.Microsoft.DropShadow(offX=1, offY=1, color='#666666')  }
-#main-button li.applegreen { background-image: url('/images/main/button-main-applegreen.png'); }
-#main-button li.deepgreen { background-image: url('/images/main/button-main-deepgreen.png'); }
-#main-button li.deepgray { background-image: url('/images/main/button-main-deepgray.png'); }
+
+#main-button li.red { background-image: url('/images/main/button-main-red.png'); }
+#main-button li.orange { background-image: url('/images/main/button-main-orange.png'); }
+#main-button li.yellow { background-image: url('/images/main/button-main-yellow.png'); }
+#main-button li.cyan { background-image: url('/images/main/button-main-cyan.png'); }
+#main-button li.green { background-image: url('/images/main/button-main-green.png'); }
+#main-button li.yellowish { background-image: url('/images/main/button-main-yellowish.png'); }
+#main-button li.skyblue { background-image: url('/images/main/button-main-skyblue.png'); }
+#main-button li.lightblue { background-image: url('/images/main/button-main-lightblue.png'); }
+#main-button li.blue { background-image: url('/images/main/button-main-blue.png'); }
+#main-button li.magenta { background-image: url('/images/main/button-main-magenta.png'); }
+#main-button li.purple { background-image: url('/images/main/button-main-purple.png'); }
+#main-button li.violet { background-image: url('/images/main/button-main-violet.png'); }
+#main-button li.vintage { background-image: url('/images/main/button-main-vintage'); }
+#main-button li.gray { background-image: url('/images/main/button-main-gray.png'); }
+#main-button li.darkgray { background-image: url('/images/main/button-main-darkgray.png'); }
+
 #main-image { position: relative; width: 580px; height: 326px; line-height: 326px; color: #ccc; background: #eee; text-align: center; }
 #main-image img { position: absolute; top: 0; left: 0; display: none; z-index: 1; }
 #main-notice, #main-qna { position: relative;width: 400px; padding-top: 18px; height: 118px; }

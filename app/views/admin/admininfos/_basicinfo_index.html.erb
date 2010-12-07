@@ -1,4 +1,56 @@
 <div id="feature_wrapper">
+	<p1>메인화면</p1>
+	<br>
+</div>
+
+<table class="board_table">
+    <thead class="main_display">
+        <tr>
+            <th class="board_thead" width="150px"><center>구분</center></th>
+            <td class="board_thead" width="200px"><center>버튼 텍스트</center></td>
+			<td class="board_thead" width="100px"><center>배경색상</center></td>
+			<td class="board_thead" width="200px"><center>설명 이미지</center></td>
+			<td class="board_thead" width="100px">&nbsp;</td>
+        </tr>
+    </thead>
+ 
+    <tbody class="main_display">
+        <%
+		@main_disp.each do |disp|
+		%>
+			<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile_#{disp.id}"} ) do -%>
+			<tr>
+				<input type="hidden" name="id" value="<%= disp.id %>">
+	            <td class="board_tbody" ><%= disp.name %></td>
+				<td class="board_tbody" ><input type="text" style="width:200px;" name="text" value="<%= disp.content %>"></td>
+				<td class="board_tbody" >
+					<select name="color" >
+						<option value="red" <%= "selected" if disp.info == "red" %> >red</option>
+						<option value="orange" <%= "selected" if disp.info == "orange" %> >orange</option>
+						<option value="yellow" <%= "selected" if disp.info == "yellow" %> >yellow</option>
+						<option value="cyan" <%= "selected" if disp.info == "cyan" %> >cyan</option>
+						<option value="green" <%= "selected" if disp.info == "green" %> >green</option>
+						<option value="yellowish" <%= "selected" if disp.info == "yellowish" %> >yellowish</option>
+						<option value="skyblue" <%= "selected" if disp.info == "skyblue" %> >skyblue</option>
+						<option value="lightblue" <%= "selected" if disp.info == "lightblue" %> >lightblue</option>
+						<option value="blue" <%= "selected" if disp.info == "blue" %> >blue</option>
+						<option value="magenta" <%= "selected" if disp.info == "magenta" %> >magenta</option>
+						<option value="purple" <%= "selected" if disp.info == "purple" %> >purple</option>
+						<option value="violet" <%= "selected" if disp.info == "violet" %> >violet</option>
+						<option value="vintage" <%= "selected" if disp.info == "vintage" %> >vintage</option>
+						<option value="gray" <%= "selected" if disp.info == "gray" %> >gray</option>
+						<option value="darkgray" <%= "selected" if disp.info == "darkgray" %> >darkgray</option>
+					</select>
+				</td>
+	            <td class="board_tbody" ><input type="file" class="val" name="file"><%= disp.file_name if disp.file_name != nil %></td>
+				<td class="board_tbody" ><center><input class="disp_save" name="<%= disp.id %>" id="<%= disp.id %>" type="button" value="저장"></center></td>
+	        </tr>
+			<%end %>
+		<%end %>
+    </tbody>
+</table>
+<br><br>
+<div id="feature_wrapper">
 	<p1>로고</p1>
 	<br>
 </div>
@@ -116,6 +168,20 @@
 <br><br>
 
 <script language="Javascript">
+$('.disp_save').live("click",function(event){
+	$id = $(this).attr("id");
+	$btn_text = $('#text_'+$id).val();
+	
+	if ($btn_text == ""){
+		alert("내용을 입력해 주세요!");
+		$('#text_'+$id).focus();
+		return false;
+	}else{
+		// editor.js 
+		disp_FileUpload($id);
+	}
+})
+
 $('.save').live("click",function(event){
 	$category = $(this).parents('tbody').attr("class");
 	$id = $(this).attr("id");

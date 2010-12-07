@@ -51,4 +51,21 @@ function Callback_req_submit(request,state){
 	}
 }
 
+
+// 메인화면 이미지 업로드 이벤트
+function disp_FileUpload(id){
+		var frm;
+		frm = $('#frmFile_'+id);
+		frm.attr("action","/admin/admininfos/save_admininfos_main_display");
+		frm.ajaxForm(disp_FileuploadCallback); 
+		frm.submit();
+}
 				
+function disp_FileuploadCallback(data,state){
+	if (data=="error"){
+		alert("파일전송중 오류가 발생하였습니다.\n다시한번 시도해주세요.");
+		//location.reload();
+		return false;
+	}
+	alert('저장이 완료되었습니다!');
+}

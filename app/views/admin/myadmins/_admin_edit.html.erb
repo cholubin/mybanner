@@ -10,47 +10,34 @@
 
 		<!-- <템플릿 정보창 한줄 반복 구간입니다. -->
 				<table>
-				<% form_for(@admin) do |f| %>
-				<%= f.error_messages %>
+					<% form_tag :action => :update, :method => 'post' do %>
+					<input type="hidden" name="id" value="<%= @myadmin.id %>">
 					<tr>
 						<td>
 							<!-- <템플릿 정보 반복 구간입니다.> -->
 							<table class="register_table">
 								<tr>
 								<td class="register_td" width="160"><img src="/images/mypage/check_empty.gif">아이디</td>
-								<td class="register_td" width="570">&nbsp;<%= current_admin.admin_id %></td>
+								<td class="register_td" width="570">&nbsp;<%= @myadmin.admin_id %></td>
 								</tr>
 								<tr>
 								<td class="register_td" width="160"><img src="/images/mypage/check_empty.gif">이름</td>
-								<td class="register_td" width="570">&nbsp;<%= current_admin.name %></td>
+								<td class="register_td" width="570">&nbsp;<%= @myadmin.name %></td>
 								</tr>								
 								<tr>
 								<td class="register_td" width="160"><img src="/images/mypage/check.jpg">현재 비밀번호</td>
 								<td class="register_td" width="570">
-								<input class="field_1" type="password" value="" name="admin[current_password]"/></td>
+								<input class="field_1" type="password" value="" name="current_password"/></td>
 								</tr>
 								<tr>
 								<td class="register_td" width="160"><img src="/images/mypage/check.jpg">수정 비밀번호</td>
-								<td class="register_td" width="570"><input class="field_1" type="password" value="" name="admin[new_password]"/></td>
+								<td class="register_td" width="570"><input class="field_1" type="password" value="" name="new_password"/></td>
 								</tr>
 
 								<tr>
 								<td width="160"><img src="/images/mypage/check.jpg">이메일 수정 </td>
 								<td width="100">
-									<input class="field_1" type="text" value="<%= @admin.email %>" name="admin[email]"/></td>
-								<!-- <td width="20"> @</td>
-								<td width="100">
-									<input class="field_1" type="text" value="" name="name"/></td>
-							    <td width="350">
-										<select>
-											<option value="0" > 선택</option>
-											<option value="1" > gmail.com </option>
-											<option value="2" > hotmail.com </option>
-											<option value="3" > yahoo.com </option>
-											<option value="4" > naver.com </option>
-											<option value="5" > hanmail.net </option>
-							        	</select>
-									</td> -->
+									<input class="field_1" type="text" value="<%= @myadmin.email %>" name="email"/></td>
 								</tr>
 
 							</table>
@@ -59,12 +46,13 @@
 					</tr>
 				
 				</table>
+				
 		<!-- <템플릿 정보창 한줄 반복 구간입니다. -->
 
 
 	<div id="line_bottom1"></div>
 	
-		<table width="732">
+		<table width="800">
 			<tr>
 				<td colspan="2" height="15">
 				 </tr>
@@ -73,4 +61,4 @@
 				<td width="62" align="right"><%= image_submit_tag("/images/mypage/confirm.jpg") %><a href="mypage_change02.html"></td>
 				</tr>
 		</table>
-		<%end%>
+		<%end %>
