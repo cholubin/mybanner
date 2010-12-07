@@ -60,7 +60,7 @@
         <tr>
             <th class="board_thead" width="150px"><center>구분</center></th>
             <td class="board_thead" width="500px"><center>내용</center></td>
-			<td class="board_thead" width="150px"><center><input type="button" class="save_all" value="로고 저장"></center></td>
+			<td class="board_thead" width="150px">&nbsp;</td>
         </tr>
     </thead>
  
@@ -68,11 +68,15 @@
         <%
 		@logos.each do |logo|
 		%>
+		<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile_#{logo.id}"} ) do -%>
+		<input type="hidden" name="id" value="<%= logo.id %>">
+		<input type="hidden" name="name" value="<%= logo.name %>">
 		<tr>
             <td class="board_tbody" width="150px"><%= logo.name %></td>
-            <td class="board_tbody" width="500px"><input type="file" class="val" id="logo_<%= logo.id %>" style="width:450px;" value="<%= logo.content %>" placeholder="<%= logo.info %>"></td>
-			<td class="board_tbody" width="150px"><center><input class="save" id="<%= logo.id %>" type="button" value="저장"></center></td>
+            <td class="board_tbody" width="500px"><input type="file" class="val" name="file" style="width:450px;"><%= logo.file_name if logo.file_name != nil %></td>
+			<td class="board_tbody" width="150px"><center><input class="logo_save" id="<%= logo.id %>" type="button" value="저장"></center></td>
         </tr>
+		<%end %>
 		<%end %>
     </tbody>
 </table>
@@ -180,6 +184,12 @@ $('.disp_save').live("click",function(event){
 		// editor.js 
 		disp_FileUpload($id);
 	}
+})
+
+$('.logo_save').live("click",function(event){
+	$id = $(this).attr("id");
+	
+	logo_FileUpload($id);
 })
 
 $('.save').live("click",function(event){

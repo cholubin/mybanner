@@ -11,7 +11,7 @@ class Admin::AdmininfosController < ApplicationController
     @basicinfos = Admininfo.all(:category => "basic_info", :order => [:order])
     @agreements = Admininfo.all(:category => "agreement", :order => [:order])
     @payments = Admininfo.all(:category => "payment", :order => [:order])
-    @logos = Admininfo.all(:category => "logo", :order => [:order])
+    @logos = Admininfo.all(:category => "logos", :order => [:order])
     @main_disp = Admininfo.all(:category => "main_display", :order => [:order])
     
     render 'admin/admininfos/admininfo', :layout => false
@@ -117,6 +117,55 @@ class Admin::AdmininfosController < ApplicationController
     
   end
   
+  
+  def save_logo
+    id = params[:id].to_i
+    name = params[:name]
+    
+    @info = Admininfo.get(id)
+    @info.name = name
+    
+    if @info.save
+      if params[:file] != nil and params[:file] != ""
+        
+        del_path = "#{RAILS_ROOT}/public/images/admin/main/#{@info.file_name}"
+        if File.exists?(del_path)
+          FileUtils.remove_entry_secure(del_path)
+        end
+        
+        file = params[:file]
+        dir = "#{RAILS_ROOT}/public/images/admin/main/"
+        
+        FileUtils.mkdir_p dir if not File.exist?(dir)
+        LogoUploader.store_dir = dir
+        
+        uploader = LogoUploader.new
+        
+        uploader.store!(file)
+
+        file_ext = File.extname(file.original_filename)
+        file_name = @info.info
+        @info.file_name = file_name + file_ext
+        
+        if File.exists?(dir + "logo" + file_ext)
+          File.rename dir + "logo" + file_ext, dir + @info.file_name
+        end
+        
+        
+        if @info.save
+          render :text => "success"
+        else
+          render :text => "fail"
+        end
+      end
+      
+    else
+      render :text => "fail"
+    end
+    
+    
+  end
+  
   def save_admininfos_main_display
     id = params[:id].to_i
     text = params[:text] 
@@ -159,7 +208,6 @@ class Admin::AdmininfosController < ApplicationController
     else
       render :text => "fail"
     end
-    
     
   end
   

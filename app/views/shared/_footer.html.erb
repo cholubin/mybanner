@@ -38,7 +38,7 @@
 	</div>
 	<div id="footer">
 		<div id="footer-wrap">
-			<h2><img src="/images/default/copyright-default-logo.png" alt="<%= Admininfo.first(:category => "basic_info", :name => "회사명").content %>" width="160" height="60" alt="###사이트제목###" /></h2>
+			<h2><img src="/images/admin/main/<%= Admininfo.first(:category => "logos", :info => "logo_bottom").file_name %>" alt="<%= Admininfo.first(:category => "basic_info", :name => "회사명").content %>" width="160" height="60" alt="###사이트제목###" /></h2>
 			<address>
 				<p class="address"><%= Admininfo.first(:category => "basic_info", :name => "회사주소").content %></p>
 				<p class="telephone"><%= Admininfo.first(:category => "basic_info", :name => "전화번호").content %></p>

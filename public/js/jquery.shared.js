@@ -269,7 +269,7 @@ function repositionViews() {
 
 // 임시 퍼포먼스용 CSS바꾸기
 
-function skin(change) {
+function _skin(change) {
 	now_skin = getCookie("skin");
 	
 	if(!now_skin) {
@@ -351,7 +351,7 @@ $(function () {
 	$("body").delegate("li.preview a","click",function() { quickPreview(740,540,$(this).attr("href"),"ajaxloadpage"); return false })
 	$("body").delegate(".withdraw","click", function() { popupView(380,310,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-edit-order","click", function() { popupView(620,340,$(this).attr("href")); return false });
-	$(".tempskin").click(function() { skin(1) });
+	// $(".tempskin").click(function() { skin(1) });
 	
 	skin();
 	$.preloadCssImages();
