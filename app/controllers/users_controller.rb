@@ -189,17 +189,29 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   def destroy
     
-    @user = User.get(params[:id])
+    @user = User.get(params[:user_id])
     
     if signed_in? && current_user.id == @user.id
 
-      user_dir = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/"
-      FileUtils.rm_rf user_dir
+      begin
+        user_dir = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/"
+        FileUtils.rm_rf user_dir
+        
+        puts_message "사용자 폴더 삭제 성공!"
+      rescue
+        puts_message "사용자 폴더 삭제 실패!"
+      end
+      
+      # 탈퇴 테이블로 이동 
+        @user_widthdraw = User_widthdraw.new
+        @user_widthdraw.userid = @user.userid
+        @user_widthdraw.name = @user.name
+        @user_widthdraw.email = @user.email
+        @user_widthdraw.withdrawal_reason = params[:reason]
+        @user_widthdraw.save
+        
       
       begin
-        @mycarts = Mycart.all(:user_id => current_user.id)  
-        @mycarts.destroy
-
         @freeboards = Freeboard.all(:user_id => current_user.id)  
         @freeboards.destroy
       
@@ -216,22 +228,21 @@ class UsersController < ApplicationController
       end
       
       if @user.destroy
+        sign_out
+        render :text => "success"
       else
         puts_message "사용자 테이블 삭제 진행중 오류 발생!"
         puts @user.errors
       end
             
-      sign_out
-
-            
-      @menu = "home"
-      @board = "user"
-      @section = "edit"
+      # @menu = "home"
+      # @board = "user"
+      # @section = "edit"
       
-      render 'users/withdrawal_finished'
+      # render 'users/withdrawal_finished'
       # render '/users/withdrawal_finished'  이경우에는 users컨트롤러가 아닌 users폴더내의 템플릿을 참고하게 된다. 즉 기본 레이아웃을 가져오지 않는다.
     else
-      redirect_to '/'
+      render :text => "fail"
     end
   end
   

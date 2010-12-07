@@ -44,9 +44,12 @@ class Admin::UsersController < ApplicationController
       user_dir = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/"
       FileUtils.rm_rf user_dir
       
-      @mycarts = Mycart.all(:user_id => @user.id)  
-      @mycarts.destroy
+      # @mycarts = Mycart.all(:user_id => @user.id)  
+      # @mycarts.destroy
 
+      @mytemplates = Mytemplate.all(:user_id => @user.id)
+      @mytemplates.destroy
+      
       @freeboards = Freeboard.all(:user_id => @user.id)  
       @freeboards.destroy
 

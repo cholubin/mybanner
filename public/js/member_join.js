@@ -86,14 +86,14 @@ function member_modify(){
 		alert('정보수정을 위해서는 비밀번호가 필요합니다!');
 		$('#user-password').focus();
 		return false;
-	}
+	};
 
 	
 	if ($('#user-email').val() == ""){
 		alert("메일주소를 입력해주세요!");
 		$('#user-email').focus();
 		return false;
-	}
+	};
 	
 
 
@@ -137,3 +137,24 @@ $('#user-id').live("change",function(){
 		}
 	});
 });
+
+// 회원탈퇴 =======================================================================
+$('.submit-button').live("click",function(){
+	if ( $(this).attr("id") != ""){
+		if (window.confirm("정말 탈퇴하시겠습니까?\n탈퇴하신 후에는 고객님의 모든 데이타가 삭제됩니다!")){
+			$.ajax({
+				data:'user_id='+$(this).attr("id"), 
+				dataType:'script', 
+				type:'post', 
+				url:'/users/destroy',
+				success: function(request){
+					alert("회원탈퇴가 완료되었습니다!");
+					$('#popup-closeButton').click();
+				}
+			});
+		}else{
+			return false;
+		}
+	}
+	
+})
