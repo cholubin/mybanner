@@ -20,7 +20,7 @@
 		<tr width="730" height="220">
             <td class="imgmargin_banner" colspan="2" >
 				<center>
-					<img width="<%=(@mytemplate.is_col) ? "400" : "700" %>" src="<%= temp_image_path +"?"+ Time.now.to_f.to_s %>" style="cursor:hand;" onClick="Javascript:openWebTopEditor('<%= User.get(@mytemplate.user_id).userid %>','<%= @mytemplate.id %>','/admin/mytemplates/<%= @mytemplate.id %>?reload=yes');" >
+					<img width="<%=(@mytemplate.is_col) ? "200" : "700" %>" src="<%= temp_image_path +"?"+ Time.now.to_f.to_s %>" style="cursor:hand;" onClick="Javascript:openWebTopEditor('<%= User.get(@mytemplate.user_id).userid %>','<%= @mytemplate.id %>','/admin/mytemplates/<%= @mytemplate.id %>?reload=yes');" >
 				</center>
 			</td>
         </tr>

@@ -11,7 +11,8 @@ class MytemplatesController < ApplicationController
     # if not File.exist?(user_path)
     #   puts %x[ln -s "#{RAILS_ROOT}/public/basic_photo/" "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/images/basic_photo"]
     # end
-    Basicinfo.up
+    
+    # Basicinfo.up
         
     @menu = "mytemplate"
     @board = "mytemplate"
