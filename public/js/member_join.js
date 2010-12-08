@@ -139,7 +139,7 @@ $('#user-id').live("change",function(){
 });
 
 // 회원탈퇴 =======================================================================
-$('.submit-button').live("click",function(){
+$('.widthdraw_button').live("click",function(){
 	if ( $(this).attr("id") != ""){
 		if (window.confirm("정말 탈퇴하시겠습니까?\n탈퇴하신 후에는 고객님의 모든 데이타가 삭제됩니다!")){
 			$.ajax({

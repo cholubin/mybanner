@@ -1,5 +1,6 @@
 #이미 추가된 파일명을 삭제시에는 git rm --cached filename 를 이용한다.
 db/development.sqlite3
+db/seeds.rb
 .DS_Store
 *.sqlite3
 *.log
