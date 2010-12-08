@@ -29,7 +29,7 @@
 		@stats = Basicinfo.all(:category => "order_process") 
 		@stats.each do |s|
 		%>
-		<option value="<%= s.code %>" <%= "selected" if s.code == params[:stat] %>><%= s.name %></option>
+		<option value="<%= s.code %>" <%= "selected" if s.code.to_s == params[:stat] %>><%= s.name %></option>
 		<%
 		end
 		%>
