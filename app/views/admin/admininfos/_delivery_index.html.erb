@@ -123,24 +123,29 @@ $('.save_all').live("click",function(event){
 	})
 	
 	$.ajax({
-		data:'name='+$gubun+'&price='+$prices+'&category='+$category+'&ids='+$ids, 
 		dataType:'script', 
 		type:'post', 
-		url:'/admin/admininfos/save_deliveries',
+		url:'/admin/admininfos/session_check',
 		success: function(request){
-			
-			if(request == "success"){
-				$('#table_content').html(request);
-				alert("배송정보의 저장이 완료되었습니다!");
-			}else if(request == "fail"){
-				alert("저장이 실패!");
+			if(request == "logined"){
+				$.ajax({
+					data:'name='+$gubun+'&price='+$prices+'&category='+$category+'&ids='+$ids, 
+					dataType:'script', 
+					type:'post', 
+					url:'/admin/admininfos/save_deliveries',
+					success: function(request){
+						$('#table_content').html(request);
+						alert("배송정보의 저장이 완료되었습니다!");
+					}
+				});
 			}else{
 				alert("장시간 사용하지 않아 자동 로그아웃 되었습니다!");
 				location.replace("/admin/login");
 			}
 			
-			
 		}
 	});
+	
+	
 })
 </script>
