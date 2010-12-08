@@ -133,7 +133,7 @@ function openWebTopEditor_user(user,id,href,etc) {
     var ua = navigator.userAgent;
     var ieRe = /MSIE (\S+); Windows NT/;
     // Windows version check, Internet Explorer version Check
-	if( (ua.indexOf("NT 5.2") != -1 || ua.indexOf("NT 5.1") != -1 || ua.indexOf("NT 5.0") != -1) && ieRe.test(ua)) {
+	if(ieRe.test(ua)) {
 		popupView(860,435,"/pages/recommend_chrome", function() {
 			$("#button .accept").click(function() { $("#chrome_install").show(); return false; });
 			$("#button .decline").click(function() { openWebTopEditor(user,id,href,etc+"&pdf_button=no"); return false; });
@@ -269,55 +269,7 @@ function repositionViews() {
 
 // 임시 퍼포먼스용 CSS바꾸기
 
-function _skin(change) {
-	now_skin = getCookie("skin");
-	
-	if(!now_skin) {
-		setCookie("skin","cloud","1");
-	} else if(change == true) {
-		switch(now_skin) {
-			case "modern":
-				$("#site_logo img").attr({"src":"/images/skin.cloud/default_logo.png"})
-				$("#skin_css").attr("href","/css/skin.cloud.css");
-				setCookie("skin","cloud","1");
-			break;
-			case "cloud":
-				$("#site_logo img").attr({"src":"/images/skin.grace/default_logo.png"})
-				$("#skin_css").attr("href","/css/skin.grace.css");
-				setCookie("skin","grace","1");
-			break;
-			case "grace":
-				$("#site_logo img").attr({"src":"/images/skin.purplenight/default_logo.png"})
-				$("#skin_css").attr("href","/css/skin.purplenight.css");
-				setCookie("skin","purplenight","1");
-			break;
-			case "purplenight":
-				$("#site_logo img").attr({"src":"/images/skin.modern/default_logo.png"})
-				$("#skin_css").attr("href","/css/skin.modern.css");
-				setCookie("skin","modern","1");
-			break;
-		}
-	} else {
-		switch(now_skin) {
-			case "cloud":
-				$("#site_logo img").attr({"src":"/images/skin.cloud/default_logo.png"})
-				$("#skin_css").attr("href","/css/skin.cloud.css");
-			break;
-			case "grace":
-				$("#site_logo img").attr({"src":"/images/skin.grace/default_logo.png"})
-				$("#skin_css").attr("href","/css/skin.grace.css");
-			break;
-			case "purplenight":
-				$("#site_logo img").attr({"src":"/images/skin.purplenight/default_logo.png"})
-				$("#skin_css").attr("href","/css/skin.purplenight.css");
-			break;
-			case "modern":
-				$("#site_logo img").attr({"src":"/images/skin.modern/default_logo.png"})
-				$("#skin_css").attr("href","/css/skin.modern.css");
-			break;
-		}
-	}
-}
+
 $(function () {
 	// 메인 페이지 이미지 교체 액션
 	$("#main-button li:eq(0)").click(function() { mainImageChange(0) });
@@ -352,8 +304,6 @@ $(function () {
 	$("body").delegate(".withdraw","click", function() { popupView(380,310,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-edit-order","click", function() { popupView(620,340,$(this).attr("href")); return false });
 	// $(".tempskin").click(function() { skin(1) });
-	
-	skin();
 	$.preloadCssImages();
 });
 

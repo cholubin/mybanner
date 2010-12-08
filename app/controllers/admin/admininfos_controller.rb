@@ -3,6 +3,15 @@
 class Admin::AdmininfosController < ApplicationController
   before_filter :authenticate_admin!      
 
+  def session_check
+    puts_message "여기 들어오냐?"
+    if !admin_signed_in?
+      redirect_to '/admin/login'
+    else
+      render :text => "logined"
+    end
+  end
+  
   def index
     @menu = "admininfo"
     @board = "basicinfo"
@@ -153,10 +162,16 @@ class Admin::AdmininfosController < ApplicationController
         
         
         if @info.save
+          puts_message "로고저장 완료!"
           render :text => "success"
         else
+          puts_message "로고저장 실패!"
           render :text => "fail"
         end
+      
+      else
+        puts_message "로고저장 완료!"
+        render :text => "success"
       end
       
     else
@@ -167,6 +182,7 @@ class Admin::AdmininfosController < ApplicationController
   end
   
   def save_admininfos_main_display
+    
     id = params[:id].to_i
     text = params[:text] 
     color = params[:color]
@@ -199,13 +215,20 @@ class Admin::AdmininfosController < ApplicationController
         @info.file_name = @info.id.to_s + file_ext
         
         if @info.save
+          puts_message "저장완료!"
           render :text => "success"
+          
         else
+          puts_message "저장실패!"
           render :text => "fail"
         end
+      else
+        puts_message "저장완료!"
+        render :text => "success"
       end
       
     else
+      puts_message "저장실패!"
       render :text => "fail"
     end
     
@@ -218,15 +241,20 @@ class Admin::AdmininfosController < ApplicationController
 
      @ids_arrary = id.split(",")
      @contents_array = content.split("$$")
-
-     i = 0
-     @ids_arrary.each do |k|
-       @admininfo = Admininfo.get(k.to_i)
-       @admininfo.content = @contents_array[i]
-       @admininfo.save
-       i += 1
-     end
-
+     
+     begin
+       i = 0
+       @ids_arrary.each do |k|
+         @admininfo = Admininfo.get(k.to_i)
+         @admininfo.content = @contents_array[i]
+         @admininfo.save
+         i += 1
+       end
+      rescue
+        puts_message "관리자 기본정보 저장 실패!"
+        render :text => "fail"
+      end
+       
      puts_message "관리자 기본정보 저장성공!"
      render :text => "success"
 

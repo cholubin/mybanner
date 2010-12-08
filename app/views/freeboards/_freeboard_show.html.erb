@@ -36,7 +36,7 @@
 				<li class="author"><%= writer_name %></li>
 				<li class="date"><%= comm.updated_at.strftime('%Y-%m-%d') %></li>
 				<li class="comment"><%= comm.content.gsub("\n","<br>") %></li>
-				<% if comm.user_id == current_user.id and comm.is_admin == false%>
+				<% if signed_in? and comm.user_id == current_user.id and comm.is_admin == false%>
 				<li id="del_<%= comm.id %>" class="delete"><a href="#삭제">삭제</a></li>
 				<%end %>
 			</ul>
@@ -50,7 +50,14 @@
 					<label for="comment">댓글내용 <span>댓글을 작성하여 내용을 보충하거나, 답변을 등록할 수 있습니다.</span></label>
 					<textarea id="comment" name="comment" ></textarea>
 				</div>
-				<div class="actions"><a href="#등록하기" class="submit_button"><input type="submit" value="등록하기"/></a><a href="#다시쓰기" class="reset_button"><input type="reset" value="다시쓰기"/></a></div>
+				<div class="actions">
+					<%if signed_in? %>
+						<a href="#등록하기" id="commnet_save" class="submit_button"><input type="submit" value="등록하기"/></a>
+						<a href="#다시쓰기" class="reset_button"><input type="reset" value="다시쓰기"/></a></div>
+					<%else %>
+						<a href="/login" class="submit_button ajax-sign-in"><input type="submit" value="등록하기"/></a>
+						<a href="/login" class="reset_button ajax-sign-in"><input type="reset" value="다시쓰기"/></a></div>
+					<%end %>
 			</fieldset>
 			</form>
 			
@@ -69,7 +76,7 @@
 	<p><a href="/freeboards?search=<%=params[:search]%>&page=<%=params[:page]%>" class="back-list">목록으로 돌아가기</a></p>
 </div>
 <script type="text/javascript">
-	$('.submit_button').click(function(){
+	$('#commnet_save').click(function(){
 		if($('#comment').val() == ""){
 			alert("내용을 입력해 주세요!");
 			$('#comment').focus();

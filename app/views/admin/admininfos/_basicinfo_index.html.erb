@@ -18,7 +18,7 @@
         <%
 		@main_disp.each do |disp|
 		%>
-			<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile_#{disp.id}"} ) do -%>
+			<% form_tag({:action => ""}, {:multipart => true, :id => "frmFile_#{disp.id}"} ) do -%>
 			<tr>
 				<input type="hidden" name="id" value="<%= disp.id %>">
 	            <td class="board_tbody" ><%= disp.name %></td>
@@ -176,20 +176,50 @@ $('.disp_save').live("click",function(event){
 	$id = $(this).attr("id");
 	$btn_text = $('#text_'+$id).val();
 	
-	if ($btn_text == ""){
-		alert("내용을 입력해 주세요!");
-		$('#text_'+$id).focus();
-		return false;
-	}else{
-		// editor.js 
-		disp_FileUpload($id);
-	}
+	$.ajax({
+		dataType:'script', 
+		type:'post', 
+		url:'/admin/admininfos/session_check',
+		success: function(request){
+			if(request == "logined"){
+				if ($btn_text == ""){
+					alert("내용을 입력해 주세요!");
+					$('#text_'+$id).focus();
+					return false;
+				}else{
+					// editor.js 
+					disp_FileUpload($id);
+				}
+			}else{
+				alert("장시간 사용하지 않아 자동 로그아웃 되었습니다!");
+				location.replace("/admin/login");
+			}
+			
+		}
+	});
+	
+	
 })
 
 $('.logo_save').live("click",function(event){
 	$id = $(this).attr("id");
 	
-	logo_FileUpload($id);
+	$.ajax({
+		dataType:'script', 
+		type:'post', 
+		url:'/admin/admininfos/session_check',
+		success: function(request){
+			if(request == "logined"){
+				logo_FileUpload($id);
+			}else{
+				alert("장시간 사용하지 않아 자동 로그아웃 되었습니다!");
+				location.replace("/admin/login");
+			}
+			
+		}
+	});
+	
+	
 })
 
 $('.save').live("click",function(event){
@@ -208,7 +238,15 @@ $('.save').live("click",function(event){
 			type:'post', 
 			url:'/admin/admininfos/save_admininfo',
 			success: function(request){
-				alert("저장이 완료되었습니다!");
+				if(request == "success"){
+					alert("저장이 완료되었습니다!");
+				}else if(request == "fail"){
+					alert("저장이 실패!");
+				}else{
+					alert("장시간 사용하지 않아 자동 로그아웃 되었습니다!");
+					location.replace("/admin/login");
+				}
+				
 			}
 		});
 	}
@@ -230,7 +268,14 @@ $('.save_all').click(function(){
 		type:'post', 
 		url:'/admin/admininfos/save_admininfos',
 		success: function(request){
-			alert("저장이 완료되었습니다!");
+			if(request == "success"){
+				alert("저장이 완료되었습니다!");
+			}else if(request == "fail"){
+				alert("저장이 실패!");
+			}else{
+				alert("장시간 사용하지 않아 자동 로그아웃 되었습니다!");
+				location.replace("/admin/login");
+			}
 		}
 	});
 })
