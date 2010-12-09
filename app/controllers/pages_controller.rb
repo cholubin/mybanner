@@ -1,8 +1,11 @@
 # encoding: utf-8
+require 'rexml/document'
+include REXML
 
 class PagesController < ApplicationController
 
   def home
+    
     Basicinfo.up
     Admininfo.up
     Request_code.up
