@@ -51,8 +51,8 @@
 						</tr>
 
 						<tr>
-							<td width="70" class="table_t5">사이즈</td>
-							<td width="180" class="table_t5"><%= Temp.get(@mytemplate.temp_id).size %></td>
+							<td width="70" class="table_t5"><%=(@mytemplate.job_code == 0)? "사이즈":"요청사이즈" %></td>
+							<td width="180" class="table_t5"><%=(@mytemplate.job_code == 0)? (@mytemplate.size):(@mytemplate.size_x+"cm x "+@mytemplate.size_y+"cm") %></td>
 						</tr>
 
 						<tr>

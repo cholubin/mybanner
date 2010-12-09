@@ -30,11 +30,7 @@
 						design_no = temp.category.to_s  + "-" + i	
 					end
 					
-					if temp.size_x != nil and temp.size_y != nil
-						size = temp.size_x + "cm x " + temp.size_y + "cm"
-					else
-						size = "0cm x 0cm" 
-					end
+					size = temp.size 
 					
 					unit_price = temp.price
 				%>

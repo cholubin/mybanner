@@ -132,11 +132,35 @@ class Admin::MytemplatesController < ApplicationController
       
       make_contens_xml(@mytemplate)
       erase_job_done_file_temp(@mytemplate)
+      fatch_modified_size(@mytemplate)
     end
     
     render 'mytemplate'    
   end
 
+  def fatch_modified_size(temp)
+    puts_message "fatch_modified_size Start!"
+    
+    
+    size_file_path = temp.path + "/web/document_size.inf"
+    
+    begin
+      if File.exists?(size_file_path)
+        size_file =  File.open(size_file_path, "r")
+        if size_file
+          size_temp = size_file.sysread(20).gsub(" ","").split(",")
+          size_str = size_temp[0] + "cm x " + size_temp[1] + "cm"
+          temp.size = size_str
+          if temp.save
+            puts_message "Size updating success!"
+          end
+        end
+      end
+    rescue
+      puts_message "Size updating fail!"
+    end
+  end
+  
   def make_contens_xml(temp) 
     
     path = temp.path
