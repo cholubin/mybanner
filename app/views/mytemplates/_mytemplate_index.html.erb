@@ -50,7 +50,7 @@
 				end
 			%>
 			<tr id="<%= my.id.to_s %>" class="item">
-				<td class="check"><input id="chk_<%= my.id.to_s %>" class="chkbox" type="checkbox"  value="<%= my.id.to_s %>" <%= "disabled" if my.job_code == 1 and my.job_status == Basicinfo.first(:category => "job_status", :name => "시안미확정").code %>/></td>
+				<td class="check"><input id="chk_<%= my.id.to_s %>" class="chkbox<%= " order_disable" if my.job_code == 1 and my.job_status == Basicinfo.first(:category => "job_status", :name => "시안미확정").code %>" type="checkbox"  value="<%= my.id.to_s %>" /></td>
 				<td class="date"><a class="request code-<%=my.feedback_code%>"><%= Basicinfo.first(:category => "job_process", :code => my.feedback_code).name %></a><%= my.updated_at.strftime('%y.%m.%d') %></td>
 				<% 
 				if my.job_code == 0 
@@ -279,7 +279,38 @@ $('#zip_search').live("click", function(){
 	}
 });
 
-$('#order').click(function(){
+$('#order').click(function(event){
+	var $unchk_count = 0;
+	
+
+	$('.chkbox:checked').each(function(){
+		if ( $(this).attr("class") == "chkbox order_disable"){
+			id = $(this).val();
+			var price = parseInt($(this).parents("tr").find("td.price").html().replace("원","").replace(",",""));
+		 	tmp_total_price = parseInt($('#total_price').html().replace("원","").replace(",",""));
+		
+			if($(this).attr("checked") == true){
+				tmp_total_price -= price;
+				$(this).attr("checked", false)
+				$('#peice_'+id).attr("disabled", false);
+			}else{
+				tmp_total_price += price;
+				$(this).attr("checked", true)
+				$('#peice_'+id).attr("disabled", true);
+			}
+
+			$('#tmp_total_price').val(tmp_total_price);
+			$('#total_price').html(to_comma(tmp_total_price) + "원");
+			$unchk_count += 1;
+			
+		}
+		
+	})
+	
+	if($unchk_count > 0){
+		alert("시안 미확정 상태의 편집의뢰중 템플릿은 주문하실 수\n없기때문에 자동으로 체크를 해제합니다.");
+	}
+	
 	var temp_array = jQuery.makeArray($('.chkbox:checked'));
 
 	var order_ids = "";

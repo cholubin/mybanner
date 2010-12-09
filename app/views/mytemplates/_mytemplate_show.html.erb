@@ -34,7 +34,7 @@ end
 				<li class="item"><strong class="title">품목</strong><%= Category.get(my.category.to_i).name %></li>
 				<li class="item"><strong class="title">상세품목</strong><%= Subcategory.get(my.subcategory.to_i).name %></li>
 				<li class="designcode"><strong class="title">디자인번호</strong><%= sn_num %></li>
-				<li class="size"><strong class="title"><%=(my.job_code == 0)? "사이즈":"요청사이즈" %></strong><%=(my.job_code == 0)? (my.size):(my.size_x+"cm x "+my.size_y+"cm") %></li>
+				<li class="size"><strong class="title"><%=(my.job_code == 0)? "사이즈":"최초 요청사이즈" %></strong><%=(my.job_code == 0)? (my.size):(my.size_x+"cm x "+my.size_y+"cm") %></li>
 				<li class="date"><strong class="title">최종수정일</strong><%= my.updated_at.strftime('%Y-%m-%d') %></li>
 				<li class="price" id="item_price"><strong class="title">개별금액</strong> <%= Temp.get(my.temp_id).price %>원</li>
 			</ul>
