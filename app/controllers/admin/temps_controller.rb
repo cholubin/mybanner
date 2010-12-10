@@ -320,16 +320,27 @@ class Admin::TempsController < ApplicationController
 
   end
 
-  # DELETE /temps/1
-  # DELETE /temps/1.xml
+  def temp_download
+    temp_id = params[:temp_id].to_i
+    @temp = Temp.get(temp_id)
+    
+    temp_path = @temp.path + ".zip"
+    
+    if File.exists?(temp_path)
+      send_file temp_path, :filename => "template_" + @temp.id.to_s + ".zip" , :type => "application/zip", :stream => "false", :disposition =>
+      'attachment'
+    else
+      render :text => "fail"
+    end
+      
+  end
 
-  
-    def get_img_tags
-      @tp = Temp.find_by_id(params[:id])
-      @tp.included_images  
-      render :json => @tp.included_images
-      # render :text => @tp.included_images    
-    end 
+  def get_img_tags
+    @tp = Temp.find_by_id(params[:id])
+    @tp.included_images  
+    render :json => @tp.included_images
+    # render :text => @tp.included_images    
+  end 
 
 
 

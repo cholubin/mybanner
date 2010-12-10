@@ -165,7 +165,6 @@ var gParaLevel = 0;
 }
 
 
-
 - (CPString)htmlStringFrom:(CPString)aStyledStr
 {
 	gParaLevel = 0;

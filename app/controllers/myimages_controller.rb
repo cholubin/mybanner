@@ -36,7 +36,7 @@ class MyimagesController < ApplicationController
       send_file @myimage_path, :filename => @myimage.name + "." + @myimage.type, :type => @type, :stream => "false", :disposition =>
       'attachment'
       
-    end
+  end
     
     
   end

@@ -18,6 +18,8 @@ var SliderToolbarItemIdentifier = "SliderToolbarItemIdentifier",
     SelectionToolIdentifier = "SelectionToolIdentifier",
     CreateRectBoxIdentifier = "CreateRectBoxIdentifier";
     CreateTextBoxIdentifier = "CreateTextBoxIdentifier";
+    UndoIdentifier = "UndoIdentifier";
+    RedoIdentifier = "RedoIdentifier";
     UseGridIdentifier = "UseGridIdentifier",
     UseGuideIdentifier = "UseGuideIdentifier",
     CharStyleIdentifier = "CharStyleIdentifier",
@@ -70,8 +72,11 @@ gDocItemSizeHeight = 90;
 	CPString mLocalDocPath;
 	var mDocWidth;
 	var mDocHeight;
+	var mSizeScale;
     CPURLConnection mCurDocImageListCon;
 	CPURLConnection mFrameListCon;
+	CPURLConnection mUndoCon;
+	CPURLConnection mRedoCon;
     CPURLConnection mDocumentInfoCon;
 	CPURLConnection mCurDocImageRefreshCon;
 	CPURLConnection mGeneratePDFCon;
@@ -105,6 +110,14 @@ gDocItemSizeHeight = 90;
 	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/textbox.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/textboxHighlighted.png" size:CPSizeMake(30, 25)];
+	[toolItemImagesSelect addObject:lSelectImg];
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/undo.png" size:CPSizeMake(30, 25)];
+	[toolItemImagesNormal addObject:lNormalImg];
+	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/undoHighlighted.png" size:CPSizeMake(30, 25)];
+	[toolItemImagesSelect addObject:lSelectImg];
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/redo.png" size:CPSizeMake(30, 25)];
+	[toolItemImagesNormal addObject:lNormalImg];
+	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/redoHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
 	mSelectedTool = 0;
 	
@@ -147,6 +160,13 @@ gDocItemSizeHeight = 90;
 	if(!mLocalDocPath) {
 		mLocalDocPath = gEncodedDocPath;
 	}
+	
+ 	mSizeScale = 0.1; //  Unit Scale MServer(mm) -> MClient(cm)
+	var lSizeScale = [args objectForKey:@"sizescale"];
+	if(lSizeScale) {
+		mSizeScale = mSizeScale * [lSizeScale floatValue];
+	}
+	
 	if(mLocalDocPath) {
 		 mCurDocPath = [CPString stringWithFormat:"%@%@%@",gBaseURL, gUserPath, mLocalDocPath];
 		var lFilename = [mLocalDocPath lastPathComponent];
@@ -538,12 +558,13 @@ gDocItemSizeHeight = 90;
 		if(info_idx == 0) {
 			var size = CGSizeFromString(lInfoStr);
 			if(size) {
-				mDocWidth = size.width;
-				mDocHeight = size.height;
+				mDocWidth = size.width * mSizeScale;
+				mDocHeight = size.height * mSizeScale;
 				[mDocWidthField setFloatValue:mDocWidth];
 				[mDocHeightField setFloatValue:mDocHeight];
-				var lSizeStr = [CPString stringWithFormat:@"%dmm X %dmm",mDocWidth,mDocHeight];
+				var lSizeStr = [CPString stringWithFormat:@"%dcm X %dcm",mDocWidth,mDocHeight];
 				[mDocSizeField setStringValue:lSizeStr];
+				[mDocSizeField display];
 			}
 		}
 		info_idx ++;
@@ -597,10 +618,10 @@ gDocItemSizeHeight = 90;
 	var new_size = CGSizeMakeZero();
 	mDocWidth = [mDocWidthField floatValue];
 	mDocHeight = [mDocHeightField floatValue];
-	new_size.width = mDocWidth;
-	new_size.height = mDocHeight;
+	new_size.width = mDocWidth / mSizeScale;
+	new_size.height = mDocHeight / mSizeScale;
 	var size_str = CPStringFromSize(new_size);
-	var new_SizeStr = [CPString stringWithFormat:@"%dmm X %dmm",mDocWidth,mDocHeight];
+	var new_SizeStr = [CPString stringWithFormat:@"%dcm X %dcm",mDocWidth,mDocHeight];
 	[mDocSizeField setStringValue:new_SizeStr];
 	[mDocSizeView setNeedsDisplay:YES];
 	[[ProgressWindow sharedWindow] show];
@@ -624,7 +645,11 @@ gDocItemSizeHeight = 90;
 
 - (@action)generatePDF:(id)sender
 {
-	if(confirm("Are you sure?")) {
+	if(confirm("PDF를 생성하시겠습니까?")) {
+		var pressMark = @"NO";
+		if(confirm("인쇄마크를 포함하겠습니까?")) {
+			pressMark = @"YES";
+		}
 		var lFilename = [mCurDocPath lastPathComponent];
 
 		//stringByDeletingPathExtension
@@ -635,7 +660,7 @@ gDocItemSizeHeight = 90;
 		var lPublish_CMD = @"publish";
 		if(mAdminUser)
 			lPublish_CMD = @"admin_publish";
-	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@/%@",gBaseURL ,lPublish_CMD, lDocumentID];
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@/%@?press_mark=%@",gBaseURL ,lPublish_CMD, lDocumentID,pressMark];
 	   	var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 		[[ProgressWindow sharedWindow] show];
 	  	mGeneratePDFCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
@@ -665,6 +690,34 @@ gDocItemSizeHeight = 90;
 {
 	mSelectedTool = [sender tag];
 	[self resetToolButtons];
+}
+
+- (@action)undo:(id)sender
+{
+	var lSpreadIdx = [[mSpreadListView selectionIndexes] firstIndex];
+	if(lSpreadIdx >= 0) {
+		var lFilename = [mCurDocPath lastPathComponent];
+		var lRequest_CMD = @"request_mlayout";
+		if(mAdminUser)
+			lRequest_CMD = @"admin_request_mlayout";
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=Undo&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
+	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
+	    mUndoCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
+	}
+}
+
+- (@action)redo:(id)sender
+{
+	var lSpreadIdx = [[mSpreadListView selectionIndexes] firstIndex];
+	if(lSpreadIdx >= 0) {
+		var lFilename = [mCurDocPath lastPathComponent];
+		var lRequest_CMD = @"request_mlayout";
+		if(mAdminUser)
+			lRequest_CMD = @"admin_request_mlayout";
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=Redo&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
+	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
+	    mRedoCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
+	}
 }
 
 - (@action)useGuide:(id)sender
@@ -761,6 +814,16 @@ gDocItemSizeHeight = 90;
 		[self loadFrameList:data];
 		[[mSpreadView drawingView] setNeedsDisplay:YES];
 	}
+	else if(connection === mUndoCon) {		
+		//[self loadSpreadPreview:data];
+		[self sendFrameListRequest];
+		[self refreshSpreadPreview];
+	}
+	else if(connection === mRedoCon) {		
+		//[self loadSpreadPreview:data];
+		[self sendFrameListRequest];
+		[self refreshSpreadPreview];
+	}
 	else if( connection === mDocumentInfoCon) {
 		//alert("framelist = "+data);
 		[self loadDocumentInfos:data];
@@ -772,7 +835,7 @@ gDocItemSizeHeight = 90;
 	}
 	else if( connection === mGeneratePDFCon) {  
 		[[ProgressWindow sharedWindow] hide];
-		alert("PDF generated successfully.");
+		alert("PDF 생성작업이 끝났습니다.");
 	}  
 	else if( connection === mSetDocumentSizeCon) {
 		var lSpreadIdx = [[mSpreadListView selectionIndexes] firstIndex];
@@ -799,12 +862,12 @@ gDocItemSizeHeight = 90;
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
 	if(mBoolUsePDFBtn) {
-	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
+	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
 	 UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
 	 FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
 	}
 	else {
-	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
+	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
 	 UseGridIdentifier, CPToolbarSpaceItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
 	 FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
 	}
@@ -957,6 +1020,38 @@ gDocItemSizeHeight = 90;
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(selectTool:)];
         [toolbarItem setLabel:"Text"];
+
+        [toolbarItem setMinSize:CGSizeMake(32, 32)];
+        [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+        [toolbarItem setTag:2];
+    }
+    else if (anItemIdentifier == UndoIdentifier)
+    {
+        var image = [toolItemImagesNormal objectAtIndex:3];
+        var highlighted = [toolItemImagesSelect objectAtIndex:3];
+            
+        [toolbarItem setImage:image];
+        [toolbarItem setAlternateImage:highlighted];
+        
+        [toolbarItem setTarget:self];
+        [toolbarItem setAction:@selector(undo:)];
+        [toolbarItem setLabel:"Undo"];
+
+        [toolbarItem setMinSize:CGSizeMake(32, 32)];
+        [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+        [toolbarItem setTag:2];
+    }
+    else if (anItemIdentifier == RedoIdentifier)
+    {
+        var image = [toolItemImagesNormal objectAtIndex:4];
+        var highlighted = [toolItemImagesSelect objectAtIndex:4];
+            
+        [toolbarItem setImage:image];
+        [toolbarItem setAlternateImage:highlighted];
+        
+        [toolbarItem setTarget:self];
+        [toolbarItem setAction:@selector(redo:)];
+        [toolbarItem setLabel:"Redo"];
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];

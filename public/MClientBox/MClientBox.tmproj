@@ -3,22 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>AppController.j</string>
+	<string>StyledTextEditView.j</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>EditController.j</string>
 			<key>lastUsed</key>
-			<date>2010-11-05T06:11:14Z</date>
+			<date>2010-11-20T05:36:43Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>AppController.j</string>
 			<key>lastUsed</key>
-			<date>2010-11-10T02:06:33Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2010-11-19T08:33:00Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -28,25 +26,25 @@
 			<key>filename</key>
 			<string>DrawingView.j</string>
 			<key>lastUsed</key>
-			<date>2010-11-05T06:04:20Z</date>
+			<date>2010-11-18T11:17:57Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>DrawingViewUtils.j</string>
 			<key>lastUsed</key>
-			<date>2010-10-07T07:39:17Z</date>
+			<date>2010-11-18T11:17:56Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>ImagePickerController.j</string>
 			<key>lastUsed</key>
-			<date>2010-11-05T06:04:22Z</date>
+			<date>2010-11-18T11:17:57Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>ImageTrimmer.j</string>
 			<key>lastUsed</key>
-			<date>2010-11-05T06:04:53Z</date>
+			<date>2010-11-19T08:30:32Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -62,7 +60,9 @@
 			<key>filename</key>
 			<string>StyledTextEditView.j</string>
 			<key>lastUsed</key>
-			<date>2010-10-12T11:39:39Z</date>
+			<date>2010-11-20T05:36:43Z</date>
+			<key>selected</key>
+			<true/>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -74,73 +74,29 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>115</integer>
+				<integer>23</integer>
 				<key>line</key>
-				<integer>380</integer>
+				<integer>744</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>363</integer>
+			<integer>723</integer>
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>112</integer>
+				<integer>11</integer>
 				<key>line</key>
-				<integer>380</integer>
+				<integer>744</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>120</integer>
+				<integer>25</integer>
 				<key>line</key>
-				<integer>380</integer>
-			</dict>
-		</dict>
-		<key>DrawingView.j</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>19</integer>
-				<key>line</key>
-				<integer>147</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>142</integer>
-		</dict>
-		<key>DrawingViewUtils.j</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>15</integer>
-				<key>line</key>
-				<integer>48</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>59</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>1</integer>
-				<key>line</key>
-				<integer>48</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>15</integer>
-				<key>line</key>
-				<integer>48</integer>
+				<integer>744</integer>
 			</dict>
 		</dict>
 		<key>EditController.j</key>
@@ -148,60 +104,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>51</integer>
+				<integer>60</integer>
 				<key>line</key>
-				<integer>170</integer>
+				<integer>349</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>153</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>5</integer>
-				<key>line</key>
-				<integer>170</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>51</integer>
-				<key>line</key>
-				<integer>170</integer>
-			</dict>
-		</dict>
-		<key>ImagePickerController.j</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>14</integer>
-				<key>line</key>
-				<integer>83</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>67</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>5</integer>
-				<key>line</key>
-				<integer>83</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>20</integer>
-				<key>line</key>
-				<integer>83</integer>
-			</dict>
+			<integer>338</integer>
 		</dict>
 		<key>ImageTrimmer.j</key>
 		<dict>
@@ -252,41 +162,22 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>56</integer>
+				<integer>19</integer>
 				<key>line</key>
-				<integer>146</integer>
+				<integer>144</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>132</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>44</integer>
-				<key>line</key>
-				<integer>146</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>56</integer>
-				<key>line</key>
-				<integer>146</integer>
-			</dict>
+			<integer>129</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>SpreadEditView.j</string>
 		<string>ImageTrimmer.j</string>
-		<string>ImagePickerController.j</string>
-		<string>DrawingView.j</string>
-		<string>DrawingViewUtils.j</string>
-		<string>AppController.j</string>
 		<string>StyledTextEditView.j</string>
+		<string>AppController.j</string>
 		<string>EditController.j</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>

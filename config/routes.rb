@@ -43,6 +43,7 @@ ActionController::Routing::Routes.draw do |map|
       admin.resources :folders, :mypdfs, :users, :temps, :categories, :notices, :freeboards, :myadmins, :faqs, :mytemplates, :myimages, :myorders, :coppuccinos, :options
   end 
   
+  map.temp_download '/temp_download' , :controller => "/admin/temps", :action => 'temp_download'    
   
   # cappuccino
   map.filelist '/filelist' , :controller => "Cappuccino", :action => 'filelist'    
