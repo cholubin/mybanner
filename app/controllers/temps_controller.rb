@@ -3,7 +3,7 @@ require 'zip/zip'
 require 'zip/zipfilesystem'
 
 class TempsController < ApplicationController
-     before_filter :authenticate_user!
+     # before_filter :authenticate_user!, :only => [:create, :update, :destroy]
 
      
   # GET /temps

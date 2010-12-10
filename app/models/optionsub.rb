@@ -15,7 +15,7 @@ class Optionsub
   property :name,         Text 
   property :price,        String
   property :info,         Text
-  property :priority,        Integer
+  property :priority,     Integer
   
   property :option_id,    Integer
 
