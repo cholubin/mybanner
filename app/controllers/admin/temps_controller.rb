@@ -253,6 +253,12 @@ class Admin::TempsController < ApplicationController
     @temp.category = params[:temp][:category]
     @temp.subcategory = params[:temp][:subcategory]
     
+    if params[:temp][:is_col] == "0"
+      @temp.is_col = false
+    else
+      @temp.is_col = true
+    end
+    
     
     user_list = params[:user_list].split(',')
 
@@ -325,6 +331,7 @@ class Admin::TempsController < ApplicationController
     @temp = Temp.get(temp_id)
     
     temp_path = @temp.path + ".zip"
+    
     
     if File.exists?(temp_path)
       send_file temp_path, :filename => "template_" + @temp.id.to_s + ".zip" , :type => "application/zip", :stream => "false", :disposition =>
