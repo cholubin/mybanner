@@ -8,7 +8,7 @@
 	    <thead class="board_thead">
 	        <tr>
 	            <th class="board_thead_view" width="620px"><%= @notice.title %></th>
-	            <td class="board_thead" width="110px"><%= @notice.created_at.strftime('%Y-%m-%d') %></td>
+	            <td class="board_thead" align="right" width="110px"><%= @notice.created_at.strftime('%Y-%m-%d') %></td>
 
 	        </tr>
 	    </thead>
@@ -28,13 +28,14 @@
 	</table>
 	<div id="line_bottom1"></div>
 			
-	<table width="732">
+	<table width="800">
+		
 		<tr>
-			<td colspan="3" height="15"></tr>
-		<tr>
-			<td width="470">&nbsp;</td>
-			<td width="262" align="right">
+			<td width="470">
 				<a href="/admin/notices?search=<%=params[:search]%>&page=<%=params[:page]%>"><img src="/images/admin/list.jpg"></a>
+			</td>
+			<td width="262" align="right">
+				<a href="/admin/notices/<%= @notice.id %>/edit"><img src="/images/admin/edit.jpg"></a>
 				<%= link_to image_tag("/images/admin/delete.jpg", :border=>0), admin_notice_path, :confirm => '정말 삭제하시겠습니까?', :method => :delete %>				
 			</td>
 

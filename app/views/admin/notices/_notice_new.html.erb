@@ -1,4 +1,4 @@
-<h1>New notice</h1>
+<h1>새공지사항 작성</h1>
 <font color="white">
 
 <% form_for(:notice, :url => admin_notices_path) do |f| %>	
@@ -9,17 +9,15 @@
   </p>
 
   <p>
-    <%= f.label :title %><br />
+    <%= f.label :제목 %><br />
     <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.label :content %><br />
+    <%= f.label :내용 %><br />
     <%= f.text_area :content %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit '작성' %><input type="button" value="취소" onClick="location.href='/admin/notices'">
   </p>
 <% end %>
-
-<%= link_to 'Back', admin_notices_path %>
 </font>

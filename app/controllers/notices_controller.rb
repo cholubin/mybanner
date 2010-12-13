@@ -13,23 +13,6 @@ class NoticesController < ApplicationController
     @board = "notice"
     @section = "index"
     
-
-    
-# temp = 1
-#     100.times { 
-#       notice = Notice.new
-#       notice.is_notice = false
-#       notice.title = "뉴스테스트" + temp.to_s
-#       notice.content = "뉴스테스트" + temp.to_s      
-#       notice.save
-#       temp += 1
-#     }
-     
-
-    # respond_to do |format|
-    #   format.html # index.html.erb
-    #   format.xml  { render :xml => @notices }
-    # end
     render 'notice' 
   end
 
@@ -88,18 +71,25 @@ class NoticesController < ApplicationController
   # PUT /notices/1
   # PUT /notices/1.xml
   def update
-    @notice = Notice.get(params[:id])
-
-    respond_to do |format|
-      if @notice.save(params[:notice])
-        flash[:notice] = 'Notice was successfully updated.'
-        format.html { redirect_to(@notice) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @notice.errors, :status => :unprocessable_entity }
-      end
+    @notice = Notice.get(params[:notice][:temp_id].to_i)
+    if params[:notice][:is_notice] == "1"
+      @notice.is_notice = true
+    else
+      @notice.is_notice = false
     end
+    
+    @notice.title = params[:notice][:title]
+    @notice.content = params[:notice][:content]
+    if @notice.save
+      @menu = "board"
+      @board = "notice"
+      @section = "index"
+    
+      redirect_to(admin_notices_url)
+    else
+      redirect_to(admin_notices_url)
+    end
+    
   end
 
   # DELETE /notices/1
