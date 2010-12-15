@@ -205,8 +205,9 @@ class CappuccinoController < ApplicationController
     
     user = current_user
     # request = params[:request].force_encoding('UTF-8')
-    request = params[:request].force_encoding('UTF-8')
-    puts_message "Request!!!! " + params[:request]
+    request = params[:request].force_encoding("UTF-8")
+    
+    puts_message "Request!!!! " + params[:request] + "인코딩:" + params[:request].encoding.to_s
     
     if user and check_existance_of_path(request)    
      if request == nil
@@ -258,9 +259,13 @@ class CappuccinoController < ApplicationController
     @output = <<-END
 
     END
-    dir = absolute_path(path)
+    dir = absolute_path(path).force_encoding("UTF-8")
     begin            
       @file_names = Dir.entries(dir)
+      @file_names.each do |file|
+        file = file.force_encoding("UTF-8")
+      end
+      
     rescue
       @file_name = "error"
     end
@@ -271,15 +276,17 @@ class CappuccinoController < ApplicationController
       if path[0,8] ==  "/images/"
         if path == "/images/" or path == "/images/basic_photo/"
           @file_names.delete_if{|f| f =~ /^(\.)(.*)/}
-          @file_names.each{|f| @output << f + "\n"}
+          @file_names.each{|f| @output << f.force_encoding("UTF-8") + "\n"}
           @file_names = @output 
           @access_url = ""
+          
         else
-          puts_message "폴더명 ===>" + path.gsub("/images/","").gsub("/","")
+          puts_message "폴더명 ===>" + path.gsub("/images/","").gsub("/","") + "::인코딩::"+path.encoding.to_s
           @file_names = Myimage.all(:user_id => current_user.id, :folder_name => path.gsub("/images/","").gsub("/",""))
-          @file_names.each{|f| @output << f.image_filename + "\n"; puts_message f.image_filename}
+          @file_names.each{|f| @output << f.image_filename.force_encoding("UTF-8") + "\n"; puts_message f.image_filename}
           @file_names = @output 
           @access_url = ""
+          
         end
       else
         @file_names.delete_if{|f| f =~ /^(\.)(.*)/}
@@ -295,13 +302,15 @@ class CappuccinoController < ApplicationController
 
   #used at filelist inorder to send file info if requested path is file   
   def send_file_info(last, path)
+    puts_message "여기가 나와야 해!!!!!!!!!!!!!!!!!"
     puts_message "send_file_info start"
     if not last == nil
       user = current_user
+      path = path.force_encoding("UTF-8")
       @file_names = "#{path.split('/').last}" + "\n"
       # @access_url = "http://graphicartshub.com:4000/user_files/#{user.userid}/templates" + path
       # @access_url = "#{HOSTING_URL}" + "/user_files/"+ "#{user.userid}/mytemplates/" + path      
-      @access_url = "#{HOSTING_URL}" + "/user_files/"+ "#{user.userid}" + path            
+      @access_url = "#{HOSTING_URL}" + "/user_files/"+ "#{user.userid}" + path.force_encoding("UTF-8")            
     else
       @file_names = "error"
       @access_url = ""
@@ -311,12 +320,15 @@ class CappuccinoController < ApplicationController
 
   #used at filelist   
   def absolute_path(path)
-    puts_message "absolute_path start"    
+    puts_message "absolute_path start_here"    
     user = current_user    
     # return ("#{RAILS_ROOT}/public/user_files/#{user.userid}/mytemplates/" + path)
-    return ("#{RAILS_ROOT}/public/user_files/#{user.userid}/" + path)    
-    puts "absolute path: " + "#{RAILS_ROOT}/public/user_files/#{user.userid}/" + path
-    puts_message "absolute_path end"       
+    puts_message "absolute path: " + "#{RAILS_ROOT}/public/user_files/#{user.userid}/" + path
+    puts_message "absolute_path end"
+    absolute_path = "#{RAILS_ROOT}/public/user_files/#{user.userid}/" + path.force_encoding("UTF-8")
+    puts_message "경로는?==>" + absolute_path.encoding.to_s
+    return absolute_path
+    
   end    
 
 
