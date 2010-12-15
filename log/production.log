@@ -1719,3 +1719,9 @@ Processing PagesController#home (for 127.0.0.1 at 2010-12-01 14:05:15) [GET]
 Rendering template within layouts/application
 Rendering pages/home
 Completed in 72ms (View: 61 | 200 OK [http://localhost/]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2010-12-15 10:32:45) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 90ms (View: 76 | 200 OK [http://localhost/]

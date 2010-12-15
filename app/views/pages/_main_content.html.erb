@@ -15,65 +15,39 @@
 		<img class="image" width="580" src="/images/admin/main/<%= m.file_name %>" />
 		<%end %>
 	</div>
-	<div id="main-block">
-		<div id="main-notice">
-			<h3>공지사항</h3>
-			<ul>
-				<% @notices.each do |no| %>
-				<li style="cursor:pointer" onClick="location.href='/notices/<%= no.id.to_s %>?search=&page='"><%= no.title %><span class="date"><%= no.created_at.strftime('%Y-%m-%d') %></span></li>
-				<%end %>
-			</ul>
-		</div>
-		<div id="main-qna">
-			<h3>질문과 답변</h3>
-			<ul>
-				<%@freeboards.each do |fr| %>
-				<%
-				comm_cnt = Comment.all(:board => "freeboard", :board_id => fr.id).count
-				if comm_cnt > 0 
-					comm_str = "["+comm_cnt.to_s+"]"
-				else
-					comm_str = ""
-				end
-				%>
-				<li style="cursor:pointer" onClick="location.href='/freeboards/<%= fr.id.to_s %>?search=&page='"><%= fr.title %>  <%= comm_str %> <span class="date"><%= fr.created_at.strftime('%Y-%m-%d') %></span></li>
-				<%end %>
-			</ul>
-		</div>
-		<div id="main-etcmenu">
-			<h3>그외 메뉴</h3>
-			<ul>
-				<li class="guide"><a href="/pages/guide"><img src="/images/main/button-etc-manual-out.png" alt="button-etc-manual" width="160" height="54" /></a></li>
-				<li class="faq"><a href="/faqs"><img src="/images/main/button-etc-faq-out.png" alt="button-etc-faq" width="160" height="54" /></a></li>
-				<!-- <li class="material"><a href="/pages/material"><img src="/images/main/button-etc-material-out.png" alt="button-etc-material" width="160" height="54" /></a></li>-->
-			</ul>
-		</div>
+	<div id="main-notice">
+		<h3>공지사항</h3>
+		<ul>
+			<% @notices.each do |no| %>
+			<li style="cursor:pointer" onClick="location.href='/notices/<%= no.id.to_s %>?search=&page='"><%= no.title %><span class="date"><%= no.created_at.strftime('%Y-%m-%d') %></span></li>
+			<%end %>
+		</ul>
+	</div>
+	<div id="main-qna">
+		<h3>질문과 답변</h3>
+		<ul>
+			<%@freeboards.each do |fr| %>
+			<%
+			comm_cnt = Comment.all(:board => "freeboard", :board_id => fr.id).count
+			if comm_cnt > 0 
+				comm_str = "["+comm_cnt.to_s+"]"
+			else
+				comm_str = ""
+			end
+			%>
+			<li style="cursor:pointer" onClick="location.href='/freeboards/<%= fr.id.to_s %>?search=&page='"><%= fr.title %>  <%= comm_str %> <span class="date"><%= fr.created_at.strftime('%Y-%m-%d') %></span></li>
+			<%end %>
+		</ul>
+	</div>
+	<div id="main-etcmenu">
+		<h3>그외 메뉴</h3>
+		<ul>
+			<li class="guide"><a href="/pages/guide"><img src="/images/main/button-etc-manual-out.png" alt="button-etc-manual" width="160" height="54" /></a></li>
+			<li class="faq"><a href="/faqs"><img src="/images/main/button-etc-faq-out.png" alt="button-etc-faq" width="160" height="54" /></a></li>
+			<!-- <li class="material"><a href="/pages/material"><img src="/images/main/button-etc-material-out.png" alt="button-etc-material" width="160" height="54" /></a></li>-->
+		</ul>
 	</div>
 </div>
 <script type="text/javascript">
-
-	// 메인 페이지 이미지 교체 액션
-	$("#main-button li:eq(0)").click(function() { mainImageChange(0) });
-	$("#main-button li:eq(1)").click(function() { mainImageChange(1) });
-	$("#main-button li:eq(2)").click(function() { mainImageChange(2) });
-
-	function mainImageChange(num) {
-		if($("#main-image img:eq("+num+")").css("z-index") != "3") {
-			if(prev_num != null)
-				$("#main-image img:eq("+prev_num+")").css("z-index","2")
-			$("#main-image img:eq("+num+")").css("z-index","3")
-			$("#main-image").animate({"height":$("#main-image img:eq("+num+")").height()},"fast",function() {
-				$("#main-image img:eq("+num+")").fadeIn("fast",function() {
-					if(prev_num != null) $("#main-image img:eq("+prev_num+")").hide();
-					prev_num = num;
-				})
-			});
-		}
-	}
-
-	$(window).load(function() {
-		// 메인이미지 로드
-		mainImageChange(0);
-	})
 	$("#main-button li span").css("top", function() { return 27-(parseInt($(this).height())/2)} )
 </script>
