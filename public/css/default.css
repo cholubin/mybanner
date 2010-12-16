@@ -1,5 +1,5 @@
 /* @override 
-	http://localhost:3000/css/default.css
+	http://ssi.fooleaf.com:3000/css/default.css
 */
 
 h1,h2,h3,h4,h5,h6,ul, ol, li, form  { margin: 0; padding: 0; list-style: none}
@@ -20,12 +20,10 @@ input.submit-button { font-weight: bold; font-size: 12px;border: 1px solid #666;
 :-moz-any-link:focus {  outline: none; }
 
 /* 헤더  시작*/
-
-h1 { position: absolute; top: 36px; }
-
 /* > 메뉴 시작*/
-#header { width: 960px; height: 186px; margin: 0 auto; position: relative; z-index: 2;}
-#header #nav-menu { background-repeat: no-repeat; position: absolute; top:142px;left: 0; width: 960px; height: 44px;}
+#header { width: 960px; height: auto; margin: 0 auto; position: relative; z-index: 2;}
+#header #site_logo { padding: 38px 0 18px; }
+#header #nav-menu { background-repeat: no-repeat; position: relative; width: 960px; height: 44px;}
 #header #nav-menu h2 { display: none }
 #header #nav-menu ul { background: url(/images/default/nav-button-background.png) no-repeat 180px 0px; width: 960px; height: 44px;}
 #header #nav-menu li { display: block; position: absolute;  }
@@ -226,7 +224,8 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 #main-button li.gray { background-image: url('/images/main/button-main-gray.png'); }
 #main-button li.darkgray { background-image: url('/images/main/button-main-darkgray.png'); }
 
-#main-image { position: relative; width: 580px; height: 326px; line-height: 326px; color: #ccc; background: #eee; text-align: center; }
+#main-block { position: relative; background: white; z-index: 5; }
+#main-image { position: relative; width: 580px; height: auto; line-height: 326px; color: #ccc; background: #eee; text-align: center; }
 #main-image img { position: absolute; top: 0; left: 0; display: none; z-index: 1; }
 #main-notice, #main-qna { position: relative;width: 400px; padding-top: 18px; height: 118px; }
 #main-notice {  border-bottom: 1px solid #ddd; }
@@ -234,7 +233,7 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 #main-notice ul, #main-qna ul { padding-left: 100px; }
 #main-notice ul li, #main-qna ul li { position: relative; height: 20px; line-height: 20px; margin-bottom: 7px;;;overflow: hidden; }
 #main-notice .date, #main-qna .date { position: absolute; top: 0px; right: 0px; color: #bbb; font-size: 9px; font-family: tahoma; height: 20px; width: 60px; text-align: right; background-image: url("/images/main/main-date-bg.png"); }
-#main-etcmenu { position: absolute; top: 410px; left: 610px; }
+#main-etcmenu { position: absolute; top: 10px; left: 420px; }
 #main-etcmenu h3 { display: none; }
 #main-etcmenu li { margin-bottom: 5px; }
 

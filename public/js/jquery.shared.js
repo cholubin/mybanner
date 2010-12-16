@@ -71,7 +71,7 @@ function popupView(popWidth, popHeight, url, post, callback) {
 	.mousedown(function(){$(document).mousemove(function(e){return false;});})
 	$("#popup-closeButton")
 	.css({"display":"none", "background-image": "url('/images/default/button-close.png')", "position": "absolute","z-index":"110","width":"52px","height":"20px","cursor":"pointer"})
-
+	
 	if(!popupStatus && url) {
 		loadingView();
 		popupStatus = Array("view",popWidth,popHeight)
@@ -103,15 +103,6 @@ function popupView(popWidth, popHeight, url, post, callback) {
 		loadingView();
 	}
 
-}
-
-function mainImageChange(num) {
-	if($("#main-image img:eq("+num+")").css("z-index") != "3") {
-		if(prev_num != null)
-			$("#main-image img:eq("+prev_num+")").css("z-index","2")
-		$("#main-image img:eq("+num+")").css("z-index","3")
-		$("#main-image img:eq("+num+")").fadeIn("fast",function() { if(prev_num != null) $("#main-image img:eq("+prev_num+")").hide();prev_num = num; });
-	}
 }
 
 function openWebTopHelper() {
@@ -166,13 +157,13 @@ function openWebTopEditor(user,id,href,etc) {
 	$("<a href='#'></a>").css({"display":"block","position":"absolute","width":"145px","height":"21px","top":"10px","left":"180px"}).click(function() { openWebTopHelper(); }).appendTo("#webTopEditor");;
 	$("#webTopEditor").css({"display":"block","height":$(window).height()});
 	$("#back_to_home").attr("href",(href == null)?"/":href)
-
+	
 	// 리사이즈시 사이즈시 자동으로 사이즈 변경	
 	$(window).resize(function() {
 		$("#webTopEditor").css("height",$(window).height());
 		$("#webtop_iframe").css("height",$(window).height()-75);
 	})
-
+	
 	if(!etc) etc = "&admin=yes";
 	var url = "/MClientBox/index.html?"+etc+"&spread_list=NO&user_path=/user_files/"+user+"&doc_path=/article_templates/"+ id +".mlayoutP"	
 	$("#webtop_iframe").attr("src",url);
@@ -207,7 +198,7 @@ function quickPreview(popWidth, popHeight, url, content_id) {
 		.css({"top": startY, "left": startX, "width":popWidth, "height":popHeight});
 		$("#quick_preview")
 		.css({"top": startY, "left": startX, "width":popWidth, "height":popHeight})
-
+		
 		if(typeof(url) == "string") {
 			$("#quick_preview").load(url+" #"+content_id, function(responseText, textStatus, XMLHttpRequest) {
 				$("#loading-icon").fadeOut();
@@ -239,7 +230,7 @@ function quickPreview(popWidth, popHeight, url, content_id) {
 		$("#modal-bg").click(function() {return false});
 		$("#quick_preview").fadeOut("fast",function() { $("#quick_preview_bg").fadeOut("fast"); $("#quick_preview_closeButton").fadeOut("fast"); });
 	}
-
+	
 }
 
 function repositionViews() {
@@ -252,7 +243,7 @@ function repositionViews() {
 		startX = ($(document).width()/2)-(popupStatus[1]/2);
 		startY = ($(window).height()/2)-(popupStatus[2]/2)+$(document).scrollTop();
 		if(startY < 20) startY = 20;
-
+		
 		$("#popup-closeButton").css({"top":startY+10,"left":startX+popupStatus[1]-62})
 		$("#popup-view").css({"top": startY, "left": startX})
 	}
@@ -260,7 +251,7 @@ function repositionViews() {
 		startX = ($(document).width()/2)-(quickViewStatus[1]/2);
 		startY = ($(window).height()/2)-(quickViewStatus[2]/2)+$(document).scrollTop();
 		if(startY < 20) startY = 20;
-
+		
 		$("#quick_preview_closeButton").css({"top":startY+10,"left":startX+quickViewStatus[1]-62})
 		$("#quick_preview_bg").css({"top": startY, "left": startX});
 		$("#quick_preview").css({"top": startY, "left": startX})	
@@ -271,10 +262,6 @@ function repositionViews() {
 
 
 $(function () {
-	// 메인 페이지 이미지 교체 액션
-	$("#main-button li:eq(0)").click(function() { mainImageChange(0) });
-	$("#main-button li:eq(1)").click(function() { mainImageChange(1) });
-	$("#main-button li:eq(2)").click(function() { mainImageChange(2) });
 	$("body").delegate(".ajax-sign-in","click", function() { popupView(250,390,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-sign-up","click", function() {
 		popupView(660,350,$(this).attr("href"),function() {
@@ -308,16 +295,12 @@ $(function () {
 });
 
 $(window).load(function() {
-	// 메인이미지 로드
-	mainImageChange(0);
-
-
 	// 제품카테고리 영역이 컨텐츠 영역을 넘을때 컨텐츠 크기 늘려주기
 	if($("#category").length == 1 && $(".content-layout").height() <= $("#category").height())
 		$(".content-layout").css("cssText","height :"+($("#category").height()-10)+"px !important");
 	else if($(".content-layout").height() <= $("#submenu").height())
 		$(".content-layout").css("cssText","height :"+($("#submenu").height()-10)+"px !important");
-
+		
 	// #nav_message div.message에 내용이 있을경우 보여주기
 	if($("#nav_message div.message a").length && getCookie("nav_message_hide") == false) {
 		$("#nav_message").show().animate({ top:0 })

@@ -1,6 +1,5 @@
-/* @override http://mac.fooleaf.com:3000/css/skin.cloud.css */
+/* @override http://ssi.fooleaf.com:3000/css/skin.cloud.css */
 
 body { background-image: url(/images/skin.cloud/background.jpg); background-color: #e5e5e5; background-position: center top; }
 #header #nav-menu { background-image: url(/images/skin.cloud/menubar.png);  }
-#site_logo { position: absolute; top: 38px; width: 960px;}
 #site_logo img { display: block; margin: 0 auto; }
