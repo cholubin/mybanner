@@ -332,6 +332,7 @@ class Admin::TempsController < ApplicationController
     
     temp_path = @temp.path + ".zip"
     
+    puts_message "템플릿 경로: " + temp_path
     
     if File.exists?(temp_path)
       send_file temp_path, :filename => "template_" + @temp.id.to_s + ".zip" , :type => "application/zip", :stream => "false", :disposition =>
