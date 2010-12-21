@@ -330,7 +330,7 @@ class Admin::TempsController < ApplicationController
     temp_id = params[:temp_id].to_i
     @temp = Temp.get(temp_id)
     
-    temp_path = @temp.path + ".zip"
+    temp_path = "#{RAILS_ROOT}" + "/public/templates/" + @temp.file_filename
     
     puts_message "템플릿 경로: " + temp_path
     
