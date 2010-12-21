@@ -3,6 +3,10 @@
 class Admin::AdmininfosController < ApplicationController
   before_filter :authenticate_admin!      
 
+  def skins
+    
+  end
+  
   def session_check
     puts_message "여기 들어오냐?"
     if !admin_signed_in?
