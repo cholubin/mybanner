@@ -53,7 +53,7 @@
 					<%
 					 if File.exists?("#{RAILS_ROOT}" + "/public/images/skin.custom/background.jpg")
 					%>
-						<img src="<%= "#{HOSTING_URL}" + "/public/images/skin.custom/background.jpg" %>" width="200">
+						<img src="<%= "#{HOSTING_URL}" + "images/skin.custom/background.jpg" %>" width="200">
 					<%	
 					 end
 					%>
@@ -100,7 +100,7 @@
 			}
 			
 			
-			if( $("#background_image").val() == "" || $filename.lastIndexOf(".jpg") == -1){
+			if( $("#background_image").val() != "" && $filename.lastIndexOf(".jpg") == -1){
 				alert("jpg 이미지만 업로드 가능합니다.");
 				$("#background_image").val("");
 				return false;
