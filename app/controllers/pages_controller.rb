@@ -10,6 +10,13 @@ class PagesController < ApplicationController
     Admininfo.up
     Request_code.up
     
+    if Skin.all.count < 1 
+      @skin = Skin.new
+      @skin.is_custom = false
+      @skin.skin_name = "cloud"
+      @skin.save
+    end
+    
     @title  = "home"
     @menu = "home"
     
