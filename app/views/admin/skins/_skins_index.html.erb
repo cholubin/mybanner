@@ -1,0 +1,150 @@
+<link rel="stylesheet" href="/js/colorpicker/css/colorpicker.css" type="text/css" />
+
+<div id="feature_wrapper">
+	<p1> 사이트 스킨설정 </p1>
+
+</div>
+<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile"} ) do -%>
+<div id="skin_css_select">
+	<div class="board_thead"><strong style="font-size:14px"><input type="radio" name="skin_type" value="default" id="skin_type_default" <%= "checked" if @skin.is_custom == false  %> /><label for="skin_type_default"> 스킨 선택</label></strong></div>
+	<ul>
+		<li><label for="skin_css_1"><img src="/images/admin/skin/skin.cloud.png" alt="skin.cloud.css" width="200" height="200" /><br/><input type="radio" name="skin_css" value="cloud" id="skin_css_1" <%= "checked" if @skin.skin_name == "cloud" %>/> Cloud</label></li>
+		<li><label for="skin_css_2"><img src="/images/admin/skin/skin.grace.png" alt="skin.grace.css" width="200" height="200" /><br/><input type="radio" name="skin_css" value="grace" id="skin_css_2" <%= "checked" if @skin.skin_name == "grace" %>/> Grace</label></li>
+		<li><label for="skin_css_3"><img src="/images/admin/skin/skin.modern.png" alt="skin.modern.css" width="200" height="200" /><br/><input type="radio" name="skin_css" value="modern" id="skin_css_3" <%= "checked" if @skin.skin_name == "modern" %>/> Modern</label></li>
+		<li><label for="skin_css_4"><img src="/images/admin/skin/skin.purplenight.png" alt="skin.purplenight.css" width="200" height="200" /><br/><input type="radio" name="skin_css" value="purplenight" id="skin_css_4" <%= "checked" if @skin.skin_name == "purplenight" %>/> Purple Light</label></li>
+	</ul>
+</div>
+
+<div id="skin_css_custom">
+	<div class="board_thead"><strong style="font-size:14px"><input type="radio" name="skin_type" value="custom" id="skin_type_custom"  <%= "checked" if @skin.is_custom == true  %>/><label for="skin_type_custom"> 사용자 편집스킨</label></strong></div>
+	
+	<table>
+		
+		<tbody>
+			<tr>
+				<th>메뉴막대 색상</th>
+				<td><select name="menubar_color" id="menubar_color">
+					<option class="blue" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "blue" %>>blue</option>
+					<option class="cyan" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "cyan" %>>cyan</option>
+					<option class="green" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "green" %>>green</option>
+					<option class="yellowish" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "yellowish" %>>yellowish</option>
+					<option class="yellow" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "yellow" %>>yellow</option>
+					<option class="orange" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "orange" %>>orange</option>
+					<option class="red" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "red" %>>red</option>
+					<option class="magenta" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "magenta" %>>magenta</option>
+					<option class="purple" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "purple" %>>purple</option>
+					<option class="navy" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "navy" %>>navy</option>
+					<option class="gray" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "gray" %>>gray</option>
+					<option class="black" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "black" %>>black</option>
+					<option class="white" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "white" %>>white</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>배경색상</th>
+				<td><input id="background_color" name="background_color" type="text" maxlength="6" value="<%= @skin.background_color %>" size="8"/> 색상은 #RRGGBB형식의 Web컬러로 입력해주셔야 합니다. 포토샵 Color Picker에 우측 하단에서 확인할 수 있습니다.
+					<p id="colorpickerHolder">
+					</p>
+					</td>
+			</tr>
+			<tr>
+				<th>배경이미지</th>
+				<td>
+					<input id="background_image" type="file" name="background_image" style="width:100%"><br>
+					<%
+					 if File.exists?("#{RAILS_ROOT}" + "/public/images/skin.custom/background.jpg")
+					%>
+						<img src="<%= "#{HOSTING_URL}" + "/public/images/skin.custom/background.jpg" %>" width="200">
+					<%	
+					 end
+					%>
+				</td>
+				
+			</tr>
+		</tbody>
+	</table>
+	
+</div>
+<%end %>
+<div class="board_thead">
+	<strong style="font-size:25px">
+		<input id="save_button" type="button" value="저장">
+	</strong>
+</div>
+
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script type="text/javascript" src="/js/editor.js"></script>
+<script type="text/javascript" src="/js/colorpicker/js/colorpicker.js"></script>
+
+<script language="javascript">
+	$('#background_color').ColorPicker({
+		onSubmit: function(hsb, hex, rgb, el) {
+			$(el).val(hex);
+			$(el).ColorPickerHide();
+		},
+		onBeforeShow: function () {
+			$(this).ColorPickerSetColor(this.value);
+		}
+	})
+	.bind('keyup', function(){
+		$(this).ColorPickerSetColor(this.value);
+	});
+	
+	$("#save_button").live("click", function(){
+		$filename = $("#background_image").val().toLowerCase();
+		
+		if($("#skin_type_custom").attr("checked") == true){
+			if( $("#background_color").val() == "" ){
+				alert("배경색상을 입력해 주세요!");
+				$("#background_color").focus();
+				return false;
+			}
+			
+			
+			if( $("#background_image").val() == "" || $filename.lastIndexOf(".jpg") == -1){
+				alert("jpg 이미지만 업로드 가능합니다.");
+				$("#background_image").val("");
+				return false;
+			}	
+		}
+		
+		if (window.confirm("스킨설정을 저장하시겠습니까?")){
+			skin_FileUpload();
+		}else{
+			return false;
+		}
+	})
+	
+	$("#skin_type_default").change(function() {
+		if($(this).is(":checked")) {
+			$("#skin_css_select ul").find("input").attr('disabled','')
+			$("#skin_css_custom table").find("input").attr('disabled', 'disabled')
+			$("#skin_css_custom table").find("select").attr('disabled', 'disabled')
+		}
+	})
+	
+	$("#skin_type_custom").change(function() {
+		if($(this).is(":checked")) {
+			$("#skin_css_select ul").find("input").attr('disabled','disabled')
+			$("#skin_css_custom table").find("input").attr('disabled', '')
+			$("#skin_css_custom table").find("select").attr('disabled', '')
+		}
+	})
+
+	// 스킨 배경이미지 업로드 
+	function skin_FileUpload(){
+			var frm;
+			frm = $('#frmFile');
+			frm.attr("action","/admin/skins/save_skin");
+			frm.ajaxForm(skin_FileuploadCallback); 
+			frm.submit();
+	}
+
+	function skin_FileuploadCallback(data,state){
+		if (data=="error"){
+			alert("파일전송중 오류가 발생하였습니다.\n다시한번 시도해주세요.");
+			//location.reload();
+			return false;
+		}
+		alert('저장이 완료되었습니다!');
+	}
+</script>

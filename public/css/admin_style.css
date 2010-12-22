@@ -538,3 +538,10 @@ p7 a{
 #order-detail .caption a { display: block; position: absolute; text-indent: -5000px; }
 
 #order-detail .caption a.back-list { top: 6px; left: 6px; }
+
+
+#skin_css_select ul { *zoom:1; padding: 0 }
+#skin_css_select ul:after { content:" "; display:block; clear:both; }
+#skin_css_select ul li { display: block; float: left; margin: 0; padding: 4px; text-align: center;}
+
+#skin_css_custom th, #skin_css_custom td{ color: white; font-size: 12px }

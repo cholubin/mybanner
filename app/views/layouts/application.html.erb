@@ -17,7 +17,11 @@
 	<link rel="stylesheet" href="/css/default.content.css" type="text/css"/>
 	<link rel="stylesheet" href="/css/editor.skin.default.css" type="text/css"/>
 <% end %>
-	<link id="skin_css" rel="stylesheet" href="/css/skin.cloud.css" type="text/css"/>
+
+	<!-- <%="custom" %>: #스킨명칭, 사용자 편집 스킨의 경우 custom 으로 표현 -->
+	<% @skin = Skin.first() %>
+	<link id="skin_css" rel="stylesheet" href="/css/skin.<%= @skin.skin_name %>.css" type="text/css"/>
+	
 	<script type="text/javascript" src="/js/jquery-1.4.2.js"></script>
 	<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.shared.js"></script>
@@ -36,7 +40,13 @@
 	<script type="text/javascript" src="/js/jquery.ie6nomore.js"></script>	
 <![endif]-->
 </head>
+
+<%if @skin.is_custom == false %>
 <body id="<%=(@menu == "home")?"main":"sub" %>">
+<%else%>
+<body id="<%=(@menu == "home")?"main":"sub" %>" class="menubar <%= @skin.menubar_color %>" style="background-color: #<%=@skin.background_color %>">
+<%end%>
+
 <%= render :partial => "/shared/header" %>	
 <hr/>
 	<div id="content">

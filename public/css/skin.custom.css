@@ -1,0 +1,18 @@
+/* @override http://mac.fooleaf.com:3000/css/skin.grace.css */
+
+body { background-image: url(/images/skin.custom/background.jpg); background-position: center top; }
+body.menubar.blue #header #nav-menu { background-image: url(/images/skin.custom/menubar-blue.png); }
+body.menubar.cyan #header #nav-menu { background-image: url(/images/skin.custom/menubar-cyan.png); }
+body.menubar.green #header #nav-menu { background-image: url(/images/skin.custom/menubar-green.png); }
+body.menubar.yellowish #header #nav-menu { background-image: url(/images/skin.custom/menubar-yellowish.png); }
+body.menubar.yellow #header #nav-menu { background-image: url(/images/skin.custom/menubar-yellow.png); }
+body.menubar.orange #header #nav-menu { background-image: url(/images/skin.custom/menubar-orange.png); }
+body.menubar.red #header #nav-menu { background-image: url(/images/skin.custom/menubar-red.png); }
+body.menubar.magenta #header #nav-menu { background-image: url(/images/skin.custom/menubar-magenta.png); }
+body.menubar.purple #header #nav-menu { background-image: url(/images/skin.custom/menubar-purple.png); }
+body.menubar.navy #header #nav-menu { background-image: url(/images/skin.custom/menubar-navy.png); }
+body.menubar.gray #header #nav-menu { background-image: url(/images/skin.custom/menubar-gray.png); }
+body.menubar.black #header #nav-menu { background-image: url(/images/skin.custom/menubar-black.png); }
+body.menubar.white #header #nav-menu { background-image: url(/images/skin.custom/menubar-white.png); }
+body.menubar.none #header #nav-menu { background-image: none; }
+#site_logo img { display: block; margin: 0 auto; }

@@ -2,5 +2,4 @@
 
 body { background-image: url(/images/skin.modern/background.jpg); background-color: #cecece; background-position: center 0; }
 #header #nav-menu { background: none  }
-#site_logo { position: absolute; top: 48px; width: 960px;}
 #site_logo img { display: block; margin: 0 auto; }
