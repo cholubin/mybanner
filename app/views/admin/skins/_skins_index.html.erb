@@ -37,6 +37,7 @@
 					<option class="gray" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "gray" %>>gray</option>
 					<option class="black" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "black" %>>black</option>
 					<option class="white" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "white" %>>white</option>
+					<option class="none" <%= "selected" if @skin.is_custom == true and @skin.menubar_color == "none" %>>none</option>
 				</select></td>
 			</tr>
 			<tr>
@@ -53,7 +54,7 @@
 					<%
 					 if File.exists?("#{RAILS_ROOT}" + "/public/images/skin.custom/background.jpg")
 					%>
-						<img src="<%= "#{HOSTING_URL}" + "images/skin.custom/background.jpg" %>" width="200">
+						<img src="<%= "#{HOSTING_URL}" + "images/skin.custom/background.jpg" %>" width="150">
 					<%	
 					 end
 					%>
@@ -113,12 +114,16 @@
 			return false;
 		}
 	})
+	$('#skin_css_select').find("input").click(function(){
+		$('#skin_type_default').attr("checked", true);
+	})
 	
 	$("#skin_type_default").change(function() {
 		if($(this).is(":checked")) {
-			$("#skin_css_select ul").find("input").attr('disabled','')
-			$("#skin_css_custom table").find("input").attr('disabled', 'disabled')
-			$("#skin_css_custom table").find("select").attr('disabled', 'disabled')
+			$("#skin_css_select ul").find("input").attr('disabled','');
+			$("#skin_css_custom table").find("input").attr('disabled', 'disabled');
+			$("#skin_css_custom table").find("select").attr('disabled', 'disabled');
+			$("#background_color").attr('disabled', true);
 		}
 	})
 	
