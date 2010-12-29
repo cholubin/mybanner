@@ -1,6 +1,6 @@
 <script type="text/javascript" src="/js/editor.js"></script>
 <div id="custom_order_form">
-	<h3>주문서 작성</h3>
+	<h3>직접의뢰</h3>
 	<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile"} ) do -%>
 		<input type="hidden" name="edit" value="direct_order">
 		<div class="order_form">
@@ -21,7 +21,7 @@
 			<h4>파일 접수</h4>
 			<ul>
 				<li>
-					<input name="feedback_file" id="feedback_file" type="file"/>
+					<input name="feedback_file" id="feedback_file_new" type="file"/>
 				</li>
 			</ul>
 			<p class="description">

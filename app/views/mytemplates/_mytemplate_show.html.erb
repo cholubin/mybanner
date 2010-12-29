@@ -20,8 +20,11 @@ end
 	<!-- 미리보기의 가로가 길면 horizon, 세로가 길면 vertical -->
 	<input type="hidden" id="tmp_total_price" value="0">
 	<input type="hidden" class="unit_price" id="unit_price_<%= my.id.to_s %>" value="<%= my.price %>">
-
-	<div id="item-information" class="<%= (my.is_col == true)? "vertical":"horizon" %>">
+	<%if my.job_code < 2 %>
+		<div id="item-information" class="<%= (my.is_col == true)? "vertical":"horizon" %>">
+	<%else %>
+		<div id="item-information" class="horizon">
+	<%end %>
 		<h4>미리보기</h4>
 		<div id="ie-overflow-fix">
 			<div id="preview-wrap">

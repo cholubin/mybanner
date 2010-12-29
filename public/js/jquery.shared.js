@@ -299,15 +299,16 @@ $(function () {
 				return false;
 			}
 			
-			if( $('#feedback_file').val() == ""){
+			if( $("#file_order").attr("checked") == true && $('#feedback_file_new').val() == ""){
 				alert("업로드할 파일을 선택해주세요!");
-				$('#feedback_file').focus();
+				$('#feedback_file_new').focus();
 				return false;
 			} 
 			
 			if (window.confirm("작성하신 내용으로 디자인 의뢰 또는 파일접수를 하시겠습니까?")){
 				// file_order.js
 				file_order(); 
+				return false;
 			}
 
 		});
