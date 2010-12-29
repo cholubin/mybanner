@@ -54,6 +54,12 @@ class PagesController < ApplicationController
     @title = "편집의뢰"
     render :layout => 'ajax-load-page'
   end
+  
+  def custom_order
+  	# 커스텀의뢰 페이지 ( AJAX 페이지 )
+    @title = "커스텀 의뢰"
+    render :layout => 'ajax-load-page'
+  end
 
   # 회사소개 페이지들 (회사소개 @menu = "company")
 

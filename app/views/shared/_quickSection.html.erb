@@ -45,6 +45,17 @@
 				<!-- login end -->
 <% end %>
 			</div>
+			
+			<div id="custom_order">
+				<h3>디자인 의뢰 / 파일 직접 접수</h3>
+				<ul>
+<% if signed_in? %>
+					<li><a href="/pages/custom_order" class="ajax-custom-order"><img src="/images/default/quicksection-custom-order.png" alt="quicksection-custom-order" width="170" height="134" border="0"/></a></li>
+<% else %>
+					<li><a href="/login" class="ajax-sign-in"><img src="/images/default/quicksection-custom-order.png" alt="quicksection-custom-order" width="170" height="134" border="0"/></a></li>
+<% end %>
+				</ul>
+			</div>
 
 			<div id="recommend_browser">
 				<div class="wrap">

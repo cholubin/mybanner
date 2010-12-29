@@ -15,13 +15,15 @@
 %>
 
 
-
+	<% if @mytemplate.job_code < 2 %>
 	<table>
 		<tr width="730" height="220">
             <td class="imgmargin_banner" colspan="2" >
+			 
 				<center>
 					<img width="<%=(@mytemplate.is_col) ? "200" : "700" %>" src="<%= temp_image_path +"?"+ Time.now.to_f.to_s %>" style="cursor:hand;" onClick="Javascript:openWebTopEditor('<%= User.get(@mytemplate.user_id).userid %>','<%= @mytemplate.id %>','/admin/mytemplates/<%= @mytemplate.id %>?reload=yes');" >
 				</center>
+			
 			</td>
         </tr>
        
@@ -72,6 +74,10 @@
 		</tr>
 
 </table>
+<%else %><br>
+<strong><%= Basicinfo.first(:category => "job_request", :code => @mytemplate.job_code).name %></strong><br>
+요청사이즈: <%= @mytemplate.size_x+"cm x "+@mytemplate.size_y+"cm" %>
+<%end %>
 	<div id="line_bottom5"></div>	
 
 <%

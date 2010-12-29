@@ -73,7 +73,6 @@
 				<td class="board_tbody" />
 					<ul onClick="location.href='/admin/myorders/<%= myorder.id.to_s %>'" style="cursor:hand;">
 						<%
-						puts_message myorder.items
 						item_array = myorder.items.split(",")
 						item_array.each do |i|
 							temp_id = i

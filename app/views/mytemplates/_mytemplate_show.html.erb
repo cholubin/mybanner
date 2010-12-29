@@ -11,7 +11,8 @@ end
 %>
 
 <div id="designcart-detail" class="content-layout">
-	<h3>디자인바구니 <span><%=(my.job_code == 0)? "직접편집":"편집의뢰" %> - <%= category_info %> (<%= sn_num %>)</span></h3>
+	<h3>디자인바구니 <span><%if my.job_code == 0%>직접편집<%elsif my.job_code == 1%>편집의뢰<%else%>직접의뢰<%end %>
+		              - <%= category_info %> (<%= sn_num %>)</span></h3>
 	<ul class="content-description">
 		<li>편집한 다지안 품목의 내용을 자세히 확인하는 페이지입니다.</li>
 		<li>편집에 어려움이 있는 경우 관리자에게 도움을 요청할 수 있습니다.</li>
@@ -24,7 +25,26 @@ end
 		<h4>미리보기</h4>
 		<div id="ie-overflow-fix">
 			<div id="preview-wrap">
+				<% if my.job_code < 2 %>
 				<img id="preview" src="<%= my.preview_url + "?" + Time.now.to_f.to_s %>">
+				<%else 
+					admin_bbs = Jobboard.first(:mytemp_id => my.id, :order => [:created_at.desc], :admin => true, :req_file.not => nil)
+					
+				%>
+					<%if admin_bbs != nil 
+						if admin_bbs.req_file != nil
+							file_path = "#{HOSTING_URL}user_files/#{current_user.userid}/req_files/" + admin_bbs.req_file
+							%>
+							<img id="preview" src="<%= file_path %>">
+							<%
+						end
+						%>
+						
+					<%else %>
+						<img id="preview" src="/images/content/file_order_preview.png">
+					<%end %>
+				
+				<%end %>
 			</div>
 		</div>
 		<div class="item-detail-wrap">
@@ -84,6 +104,7 @@ end
 					<% elsif  my.job_status == Basicinfo.first(:category => "job_status", :name => "시안확정").code %>
 						<li class="accept-cancel" id="design_confirm_section"><a id="design_confirm" href="#">시안확정 취소</a></li>
 					<% end %>
+				<%elsif my.job_code == 2 or my.job_code == 3 %>
 				<% else %>
 					<li class="edit"><a href="#">편집하기</a></li>
 				<% end %>

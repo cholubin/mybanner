@@ -210,21 +210,38 @@ class TempsController < ApplicationController
   def create_mytemp
     @mytemplate = Mytemplate.new
     @mytemplate.user_id = current_user.id  
-    @mytemplate.temp_id = params[:temp_id] 
+    
+    # 파일직접등록 이나 디자인의뢰시에는 가장 최근 템플릿을 하나 가져와 기본셋팅 처리한다.
+    if params[:edit] != "" and params[:edit] == "direct_order"
+      @mytemplate.temp_id = Temp.first(:order => [:created_at.desc]).id
+    else
+      @mytemplate.temp_id = params[:temp_id] 
+    end
+    
     @mytemplate.quantity = 1
     @mytemplate.save
         
     edit = params[:edit]
 
-    
     copy_template_mytemp(@mytemplate, @mytemplate.temp_id)    
     # if @mytemplate != nil && @mytemplate.save && @user.save        
 
-    if edit == "req"
-      @mytemplate.job_code = 1
+    if edit == "req" or edit == "direct_order"
+      
       feedback_memo = params[:feedback_memo]
       @mytemplate.size_x = params[:size_info_x]
       @mytemplate.size_y = params[:size_info_y]
+      if edit == "direct_order"
+        @mytemplate.is_direct = true
+        if params[:order_type] == "file_order"
+          @mytemplate.job_code = 2
+        elsif params[:order_type] == "custom_order"
+          @mytemplate.job_code = 3
+        end
+      else
+        @mytemplate.job_code = 1
+      end
+      
       req_file = params[:feedback_file]
       
       if params[:feedback_memo] != "" or params[:feedback_file] != nil

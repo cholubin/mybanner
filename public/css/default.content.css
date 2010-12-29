@@ -144,6 +144,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #designcart table#designcart-list td.design .other { font-size: 11px; color: #999; }
 #designcart table#designcart-list td.design.self-edit { background-image: url("/images/content/icon-worktype-self.png");  }
 #designcart table#designcart-list td.design.order-edit { background-image: url("/images/content/icon-worktype-order.png") }
+#designcart table#designcart-list td.design.file_order { background-image: url("/images/content/icon-worktype-file.png") }
 #designcart table#designcart-list td.design.order-edit-accept { background-image: url("/images/content/icon-worktype-order-accept.png") }
 #designcart table#designcart-list td.design a.item { font-weight: bold; cursor: pointer; }
 #designcart table#designcart-list td.design a:hover { text-decoration: underline; color: #333; }
@@ -402,6 +403,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #order-detail #order-product-list td.work-type { text-indent: -5000px; background: no-repeat 50% 50%; }
 #order-detail #order-product-list td.work-type.order-edit { background-image: url("/images/content/icon-worktype-order.png"); }
 #order-detail #order-product-list td.work-type.self-edit { background-image: url("/images/content/icon-worktype-self.png"); }
+#order-detail #order-product-list td.work-type.file_order { background-image: url("/images/content/icon-worktype-file.png"); }
 #order-detail #order-product-list td.item p { margin: 0; }
 #order-detail #order-product-list td.item .option { display: inline; font-size: 11px; color: #999; }
 #order-detail #order-product-list td.work-type { border-left: 1px solid #ddd; }

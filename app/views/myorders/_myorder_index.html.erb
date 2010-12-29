@@ -80,6 +80,8 @@
 							# 작업 구분 by fooleaf
 							if temp.job_code == 0
 								add_class = "self-edit"
+							elsif temp.job_code == 2
+								add_class = "file_order"
 							else
 								add_class = "order-edit"
 							end

@@ -1,0 +1,33 @@
+<script type="text/javascript" src="/js/editor.js"></script>
+<div id="custom_order_form">
+	<h3>주문서 작성</h3>
+	<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile"} ) do -%>
+		<input type="hidden" name="edit" value="direct_order">
+		<div class="order_form">
+			<h4>의뢰 정보 입력</h4>
+			<ul>
+				<li><input type="radio" id="file_order" name="order_type" value="file_order" checked="checked"/> <label for="file_order">직접 디자인한 파일이 있습니다.</label></li>
+				<li><input type="radio" id="custom_order" name="order_type" value="custom_order"/> <label for="custom_order">새로운 디자인을 의뢰합니다.</label></li>
+			</ul>
+			<p>
+				<label for="order-size-width">의뢰 사이즈</label> <input name="size_info_x" id="order-size-width" value="500" placeholder="가로" type="number" size="4" maxlength="5"/>cm x <input name="size_info_y" id="order-size-height" value="90" placeholder="세로" type="number" size="4" maxlength="5"/>cm
+			</p>
+			<h4>요청사항 입력</h4>
+			<p>
+				<textarea name="feedback_memo" id="feedback-memo"></textarea>
+			</p>
+		</div>
+		<div class="file_form">
+			<h4>파일 접수</h4>
+			<ul>
+				<li>
+					<input name="feedback_file" id="feedback_file" type="file"/>
+				</li>
+			</ul>
+			<p class="description">
+				<strong>알아두세요!</strong><br/> 접수 파일이 대용량인 경우 인터넷 상태에 따라서 제대로 접수가 되지 않는 경우가 있습니다. 시간이 매우 오래걸리거나, 에러가 발생할 경우 대용량 파일 접수시 고객센터로 연락주세요.<br/></p>
+		</fieldset>
+		<!-- 선결제 금액 필요시 -->
+		<input id="direct_order_submit" type="button" class="submit-button" value="편집의뢰 신청">
+	<%end %>
+</div>

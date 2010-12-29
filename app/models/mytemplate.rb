@@ -52,6 +52,9 @@ class Mytemplate
   property :design_confirmed,       Boolean, :default => false
   property :design_code,            String
   
+  # 파일직접접수 또는 새로운 디자인 요청시 
+  property :is_direct,              Boolean, :default => false
+  
   timestamps :at
   
   belongs_to :user

@@ -61,22 +61,40 @@
 					else
 						add_class = "order-edit-accept"
 					end
+				elsif my.job_code > 1
+					add_class = "file_order"
 				end
 				%>
-				<td class="design <%= add_class %>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item"><%= category_info%> <span class="design-code"><%= my.design_code %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>
-				<div class="action-select">
-					<ul>
-						<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
-						<% if my.job_code == 0 %>
-						<li class="edit"><a href="#" onClick="openWebTopEditor_user('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>');">편집하기</a></li>
-						<% elsif my.job_code == 1 %>
-						<li class="request"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>#feedback-list">요청하기</a></li>
-						<% else %>
-						<li class="request-disable"><span >시안확정</span></li>
-						<% end %>
-						<li class="delete"><a href="#" id="del_<%= my.id.to_s %>">삭제하기</a></li>
-					</ul>
-				</div></td>
+				<%if my.job_code < 2 %>
+					<td class="design <%= add_class %>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item">
+						<%= category_info%> 
+						<span class="design-code"><%= my.design_code %></span></a> <div class="other">단가: <%= my.price %>원, <%= my.size %></div>
+						<div class="action-select">
+							<ul>
+								<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
+								<% if my.job_code == 0 %>
+								<li class="edit"><a href="#" onClick="openWebTopEditor_user('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>');">편집하기</a></li>
+								<% elsif my.job_code == 1 %>
+								<li class="request"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>#feedback-list">요청하기</a></li>
+								<% else %>
+								<li class="request-disable"><span >시안확정</span></li>
+								<% end %>
+								<li class="delete"><a href="#" id="del_<%= my.id.to_s %>">삭제하기</a></li>
+							</ul>
+						</div>
+					</td>
+				<%else %>
+					<td class="design <%= add_class %>"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>" class="item">
+						<%= Basicinfo.first(:category => "job_request", :code => my.job_code).name %> 
+						<div class="action-select">
+							<ul>
+								<li class="detail"><a href="/mytemplates/<%= my.id.to_s %>?cate=<%= params[:cate] %>&page=<%= params[:page] %>">상세보기</a></li>
+								<li class="request-disable"><span >시안확정</span></li>
+								<li class="delete"><a href="#" id="del_<%= my.id.to_s %>">삭제하기</a></li>
+							</ul>
+						</div>
+					</td>
+				<%end %>
 				<td class="piece"><a class="minus">-</a><input id="peice_<%= my.id.to_s %>" name="piece[]" value="<%= my.quantity %>" size="2" class="piece" /><a class="plus">+</a></td>
 				<td class="price num" id="price_<%= my.id.to_s %>">
 					<%= my.price.to_i * my.quantity %>

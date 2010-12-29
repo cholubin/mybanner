@@ -39,7 +39,7 @@ include SessionsHelper
   # Add a white list of extensions which are allowed to be uploaded,
   # for images you might use something like this:
       def extension_white_list
-        %w(jpg jpeg gif png pdf tif zip)
+        %w(jpg jpeg gif png pdf tif psd eps ai zip)
       end
 
   # Override the filename of the uploaded files

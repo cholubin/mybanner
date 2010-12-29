@@ -11,6 +11,7 @@ function setCookie(cName, cValue, cDay){
 	document.cookie = cookies;
 }
 
+
 function getCookie(cName) {
 	cName = cName + '=';
 	var cookieData = document.cookie;
@@ -289,6 +290,28 @@ $(function () {
 	$("body").delegate(".ajax-myimages","click", function() { popupView(798,554,$(this).attr("href")); return false }); // 차후 김현수 과장과 합칠때 확인 할것!
 	$("body").delegate("li.preview a","click",function() { quickPreview(740,540,$(this).attr("href"),"ajaxloadpage"); return false })
 	$("body").delegate(".withdraw","click", function() { popupView(380,310,$(this).attr("href")); return false });
+	$("body").delegate(".ajax-custom-order","click", function() { popupView(620,340,$(this).attr("href"),
+	function() {
+		$('#direct_order_submit').live("click", function(){
+			if($('#feedback-memo').val() == ""){
+				alert("요청사항을 입력해주세요!");
+				$('#feedback-memo').focus();
+				return false;
+			}
+			
+			if( $('#feedback_file').val() == ""){
+				alert("업로드할 파일을 선택해주세요!");
+				$('#feedback_file').focus();
+				return false;
+			} 
+			
+			if (window.confirm("작성하신 내용으로 디자인 의뢰 또는 파일접수를 하시겠습니까?")){
+				// file_order.js
+				file_order(); 
+			}
+
+		});
+	}); return false });
 	$("body").delegate(".ajax-edit-order","click", function() { popupView(620,340,$(this).attr("href")); return false });
 	// $(".tempskin").click(function() { skin(1) });
 	$.preloadCssImages();

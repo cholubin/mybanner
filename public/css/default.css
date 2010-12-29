@@ -184,7 +184,7 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 
 /* 컨텐츠 섹션 시작 */
 
-#content { width: 960px; margin: 0 auto; position: relative; z-index: 3; overflow: visible; background-color: white; min-height: 680px; height: auto !important; height: 680px;}
+#content { width: 960px; margin: 0 auto; position: relative; z-index: 3; overflow: visible; background-color: white; min-height: 842px; height: auto !important; height: 842px;}
 #main .content-layout { padding: 10px 190px 30px; width: 580px; }
 
 /* > 사이드 섹션 시작 */
@@ -241,6 +241,7 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 /* 로그인 */
 #content #quick-section { position: absolute; width: 170px; top : 10px;right: 10px; }
 * html #content #myinfo { float: left; }
+#content #quick-section .ajax-custom-order img { margin-top: 10px; }
 #content #myinfo #quick-login { border: none; margin: 0; padding: 0 10px 4px }
 #content #myinfo #quick-login legend { display: none; }
 #content #myinfo #quick-login p { line-height: 23px; *zoom:1; margin: 6px 0;}
@@ -270,11 +271,15 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 #content #work-summary li span { position: absolute; right: 10px; }
 
 /* 퀵 링크! */
+#content #custom_order { margin: 10px 0; }
+#content #custom_order h3 {  display:  none; }
+#content #custom_order img { display: block; }
 #content #quick-link { margin-top: 10px; }
 #content #quick-link h3 { display: none;}
 
 /*그외 정보 */
 #content #quick-information, #recommend_browser .wrap { letter-spacing: -1px; border-radius:6px; -webkit-border-radius: 6px; -moz-border-radius: 6px; margin: 6px 0; border: 1px solid #ccc; padding: 9px; width: 150px; }
+
 #content #quick-information li { width: 110px;padding: 0 0 0 40px; height:60px; line-height: 140%; background-repeat: no-repeat; background-position: left 4px}
 #content #quick-information li h4 {  font-size: 12px; }
 #content #quick-information li p { margin: 0; padding: 5px 0 5px;  font-size: 11px;}
@@ -384,3 +389,19 @@ ul.pager { width: 580px; height: 35px; background: url("/images/default/paging-b
 #ajaxloadpage #recommend_chrome #etc_browser li.chrome a { background-position: -82px 0;left: 652px; }
 #ajaxloadpage #recommend_chrome #etc_browser li.firefox a { background-position: -167px 0; left: 743px;}
 #ajaxloadpage #recommend_chrome #chrome_install { position: absolute; top: 0; left: 0; background: white; width: 861px; height: 436px; margin: 0; padding: 0; display: none; }
+
+
+/* 커스텀 편집 창 */ 
+#ajaxloadpage #custom_order_form .order_form, #ajaxloadpage #custom_order_form .file_form { position: absolute; }
+#ajaxloadpage #custom_order_form .order_form input, #ajaxloadpage #custom_order_form .file_form input { vertical-align: middle; }
+#ajaxloadpage #custom_order_form .order_form {
+	border: 1px solid #ddd;
+	padding: 10px 10px 0 ;
+	background: #eee;
+	top: 74px; left: 14px;
+}
+#ajaxloadpage #custom_order_form .order_form textarea { width: 275px; height: 80px; }
+#ajaxloadpage #custom_order_form .file_form { top: 74px; left: 330px; width: 268px; }
+#ajaxloadpage #custom_order_form .file_form #feedback_file { width: 260px; }
+#ajaxloadpage #custom_order_form .file_form p.description { width: 248px;padding: 10px; border: 1px solid #ddd; margin: 10px 0; line-height: 140%;}
+#ajaxloadpage #custom_order_form .file_form .submit-button { width: 270px; height: 36px; }

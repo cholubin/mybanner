@@ -105,7 +105,17 @@
 					%>
 					<%= Basicinfo.first(:category => "job_process", :code => mytemplate.feedback_code).name + job_status%>
 				</th>
-	            <td class="board_tbody" /><center><a href="/admin/mytemplates/<%= mytemplate.id.to_s %>?search=<%= params[:search] %>&userid=<%= params[:userid] %>&page=<%= params[:page] %>"><%= "<img src='" + temp_image_path + "'>" if mytemplate.thumb_url %></a></center></td>
+	            <td class="board_tbody"/>
+					<%if mytemplate.job_code < 2 %>
+					<center><a href="/admin/mytemplates/<%= mytemplate.id.to_s %>?search=<%= params[:search] %>&userid=<%= params[:userid] %>&page=<%= params[:page] %>"><%= "<img src='" + temp_image_path + "'>" if mytemplate.thumb_url %></a></center>
+					<%else  %>
+					<center><a href="/admin/mytemplates/<%= mytemplate.id.to_s %>?search=<%= params[:search] %>&userid=<%= params[:userid] %>&page=<%= params[:page] %>">
+						<% puts_message mytemplate.job_code.to_s %>
+						<%= (mytemplate.job_code == 2)? "파일접수":"디자인의뢰" %> 상세보기
+						</a>
+					</center>
+					<%end %>
+				</td>
 				<td class="board_tbody" />
 					<center>
 						<% 
@@ -125,8 +135,10 @@
 							category_str = ""
 						end
 						%>
-						<%= mytemplate.name + "<br>" if mytemplate.name != nil %>
-						<%= category_str %>
+						<%if mytemplate.job_code < 2 %>
+							<%= mytemplate.name + "<br>" if mytemplate.name != nil %>
+							<%= category_str %>
+						<%end %>
 					</center></td>
 	            <td class="board_tbody" /><center><%= mytemplate.created_at.strftime('%Y-%m-%d') %></center></td>
 	            <td class="board_tbody" /><center><%= User.get(mytemplate.user_id).userid %><br>(<%= User.get(mytemplate.user_id).name %>)</center></td>

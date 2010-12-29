@@ -53,6 +53,11 @@ class Basicinfo
       Basicinfo.new(:code => 0, :name => "직접편집", :category => "job_request", :info => "사용자가 직접편집으로 디자인바구니에 넣은경우", :order => 1).save
       Basicinfo.new(:code => 1, :name => "편집요청", :category => "job_request", :info => "사용자가 편집의뢰로 주문하여 디자인바구니에 넣은 경우", :order => 2).save
       Basicinfo.new(:code => 2, :name => "파일접수", :category => "job_request", :info => "파일을 직접 접수한경우", :order => 3).save
+      Basicinfo.new(:code => 3, :name => "디자인의뢰", :category => "job_request", :info => "디자인 의뢰 (참고파일 업로드)", :order => 4).save
+    else
+      if Basicinfo.all(:category => "job_request", :code => 3).count < 1
+        Basicinfo.new(:code => 3, :name => "디자인의뢰", :category => "job_request", :info => "디자인 의뢰 (참고파일 업로드)", :order => 4).save
+      end
     end
     
     if Basicinfo.all(:category => "delivery").count < 1

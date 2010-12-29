@@ -37,6 +37,9 @@
 					if temp.job_code == 0
 						add_class = "self-edit"
 						job_type = "사용자 편집"
+					elsif temp.job_code == 2
+						add_class = "file_order"
+						job_type = "직접 파일의뢰"
 					else
 						add_class = "order-edit"
 						job_type = "편집 의뢰"
@@ -48,7 +51,14 @@
 					<td class="item">
 						<p><%= category+subcategory %> <span class="design-code">(<%= design_no %>)</span></p>
 						<p class="option">현수막천/링마감</p>
-						<p class="preview"><img src="<%= temp.preview_url%>"/><a href="<%= temp.preview_url%>" class="button">미리보기</a></p></td>
+						<p class="preview">
+							<% if temp.job_code != 2 %>
+							<img src="<%= temp.preview_url%>"/><a href="<%= temp.preview_url%>" class="button">미리보기</a>
+							<%else %>
+							<img src="/images/content/file_order_preview.png"/><a href="/images/content/file_order_preview.png" class="button">미리보기</a>
+							<%end %>
+						</p>
+					</td>
 					<td class="size"><%= size %> <!-- 가로사이즈 cm x 세로 사이즈 cm --></td>
 					<td class="piece"><%= temp.quantity %>ea <!-- 갯수 ea --></td>
 					<td class="price"><%= (temp.quantity * unit_price.to_i).to_s %>원<!-- 개별가격 * 갯수 --><span>(개별: <%= unit_price %>원)<!-- 개별가격 --></span></td>
