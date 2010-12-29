@@ -233,10 +233,10 @@ class TempsController < ApplicationController
       @mytemplate.size_y = params[:size_info_y]
       if edit == "direct_order"
         @mytemplate.is_direct = true
-        if params[:order_type] == "file_order"
-          @mytemplate.job_code = 2
-        elsif params[:order_type] == "custom_order"
+        if params[:order_type] == "custom_order"
           @mytemplate.job_code = 3
+        else 
+          @mytemplate.job_code = 2
         end
       else
         @mytemplate.job_code = 1

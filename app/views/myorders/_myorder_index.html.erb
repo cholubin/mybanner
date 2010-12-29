@@ -80,14 +80,18 @@
 							# 작업 구분 by fooleaf
 							if temp.job_code == 0
 								add_class = "self-edit"
-							elsif temp.job_code == 2
-								add_class = "file_order"
-							else
+							elsif temp.job_code == 1
 								add_class = "order-edit"
+							elsif temp.job_code > 2
+								add_class = "file_order"
 							end
 						%>
 						<!-- 주문 품목 반복될 부분 -->
-						<li class="<%= add_class %>"><%= category + subcategory %> <span class="design-code">(<%= design_no %>)</span></li>
+						<%if temp.job_code < 2  %>
+							<li class="<%= add_class %>"><%= category + subcategory %> <span class="design-code">(<%= design_no %>)</span></li>
+						<%else %>
+							<li class="<%= add_class %>"><%= Basicinfo.first(:category => "job_request", :code => temp.job_code).name %></li>
+						<%end %>
 						<!-- 주문 품목 반복될 부분 끝 -->
 						<%end %>
 					</ul>

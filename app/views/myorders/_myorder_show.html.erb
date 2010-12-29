@@ -37,25 +37,46 @@
 					if temp.job_code == 0
 						add_class = "self-edit"
 						job_type = "사용자 편집"
-					elsif temp.job_code == 2
-						add_class = "file_order"
-						job_type = "직접 파일의뢰"
-					else
+					elsif temp.job_code == 1
 						add_class = "order-edit"
 						job_type = "편집 의뢰"
+					elsif temp.job_code > 1
+						add_class = "file_order"
+						job_type = "직접 파일의뢰"
 					end
 				%>
 				<!-- 주문 품목 갯수에 따른 반복 -->
 				<tr>
 					<td class="work-type <%= add_class%>"><%=job_type%></td>
 					<td class="item">
-						<p><%= category+subcategory %> <span class="design-code">(<%= design_no %>)</span></p>
-						<p class="option">현수막천/링마감</p>
+						<%if temp.job_code < 2 %>
+							<p><%= category+subcategory %> <span class="design-code">(<%= design_no %>)</span></p>
+							<p class="option">현수막천/링마감</p>
+						<%else %>
+							<p><%= Basicinfo.first(:category => "job_request", :code => temp.job_code).name %></p>
+						<%end %>
 						<p class="preview">
-							<% if temp.job_code != 2 %>
+							<% if temp.job_code < 2 %>
 							<img src="<%= temp.preview_url%>"/><a href="<%= temp.preview_url%>" class="button">미리보기</a>
 							<%else %>
-							<img src="/images/content/file_order_preview.png"/><a href="/images/content/file_order_preview.png" class="button">미리보기</a>
+								<%if temp.job_code == 3 %>
+									<% admin_bbs = Jobboard.first(:mytemp_id => temp.id, :order => [:created_at.desc], :admin => true, :req_file.not => nil) %>
+									<%if admin_bbs != nil 
+										puts_message "있네!!"
+										if admin_bbs.req_file != nil
+											file_path = "#{HOSTING_URL}user_files/#{current_user.userid}/req_files/" + admin_bbs.req_file
+											%>
+											<img src="<%= file_path %>"/><a href="/images/content/file_order_preview.png" class="button">미리보기</a>
+											<%
+										end
+										%>
+
+									<%else %>
+										<img src="/images/content/file_order_preview.png"/><a href="/images/content/file_order_preview.png" class="button">미리보기</a>
+									<%end %>
+									
+									
+								<%end %>
 							<%end %>
 						</p>
 					</td>

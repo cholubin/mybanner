@@ -41,17 +41,20 @@
 						temp_image_path = temp.thumb_url		
 					end
 				%>
+				<%if temp.job_code < 2 %>
 				<tr>
 					<td colspan="6">
+						
 						<center>
 							<img width="700" src="<%= temp_image_path +"?"+ Time.now.to_f.to_s %>" style="cursor:hand;" onClick="Javascript:openWebTopEditor('<%= User.get(temp.user_id).userid %>','<%= temp.id %>','/admin/myorders/<%= @myorder.id %>?reload=yes&mytempid=<%= temp.id %>');" >
 						</center>
 					</td>
 				</tr>
+				<%end %>
 				<tr>
-					<td class="work-type">직접작업<!-- 작업 타입 --></td>
+					<td class="work-type"><%= Basicinfo.first(:category => "job_request", :code => temp.job_code).name %><!-- 작업 타입 --></td>
 					<td class="item">
-						<%= category+subcategory %><!-- 1단계 카테고리 / 2단계 카테고리 --><span class="design-code">(<%= design_no %><!-- 디자인번호 -->)</span>
+						<%= category+subcategory if temp.job_code < 2%><!-- 1단계 카테고리 / 2단계 카테고리 --><span class="design-code">(<%= design_no if temp.job_code < 2%><!-- 디자인번호 -->)</span>
 						<br>
 						<%
 						if temp.option != nil and temp.option != ""
@@ -78,7 +81,11 @@
 						pdf_path = temp.path + "/web/document.pdf"
 						is_there_pdf = File.exists?(pdf_path)
 						%>
-						<input <%= "onClick=\"download_pdf('#{temp.id}');\"" if is_there_pdf == true %> type="button" value="PDF다운" style="cursor:hand" <%= "disabled title='편집기에서 pdf파일을 생성하시면 다운로드 버튼이 활성화됩니다.'" if !is_there_pdf %>>
+						<%if temp.job_code < 2 %>
+							<input <%= "onClick=\"download_pdf('#{temp.id}');\"" if is_there_pdf == true %> type="button" value="PDF다운" style="cursor:hand" <%= "disabled title='편집기에서 pdf파일을 생성하시면 다운로드 버튼이 활성화됩니다.'" if !is_there_pdf %>>
+						<%else %>
+							<input <%= "onClick=\"go_temp('#{temp.id}');\""%> type="button" value="요청게시판" style="cursor:hand">
+						<%end %>
 					</td>
 				</tr>
 				<!-- 주문 품목에 따른 반복 -->
@@ -128,17 +135,15 @@
 function download_pdf(temp_id){
 	$tempid = temp_id;
 	
-	// $.ajax({
-	// 	data:'temp_id='+$tempid, 
-	// 	dataType:'script', 
-	// 	type:'post', 
-	// 	url:'/admin/myorders/pdf_download',
-	// 	success: function(request){
-	// 		
-	// 	}
-	// });
-	
 	location.href = '/admin/myordersubs/pdf_download?temp_id='+$tempid;
 	return false;
 }
+
+function go_temp(temp_id){
+	$tempid = temp_id;
+	
+	location.href = '/admin/mytemplates/'+$tempid;
+	return false;
+}
+
 </script>
