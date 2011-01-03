@@ -69,13 +69,26 @@ class Admin::NoticesController < ApplicationController
 
         
     @notice = Notice.new(params[:notice])
-
-      if @notice.save
-        redirect_to admin_notices_url
-      else
-        @section = "new" 
-        render 'notice'
-      end
+    content = params[:notice][:content]
+    # 정규식 처리 
+    # content = content.gsub(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix) {|s| s = "<a target='new' href='#{s}'>#{s}</a>"}
+    # content = content.gsub(/^https?:\/\/[a-z0-9]+([\.\-\_=&\+\/\?]?[a-z0-9]+)+$/) {|s| s = "<a target='new' href='#{s}'>#{s}</a>"}
+    
+    # @notice.content = content
+    
+    urls = content.scan(/(?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
+    urls.each do |url|
+     content.gsub!(url, "<a href='#{url}'>#{url}</a>")
+    end
+    
+    @notice.content = content
+     
+    if @notice.save
+      redirect_to admin_notices_url
+    else
+      @section = "new" 
+      render 'notice'
+    end
 
   end
 
@@ -83,15 +96,28 @@ class Admin::NoticesController < ApplicationController
   # PUT /notices/1.xml
   def update
     @notice = Notice.get(params[:id])
+    
+    content = params[:notice][:content]
+    title = params[:notice][:title]
 
-    respond_to do |format|
-      if @notice.save(params[:notice])
-        format.html { redirect_to(@notice) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @notice.errors, :status => :unprocessable_entity }
-      end
+    # 정규식 처리 
+    # urls = content.scan(/(?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
+    #     urls.each do |url|
+    #      content.gsub!(url, "<a href='#{url}'>#{url}</a>")
+    #     end
+        
+    @notice.content = content
+    
+    @notice.title = title
+    if params[:is_notice] == "0"
+      @notice.is_notice = false
+    else
+      @notice.is_notice = true
+    end
+    
+    
+    if @notice.save
+      redirect_to(@notice)    
     end
   end
 
