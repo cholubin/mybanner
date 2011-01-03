@@ -1,3 +1,4 @@
+/* @override http://localhost:3000/css/default.content.css */
 
 div#error-screen { margin: 40px 0; }
 #faqs #error-screen { margin: 0; border: 1px solid #ddd; border-width: 0 1px 0 1px; }
@@ -379,7 +380,6 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #order-delivery td.item li { padding-left: 20px; line-height: 24px; background: no-repeat 0 2px; }
 #order-delivery td.item li.self-edit { background-image: url("/images/content/icon-small-self-edit.png"); }
 #order-delivery td.item li.order-edit { background-image: url("/images/content/icon-small-order-edit.png"); }
-#order-delivery td.item li.file_order { background-image: url("/images/content/icon-small-file-order.png"); }
 
 #order-delivery .detail a, #order-delivery .cancel-button, #order-delivery .cancel-disable,#order-delivery .order-delete { display: block; text-indent: -5000px; width: 43px; height: 50px; }
 #order-delivery .detail a { background: url("/images/content/button-order-detail.png"); }

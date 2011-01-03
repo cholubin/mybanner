@@ -78,7 +78,7 @@ class Admin::NoticesController < ApplicationController
     
     urls = content.scan(/(?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
     urls.each do |url|
-     content.gsub!(url, "<a href='#{url}'>#{url}</a>")
+     content.gsub!(url, "<a href='#{url}' target='new'>#{url}</a>")
     end
     
     @notice.content = content
