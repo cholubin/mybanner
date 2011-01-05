@@ -1,4 +1,38 @@
 <div id="feature_wrapper">
+	<p1>회사소개</p1> size: 580px (이미지를 선택하지 않고 저장을 하시면 기존 업로드된 이미지가 삭제처리됩니다.)
+	<br>
+</div>
+
+<table class="board_table">
+    <thead class="logo">
+        <tr>
+            <th class="board_thead" width="150px"><center>구분</center></th>
+            <td class="board_thead" width="500px"><center>내용</center></td>
+			<td class="board_thead" width="150px">&nbsp;</td>
+        </tr>
+    </thead>
+ 
+    <tbody class="logo">
+		<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile_intro"} ) do -%>
+		<tr>
+            <td class="board_tbody" width="150px">소개 이미지</td>
+            <td class="board_tbody" width="500px"><input type="file" class="val" name="file" style="width:350px;">
+			<%
+			image_path = "#{RAILS_ROOT}/public/images/admin/main/intro.jpg"
+  			if File.exists?(image_path)
+    			%><br>업로드된 이미지:&nbsp;<%= "<a href='#{HOSTING_URL}/public/images/admin/main/intro.jpg' target='new'>intro.jpg</a>" %><%
+  			end
+			%>
+			</td>
+			<td class="board_tbody" width="150px"><center><input class="intro_save" id="intro_save" type="button" value="저장"></center></td>
+        </tr>
+		<%end %>
+    </tbody>
+</table>
+
+<br><br>
+
+<div id="feature_wrapper">
 	<p1>메인화면</p1>
 	&nbsp;[가로: 580 고정]
 	<br>
@@ -191,6 +225,27 @@ $('.disp_save').live("click",function(event){
 					// editor.js 
 					disp_FileUpload($id);
 				}
+			}else{
+				alert("장시간 사용하지 않아 자동 로그아웃 되었습니다!");
+				location.replace("/admin/login");
+			}
+			
+		}
+	});
+	
+	
+})
+
+$('.intro_save').live("click",function(event){
+	$id = $(this).attr("id");
+	
+	$.ajax({
+		dataType:'script', 
+		type:'post', 
+		url:'/admin/admininfos/session_check',
+		success: function(request){
+			if(request == "logined"){
+				intro_FileUpload($id);
 			}else{
 				alert("장시간 사용하지 않아 자동 로그아웃 되었습니다!");
 				location.replace("/admin/login");

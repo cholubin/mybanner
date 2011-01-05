@@ -184,7 +184,46 @@ class Admin::AdmininfosController < ApplicationController
     
     
   end
-  
+
+
+  def save_intro
+    
+      if params[:file] != nil and params[:file] != ""
+        
+        begin
+          del_path = "#{RAILS_ROOT}/public/images/admin/main/intro.jpg"
+          if File.exists?(del_path)
+            FileUtils.remove_entry_secure(del_path)
+          end
+        
+          file = params[:file]
+          dir = "#{RAILS_ROOT}/public/images/admin/main/"
+        
+          FileUtils.mkdir_p dir if not File.exist?(dir)
+          IntroUploader.store_dir = dir
+        
+          uploader = IntroUploader.new
+        
+          uploader.store!(file)
+
+        rescue
+          puts_message "로고저장 실패!"
+          render :text => "fail"
+        end
+        
+      else
+        
+        del_path = "#{RAILS_ROOT}/public/images/admin/main/intro.jpg"
+        if File.exists?(del_path)
+          FileUtils.remove_entry_secure(del_path)
+        end
+        
+        puts_message "로고삭제 완료!"
+        render :text => "success"
+      end
+    
+  end
+    
   def save_admininfos_main_display
     
     id = params[:id].to_i
