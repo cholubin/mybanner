@@ -8,7 +8,7 @@
 		<div id="googleMap" style="width:578px;height:380px;border:1px solid #ddd"></div>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" src="/js/googleMap.js"></script>
-		<script type="text/javascript"> initialize('googleMap','서울 중구 충무로2가 49-17 조양빌딩 10층','map-address')</script>		
+		<script type="text/javascript"> initialize('googleMap','<%= Admininfo.first(:category => "basic_info", :name => "회사주소").content %>','map-address')</script>		
 		<div id="map-address">
 			<p><h4><%= Admininfo.first(:category => "basic_info", :name => "회사명").content %></h4></p>
 			<p><strong>주소</strong> <%= Admininfo.first(:category => "basic_info", :name => "회사주소").content %></p>

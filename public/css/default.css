@@ -1,5 +1,6 @@
 /* @override 
 	http://ssi.fooleaf.com:3000/css/default.css
+	http://localhost:3000/css/default.css
 */
 
 h1,h2,h3,h4,h5,h6,ul, ol, li, form  { margin: 0; padding: 0; list-style: none}
@@ -134,30 +135,31 @@ input.submit-button { font-weight: bold; font-size: 12px;border: 1px solid #666;
 #imagehard-folder ul { width: 170px; border-bottom: 1px solid #ddd; }
 #imagehard-folder ul li { position: relative; width: 170px; line-height: 30px; }
 #imagehard-folder ul li p.action { position: absolute; top: 2px; right: 0; width: 43px; padding: 0; }
+#imagehard-list { position: absolute; overflow: auto; width: 580px; left: 200px; top: 90px;  height: 380px; *zoom: 1; }
+#imagehard-list:after {content:" "; display:block; clear:both;}
+#imagehard-list .article { float: left; position: relative; width: 168px; height: 194px; margin:8px; display: inline; border-bottom: 1px solid #ddd; padding: 0 0 10px;}
+#imagehard-list .article li.preview { position: relative; width: 168px; height: 158px; display: table-cell; vertical-align: middle; overflow: hidden; }
+#imagehard-list .article li.preview a { display: block; width: 168px;}
+#imagehard-list .article li.preview img { display: block; margin: 0 auto; border: 1px solid #ddd;}
+#imagehard-list .article .filename { position: absolute; width: 168px; bottom: 28px; font-weight: bold; text-align: center;}
+#imagehard-list .article .date { position: absolute; width: 168px;  bottom: 10px; text-align: center;}
+
+#imagehard-wrap div.pager { position: absolute; left: 200px; bottom: 32px; }
+#imagehard-wrap .upload { position: absolute; left: 200px; height: 20px; bottom: 16px; width: 580px; }
+#imagehard-wrap .upload #myimage_image_file {  width: 430px; }
 
 #imagehard-folder fieldset { background: none; border: 0; padding: 12px 0 ; margin: 0; text-align: center;}
 #imagehard-folder fieldset h5, #imagehard-folder fieldset label { display: none; }
 #imagehard-folder fieldset input { width: 160px; margin: 2px auto; display: block;}
 #imagehard-folder fieldset input.submit-button { width: 168px; }
-#imagehard-list { position: absolute; width: 592px; left: 200px; top: 110px; *zoom:1; }
-#imagehard-list:after {content:" "; display:block; clear:both;}
-#imagehard-list ul.article { float: left; width: 136px; overflow: hidden; margin: 0 12px 20px 0; padding: 0; }
-#imagehard-list ul, #imagehard-list li { padding: 0; }
-#imagehard-list li.preview { padding: 0; }
-#imagehard-list li.filename { width: 136px; height: 20px; overflow: hidden; line-height: 20px; position: relative; }
-#imagehard-list li.filename a { width: 300px; display: block; }
-#imagehard-list li.filename span { position: absolute; top: 0px; right: 0px; height: 20px; width: 13px; background: url("/images/main/main-date-bg.png") left top; }
-#imagehard-list li.date { font-size: 10px; font-family: tahoma; line-height: 16px; position: relative;}
-#imagehard div.upload { position:absolute; top: 504px; left: 200px; height: 33px;width: 580px; line-height: 31px; z-index: 33; }
-#imagehard .upload-image label { font-weight: bold; letter-spacing:-1px; padding-left: 10px; }
-#imagehard .upload-image #myimage_image_file {  width: 407px; }
-#imagehard div.pager { position: absolute; top: 460px; left: 200px; } #imagehard ul.pager {  margin: 0; }
+
 
 #imagehard_preview, #imagehard_preview input{ color: white; }
 #imagehard_preview h2 { display: none; }
 #imagehard_preview h3 { position: absolute; width: 180px; left: 540px; top: 150px; font-size: 14px; font-weight: bold;line-height: 140%; letter-spacing: -1px; }
-#imagehard_preview #preview_image { position: absolute; top: 15px; left: 15px; width: 510px; height: 510px; line-height: 520px; overflow: hidden;  text-align: center;}
-#imagehard_preview #preview_image img { border: 1px solid black; max-height: 508px; max-width: 508px; width: expression( this.clientWidth > 507 ? "508px" : "auto" ); height: expression( this.clientHeight > 507 ? "508px" : "auto" ); }
+#imagehard_preview #preview_image { position: relative; padding: 15px; width: 510px; height: 510px; overflow: hidden; display: table-cell; text-align: center; vertical-align: middle; }
+* html #imagehard_preview #preview_image { display: inline; zoom:1; }
+#imagehard_preview #preview_image img { border: 1px solid black; max-height: 508px; max-width: 508px;}
 #imagehard_preview ul { position: absolute; top: 340px; left: 540px; width: 180px; }
 #imagehard_preview ul li { padding: 0 0 8px; position: relative; }
 #imagehard_preview ul li a { display: block; text-indent: -5000px;  }
@@ -184,13 +186,14 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 
 /* 컨텐츠 섹션 시작 */
 
-#content { width: 960px; margin: 0 auto; position: relative; z-index: 3; overflow: visible; background-color: white; min-height: 842px; height: auto !important; height: 842px;}
-#main .content-layout { padding: 10px 190px 30px; width: 580px; }
+#content { width: 960px; margin: 0 auto; position: relative; z-index: 3; overflow: visible; background-color: white; min-height: 842px; height: auto !important; height: 842px; *zoom: 1}
+#content:after {content:" "; display:block; clear:both;}
+#main .content-layout { width: 580px; float: left; position: relative; padding: 10px 10px; }
 
 /* > 사이드 섹션 시작 */
 #content .sideblock { background: url(/images/default/block-side-bg.png) no-repeat left bottom; }
 #content .sideblock h3 { height: 21px; padding: 0 5px; text-shadow: 0px -1px #333; background:  url(/images/default/block-side-header.png); color: white; font-size: 7pt; font-family: tahoma, sans-serif; line-height: 21px; }
-#content #category { position: absolute; width: 170px; left: 10px; top: 10px; padding:0; }
+#content #category { width: 170px; position: relative; float: left; margin-left: 10px; display: inline; margin-bottom: 10px; margin-top: 10px;;}
 #content #category ul { padding: 10px }
 #content #category ul li { padding: 4px 0 8px; line-height: 150%; }
 #content #category a.title { font-weight: bold; font-size: 16px;padding-left: 18px; background:  url(/images/default/category-title-icon.png) no-repeat 2px center;  }
@@ -239,7 +242,7 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 
 
 /* 로그인 */
-#content #quick-section { position: absolute; width: 170px; top : 10px;right: 10px; }
+#content #quick-section { float: right;  position: relative; width: 170px; margin-right: 10px; margin-top: 10px; display: inline;}
 * html #content #myinfo { float: left; }
 #content #quick-section .ajax-custom-order img { margin-top: 10px; }
 #content #myinfo #quick-login { border: none; margin: 0; padding: 0 10px 4px }

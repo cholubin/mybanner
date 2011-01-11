@@ -39,7 +39,7 @@ function loadingView() {
 		$("#loading-icon").css({"position": "absolute","top":startY,"left":startX}).show()
 		$("#modal-bg")
 			.css({"width": "100%","min-width":"960px", "height": $(document).height()})
-			.stop().fadeTo(0,"0.2")
+			.stop().fadeTo(0,"0.5")
 	} else {
 		if(popupStatus) {
 			if(loadingStatus == "view") {
@@ -319,12 +319,6 @@ $(function () {
 });
 
 $(window).load(function() {
-	// 제품카테고리 영역이 컨텐츠 영역을 넘을때 컨텐츠 크기 늘려주기
-	if($("#category").length == 1 && $(".content-layout").height() <= $("#category").height())
-		$(".content-layout").css("cssText","height :"+($("#category").height()-10)+"px !important");
-	else if($(".content-layout").height() <= $("#submenu").height())
-		$(".content-layout").css("cssText","height :"+($("#submenu").height()-10)+"px !important");
-		
 	// #nav_message div.message에 내용이 있을경우 보여주기
 	if($("#nav_message div.message a").length && getCookie("nav_message_hide") == false) {
 		$("#nav_message").show().animate({ top:0 })

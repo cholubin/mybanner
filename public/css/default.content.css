@@ -1,3 +1,4 @@
+/* @override http://localhost:3000/css/default.content.css */
 
 div#error-screen { margin: 40px 0; }
 #faqs #error-screen { margin: 0; border: 1px solid #ddd; border-width: 0 1px 0 1px; }
@@ -21,9 +22,8 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 
 /* 서브페이지 서브 메뉴, 기본 레이아웃 */
 #sub #content {	background: #fff url(/images/content/page-sub-bg.png) left 78px no-repeat; }
-#sub #submenu { position: absolute; width: 170px; left: 10px; top: 10px; padding:0;  }
+#sub #submenu { width: 170px; position: relative; float: left; margin-left: 10px; display: inline; margin-bottom: 10px; }
 #sub #submenu h3 { padding: 40px 0 30px; text-align: center; color: #bbb; font-weight: normal; }
-#sub #submenu { position: absolute; width: 170px; left: 10px; top: 10px; padding:0; }
 #sub #submenu ul { padding: 0 10px 10px }
 #sub #submenu ul li { padding: 4px 0 8px; line-height: 150%; }
 #sub #submenu a.title, #sub #submenu a.title-on { font-weight: bold; font-size: 12px;padding-left: 14px; background:  url(/images/content/submenu-title-icon.png) no-repeat 2px center;  }
@@ -34,7 +34,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 #sub #submenu ul li ul li a { display: block; width: 100%; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
 #sub #submenu ul li ul li a:hover, #sub #submenu ul li ul li.on a { background: #67991a; color: #67991a; color: white; }
 #sub #submenu ul li ul li a:active { background: #b0681b;color: white; }
-#sub .content-layout { padding: 10px 190px 30px; width: 580px; min-height: 650px; height: auto !important; height: 650px; }
+#sub .content-layout { width: 580px; float: left; position: relative; padding: 10px; }
 #sub .content-layout h3 { width:580px; height: 30px; padding-top:39px; text-indent:-5000px; background-repeat: no-repeat; background-position: left 29px;}
 
 
