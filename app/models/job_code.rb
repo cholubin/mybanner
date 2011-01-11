@@ -24,7 +24,7 @@ class Job_code
   
   def self.up
     if Job_code.all().count < 1
-      Job_code.new(:code => "0", :name => "직접편집", :info => "사용자가 직접편집으로 디자인바구니에 넣은경우").save
+      Job_code.new(:code => "0", :name => "직접편집", :info => "사용자가 직접편집으로 디자인바구니에 넣은 경우").save
       Job_code.new(:code => "1", :name => "편집요청", :info => "사용자가 편집의뢰로 주문하여 디자인바구니에 넣은 경우").save
       Job_code.new(:code => "2", :name => "파일접수", :info => "파일을 직접 접수한경우").save
 

@@ -31,6 +31,7 @@ class Admin::AdmininfosController < ApplicationController
   end
   
   
+  
   def delivery_index
     @menu = "admininfo"
     @board = "delivery"
