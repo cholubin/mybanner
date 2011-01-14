@@ -1,0 +1,42 @@
+<table width="800">
+	<tr>
+		<td width="250">왼쪽</td>
+		<td width="250">가운데</td>
+		<td width="250">오른쪽</td>
+	</tr>
+	<tr valign="top">
+		<td width="170">
+			<div id="sortables_left">
+				<% @banner_left.each do |l| %>
+				<div id="<%= l.id %>">
+					<input id="<%= l.id %>" class="del" type="button" value="삭제"><br>
+					<img title="<%= l.link_url %>" width="170" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{l.img_filename}" %>">
+					<br>
+				</div>
+				<%end %>
+			</div>
+		</td>
+		<td width="500">
+			<div id="sortables_center">
+				<% @banner_center.each do |c| %>
+				<div id="<%= c.id %>">
+					<input id="<%= c.id %>" class="del" type="button" value="삭제"><br>
+					<img title="<%= c.link_url %>" width="400" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{c.img_filename}" %>">
+					<br>
+				</div>
+				<%end %>
+			</div>
+		</td>
+		<td width="170">
+			<div id="sortables_right">
+				<% @banner_right.each do |r| %>
+				<div id="<%= r.id %>">
+					<input id="<%= r.id %>" class="del" type="button" value="삭제"><br>
+					<img title="<%= r.link_url %>" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{r.img_filename}" %>">
+					<br>
+				</div>
+				<%end %>
+			</div>
+		</td>
+	</tr>
+</table>

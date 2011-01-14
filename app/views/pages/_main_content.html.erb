@@ -48,6 +48,21 @@
 				<!-- <li class="material"><a href="/pages/material"><img src="/images/main/button-etc-material-out.png" alt="button-etc-material" width="160" height="54" /></a></li>-->
 			</ul>
 		</div>
+		<div id="main-banner" class="banner">
+			<!-- loop : 580px고정 -->
+			<% @banner = Banner.all(:location => "center", :order => [:order])%>
+			<% @banner.each do |b| %>
+			<%if b.link_url != nil and b.link_url != "" %>
+				<div>
+					<a href="<%= b.link_url %>" <%= "target='_blank'" if b.mode = "new" %> ><img width="580" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>"></a>
+				</div>
+			<%else %>
+			<div>
+				<img width="580" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>">
+			</div>
+			<%end %>
+			<%end %>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">

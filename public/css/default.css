@@ -1,6 +1,7 @@
 /* @override 
 	http://ssi.fooleaf.com:3000/css/default.css
 	http://localhost:3000/css/default.css
+	http://14.56.54.146:3000/css/default.css
 */
 
 h1,h2,h3,h4,h5,h6,ul, ol, li, form  { margin: 0; padding: 0; list-style: none}
@@ -19,20 +20,21 @@ input.submit-button { font-weight: bold; font-size: 12px;border: 1px solid #666;
 .caption { font-size: 11px; color: #999; caption-side: bottom; text-align: right; }
 .no-line { border: none !important; }
 :-moz-any-link:focus {  outline: none; }
+.banner { margin-top: 10px; }
 
 /* 헤더  시작*/
 /* > 메뉴 시작*/
 #header { width: 960px; height: auto; margin: 0 auto; position: relative; z-index: 2;}
-#header #site_logo { padding: 38px 0 18px; }
+#header #site_logo { padding: 38px 0 11px; }
 #header #nav-menu { background-repeat: no-repeat; position: relative; width: 960px; height: 44px;}
 #header #nav-menu h2 { display: none }
 #header #nav-menu ul { background: url(/images/default/nav-button-background.png) no-repeat 180px 0px; width: 960px; height: 44px;}
 #header #nav-menu li { display: block; position: absolute;  }
-#header #nav-menu li.guide { top: 9px; left: 31px; }
+#header #nav-menu li.guide { top: 9px; left: 39px; }
 #header #nav-menu li.template { top: 9px; left: 210px; }
 #header #nav-menu li.designcart { top: 9px; left: 390px; }
 #header #nav-menu li.order-delivery { top: 9px; left: 570px; }
-#header #nav-menu li.cscenter { top: 9px; left: 810px}
+#header #nav-menu li.cscenter { top: 9px; left: 805px}
 #header #nav-menu li a { display: block; text-indent: -9999px; background-repeat: no-repeat}
 #header #nav-menu li.guide a { background-image:url(/images/default/nav-button-guide.png); width: 115px; height: 28px;}
 #header #nav-menu li.template a { background-image:url(/images/default/nav-button-template.png); width: 180px; height: 35px;}
@@ -192,7 +194,7 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 
 /* > 사이드 섹션 시작 */
 #content .sideblock { background: url(/images/default/block-side-bg.png) no-repeat left bottom; }
-#content .sideblock h3 { height: 21px; padding: 0 5px; text-shadow: 0px -1px #333; background:  url(/images/default/block-side-header.png); color: white; font-size: 7pt; font-family: tahoma, sans-serif; line-height: 21px; }
+#content .sideblock h3, #content #category h3  { height: 21px; padding: 0 5px; text-shadow: 0px -1px #333; background:  url(/images/default/block-side-header.png); color: white; font-size: 7pt; font-family: tahoma, sans-serif; line-height: 21px; }
 #content #category { width: 170px; position: relative; float: left; margin-left: 10px; display: inline; margin-bottom: 10px; margin-top: 10px;;}
 #content #category ul { padding: 10px }
 #content #category ul li { padding: 4px 0 8px; line-height: 150%; }
@@ -296,14 +298,20 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 
 /* 페이징 */
 
-ul.pager { width: 580px; height: 35px; background: url("/images/default/paging-bg.png") no-repeat top left; position: relative; z-index:2; text-align: center; margin: 12px 0; padding; 0;}
-.pager li { display: inline; line-height: 35px; margin: 0; padding: 0 2px; }
+ul.pager { width: 580px; height: 35px; line-height: 35px; background: url("/images/default/paging-bg.png") no-repeat top left; position: relative; z-index:2; text-align: center; margin: 12px 0; padding; 0; zoom: 1;}
+.pager li { display: inline-block; line-height: 35px; margin: 0; width: 17px; height: 21px; line-height: 21px;}
+.pager .active { background: url("/images/default/paging-active.png") no-repeat; }
 .pager .more { color: #bbb; }
-.pager .jump a { display: block; position: absolute; height: 35px; text-indent: -5000px; background: no-repeat left top; top: 0; }
-.pager .first a { width: 60px;  background-image: url("/images/default/paging-first-button.png"); left: 0;}
-.pager .previous a { width: 60px;  background-image: url("/images/default/paging-prev-button.png"); left: 60px;}
-.pager .next a { width: 60px;  background-image: url("/images/default/paging-next-button.png"); left: 459px;}
-.pager .last a { width: 60px;  background-image: url("/images/default/paging-last-button.png"); left: 519px;}
+.pager li.jump { display: block; position: absolute; width: 60px; height: 35px; top: 0;}
+.pager .jump a { display: block; width: 60px; height: 35px; text-indent: -5000px; background: no-repeat left top; }
+.pager .first{ left: 0; }
+.pager .previous { left: 60px; }
+.pager .next { left: 459px; }
+.pager .last { left: 519px; }
+.pager .first a { background-image: url("/images/default/paging-first-button.png");}
+.pager .previous a { background-image: url("/images/default/paging-prev-button.png"); }
+.pager .next a { background-image: url("/images/default/paging-next-button.png"); }
+.pager .last a { background-image: url("/images/default/paging-last-button.png"); }
 .pager .jump a:hover { background-position: -60px; }
 .pager .jump a:active { background-position: -120px; }
 

@@ -8,11 +8,13 @@ class Admin::AdmininfosController < ApplicationController
   end
   
   def session_check
-    puts_message "여기 들어오냐?"
     if !admin_signed_in?
+      puts_message "admin session failed"
       redirect_to '/admin/login'
     else
+      puts_message "admin session checked"
       render :text => "logined"
+      
     end
   end
   

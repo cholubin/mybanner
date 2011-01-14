@@ -1,4 +1,7 @@
-/* @override http://localhost:3000/css/default.content.css */
+/* @override 
+	http://localhost:3000/css/default.content.css
+	http://ssi.fooleaf.com:3000/css/default.content.css
+*/
 
 div#error-screen { margin: 40px 0; }
 #faqs #error-screen { margin: 0; border: 1px solid #ddd; border-width: 0 1px 0 1px; }
@@ -22,7 +25,7 @@ thead th, ul.head li, .new_form fieldset h4 { filter:progid:DXImageTransform.Mic
 
 /* 서브페이지 서브 메뉴, 기본 레이아웃 */
 #sub #content {	background: #fff url(/images/content/page-sub-bg.png) left 78px no-repeat; }
-#sub #submenu { width: 170px; position: relative; float: left; margin-left: 10px; display: inline; margin-bottom: 10px; }
+#sub #submenu { width: 170px; position: relative; float: left; margin-left: 10px; display: inline; margin-bottom: 10px;margin-top: 10px; }
 #sub #submenu h3 { padding: 40px 0 30px; text-align: center; color: #bbb; font-weight: normal; }
 #sub #submenu ul { padding: 0 10px 10px }
 #sub #submenu ul li { padding: 4px 0 8px; line-height: 150%; }

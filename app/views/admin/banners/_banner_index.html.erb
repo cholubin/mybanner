@@ -1,18 +1,183 @@
+<script type="text/javascript" src="/js/jquery_1.4.2/ui/jquery.ui.core.js"></script>
+<script type="text/javascript" src="/js/jquery_1.4.2/ui/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/js/jquery_1.4.2/ui/jquery.ui.mouse.js"></script>
+<script type="text/javascript" src="/js/jquery_1.4.2/ui/jquery.ui.sortable.js"></script>
+<script type="text/javascript" src="/js/jScrollPane/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="/js/jScrollPane/jquery.em.js"></script>
+<script type="text/javascript" src="/js/jScrollPane/jScrollPane.js"></script>
+
 <div id="feature_wrapper">
 	<h1>배너추가</h1>
 	<br>
 </div>
 
-<div>
-	
+<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile_banner"} ) do -%>
+<div style="line-height:2">
+	<label>새창띄우기</label><input type="checkbox" name="window_mode" checked>
+	<br>
+	<label>배너위치</label><input type="radio" name="location" value="left" checked>왼쪽
+	<input type="radio" name="location" value="center">가운데
+	<input type="radio" name="location" value="right">오른족 
+	<br>
+	<label>배너이미지: </label><input type="file" id="image_file" name="image_file">
+	<br><font color="blue">(왼쪽,오른쪽: 170px // 가운데: 580px)</font>
+	<br>
+	<label>링크주소: </label><input type="text" style="width: 300px" name="link_url" value="http://" placeholder="http://">
+	<br>
+	<input type="button" id="banner_submit_button" value="저장">
 </div>
+<%end%>
 
 
-
+<br>
 <div id="feature_wrapper">
 	<h1>추가된 배너</h1>
 	<br>
 </div>
 
-<div>
+<div id="banner_content">
+	<table width="800">
+		<tr>
+			<td width="250">왼쪽</td>
+			<td width="250">가운데</td>
+			<td width="250">오른쪽</td>
+		</tr>
+		<tr valign="top">
+			<td width="170">
+				<div id="sortables_left">
+					<% @banner_left.each do |l| %>
+					<div id="<%= l.id %>">
+						<input id="<%= l.id %>" class="del" type="button" value="삭제"><br>
+						<img title="<%= l.link_url %>" width="170" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{l.img_filename}" %>">
+						<%= l.link_url if l.link_url != nil and l.link_url != "" %>
+						<br>
+					</div>
+					<%end %>
+				</div>
+			</td>
+			<td width="500">
+				<div id="sortables_center">
+					<% @banner_center.each do |c| %>
+					<div id="<%= c.id %>">
+						<input id="<%= c.id %>" class="del" type="button" value="삭제"><br>
+						<img title="<%= c.link_url %>" width="400" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{c.img_filename}" %>">
+						<%= c.link_url if c.link_url != nil and c.link_url != "" %>
+						<br>
+					</div>
+					<%end %>
+				</div>
+			</td>
+			<td width="170">
+				<div id="sortables_right">
+					<% @banner_right.each do |r| %>
+					<div id="<%= r.id %>">
+						<input id="<%= r.id %>" class="del" type="button" value="삭제"><br>
+						<img title="<%= r.link_url %>" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{r.img_filename}" %>">
+						<%= r.link_url if r.link_url != nil and r.link_url != "" %>
+						<br>
+					</div>
+					<%end %>
+				</div>
+			</td>
+		</tr>
+	</table>
 </div>
+
+<script language="Javascript">
+$('#banner_submit_button').live("click",function(event){
+	$.ajax({
+		dataType:'script', 
+		type:'post', 
+		url:'/admin/admininfos/session_check',
+		success: function(request){
+			if(request == "logined"){
+				if($('#image_file').val() == ""){
+					alert("배너이미지를 선택해 주세요!");
+					return false;
+				}else{
+					banner_FileUpload();
+				}
+				
+			}else{
+				alert("장시간 사용하지 않아 자동 로그아웃 되었습니다!");
+				location.replace("/admin/login");
+			}
+		}
+	});
+})
+
+
+function banner_FileUpload(){
+		var frm;
+		frm = $('#frmFile_banner');
+		frm.attr("action","/admin/banners/create");
+		frm.ajaxForm(banner_FileuploadCallback); 
+		frm.submit();
+}
+				
+function banner_FileuploadCallback(data,state){
+	if (data=="error"){
+		alert("파일전송중 오류가 발생하였습니다.\n다시한번 시도해주세요.");
+		return false;
+	}
+
+	$('#banner_content').html(data);
+	alert('저장이 완료되었습니다!');
+	
+	
+}
+
+$('.del').live("click", function(){
+	$id = $(this).attr("id");
+	
+	if(window.confirm("정말 삭제하시겠습니까?")){
+		$.ajax({
+			data:'id='+$id, 
+			dataType:'script', 
+			type:'post', 
+			url:'/admin/banners/delete_banner',
+			success: function(request){
+				if(request == "error"){
+					alert("배너를 삭제하는 중 오류가 발생했습니다.");
+				}else{
+					$('#banner_content').html(request);
+					alert('삭제가 완료되었습니다!');
+				}
+			}
+		});
+	}
+	
+})
+
+$("#sortables_left").sortable({
+ update: function(event, ui) { 
+	<%= remote_function(:url  => {:action => "banner_order_update"},:with => "'location=left&banner_id='+result_banner('left')") %>
+	}
+});
+
+$("#sortables_center").sortable({
+ update: function(event, ui) { 
+	<%= remote_function(:url  => {:action => "banner_order_update"},:with => "'location=center&banner_id='+result_banner('center')") %>
+	}
+});
+
+$("#sortables_right").sortable({
+ update: function(event, ui) { 
+	<%= remote_function(:url  => {:action => "banner_order_update"},:with => "'location=right&banner_id='+result_banner('right')") %>
+	}
+});
+
+$(function() {
+   	$("#sortables_left").sortable({axis: 'y' });
+	$("#sortables_center").sortable({axis: 'y' });
+	$("#sortables_right").sortable({axis: 'y' });
+
+});
+
+function result_banner(location){
+  var result = new Array();
+  result = $('#sortables_'+ location).sortable('toArray');
+  return result;
+}
+</script>
+

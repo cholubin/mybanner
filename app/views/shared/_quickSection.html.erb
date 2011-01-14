@@ -90,4 +90,19 @@
 					<p><%= Admininfo.first(:category => "basic_info", :name => "전화번호").content %><br/>업무시간외 통화불가</p>
 				</li>
 			</ul>
+			<div id="quick-banner" class="banner">
+				<!-- 배너 이미지 반복 -->
+				<% @banner = Banner.all(:location => "right", :order => [:order])%>
+				<% @banner.each do |b| %>
+				<%if b.link_url != nil and b.link_url != "" %>
+					<div>
+						<a href="<%= b.link_url %>" <%= "target='_blank'" if b.mode = "new" %> ><img width="170" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>"></a>
+					</div>
+				<%else %>
+				<div>
+					<img width="170" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>">
+				</div>
+				<%end %>
+				<%end %>
+			</div>
 		</div>

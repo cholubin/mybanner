@@ -1,6 +1,6 @@
-		<div id="<%=(@menu == "home")? "category" : "submenu"%>"<%=(@menu == "home")? " class=\"sideblock\"" : nil%>>
+		<div id="<%=(@menu == "home")? "category" : "submenu"%>">
 			<h3>제품 카테고리</h3>
-			<ul>
+			<ul<%=(@menu == "home")? " class=\"sideblock\"" : nil%>>
 <% @categories = Category.all(:order => [ :priority.asc ]) %>
 <% @categories.each do |category| %>
 				<li>
@@ -16,4 +16,19 @@ if @subcategories.count !=0 %>
 				</li>
 <% end  %>
 			</ul>
+			<div id="category-banner" class="banner">
+				<!-- loop : 170px 고정 -->
+				<% @banner = Banner.all(:location => "left", :order => [:order])%>
+				<% @banner.each do |b| %>
+					<%if b.link_url != nil and b.link_url != "" %>
+						<div>
+							<a href="<%= b.link_url %>" <%= "target='_blank'" if b.mode = "new" %> ><img width="170" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>"></a>
+						</div>
+					<%else %>
+					<div>
+						<img width="170" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>">
+					</div>
+					<%end %>
+				<%end %>
+			</div>
 		</div>
