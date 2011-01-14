@@ -19,6 +19,7 @@ class Skin
   property :menubar_color,    String
   property :background_color, String
   property :image_file,       Text
+  property :recommend_bw,     Boolean
   
   #배경이미지는 /public/images/skin.custom.css/background.jpg 로 고정   
   

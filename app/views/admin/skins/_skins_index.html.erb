@@ -5,6 +5,12 @@
 
 </div>
 <% form_tag({:action => ''}, {:multipart => true, :id => "frmFile"} ) do -%>
+
+<div style="padding-bottom:10">
+	<input type="checkbox" id="chk_bw" name="chk_bw" <%= "checked" if @skin.recommend_bw == true %> />메인화면에 부라우져 추천 배너 출력여부
+	<br>
+</div>
+
 <div id="skin_css_select">
 	<div class="board_thead"><strong style="font-size:14px"><input type="radio" name="skin_type" value="default" id="skin_type_default" <%= "checked" if @skin.is_custom == false  %> /><label for="skin_type_default"> 스킨 선택</label></strong></div>
 	<ul>

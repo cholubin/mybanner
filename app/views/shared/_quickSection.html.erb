@@ -56,7 +56,8 @@
 <% end %>
 				</ul>
 			</div>
-
+			
+			<%if Skin.first().recommend_bw == true %>
 			<div id="recommend_browser">
 				<div class="wrap">
 					<h4>추천 인터넷 브라우저</h4>
@@ -68,6 +69,7 @@
 					</ul>
 				</div>
 			</div>
+			<%end %>
 			<!--			
 			<div id="quick-link">
 				<h3>빠른 메뉴</h3>

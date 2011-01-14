@@ -30,6 +30,12 @@ class Admin::SkinsController < ApplicationController
       
       @skin = Skin.first()
       
+      if params[:chk_bw] == "on"
+        @skin.recommend_bw = true
+      else
+        @skin.recommend_bw = false
+      end
+      
       @skin.is_custom = is_custom
       @skin.skin_name = skin_name
       if @skin.save
@@ -44,7 +50,13 @@ class Admin::SkinsController < ApplicationController
       background_color = params[:background_color]
       
       @skin = Skin.first()
-
+      
+      if params[:chk_bw] == "on"
+        @skin.recommend_bw = true
+      else
+        @skin.recommend_bw = false
+      end
+      
       @skin.skin_name = "custom"
       @skin.is_custom = is_custom
       @skin.menubar_color = menubar_color
