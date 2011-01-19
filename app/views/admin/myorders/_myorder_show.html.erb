@@ -23,7 +23,7 @@
 					category = Category.get(temp.category.to_i).name
 					
 					if temp.subcategory != nil
-						if Subcategory.get(temp.subcategory.to_i).name != nil and Subcategory.get(temp.subcategory.to_i).name != ""
+						if Subcategory.get(temp.subcategory.to_i) != nil and Subcategory.get(temp.subcategory.to_i) != ""
 							subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name 
 						else
 							subcategory = ""
