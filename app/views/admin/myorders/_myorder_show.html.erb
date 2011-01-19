@@ -23,7 +23,11 @@
 					category = Category.get(temp.category.to_i).name
 					
 					if temp.subcategory != nil
-						subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name
+						if Subcategory.get(temp.subcategory.to_i).name != nil and Subcategory.get(temp.subcategory.to_i).name != ""
+							subcategory = "/" + Subcategory.get(temp.subcategory.to_i).name 
+						else
+							subcategory = ""
+						end
 						design_no = temp.category.to_s + "-" + temp.subcategory.to_s + "-" + i
 					else
 						subcategory = ""
