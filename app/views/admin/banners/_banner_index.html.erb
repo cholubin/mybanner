@@ -12,7 +12,7 @@
 </div>
 
 <% form_tag({:action => ''}, {:multipart => true, :id => "frmFile_banner"} ) do -%>
-<div style="line-height:2">
+<div style="line-height:2; border: 2px solid #999; padding: 20px 10px; width: 720px;">
 	<label>새창띄우기</label><input type="checkbox" name="window_mode" checked>
 	<br>
 	<label>배너위치</label><input type="radio" name="location" value="left" checked>왼쪽
@@ -35,12 +35,12 @@
 	<br>
 </div>
 
-<div id="banner_content">
-	<table width="800">
+<div id="banner_content" style="line-height:2; border: 2px solid #999; padding: 20px 10px; width: 720px;">
+	<table width="700">
 		<tr>
-			<td width="250">왼쪽</td>
-			<td width="250">가운데</td>
-			<td width="250">오른쪽</td>
+			<td width="200">왼쪽</td>
+			<td width="200">가운데</td>
+			<td width="200">오른쪽</td>
 		</tr>
 		<tr valign="top">
 			<td width="170">
@@ -56,11 +56,11 @@
 				</div>
 			</td>
 			<td width="500">
-				<div id="sortables_center">
+				<div id="sortables_center" style="padding-left:7px">
 					<% @banner_center.each do |c| %>
 					<div id="<%= c.id %>">
 						<input id="<%= c.id %>" class="del" type="button" value="삭제"><br>
-						<img title="<%= c.link_url %>" width="400" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{c.img_filename}" %>">
+						<img title="<%= c.link_url %>" width="330" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{c.img_filename}" %>">
 						<%= c.link_url if c.link_url != nil and c.link_url != "" %>
 						<br>
 					</div>
