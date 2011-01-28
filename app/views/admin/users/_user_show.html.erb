@@ -15,7 +15,7 @@
 
 <%
 count_image = Myimage.all(:user_id => @user.id).count
-count_temp = Mytemplate.all(:user_id => @user.id).count
+count_temp = Mytemplate.all(:user_id => @user.id, :in_order => false).count
 count_order = Myorder.all(:user_id => @user.id).count
 %>
 <input type="button" value="목록" style="cursor:hand;" onClick="goList()">

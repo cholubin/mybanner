@@ -77,7 +77,11 @@
 						<option value="darkgray" <%= "selected" if disp.info == "darkgray" %> >darkgray</option>
 					</select>
 				</td>
-	            <td class="board_tbody" ><input type="file" class="val" name="file"><%= disp.file_name if disp.file_name != nil %></td>
+	            <td class="board_tbody" ><input type="file" class="val" name="file">
+					<%if disp.file_name != nil %>
+				    <img src="<%= "#{HOSTING_URL}" + "images/admin/main/" + disp.file_name  %>" width="170">
+					<%end %>
+				</td>
 				<td class="board_tbody" ><center><input class="disp_save" name="<%= disp.id %>" id="<%= disp.id %>" type="button" value="저장"></center></td>
 	        </tr>
 			<%end %>
@@ -108,7 +112,11 @@
 		<input type="hidden" name="name" value="<%= logo.name %>">
 		<tr>
             <td class="board_tbody" width="150px"><%= logo.name %></td>
-            <td class="board_tbody" width="500px"><input type="file" class="val" name="file" style="width:450px;"><%= logo.file_name if logo.file_name != nil %></td>
+            <td class="board_tbody" width="500px"><input type="file" class="val" name="file" style="width:450px;">
+				<%if logo.file_name != nil %>
+			    <img src="<%= "#{HOSTING_URL}" + "images/admin/main/" + logo.file_name  %>" width="170">
+				<%end %>
+			</td>
 			<td class="board_tbody" width="150px"><center><input class="logo_save" id="<%= logo.id %>" type="button" value="저장"></center></td>
         </tr>
 		<%end %>

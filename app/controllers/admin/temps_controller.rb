@@ -204,9 +204,13 @@ class Admin::TempsController < ApplicationController
     if params[:temp][:file] != nil
       
       # 기존 파일 삭제처리 ==============================================
-      del_dir = "#{RAILS_ROOT}" + "/public/templates/"
-      del_m_zip_file = @temp.file_filename_encoded.gsub("mlayoutp","mlayoutP")
-      del_m_file = del_m_zip_file.gsub(".zip","")
+      begin
+        del_dir = "#{RAILS_ROOT}" + "/public/templates/"
+        del_m_zip_file = @temp.file_filename_encoded.gsub("mlayoutp","mlayoutP")
+        del_m_file = del_m_zip_file.gsub(".zip","")
+      rescue
+        puts_message "템플릿 파일 삭제 실패"
+      end
       
       begin
         if File.exists?(del_dir + del_m_zip_file)
