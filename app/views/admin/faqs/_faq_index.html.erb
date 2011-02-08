@@ -16,7 +16,6 @@
 	    <thead class="board_thead">
 	        <tr>
 	            <th class="board_thead" width="60px">번호 </th>
-	            <td class="board_thead" width="70px"><center>카테고리<br>(구현보류)</center></td>
 				<td class="board_thead" width="250px"><center>질문</center></td>
 	            <td class="board_thead" width="250px"><center>답변</center></td>
 	            <td class="board_thead" width="65px"><center>조회</center></td>
@@ -36,9 +35,8 @@
 			<% @faqs.each do |faq| %>
 	        <tr class="table_b","board_tbody">
 	            <th class="board_tbody" width="70px"><center><%= @page_num %></center></th>
-	            <td class="board_tbody" width="50px">&nbsp;</td>
-				<td class="board_tbody" width="250px"><center><%= faq.question %></center></td>
-	            <td class="board_tbody" width="250px"><center><%= faq.answer %></center></td>
+				<td class="board_tbody" width="250px" style="cursor:hand;" OnClick="location.href='/admin/faqs/<%= faq.id %>/edit'"><center><%= faq.question %></center></td>
+	            <td class="board_tbody" width="250px" style="cursor:hand;" OnClick="location.href='/admin/faqs/<%= faq.id %>/edit'"><center><%= faq.answer %></center></td>
 	            <td class="board_tbody" width="65px"><center><%= faq.hit_cnt %></center></td>
 				<td class="board_tbody" width="30px"><center><input class="chk_box" type="checkbox" name="chk[<%= faq.id %>]"></center></td>
 	        </tr>
@@ -58,7 +56,7 @@
 				<td width="230">&nbsp;</td>
 				<td width="350" style="align:center">
 					<div class="pager">
-					<%=Faq.search(params[:search], params[:page]).pager.to_html "/faqs?search=#{params[:search]}" %>
+					<%=Faq.search(params[:search], params[:page]).pager.to_html "/admin/faqs?search=#{params[:search]}" %>
 					</div>
 				</td>
 				<td width="150" align="right">

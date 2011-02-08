@@ -99,12 +99,6 @@ class Admin::NoticesController < ApplicationController
     
     content = params[:notice][:content]
     title = params[:notice][:title]
-
-    # 정규식 처리 
-    # urls = content.scan(/(?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix)
-    #     urls.each do |url|
-    #      content.gsub!(url, "<a href='#{url}'>#{url}</a>")
-    #     end
         
     @notice.content = content
     
