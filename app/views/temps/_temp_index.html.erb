@@ -20,7 +20,7 @@ floatClear = 0
 %>
 		<div class="article">
 		<ul class="head">
-			<li class="item"><span>품목 :</span> <%= Category.get(my.category).name%><%= "/" + Subcategory.get(my.subcategory).name if my.subcategory != nil %></li>
+			<li class="item"><span>품목 :</span> <%= Category.get(my.category).name if Category.get(my.category) != nil %><%= "/" + Subcategory.get(my.subcategory).name if Subcategory.get(my.subcategory) != nil %></li>
 			<li class="designcode"><%= code %></li>
 		</ul>
 		<div class="preview"><img src="<%= temp_image_path %>" width="<%= @is_col ? "139" : "578" %>"></div>
