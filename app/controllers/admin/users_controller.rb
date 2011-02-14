@@ -86,43 +86,47 @@ class Admin::UsersController < ApplicationController
             flash[:notice] = @user.user_name + " 사용자의 폴더를 삭제중 오류발생!"
           end
           
-          @mycarts = Mycart.all(:user_id => @user.id)  
-          @mycarts.destroy
+          begin
+          
+            @mycarts = Mycart.all(:user_id => @user.id)  
+            @mycarts.destroy
 
-          @freeboards = Freeboard.all(:user_id => @user.id)  
-          @freeboards.destroy
+            @freeboards = Freeboard.all(:user_id => @user.id)  
+            @freeboards.destroy
 
-          @myimages = Myimage.all(:user_id => @user.id)  
-          @myimages.destroy
+            @myimages = Myimage.all(:user_id => @user.id)  
+            @myimages.destroy
         
-          @mytemplates = Mytemplate.all(:user_id => @user.id)  
-          @mytemplates.destroy
+            @mytemplates = Mytemplate.all(:user_id => @user.id)  
+            @mytemplates.destroy
           
-          @folders = Folder.all(:user_id => @user.id)  
-          @folders.destroy
+            @folders = Folder.all(:user_id => @user.id)  
+            @folders.destroy
 
-          @mybookfolders = Mybookfolder.all(:user_id => @user.id)  
-          @mybookfolders.destroy
+            @mybookfolders = Mybookfolder.all(:user_id => @user.id)  
+            @mybookfolders.destroy
 
-          @mybookpdfs = Mybookpdf.all(:user_id => @user.id)  
-          @mybookpdfs.destroy
+            @mybookpdfs = Mybookpdf.all(:user_id => @user.id)  
+            @mybookpdfs.destroy
 
-          @mybooks = Mybook.all(:user_id => @user.id)  
-          @mybooks.destroy
+            @mybooks = Mybook.all(:user_id => @user.id)  
+            @mybooks.destroy
 
-          @mypdfs = Mypdf.all(:user_id => @user.id)  
-          @mypdfs.destroy
+            @mypdfs = Mypdf.all(:user_id => @user.id)  
+            @mypdfs.destroy
 
-          @usertempopenlists = Usertempopenlist.all(:user_id => User.get(@user.id).userid)
-          @usertempopenlists.destroy
+            @usertempopenlists = Usertempopenlist.all(:user_id => User.get(@user.id).userid)
+            @usertempopenlists.destroy
           
-          @user.destroy
+          rescue
+            flash[:notice] = '사용자 관련 테이블 삭제 진행중 오류가 발생했습니다!'              
+          end
           
-          # if @user.destroy   
-          #             flash[:notice] = "정상적으로 사용자 삭제됨!"
-          #           else
-          #             flash[:notice] = "사용자 삭제진행중 오류 발생!"            
-          #           end
+          if @user.destroy   
+            flash[:notice] = "정상적으로 사용자 삭제됨!"
+          else
+            flash[:notice] = "사용자 테이블 삭제진행중 오류 발생!"            
+          end
           
         # rescue
         #   flash[:notice] = '사용자 관련 테이블 삭제 진행중 오류가 발생했습니다!'              
