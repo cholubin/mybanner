@@ -77,6 +77,7 @@ class Admin::UsersController < ApplicationController
       chk.each do |chk|
         @user = User.get(chk[0].to_i)
         
+        puts_message @user.user_name
         # begin
           begin 
             user_dir = "#{RAILS_ROOT}" + "/public/user_files/#{@user.userid}/"
