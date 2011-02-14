@@ -77,7 +77,7 @@ class Admin::UsersController < ApplicationController
       chk.each do |chk|
         @user = User.get(chk[0].to_i)
         
-        begin
+        # begin
           user_dir = "#{RAILS_ROOT}" + "/public/user_files/#{@user.userid}/"
           FileUtils.rm_rf user_dir
 
@@ -117,9 +117,9 @@ class Admin::UsersController < ApplicationController
             flash[:notice] = "사용자 삭제진행중 오류 발생!"            
           end
           
-        rescue
-          flash[:notice] = '사용자 관련 테이블 삭제 진행중 오류가 발생했습니다!'              
-        end 
+        # rescue
+        #   flash[:notice] = '사용자 관련 테이블 삭제 진행중 오류가 발생했습니다!'              
+        # end 
       end
     else
         flash[:notice] = '삭제할 사용자를 선택하지 않으셨습니다!'    

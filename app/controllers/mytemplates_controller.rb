@@ -615,7 +615,11 @@ class MytemplatesController < ApplicationController
         if @jobboards.count > 0
           @jobboards.each do |j|
             if j.req_file != nil and File.exist?(req_file_dir + j.req_file)
-              FileUtils.rm_rf req_file_dir + j.req_file
+              begin
+                FileUtils.rm_rf req_file_dir + j.req_file
+              rescue
+                puts_message "File Remove Error!"
+              end
             end
           end
           
@@ -629,7 +633,11 @@ class MytemplatesController < ApplicationController
         
         if @mytemplate.destroy
           if File.exist?(@mytemplate.path.force_encoding('UTF8-MAC')) 
-            FileUtils.remove_entry_secure @mytemplate.path.force_encoding('UTF8-MAC') 
+            begin
+              FileUtils.rm_rf @mytemplate.path.force_encoding('UTF8-MAC') 
+            rescue
+              puts_message "File Remove Error!"
+            end
           end
           
           puts_message "마이템플릿 삭제 완료!"

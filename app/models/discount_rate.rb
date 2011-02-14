@@ -4,25 +4,19 @@ require 'carrierwave/orm/datamapper'
 require 'dm-core'
 require 'dm-pager'
 
-class Optionsub
+class Discount_rate
   
   # Class Configurations ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   include DataMapper::Resource
 
   
   # Attributes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  property :id,             Serial
-  property :name,           Text 
-  property :price,          String
-  property :info,           Text
-  property :priority,       Integer
-  
-  property :option_id,      Integer
-  
-  property :category,       Integer
-  property :category_name,  String
-  property :unit_price,     String
-  
+  property :id,               Serial
+  property :option_basic_id,  Integer
 
+  property :quantity,         Integer
+  property :condition,        String # < > = 
+  property :rate,             String
+  
   timestamps :at
 end

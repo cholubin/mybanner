@@ -9,6 +9,95 @@
 
 <link href="/css/admin/layout.css" rel="stylesheet" type="text/css" />
 
+
+<div id="feature_wrapper">
+	<p1>기본설정</p1>
+	<br>
+</div>
+
+<table class="board_table">
+    <thead class="logo">
+        <tr>
+            <th class="board_thead" width="700px">계산식:
+				{ { (가로x세로x기본단가) + 후가공 } x건수 } x 1.1(부가세)
+			</th>
+        </tr>
+    </thead>
+ 
+    <tbody class="logo">
+		<% form_tag({:action => ''}, {:multipart => true, :id => "frmFile_intro"} ) do -%>
+		<tr>
+            <td class="board_tbody" width="200px">기본단가: <input type="text" id="basic_unit_price">원
+	
+			</td>
+        </tr>
+		<tr>
+			<td class="board_tbody">가로, 세로 100cm가 안될 경우 무조건 100cm로 계산 <input type="checkbox" id="size_limit_flag"></td>
+		</tr>
+		<tr>
+			<td class="board_tbody">최저금액 적용여부 <input type="checkbox" id="lowest_price_flag">
+				<input type="text" id="lowest_price">원
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="board_tbody">특정 소재 선택시 기본단가 변경 <input type="checkbox" id="unit_price_change_by_material_flag">
+				<ul id="ul1" style="padding:0 0 0 10px;">
+					<%
+					Optionsub.all(:option_id => 1).each do |opt| 
+					%>
+					<span style="padding:0 20px 0 0"><%= opt.name %></span> <input type="text" id="unit_price_option">원<br>
+					<%
+					end
+					%>
+				</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="board_tbody">특정 후가공 선택시 기본단가 변경 <input type="checkbox" id="unit_price_change_by_postproc_flag">
+				<ul id="ul2" style="padding:0 0 0 10px;">
+					<%
+					Optionsub.all(:option_id => 2).each do |opt| 
+					%>
+					<span style="padding:0 20px 0 0"><%= opt.name %></span> <input type="text" id="unit_price_option">원<br>
+					<%
+					end
+					%>
+				</div>
+			</td>
+		</tr> 
+		<tr>
+			<td class="board_tbody">반올림 적용여부 및 단위 <input type="checkbox" id="round_off_flag">
+				<br><input type="radio" id="round_off" value="1000">1,000원 
+				<input type="radio" id="round_off" value="1000">100원
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="board_tbody">구매 건수별 배율(할인율) 적용 <input type="checkbox" id="discount_rate_flag">
+				<br>(ex: 3건 이상, 건수 - 0.5 => 3건 이상인 경우 실제 계산식에 곱할 배율은 2.5 가 된다.)
+				<br><input type="text" style="width:30" id="lowest_price">건
+				    <select id="condition">
+				    	<option value="gt">이상</option>
+						<option value="lt">이하</option>
+						<option value="eq">동일</option>
+				    </select>
+					&nbsp;건수 - <input type="text" style="width:30" id="rate">
+					<input type="button" value="저장"><input type="button" value="삭제">
+			</td>
+		</tr>
+		
+		<tr>
+			<td height="100px">
+			</td>
+		</tr>
+		
+		<%end %>
+    </tbody>
+</table>
+
+
 <div id="category-list">
 	<fieldset class="main-write-form">
 		<legend>옵션 추가</legend>
@@ -44,8 +133,25 @@
 </div>
 
 <script type="text/javascript">
+$('#unit_price_change_by_material_flag').live("click",function(){
+	alert("test");
+})
 
 $(document).ready(function(){
+	if ($('#unit_price_change_by_material_flag').is(':checked') ) {
+		$('#ul1').css('display','block')
+	}else{
+		$('#ul1').css('display','none')
+		
+	}
+	
+	if ($('#unit_price_change_by_postproc_flag').is(':checked') ) {
+		$('#ul2').css('display','block')
+	}else{
+		$('#ul2').css('display','none')
+		
+	}
+	
 	$('#sortables').click(function(event){
 		if ( $(event.target).is('.delete') ){
 			var temp_id = event.target.id.split("_");
