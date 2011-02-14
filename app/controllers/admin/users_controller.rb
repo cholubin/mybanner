@@ -78,9 +78,13 @@ class Admin::UsersController < ApplicationController
         @user = User.get(chk[0].to_i)
         
         # begin
-          user_dir = "#{RAILS_ROOT}" + "/public/user_files/#{@user.userid}/"
-          FileUtils.rm_rf user_dir
-
+          begin 
+            user_dir = "#{RAILS_ROOT}" + "/public/user_files/#{@user.userid}/"
+            FileUtils.rm_rf user_dir
+          rescue
+            flash[:notice] = @user.user_name + " 사용자의 폴더를 삭제중 오류발생!"
+          end
+          
           @mycarts = Mycart.all(:user_id => @user.id)  
           @mycarts.destroy
 
