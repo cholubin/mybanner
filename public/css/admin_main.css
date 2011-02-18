@@ -698,6 +698,15 @@ text-decoration: none;
 	padding: 0.6em;
 }
 
+.board_tbody_thick{
+    background:#333333;
+	border-bottom: 3px solid #92b64f;
+    border-top: 1px solid #334428;
+    font-size: 100%;
+	padding: 0.6em;
+}
+
+
 .contact_td1 {
 	width:100px;
 	font-size:12px;

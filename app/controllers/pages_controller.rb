@@ -69,6 +69,12 @@ class PagesController < ApplicationController
     @section = "about"
   end
   
+  def intro_movie
+    @title = "뚝딱 현수막 시연 영상"
+    @menu = "intro_movie"
+    @section = "home"
+  end
+  
   def map
     @title = "연락처/오시는길"
     @menu = "company" 

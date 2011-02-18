@@ -9,6 +9,16 @@
 	Border-radius: 4px;
 }
 
+#category-list .textfield2 {
+	color: white;
+	font-weight: bold;
+	border: 1px solid #6c6c6c;
+	border-top-color: #191919; border-left-color: #191919;
+	background: url(/images/admin/category/input-bg.png) repeat-x;
+	Border-radius: 4px;
+}
+
+
 #category-list legend { display: none; }
 #category-list .edit, #category-list .delete, #category-list .edit-complete { width: 19px; display:block; float:left; height: 20px; cursor: pointer; border: 0; background: url(/images/admin/category/button-edit.png) no-repeat; text-indent:-5000px;}
 #category-list .edit { margin-left: 41px; }
@@ -31,5 +41,6 @@
 
 #category-list .sub-write-form { border: 0; width: 610px;padding: 10px 10px 10px 50px;	background: url(/images/admin/category/label-sub-add.png) no-repeat 16px center; margin: 0 0 0 auto;}
 #category-list .sub-write-form .submit { width: 61px; height: 30px; border: 0; text-indent: -5000px; background: url(/images/admin/category/button-sub-add.png); cursor: pointer; border: 0}
-#category-list .sub-write-form .textfield { width: 529px; height: 24px; padding: 2px; font-size: 12px; background-position: 0 -14px }
+#category-list .sub-write-form .textfield { width: 300px; height: 24px; padding: 2px; font-size: 12px; background-position: 0 -14px }
+#category-list .sub-write-form .textfield2 { width: 200px; height: 24px; padding: 2px; font-size: 12px; background-position: 0 -14px }
 #category-list .sub-write-form label { display: none; text-indent: -5000px; }

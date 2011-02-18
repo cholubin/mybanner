@@ -12,10 +12,10 @@ class Option_basic
   
   # Attributes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   property :id,                                 Serial
-  property :name,                               String 
 
   property :category_id,                        Integer
   property :category_name,                      String
+  property :unit_price,                         Integer
   property :size_limit_flag,                    Boolean
   property :lowest_price_flag,                  Boolean
   property :lowest_price,                       String

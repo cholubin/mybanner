@@ -9,6 +9,7 @@ var html_str = "<li id='optsub_<%= optionsub.id.to_s %>' class='sub-category-lis
 $('#sortables_<%= option_id %>').append(html_str);
 
 $('#optionsub-write_<%= @option_id %>').val("");
+$('#optionsub_price_<%= @option_id %>').val("");
 
 $("#sortables_<%= option_id.to_s %>").sortable({
    update: function(event, ui) { 

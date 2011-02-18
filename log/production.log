@@ -1746,3 +1746,153 @@ Processing Admin::BannersController#index (for 127.0.0.1 at 2011-01-13 15:22:26)
 Rendering template within layouts/admin_layout
 Rendering admin/banners/banner
 Completed in 26ms (View: 24 | 200 OK [http://localhost/admin/banners]
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2011-02-15 17:34:25) [GET]
+Rendering admin/options/option
+Completed in 104ms (View: 99 | 200 OK [http://localhost/admin/options]
+
+
+Processing Admin::OptionsController#discount_save (for 127.0.0.1 at 2011-02-15 17:34:41) [POST]
+  Parameters: {"qt"=>"3", "rate"=>"0.5", "condition"=>"gt", "mode"=>"new"}
+
+NoMethodError (undefined method `save' for nil:NilClass):
+  app/controllers/admin/options_controller.rb:269:in `discount_save'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing Admin::OptionsController#basic_save (for 127.0.0.1 at 2011-02-17 18:14:19) [POST]
+  Parameters: {"category_id"=>"", "category_name"=>"현수막", "bup"=>"1000", "sl_f"=>"false", "lp_f"=>"false", "lp"=>"", "upcbm_f"=>"false", "upcbp_f"=>"false", "ro_f"=>"false", "ro"=>"1000"}
+Completed in 37ms (View: 1 | 200 OK [http://localhost/admin/options/basic_save]
+
+
+Processing Admin::OptionsController#option_unit_price_save (for 127.0.0.1 at 2011-02-17 18:16:46) [POST]
+  Parameters: {"ids"=>"1,3,4,5,6,7,", "vals"=>"15000,,,,,,"}
+Completed in 164ms (View: 0 | 200 OK [http://localhost/admin/options/option_unit_price_save]
+
+
+Processing Admin::OptionsController#option_unit_price_save (for 127.0.0.1 at 2011-02-17 18:16:55) [POST]
+  Parameters: {"ids"=>"2,8,9,10,11,12,13,14,", "vals"=>"5000,,,,,,,,"}
+Completed in 40ms (View: 0 | 200 OK [http://localhost/admin/options/option_unit_price_save]
+
+
+Processing Admin::OptionsController#basic_save (for 127.0.0.1 at 2011-02-17 18:17:29) [POST]
+  Parameters: {"category_id"=>"", "category_name"=>"현수막", "bup"=>"1000", "sl_f"=>"true", "lp_f"=>"true", "lp"=>"15000", "upcbm_f"=>"true", "upcbp_f"=>"true", "ro_f"=>"true", "ro"=>"1000"}
+Redirected to http://localhost:3000/admin/login
+Filter chain halted as [:authenticate_admin!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/admin/options/basic_save]
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2011-02-17 18:17:29) [GET]
+Rendering template within layouts/adminsessions
+Rendering admin/adminsessions/new
+Completed in 231ms (View: 224 | 200 OK [http://localhost/admin/login]
+
+
+Processing Admin::OptionsController#basic_save (for 127.0.0.1 at 2011-02-17 18:20:13) [POST]
+  Parameters: {"category_id"=>"", "category_name"=>"현수막", "bup"=>"1000", "sl_f"=>"true", "lp_f"=>"true", "lp"=>"15000", "upcbm_f"=>"true", "upcbp_f"=>"true", "ro_f"=>"true", "ro"=>"1000"}
+Redirected to http://localhost:3000/admin/login
+Filter chain halted as [:authenticate_admin!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/admin/options/basic_save]
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2011-02-17 18:20:13) [GET]
+Rendering template within layouts/adminsessions
+Rendering admin/adminsessions/new
+Completed in 54ms (View: 2 | 200 OK [http://localhost/admin/login]
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2011-02-17 18:20:21) [GET]
+Redirected to http://localhost:3000/admin/login
+Filter chain halted as [:authenticate_admin!] rendered_or_redirected.
+Completed in 0ms | 302 Found [http://localhost/admin/options]
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2011-02-17 18:20:21) [GET]
+Rendering template within layouts/adminsessions
+Rendering admin/adminsessions/new
+Completed in 10ms (View: 4 | 200 OK [http://localhost/admin/login]
+
+
+Processing AdminsessionsController#create (for 127.0.0.1 at 2011-02-17 18:20:29) [POST]
+  Parameters: {"authenticity_token"=>"FxhHlhrGtEz5Xxsk0+6qmEQ6A6v48eKK3KQgjKt+HJY=", "adminsession"=>{"admin_id"=>"webtop", "password"=>"5972"}, "x"=>"0", "y"=>"0"}
+Redirected to http://localhost:3000/admin/temps
+Completed in 604ms | 302 Found [http://localhost/adminsessions]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2011-02-17 18:20:30) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Completed in 185ms (View: 89 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::AdmininfosController#index (for 127.0.0.1 at 2011-02-17 18:20:33) [GET]
+Rendering admin/admininfos/admininfo
+Completed in 159ms (View: 149 | 200 OK [http://localhost/admin/admininfos]
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2011-02-17 18:20:34) [GET]
+Rendering admin/options/option
+Completed in 151ms (View: 147 | 200 OK [http://localhost/admin/options]
+
+
+Processing Admin::OptionsController#basic_save (for 127.0.0.1 at 2011-02-17 18:20:47) [POST]
+  Parameters: {"category_id"=>"", "category_name"=>"현수막", "bup"=>"1000", "sl_f"=>"false", "lp_f"=>"false", "lp"=>"", "upcbm_f"=>"false", "upcbp_f"=>"false", "ro_f"=>"true", "ro"=>"1000"}
+Completed in 37ms (View: 0 | 200 OK [http://localhost/admin/options/basic_save]
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2011-02-17 18:31:13) [GET]
+Rendering admin/options/option
+Completed in 243ms (View: 86 | 200 OK [http://localhost/admin/options]
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2011-02-17 18:31:40) [GET]
+Rendering admin/options/option
+Completed in 49ms (View: 46 | 200 OK [http://localhost/admin/options]
+
+
+Processing Admin::OptionsController#basic_save (for 127.0.0.1 at 2011-02-17 18:33:53) [POST]
+  Parameters: {"category_id"=>"", "category_name"=>"현수막", "bup"=>"1000", "sl_f"=>"false", "lp_f"=>"false", "lp"=>"", "upcbm_f"=>"false", "upcbp_f"=>"false", "ro_f"=>"true", "ro"=>"1000"}
+Completed in 52ms (View: 0 | 200 OK [http://localhost/admin/options/basic_save]
+
+
+Processing Admin::OptionsController#basic_save (for 127.0.0.1 at 2011-02-17 18:34:12) [POST]
+  Parameters: {"category_id"=>"", "category_name"=>"현수막", "bup"=>"1000", "sl_f"=>"false", "lp_f"=>"false", "lp"=>"", "upcbm_f"=>"false", "upcbp_f"=>"false", "ro_f"=>"true", "ro"=>"1000"}
+Completed in 5ms (View: 0 | 200 OK [http://localhost/admin/options/basic_save]
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2011-02-17 18:36:01) [GET]
+Rendering admin/options/option
+Completed in 96ms (View: 46 | 200 OK [http://localhost/admin/options]
+
+
+Processing Admin::OptionsController#basic_save (for 127.0.0.1 at 2011-02-17 18:36:09) [POST]
+  Parameters: {"category_id"=>"", "category_name"=>"현수막", "bup"=>"1000", "sl_f"=>"false", "lp_f"=>"false", "lp"=>"", "upcbm_f"=>"false", "upcbp_f"=>"false", "ro_f"=>"true", "ro"=>"1000"}
+Completed in 6ms (View: 0 | 200 OK [http://localhost/admin/options/basic_save]
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2011-02-17 18:36:48) [GET]
+Rendering admin/options/option
+Completed in 44ms (View: 41 | 200 OK [http://localhost/admin/options]
+
+
+Processing Admin::OptionsController#basic_save (for 127.0.0.1 at 2011-02-17 18:36:55) [POST]
+  Parameters: {"category_id"=>"", "category_name"=>"현수막", "bup"=>"1000", "sl_f"=>"false", "lp_f"=>"false", "lp"=>"", "upcbm_f"=>"false", "upcbp_f"=>"false", "ro_f"=>"true", "ro"=>"1000"}
+Completed in 7ms (View: 0 | 200 OK [http://localhost/admin/options/basic_save]
+
+
+Processing Admin::OptionsController#index (for 127.0.0.1 at 2011-02-17 18:37:09) [GET]
+Rendering admin/options/option
+Completed in 46ms (View: 40 | 200 OK [http://localhost/admin/options]
+
+
+Processing Admin::OptionsController#basic_save (for 127.0.0.1 at 2011-02-17 18:37:19) [POST]
+  Parameters: {"category_id"=>"", "category_name"=>"현수막", "bup"=>"1000", "sl_f"=>"false", "lp_f"=>"false", "lp"=>"", "upcbm_f"=>"false", "upcbp_f"=>"false", "ro_f"=>"true", "ro"=>"1000"}
+Completed in 6ms (View: 0 | 200 OK [http://localhost/admin/options/basic_save]

@@ -417,7 +417,11 @@ class Admin::MytemplatesController < ApplicationController
 
         if @mytemplate != nil
           if File.exist?(@mytemplate.path.force_encoding('UTF8-MAC')) 
-            FileUtils.remove_entry_secure @mytemplate.path.force_encoding('UTF8-MAC') 
+            begin
+              FileUtils.remove_entry_secure @mytemplate.path.force_encoding('UTF8-MAC') 
+            rescue
+              puts_message "삭제 실패!"
+            end
           end
         end
         @mytemplate.destroy    

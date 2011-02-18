@@ -8,10 +8,16 @@ class Admin::OptionsController < ApplicationController
     @menu = "option"
     @board = "option"
     @section = "index"
+    if params[:category] == ""
+      category = params[:category]
+    else
+      category = "현수막"
+    end
       
     @options = Option.all(:order => [ :priority])
-
-     render 'admin/options/option', :layout => false
+    @discount_rate = Discount_rate.all(:option_basic_id => Option_basic.first(:category_name => category).id)
+    
+    render 'admin/options/option', :layout => false
   end
   
 
@@ -108,34 +114,7 @@ class Admin::OptionsController < ApplicationController
 
   end
 
-  # # DELETE /admin_options/1
-  # # DELETE /admin_options/1.xml
-  # def destroy
-  #   puts "==============================="
-  #   @option = Option.get(params[:id])
-  #   @subcategoris = Optionsub.all(:option_id => @option.id)
-  #   
-  # 
-  #   if @subcategoris.destroy
-  #     @option.destroy
-  #     redirect_to admin_options_url      
-  #   else
-  #     puts_message "Error occured during deleting optionsubs"
-  #     redirect_to admin_options_url      
-  #   end
-  # end
-  # 
-  # def destroy_sub
-  #   @options = Option.all
-  #   @optionsub = @options.optionsubs.get(params[:id].to_i)
-  #   
-  #   if @optionsub.destroy
-  #     redirect_to admin_options_url      
-  #   else
-  #     puts_message "Error occured during deleting optionsubs"
-  #     redirect_to admin_options_url      
-  #   end
-  # end  
+
 
   def option_order_update
     option_id = params[:option_id].split(',')
@@ -205,6 +184,7 @@ class Admin::OptionsController < ApplicationController
   def add_optionsub
     option_id = params[:option_id]
     optionsub_name = params[:optionsub_name]
+    optionsub_price = params[:optionsub_price]
     
     @option = Option.get(option_id.to_i)
     @optionsub = Optionsub.new
@@ -214,6 +194,7 @@ class Admin::OptionsController < ApplicationController
         
     @optionsub.priority = max_order + 1
     @optionsub.name = optionsub_name
+    @optionsub.price = optionsub_price
     
     if @optionsub.save
       puts_message "adding optionsub has finished!"
@@ -282,4 +263,157 @@ class Admin::OptionsController < ApplicationController
     render :nothing => true
   end
   
+  def discount_save
+    category_name = params[:category]
+    qt = params[:qt].to_i
+    condition = params[:condition]
+    rate = params[:rate].to_f
+    mode = params[:mode]
+
+    if Option_basic.all(:category_name => "현수막").count > 0
+      @option_basic = Option_basic.first(:category_name => category_name)
+    else
+      @option_basic = Option_basic.new()
+      @option_basic.category_name = category_name
+      @option_basic.save
+    end
+    option_basic_id = @option_basic.id
+    
+    if mode == "new"
+      @discount_rate = Discount_rate.new()
+
+      @discount_rate.option_basic_id = option_basic_id
+      @discount_rate.quantity = qt
+      @discount_rate.rate = rate
+      @discount_rate.condition = condition
+      if @discount_rate.save
+        puts_message "배율 추가 성공!"
+      else
+        puts_message "배율 추가 실패!"
+      end
+    else
+      discount_rate_id = params[:id].to_i
+      @discount_rate = Discount_rate.get(discount_rate_id)
+      @discount_rate.quantity = qt
+      @discount_rate.rate = rate
+      @discount_rate.condition = condition
+      
+      if @discount_rate.save
+        puts_message "배율 업데이트 성공!"
+      else
+        puts_message "배율 업데이트 실패!"
+      end
+    end
+    
+    @discount_rate = Discount_rate.get(@discount_rate.id)
+    puts_message @discount_rate.id.to_s
+    
+    render :update do |page|
+      page.replace_html 'discount_rate_div', :partial => 'discount_rate_div', :object => @discount_rate
+    end
+    
+    # render :nothing => true
+  end
+  
+  def discount_del
+    id = params[:id].to_i
+    
+    discount_rate = Discount_rate.get(id)
+    
+    if discount_rate.destroy
+      render :text => "success"
+    else
+      render :nothing => true
+    end
+  end
+  
+  def option_unit_price_save
+    ids = params[:ids].split(",")
+    vals = params[:vals].split(",")
+    
+    i = 0
+    ids.each do |id|
+       optionsub = Optionsub.get(id.to_i)
+       optionsub.unit_price = vals[i]
+       optionsub.save
+       i += 1
+    end
+    
+    render :text => "success"
+  end
+  
+  def basic_save
+    category_id = params[:category_id].to_i
+    category_name = params[:category_name]
+    bup = params[:bup].to_i
+    
+    if params[:sl_f] == "true"
+      sl_f = true
+    else
+      sl_f = false
+    end
+    
+    if params[:lp_f] == "true"
+      lp_f = true
+    else
+      lp_f = false
+    end
+    
+    lp = params[:lp]
+
+    if params[:upcbm_f] == "true"
+      upcbm_f = true
+    else
+      upcbm_f = false
+    end
+    
+    if params[:upcbp_f] == "true"
+      upcbp_f = true
+    else
+      upcbp_f = false
+    end
+        
+    if params[:ro_f] == "true"
+      ro_f = true
+    else
+      ro_f = false
+    end
+    
+    ro = params[:ro]
+
+    if params[:dr_f] == "true"
+      dr_f = true
+    else
+      dr_f = false
+    end
+    
+    
+    if Option_basic.all(:category_name => category_name).count > 0
+      option_basic = Option_basic.first(:category_name => category_name)
+    else
+      option_basic = Option_basic.new()
+    end
+    
+    option_basic.category_id = category_id
+    option_basic.category_name = category_name
+    option_basic.unit_price = bup
+    option_basic.size_limit_flag = sl_f
+    option_basic.lowest_price_flag = lp_f
+    option_basic.lowest_price = lp
+    option_basic.unit_price_change_by_meterial_flag = upcbm_f
+    option_basic.unit_price_change_by_postproc_flag = upcbp_f
+    option_basic.round_off_flag = ro_f
+    option_basic.round_off_unit = ro
+    option_basic.discount_rate_flag = dr_f
+    
+    
+    # option_basic.save
+    
+    if option_basic.save
+      render :text => "success"
+    else
+      puts_message "저장실패!"
+    end
+
+  end
 end

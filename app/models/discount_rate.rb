@@ -16,7 +16,7 @@ class Discount_rate
 
   property :quantity,         Integer
   property :condition,        String # < > = 
-  property :rate,             String
+  property :rate,             Float
   
   timestamps :at
 end
