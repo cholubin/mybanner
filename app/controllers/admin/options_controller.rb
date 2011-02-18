@@ -15,7 +15,7 @@ class Admin::OptionsController < ApplicationController
     end
       
     @options = Option.all(:order => [ :priority])
-    @discount_rate = Discount_rate.all(:option_basic_id => Option_basic.first(:category_name => category).id)
+    # @discount_rate = Discount_rate.all(:option_basic_id => Option_basic.first(:category_name => category).id)
     
     render 'admin/options/option', :layout => false
   end
