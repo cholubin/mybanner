@@ -124,6 +124,7 @@ class Admin::UsersController < ApplicationController
           
           @user.destroy   
           
+          puts_message @user.name
           # if @user.destroy   
           #   flash[:notice] = "정상적으로 사용자 삭제됨!" 
           # else
