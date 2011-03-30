@@ -99,6 +99,9 @@ class Admin::UsersController < ApplicationController
         
             @mytemplates = Mytemplate.all(:user_id => @user.id)  
             @mytemplates.destroy
+            
+            @tempfolders = Tempfolder.all(:user_id => @user.id)  
+            @tempfolders.destroy
           
             @folders = Folder.all(:user_id => @user.id)  
             @folders.destroy
@@ -122,14 +125,14 @@ class Admin::UsersController < ApplicationController
             flash[:notice] = '사용자 관련 테이블 삭제 진행중 오류가 발생했습니다!'              
           end
           
-          @user.destroy   
-          
-          puts_message @user.name
-          # if @user.destroy   
-          #   flash[:notice] = "정상적으로 사용자 삭제됨!" 
-          # else
-          #   flash[:notice] = "사용자 테이블 삭제진행중 오류 발생! (" + @user.errors.to_s + ")"
-          # end
+          # @user.destroy   
+          # 
+          # puts_message @user.name
+          if @user.destroy   
+            flash[:notice] = "정상적으로 사용자 삭제됨!" 
+          else
+            flash[:notice] = "사용자 테이블 삭제진행중 오류 발생! (" + @user.errors.to_s + ")"
+          end
           
         # rescue
         #   flash[:notice] = '사용자 관련 테이블 삭제 진행중 오류가 발생했습니다!'              
