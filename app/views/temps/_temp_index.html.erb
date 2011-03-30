@@ -26,7 +26,26 @@ floatClear = 0
 		<div class="preview"><img src="<%= temp_image_path %>" width="<%= @is_col ? "139" : "578" %>"></div>
 		<ul class="foot">
 			<li class="size"><span>기본 :</span> <%= my.size %></li>
-			<li class="price"><span>가격 :</span> <%=my.price%>원</li>
+			<% 
+				category_id = my.category
+				
+				if Category.get(category_id) != nil and Category.get(category_id) != ""
+					rcategory = Category.get(category_id).rcategory
+				else
+					rcategory = ""
+				end
+				
+				if rcategory != ""
+					if Option_basic.first(:category_name => rcategory) != nil
+						unit_price = Option_basic.first(:category_name => rcategory).unit_price.to_s + "원"
+					else
+						unit_price = "미정"
+					end
+				else
+					unit_price = "미정"
+				end
+				%>
+			<li class="price"><span>가격 :</span> <%=unit_price%></li>
 			<% if signed_in? %>
 			<li class="self-edit <%= "col" if my.is_col == true %>" id="<%= my.id.to_s %>"><a href="#">직접편집하기</a><%#= link_to "직접편집하기", '/temps?temp_id='+my.id.to_s+'&edit=y', :confirm => '디자인바구니에 담으며 바로 편집하시겠습니까?',  :method => :post %></li>
 			<li class="order-edit"><a href="/pages/editorder?id=<%= my.id.to_s %>" class="ajax-edit-order">편집의뢰하기</a></li>

@@ -44,6 +44,16 @@ class MytemplatesController < ApplicationController
       @mytemplates = Mytemplate.all(:in_order => false, :folder => Tempfolder.get(folder).name, :category => cate, :user_id => current_user.id, :order => [:created_at.desc]).search(params[:search], params[:page])                           
     end
     
+    @total_prices = Array.new()
+    @mytemplates.each do |my|
+      price = total_price_cal_sub(my.id).to_i
+      @total_prices << price
+    end
+    
+    # @total_prices.each do |to|
+    #   puts_message to.to_s
+    # end
+    
     @tempfolders = Tempfolder.all(:user_id => current_user.id)
     render 'mytemplate'
   end
@@ -181,7 +191,7 @@ class MytemplatesController < ApplicationController
     @section = "show"
     
     @categories = Category.all(:order => :priority)   
-    @mytemplate = Mytemplate.get(params[:id])
+    @mytemplate = Mytemplate.get(params[:id].to_i)
 
     job_done = @mytemplate.path + "/web/done.txt"
     
@@ -198,6 +208,8 @@ class MytemplatesController < ApplicationController
      
     @category_name = @mytemplate.category
     @subcategory_name = @mytemplate.subcategory
+    @total_price = total_price_cal_sub(@mytemplate.id).to_i
+    
     render 'mytemplate'    
   end
   
@@ -541,7 +553,8 @@ class MytemplatesController < ApplicationController
     end
     
     if @mytemp.save
-      render :nothing => true
+      total_price = total_price_cal_sub(mytemp_id).to_i
+      render :text => total_price.to_s
     else
       puts_message "옵션을 업데이트 하는 도중 오류가 발생했습니다!"
     end
@@ -554,7 +567,8 @@ class MytemplatesController < ApplicationController
     @mytemp = Mytemplate.get(mytemp_id)
     @mytemp.quantity = quantity
     if @mytemp.save
-      render :nothing => true
+      total_price = total_price_cal_sub(mytemp_id).to_i
+      render :text => total_price.to_s
     else
       puts_message "수량을 업데이트 하는 도중 오류가 발생했습니다!"
     end
@@ -693,7 +707,103 @@ class MytemplatesController < ApplicationController
     end
   end
   
+def total_price_cal
+  my_id = params[:temp_id].to_i
+  total_price = total_price_cal_sub(my_id)
   
+  render :text => total_price.to_i.to_s
+   
+end
+
+def total_price_cal_sub(my_id)
+  my = Mytemplate.get(my_id)
+  size_temp = my.size.split(" x ")
+  size_x = size_temp[0].gsub("cm","")
+  size_y = size_temp[1].gsub("cm","")
+  
+  size = (size_x.to_f * size_y.to_f) / 10000
+  ea = my.quantity.to_f
+  msg = ea.to_i.to_s + "개 / "
+  
+  if my.option != nil and my.option != ""
+    opt_temp = my.option.split(",")
+    opt1_id = opt_temp[0].to_i
+    opt2_id = opt_temp[1].to_i
+
+    if Optionsub.get(opt2_id) != nil and Optionsub.get(opt2_id) != ""
+      opt2_price = Optionsub.get(opt2_id).price.to_f 
+    else
+      opt2_price = 0
+    end
+  else
+    opt2_price = 0  
+  end
+  
+  msg = msg + "후가공비: " + opt2_price.to_s
+  
+  
+  # 대표 카테고리 
+  rcategory = Category.get(my.category).rcategory
+  option_basic = Option_basic.first(:category_name => rcategory)
+  
+  if option_basic.size_limit_flag == true
+    if size < 1.0
+      size = 1.0
+    end  
+  end
+  
+  msg = msg + " / size: " + size.to_s
+  
+  unit_price = option_basic.unit_price.to_f
+  
+  
+  # 특정소재나, 후가공을 선택했을 때 기본단가를 변경시킬지 여부 판단 
+  if option_basic.unit_price_change_by_meterial_flag == true
+    if Optionsub.get(opt1_id) != nil and Optionsub.get(opt1_id) != ""
+      unit_price = Optionsub.get(opt1_id).unit_price.to_f
+      msg += "/ 소재별 기본단가 변경 적용 "
+    end
+
+  elsif option_basic.unit_price_change_by_postproc_flag == true
+    if my.option != nil and my.option != "" and Optionsub.get(opt2_id) != nil and Optionsub.get(opt2_id) != ""
+      if Optionsub.get(opt2_id).unit_price != nil and Optionsub.get(opt2_id).unit_price != ""
+        unit_price = Optionsub.get(opt2_id).unit_price.to_f
+        msg += "/ 후가공별 기본단가 변경 적용 "
+      end
+    end
+  end
+
+  msg += "/ 기본단가: " + unit_price.to_s  
+  
+  # puts_message size.to_s
+  # puts_message unit_price.to_s
+  # puts_message opt2_price.to_s
+  # puts_message ea.to_s
+  
+  total_price = (((size * unit_price) + opt2_price) * ea) * 1.1
+  
+  if option_basic.round_off_flag == true
+    puts_message "반올림 처리" + "("+option_basic.round_off_unit+") : 원금=>"+ total_price.to_s + "원"
+    total_price = round_to(total_price, (option_basic.round_off_unit.to_i == 100)? -3:-4)
+  end
+
+  if option_basic.lowest_price_flag == true
+    if total_price < option_basic.lowest_price.to_f
+      total_price = option_basic.lowest_price.to_f
+    end
+  end
+  
+  puts_message msg
+  
+  return total_price 
+end
+
+#반올림 처리 함수 
+def round_to(num, decimals)
+  factor = 10.0**decimals
+  return (num*factor).round / factor
+end
+
     #::PRIVATE METHODS:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::    
   private  
 

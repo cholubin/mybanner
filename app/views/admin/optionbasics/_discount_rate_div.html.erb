@@ -1,0 +1,20 @@
+<%
+dr = @discount_rate
+
+%>
+<script>
+var html_str = "<div id='div_<%= dr.id %>'><input type='text' value='<%= dr.quantity %>' style='width:30' id='qt_<%= dr.id %>'>건&nbsp;" + 
+    		 "<select id='condition_<%= dr.id %>'>" + 
+    		 "<option value='gt' <%= "selected" if dr.condition == "gt" %>>이상</option>" + 
+			 "<option value='lt' <%= "selected" if dr.condition == "lt" %>>이하</option>" + 
+			 "<option value='eq' <%= "selected" if dr.condition == "eq" %>>동일</option>" + 
+    		 "</select>" + 
+			 "&nbsp;&nbsp;건수 - <input type='text' value='<%= dr.rate %>' style='width:30' id='rate_<%= dr.id %>'>" + 
+			 "&nbsp;<input type='button' id='btn_discount_save_<%= dr.id %>' value='수정'><input type='button'  class='discount_rate_del' id='<%= dr.id %>' value='삭제'</div>";
+
+$('#insert_point').append(html_str);
+
+$('#qt').val("");
+$('#rate').val("");
+
+</script>

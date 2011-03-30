@@ -8,14 +8,16 @@ class Admin::OptionsController < ApplicationController
     @menu = "option"
     @board = "option"
     @section = "index"
-    if params[:category] == ""
-      category = params[:category]
+
+    if params[:rca] != nil and params[:rca] != ""
+      rcategory = params[:rca]
     else
-      category = "현수막"
+      rcategory = "현수막"
     end
-      
+
+    
     @options = Option.all(:order => [ :priority])
-    # @discount_rate = Discount_rate.all(:option_basic_id => Option_basic.first(:category_name => category).id)
+    @discount_rate = Discount_rate.all(:option_basic_id => Option_basic.first(:category_name => rcategory).id)
     
     render 'admin/options/option', :layout => false
   end
@@ -159,6 +161,7 @@ class Admin::OptionsController < ApplicationController
 
   def add_option
     option_name = params[:option_name]
+    option_rcategory = params[:rcate]
     
     options = Option.all(:order => [:priority])
 
@@ -171,6 +174,7 @@ class Admin::OptionsController < ApplicationController
     
     option = Option.new()
     option.name = option_name
+    option.category_name = option_rcategory
     option.priority = 1
     option.save
     
@@ -185,6 +189,7 @@ class Admin::OptionsController < ApplicationController
     option_id = params[:option_id]
     optionsub_name = params[:optionsub_name]
     optionsub_price = params[:optionsub_price]
+    optionsub_rcategory = params[:rcate]
     
     @option = Option.get(option_id.to_i)
     @optionsub = Optionsub.new
@@ -195,6 +200,8 @@ class Admin::OptionsController < ApplicationController
     @optionsub.priority = max_order + 1
     @optionsub.name = optionsub_name
     @optionsub.price = optionsub_price
+    
+    @optionsub.category_name = optionsub_rcategory
     
     if @optionsub.save
       puts_message "adding optionsub has finished!"
@@ -244,6 +251,8 @@ class Admin::OptionsController < ApplicationController
   def update_option
     temp_option_id = params[:option_id].split('_')
     option_name = params[:option_name]
+    option_price = params[:option_price]
+
     option_selector = temp_option_id[0]
     option_id = temp_option_id[1]
     
@@ -256,6 +265,7 @@ class Admin::OptionsController < ApplicationController
     else
       @optionsub = Optionsub.get(option_id.to_i)
       @optionsub.name = option_name
+      @optionsub.price = option_price
       if @optionsub.save
         puts_message "서브카테고리 업데이트 완료!"
       end

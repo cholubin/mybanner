@@ -68,7 +68,7 @@ class Basicinfo
     
     if Basicinfo.all(:category => "pay_method").count < 1
       Basicinfo.new(:code => 0, :name => "직접 계좌이체", :category => "pay_method", :info => "은행계좌로 직접 입금하는 경우", :order => 1, :disable => false, :is_default => true).save
-      Basicinfo.new(:code => 1, :name => "실시간 계좌이체", :category => "pay_method", :info => "실시간 계좌이체를 통해 결제하는 경우", :order => 2, :disable => true,).save
+      Basicinfo.new(:code => 1, :name => "실시간 계좌이체", :category => "pay_method", :info => "실시간 계좌이체를 통해 결제하는 경우", :order => 2, :disable => true).save
       Basicinfo.new(:code => 2, :name => "신용카드", :category => "pay_method", :info => "신용카드로 결제하는 경우", :order => 3, :disable => true).save
       Basicinfo.new(:code => 3, :name => "휴대폰", :category => "pay_method", :info => "휴대폰으로 결제하는 경우", :order => 4, :disable => true).save
     end

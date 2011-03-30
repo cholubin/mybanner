@@ -4,7 +4,7 @@ require 'carrierwave/orm/datamapper'
 require 'dm-core'
 require 'dm-pager'
 
-class Category
+class Rcategory
   
   # Class Configurations ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   include DataMapper::Resource
@@ -13,22 +13,20 @@ class Category
   # Attributes ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   property :id,               Serial
   property :name,             String, :required => true
-  property :rcategory,        String  #대표카테고리 (자동견적의 대표카테고리로 이용)
   property :priority,         Integer, :default => 9999
-  # property :sn,           String, :default => "mc"
   timestamps :at
 
-  has n, :subcategories
 
-  #   def self.up
-  #   if Category.first(:name => '명함') == nil
-  #     Category.new(:name=>'명함', :priority=>1).save
-  #     Category.new(:name=>'현수막', :priority=>2).save
-  #     Category.new(:name=>'봉투', :priority=>3).save  
-  #   else 
-  #     puts Category.first(:priority => 1).id
-  #   end
-  # end
+  def self.up
+    if Rcategory.first(:name => '현수막') == nil
+      Rcategory.new(:name=>'현수막', :priority=>1).save
+      Rcategory.new(:name=>'배너', :priority=>2).save
+      Rcategory.new(:name=>'실사출력', :priority=>3).save  
+    else 
+      puts Rcategory.first(:priority => 1).name
+    end
+  end
+  
 end
 
 DataMapper.auto_upgrade!

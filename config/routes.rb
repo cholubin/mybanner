@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.resources :mytemplates, :only => [:index, :show]
 
   map.namespace :admin do |admin|
-      admin.resources :folders, :mypdfs, :users, :temps, :categories, :notices, :freeboards, :myadmins, :faqs, :mytemplates, :myimages, :myorders, :coppuccinos, :options, :banners
+      admin.resources :folders, :mypdfs, :users, :temps, :categories, :notices, :freeboards, :myadmins, :faqs, :mytemplates, :myimages, :myorders, :coppuccinos, :options, :banners, :optionbasics
   end 
   
   map.temp_download '/temp_download' , :controller => "/admin/temps", :action => 'temp_download'    

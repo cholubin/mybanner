@@ -14,6 +14,7 @@ class Option
   property :id,           Serial
   property :name,         String 
   property :priority,     Integer
+  property :category_name, String
 
   timestamps :at
 end

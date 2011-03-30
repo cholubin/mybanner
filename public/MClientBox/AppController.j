@@ -20,6 +20,7 @@ var SliderToolbarItemIdentifier = "SliderToolbarItemIdentifier",
     CreateTextBoxIdentifier = "CreateTextBoxIdentifier";
     UndoIdentifier = "UndoIdentifier";
     RedoIdentifier = "RedoIdentifier";
+    BringToFrontIdentifier = "BringToFrontIdentifier";
     UseGridIdentifier = "UseGridIdentifier",
     UseGuideIdentifier = "UseGuideIdentifier",
     CharStyleIdentifier = "CharStyleIdentifier",
@@ -77,6 +78,7 @@ gDocItemSizeHeight = 90;
 	CPURLConnection mFrameListCon;
 	CPURLConnection mUndoCon;
 	CPURLConnection mRedoCon;
+	CPURLConnection mToFrontCon;
     CPURLConnection mDocumentInfoCon;
 	CPURLConnection mCurDocImageRefreshCon;
 	CPURLConnection mGeneratePDFCon;
@@ -99,25 +101,29 @@ gDocItemSizeHeight = 90;
 	toolItemImagesNormal = [[CPArray alloc] init];
 	toolItemImagesSelect = [[CPArray alloc] init];
 	
-	var lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/select.png" size:CPSizeMake(30, 25)];
+	var lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/select.png" size:CPSizeMake(30, 25)];  //  0
 	[toolItemImagesNormal addObject:lNormalImg];
 	var lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/selectHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
-	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/imgbox.png" size:CPSizeMake(30, 25)];
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/imgbox.png" size:CPSizeMake(30, 25)];  //  1
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/imgboxHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
-	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/textbox.png" size:CPSizeMake(30, 25)];
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/textbox.png" size:CPSizeMake(30, 25)];  //  2
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/textboxHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
-	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/undo.png" size:CPSizeMake(30, 25)];
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/undo.png" size:CPSizeMake(30, 25)];  //  3
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/undoHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
-	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/redo.png" size:CPSizeMake(30, 25)];
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/redo.png" size:CPSizeMake(30, 25)];  //  4
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/redoHighlighted.png" size:CPSizeMake(30, 25)];
+	[toolItemImagesSelect addObject:lSelectImg];
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/tofront.png" size:CPSizeMake(30, 25)];  //  5
+	[toolItemImagesNormal addObject:lNormalImg];
+	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/tofrontHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
 	mSelectedTool = 0;
 	
@@ -397,6 +403,11 @@ gDocItemSizeHeight = 90;
 	return mAdminUser;
 }
 
+- (CPString)currentDocumentPath
+{
+	return mCurDocPath;
+}
+
 - (void)sendCurDocImageListRequest
 {
 	var lFilename = [mLocalDocPath lastPathComponent];
@@ -605,8 +616,10 @@ gDocItemSizeHeight = 90;
 
 - (@action)changeDocSize:(id)sender
 {
-	[mDocWidthField setFloatValue:mDocWidth];
-	[mDocHeightField setFloatValue:mDocHeight];
+	var lWidthStr = [CPString stringWithFormat:@"%.1f", mDocWidth];
+	var lHeightStr = [CPString stringWithFormat:@"%.1f", mDocHeight];
+	[mDocWidthField setStringValue:lWidthStr];
+	[mDocHeightField setStringValue:lHeightStr];
 	[[CPApplication sharedApplication] runModalForWindow:mDocSizeWin];
 //	[mDocSizeWin makeKeyAndOrderFront:self];
 }
@@ -621,7 +634,7 @@ gDocItemSizeHeight = 90;
 	new_size.width = mDocWidth / mSizeScale;
 	new_size.height = mDocHeight / mSizeScale;
 	var size_str = CPStringFromSize(new_size);
-	var new_SizeStr = [CPString stringWithFormat:@"%dcm X %dcm",mDocWidth,mDocHeight];
+	var new_SizeStr = [CPString stringWithFormat:@"%.1fcm X %.1fcm",mDocWidth,mDocHeight];
 	[mDocSizeField setStringValue:new_SizeStr];
 	[mDocSizeView setNeedsDisplay:YES];
 	[[ProgressWindow sharedWindow] show];
@@ -717,6 +730,21 @@ gDocItemSizeHeight = 90;
 	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=Redo&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
 	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 	    mRedoCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
+	}
+}
+
+- (@action)toFront:(id)sender
+{
+	var lSpreadIdx = [[mSpreadListView selectionIndexes] firstIndex];
+	if(lSpreadIdx >= 0) {
+		var gid = [[[mEditController drawingView] selectedFrame] GID];
+		var lFilename = [mCurDocPath lastPathComponent];
+		var lRequest_CMD = @"request_mlayout";
+		if(mAdminUser)
+			lRequest_CMD = @"admin_request_mlayout";
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=ToFront&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,gid];
+	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
+	    mToFrontCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	}
 }
 
@@ -824,6 +852,11 @@ gDocItemSizeHeight = 90;
 		[self sendFrameListRequest];
 		[self refreshSpreadPreview];
 	}
+	else if(connection === mToFrontCon) {		
+		//[self loadSpreadPreview:data];
+		[self sendFrameListRequest];
+		[self refreshSpreadPreview];
+	}
 	else if( connection === mDocumentInfoCon) {
 		//alert("framelist = "+data);
 		[self loadDocumentInfos:data];
@@ -862,12 +895,12 @@ gDocItemSizeHeight = 90;
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
 	if(mBoolUsePDFBtn) {
-	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
+	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, BringToFrontIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
 	 UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
 	 FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
 	}
 	else {
-	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
+	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, BringToFrontIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
 	 UseGridIdentifier, CPToolbarSpaceItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
 	 FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
 	}
@@ -893,7 +926,7 @@ gDocItemSizeHeight = 90;
       	[toolbarItem setView:mPopupButton];
         [toolbarItem setMinSize:CGSizeMake(100, 24)];
         [toolbarItem setMaxSize:CGSizeMake(100, 24)];
-        [toolbarItem setLabel:"Scale"];
+        [toolbarItem setLabel:"확대축소"];  // Scale
     }
     else if (anItemIdentifier == CharStyleIdentifier)
     {
@@ -916,7 +949,7 @@ gDocItemSizeHeight = 90;
       	[toolbarItem setView:mCharStyleButton];
         [toolbarItem setMinSize:CGSizeMake(150, 24)];
         [toolbarItem setMaxSize:CGSizeMake(150, 24)];
-        [toolbarItem setLabel:"CharStyle"];
+        [toolbarItem setLabel:"문자스타일"];  // Char Style
     }
     else if (anItemIdentifier == FontSizeIdentifier)
     {
@@ -942,7 +975,7 @@ gDocItemSizeHeight = 90;
       	[toolbarItem setView:mFontSizeButton];
         [toolbarItem setMinSize:CGSizeMake(80, 24)];
         [toolbarItem setMaxSize:CGSizeMake(80, 24)];
-        [toolbarItem setLabel:"Font Size"];
+        [toolbarItem setLabel:"서체크기"]; // Font Size
     }
     else if (anItemIdentifier == PDFToolbarItemIdentifier )
     {
@@ -954,7 +987,7 @@ gDocItemSizeHeight = 90;
         
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(generatePDF:)];
-        [toolbarItem setLabel:"Generate PDF"];
+        [toolbarItem setLabel:"PDF 생성"]; // Generate PDF
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
@@ -987,7 +1020,7 @@ gDocItemSizeHeight = 90;
         
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(selectTool:)];
-        [toolbarItem setLabel:"Sel"];
+        [toolbarItem setLabel:"선택"];  //  Sel.
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
@@ -1003,7 +1036,7 @@ gDocItemSizeHeight = 90;
         
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(selectTool:)];
-        [toolbarItem setLabel:"Image"];
+        [toolbarItem setLabel:"이미지"]; // Image
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
@@ -1019,7 +1052,7 @@ gDocItemSizeHeight = 90;
         
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(selectTool:)];
-        [toolbarItem setLabel:"Text"];
+        [toolbarItem setLabel:"텍스트"]; // Text
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
@@ -1035,7 +1068,7 @@ gDocItemSizeHeight = 90;
         
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(undo:)];
-        [toolbarItem setLabel:"Undo"];
+        [toolbarItem setLabel:"취소"];  // Undo
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
@@ -1051,7 +1084,23 @@ gDocItemSizeHeight = 90;
         
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(redo:)];
-        [toolbarItem setLabel:"Redo"];
+        [toolbarItem setLabel:"복귀"]; // Redo
+
+        [toolbarItem setMinSize:CGSizeMake(32, 32)];
+        [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+        [toolbarItem setTag:2];
+    }
+    else if (anItemIdentifier == BringToFrontIdentifier)
+    {
+        var image = [toolItemImagesNormal objectAtIndex:5];
+        var highlighted = [toolItemImagesSelect objectAtIndex:5];
+            
+        [toolbarItem setImage:image];
+        [toolbarItem setAlternateImage:highlighted];
+        
+        [toolbarItem setTarget:self];
+        [toolbarItem setAction:@selector(toFront:)];
+        [toolbarItem setLabel:"앞으로"];  // Bring to Front
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
@@ -1064,7 +1113,7 @@ gDocItemSizeHeight = 90;
         
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(useGuide:)];
-        [toolbarItem setLabel:"Guide"];
+        [toolbarItem setLabel:"안내선"]; // Guide
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
@@ -1077,14 +1126,14 @@ gDocItemSizeHeight = 90;
         
         [toolbarItem setTarget:self];
         [toolbarItem setAction:@selector(useGrid:)];
-        [toolbarItem setLabel:"Grid"];
+        [toolbarItem setLabel:"눈금선"];  // Grid
 
         [toolbarItem setMinSize:CGSizeMake(32, 32)];
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
         [toolbarItem setTag:11];
     }
     else if (anItemIdentifier == ChangeTemplateSizeIdentifier) {
-        [toolbarItem setLabel:"Document Size"];
+        [toolbarItem setLabel:"문서크기"];  // Document Size
       	[toolbarItem setView:mDocSizeView];
         [toolbarItem setMinSize:CGSizeMake(221, 30)];
         [toolbarItem setMaxSize:CGSizeMake(221, 30)];

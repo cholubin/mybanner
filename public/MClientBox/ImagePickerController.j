@@ -75,6 +75,25 @@ gThumbSizeHeight = 100;
 	
 }
 
+// - (@action)changeCategory:(id)sender
+// {
+// 	var category = [mCategoryPopup titleOfSelectedItem];
+// 	[mCategoryPopup setEnabled:NO];
+// 
+// 	var lAppController = [[CPApplication sharedApplication] delegate];
+//  	var lAdminUser = [lAppController adminUser];
+// 	var lCurDocPath = [lAppController currentDocumentPath];
+// 	var lFilename = [lCurDocPath lastPathComponent];
+// 	var lRequest_CMD = @"request_mlayout";
+// 	if(lAdminUser)
+// 		lRequest_CMD = @"admin_request_mlayout";
+//     var lDocWebImagePathStr = [CPString stringWithFormat:"%@/%@?requested_action=Filelist&docname=%@&userinfo=%@/images/%@/",gBaseURL , lRequest_CMD, lFilename,gUserPath,category];
+//   	var lDocWebImageURL = [CPURL URLWithString:lDocWebImagePathStr];
+//   	var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
+// 
+//     mImageListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
+// }
+
 - (@action)changeCategory:(id)sender
 {
 	var category = [mCategoryPopup titleOfSelectedItem];
@@ -135,6 +154,30 @@ gThumbSizeHeight = 100;
 	[mImagePickerWin close];
 }
 
+// - (void)runModalForReceiver:(id)aReceiver
+// {
+// 	if(mReceiver)
+// 		[mReceiver release];
+// 	mReceiver = [aReceiver retain];
+// 	
+// 	var lAppController = [[CPApplication sharedApplication] delegate];
+//  	var lAdminUser = [lAppController adminUser];
+// 	var lCurDocPath = [lAppController currentDocumentPath];
+// 	var lFilename = [lCurDocPath lastPathComponent];
+// 	var lRequest_CMD = @"request_mlayout";
+// 	if(lAdminUser)
+// 		lRequest_CMD = @"admin_request_mlayout";
+//     var lDocWebImagePathStr = [CPString stringWithFormat:"%@/%@?requested_action=Filelist&docname=%@&userinfo=%@/images/",gBaseURL , lRequest_CMD, lFilename, gUserPath];
+//   	var lDocWebImageURL = [CPURL URLWithString:lDocWebImagePathStr];
+//   	var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
+//     mImageCategoryCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
+// 
+// 	[mCategoryPopup setEnabled:NO];
+// 	
+// 	[mImagePickerWin makeKeyAndOrderFront:self];
+// 	[[CPApplication sharedApplication] runModalForWindow:mImagePickerWin];
+// }
+
 - (void)runModalForReceiver:(id)aReceiver
 {
 	if(mReceiver)
@@ -154,6 +197,7 @@ gThumbSizeHeight = 100;
 	[mImagePickerWin makeKeyAndOrderFront:self];
 	[[CPApplication sharedApplication] runModalForWindow:mImagePickerWin];
 }
+
 - (void)connection:(CPURLConnection)connection didFailWithError:(CPString)error
 {
     alert("Connection did fail with error : " + error) ;
@@ -167,6 +211,7 @@ gThumbSizeHeight = 100;
 {
     if (connection === mImageCategoryCon)
     {
+		debugger;
 		[mCategoryPopup removeAllItems];
 	    var lPathList = [data componentsSeparatedByString:@"\n"]; 
 		var i;

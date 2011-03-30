@@ -4,7 +4,9 @@ class Admin::CategoriesController < ApplicationController
   before_filter :authenticate_admin!      
   # GET /admin_categories
   # GET /admin_categories.xml
+  
   def index
+    Rcategory.up
     @menu = "category"
     @board = "category"
     @section = "index"
@@ -144,9 +146,11 @@ class Admin::CategoriesController < ApplicationController
       i = 1
       category_id.each do |c|
         temp = c.split('_')
-        category = Category.get(temp[1].to_i)
-        category.priority = i
-        category.save
+        if Category.get(temp[1].to_i) != nil
+          category = Category.get(temp[1].to_i)
+          category.priority = i
+          category.save
+        end
         i += 1
       end
     end
@@ -177,6 +181,7 @@ class Admin::CategoriesController < ApplicationController
 
   def add_category
     category_name = params[:category_name]
+    rcategory_name = params[:rcategory_name]
     
     categories = Category.all(:order => [:priority])
 
@@ -189,6 +194,7 @@ class Admin::CategoriesController < ApplicationController
     
     category = Category.new()
     category.name = category_name
+    category.rcategory = rcategory_name
     category.priority = 1
     category.save
     
@@ -264,12 +270,17 @@ class Admin::CategoriesController < ApplicationController
   def update_category
     temp_category_id = params[:category_id].split('_')
     category_name = params[:category_name]
+    rcategory = params[:rcategory]
     category_selector = temp_category_id[0]
     category_id = temp_category_id[1]
     
     if category_selector == "cate-edit"
       @category = Category.get(category_id.to_i)
       @category.name = category_name
+      @category.rcategory = rcategory
+      
+      puts @category.rcategory 
+      
       if @category.save
         puts_message "카테고리 업데이트 완료!"
       end

@@ -1,4 +1,4 @@
-<% 
+<%
 	if params[:cate] != nil; cate = params[:cate] else; cate = "" end
 	if params[:folder] != nil; folder = params[:folder] else; folder = "" end
 	if params[:page] != nil; page = params[:page] else; page = "" end
@@ -10,6 +10,8 @@
 	else
 		title_text = Category.get(cate.to_i).name
 	end
+	
+
 %>
 <div id="designcart" class="content-layout">
 	<h3>디자인바구니</h3>
@@ -33,8 +35,11 @@
 		<tbody>
 			<!-- 디자인 항목 반복 시작 -->
 			<%
-			@temp = 1 
+			@temp = 1
+			pi = 0 
 			@mytemplates.each do |my| 
+				rcategory = Category.get(my.category).rcategory
+				
 				if my.subcategory != nil
 					if Category.get(my.category.to_i) != nil and Subcategory.get(my.subcategory.to_i) != nil
 						category_info = Category.get(my.category.to_i).name + "/" + Subcategory.get(my.subcategory.to_i).name
@@ -97,7 +102,7 @@
 				<%end %>
 				<td class="piece"><a class="minus">-</a><input id="peice_<%= my.id.to_s %>" name="piece[]" value="<%= my.quantity %>" size="2" class="piece" /><a class="plus">+</a></td>
 				<td class="price num" id="price_<%= my.id.to_s %>">
-					<%= my.price.to_i * my.quantity %>
+					<%= to_comma(@total_prices[pi].to_s) %>
 				</td>
 				<input type="hidden" id="tmp_total_price" value="0">
 				<input type="hidden" class="unit_price" id="unit_price_<%= my.id.to_s %>" value="<%= my.price %>">
@@ -125,10 +130,10 @@
 							<%Option.all(:order => [:priority]).each do |opt| %>
 							<li>
 								<label><%= opt.name %></label>
-								<select class="opt" id="select_<%= my.id %>">
+								<select class="opt_<%= my.id %>" id="select_<%= my.id %>">
 									<option value="" selected>선택해주세요.</option>
 									<option value="">------------------</option>
-									<%Optionsub.all(:option_id => opt.id).each do |optsub| %>
+									<%Optionsub.all(:category_name => rcategory, :option_id => opt.id).each do |optsub| %>
 										<option value="<%= optsub.id %>" <%= "selected" if optsub.id.to_i == myopt_array[i].to_i %>><%= optsub.name %></option>
 									<%
 									end %>
@@ -146,7 +151,8 @@
 					<!-- jQuery로 숨겨놨다가 레이어로 토글할 생각입니다. 끝-->
 				</td>
 			</tr>
-			<% end %>
+			<% 		pi = pi + 1
+				end %>
 			<!-- 디자인 항목 반복 끝 -->
 		</tbody>
 		
@@ -207,7 +213,7 @@ $('.option_save').live("click", function(event){
 	var $id = $(this).attr("id").replace("option_save_","");
 	var $option = "";
 	
-	$('.opt').each(function(){
+	$('.opt_'+$id).each(function(){
 		$option += $(this).find("option:selected").val() + ","
 	})
 	
@@ -215,7 +221,10 @@ $('.option_save').live("click", function(event){
 		data:'option='+$option+'&id='+ $id, 
 		dataType:'script', 
 		type:'post', 
-		url:'/mytemplates/update_option'
+		url:'/mytemplates/update_option',
+		success: function(request){
+			$('#price_'+$id).html(to_comma(request)+"원");
+		}
 	});
 });
 
@@ -229,15 +238,18 @@ $('.piece').change(function(event) {
 			$('#peice_'+id).val("1");
 		}
 		current_unit = $('#peice_'+id).val();
-		unit_price = $('#unit_price_'+id).val();
-		tmp_total_price = parseInt(current_unit) * parseInt(unit_price);
-		$(event.target).parents("tr").find("td.price").html(to_comma(tmp_total_price) + "원");
+		// unit_price = $('#unit_price_'+id).val();
+		// tmp_total_price = parseInt(current_unit) * parseInt(unit_price);
+		// $(event.target).parents("tr").find("td.price").html(to_comma(tmp_total_price) + "원");
 		
 		$.ajax({
 			data:'quantity='+current_unit+'&id='+ id, 
 			dataType:'script', 
 			type:'post', 
-			url:'/mytemplates/update_quantity'
+			url:'/mytemplates/update_quantity',
+			success: function(request){
+				$('#price_'+id).html(to_comma(request) + "원");
+			}
 		});
 	}else{
 		alert("품목이 선택되어진 상태에서는 수량을 변동할 수 없습니다! \n체크박스의 체크를 해제하시고 시도해주세요!");
@@ -473,7 +485,7 @@ $('#chk_all').click(function(){
 	$('.chkbox:enabled').each(function(){
 		id = $(this).val();
 		
-		var price = parseInt($(this).parents("tr").find("td.price").html());
+		var price = parseInt($(this).parents("tr").find("td.price").html().replace("원","").replace(",",""));
 	 	tmp_total_price = parseInt($('#total_price').html().replace("원","").replace(",",""));
 
 		if($(this).attr("checked") == true){
@@ -560,15 +572,18 @@ $("a.minus")
 			}
 
 			current_unit = $(this).parents("tr").find("input.piece").val();
-			unit_price = $('#unit_price_'+$id).val()
-			total_price = parseInt(current_unit) * parseInt(unit_price);
-			$(this).parents("tr").find("td.price").html(to_comma(total_price) + "원");
+			// unit_price = $('#unit_price_'+$id).val()
+			// total_price = parseInt(current_unit) * parseInt(unit_price);
+			// $(this).parents("tr").find("td.price").html(to_comma(total_price) + "원");
 			
 			$.ajax({
 				data:'quantity='+current_unit+'&id='+ $id, 
 				dataType:'script', 
 				type:'post', 
-				url:'/mytemplates/update_quantity'
+				url:'/mytemplates/update_quantity',
+				success: function(request){
+					$('#price_'+$id).html(to_comma(request) + "원");
+				}
 			});
 			
 		}else{
@@ -587,15 +602,18 @@ $("a.plus")
 			now = parseInt($(this).parents("tr").find("input.piece").val());
 			$(this).parents("tr").find("input.piece").val(now+1);
 			current_unit = $(this).parents("tr").find("input.piece").val();
-			unit_price = $('#unit_price_'+$id).val()
-			total_price = parseInt(current_unit) * parseInt(unit_price);
-			$(this).parents("tr").find("td.price").html(to_comma(total_price) + "원");
+			// unit_price = $('#unit_price_'+$id).val()
+			// total_price = parseInt(current_unit) * parseInt(unit_price);
+			// $(this).parents("tr").find("td.price").html(to_comma(total_price) + "원");
 			
 			$.ajax({
 				data:'quantity='+current_unit+'&id='+ $id, 
 				dataType:'script', 
 				type:'post', 
-				url:'/mytemplates/update_quantity'
+				url:'/mytemplates/update_quantity',
+				success: function(request){
+					$('#price_'+$id).html(to_comma(request) + "원");
+				}
 			});
 		}else{
 			alert("품목이 선택되어진 상태에서는 수량을 변동할 수 없습니다! \n체크박스의 체크를 해제하시고 시도해주세요!");
@@ -637,16 +655,22 @@ $("#designcart-list td")
 $("#designcart-list td.option h5")
 	.live("click",
 	function (){
-		if($(this).parents("td.option").find(".option-select ul").css("display") == "none") {
-			if(prevOption != null)
-				prevOption.slideUp("fast");
-			$(this).parents("td.option").find(".option-select ul").slideDown("fast")
-			prevOption = $(this).parents("td.option").find(".option-select ul");
+		var $chkbox = $(this).parents("tr.item").find("input:checkbox")
+		if($chkbox.attr("checked") == false){
+			if($(this).parents("td.option").find(".option-select ul").css("display") == "none") {
+				if(prevOption != null)
+					prevOption.slideUp("fast");
+				$(this).parents("td.option").find(".option-select ul").slideDown("fast")
+				prevOption = $(this).parents("td.option").find(".option-select ul");
+			}
+			else {
+				$(this).parents("td.option").find(".option-select ul").slideUp("fast");
+				prevOption = null;
+			}
+		}else{
+			alert("품목이 선택되어진 상태에서는 옵션을 변경할 수 없습니다! \n체크박스의 체크를 해제하시고 시도해주세요!");	
 		}
-		else {
-			$(this).parents("td.option").find(".option-select ul").slideUp("fast");
-			prevOption = null;
-		}
+		
 	}
 );
 $(".option-select ul")
@@ -655,7 +679,16 @@ $(".option-select ul")
 		/*$(this).fadeOut("fast")*/
 	}
 );
-$(".option-select").delegate("select","change",function() { if($(this).parents("ul").find("select:eq(0)").val() == "" || $(this).parents("ul").find("select:eq(1)").val() == "") { $(this).parents("td.option").find("h5").html("<a class=\"select\">옵션을 선택해주세요.</a>")} else { $(this).parents("td.option").find("h5").html("<a class=\"selected\">옵션 선택 완료.</a>")}});
-$(".option-select .submit-button").live("click",function() { $(this).parents("ul").slideUp("fast"); prevOption = null;});
+$(".option-select").delegate("select","change",function() { 
+	if($(this).parents("ul").find("select:eq(0)").val() == "" || $(this).parents("ul").find("select:eq(1)").val() == "") { 
+		$(this).parents("td.option").find("h5").html("<a class=\"select\">옵션을 선택해주세요.</a>")
+		} else { 
+			$(this).parents("td.option").find("h5").html("<a class=\"selected\">옵션 선택 완료.</a>")
+		}
+	}
+);
+$(".option-select .submit-button").live("click",function() { 
+	$(this).parents("ul").slideUp("fast"); prevOption = null;
+});
 
 </script>

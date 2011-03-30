@@ -1,5 +1,9 @@
 <%
+temp_total_price = to_comma(@total_price)
+
 my = @mytemplate
+
+rcategory = Category.get(my.category).rcategory
 
 if my.subcategory != nil
 	category_info = Category.get(my.category.to_i).name + "/" + Subcategory.get(my.subcategory.to_i).name
@@ -59,7 +63,7 @@ end
 				<li class="designcode"><strong class="title">디자인번호</strong><%= sn_num %></li>
 				<li class="size"><strong class="title"><%=(my.job_code == 0)? "사이즈":"최초 요청사이즈" %></strong><%=(my.job_code == 0)? (my.size):(my.size_x+"cm x "+my.size_y+"cm") %></li>
 				<li class="date"><strong class="title">최종수정일</strong><%= my.updated_at.strftime('%Y-%m-%d') %></li>
-				<li class="price" id="item_price"><strong class="title">개별금액</strong> <%= Temp.get(my.temp_id).price %>원</li>
+				<li class="price" id="item_price"><strong class="title">금액</strong> <%= temp_total_price %>원</li>
 			</ul>
 			<fieldset class="option-select_detail">
 				<h5>옵션 선택</h5>
@@ -67,7 +71,7 @@ end
 					<!-- 옵션 반복 시작 -->
 					<li>
 						<label>수량</label>
-						<div class="piece-wrap"><a class="minus">-</a><input id="peice_<%= my.id.to_s %>" name="piece[]" value="<%= my.quantity %>" size="2" class="piece" /><a class="plus">+</a></div>
+						<div class="piece-wrap"><a class="minus">-</a><input id="piece_<%= my.id.to_s %>" name="piece[]" value="<%= my.quantity %>" size="2" class="piece" /><a class="plus">+</a></div>
 					</li>
 					<%
 					i = 0 
@@ -80,10 +84,10 @@ end
 					<%Option.all(:order => [:priority]).each do |opt| %>
 					<li>
 						<label><%= opt.name %></label>
-						<select class="opt" id="select_<%= my.id %>">
+						<select class="opt" id="select_<%= opt.id %>">
 							<option value="" selected>선택해주세요.</option>
 							<option value="">------------------</option>
-							<%Optionsub.all(:option_id => opt.id).each do |optsub| %>
+							<%Optionsub.all(:category_name => rcategory, :option_id => opt.id).each do |optsub| %>
 								<option value="<%= optsub.id %>" <%= "selected" if optsub.id.to_i == myopt_array[i].to_i %>><%= optsub.name %></option>
 							<%
 							end %>
@@ -215,7 +219,10 @@ $('.opt').live("change", function(event){
 		data:'option='+$option+'&id='+ $id, 
 		dataType:'script', 
 		type:'post', 
-		url:'/mytemplates/update_option'
+		url:'/mytemplates/update_option',
+		success: function(request){
+			$('#item_price').html("<strong class='title'>금액</strong> "+to_comma(request)+"원</li>");
+		}
 	});
 });
 
@@ -271,7 +278,10 @@ function update_quantity(quan, id){
 		data:'quantity='+quan+'&id='+id, 
 		dataType:'script', 
 		type:'post', 
-		url:'/mytemplates/update_quantity'
+		url:'/mytemplates/update_quantity',
+		success: function(request){
+			$('#item_price').html("<strong class='title'>금액</strong> "+to_comma(request)+"원</li>");
+		}
 	});	
 }
 
@@ -309,9 +319,19 @@ $("a.plus")
 
 // 데모 주문을 위해서 임시적으로 추가
 $('#order-button').click(function(){
+	$.ajax({
+		data:'temp_id=<%= my.id.to_s %>', 
+		dataType:'script', 
+		type:'post', 
+		url:'/mytemplates/total_price_cal',
+		success: function(request){
+			$('#item_price').html("<strong class='title'>금액</strong> "+to_comma(request)+"원</li>");
+			popupView(696,390,"/mytemplates/mytemplate_order", { total_price: $('#item_price').text().replace(",","").replace("금액",""), ids: <%= my.id.to_s %>});
+			return false;
+		}
+	});
 	
-	popupView(696,390,"/mytemplates/mytemplate_order", { total_price: $('#item_price').text().replace(",","").replace("개별금액",""), ids: <%= my.id.to_s %>});
-	return false;
+	
 });
 
 
@@ -432,7 +452,7 @@ $('#design_confirm_section').delegate('#design_confirm','click',function(){
 // 최종 주문하기 버튼 클릭시 프로세스 ==========================================
 $('#order_basic').live("click", function(){
 	var order_item = "<%= my.id.to_s %>";
-	var item_unit = $('#peice_' + order_item).val();
+	var item_unit = $('#piece_' + order_item).val();
 
 	if (order_item == ""){
 		alert("주문할 항목을 선택해주세요!");
