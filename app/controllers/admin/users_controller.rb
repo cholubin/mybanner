@@ -125,7 +125,7 @@ class Admin::UsersController < ApplicationController
           if @user.destroy   
             flash[:notice] = "정상적으로 사용자 삭제됨!" 
           else
-            flash[:notice] = "사용자 테이블 삭제진행중 오류 발생! (" + @user.errors.to_s + ")"
+            flash[:notice] = "사용자 테이블 삭제진행중 오류 발생! (" + @user.errors + ")"
           end
           
         # rescue
