@@ -122,11 +122,13 @@ class Admin::UsersController < ApplicationController
             flash[:notice] = '사용자 관련 테이블 삭제 진행중 오류가 발생했습니다!'              
           end
           
-          if @user.destroy   
-            flash[:notice] = "정상적으로 사용자 삭제됨!" 
-          else
-            flash[:notice] = "사용자 테이블 삭제진행중 오류 발생! (" + @user.errors + ")"
-          end
+          @user.destroy   
+          
+          # if @user.destroy   
+          #   flash[:notice] = "정상적으로 사용자 삭제됨!" 
+          # else
+          #   flash[:notice] = "사용자 테이블 삭제진행중 오류 발생! (" + @user.errors.to_s + ")"
+          # end
           
         # rescue
         #   flash[:notice] = '사용자 관련 테이블 삭제 진행중 오류가 발생했습니다!'              
