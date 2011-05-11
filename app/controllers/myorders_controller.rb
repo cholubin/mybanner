@@ -24,7 +24,7 @@ class MyordersController < ApplicationController
     
     render 'myorder'    
   end
-
+  
   
   
 end

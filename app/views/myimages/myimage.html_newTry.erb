@@ -8,9 +8,9 @@
 			<li id="photo">
 				<p class="folder on"><a>photo</a></p>
 			</li>
-
+			
 			<div id="sortables">
-
+				
 				<!-- 기본폴더 (photo) -->
 				<%
 				@folders = Folder.all(:user_id => current_user.id, :order =>[:order]) 
@@ -48,7 +48,7 @@
 				<li class="filename"><a href="### 파일링크 ###" target="_blank"><%= myimage.name %></a><span></span></li>
 				<li class="date"><%= myimage.created_at.strftime('%Y-%m-%d') %><a class="delete img">삭제</a></li>
 	<!--        # 차후 개선버전시 용량도 추가 #
-				<li>5,123kb</li> -->
+				<li>5,123kb</li> -->	
 			</ul>
 	<!-- 파일 목록 반복 끝 -->
 			<%end %>
@@ -68,10 +68,18 @@
 				<input name="search" id="image_search_val" type="text" value="<%= params[:search] %>"/><input id="image_search_submit_btn" type="submit" value="검색" class="submit-button"/>
 			</p>
 		</fieldset>
+		<input type="button" value="테스트" id="file_test">
+		
 		<div class="upload">
 			<% form_tag({:action => ''}, {:multipart => true, :id => "imgFile", :class => "upload-image"} ) do -%>
+				<div id="files_list" style="background-color: yellow;height:100"></div>
+				Files: 총5개 까지 선택하시 수 있습니다!
+				<!-- This is where the output will appear -->
+				<input id="my_file_element" type="file" name="file" >
+				<input  id="imgUpload_btn" type="submit" value="이미지 올리기">
+				
 				<input type="hidden" name="myimage_folder_id" id="myimage_folder_id">
-				<label for="myimage_image_file">이미지 올리기</label> <input name="myimage_image_file" type="file" id="myimage_image_file">
+				<!-- <label for="myimage_image_file">이미지 올리기</label> <input name="myimage_image_file" type="file" id="myimage_image_file"> -->
 				<a id="imgUpload_btn">올리기</a>
 			<% end%>
 		</div>

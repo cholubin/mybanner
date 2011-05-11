@@ -263,7 +263,20 @@ function repositionViews() {
 
 
 $(function () {
-	$("body").delegate(".ajax-sign-in","click", function() { popupView(250,390,$(this).attr("href")); return false });
+	$("body").delegate(".ajax-sign-in","click", function() { popupView(250,390,$(this).attr("href"),function(){
+		$('#login_submit_btn').click(function(){
+			if ($('#login_userid').val() == ""){
+				alert("아이디를 입력해주세요.");
+				$('#login_userid').focus();
+				return false;
+			}
+			if ($('#login_password').val() == ""){
+				alert("비밀번호를 입력해주세요.");
+				$('#login_password').focus();
+				return false;
+			}
+		})
+	}); return false });
 	$("body").delegate(".ajax-sign-up","click", function() {
 		popupView(660,350,$(this).attr("href"),function() {
 			$("#signup_tos_title").click(function() {
@@ -287,7 +300,18 @@ $(function () {
 		}
 	);return false});
 	$("body").delegate(".ajax-edit","click", function() { popupView(360,330,$(this).attr("href")); return false }); 
-	$("body").delegate(".ajax-myimages","click", function() { popupView(798,554,$(this).attr("href")); return false }); // 차후 김현수 과장과 합칠때 확인 할것!
+	$("body").delegate(".ajax-myimages","click", function() { popupView(798,554,$(this).attr("href")), 
+	function(){
+		$('#my_file_element').live("click",function(){
+			var file_max_num = 5;
+			$('#file_max_num').val(file_max_num);
+			<!-- Create an instance of the multiSelector class, pass it the output target and the max number of files -->
+			var multi_selector = new MultiSelector( document.getElementById( 'files_list' ), file_max_num );
+			<!-- Pass in the file element -->
+			multi_selector.addElement( document.getElementById( 'my_file_element' ) );
+		})
+	}; return false });
+	
 	$("body").delegate("li.preview a","click",function() { quickPreview(740,540,$(this).attr("href"),"ajaxloadpage"); return false })
 	$("body").delegate(".withdraw","click", function() { popupView(380,310,$(this).attr("href")); return false });
 	$("body").delegate(".ajax-custom-order","click", function() { popupView(620,340,$(this).attr("href"),

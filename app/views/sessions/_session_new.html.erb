@@ -7,13 +7,13 @@
 				<legend>로그인 정보 입력</legend>
 				<p>
 					<label for="userid">아이디</label>
-					<input name="session[userid]" id="userid" type="text" placeholder="ID" autofocus/>
+					<input name="session[userid]" id="login_userid" type="text" placeholder="ID" autofocus/>
 				</p>
 				<p>
 					<label for="password">비밀번호</label>
-					<input name="session[password]" id="password" type="password" placeholder="PASSWORD"/>
+					<input name="session[password]" id="login_password" type="password" placeholder="PASSWORD"/>
 				</p>
-				<p><input type="submit" value="로그인" class="submit-button"></p>
+				<p><input type="submit" id="login_submit_btn" value="로그인" class="submit-button" onClick="" ></p>
 		</fieldset>
 	</form>
 	<div class="singup">
@@ -22,3 +22,4 @@
 	</div>
 	<% end %>
 </div>
+

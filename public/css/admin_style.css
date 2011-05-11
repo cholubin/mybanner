@@ -512,7 +512,7 @@ p7 a{
 #order-detail #order-product-list thead tr { height: 32px;}
 #order-detail #order-product-list th {  border-bottom: 1px solid #222; color: white; }
 #order-detail #order-product-list th.work-type { width: 70px; }
-#order-detail #order-product-list th.item { width: 200px; }
+#order-detail #order-product-list th.item { width: 150px; }
 #order-detail #order-product-list th.size { width: 90px; }
 #order-detail #order-product-list th.piece { width: 60px; }
 #order-detail #order-product-list th.price { width: 100px; }

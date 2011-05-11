@@ -72,9 +72,9 @@ end
 	<fieldset id="search-form">
 		<legend>디자인 검색</legend>
 		<ul>
-			<li><input type="radio" name="search_gubun" id="radio_code" value="designcode" checked><label for="radio_code">디자인 코드</label></li>
-			<li><input type="radio" name="search_gubun" id="radio_tag" value="tag"><label for="radio_tag">태그</label></li>
-			<li><input type="radio" name="search_gubun" id="radio_name" value="name"><label for="radio_tag">템플릿명</label></li>
+			<li><input type="radio" name="search_gubun" id="radio_code" value="designcode" <%=  "checked" if params[:search_gubun] == "designcode" %> ><label for="radio_code">디자인 코드</label></li>
+			<li><input type="radio" name="search_gubun" id="radio_tag" value="tag"  <%=  "checked" if params[:search_gubun] == "tag" %>><label for="radio_tag">태그</label></li>
+			<li><input type="radio" name="search_gubun" id="radio_name" value="name"  <%=  "checked" if params[:search_gubun] == "name" %>><label for="radio_tag">템플릿명</label></li>
 		</ul>
 		<p><input name="search" id="search_val" type="text"/><input type="submit" value="검색" class="submit-button"/></p>
 	</fieldset>
@@ -141,5 +141,7 @@ $('#req_edit_submit').live("click", function(){
 	}
 	
 });
+
+
 </script>
 <% end %>

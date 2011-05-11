@@ -64,7 +64,7 @@ class Temp
     elsif gubun == "designcode"
       Temp.all(:conditions => {:design_code.like => "%#{search}%"}).page :page => page, :per_page => 12
     elsif gubun == "tag"
-      Temp.all(:conditions => {:tag.like => "%#{search}%"}).page :page => page, :per_page => 12
+      Temp.all(:conditions => {:tags.like => "%#{search}%"}).page :page => page, :per_page => 12
     else
       Temp.all.page :page => page, :per_page => 12
     end

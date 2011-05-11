@@ -90,6 +90,8 @@
 						<%else %>
 							<input <%= "onClick=\"go_temp('#{temp.id}');\""%> type="button" value="요청게시판" style="cursor:hand">
 						<%end %>
+						<input <%= "onClick=\"mfile_download('#{temp.id}');\""%> type="button" name="mdown" id="mdown" value="M다운" style="cursor:pointer;">
+						
 					</td>
 				</tr>
 				<!-- 주문 품목에 따른 반복 -->
@@ -140,6 +142,13 @@ function download_pdf(temp_id){
 	$tempid = temp_id;
 	
 	location.href = '/admin/myordersubs/pdf_download?temp_id='+$tempid;
+	return false;
+}
+
+function mfile_download(temp_id){
+	$tempid = temp_id;
+	
+	location.href = '/admin/myordersubs/mfile_download?temp_id='+$tempid;
 	return false;
 }
 

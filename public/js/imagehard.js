@@ -1,6 +1,16 @@
 $(document).ready(function(){
+	$('#my_file_element').live("click",function(){
+		var file_max_num = 5;
+		$('#file_max_num').val(file_max_num);
+		<!-- Create an instance of the multiSelector class, pass it the output target and the max number of files -->
+		var multi_selector = new MultiSelector( document.getElementById( 'files_list' ), file_max_num );
+		<!-- Pass in the file element -->
+		multi_selector.addElement( document.getElementById( 'my_file_element' ) );
+	})
+	
 	// 폴더생성 =========================================
 	$('#folder_create_btn').live("click", function(){
+		alert("test");
 		if ($('#folder_name').val() == ""){
 			alert("폴더명을 입력해 주세요~");
 			$('#folder_name').focus();
@@ -171,17 +181,6 @@ $(document).ready(function(){
 									$("#imagehard-list").hide().fadeIn("slow");	
 								});
 							});
-							// $.ajax({
-							// 	data:'myimage_folder_id=photo', 
-							// 	dataType:'html', 
-							// 	type:'post', 
-							// 	url:'/myimages/get_list',
-							// 	success: function(request){
-							// 		$("#imagehard-list").hide().html(request).fadeIn("slow");
-							// 		$('p.folder').removeClass("on");	
-							// 		$('#photo p.folder').addClass("on");	
-							// 	}
-							// });		
 						}else{
 							alert("폴더삭제 진행중 문제가 발생했습니다! \n다시한번 시도해주시기 바랍니다.");
 						};
@@ -244,25 +243,38 @@ $(document).ready(function(){
 	
 	//이미지 업로드 ================================================
 	$('#imgUpload_btn').live("click", function(){
-		$imgFile = $('#myimage_image_file');
-		val = $imgFile.val().split("\\");
-		f_name = val[val.length-1]; //마지막 화일명
-		s_name = f_name.substring(f_name.length-4, f_name.length);//확장자빼오기
-		ext = s_name.toLowerCase().replace('.','');
-		
-		if( $imgFile.val() == "" ){
-			alert("이미지를 선택해 주세요!");
-			return false;
-		}else{
-			if(ext == "eps" || ext == "png" || ext == "jpg" || ext == "pdf" || ext == "jpeg" || ext == "tif" || ext == "gif"){
-				imgUpload();	
-			}else{
-				alert("pdf파일 또는 이미지 파일만 업로드 하실 수 있습니다!");
-				$('#myimage_image_file').val("");
-				return false;
-			}
+		$imgFile = $('input:file');
+		$file_len = $imgFile.length - 1;
+		$i = 1;
+		if ($imgFile.length > 1) {
+			$imgFile.each(function(){
+				val = $(this).val().split("\\");
+				if ($(this).val() != ""){
+					f_name = val[val.length-1]; //마지막 화일명
+					s_name = f_name.substring(f_name.length-4, f_name.length);//확장자빼오기
+					ext = s_name.toLowerCase().replace('.','');
+
+					if( $(this).val() == "" ){
+						alert("이미지를 선택해 주세요!");
+						return false;
+					}else{
+						if(ext == "eps" || ext == "png" || ext == "jpg" || ext == "pdf" || ext == "jpeg" || ext == "tif" || ext == "gif"){
+							imgUpload();	
+						}else{
+							alert("pdf파일 또는 이미지 파일만 업로드 하실 수 있습니다!");
+							$('#files_list div:eq('+ ($file_len - $i) +')').find('input:button').click();
+							// return false;
+						}
+					}
+					$i = $i + 1;
+				}
+			})
 			
+		}else{
+			alert("이미지를 1개 이상 선택해주세요~");
+			return false;
 		}
+		
 
 	})
 });
@@ -463,3 +475,5 @@ $('#change_file').live("keydown", function(event){
 		return false;
 	}
 });
+
+

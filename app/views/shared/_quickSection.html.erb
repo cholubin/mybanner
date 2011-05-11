@@ -38,7 +38,7 @@
 								<label for="password">비밀번호</label>
 								<input name="session[password]" id="password" type="password" placeholder="PASSWORD"/>
 							</p>
-							<input type="submit" value="로그인" class="submit-button">
+							<input id="submit_btn" type="submit" value="로그인" class="submit-button">
 					</fieldset>
 				<% end %>
 				<p class="signup-message"><a href="/users/new" class="ajax-sign-up">회원가입</a> 무료 회원 가입하시고, 웹 편집 기능을 사용해보세요. </p>
@@ -108,3 +108,18 @@
 				<%end %>
 			</div>
 		</div>
+		
+<script language="Javascript">
+$('#submit_btn').click(function(){
+	if ($('#userid').val() == ""){
+		alert("아이디를 입력해주세요.");
+		$('#userid').focus();
+		return false;
+	}
+	if ($('#password').val() == ""){
+		alert("비밀번호를 입력해주세요.");
+		$('#password').focus();
+		return false;
+	}
+})
+</script>		
