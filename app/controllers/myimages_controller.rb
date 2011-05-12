@@ -59,7 +59,7 @@ class MyimagesController < ApplicationController
     @board = "myimage"
     @section = "index"
   
-    if ext == "all" or ext == nil or ext == ""
+    if ext == "all" or ext == nil or ext == "" or ext = "undefined"
       ext = "all"
     end
     

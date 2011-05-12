@@ -7,7 +7,7 @@ $(document).ready(function(){
 		<!-- Pass in the file element -->
 		multi_selector.addElement( document.getElementById( 'my_file_element' ) );
 	})
-	
+
 	// 폴더생성 =========================================
 	$('#folder_create_btn').live("click", function(){
 		alert("test");
@@ -26,7 +26,7 @@ $(document).ready(function(){
 					message_tmp = result_tmp[1].split("/##/");
 					message = message_tmp[0];
 					sanitized_folder_name = message_tmp[1];
-					
+
 					if(result == "success"){
 						html_str = "<li id='"+message+"'>" +
 							"<p class='folder'><a>"+sanitized_folder_name+"</a></p>" +
@@ -34,7 +34,7 @@ $(document).ready(function(){
 							"<a class='config'>관리</a>" +
 							"</p>" +
 							"</li>";
-						
+
 						$('#sortables').append(html_str);
 						$('#'+message).hide().fadeIn(500);
 						$('#folder_name').val("")
@@ -46,7 +46,7 @@ $(document).ready(function(){
 			});
 		}
 	});
-	
+
 	//폴더생성: 폴더명 입력 후 엔터를 클릭한 경우 ====================================
 	$('#folder_name').live("keydown", function(event){
 		if(event.keyCode == 13){
@@ -64,7 +64,7 @@ $(document).ready(function(){
 			edit_folder($edit_btn, false);
 		}
 	});
-	
+
 	function edit_folder(event_target, fold){
 		myli = event_target.parents("li");
 		folder_id = myli.attr("id");
@@ -78,7 +78,7 @@ $(document).ready(function(){
 		}
 		parent_action_p = event_target.parents("p.action");
 		parent_folder_p = event_target.parents("li").children("p.folder");
-		
+
 		if(fold == false){
 			$.ajax({
 				data:'folder_name='+folder_name+'&folder_id='+ folder_id, 
@@ -104,9 +104,9 @@ $(document).ready(function(){
 			parent_folder_p.html(html_folder_str);
 			myli.fadeIn("slow");
 		}
-		
+
 	}
-	
+
 	// 폴더관리 ==================================================
 	$('li').live("click", function(event){
 		// 폴더를 선택하는 경우 =====================================
@@ -114,7 +114,7 @@ $(document).ready(function(){
 			myli = $(event.target).parents("li");
 			$('p.folder').removeClass("on");
 			// $.data('#folder_list li', "clicked", "");
-			
+
 			if($(event.target).is('p.folder a')){
 				$(event.target).parent().addClass("on");
 			}else{
@@ -124,13 +124,20 @@ $(document).ready(function(){
 			$folder_id = myli.attr("id");
 			$sel_type = $('#image_search_type option:selected').val();
 			$search_val = $('#image_search_val').val();
-			
-			$("#imagehard-list").fadeOut("fast",function() {
-				$("#imagehard-wrap").load("/myimages?search="+$search_val+"&ext="+$sel_type+"&myimage_folder_id="+ $folder_id +" #imagehard-wrap", function(){
-					$("#imagehard-list").hide().fadeIn("fast");	
+
+			if (myli.attr("id") == "shared") {
+				$("#imagehard-list").fadeOut("fast",function() {
+					$("#imagehard-wrap").load("/sharedimages?search="+$search_val+"&ext=all&myimage_folder_id="+ $folder_id +" #imagehard-wrap", function(){
+						$("#imagehard-list").hide().fadeIn("fast");	
+					});
 				});
-			});
-			
+			}else{
+				$("#imagehard-list").fadeOut("fast",function() {
+					$("#imagehard-wrap").load("/myimages?search="+$search_val+"&ext="+$sel_type+"&myimage_folder_id="+ $folder_id +" #imagehard-wrap", function(){
+						$("#imagehard-list").hide().fadeIn("fast");	
+					});
+				});
+			}
 		};
 		// 설정버튼을 클릭한 경우 ====================================
 		if($(event.target).is('a.config')){
@@ -138,13 +145,13 @@ $(document).ready(function(){
 			if(tmp_finder.length > 0){
 				edit_folder(tmp_finder, true);
 			}
-				
+
 			myli = $(event.target).parents("li");
 			myli_id = myli.attr("id");
 			parent_action_p = $(event.target).parents("p.action");
 			parent_folder_p = $(event.target).parents("li").children("p.folder");
 			folder_name = $(event.target).parents("li").children("p.folder").children("a").html();
-			
+
 			//이미 클릭한 경우 ========================
 			$.data(myli, "clicked", "yes");
 			// folder_name = 
@@ -152,20 +159,20 @@ $(document).ready(function(){
 			html_folder_str = "<input type='text' id='edit_folder_name' value='"+ folder_name +"'>";
 			parent_action_p.html(html_action_str);
 			parent_folder_p.html(html_folder_str);
-			
+
 		};
-		
-		
+
+
 		// 수정버튼을 클릭한 경우 ====================================
 		if($(event.target).is('a.edit')){
 			edit_folder($(event.target), false);
 		};
-		
+
 		// 폴더 삭제버튼을 클릭한 경우 ====================================
 		if($(event.target).is('a.delete.folder')){
 			myli = $(event.target).parents("li");
 			folder_id = myli.attr("id");
-			
+
 			if( window.confirm("선택하신 폴더를 삭제하시겠습니까?") ){
 				$.ajax({
 					data:'folder_id='+ folder_id, 
@@ -175,7 +182,7 @@ $(document).ready(function(){
 					success: function(request){
 						if(request == "success"){
 							myli.fadeOut("slow").delay(300).remove();
-							
+
 							$("#imagehard-list").fadeOut("fast",function() {
 								$("#imagehard-wrap").load("/myimages?myimage_folder_id=photo" +" #imagehard-wrap", function(){
 									$("#imagehard-list").hide().fadeIn("slow");	
@@ -184,18 +191,18 @@ $(document).ready(function(){
 						}else{
 							alert("폴더삭제 진행중 문제가 발생했습니다! \n다시한번 시도해주시기 바랍니다.");
 						};
-						
+
 					}
 				});
 			}
 		};
-		
+
 		// 이미지 삭제버튼을 클릭한 경우 ====================================
 		if($(event.target).is('a.delete.img')){
 			myimage = $(event.target).parents("ul.article");
 			myimage_id = myimage.attr("id");
 			$folder_id = $('p.folder.on').parents("li").attr("id");
-			
+
 			if( window.confirm("선택하신 이미지를 삭제하시겠습니까?") ){
 				$.ajax({
 					data:'myimage_id='+ myimage_id, 
@@ -221,7 +228,7 @@ $(document).ready(function(){
 										$(this).remove();
 									});
 								}
-									
+
 							}else{
 								myimage.fadeOut("slow", function(){
 									$(this).remove();
@@ -231,7 +238,7 @@ $(document).ready(function(){
 						}else{
 							alert("이미지 삭제중 문제가 발생했습니다! \n다시한번 시도해주시기 바랍니다.");
 						};
-						
+
 					}
 				});
 			}else{
@@ -240,13 +247,13 @@ $(document).ready(function(){
 		};
 	});
 	// 폴더관리 ==================================================
-	
+
 	//이미지 업로드 ================================================
 	$('#imgUpload_btn').live("click", function(){
 		$imgFile = $('input:file');
 		$file_len = $imgFile.length - 1;
 		$i = 1;
-		if ($imgFile.length > 1) {
+		if ($imgFile.length > 0) {
 			$imgFile.each(function(){
 				val = $(this).val().split("\\");
 				if ($(this).val() != ""){
@@ -269,12 +276,12 @@ $(document).ready(function(){
 					$i = $i + 1;
 				}
 			})
-			
+
 		}else{
 			alert("이미지를 1개 이상 선택해주세요~");
 			return false;
 		}
-		
+
 
 	})
 });
@@ -284,7 +291,7 @@ function imgUpload(){
 	loadingView();
 	$folder_id = $('p.folder.on').parents("li").attr("id");
 	$('#myimage_folder_id').val($folder_id);
-	
+
 	var frm ;
 	frm = $('#imgFile');
 	frm.ajaxForm({ 
@@ -293,7 +300,7 @@ function imgUpload(){
         success:   Callback_imgUpload
 	  });
 	 frm.submit();
-	
+
 }
 
 function Callback_imgUpload(request,state){
@@ -305,7 +312,7 @@ function Callback_imgUpload(request,state){
 		}else{
 			page_num = 1;
 		}
-		
+
 		$folder_id = $('p.folder.on').parents("li").attr("id");
 		$("#imagehard-list").fadeOut("fast",function() {
 			$("#imagehard-wrap").load("/myimages?page="+page_num+"&myimage_folder_id="+ $folder_id +" #imagehard-wrap", function(){
@@ -313,14 +320,14 @@ function Callback_imgUpload(request,state){
 			});
 		});
 	}
-	
+
 	if (state == "success"){
 		loadingView();
 		$('#myimage_image_file').val("");
 		$("#imagehard-list").hide()
 							.prepend(request)
 							.fadeIn("slow");
-							
+
 	}
 }
 
@@ -333,7 +340,7 @@ $("#imagehard .pager a").live("click",
 				$("#imagehard-list").hide().fadeIn("slow");	
 			});
 	});	
-	
+
 	return false;
 })
 
@@ -370,7 +377,7 @@ $('#image_search_submit_btn').live("click", function(){
 	// }else{
 	// 	search_myimage();	
 	// }
-	
+
 })
 
 function search_myimage(){
@@ -378,13 +385,13 @@ function search_myimage(){
 	$folder_id = $sel_folder.parents('li').attr("id");
 	$sel_type = $('#image_search_type option:selected').val();
 	$search_val = $('#image_search_val').val();
-	
+
 	$("#imagehard-list").fadeOut("fast",function() {
 		$("#imagehard-wrap").load("/myimages?search="+$search_val+"&ext="+$sel_type+"&myimage_folder_id=" + $folder_id +" #imagehard-wrap", function(){
 			$("#imagehard-list").hide().fadeIn("slow");	
 		});
 	});
-	
+
 }
 
 //이미지 상세 페이지 ================================================
@@ -392,24 +399,18 @@ $('#imagehard_preview').live("click", function(event){
 	$myimage_id = $(this).children("ul").attr("id").replace("myimage_","");
 	// 원본받기 ================================================
 	if($(event.target).is('li.download') || $(event.target).is('li.download a')){
-		
+
 		location.href = '/myimages/myimage_download?myimage_id='+$myimage_id;
 		return false;
-			// $.ajax({
-			// 			// data:'myimage_id='+$myimage_id, 
-			// 			dataType:'html', 
-			// 			type:'post', 
-			// 			url:'/myimages/myimage_download?myimage_id='+$myimage_id,
-			// 			success: function(request){
-			// 				// alert("성공");
-			// 			}
-			// 		});
-			// 		return false;
+	}else if ($(event.target).is('li.download_sharedimage') || $(event.target).is('li.download_sharedimage a')){
+		$myimage_id = $(this).children("ul").attr("id").replace("sharedimage_","");
+		location.href = '/sharedimages/sharedimage_download?myimage_id='+$myimage_id;
+		return false;
 	};
-	
+
 	// 이미지 삭제 =================================================================
 	if($(event.target).is('li.delete a')){
-		
+
 		$('#'+$myimage_id).children('li.date').children('a.delete.img').click();
 	};
 
@@ -451,6 +452,27 @@ $('#imagehard_preview').live("click", function(event){
 		});
 		return false;
 	};
+	
+	if($(event.target).is('li.move_sharedimage a')){
+		$myimage_id = $(this).children("ul").attr("id").replace("sharedimage_","");
+		$folder_id = $('#move_file option:selected').val();
+		$.ajax({
+			data:'folder_id='+$folder_id+'&myimage_id='+$myimage_id, 
+			dataType:'html', 
+			type:'post', 
+			url:'/sharedimages/copy_sharedimage',
+			success: function(request){
+				if(request == "success"){
+					// current_page_reload();
+					alert("공개 이미지가 복사완료되었습니다!");
+				}else{
+					alert("공개 이미지 복사중 오류가 발생하였습니다! 관리자에게 문의하여 주세요!");
+				}
+				
+			}
+		});
+		return false;
+	};
 });
 
 function current_page_reload(){
@@ -475,5 +497,3 @@ $('#change_file').live("keydown", function(event){
 		return false;
 	}
 });
-
-

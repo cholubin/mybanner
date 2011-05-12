@@ -119,7 +119,16 @@ class Myimage
     FileUtils.chmod 0777, dir
     return dir 
   end
+  
+  def make_thumb_folder(folder)
+    dir1 = "#{RAILS_ROOT}" + "/public/user_files/#{self.user.userid}/images/#{folder}/Thumb"
+    FileUtils.mkdir_p dir1 if not File.exist?(dir1)
+    FileUtils.chmod 0777, dir1
 
+    dir1 = "#{RAILS_ROOT}" + "/public/user_files/#{self.user.userid}/images/#{folder}/Preview"
+    FileUtils.mkdir_p dir1 if not File.exist?(dir1)
+    FileUtils.chmod 0777, dir1
+  end
     
   def filename
 

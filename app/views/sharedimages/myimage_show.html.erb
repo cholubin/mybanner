@@ -1,0 +1,21 @@
+<div id="imagehard_preview">
+	<h2>이미지하드 미리보기</h2>
+	<h3><%=h @sharedimage.name %></h3>
+	<div id="preview_image"><img src="<%= @sharedimage.preview_url %>"></div>
+	<ul id="sharedimage_<%= @sharedimage.id.to_s %>" class="action">
+		<li class="download_sharedimage"><a href="#">원본받기</a></li>
+		<li class="delete"><a>현재 이미지 삭제하기</a></li>
+		<!-- <li class="change_file"><label for="change_file">파일명 변경</label> <input name="change_file" id="change_file" placeholder="작성된 이름으로 변경"> <a id="name_change_btn">이름 변경</a></li> -->
+		<li class="move_sharedimage">
+			<label for="move_file">내 이미지 하드로 이동</label>
+			<select name="move_file" id="move_file">
+				<option value="photo">photo</option>
+			<% @folders = Folder.all(:user_id => current_user.id, :order => [:order]) 
+				@folders.each do |f|
+			%>
+				<option value="<%= f.id %>"><%= f.name %></option>
+			<%end %>
+			</select>
+			<a style="cursor:pointer;">폴더 이동</a></li>
+	</ul>
+</div>

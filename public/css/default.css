@@ -170,6 +170,12 @@ input.submit-button { font-weight: bold; font-size: 12px;border: 1px solid #666;
 #imagehard_preview ul li.delete a { background-image: url("/images/content/button-image-delete.png");height: 27px; }
 #imagehard_preview ul li.download a:hover, #imagehard_preview ul li.delete a:hover { background-position: -180px 0; }
 #imagehard_preview ul li.download a:active, #imagehard_preview ul li.delete a:active {  background-position: -360px 0; }
+#imagehard_preview ul li.download_sharedimage a, #imagehard_preview ul li.delete a { width: 180px; background: no-repeat left top; }
+#imagehard_preview ul li.download_sharedimage a { background-image: url("/images/content/button-download-original.png"); height: 35px }
+#imagehard_preview ul li.delete_sharedimage a { background-image: url("/images/content/button-image-delete.png");height: 27px; }
+#imagehard_preview ul li.download_sharedimage a:hover, #imagehard_preview ul li.delete a:hover { background-position: -180px 0; }
+#imagehard_preview ul li.download_sharedimage a:active, #imagehard_preview ul li.delete a:active {  background-position: -360px 0; }
+
 #imagehard_preview ul input { background-image: url("/images/default/form-input-bg-black.png"); border: 1px solid black; border-color: black #666 #666 black; }
 #imagehard_preview ul li.change_file label, #imagehard_preview ul li.move_file label { 
 display: block; margin: 0 0 2px; line-height: 20px; }
@@ -177,6 +183,14 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 #imagehard_preview ul li.change_file a , #imagehard_preview ul li.move_file a { width: 41px; height: 27px; background: url("/images/content/button-image-change.png") no-repeat left top; position: absolute;right: 0px; top: 21px;}
 #imagehard_preview ul li.change_file a:hover , #imagehard_preview ul li.move_file a:hover { background-position: -41px; }
 #imagehard_preview ul li.change_file a:active , #imagehard_preview ul li.move_file a:active { background-position: -82px; }
+
+#imagehard_preview ul li.change_file label, #imagehard_preview ul li.move_sharedimage label { 
+display: block; margin: 0 0 2px; line-height: 20px; }
+#imagehard_preview ul li.change_file input, #imagehard_preview ul li.move_sharedimage select { width: 124px; }
+#imagehard_preview ul li.change_file a , #imagehard_preview ul li.move_sharedimage a { width: 41px; height: 27px; background: url("/images/content/button-image-change.png") no-repeat left top; position: absolute;right: 0px; top: 21px;}
+#imagehard_preview ul li.change_file a:hover , #imagehard_preview ul li.move_sharedimage a:hover { background-position: -41px; }
+#imagehard_preview ul li.change_file a:active , #imagehard_preview ul li.move_sharedimage a:active { background-position: -82px; }
+
 
 #imagehard_search { width: 580px; position: absolute; top: 60px; left: 200px; background: transparent!important;  border-bottom: 1px solid #ddd; border-width: 0 0 1px 0 !important; height: 30px;}
 #imagehard_search p { position: absolute; margin: 0; padding: 0!important; top: 0; line-height: 30px !important; }

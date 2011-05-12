@@ -16,6 +16,7 @@ class Category
   property :rcategory,        String  #대표카테고리 (자동견적의 대표카테고리로 이용)
   property :priority,         Integer, :default => 9999
   # property :sn,           String, :default => "mc"
+  property :gubun,            String, :default => "template"
   timestamps :at
 
   has n, :subcategories

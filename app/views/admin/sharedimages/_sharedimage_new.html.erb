@@ -1,0 +1,48 @@
+<h1>이미지 업로드</h1>
+<br>
+<!-- This is the form -->
+<!-- <form enctype="multipart/form-data" action="admin/sharedimages" method = "post"> -->
+<% form_for(:sharedimage, :url => admin_sharedimages_path, :html => {:multipart => true}) do |f| %>	
+	<input type="hidden" id="file_max_num" name="file_max_num" value="10">
+	
+	<p>
+	    <%= f.label :"공개여부" %>
+	    <%= f.check_box :open_fl %>
+	  </p>
+	<br><br>
+	
+	<!-- The file element -- NOTE: it has an ID -->
+	<input id="my_file_element" type="file" name="file">
+	<%= f.submit '이미지 업로드' %>
+<%end %>
+<!-- </form> -->
+
+<!-- This is where the output will appear -->
+<div id="files_list" class="ui-state-highlight ui-corner-all" style="width:400;margin-top: 20px; padding: 0 .7em;">
+	<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span><font color=blue>Files: 총<span id="max_num"></span>개 까지 선택하실 수 있습니다!</font></p>
+</div>
+<script>
+	var file_max_num = 10;
+	$('#max_num').text(file_max_num);
+	$('#file_max_num').val(file_max_num);
+	<!-- Create an instance of the multiSelector class, pass it the output target and the max number of files -->
+	var multi_selector = new MultiSelector( document.getElementById( 'files_list' ), file_max_num );
+	<!-- Pass in the file element -->
+	multi_selector.addElement( document.getElementById( 'my_file_element' ) );
+	
+</script>
+
+<script language="Javascript">
+$('#sharedimage_submit').click(function(){
+	$imgFile = $('input:file');
+	if ($imgFile.length < 2){
+		alert("이미지 파일을 선택해주세요!");
+		return false;
+	}
+	
+})
+</script>
+
+<%= link_to '목록', "/admin/sharedimages" %>
+
+
