@@ -150,6 +150,11 @@ class UsersController < ApplicationController
 
           @user.update_password(params[:new_password])
           @user.email = params[:email]
+          @user.tel = params[:tel]
+          @user.mobile = params[:mobile]
+          @user.zip = params[:zip]
+          @user.addr1 = params[:addr1]
+          @user.addr2 = params[:addr2]
           
           if @user.save
             render :text => "수정완료"  
@@ -161,7 +166,12 @@ class UsersController < ApplicationController
 
         else  #메일만 수정하는 경우       
           @user.email = params[:email]
-
+          @user.tel = params[:tel]
+          @user.mobile = params[:mobile]
+          @user.zip = params[:zip]
+          @user.addr1 = params[:addr1]
+          @user.addr2 = params[:addr2]
+          
           if @user.save
             render :text => "수정완료" 
           else

@@ -102,7 +102,7 @@ function member_modify(){
 		
 						
 		$.ajax({
-			data:'id='+$('#user_id').val()+'&current_password='+$('#user-password').val()+'&new_password='+$('#user-new-password').val()+'&email='+$('#user-email').val(), 
+			data:'id='+$('#user_id').val()+'&current_password='+$('#user-password').val()+'&new_password='+$('#user-new-password').val()+'&email='+$('#user-email').val()+'&tel='+$('#user-tel').val()+'&mobile='+$('#user-mobile').val()+'&zip='+$('#user-zip').val()+'&addr1='+$('#user-addr1').val()+'&addr2='+$('#user-addr2').val(),
 			dataType:'script', 
 			type:'post', 
 			url:'/users/update',

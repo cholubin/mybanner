@@ -299,7 +299,7 @@ $(function () {
 			})
 		}
 	);return false});
-	$("body").delegate(".ajax-edit","click", function() { popupView(360,330,$(this).attr("href")); return false }); 
+	$("body").delegate(".ajax-edit","click", function() { popupView(360,500,$(this).attr("href")); return false }); 
 	$("body").delegate(".ajax-myimages","click", function() { popupView(798,554,$(this).attr("href")), 
 	function(){
 		$('#my_file_element').live("click",function(){

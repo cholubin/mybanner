@@ -90,6 +90,12 @@ input.submit-button { font-weight: bold; font-size: 12px;border: 1px solid #666;
 #popup-view #signup-form #user-password { width: 130px; }
 #popup-view #signup-form #user-repassword { width: 130px; }
 #popup-view #signup-form #user-email { width: 160px; }
+#popup-view #signup-form #user-tel { width: 160px; }
+#popup-view #signup-form #user-mobile { width: 160px; }
+#popup-view #signup-form #user-zip { width: 160px; }
+#popup-view #signup-form #user-addr1 { width: 180px; }
+#popup-view #signup-form #user-addr2 { width: 180px; }
+
 
 #popup-view #signup-form .agree { position: absolute; width: 302px; height: 220px; overflow: auto; top: 98px; left: 337px; line-height: 150%; font-size: 12px; padding: 0;background: white; border:  1px solid #ccc; }
 #popup-view #signup-form .submit-button { position: absolute; top: 290px;  left: 20px; width: 302px; height: 30px;}
@@ -99,8 +105,9 @@ input.submit-button { font-weight: bold; font-size: 12px;border: 1px solid #666;
 #popup-view #signup-form div.description { padding: 0 14px 10px; }
 #popup-view #signup-form div.description p { padding: 14px 0 0; }
 
+#ajaxloadpage #edit-user-form { height: 530px; }
 #popup-view #edit-user-form label {display: block; width: 110px; line-height: 22px; float: left; }
-#popup-view #edit-user-form .submit-button { position: absolute; top: 289px; left: 20px; width: 320px; height: 30px; }
+#popup-view #edit-user-form .submit-button { position: absolute; top: 440px; left: 20px; width: 320px; height: 30px; }
 #popup-view #edit-user-form input { width: 180px; }
 #popup-view #edit-user-form .withdraw {  display: block; position: absolute; top: 121px; left: 260px;  width: 52px; text-align: center; border: 1px solid #333; border-color: #ccc #999 #999 #ccc; background: url(/images/default/form-button-bg-white.png); color: #666; padding: 0 7px; line-height: 22px;}
 #popup-view #edit-user-form .withdraw:hover { color: #666; font-weight: bold; }

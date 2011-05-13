@@ -37,10 +37,12 @@ my = Mytemplate.get(@tempids[0].to_i)
 			</p>
 		</fieldset>
 		<fieldset id="delivery-address">
+			
 			<h4>배송주소</h4>
+			<%if current_user.zip == nil or current_user.zip == "" %>
 			<div id="search-address-form"><h5>주소검색</h5><input id="address-search" placeholder="동/면/읍" maxlength="10" size="14" type="text"/> <input id="zip_search" type="button" value="검색" class="submit-button"/> <p>주소의 동/면/읍을 입력하고 검색버튼을 눌러주세요.</p></div>
 			<ul id="address-block">
-				<li><label for="zipcode">우편번호</label> <input id="zip_code" name="zip_code"  placeholder="000-000" maxlength="10" size="8" type="text"/></li>
+				<li><label for="zipcode">우편번호</label> <input id="zip_code" name="zip_code" placeholder="000-000" maxlength="10" size="8" type="text"/></li>
 				<li id="addr_result"><label for="address-selector">주소선택</label>
 					<select id="address-selector" name="address1">
 						<option value="" selected>먼저 검색을 해주세요.</option>
@@ -48,6 +50,21 @@ my = Mytemplate.get(@tempids[0].to_i)
 				</li>
 				<li><label for="address2">나머지 주소</label><input name="address2" id="address2" placeholder="나머지 주소" maxlength="50" size="36" type="text"/></li>
 			</ul>
+			<%else %>
+			<div id="search-address-form" style="display:none;"><h5>주소검색</h5><input id="address-search" placeholder="동/면/읍" maxlength="10" size="14" type="text"/> <input id="zip_search" type="button" value="검색" class="submit-button"/> <p>주소의 동/면/읍을 입력하고 검색버튼을 눌러주세요.</p></div>
+			<ul id="address-block">
+				<li>
+					<label for="zipcode">우편번호</label> <input id="zip_code" name="zip_code" value="<%= current_user.zip %>" placeholder="000-000" maxlength="10" size="8" type="text"/>
+					<input type="button" id="re_search" value="재검색" style="cursor:pointer;">
+				</li>
+				<li id="addr_result"><label for="address-selector">주소선택</label>
+					<select id="address-selector" name="address1">
+						<option value="<%= current_user.addr1 %>" selected><%= current_user.addr1 %></option>
+					</select>
+				</li>
+				<li><label for="address2">나머지 주소</label><input name="address2" id="address2" value="<%= current_user.addr2 %>" placeholder="나머지 주소" maxlength="50" size="36" type="text"/></li>
+			</ul>
+			<%end %>
 			<p class="delivery-request"><label for="receive-note">배송 요청사항</label><input name="receive-note" id="receive-note" placeholder="배송시 요청사항을 짧게 입력해주세요." maxlength="30" size="35" type="text"></p>
 		</fieldset>
 	</div>

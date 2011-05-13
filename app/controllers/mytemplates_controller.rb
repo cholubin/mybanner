@@ -136,6 +136,23 @@ class MytemplatesController < ApplicationController
       end
       index += 1
     end
+    
+    @user = User.get(current_user.id)
+    
+    if @user.tel == nil or @user.tel == ""
+      @user.tel = @myorder.order_tel
+      @user.mobile = @myorder.order_mobile
+      @user.zip = @myorder.order_zip
+      @user.addr1 = @myorder.order_addr1
+      @user.addr2 = @myorder.order_addr2
+      
+      if @user.save
+        puts_message "사용자 정보 업데이트 성공"
+      else
+        puts_message "사용자 정보 업데이트 실패!"
+      end
+    end
+    
   end
   
 
