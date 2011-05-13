@@ -43,6 +43,7 @@ class Admin::BannersController < ApplicationController
     @banner.order = order
     
     @banner.img_file = params[:image_file]
+    @banner.type = File.extname(params[:image_file].original_filename).gsub(".","")
     
     if @banner.save
       file_name = @banner.id.to_s

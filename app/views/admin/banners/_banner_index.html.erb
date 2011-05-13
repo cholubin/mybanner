@@ -48,7 +48,11 @@
 					<% @banner_left.each do |l| %>
 					<div id="<%= l.id %>">
 						<input id="<%= l.id %>" class="del" type="button" value="삭제"><br>
-						<img title="<%= l.link_url %>" width="170" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{l.img_filename}" %>">
+						<%if l.type == "swf" %>
+						 <embed src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{l.img_filename}" %>" type="application/x-shockwave-flash" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" width="170"></embed>
+						<%else %>
+							<img title="<%= l.link_url %>" width="170" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{l.img_filename}" %>">
+						<%end %>
 						<%= l.link_url if l.link_url != nil and l.link_url != "" %>
 						<br>
 					</div>
@@ -60,7 +64,12 @@
 					<% @banner_center.each do |c| %>
 					<div id="<%= c.id %>">
 						<input id="<%= c.id %>" class="del" type="button" value="삭제"><br>
-						<img title="<%= c.link_url %>" width="330" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{c.img_filename}" %>">
+						<%if c.type == "swf" %>
+						 <embed src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{c.img_filename}" %>" type="application/x-shockwave-flash" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" width="170"></embed>
+						<%else %>
+							<img title="<%= c.link_url %>" width="330" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{c.img_filename}" %>">
+						<%end %>
+						
 						<%= c.link_url if c.link_url != nil and c.link_url != "" %>
 						<br>
 					</div>
@@ -72,7 +81,13 @@
 					<% @banner_right.each do |r| %>
 					<div id="<%= r.id %>">
 						<input id="<%= r.id %>" class="del" type="button" value="삭제"><br>
-						<img title="<%= r.link_url %>" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{r.img_filename}" %>">
+						<%if r.type == "swf" %>
+						 <embed src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{r.img_filename}" %>" type="application/x-shockwave-flash" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" width="170"></embed>
+						<%else %>
+							<img title="<%= r.link_url %>" width="170" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{r.img_filename}" %>">
+						<%end %>
+						
+						
 						<%= r.link_url if r.link_url != nil and r.link_url != "" %>
 						<br>
 					</div>

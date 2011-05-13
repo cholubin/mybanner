@@ -14,7 +14,7 @@ include SessionsHelper
     end
   
     def extension_white_list
-      %w(jpg png)
+      %w(jpg png swf)
     end
 
     def filename

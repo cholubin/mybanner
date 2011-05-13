@@ -48,7 +48,7 @@
 			<ul class="article" id="<%= myimage.id.to_s %>">
 				<!-- 가로 세로 사이즈 136으로 제한, 현재 IMAG태그에 임의로 width=136, height=136 해놨습니다.  -->
 				<li class="preview"><a href="/myimages/show_myimage/<%=myimage.id.to_s %>" target="_blank"><img src="<%= myimage.thumb_url %>"/></a></li>
-				<li class="filename"><a href="### 파일링크 ###" target="_blank"><%= myimage.name %></a><span></span></li>
+				<li class="filename"><a href="/myimages/show_myimage/<%=myimage.id.to_s %>" target="_blank"><%= myimage.name %></a><span></span></li>
 				<li class="date"><%= myimage.created_at.strftime('%Y-%m-%d') %><a class="delete img">삭제</a></li>
 	<!--        # 차후 개선버전시 용량도 추가 #
 				<li>5,123kb</li> -->

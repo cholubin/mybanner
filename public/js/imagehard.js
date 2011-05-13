@@ -385,13 +385,23 @@ function search_myimage(){
 	$folder_id = $sel_folder.parents('li').attr("id");
 	$sel_type = $('#image_search_type option:selected').val();
 	$search_val = $('#image_search_val').val();
-
-	$("#imagehard-list").fadeOut("fast",function() {
-		$("#imagehard-wrap").load("/myimages?search="+$search_val+"&ext="+$sel_type+"&myimage_folder_id=" + $folder_id +" #imagehard-wrap", function(){
-			$("#imagehard-list").hide().fadeIn("slow");	
+	
+	if($folder_id == "shared"){
+		$("#imagehard-list").fadeOut("fast",function() {
+			$("#imagehard-wrap").load("/sharedimages?search="+$search_val+"&ext="+$sel_type+"&myimage_folder_id=" + $folder_id +" #imagehard-wrap", function(){
+				$("#imagehard-list").hide().fadeIn("slow");	
+			});
 		});
-	});
-
+		
+	}else{
+		$("#imagehard-list").fadeOut("fast",function() {
+			$("#imagehard-wrap").load("/myimages?search="+$search_val+"&ext="+$sel_type+"&myimage_folder_id=" + $folder_id +" #imagehard-wrap", function(){
+				$("#imagehard-list").hide().fadeIn("slow");	
+			});
+		});
+		
+	}
+	
 }
 
 //이미지 상세 페이지 ================================================

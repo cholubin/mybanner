@@ -20,6 +20,9 @@ class User
   property :email,              String, :required => true
   property :tel,                String
   property :mobile,             String
+  property :zip,                String
+  property :addr1,              String
+  property :addr2,              String
 
   property :encrypted_password, String, :length => 150
   property :salt,               String, :length => 150

@@ -54,11 +54,19 @@
 			<% @banner.each do |b| %>
 			<%if b.link_url != nil and b.link_url != "" %>
 				<div>
-					<a href="<%= b.link_url %>" <%= "target='_blank'" if b.mode = "new" %> ><img width="580" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>"></a>
+					<%if b.type == "swf" %>
+						<a href="<%= b.link_url %>" <%= "target='_blank'" if b.mode = "new" %> ><embed src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>" type="application/x-shockwave-flash" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" width="580"></embed></a>
+					<%else %>
+						<a href="<%= b.link_url %>" <%= "target='_blank'" if b.mode = "new" %> ><img width="580" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>"></a>
+					<%end %>
 				</div>
 			<%else %>
 			<div>
-				<img width="580" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>">
+				<%if b.type == "swf" %>
+					<embed src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>" type="application/x-shockwave-flash" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" width="580"></embed>
+				<%else %>
+					<img width="580" src="<%= "#{HOSTING_URL}" + "images/admin/banner/#{b.img_filename}" %>">
+				<%end %>
 			</div>
 			<%end %>
 			<%end %>

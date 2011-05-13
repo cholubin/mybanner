@@ -59,7 +59,7 @@ end
 			<ul class="item-detail">
 				<li class="type"><strong class="title">구분</strong><%=(my.job_code == 0)? "직접편집":"편집의뢰" %></li>
 				<li class="item"><strong class="title">품목</strong><%= Category.get(my.category.to_i).name %></li>
-				<li class="item"><strong class="title">상세품목</strong><%= Subcategory.get(my.subcategory.to_i).name %></li>
+				<li class="item"><strong class="title">상세품목</strong><%= Subcategory.get(my.subcategory.to_i).name if my.subcategory != nil and my.subcategory != "" %></li>
 				<li class="designcode"><strong class="title">디자인번호</strong><%= sn_num %></li>
 				<li class="size"><strong class="title"><%=(my.job_code == 0)? "사이즈":"최초 요청사이즈" %></strong><%=(my.job_code == 0)? (my.size):(my.size_x+"cm x "+my.size_y+"cm") %></li>
 				<li class="date"><strong class="title">최종수정일</strong><%= my.updated_at.strftime('%Y-%m-%d') %></li>
