@@ -62,12 +62,16 @@
 						<br>
 						<%
 						if temp.option != nil and temp.option != ""
-							opt_array = temp.option.split(",")
+							begin
+								opt_array = temp.option.split(",")
 							
-							option_str = ""
-							opt_array.each do |opt|
-								opt = Optionsub.get(opt.to_i).name
-								option_str += "- " + opt + "<br>"
+								option_str = ""
+								opt_array.each do |opt|
+									opt = Optionsub.get(opt.to_i).name
+									option_str += "- " + opt + "<br>"
+								end
+							rescue
+								option_str = "옵션선택 없음"
 							end
 						else
 							option_str = "옵션선택 없음"
