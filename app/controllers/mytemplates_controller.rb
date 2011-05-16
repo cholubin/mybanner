@@ -734,7 +734,12 @@ end
 
 def total_price_cal_sub(my_id)
   my = Mytemplate.get(my_id)
-  size_temp = my.size.split(" x ")
+  if my.size != nil and my.size != ""
+    size_temp = my.size.split(" x ")
+  else
+    size_temp = [0,0]
+  end
+  
   size_x = size_temp[0].gsub("cm","")
   size_y = size_temp[1].gsub("cm","")
   
