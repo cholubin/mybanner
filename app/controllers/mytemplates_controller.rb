@@ -737,7 +737,7 @@ def total_price_cal_sub(my_id)
   if my.size != nil and my.size != ""
     size_temp = my.size.split(" x ")
   else
-    size_temp = [0,0]
+    size_temp = ["0cm","0cm"]
   end
   
   size_x = size_temp[0].gsub("cm","")
