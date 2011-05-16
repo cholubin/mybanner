@@ -67,7 +67,11 @@
 							
 								option_str = ""
 								opt_array.each do |opt|
-									opt = Optionsub.get(opt.to_i).name
+									if Optionsub.get(opt.to_i) != nil and Optionsub.get(opt.to_i) != ""
+										opt = Optionsub.get(opt.to_i).name
+									else
+										opt = ""
+									end
 									option_str += "- " + opt + "<br>"
 								end
 							rescue
