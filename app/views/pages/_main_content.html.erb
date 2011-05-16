@@ -12,7 +12,11 @@
 	<div id="main-image">
 		페이지를 불러오는 중입니다. 잠시만 기다려주세요.
 		<%@main_disp.each do |m| %>
-		<img class="image" width="580" src="/images/admin/main/<%= m.file_name %>" />
+			<%if File.extname(m.file_name) == ".swf" %>
+				<embed src="/images/admin/main/<%= m.file_name %>" type="application/x-shockwave-flash" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" width="580"></embed>
+			<%else %>
+				<img class="image" width="580" src="/images/admin/main/<%= m.file_name %>" />
+			<%end %>
 		<%end %>
 	</div>
 	<div id="main-block">

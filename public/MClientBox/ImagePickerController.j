@@ -100,10 +100,11 @@ gThumbSizeHeight = 100;
 	[mCategoryPopup setEnabled:NO];
 
  	var lAdminUser = [[[CPApplication sharedApplication] delegate] adminUser];
+	var lServerDocPath = [[[CPApplication sharedApplication] delegate] serverDocumentPath]
 	var lFileList_CMD = @"filelist";
 	if(lAdminUser) 
 		lFileList_CMD = @"admin_filelist";
-    var lDocWebImagePathStr = [CPString stringWithFormat:"%@/%@?request=/images/%@/",gBaseURL ,lFileList_CMD ,category];
+    var lDocWebImagePathStr = [CPString stringWithFormat:"%@/%@?request=/images/%@/&docpath=%@",gBaseURL ,lFileList_CMD ,category,lServerDocPath];
 	var lDocWebImageURL = [CPURL URLWithString:lDocWebImagePathStr];
     var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
     mImageListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
@@ -185,11 +186,12 @@ gThumbSizeHeight = 100;
 	mReceiver = [aReceiver retain];
 	
  	var lAdminUser = [[[CPApplication sharedApplication] delegate] adminUser];
+	var lServerDocPath = [[[CPApplication sharedApplication] delegate] serverDocumentPath]
 	var lFileList_CMD = @"filelist";
 	if(lAdminUser) 
 		lFileList_CMD = @"admin_filelist";
 
-   	var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=/images/",gBaseURL,lFileList_CMD];
+   	var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=/images/&docpath=%@",gBaseURL,lFileList_CMD,lServerDocPath];
     var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
     mImageCategoryCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	[mCategoryPopup setEnabled:NO];

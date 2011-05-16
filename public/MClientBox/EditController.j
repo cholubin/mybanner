@@ -2,7 +2,8 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 var gXMLInspectorView = null;
-
+var gSlideMax	= 1.9;
+var gSlideMin	= 0.1;
 function TextMonitor()
 {
 	var itemViewList = [gXMLInspectorView itemViewList]; 
@@ -22,6 +23,7 @@ function TextMonitor()
 	@outlet CPView					mImageInspectorView;
 	@outlet CPImageView 			mImageImageView;
 	@outlet ImagePickerController 	mImagePicker;
+	@outlet CPSlider 				mScaleSlider;
 
 	@outlet CPView		mTextInspectorView;
 	@outlet CPView		mXMLInspectorView;
@@ -32,6 +34,7 @@ function TextMonitor()
 	CPURLConnection		mCreateObjectCon;
 	DrawingView			mDrawingView;
 	CPString 			mDocumentName;
+	CPString 			mDocumentPath;
 	id 					mAppController;
 	var					mGID;
 	CPString			mOrgImagePath;
@@ -49,10 +52,21 @@ function TextMonitor()
 }
 - (void)awakeFromCib
 {
-	[mSelectPopupBtn removeAllItems];
-	[mSelectPopupBtn addItemWithTitle:"Text"];
-	[mSelectPopupBtn addItemWithTitle:"Image"];
-	[mSelectPopupBtn selectItemAtIndex:0];
+	
+	var args = [[CPApplication sharedApplication] namedArguments];
+	var lUseImageTextPopup = [args objectForKey:@"select_content"];
+	if(lUseImageTextPopup && [[lUseImageTextPopup lowercaseString] isEqualToString:@"yes"]) {
+		[mAppController setUseImageTextPopup:YES];
+	}
+	if([mAppController useImageTextPopup]) {
+		[mSelectPopupBtn removeAllItems];
+		[mSelectPopupBtn addItemWithTitle:"Text"];
+		[mSelectPopupBtn addItemWithTitle:"Image"];
+		[mSelectPopupBtn selectItemAtIndex:0];
+	}
+	else {
+		[mSelectPopupBtn removeFromSuperview];
+	}
 	
 	var lFrame = CPRectInset([mTextInspectorView frame], 3, 3);
 	var lAutoMask = [mTextInspectorView autoresizingMask];
@@ -74,7 +88,8 @@ function TextMonitor()
 	
 	mArticleInspectorView = mTextInspectorView;
 	
-	[self changeInspector:mSelectPopupBtn];
+//	[self changeInspector:mSelectPopupBtn];
+	[self changeInspectorAtIndex:0];
 	[mTextInspectorView retain];
 	var newImageViewFrame = [mImageImageView frame];
 	[mImageImageView removeFromSuperview];
@@ -85,6 +100,11 @@ function TextMonitor()
 	mIsVisible = NO;
 	[mInspectorWin setAcceptsMouseMovedEvents:YES];
 	[mInspectorWin setDelegate:self];
+	
+//	[mScaleSlider setContinuous:YES];
+	[mScaleSlider setMaxValue:gSlideMax];
+	[mScaleSlider setMinValue:gSlideMin];
+	[mScaleSlider setValue:1.0];
 }
 
 - (void)startTextMonitor
@@ -107,6 +127,10 @@ function TextMonitor()
 - (void)setDocumentName:(CPString)aString
 {
 	mDocumentName = aString;
+}
+- (void)setDocumentPath:(CPString)aString
+{
+	mDocumentPath = aString;
 }
 - (void)setImagePath:(CPString)aImagePath
 {
@@ -159,6 +183,7 @@ function TextMonitor()
 	imgFrame.origin.y = (boxSize.height - imgFrame.size.height) / 2.0;
 	[mImageImageView setServerBoxImageFrame:imgFrame];
 	[mImageImageView setImage:anImage];
+	[mScaleSlider setValue:1.0];
 }
 
 - (void)setImagePathToImageView:(CPString)aImagePath
@@ -219,7 +244,18 @@ function TextMonitor()
 	[mImagePicker runModalForReceiver:self];
 	
 }
-
+- (@action)takeFloatValueFrom:(id)sender  // mScaleSlider
+{
+	var scale = [mScaleSlider floatValue];
+	var newRect = CPRectMake(0,0,0,0);
+	var curRect = [mImageImageView curImageFrame];
+	var orgRect = [mImageImageView orgImageFrame];
+	newRect.origin.x = curRect.origin.x;
+	newRect.origin.y = curRect.origin.y;
+	newRect.size.width = orgRect.size.width * scale;
+	newRect.size.height = orgRect.size.height * scale;
+	[mImageImageView setCurImageFrame:newRect];
+}
 - (void)setAppController:(id)aController
 {
 	mAppController = aController;
@@ -246,7 +282,7 @@ function TextMonitor()
 		lPost_CMD = @"admin_post_mlayout";
 	}
     var lDocOpenURL = [CPString stringWithFormat:"%@/%@",gBaseURL, lPost_CMD];
-  	var JSONString = '{"requested_action":"'+command+'","docname":"'+mDocumentName+'","userinfo":"'+datastr+'"}';
+  	var JSONString = '{"requested_action":"'+command+'","docname":"'+mDocumentName+'","docpath":"'+mDocumentPath+'","userinfo":"'+datastr+'"}';
 	
     var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 	[lRequest setHTTPMethod:@"POST"];
@@ -311,7 +347,21 @@ function TextMonitor()
 		var win = [mTextInspectorView DOMWindow];
 		if(win) {
 			//	var str = [self stringFromHTML:win.document.body.innerHTML];
-				var lInnerText = win.document.body.innerText;
+				var lInnerText = "Start";//win.document.body.innerText;
+				if(win.document) {
+					lInnerText = "win.doc";
+				}
+				if(win.document.body) {
+					lInnerText = "win.doc.body";
+				}
+				if(win.document.body.innerText) {
+					lInnerText = win.document.body.innerText;
+				}
+				else {
+					lInnerText = win.document.body.innerHTML;
+					lInnerText = lInnerText.replace(/(<br>)/ig," ");
+					lInnerText = lInnerText.replace(/(<[^>]+>)/g,"");
+				}
 				lInnerText = [self parsebleStringFrom:lInnerText];
 				str = "TEXT__FIELD_SEP__"+lInnerText;  // TEXT + __FIELD_SEP__
 		}
@@ -321,7 +371,7 @@ function TextMonitor()
 		str = "XML__FIELD_SEP__"+lServerStr;  // XML + __FIELD_SEP__
 	}
 	if(mImagePath) {
-		var lImgRect = CPStringFromRect([mImageImageView orgImageFrame]);
+		var lImgRect = CPStringFromRect([mImageImageView curImageFrame]);
 		var lImgInfoStr = "Path__IMG_ATTR__"+mImagePath+"__ATTR_SEP__ImgRect__IMG_ATTR__"+lImgRect;
 		if([str length])
 			str = str + "__TYPE_SEP__";
@@ -360,9 +410,9 @@ function TextMonitor()
 	mTextContent = [str retain];
 }
 
-- (@action)changeInspector:(id)sender
+
+- (void)changeInspectorAtIndex:(var)idx
 {
-	var idx = [sender indexOfSelectedItem];
 	if([mTextInspectorView superview])
 		[mTextInspectorView removeFromSuperview];
 	if(mXMLInspectorView && [mXMLInspectorView superview])
@@ -391,15 +441,24 @@ function TextMonitor()
 	}
 }
 
+- (@action)changeInspector:(id)sender
+{
+	var idx = 0;
+	if(sender)
+		idx = [sender indexOfSelectedItem];
+	[self changeInspectorAtIndex:idx];
+}
+
 - (void)drawingView:(DrawingView)aDrawingView frameSelected:(GraphicFrame)aFrame
 {
 	var lRequest_CMD = @"request_mlayout";
 	if([mAppController adminUser])
 		lRequest_CMD = @"admin_request_mlayout";
-    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=GetContentsJSON&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, mDocumentName,[aFrame GID]];
+	var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=GetContentsJSON&docname=%@&docpath=%@&userinfo=%d",gBaseURL , lRequest_CMD, mDocumentName, mDocumentPath, [aFrame GID]];
     var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
     mGetContentsCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	mIsVisible = YES;
+	[mScaleSlider setValue:1.0];
 	[mInspectorWin makeKeyAndOrderFront:self];
 	mGID = [aFrame GID];
 	
@@ -463,20 +522,29 @@ function TextMonitor()
 			[self setImagePathToImageView:mOrgImagePath];
 			hasImage = YES;
 		}
-		if(hasImage && [mSelectPopupBtn indexOfSelectedItem] != 1) {
-			[mSelectPopupBtn selectItemAtIndex:1];
-			//[self changeInspector:mSelectPopupBtn];
-		}
-		else if(!hasImage) {
-		 	if([mSelectPopupBtn indexOfSelectedItem] != 0){
-				[mSelectPopupBtn selectItemAtIndex:0];
-				//[self changeInspector:mSelectPopupBtn];
+		if([mAppController useImageTextPopup]) {
+			if(hasImage && [mSelectPopupBtn indexOfSelectedItem] != 1) {
+				[mSelectPopupBtn selectItemAtIndex:1];
 			}
-			else if(lTextViewChanged){
-			//	[self changeInspector:mSelectPopupBtn];
+			else if(!hasImage) {
+			 	if([mSelectPopupBtn indexOfSelectedItem] != 0){
+					[mSelectPopupBtn selectItemAtIndex:0];
+				}
+				else if(lTextViewChanged){
+				}
+			}
+			[self changeInspector:mSelectPopupBtn];
+		}
+		else {
+			if(hasImage) {
+				[mInspectorWin setTitle:@"이미지 수정"]
+				[self changeInspectorAtIndex:1];
+			}
+			else {
+				[mInspectorWin setTitle:@"텍스트 수정"]
+				[self changeInspectorAtIndex:0];
 			}
 		}
-		[self changeInspector:mSelectPopupBtn];
 		mIsVisible = YES;
  		[mInspectorWin makeKeyAndOrderFront:self];
    }

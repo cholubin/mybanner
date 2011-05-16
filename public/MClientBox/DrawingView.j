@@ -413,30 +413,34 @@ gDownArrowKey = 40;
 	[mEditController sendJSONRequestAndRefresh:@"SetFrames" data:frames_str];
 }
 
+- (void)deleteSelectedBox
+{
+	var frames_str = @"";
+	var i = 0;
+	var icnt = [mSelectedFrameList count];
+	for(;i<icnt;i++) {
+		var lSelectedFrame = [mSelectedFrameList objectAtIndex:i];
+		var gid = [lSelectedFrame GID]; // mGID
+		if(i > 0) {
+			frames_str += "__GRAPHICSEP__";
+		}
+		frames_str += gid;
+		[mFrameList removeObject:lSelectedFrame];
+	}
+	[mSelectedFrameList removeAllObjects];
+	[[ProgressWindow sharedWindow] show];
+	[mEditController sendJSONRequestAndRefresh:@"DeleteGraphics" data:frames_str];
+	mFocusedFrame = nil;
+	[self setNeedsDisplay:YES];
+}
 - (void)keyDown:(CPEvent)anEvent	
 {
 	var keycode = [anEvent keyCode];
-	debugger;
-	if(keycode == 8) { // back space key
-		var frames_str = @"";
-		var i = 0;
-		var icnt = [mSelectedFrameList count];
-		for(;i<icnt;i++) {
-			var lSelectedFrame = [mSelectedFrameList objectAtIndex:i];
-			var gid = [lSelectedFrame GID]; // mGID
-			if(i > 0) {
-				frames_str += "__GRAPHICSEP__";
-			}
-			frames_str += gid;
-			[mFrameList removeObject:lSelectedFrame];
-		}
-		[mSelectedFrameList removeAllObjects];
-		[[ProgressWindow sharedWindow] show];
-		[mEditController sendJSONRequestAndRefresh:@"DeleteGraphics" data:frames_str];
-		mFocusedFrame = nil;
-		[self setNeedsDisplay:YES];
+	// alert("keycode = "+keycode);
+	if(keycode == 8 || keycode == 46) { // back space key, delete key = 46?
+		[self deleteSelectedBox];
 	}
-	else if(keycode >= 37 && keycode <= 40) { // Arrow Keys (Left,RIght,Up,Down)
+	else if(keycode >= 37 && keycode <= 40) { // Arrow Keys (Left,Right,Up,Down)
 		if (!mMovingMode) {
 			mMovingMode = YES;
 			[mMovingFrameList removeAllObjects];
@@ -607,7 +611,7 @@ gDownArrowKey = 40;
 					if(mKnobGrabed) {
 						//alert("knob clicked at = "+[mKnobGrabed position]);
 					}
-					else {
+					else if(![lSelFrame movingLock]){
 						mFrameGrabed = YES;
 					}				
 				}

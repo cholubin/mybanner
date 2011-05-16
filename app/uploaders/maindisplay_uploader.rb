@@ -6,7 +6,7 @@ include SessionsHelper
   storage :file
 
       def extension_white_list
-        %w(jpg jpeg gif png tif)
+        %w(jpg jpeg gif png tif swf)
       end
 
       def filename

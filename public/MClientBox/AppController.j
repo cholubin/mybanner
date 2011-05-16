@@ -18,9 +18,11 @@ var SliderToolbarItemIdentifier = "SliderToolbarItemIdentifier",
     SelectionToolIdentifier = "SelectionToolIdentifier",
     CreateRectBoxIdentifier = "CreateRectBoxIdentifier";
     CreateTextBoxIdentifier = "CreateTextBoxIdentifier";
+    DeleteBoxIdentifier = "DeleteBoxIdentifier";
     UndoIdentifier = "UndoIdentifier";
     RedoIdentifier = "RedoIdentifier";
     BringToFrontIdentifier = "BringToFrontIdentifier";
+    BringToBackIdentifier = "BringToBackIdentifier";
     UseGridIdentifier = "UseGridIdentifier",
     UseGuideIdentifier = "UseGuideIdentifier",
     CharStyleIdentifier = "CharStyleIdentifier",
@@ -33,7 +35,7 @@ gDefBaseURL = "http://211.35.79.131:3000"; // "http://61.251.202.120:3000"; // "
 gBaseURL = ""; //"http://localhost:3000"; //"http://graphicartshub.com:4000";
 gUserPath = "";
 
-var gFactorList = Array(0.25, 0.5, 1.0, 2.0, 3.0);
+var gFactorList = Array(0.25, 0.5, 1.0, 2.0, 3.0, 4.0);
 
 gListViewHeight = 100;
 
@@ -65,20 +67,29 @@ gDocItemSizeHeight = 90;
 	CPImage mUseGridImageSelected;
 	CPToolbar mToolbar;
 	var mSelectedTool;
+	BOOL mBoolUseSelectionTool;
 	BOOL mBoolSelectedByUser;
 	BOOL mBoolUsePDFBtn;
+	BOOL mBoolUseGuideBtn;
+	BOOL mBoolUseGridBtn;
+	BOOL mBoolUseDocSizeBtn;
+	BOOL mBoolUseImageTextPopup;
+	
 	BOOL mAdminUser;
 	
 	CPString mCurDocPath;
 	CPString mLocalDocPath;
+	CPString mServerDocPath;
 	var mDocWidth;
 	var mDocHeight;
 	var mSizeScale;
+	var mScaleIndex;
     CPURLConnection mCurDocImageListCon;
 	CPURLConnection mFrameListCon;
 	CPURLConnection mUndoCon;
 	CPURLConnection mRedoCon;
 	CPURLConnection mToFrontCon;
+	CPURLConnection mToBackCon;
     CPURLConnection mDocumentInfoCon;
 	CPURLConnection mCurDocImageRefreshCon;
 	CPURLConnection mGeneratePDFCon;
@@ -105,26 +116,42 @@ gDocItemSizeHeight = 90;
 	[toolItemImagesNormal addObject:lNormalImg];
 	var lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/selectHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
+	
 	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/imgbox.png" size:CPSizeMake(30, 25)];  //  1
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/imgboxHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
+	
 	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/textbox.png" size:CPSizeMake(30, 25)];  //  2
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/textboxHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
+	
 	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/undo.png" size:CPSizeMake(30, 25)];  //  3
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/undoHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
+	
 	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/redo.png" size:CPSizeMake(30, 25)];  //  4
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/redoHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
+	
 	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/tofront.png" size:CPSizeMake(30, 25)];  //  5
 	[toolItemImagesNormal addObject:lNormalImg];
 	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/tofrontHighlighted.png" size:CPSizeMake(30, 25)];
 	[toolItemImagesSelect addObject:lSelectImg];
+	
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/toback.png" size:CPSizeMake(30, 25)];  //  5
+	[toolItemImagesNormal addObject:lNormalImg];
+	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/tobackHighlighted.png" size:CPSizeMake(30, 25)];
+	[toolItemImagesSelect addObject:lSelectImg];
+	
+	lNormalImg = [[CPImage alloc] initWithContentsOfFile:"Resources/delete.png" size:CPSizeMake(30, 25)];  //  5
+	[toolItemImagesNormal addObject:lNormalImg];
+	lSelectImg = [[CPImage alloc] initWithContentsOfFile:"Resources/deleteHighlighted.png" size:CPSizeMake(30, 25)];
+	[toolItemImagesSelect addObject:lSelectImg];
+	
 	mSelectedTool = 0;
 	
 	mUseGuideImage = [[CPImage alloc] initWithContentsOfFile:"Resources/guideline.png" size:CPSizeMake(30, 25)];
@@ -151,12 +178,41 @@ gDocItemSizeHeight = 90;
 	if(!gUserPath) {
 		alert("No 'user_path' parameter.");
 	}
-	var lUsePDFBtn = [args objectForKey:@"pdf_button"];
-	mBoolUsePDFBtn = YES;
-	if(lUsePDFBtn && [[lUsePDFBtn lowercaseString] isEqualToString:@"no"]) {
-		mBoolUsePDFBtn = NO;
+	debugger;
+	mScaleIndex = 2;
+	var lScaleIndex = [args objectForKey:@"scale_idx"];
+	if(lScaleIndex) {
+		mScaleIndex = [lScaleIndex intValue];
+	}
+	mBoolUseSelectionTool = NO;
+	var lUseBtn = [args objectForKey:@"selection"];
+	if(lUseBtn && [[lUseBtn lowercaseString] isEqualToString:@"yes"]) {
+		mBoolUseSelectionTool = YES;
 	}
 	
+	mBoolUsePDFBtn = YES;
+ 	lUseBtn = [args objectForKey:@"pdf_button"];
+	if(lUseBtn && [[lUseBtn lowercaseString] isEqualToString:@"no"]) {
+		mBoolUsePDFBtn = NO;
+	}
+	mBoolUseGuideBtn = YES;
+	lUseBtn = [args objectForKey:@"guide_button"];
+	if(lUseBtn && [[lUseBtn lowercaseString] isEqualToString:@"no"]) {
+		mBoolUseGuideBtn = NO;
+	}
+	
+	mBoolUseGridBtn = YES;
+	lUseBtn = [args objectForKey:@"grid_button"];
+	if(lUseBtn && [[lUseBtn lowercaseString] isEqualToString:@"no"]) {
+		mBoolUseGridBtn = NO;
+	}
+	
+	mBoolUseDocSizeBtn = YES;
+	lUseBtn = [args objectForKey:@"docsize_button"];
+	if(lUseBtn && [[lUseBtn lowercaseString] isEqualToString:@"no"]) {
+		mBoolUseDocSizeBtn = NO;
+	}
+		
 	var lAdminUser = [args objectForKey:@"admin"];
 	mAdminUser = NO;
 	if(lAdminUser && [[lAdminUser lowercaseString] isEqualToString:@"yes"]) {
@@ -175,8 +231,11 @@ gDocItemSizeHeight = 90;
 	
 	if(mLocalDocPath) {
 		 mCurDocPath = [CPString stringWithFormat:"%@%@%@",gBaseURL, gUserPath, mLocalDocPath];
+		var lDocFolderpath = [mLocalDocPath stringByDeletingLastPathComponent];
+		 mServerDocPath = [CPString stringWithFormat:"%@%@",gUserPath, lDocFolderpath];
 		var lFilename = [mLocalDocPath lastPathComponent];
 		[mEditController setDocumentName:lFilename];
+		[mEditController setDocumentPath:mServerDocPath];
 		[self sendDocumentInfoRequest];
 		//[self sendCurDocImageListRequest];
 		//		alert(@"doc_path = "+ mLocalDocPath);
@@ -220,6 +279,8 @@ gDocItemSizeHeight = 90;
 	[[mSpreadView imageView] setImageScaling:CPScaleProportionally];
 	var lBounds = [[mScrollView contentView] bounds];
 	[mSpreadView setFrame:lBounds];
+	var factor = gFactorList[mScaleIndex];
+	[mSpreadView setScaleFactor:factor];
 	// Reordering view for animation
 	[mScrollView removeFromSuperview];
 	[contentView addSubview:mScrollView];
@@ -408,13 +469,33 @@ gDocItemSizeHeight = 90;
 	return mCurDocPath;
 }
 
+- (CPString)serverDocumentPath
+{
+	return mServerDocPath;
+}
+
+- (BOOL)useImageTextPopup
+{
+	return mBoolUseImageTextPopup;
+}
+
+- (void)setUseImageTextPopup:(BOOL)aFlag
+{
+	mBoolUseImageTextPopup = aFlag;
+}
+
+- (BOOL)useSelectionTool
+{
+	return mBoolUseSelectionTool;
+}
+
 - (void)sendCurDocImageListRequest
 {
 	var lFilename = [mLocalDocPath lastPathComponent];
 	var lFileList_CMD = @"filelist";
 	if(mAdminUser) 
 		lFileList_CMD = @"admin_filelist";
-	var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=%@/web/",gBaseURL,lFileList_CMD, mLocalDocPath];
+	var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=%@/web/&docpath=%@",gBaseURL,lFileList_CMD, mLocalDocPath,mServerDocPath];
 	var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
 	mCurDocImageListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];	
 }
@@ -427,7 +508,7 @@ gDocItemSizeHeight = 90;
 		if(mAdminUser)
 			lRequest_CMD = @"admin_request_mlayout";
 		var lFilename = [mCurDocPath lastPathComponent];
-	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=DocumentInfos&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=DocumentInfos&docname=%@&docpath=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,mServerDocPath, lSpreadIdx];
 	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 	    mDocumentInfoCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	}
@@ -442,7 +523,7 @@ gDocItemSizeHeight = 90;
 		var lRequest_CMD = @"request_mlayout";
 		if(mAdminUser)
 			lRequest_CMD = @"admin_request_mlayout";
-	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=FrameList&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=FrameList&docname=%@&docpath=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,mServerDocPath,lSpreadIdx];
 	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 	    mFrameListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	}
@@ -514,6 +595,12 @@ gDocItemSizeHeight = 90;
 			var lHeight = [[lItemList objectAtIndex:m++] floatValue];
 			var lRect = CPRectMake(lLeft, lTop, lWidth, lHeight);
 			var lGFrame = [[GraphicFrame alloc] initWithRect:lRect gid:lGID];
+			if([lItemList count] > m) {
+				var lLocked = [[lItemList objectAtIndex:m++] boolValue];
+				if(lLocked) {
+					[lGFrame setMovingLock:YES];
+				}
+			}
 			[drawingView addFrame:lGFrame];
 			[lGFrame release]
 		}
@@ -682,27 +769,58 @@ gDocItemSizeHeight = 90;
 
 - (void)resetToolButtons
 {
-	var i = 0;
-	for(i=0;i<3;i++) {
-		var toolbarItem = [[mToolbar items] objectAtIndex:i];
-        var image = [toolItemImagesNormal objectAtIndex:i];
-        var highlighted = [toolItemImagesSelect objectAtIndex:i];
-		if(i == mSelectedTool) {
-		    [toolbarItem setImage:highlighted];
-		    [toolbarItem setAlternateImage:image];
+	if(mBoolUseSelectionTool) {
+		var i = 0;
+		for(i=0;i<3;i++) {
+			var toolbarItem = [[mToolbar items] objectAtIndex:i];
+	        var image = [toolItemImagesNormal objectAtIndex:i];
+	        var highlighted = [toolItemImagesSelect objectAtIndex:i];
+			if(i == mSelectedTool) {
+			    [toolbarItem setImage:highlighted];
+			    [toolbarItem setAlternateImage:image];
+			}
+			else {
+		        [toolbarItem setImage:image];
+		        [toolbarItem setAlternateImage:highlighted];
+			}
 		}
-		else {
-	        [toolbarItem setImage:image];
-	        [toolbarItem setAlternateImage:highlighted];
-		}
+		[[mSpreadView drawingView] toolDidChanged];
 	}
-	[[mSpreadView drawingView] toolDidChanged];
 }
 
 - (@action)selectTool:(id)sender
 {
-	mSelectedTool = [sender tag];
-	[self resetToolButtons];
+	var lSelectedTool = [sender tag];
+	if(lSelectedTool == 3) {  //  delete box
+		[[mEditController drawingView] deleteSelectedBox];
+		return;
+	}
+	if(mBoolUseSelectionTool) {
+		mSelectedTool = lSelectedTool;
+		[self resetToolButtons];
+	}
+	else {
+		var lViewFrame = [[mEditController drawingView] frame];
+		var lDefWdith = lViewFrame.size.width / 3.0;
+		var lDefHeight = lViewFrame.size.height / 3.0;
+		var lCreateFrame = CPMakeRect(lDefWdith, lDefHeight, lDefWdith, lDefHeight)
+		var scaleFactor = [[mEditController drawingView] scaleFactor];
+		var lOrgRect = CPRectMake(0,0,0,0);//  need to compute. mCreateFrame;
+		lOrgRect.origin.x = lCreateFrame.origin.x / scaleFactor;
+		lOrgRect.origin.y = lCreateFrame.origin.y / scaleFactor;
+		lOrgRect.size.width = lCreateFrame.size.width / scaleFactor;
+		lOrgRect.size.height = lCreateFrame.size.height / scaleFactor;
+		var framestr = CPStringFromRect(lOrgRect);
+		var spreadIdx = [mEditController currentSpreadIndex];
+		var infostr = [CPString stringWithFormat:@"%d__SPREAD__%@",spreadIdx,framestr];
+		[[ProgressWindow sharedWindow] show];
+		if(lSelectedTool == 1) {
+			[mEditController sendCreateRequestAndRefresh:@"MakeGraphic" data:infostr];
+		}
+		else if(lSelectedTool == 2) {
+			[mEditController sendCreateRequestAndRefresh:@"MakeTextGraphic" data:infostr];
+		}
+	}
 }
 
 - (@action)undo:(id)sender
@@ -713,7 +831,7 @@ gDocItemSizeHeight = 90;
 		var lRequest_CMD = @"request_mlayout";
 		if(mAdminUser)
 			lRequest_CMD = @"admin_request_mlayout";
-	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=Undo&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=Undo&docname=%@&docpath=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,mServerDocPath, lSpreadIdx];
 	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 	    mUndoCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	}
@@ -727,7 +845,7 @@ gDocItemSizeHeight = 90;
 		var lRequest_CMD = @"request_mlayout";
 		if(mAdminUser)
 			lRequest_CMD = @"admin_request_mlayout";
-	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=Redo&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=Redo&docname=%@&docpath=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,mServerDocPath, lSpreadIdx];
 	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 	    mRedoCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	}
@@ -742,9 +860,23 @@ gDocItemSizeHeight = 90;
 		var lRequest_CMD = @"request_mlayout";
 		if(mAdminUser)
 			lRequest_CMD = @"admin_request_mlayout";
-	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=ToFront&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,gid];
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=ToFront&docname=%@&docpath=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,mServerDocPath,gid];
 	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 	    mToFrontCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
+	}
+}
+- (@action)toBack:(id)sender
+{
+	var lSpreadIdx = [[mSpreadListView selectionIndexes] firstIndex];
+	if(lSpreadIdx >= 0) {
+		var gid = [[[mEditController drawingView] selectedFrame] GID];
+		var lFilename = [mCurDocPath lastPathComponent];
+		var lRequest_CMD = @"request_mlayout";
+		if(mAdminUser)
+			lRequest_CMD = @"admin_request_mlayout";
+	    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=ToBack&docname=%@&docpath=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,mServerDocPath,gid];
+	    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
+	    mToBackCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 	}
 }
 
@@ -808,7 +940,7 @@ gDocItemSizeHeight = 90;
 	var lFileList_CMD = @"filelist";
 	if(mAdminUser) 
 		lFileList_CMD = @"admin_filelist";
-    var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=%@/web/",gBaseURL,lFileList_CMD, mLocalDocPath];
+    var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=%@/web/&docpath=%@",gBaseURL,lFileList_CMD, mLocalDocPath, mServerDocPath];
     var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
     mCurDocImageRefreshCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 }
@@ -857,6 +989,11 @@ gDocItemSizeHeight = 90;
 		[self sendFrameListRequest];
 		[self refreshSpreadPreview];
 	}
+	else if(connection === mToBackCon) {		
+		//[self loadSpreadPreview:data];
+		[self sendFrameListRequest];
+		[self refreshSpreadPreview];
+	}
 	else if( connection === mDocumentInfoCon) {
 		//alert("framelist = "+data);
 		[self loadDocumentInfos:data];
@@ -877,7 +1014,7 @@ gDocItemSizeHeight = 90;
 			var lRequest_CMD = @"request_mlayout";
 			if(mAdminUser)
 				lRequest_CMD = @"admin_request_mlayout";
-		    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=FrameList&docname=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,lSpreadIdx];
+		    var lDocOpenURL = [CPString stringWithFormat:"%@/%@?requested_action=FrameList&docname=%@&docpath=%@&userinfo=%d",gBaseURL , lRequest_CMD, lFilename,mServerDocPath,lSpreadIdx];
 		    var lRequest = [CPURLRequest requestWithURL:lDocOpenURL];
 		    mSetDocumentSizeFrameListCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 		}
@@ -894,16 +1031,50 @@ gDocItemSizeHeight = 90;
 
 - (CPArray)toolbarDefaultItemIdentifiers:(CPToolbar)aToolbar
 {
+	var lToolItemList = [[CPArray alloc] init];
+	
+	if(mBoolUseSelectionTool) {
+		[lToolItemList addObject:SelectionToolIdentifier];
+	}
+	[lToolItemList addObject:CreateRectBoxIdentifier];
+	[lToolItemList addObject:CreateTextBoxIdentifier];
+	[lToolItemList addObject:DeleteBoxIdentifier];
+	[lToolItemList addObject:CPToolbarSpaceItemIdentifier];
+	[lToolItemList addObject:UndoIdentifier];
+	[lToolItemList addObject:RedoIdentifier];
+	[lToolItemList addObject:CPToolbarSpaceItemIdentifier];
+	[lToolItemList addObject:BringToFrontIdentifier];
+	[lToolItemList addObject:BringToBackIdentifier];
+	[lToolItemList addObject:CPToolbarSpaceItemIdentifier];
+	if(mBoolUseGuideBtn) {
+		[lToolItemList addObject:UseGuideIdentifier];
+	}
+	if(mBoolUseGridBtn) {
+		[lToolItemList addObject:UseGridIdentifier];
+	}
+	[lToolItemList addObject:CPToolbarSpaceItemIdentifier];
 	if(mBoolUsePDFBtn) {
-	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, BringToFrontIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
-	 UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
-	 FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
+		[lToolItemList addObject:PDFToolbarItemIdentifier];
 	}
-	else {
-	   return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, BringToFrontIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
-	 UseGridIdentifier, CPToolbarSpaceItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
-	 FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
+	[lToolItemList addObject:CPToolbarFlexibleSpaceItemIdentifier];
+	if(mBoolUseDocSizeBtn) {
+		[lToolItemList addObject:ChangeTemplateSizeIdentifier];
 	}
+	[lToolItemList addObject:FontSizeIdentifier];
+	[lToolItemList addObject:CharStyleIdentifier];
+	[lToolItemList addObject:SliderToolbarItemIdentifier];
+	return lToolItemList;
+	
+	// if(mBoolUsePDFBtn) {
+	//    return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, BringToFrontIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
+	//  UseGridIdentifier, CPToolbarSpaceItemIdentifier, PDFToolbarItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
+	//  FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
+	// }
+	// else {
+	//    return [SelectionToolIdentifier, CreateRectBoxIdentifier,CreateTextBoxIdentifier,CPToolbarSpaceItemIdentifier, UndoIdentifier, RedoIdentifier, CPToolbarSpaceItemIdentifier, BringToFrontIdentifier, CPToolbarSpaceItemIdentifier, UseGuideIdentifier,
+	//  UseGridIdentifier, CPToolbarSpaceItemIdentifier, CPToolbarFlexibleSpaceItemIdentifier, ChangeTemplateSizeIdentifier,
+	//  FontSizeIdentifier, CharStyleIdentifier, SliderToolbarItemIdentifier];
+	// }
 }
 //this delegate method returns the actual toolbar item for the given identifier
 
@@ -920,7 +1091,8 @@ gDocItemSizeHeight = 90;
  		[mPopupButton addItemWithTitle:@"100%"];
 		[mPopupButton addItemWithTitle:@"200%"];
  		[mPopupButton addItemWithTitle:@"300%"];
-		[mPopupButton selectItemAtIndex:2];
+ 		[mPopupButton addItemWithTitle:@"400%"];
+		[mPopupButton selectItemAtIndex:mScaleIndex];
         [toolbarItem setTarget:self];
 		[mPopupButton setAction:@selector(changeScale:)];
       	[toolbarItem setView:mPopupButton];
@@ -1058,6 +1230,22 @@ gDocItemSizeHeight = 90;
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
         [toolbarItem setTag:2];
     }
+    else if (anItemIdentifier == DeleteBoxIdentifier)
+    {
+        var image = [toolItemImagesNormal objectAtIndex:7];
+        var highlighted = [toolItemImagesSelect objectAtIndex:7];
+            
+        [toolbarItem setImage:image];
+        [toolbarItem setAlternateImage:highlighted];
+        
+        [toolbarItem setTarget:self];
+        [toolbarItem setAction:@selector(selectTool:)];
+        [toolbarItem setLabel:"삭제"]; // Text
+
+        [toolbarItem setMinSize:CGSizeMake(32, 32)];
+        [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+        [toolbarItem setTag:3];
+    }
     else if (anItemIdentifier == UndoIdentifier)
     {
         var image = [toolItemImagesNormal objectAtIndex:3];
@@ -1106,6 +1294,22 @@ gDocItemSizeHeight = 90;
         [toolbarItem setMaxSize:CGSizeMake(32, 32)];
         [toolbarItem setTag:2];
     }
+    else if (anItemIdentifier == BringToBackIdentifier)
+    {
+        var image = [toolItemImagesNormal objectAtIndex:6];
+        var highlighted = [toolItemImagesSelect objectAtIndex:6];
+            
+        [toolbarItem setImage:image];
+        [toolbarItem setAlternateImage:highlighted];
+        
+        [toolbarItem setTarget:self];
+        [toolbarItem setAction:@selector(toBack:)];
+        [toolbarItem setLabel:"뒤로"];  // Bring to back
+
+        [toolbarItem setMinSize:CGSizeMake(32, 32)];
+        [toolbarItem setMaxSize:CGSizeMake(32, 32)];
+        [toolbarItem setTag:2];
+    }
     else if (anItemIdentifier == UseGuideIdentifier)
     {
         [toolbarItem setImage:mUseGuideImage];
@@ -1147,7 +1351,7 @@ gDocItemSizeHeight = 90;
 	var lFileList_CMD = @"filelist";
 	if(mAdminUser) 
 		lFileList_CMD = @"admin_filelist";
-    var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=%@/web/",gBaseURL, lFileList_CMD, mLocalDocPath];
+    var lDocWebImageURL = [CPString stringWithFormat:"%@/%@?request=%@/web/&docpath=%@",gBaseURL, lFileList_CMD, mLocalDocPath, mServerDocPath];
     var lRequest = [CPURLRequest requestWithURL:lDocWebImageURL];
     mNewPreviewCon = [CPURLConnection connectionWithRequest:lRequest delegate:self];
 }

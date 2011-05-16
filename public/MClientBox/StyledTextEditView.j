@@ -262,6 +262,11 @@ var gParaLevel = 0;
 	for(i=0;i<icnt;i++) {
 		var p_node = ptags[i];
 		var lInnerText = [mEditController parsebleStringFrom:p_node.innerText];
+		if(!lInnerText) {
+			lInnerText = p_node.innerHTML;
+			lInnerText = lInnerText.replace(/(<br>)/ig," ");
+			lInnerText = lInnerText.replace(/(<[^>]+>)/g,"");
+		}
 		var lStyleName = [mStyleNameDict objectForKey:p_node.className];
 		var lParaStr = lStyleName + "__FS__" + lInnerText;
 		if (lRetStr.length > 0) {

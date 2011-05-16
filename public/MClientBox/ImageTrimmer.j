@@ -101,6 +101,7 @@
 {
 	ImageClipper mClipView;
 	CPImageView mImageView;
+	CPRect curImageFrame;
 	CPRect orgImageFrame;
 	CPPoint mPointInView;
 	BOOL mImageGrabed;
@@ -122,7 +123,7 @@
 		[self addSubview:mClipView];
 		[self setAutoresizesSubviews:YES];
 		mPointInView = CPPointMake(0, 0);
-		orgImageFrame = lClipViewFrame;
+		orgImageFrame = curImageFrame = lClipViewFrame;
 	  	
   }
     return self;
@@ -172,16 +173,16 @@
 	var lNewImageFrame = CPRectMake(0,0,0,0);
 	var lBoxFrame = [mClipView boxFrame];
 	var lScaleFactor = [mClipView factor];
-	lNewImageFrame.origin.x = lScaleFactor * orgImageFrame.origin.x + lBoxFrame.origin.x;
-	lNewImageFrame.origin.y = lScaleFactor * orgImageFrame.origin.y + lBoxFrame.origin.y;
-	lNewImageFrame.size.width = lScaleFactor * orgImageFrame.size.width;
-	lNewImageFrame.size.height = lScaleFactor * orgImageFrame.size.height;
+	lNewImageFrame.origin.x = lScaleFactor * curImageFrame.origin.x + lBoxFrame.origin.x;
+	lNewImageFrame.origin.y = lScaleFactor * curImageFrame.origin.y + lBoxFrame.origin.y;
+	lNewImageFrame.size.width = lScaleFactor * curImageFrame.size.width;
+	lNewImageFrame.size.height = lScaleFactor * curImageFrame.size.height;
 	[mImageView setFrame:lNewImageFrame];
 }
 
 - (void)setServerBoxImageFrame:(CPRect)image_frame
 {
-	orgImageFrame = image_frame;
+	orgImageFrame = curImageFrame = image_frame;
 	[self setNeedsDisplay:YES];
 }
 
@@ -228,33 +229,38 @@
 		//	max = dy;
 	//	}
 		//max = dx / lScaleFactor;
-		var imgFactor = orgImageFrame.size.width / orgImageFrame.size.height; 
-		if(imgFactor > 1.0) { // orgImageFrame.size.width > orgImageFrame.size.height	
+		var imgFactor = curImageFrame.size.width / curImageFrame.size.height; 
+		if(imgFactor > 1.0) { // curImageFrame.size.width > curImageFrame.size.height	
 			var inc = max * imgFactor;		
-			orgImageFrame.size.width += inc;
-			orgImageFrame.size.height += max
+			curImageFrame.size.width += inc;
+			curImageFrame.size.height += max
 		}
 		else {
-			imgFactor = orgImageFrame.size.height / orgImageFrame.size.width
+			imgFactor = curImageFrame.size.height / curImageFrame.size.width
 			var inc = max * imgFactor;		
-			orgImageFrame.size.width += max;
-			orgImageFrame.size.height += inc
+			curImageFrame.size.width += max;
+			curImageFrame.size.height += inc
 		}
 		
 /*
 			max = dy;
 		var lImgScaleFactor = 1.0 + max / lScaleFactor;
-		orgImageFrame.size.width *= lImgScaleFactor;
-		orgImageFrame.size.height *= lImgScaleFactor;
+		curImageFrame.size.width *= lImgScaleFactor;
+		curImageFrame.size.height *= lImgScaleFactor;
 		*/
 	}
 	else {
-		orgImageFrame.origin.x += dx / lScaleFactor;
-		orgImageFrame.origin.y += dy / lScaleFactor;
+		curImageFrame.origin.x += dx / lScaleFactor;
+		curImageFrame.origin.y += dy / lScaleFactor;
 	}
 	[self setNeedsDisplay:YES];
 	mPointInView = lPtInView;
 //	console.log("keycode = "+[anEvent modifierFlags]);
+}
+
+- (void) mouseUp:(CPEvent)anEvent
+{
+	orgImageFrame = curImageFrame;
 }
 
 - (void)mouseDown:(CPEvent)anEvent
@@ -278,8 +284,20 @@
 	mImageGrabed = NO;
 }
 
+- (CPRect)curImageFrame
+{
+	return curImageFrame;
+}
+
+- (void)setCurImageFrame:(CPRect)image_frame
+{
+	curImageFrame = image_frame;
+	[self setNeedsDisplay:YES];
+}
+
 - (CPRect)orgImageFrame
 {
 	return orgImageFrame;
 }
+
 @end

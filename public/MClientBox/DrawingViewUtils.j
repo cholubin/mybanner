@@ -51,6 +51,7 @@ gKnobPostionLeft = 8;
 	CGRect mRect;
 	var mGID;
 	CPArray mKnobList;
+	BOOL mLocked;
 }
 
 - (id)initWithRect:(CGRect)aRect gid:(var)aGID
@@ -59,7 +60,8 @@ gKnobPostionLeft = 8;
 	if(self) {
 		mRect = aRect;
 		mGID = aGID;
- 		mKnobList = [[CPArray alloc] init]		
+ 		mKnobList = [[CPArray alloc] init];
+		mLocked = NO;
 	}
 	return self;
 }
@@ -92,13 +94,26 @@ gKnobPostionLeft = 8;
 	mRect = aRect;
 }
 
+- (void)setMovingLock:(BOOL)flag
+{
+	mLocked = flag;
+}
+
+- (BOOL)movingLock
+{
+	return mLocked;
+}
+
 - (void)drawKnobsOnView:(CPView)aView
 {
+	[mKnobList removeAllObjects];
+	if(mLocked)
+		return;
 	var lScaledRect = [aView scaledRectFrom:mRect];
 	var lOutRect = CPRectInset(lScaledRect, -3, -3);
 	[[CPColor darkGrayColor] set];
+	
 	// left top
-	[mKnobList removeAllObjects];
 	var knobRect = CPRectMake(lOutRect.origin.x, lOutRect.origin.y, gKnobWidth,gKnobHeight);
 	[CPBezierPath fillRect:knobRect];
 	var lKnobObj = [[Knob alloc] initWithRect:knobRect gFrame:self position:gKnobPostionLeftTop];
