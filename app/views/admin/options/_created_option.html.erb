@@ -10,6 +10,7 @@ var html_str = "<li id='opt_<%= option.id.to_s %>' class='main-category-list'>" 
 					"<legend>서브 카테고리 추가</legend>"+
 					"<label for='optionsub-write_<%= option.id.to_s %>'>카테고리명</label>"+
 					"<input type='text' name='optionsub_name' id='optionsub-write_<%= option.id.to_s %>' class='textfield'  placeholder='서브 카테고리명 입력'/>"+
+					"<input type='text' name='optionsub_price' id='optionsub_price_<%= option.id.to_s %>' class='textfield2'  placeholder='단가 입력 (숫자만 입력!)'/>"+
 					"<input id='add_optionsub_<%= option.id.to_s %>' class='submit' type='button' value='추가'/>"+
 				"</fieldset>"+
 				"</li>";
@@ -23,7 +24,8 @@ $('#add_optionsub_<%= option.id.to_s %>').click(function() {
 		alert("카테고리명을 입력하세요~");
 	}else{
 		$.ajax({
-			data:'option_id=<%= option.id.to_s %>&optionsub_name='+ $('#optionsub-write_<%= option.id.to_s %>').val(), 
+			// data:'option_id=<%= option.id.to_s %>&optionsub_name='+ $('#optionsub-write_<%= option.id.to_s %>').val(), 
+			data:'rcate='+$('#rcate :selected').val()+'&option_id=<%= option.id.to_s %>&optionsub_name='+ $('#optionsub-write_<%= option.id.to_s %>').val()+'&optionsub_price='+$('#optionsub_price_<%= option.id.to_s %>').val(), 
 			dataType:'script', 
 			type:'post', 
 			url:'/admin/options/add_optionsub'

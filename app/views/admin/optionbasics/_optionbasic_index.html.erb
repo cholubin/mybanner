@@ -80,7 +80,12 @@
 			<td class="board_tbody">특정 소재 선택시 기본단가 변경 <input type="checkbox" id="unit_price_change_by_material_flag" <%= "checked" if upcbm_f == true %>>
 				<ul id="ul1" style="padding:0 0 0 10px;">
 					<%
-					Optionsub.all(:category_name => category, :option_id => 1).each do |opt| 
+					if Option.first(:category_name => category, :name => "소재") != nil
+						option_id = Option.first(:category_name => category, :name => "소재").id
+					else
+						option_id = 0
+					end
+					Optionsub.all(:option_id => option_id, :order => [:priority]).each do |opt| 
 					%>
 					<span style="padding:0 20px 0 0"><%= opt.name %></span>
 					<input type="text" class="unit_price_option" id="<%= opt.id %>" value="<%= opt.unit_price %>">원<br>
@@ -95,7 +100,13 @@
 			<td class="board_tbody">특정 후가공 선택시 기본단가 변경 <input type="checkbox" id="unit_price_change_by_postproc_flag" <%= "checked" if upcbp_f == true %>>
 				<ul id="ul2" style="padding:0 0 0 10px;">
 					<%
-					Optionsub.all(:category_name => category, :option_id => 2).each do |opt| 
+					if Option.first(:category_name => category, :name => "후가공") != nil
+						option_id = Option.first(:category_name => category, :name => "후가공").id
+					else
+						option_id = 0
+					end
+					
+					Optionsub.all(:option_id => option_id, :order => [:priority]).each do |opt| 
 					%>
 					<span style="padding:0 20px 0 0"><%= opt.name %></span> 
 					<input type="text" class="unit_price_postoption" id="<%= opt.id %>" value="<%= opt.unit_price %>">원<br>

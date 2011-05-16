@@ -127,7 +127,7 @@
 								myopt_array = "$$$$$"
 							end
 							%>
-							<%Option.all(:order => [:priority]).each do |opt| %>
+							<%Option.all(:order => [:priority], :category_name => Category.get(my.category.to_i).rcategory).each do |opt| %>
 							<li>
 								<label><%= opt.name %></label>
 								<select class="opt_<%= my.id %>" id="select_<%= my.id %>">
