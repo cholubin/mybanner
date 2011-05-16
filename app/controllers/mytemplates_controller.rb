@@ -157,7 +157,7 @@ class MytemplatesController < ApplicationController
   
 
   delivery_price = Basicinfo.first(:category => "delivery", :code => @myorder.receive_type).price
-  @myorder.total_price = @temp_price + delivery_price
+  # @myorder.total_price = @temp_price + delivery_price
   begin
     if @myorder.save
       render :text => @order_no
