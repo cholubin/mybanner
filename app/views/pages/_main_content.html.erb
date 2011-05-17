@@ -5,19 +5,29 @@
 <div id="main-content" class="content-layout">
 	<ul id="main-button">
 		<%@main_disp = Admininfo.all(:category => "main_display", :order => [:code])%>
-		<%@main_disp.each do |m| %>
+		<%
+		ext_num = 0
+		@main_disp.each do |m| 
+			if File.extname(m.file_name) == ".swf"
+				ext_num += 1
+			end
+		%>
 		<li class="<%= m.info %> button"><span><%= m.content %></span></li>
-		<%end %>
+		<%end 
+		@mode = (ext_num == 3) ? "flash":"image"
+		%>
 	</ul>
 	<div id="main-image">
-		페이지를 불러오는 중입니다. 잠시만 기다려주세요.
-		<%@main_disp.each do |m| %>
-			<%if File.extname(m.file_name) == ".swf" %>
-				<embed src="/images/admin/main/<%= m.file_name %>" type="application/x-shockwave-flash" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" width="580"></embed>
-			<%else %>
-				<img class="image" width="580" src="/images/admin/main/<%= m.file_name %>" />
+			
+			<%@main_disp.each do |m| %>
+				<%if @mode != "flash"%>
+				페이지를 불러오는 중입니다. 잠시만 기다려주세요.
+					<img class="image" width="580" src="/images/admin/main/<%= m.file_name %>" />
+				<%else%>
+					<li style="display:none;"><embed wmode="transparent" src="/images/admin/main/<%= m.file_name %>" type="application/x-shockwave-flash" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" width="580"></li>
+				<%end %>
 			<%end %>
-		<%end %>
+		
 	</div>
 	<div id="main-block">
 		<div id="main-notice">
@@ -84,19 +94,42 @@
 	$("#main-button li:eq(1)").click(function() { mainImageChange(1) });
 	$("#main-button li:eq(2)").click(function() { mainImageChange(2) });
 
-	function mainImageChange(num) {
-		if($("#main-image img:eq("+num+")").css("z-index") != "3") {
-			if(prev_num != null)
-				$("#main-image img:eq("+prev_num+")").css("z-index","2")
-			$("#main-image img:eq("+num+")").css("z-index","3")
-			$("#main-image").animate({"height":$("#main-image img:eq("+num+")").height()},"fast",function() {
-				$("#main-image img:eq("+num+")").fadeIn("fast",function() {
-					if(prev_num != null) $("#main-image img:eq("+prev_num+")").hide();
-					prev_num = num;
-				})
-			});
+	<%if @mode != "flash"%>
+		function mainImageChange(num) {
+			if($("#main-image img:eq("+num+")").css("z-index") != "3") {
+				if(prev_num != null)
+					$("#main-image img:eq("+prev_num+")").css("z-index","2")
+				$("#main-image img:eq("+num+")").css("z-index","3")
+				$("#main-image").animate({"height":$("#main-image img:eq("+num+")").height()},"fast",function() {
+					$("#main-image img:eq("+num+")").fadeIn("fast",function() {
+						if(prev_num != null) $("#main-image img:eq("+prev_num+")").hide();
+						prev_num = num;
+					})
+				});
+			}
 		}
-	}
+	<%else%>
+		function mainImageChange(num) {
+			if($("#main-image li:eq("+num+")").css("z-index") != "3") {
+				if(prev_num != null){ 
+					$("#main-image li:eq("+prev_num+")").css("z-index","2"); 
+					// $("#main-image li:eq("+prev_num+")").hide();
+				}
+					
+				$("#main-image").animate({"height":$("#main-image li:eq("+num+")").height()},"fast",function() {
+					$("#main-image li:eq("+num+")").fadeIn("fast",function() {
+						if(prev_num != null) $("#main-image li:eq("+prev_num+")").hide();
+						prev_num = num;
+					})
+				});
+				
+				// $("#main-image li:eq("+num+")").css("z-index","3");
+				// $("#main-image li:eq("+num+")").fadeIn();
+				// 
+				// prev_num = num;
+			}
+		}
+	<%end%>
 
 	$(window).load(function() {
 		// 메인이미지 로드

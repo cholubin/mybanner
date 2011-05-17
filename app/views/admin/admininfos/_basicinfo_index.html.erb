@@ -79,7 +79,11 @@
 				</td>
 	            <td class="board_tbody" ><input type="file" class="val" name="file">
 					<%if disp.file_name != nil %>
-				    <img src="<%= "#{HOSTING_URL}" + "images/admin/main/" + disp.file_name  %>" width="170">
+						<%if File.extname(disp.file_name) != ".swf" %>
+				    		<img src="<%= "#{HOSTING_URL}" + "images/admin/main/" + disp.file_name  %>" width="170">
+						<%else%>
+							<embed wmode="transparent" src="/images/admin/main/<%= disp.file_name %>" type="application/x-shockwave-flash" allowScriptAccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer" width="170">
+						<%end%>
 					<%end %>
 				</td>
 				<td class="board_tbody" ><center><input class="disp_save" name="<%= disp.id %>" id="<%= disp.id %>" type="button" value="저장"></center></td>
