@@ -14,3 +14,5 @@ test/*
 log/*
 db/*
 config/environment.rb
+public/images/admin/main/*.*
+public/sharedimage/*.*
