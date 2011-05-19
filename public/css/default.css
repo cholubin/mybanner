@@ -306,7 +306,8 @@ display: block; margin: 0 0 2px; line-height: 20px; }
 /*그외 정보 */
 #content #quick-information, #recommend_browser .wrap { letter-spacing: -1px; border-radius:6px; -webkit-border-radius: 6px; -moz-border-radius: 6px; margin: 6px 0; border: 1px solid #ccc; padding: 9px; width: 150px; }
 
-#content #quick-information li { width: 110px;padding: 0 0 0 40px; height:60px; line-height: 140%; background-repeat: no-repeat; background-position: left 4px}
+/*#content #quick-information li { width: 110px;padding: 0 0 0 40px; height:65px; line-height: 140%; background-repeat: no-repeat; background-position: left 4px}*/
+#content #quick-information li { width: 110px;padding: 0 0 0 40px; line-height: 140%; background-repeat: no-repeat; background-position: left 4px}
 #content #quick-information li h4 {  font-size: 12px; }
 #content #quick-information li p { margin: 0; padding: 5px 0 5px;  font-size: 11px;}
 #content #quick-information li.payment { background-image: url(/images/default/quicksection-payment.png); }
