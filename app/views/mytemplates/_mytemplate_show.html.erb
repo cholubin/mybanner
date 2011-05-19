@@ -81,13 +81,14 @@ end
 						myopt_array = "$$$$$"
 					end
 					%>
-					<%Option.all(:order => [:priority]).each do |opt| %>
+					<%Option.all(:order => [:priority], :category_name => Category.get(my.category.to_i).rcategory).each do |opt| %>
 					<li>
 						<label><%= opt.name %></label>
 						<select class="opt" id="select_<%= opt.id %>">
 							<option value="" selected>선택해주세요.</option>
 							<option value="">------------------</option>
 							<%Optionsub.all(:category_name => rcategory, :option_id => opt.id).each do |optsub| %>
+							
 								<option value="<%= optsub.id %>" <%= "selected" if optsub.id.to_i == myopt_array[i].to_i %>><%= optsub.name %></option>
 							<%
 							end %>
