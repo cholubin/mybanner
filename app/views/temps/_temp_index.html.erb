@@ -37,7 +37,7 @@ floatClear = 0
 				
 				if rcategory != ""
 					if Option_basic.first(:category_name => rcategory) != nil
-						unit_price = Option_basic.first(:category_name => rcategory).unit_price.to_s + "원"
+						unit_price = Option_basic.first(:category_name => rcategory).unit_price.to_s + "원 <font color=gray>(단위가격)</font>"
 					else
 						unit_price = "미정"
 					end
