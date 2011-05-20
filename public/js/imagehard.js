@@ -10,7 +10,6 @@ $(document).ready(function(){
 
 	// 폴더생성 =========================================
 	$('#folder_create_btn').live("click", function(){
-		alert("test");
 		if ($('#folder_name').val() == ""){
 			alert("폴더명을 입력해 주세요~");
 			$('#folder_name').focus();
