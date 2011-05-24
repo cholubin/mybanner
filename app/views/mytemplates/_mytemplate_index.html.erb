@@ -487,7 +487,7 @@ $('#order_basic').live("click", function(){
 			success: function(request){
 				loadingView();
 				if(request != "주문에러!"){
-					alert("주문시 표시된 결제금액은 기본금액입니다! 옵션 선택에 따른 추가 금액에 대해선 관리자와 상담해주시기 바랍니다!");
+					// alert("주문시 표시된 결제금액은 기본금액입니다! 옵션 선택에 따른 추가 금액에 대해선 관리자와 상담해주시기 바랍니다!");
 					alert("주문번호: "+request+" \n주문절차가 정상적으로 처리되었습니다!");	
 					$('#popup-closeButton').click();
 					$('.chkbox:checked').parents("tr").remove();

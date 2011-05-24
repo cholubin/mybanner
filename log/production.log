@@ -2865,3 +2865,68 @@ Processing Admin::OptionsController#index (for 127.0.0.1 at 2011-02-25 15:52:13)
   Parameters: {"rca"=>"배너"}
 Rendering admin/options/option
 Completed in 33ms (View: 29 | 200 OK [http://localhost/admin/options?rca=%EB%B0%B0%EB%84%88]
+
+
+Processing MytemplatesController#cancel_order (for 127.0.0.1 at 2011-05-24 11:38:01) [POST]
+  Parameters: {"order_id"=>"73"}
+Completed in 30ms (View: 1 | 200 OK [http://localhost/mytemplates/cancel_order]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-05-24 11:38:02) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 190ms (View: 175 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#mytemplate_order (for 127.0.0.1 at 2011-05-24 11:38:07) [POST]
+  Parameters: {"total_price"=>"83000원", "ids"=>"560,559,"}
+Rendering template within layouts/ajax-load-page
+Rendering mytemplates/mytemplate
+Completed in 13ms (View: 11 | 200 OK [http://localhost/mytemplates/mytemplate_order]
+
+
+Processing MytemplatesController#create_order (for 127.0.0.1 at 2011-05-24 11:38:09) [POST]
+  Parameters: {"item_unit"=>"1,1,", "pay_m"=>"0", "total_price"=>"83000", "receive-note"=>"", "address2"=>"두산두래아파트 1동 606호", "address1"=>"서울시 영등포구 문래동", "zip_code"=>"150-095", "receive_mobile"=>"011-323-1188", "receive_tel"=>"070-8273-6517", "receive_name"=>"김현수", "receive_type"=>"0", "ids"=>"560,559,"}
+
+ArgumentError (wrong number of arguments (1 for 0)):
+  app/controllers/mytemplates_controller.rb:133:in `block in create_order'
+  app/controllers/mytemplates_controller.rb:128:in `each'
+  app/controllers/mytemplates_controller.rb:128:in `create_order'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-05-24 11:39:06) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 173ms (View: 157 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#mytemplate_order (for 127.0.0.1 at 2011-05-24 11:39:12) [POST]
+  Parameters: {"total_price"=>"83000원", "ids"=>"560,559,"}
+Rendering template within layouts/ajax-load-page
+Rendering mytemplates/mytemplate
+Completed in 8ms (View: 7 | 200 OK [http://localhost/mytemplates/mytemplate_order]
+
+
+Processing MytemplatesController#create_order (for 127.0.0.1 at 2011-05-24 11:39:16) [POST]
+  Parameters: {"item_unit"=>"1,1,", "pay_m"=>"0", "total_price"=>"83000", "receive-note"=>"", "address2"=>"두산두래아파트 1동 606호", "address1"=>"서울시 영등포구 문래동", "zip_code"=>"150-095", "receive_mobile"=>"011-323-1188", "receive_tel"=>"070-8273-6517", "receive_name"=>"김현수", "receive_type"=>"0", "ids"=>"560,559,"}
+
+ArgumentError (wrong number of arguments (1 for 0)):
+  app/controllers/mytemplates_controller.rb:133:in `block in create_order'
+  app/controllers/mytemplates_controller.rb:128:in `each'
+  app/controllers/mytemplates_controller.rb:128:in `create_order'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)

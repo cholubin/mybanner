@@ -96,7 +96,7 @@
 						<%end %>
 					</ul>
 				</td>
-				<td class="price"><%= my.total_price.to_s %><br><font color=red>(가격상담 요!)</font></td>
+				<td class="price"><%= my.total_price.to_s %></td>
 				<td class="status"><%= Basicinfo.first(:category=>"order_process", :code => my.status).name %></td>
 				<td class="detail"><a href="/myorders/<%= my.id.to_s %>">상세정보 보기</a></td>
 				<td class="cancel">

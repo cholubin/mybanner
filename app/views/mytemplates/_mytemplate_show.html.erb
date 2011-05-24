@@ -326,6 +326,7 @@ $('#order-button').click(function(){
 		type:'post', 
 		url:'/mytemplates/total_price_cal',
 		success: function(request){
+			// alert($('#item_price').text().replace(",","").replace("금액",""));
 			$('#item_price').html("<strong class='title'>금액</strong> "+to_comma(request)+"원</li>");
 			popupView(696,390,"/mytemplates/mytemplate_order", { total_price: $('#item_price').text().replace(",","").replace("금액",""), ids: <%= my.id.to_s %>});
 			return false;
@@ -493,7 +494,7 @@ $('#order_basic').live("click", function(){
 		
 		loadingView();
 		$.ajax({
-			data:'direct=yes&item_unit='+item_unit+'&pay_m='+$('input:radio:checked').val()+'&total_price='+$('#order_total_price').val()+'&receive-note='+$('#receive-note').val()+'&address2='+$('#address2').val()+'&address1='+$('#address-selector option:selected').text()+'&zip_code='+$('#zip_code').val()+'&receive_mobile='+$('#receive-mobile').val()+'&receive_tel='+$('#receive-tel').val()+'&receive_name='+$('#receive-name').val()+'&receive_type='+$('#receive-type2 option:selected').val()+'&ids='+ order_item, 
+			data:'direct=yes&item_unit='+item_unit+'&pay_m='+$('input:radio:checked').val()+'&total_price='+$('#order_total_price').text().replace('원','')+'&receive-note='+$('#receive-note').val()+'&address2='+$('#address2').val()+'&address1='+$('#address-selector option:selected').text()+'&zip_code='+$('#zip_code').val()+'&receive_mobile='+$('#receive-mobile').val()+'&receive_tel='+$('#receive-tel').val()+'&receive_name='+$('#receive-name').val()+'&receive_type='+$('#receive-type2 option:selected').val()+'&ids='+ order_item, 
 			dataType:'script', 
 			type:'post', 
 			url:'/mytemplates/create_order',

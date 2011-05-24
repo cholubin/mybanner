@@ -82,7 +82,7 @@
 					</td>
 					<td class="size"><%= size %> <!-- 가로사이즈 cm x 세로 사이즈 cm --></td>
 					<td class="piece"><%= temp.quantity %>ea <!-- 갯수 ea --></td>
-					<td class="price"><%= (temp.quantity * unit_price.to_i).to_s %>원<!-- 개별가격 * 갯수 --><span>(개별: <%= unit_price %>원)<!-- 개별가격 --></span></td>
+					<td class="price"><%= temp.total_price %>원<!-- 개별가격 * 갯수 --><span>(개별: <%= unit_price %>원)<!-- 개별가격 --></span></td>
 				</tr>
 				<!-- 주문 품목에 따른 반복 -->
 				<%end %>
@@ -124,7 +124,7 @@
 		<div class="delivery">
 			<h4>배송정보</h4>
 			<ul>
-				<li class="type"><strong>배송방법</strong> <span><%= Basicinfo.first(:category=>"delivery", :code => @myorder.receive_type.to_i).name %></span><!-- 배송방법 --></li>
+				<li class="type"><strong>배송방법</strong> <span><%= Basicinfo.first(:category=>"delivery", :code => @myorder.receive_type.to_i).name %> (<%= Basicinfo.first(:category=>"delivery", :code => @myorder.receive_type.to_i).price %>원)</span><!-- 배송방법 --></li>
 				<li class="type"><strong>배송상세</strong> <span></span><!-- 배송방법 --></li>
 				<li class="address"><strong>우편번호</strong> <span><%= @myorder.order_zip %></span><!-- 주소 --></li>
 				<li class="address"><strong>배송주소</strong> <span><%= @myorder.order_addr1 + " " + @myorder.order_addr2 %></span><!-- 주소 --></li>
@@ -136,9 +136,9 @@
 			<ul>
 				<li class="type"><strong>결제방법</strong>  <span><%= Basicinfo.first(:category => "pay_method", :code => @myorder.pay_method).name %></span><!-- ### 결제방법(신용카드일 경우 전표번호 또는 결제 한 카드 앞 4자리 표시)) ###--></li>
 				<li class="type-detail"><strong>결제상세</strong> <span></span></li>
-				<li class="price"><strong>주문금액</strong>  <span><%= @myorder.total_price %>원</span> (기본금액)<!-- ### 총주문금액 ### --></li>
+				<li class="price"><strong>주문금액</strong>  <span><%= @myorder.total_price %>원</span><!-- ### 총주문금액 ### --></li>
 				<li class="first-price"><strong>선결제금액</strong>  <span class="none"><%= @myorder.pre_price if @myorder.pre_price != nil %></span><!-- 선결제 금액 --></li>
-				<li class="last-price"><strong>결제금액</strong>  <span><font color=red>상기 주문금액은 기본금액으로 사이즈변경 및 옵션에 따른 가격상담이 필요합니다!</font></span><!--### 총주문금액 - 선결제금액 = 결제금액 ### --></li>
+				<li class="last-price"><strong>결제금액</strong>  <!--### 총주문금액 - 선결제금액 = 결제금액 ### --></li>
 			</ul>
 		</div>
 	</div>

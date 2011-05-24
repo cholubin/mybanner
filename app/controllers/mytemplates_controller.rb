@@ -82,7 +82,7 @@ class MytemplatesController < ApplicationController
   @myorder.receive_type = params[:receive_type]
   @myorder.pay_method = params[:pay_m]
   @myorder.receive_note = params[:receive_note]
-  @myorder.total_price = params[:total_price]
+  @myorder.total_price = params[:total_price].gsub(",","").to_i
   @myorder.receive_name = params[:receive_name]
   @myorder.order_tel = params[:receive_tel]
   @myorder.order_mobile = params[:receive_mobile]
@@ -109,8 +109,12 @@ class MytemplatesController < ApplicationController
     mytemp.in_order = true
     mytemp.job_status = 0
     mytemp.feedback_code = 0
-    mytemp.quantity = params[:item_unit].to_i
-    @temp_price += (mytemp.quantity * mytemp.price.to_i)
+    mytemp.total_price = total_price_cal_sub(mytemp.id)
+    
+    # mytemp.quantity = params[:item_unit].to_i
+    # @temp_price += (mytemp.quantity * mytemp.price.to_i)
+    
+    puts_message "@temp_price #{@temp_price} += (mytemp.quantity(#{mytemp.quantity}) * mytemp.price.to_i(#{mytemp.price}) )"
     
     if mytemp.save
       puts_message "주문항목 저장 완료!"
@@ -126,9 +130,10 @@ class MytemplatesController < ApplicationController
       mytemp.in_order = true
       mytemp.job_status = 0
       mytemp.feedback_code = 0
+      mytemp.total_price = total_price_cal_sub(mytemp.id)
       
-      mytemp.quantity = item_unit[index].to_i
-      @temp_price += (mytemp.quantity * mytemp.price.to_i)
+      # mytemp.quantity = item_unit[index].to_i
+      # @temp_price += (mytemp.quantity * mytemp.price.to_i)
       if mytemp.save
         puts_message "주문항목 저장 완료!"
       else
@@ -136,28 +141,25 @@ class MytemplatesController < ApplicationController
       end
       index += 1
     end
+  end
+
+  @user = User.get(current_user.id)
+  
+  
+  if @user.tel == nil or @user.tel == ""
+    @user.tel = @myorder.order_tel
+    @user.mobile = @myorder.order_mobile
+    @user.zip = @myorder.order_zip
+    @user.addr1 = @myorder.order_addr1
+    @user.addr2 = @myorder.order_addr2
     
-    @user = User.get(current_user.id)
-    
-    if @user.tel == nil or @user.tel == ""
-      @user.tel = @myorder.order_tel
-      @user.mobile = @myorder.order_mobile
-      @user.zip = @myorder.order_zip
-      @user.addr1 = @myorder.order_addr1
-      @user.addr2 = @myorder.order_addr2
-      
-      if @user.save
-        puts_message "사용자 정보 업데이트 성공"
-      else
-        puts_message "사용자 정보 업데이트 실패!"
-      end
+    if @user.save
+      puts_message "사용자 정보 업데이트 성공"
+    else
+      puts_message "사용자 정보 업데이트 실패!"
     end
-    
   end
   
-
-  delivery_price = Basicinfo.first(:category => "delivery", :code => @myorder.receive_type).price
-  # @myorder.total_price = @temp_price + delivery_price
   begin
     if @myorder.save
       render :text => @order_no
@@ -166,8 +168,8 @@ class MytemplatesController < ApplicationController
       render :text => "주문에러!"
     end
   rescue
-    # puts_message @myorder.errors.to_s
-    render :text => "주문에러!"
+    puts_message @myorder.errors.to_s
+    # render :text => "주문에러!"
   end
   
 
