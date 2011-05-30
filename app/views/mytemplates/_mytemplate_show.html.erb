@@ -339,7 +339,7 @@ $('#order-button').click(function(){
 
 $("li.edit a").click(function () {
 	<%if my.job_code != 3 %>
-		openWebTopEditor_user('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>?reload=yes');
+		openWebTopEditor_user('<%= current_user.userid %>','<%= my.id.to_s %>','/mytemplates/<%= my.id.to_s %>?reload=yes','sizescale=10');
 		return false
 	<% else %>
 		alert('시안이 확정된 상태에서는 편집하실 수 없습니다!');
