@@ -41,7 +41,7 @@
 	        <tr>
 	            <th class="board_thead" width="40px">번호</th>
 				<th class="board_thead" width="40px">상태</th>
-	            <td class="board_thead" width="100px"><center>주문날짜</center></td>
+	            <td class="board_thead" width="100px"><center>주문번호<br>주문날짜</center></td>
 				<td class="board_thead" width="120px"><center>아이템</center></td>
 	            <td class="board_thead" width="50px"><center>총 주문금액 </center></td>
 	            <td class="board_thead" width="50px"><center>사용자(아이디/이름)</center></td>
@@ -69,7 +69,7 @@
 						<%puts_message myorder.status.to_s %>
 					</select>
 				</th>
-	            <td class="board_tbody" /><center><%= myorder.updated_at.strftime('%Y-%m-%d') %></center></td>
+	            <td class="board_tbody" /><center><%= myorder.order_no %><br><%= myorder.updated_at.strftime('%Y-%m-%d') %></center></td>
 				<td class="board_tbody" />
 					<ul onClick="location.href='/admin/myorders/<%= myorder.id.to_s %>'" style="cursor:hand;">
 						<%

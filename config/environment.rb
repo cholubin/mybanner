@@ -101,4 +101,14 @@ Haml::Template.options[:format] = :html4
   M_ROOT = RAILS_ROOT + "/public" 
   M_PORT = 3000
 
+  ActionMailer::Base.delivery_method = :smtp
+   ActionMailer::Base.smtp_settings = {
+       :tls => true,
+       :address => "smtp.gmail.com",
+       :port => "587",
+       :domain => "banner.iedit.net",
+       :authentication => :plain,
+       :user_name => "banner.iedit",
+       :password => "Banner.iedit1" 
+     }
 

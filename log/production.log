@@ -2930,3 +2930,292 @@ ArgumentError (wrong number of arguments (1 for 0)):
   /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
 
 Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-13 17:25:29) [GET]
+Sent mail to cholubin@gmail.com
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 4309ms (View: 166 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-13 18:11:22) [GET]
+Sent mail to cholubin@gmail.com
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 6171ms (View: 165 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-13 18:17:32) [GET]
+Sent mail to cholubin@gmail.com
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 3985ms (View: 166 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-13 18:25:08) [GET]
+Sent mail to cholubin@gmail.com
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 4774ms (View: 169 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-13 18:26:35) [GET]
+Sent mail to cholubin@gmail.com
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 5565ms (View: 165 | 200 OK [http://localhost/mytemplates]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2011-06-14 10:14:02) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 537ms (View: 516 | 200 OK [http://localhost/]
+
+
+Processing AdminsessionsController#new (for 127.0.0.1 at 2011-06-14 10:14:06) [GET]
+Rendering template within layouts/adminsessions
+Rendering admin/adminsessions/new
+Completed in 6ms (View: 3 | 200 OK [http://localhost/admin]
+
+
+Processing AdminsessionsController#create (for 127.0.0.1 at 2011-06-14 10:14:10) [POST]
+  Parameters: {"authenticity_token"=>"GCsDZR7iJ3FjKPTUhKtLN/uJKzkXq0UJpVCMNI+AfR8=", "adminsession"=>{"admin_id"=>"webtop", "password"=>"5972"}, "x"=>"0", "y"=>"0"}
+Redirected to http://localhost:3000/admin/temps
+Completed in 334ms | 302 Found [http://localhost/adminsessions]
+
+
+Processing Admin::TempsController#index (for 127.0.0.1 at 2011-06-14 10:14:11) [GET]
+Rendering template within layouts/admin_layout
+Rendering admin/temps/temp
+Completed in 82ms (View: 73 | 200 OK [http://localhost/admin/temps]
+
+
+Processing Admin::AdmininfosController#index (for 127.0.0.1 at 2011-06-14 10:14:25) [GET]
+Rendering admin/admininfos/admininfo
+Completed in 99ms (View: 91 | 200 OK [http://localhost/admin/admininfos]
+
+
+Processing Admin::AdmininfosController#save_admininfo (for 127.0.0.1 at 2011-06-14 10:17:47) [POST]
+  Parameters: {"content"=>"cholubin@gmail.com", "id"=>"10"}
+Completed in 44ms (View: 1 | 200 OK [http://localhost/admin/admininfos/save_admininfo]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2011-06-14 10:24:05) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 83ms (View: 64 | 200 OK [http://localhost/]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2011-06-14 10:24:16) [POST]
+  Parameters: {"authenticity_token"=>"GCsDZR7iJ3FjKPTUhKtLN/uJKzkXq0UJpVCMNI+AfR8=", "session"=>{"uri"=>"", "userid"=>"cholubin", "password"=>"5972"}}
+Redirected to http://localhost:3000/
+Completed in 15ms | 302 Found [http://localhost/sessions]
+
+
+Processing PagesController#home (for 127.0.0.1 at 2011-06-14 10:24:17) [GET]
+Rendering template within layouts/application
+Rendering pages/home
+Completed in 160ms (View: 148 | 200 OK [http://localhost/]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:24:19) [GET]
+Sent mail to cholubin@gmail.com
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 5872ms (View: 106 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:31:36) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 190ms (View: 173 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2011-06-14 10:31:38) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Completed in 80ms (View: 72 | 200 OK [http://localhost/myorders]
+
+
+Processing MytemplatesController#cancel_order (for 127.0.0.1 at 2011-06-14 10:31:40) [POST]
+  Parameters: {"order_id"=>"78"}
+Completed in 21ms (View: 1 | 200 OK [http://localhost/mytemplates/cancel_order]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:31:42) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 204ms (View: 102 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#mytemplate_order (for 127.0.0.1 at 2011-06-14 10:31:51) [POST]
+  Parameters: {"total_price"=>"51000원", "ids"=>"559,"}
+Rendering template within layouts/ajax-load-page
+Rendering mytemplates/mytemplate
+Completed in 11ms (View: 9 | 200 OK [http://localhost/mytemplates/mytemplate_order]
+
+
+Processing MytemplatesController#create_order (for 127.0.0.1 at 2011-06-14 10:31:55) [POST]
+  Parameters: {"item_unit"=>"2,", "pay_m"=>"0", "total_price"=>"51000", "receive-note"=>"", "address2"=>"두산두래아파트 1동 606호", "address1"=>"서울시 영등포구 문래동", "zip_code"=>"150-095", "receive_mobile"=>"011-323-1188", "receive_tel"=>"070-8273-6517", "receive_name"=>"김현수", "receive_type"=>"0", "ids"=>"559,"}
+
+ActionView::MissingTemplate (Missing template mytemplates/create_order.erb in view path app/views:vendor/plugins/paygate/app/views:vendor/plugins/ko_zipcode/app/views):
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  haml (3.0.4) lib/sass/plugin/rack.rb:41:in `call'
+  <internal:prelude>:8:in `synchronize'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /Users/cholubin/.rvm/rubies/ruby-1.9.1-p378/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+Rendering rescues/layout (internal_server_error)
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:32:22) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 111ms (View: 94 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:44:12) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 188ms (View: 172 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#mytemplate_order (for 127.0.0.1 at 2011-06-14 10:44:20) [POST]
+  Parameters: {"total_price"=>"32000원", "ids"=>"560,"}
+Rendering template within layouts/ajax-load-page
+Rendering mytemplates/mytemplate
+Completed in 12ms (View: 11 | 200 OK [http://localhost/mytemplates/mytemplate_order]
+
+
+Processing MytemplatesController#create_order (for 127.0.0.1 at 2011-06-14 10:44:24) [POST]
+  Parameters: {"item_unit"=>"1,", "pay_m"=>"0", "total_price"=>"32000", "receive-note"=>"", "address2"=>"두산두래아파트 1동 606호", "address1"=>"서울시 영등포구 문래동", "zip_code"=>"150-095", "receive_mobile"=>"011-323-1188", "receive_tel"=>"070-8273-6517", "receive_name"=>"김현수", "receive_type"=>"1", "ids"=>"560,"}
+Sent mail to cholubin@gmail.com
+Completed in 4459ms (View: 1 | 200 OK [http://localhost/mytemplates/create_order]
+
+
+Processing MytemplatesController#mytemplate_order (for 127.0.0.1 at 2011-06-14 10:47:16) [POST]
+  Parameters: {"total_price"=>"62000원", "ids"=>"561,"}
+Rendering template within layouts/ajax-load-page
+Rendering mytemplates/mytemplate
+Completed in 17ms (View: 11 | 200 OK [http://localhost/mytemplates/mytemplate_order]
+
+
+Processing MytemplatesController#create_order (for 127.0.0.1 at 2011-06-14 10:47:18) [POST]
+  Parameters: {"item_unit"=>"1,", "pay_m"=>"0", "total_price"=>"62000", "receive-note"=>"", "address2"=>"두산두래아파트 1동 606호", "address1"=>"서울시 영등포구 문래동", "zip_code"=>"150-095", "receive_mobile"=>"011-323-1188", "receive_tel"=>"070-8273-6517", "receive_name"=>"김현수", "receive_type"=>"1", "ids"=>"561,"}
+Sent mail to cholubin@gmail.com
+Completed in 4480ms (View: 1 | 200 OK [http://localhost/mytemplates/create_order]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:48:41) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 94ms (View: 85 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2011-06-14 10:48:45) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Completed in 95ms (View: 87 | 200 OK [http://localhost/myorders]
+
+
+Processing MytemplatesController#cancel_order (for 127.0.0.1 at 2011-06-14 10:48:49) [POST]
+  Parameters: {"order_id"=>"84"}
+Completed in 16ms (View: 1 | 200 OK [http://localhost/mytemplates/cancel_order]
+
+
+Processing MytemplatesController#cancel_order (for 127.0.0.1 at 2011-06-14 10:48:50) [POST]
+  Parameters: {"order_id"=>"83"}
+Completed in 15ms (View: 1 | 200 OK [http://localhost/mytemplates/cancel_order]
+
+
+Processing MytemplatesController#cancel_order (for 127.0.0.1 at 2011-06-14 10:48:51) [POST]
+  Parameters: {"order_id"=>"82"}
+Completed in 15ms (View: 0 | 200 OK [http://localhost/mytemplates/cancel_order]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:48:52) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 192ms (View: 173 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#mytemplate_order (for 127.0.0.1 at 2011-06-14 10:48:56) [POST]
+  Parameters: {"total_price"=>"51000원", "ids"=>"559,"}
+Rendering template within layouts/ajax-load-page
+Rendering mytemplates/mytemplate
+Completed in 12ms (View: 9 | 200 OK [http://localhost/mytemplates/mytemplate_order]
+
+
+Processing MytemplatesController#create_order (for 127.0.0.1 at 2011-06-14 10:48:57) [POST]
+  Parameters: {"item_unit"=>"2,", "pay_m"=>"0", "total_price"=>"51000", "receive-note"=>"", "address2"=>"두산두래아파트 1동 606호", "address1"=>"서울시 영등포구 문래동", "zip_code"=>"150-095", "receive_mobile"=>"011-323-1188", "receive_tel"=>"070-8273-6517", "receive_name"=>"김현수", "receive_type"=>"0", "ids"=>"559,"}
+Sent mail to cholubin@gmail.com
+Completed in 3947ms (View: 1 | 200 OK [http://localhost/mytemplates/create_order]
+
+
+Processing MytemplatesController#mytemplate_order (for 127.0.0.1 at 2011-06-14 10:51:02) [POST]
+  Parameters: {"total_price"=>"83000원", "ids"=>"560,"}
+Rendering template within layouts/ajax-load-page
+Rendering mytemplates/mytemplate
+Completed in 19ms (View: 12 | 200 OK [http://localhost/mytemplates/mytemplate_order]
+
+
+Processing MytemplatesController#create_order (for 127.0.0.1 at 2011-06-14 10:51:04) [POST]
+  Parameters: {"item_unit"=>"1,", "pay_m"=>"0", "total_price"=>"83000", "receive-note"=>"", "address2"=>"두산두래아파트 1동 606호", "address1"=>"서울시 영등포구 문래동", "zip_code"=>"150-095", "receive_mobile"=>"011-323-1188", "receive_tel"=>"070-8273-6517", "receive_name"=>"김현수", "receive_type"=>"0", "ids"=>"560,"}
+Sent mail to cholubin@gmail.com
+Completed in 4695ms (View: 1 | 200 OK [http://localhost/mytemplates/create_order]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:52:26) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 174ms (View: 163 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2011-06-14 10:52:42) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Completed in 98ms (View: 90 | 200 OK [http://localhost/myorders]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2011-06-14 10:52:49) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Completed in 79ms (View: 76 | 200 OK [http://localhost/myorders]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:52:53) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 185ms (View: 171 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MyordersController#index (for 127.0.0.1 at 2011-06-14 10:52:53) [GET]
+Rendering template within layouts/application
+Rendering myorders/myorder
+Completed in 149ms (View: 145 | 200 OK [http://localhost/myorders]
+
+
+Processing MytemplatesController#cancel_order (for 127.0.0.1 at 2011-06-14 10:52:56) [POST]
+  Parameters: {"order_id"=>"85"}
+Completed in 52ms (View: 1 | 200 OK [http://localhost/mytemplates/cancel_order]
+
+
+Processing MytemplatesController#index (for 127.0.0.1 at 2011-06-14 10:52:57) [GET]
+Rendering template within layouts/application
+Rendering mytemplates/mytemplate
+Completed in 105ms (View: 92 | 200 OK [http://localhost/mytemplates]
+
+
+Processing MytemplatesController#mytemplate_order (for 127.0.0.1 at 2011-06-14 10:53:03) [POST]
+  Parameters: {"total_price"=>"51000원", "ids"=>"559,"}
+Rendering template within layouts/ajax-load-page
+Rendering mytemplates/mytemplate
+Completed in 12ms (View: 10 | 200 OK [http://localhost/mytemplates/mytemplate_order]
+
+
+Processing MytemplatesController#create_order (for 127.0.0.1 at 2011-06-14 10:53:05) [POST]
+  Parameters: {"item_unit"=>"2,", "pay_m"=>"0", "total_price"=>"51000", "receive-note"=>"", "address2"=>"두산두래아파트 1동 606호", "address1"=>"서울시 영등포구 문래동", "zip_code"=>"150-095", "receive_mobile"=>"011-323-1188", "receive_tel"=>"070-8273-6517", "receive_name"=>"김현수", "receive_type"=>"0", "ids"=>"559,"}
+Sent mail to cholubin@gmail.com
+Completed in 4205ms (View: 1 | 200 OK [http://localhost/mytemplates/create_order]

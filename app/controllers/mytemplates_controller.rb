@@ -3,17 +3,8 @@
 class MytemplatesController < ApplicationController
   before_filter :authenticate_user!
   
-  
   def index
-
-    #basic_photo 폴더링크가 없으면 생성한다.
-    # user_path =  "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/images/basic_photo"
-    # if not File.exist?(user_path)
-    #   puts %x[ln -s "#{RAILS_ROOT}/public/basic_photo/" "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/images/basic_photo"]
-    # end
     
-    # Basicinfo.up
-        
     @menu = "mytemplate"
     @board = "mytemplate"
     @section = "index"
@@ -162,6 +153,13 @@ class MytemplatesController < ApplicationController
   
   begin
     if @myorder.save
+      
+      puts_message @user.id.to_s
+      puts_message @myorder.created_at.strftime('%Y-%m-%d')
+      puts_message "주문완료"
+      
+      emailing(@user.id, @myorder.created_at.strftime('%Y-%m-%d') , "주문완료", @myorder.order_no)
+      
       render :text => @order_no
     else
       puts_message @myorder.errors.to_s
@@ -1171,5 +1169,104 @@ end
         # throw error
       end
     end  
+    
+    def emailing(user_id, date, status, order_no)
+      
+      body_html = "<html xmlns='http://www.w3.org/1999/xhtml' lang='UTF-8'>" + 
+      "<head><style type='text/css'>" +
+      	"#layout {" +
+      		"width: 580px;" +
+      		"height: 440px;" +
+      		"padding: 16px;" +
+      		"background-color: #ededed;" +
+      		"border: 1px solid #cecece;" +
+      		"color: #9d9d9d;" +
+      		"font-family: Dotum,sans-serif,NanumGothic,MalgunGothic;" +
+      		"font-size: 13px;}" +
+      	".title {" +
+      		"font-size: 28px;" +
+      		"font-weight: bolder;}" +
+      	".date_email {" +
+      		"text-align: right;}" +
+      	"#contents_layout {" +
+      		"height: 340px;" +
+      		"width: 100%;" +
+      		"padding: 18px;" +
+      		"background-color: #fff;" +
+      		"border: 1px solid #cecece;" +
+      		"color: #287cb1;}" +
+      	".order_layout {" +
+      		"width: 100%;" +
+      		"border: 3px solid #6b90a7;" +
+      		"padding: 12px;" +
+      		"font-weight: bold;}" +
+      	".order {" +
+      		"padding-left: 60px;" + 
+      		"padding-right: 100px;" +
+      		"font-size: 26px;}" +
+      	".date_order {" +
+      		"vertical-align: 5px;}" +
+      	".customer {" +
+      		"font-size: 16px;" +
+      		"font-weight: bold;" +
+      		"border-bottom: 3px solid #9dcbe8;" +
+      		"vertical-align: bottom;" +
+      	"	padding-bottom: 7px;}" +
+      	".title_customer, .customer_name, .customer_tel {" +
+      		"border-bottom: 1px dotted #9dcbe8;}" +
+      	".title_customer {" +
+      		"width: 50px;}" +
+      	".title_customer cite {" +
+      		"font-size: 7px;" +
+      		"color: #95c4e2;}" +
+      "</style>" +
+      "</head><body><table id='layout'><tr><td class='title'>WEPTOP 안내서</td><td class='date_email'>[date]</td></tr>" +
+      "<tr><td colspan='2' class='contents'><table id='contents_layout'>" +
+      "<tr><td colspan='2' class='meant'><b>[username]</b> 님의 주문내역을 알려 드립니다.</td></tr>" +
+      "<tr><td class='order_layout' colspan='2'><span class='order'>[status]</span><span class='date_order'>날짜 : [date] <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(주문번호:#{order_no})</span></td></tr>" +
+      "<tr><td colspan='2' class='customer'>고객정보</td></tr>" +
+      "<tr><td class='title_customer'><cite>●</cite> 고객명</td><td class='customer_name'><b>[username]</b></td></tr>" +
+      "<tr><td class='title_customer'><cite>●</cite> 고객 전화번호</td><td class='customer_tel'><b>[usertel]</b></td>" +
+      "</tr></table></td></tr></table></body></html>"
+
+
+      user = User.get(user_id)
+      username = "#{user.name}(#{user.userid})"
+      
+      if user.mobile != nil and user.mobile != ""
+        usertel = user.mobile 
+      end
+
+      if user.tel != nil and user.tel != ""
+        usertel += " / " + user.tel
+      end
+      
+      admin_email = Admininfo.first(:code => "7", :name => "대표 이메일주소", :category => "basic_info").content
+      
+      
+      
+      body_html = body_html.gsub("[username]", username)
+      body_html = body_html.gsub("[status]", status)
+      body_html = body_html.gsub("[usertel]", usertel)
+      body_html = body_html.gsub("[date]", date)
+      
+      if admin_email != nil and admin_email != ""
+        begin
+          Emailer.deliver_email(
+            :recipients => admin_email,
+            :subject => "[웹탑배너] #{username} 고객님의 #{status} 하셨습니다.",
+            :from => "웹탑배너<banner.iedit@gmail.com>",
+            :body => body_html
+          )
+
+          return true
+        rescue
+          return false
+        end
+      else
+        puts_message "대표 관리자 이메일주소가 입력되지 않았습니다! 메일 발송을 중단합니다."
+      end
+
+    end
     
 end
