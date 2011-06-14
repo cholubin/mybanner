@@ -624,7 +624,13 @@ class MytemplatesController < ApplicationController
       mytemp.save
     end
     
+    user_id = myorder.user_id
+    order_date = myorder.created_at.strftime('%Y-%m-%d')
+    order_no = myorder.order_no
+    
     if myorder.destroy
+      emailing(user_id, order_date , "주문취소", order_no)
+      
       render :text => "success"
     else
       puts_message "사용자 주문취소 실패!"
