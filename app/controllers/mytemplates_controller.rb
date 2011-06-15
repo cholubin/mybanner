@@ -1260,7 +1260,7 @@ end
         begin
           Emailer.deliver_email(
             :recipients => admin_email,
-            :subject => "[웹탑배너] #{username} 고객님의 #{status} 하셨습니다.",
+            :subject => "[웹탑배너] #{username} 고객님께서 #{status} 하셨습니다.",
             :from => "웹탑배너<banner.iedit@gmail.com>",
             :body => body_html
           )

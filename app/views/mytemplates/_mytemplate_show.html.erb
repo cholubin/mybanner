@@ -573,4 +573,25 @@ $('#zip_search').live("click", function(){
 		});
 	}
 });
+
+$('#re_search').live("click",function(){
+	$('#address-search').val("");
+	$('#zip_code').val("");
+	$('#address2').val("");
+	$("#search-address-form").fadeIn("fast");
+	$('#address-search').focus();
+	
+	$('#re_search').val("기존주소 가져오기");
+	$('#re_search').attr("id", "fatch_myaddress");
+	
+});
+
+$('#fatch_myaddress').live("click", function(){
+	$('#zip_code').val("<%= current_user.zip %>");
+	$('#address-selector').html("<option value='<%= current_user.addr1 %>' selected><%= current_user.addr1 %></option>");
+	$('#address2').val("<%= current_user.addr2 %>");
+	
+	$('#fatch_myaddress').val("재검색");
+	$('#fatch_myaddress').attr("id", "re_search");
+});
 </script>
