@@ -25,13 +25,14 @@ class TlsTest < Test::Unit::TestCase
       :address => "smtp.gmail.com",
       :port => 587,
       :user_name => ENV['EMAIL'],
-      :password => ENV['PASSWORD'],
+      :password  => ENV['PASSWORD'],
       :authentication => :plain,
       :tls => true
     }
   end
   
   def test_send_mail
+    puts_message "here!here!here!here!here!here!here!here!here!here!here!here!here!here!"
     Emailer.deliver_email(
       :recipients => ENV["EMAIL"],
       :subject => "SMTP/TLS test",

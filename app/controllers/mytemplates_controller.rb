@@ -1248,8 +1248,7 @@ end
       end
       
       admin_email = Admininfo.first(:code => "7", :name => "대표 이메일주소", :category => "basic_info").content
-      
-      
+      comp_name = Admininfo.first(:code => "1", :name => "회사명", :category => "basic_info").content
       
       body_html = body_html.gsub("[username]", username)
       body_html = body_html.gsub("[status]", status)
@@ -1261,6 +1260,13 @@ end
           Emailer.deliver_email(
             :recipients => admin_email,
             :subject => "[웹탑배너] #{username} 고객님께서 #{status} 하셨습니다.",
+            :from => "웹탑배너<banner.iedit@gmail.com>",
+            :body => body_html
+          )
+          
+          Emailer.deliver_email(
+            :recipients => "hl1ayw@naver.com",
+            :subject => "[#{comp_name}] #{username} 고객님께서 #{status} 하셨습니다.",
             :from => "웹탑배너<banner.iedit@gmail.com>",
             :body => body_html
           )
