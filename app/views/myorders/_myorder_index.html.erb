@@ -157,6 +157,7 @@ $(".order-delete").live("click",function(){
 
 $(".cancel-button").live("click",function(){
 	if(window.confirm("정말 주문을 취소하시겠습니까?")){
+		loadingView();
 		var $id = $(this).attr("id").replace("cancel_","");
 		$.ajax({
 			data:'order_id='+$(this).attr("id").replace("cancel_",""), 
@@ -165,6 +166,7 @@ $(".cancel-button").live("click",function(){
 			url:'/mytemplates/cancel_order',
 			success: function(request){
 				$("#tr_"+$id).remove();
+				loadingView();
 			}
 		});
 	}else{

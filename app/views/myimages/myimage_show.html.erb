@@ -7,7 +7,7 @@
 		<li class="delete"><a>현재 이미지 삭제하기</a></li>
 		<li class="change_file"><label for="change_file">파일명 변경</label> <input name="change_file" id="change_file" placeholder="작성된 이름으로 변경"> <a id="name_change_btn">이름 변경</a></li>
 		<li class="move_file">
-			<label for="move_file">폴더 이동</label>
+			<label for="move_file">폴더 변경</label>
 			<select name="move_file" id="move_file">
 				<option value="photo">photo</option>
 			<% @folders = Folder.all(:user_id => current_user.id, :order => [:order]) 
@@ -16,6 +16,6 @@
 				<option value="<%= f.id %>" <%= "selected" if @myimage.folder_name == f.name %>><%= f.name %></option>
 			<%end %>
 			</select>
-			<a>폴더 이동</a></li>
+			<a>폴더 변경</a></li>
 	</ul>
 </div>
