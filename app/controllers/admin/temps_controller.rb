@@ -73,7 +73,7 @@ class Admin::TempsController < ApplicationController
     @section = "new"
         
     @temp = Temp.new
-    @categories = Category.all(:order => :priority)    
+    @categories = Category.all(:gubun => "template", :order => :priority)    
     @subcategories = Subcategory.all(:order => :priority)
     
      render 'temp'

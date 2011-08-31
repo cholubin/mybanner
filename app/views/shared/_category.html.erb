@@ -1,7 +1,7 @@
 		<div id="<%=(@menu == "home")? "category" : "submenu"%>">
 			<h3>제품 카테고리</h3>
 			<ul<%=(@menu == "home")? " class=\"sideblock\"" : nil%>>
-<% @categories = Category.all(:order => [ :priority.asc ]) %>
+<% @categories = Category.all(:gubun => "template", :order => [ :priority.asc ]) %>
 <% @categories.each do |category| %>
 				<li>
 					<a class="<%=(params[:category_name].to_i==category.id)?"title-on":"title"%>" href="/temps?category_name=<%= category.id %>"<%= "class='on'" if @category_name == category.name%>><%= category.name %></a>

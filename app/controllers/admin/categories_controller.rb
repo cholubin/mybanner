@@ -10,8 +10,18 @@ class Admin::CategoriesController < ApplicationController
     @menu = "category"
     @board = "category"
     @section = "index"
+    
+    gubun = (params[:gubun] != nil and params[:gubun] != "") ? params[:gubun]:"temp"
+    
+    if gubun == "image"
+      @categories = Category.all(:gubun => "image", :order => [ :priority ])
+      @submenu = "image"
+    elsif gubun == "temp"
+      @categories = Category.all(:gubun => "template", :order => [ :priority ])
+      @submenu = "temp"
+    end
       
-    @categories = Category.all(:order => [ :priority.asc ])
+    
 
      render 'admin/categories/category', :layout => false
   end
@@ -59,8 +69,17 @@ class Admin::CategoriesController < ApplicationController
   # POST /admin_categories
   # POST /admin_categories.xml
   def create
+    gubun = (params[:gubun] != nil and params[:gubun] != "") ? params[:gubun]:"temp"
+    if gubun == "temp"
+      category = "template"
+    else
+      gubun = "image"
+      
+    end
+    
     if params[:categories][:name] != "" and params[:categories][:sub_name] == ""
       @category = Category.new
+      @category.gubun = gubun
       @category.name = params[:categories][:name]
       @category.priority = params[:categories][:priority].to_i
       
@@ -182,7 +201,12 @@ class Admin::CategoriesController < ApplicationController
   def add_category
     category_name = params[:category_name]
     rcategory_name = params[:rcategory_name]
-    
+    gubun = params[:gubun]
+    if gubun == "temp"
+      gubun_m = "template"
+    else
+      gubun_m = "image"
+    end
     categories = Category.all(:order => [:priority])
 
     i = 2
@@ -194,11 +218,13 @@ class Admin::CategoriesController < ApplicationController
     
     category = Category.new()
     category.name = category_name
+    category.gubun = gubun_m
     category.rcategory = rcategory_name
     category.priority = 1
     category.save
     
     @category = category
+    @gubun = gubun_m
     
     render :update do |page|
       page.replace_html 'created_category', :partial => 'created_category', :object => @category

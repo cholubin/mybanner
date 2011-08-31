@@ -2,7 +2,7 @@
 category = @category %>
 <script>
 var html_str = "<li id='cate_<%= category.id.to_s %>' class='main-category-list'>" +
-				"<h4 id='cate_name_<%= category.id.to_s %>'><%= category.name %>&nbsp;<%= "("+category.rcategory+")" if category.rcategory != nil and category.rcategory != ""  %></h4>" +
+				"<h4 id='cate_name_<%= category.id.to_s %>'><%= category.name %>&nbsp;<%= "("+category.rcategory+")" if category.rcategory != nil and category.rcategory != "" and @gubun != "image"  %></h4>" +
 				"<input type='hidden' id='cate_name_hidden_<%= category.id.to_s %>' value='<%= category.name %>'>"+
 				"<input type='hidden' id='rcate_name_hidden_<%= category.id.to_s %>' value='<%= category.rcategory %>'>"+
 				"<p class='main-category-action'><a id='cate-edit_<%= category.id.to_s %>' class='edit'>수정</a><a id='cate-del_<%= category.id.to_s %>' class='delete'>삭제</a></p>"+

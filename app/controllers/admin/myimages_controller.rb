@@ -6,7 +6,7 @@ class Admin::MyimagesController < ApplicationController
   # GET /myimages
   # GET /myimages.xml
   def index
-    @menu = "mytemplate"
+    @menu = "user"
     @board = "myimage"
     @section = "index"
 

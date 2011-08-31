@@ -1,3 +1,5 @@
 <ul id="nav">
-	<li><a <%= "Class=\"on\"" if @section == "index" or  @section == "show" %> href="/admin/myorders">전체 주문정보</a></li>
+	<li><a <%= "Class=\"on\"" if @submenu == "order" %> href="/admin/myorders">전체 주문정보</a></li>
+	<li><a <%= "Class=\"on\"" if @submenu == "file" %> href="/admin/mytemplates?jc=2&fc=all&type=myorder&sub=file">파일접수</a></li>
+	<li><a <%= "Class=\"on\"" if @submenu == "design" or  @section == "show" %> href="/admin/mytemplates?jc=3&fc=all&type=myorder&sub=design">디자인의뢰</a></li>
 </ul>

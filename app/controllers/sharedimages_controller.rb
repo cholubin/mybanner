@@ -69,9 +69,26 @@ class SharedimagesController < ApplicationController
     end
     
     @exts = repository(:default).adapter.select("SELECT distinct type FROM sharedimages WHERE open_fl = 'true' ")
-    @sharedimages = Sharedimage.all(:order => [:created_at.desc],:open_fl => true).search(params[:search], params[:page])
-    @folders = Folder.all(:user_id => current_user.id)
+    @sharedimages = Sharedimage.all(:order => [:created_at.desc],:open_fl => true)
+    
+    if params[:cat] != "all" and params[:cat] != nil
+      @sharedimages = @sharedimages.all(:category => params[:cat].to_i)
+    end
+    
+    if params[:subcat] != "all" and params[:subcat] != nil
+      @sharedimages = @sharedimages.all(:subcategory => params[:subcat].to_i)
+    end
 
+    @sharedimages = @sharedimages.all.search(@sharedimages, params[:search], params[:page])
+    
+    
+    @folders = Folder.all(:user_id => current_user.id)
+    @categories = Category.all(:gubun => "image", :order => :priority)    
+    if params[:cat] != "all" and params[:cat] != ""
+      @subcategories = Subcategory.all(:category_id => params[:cat])
+    else
+      @subcategories = Subcategory.all(:category_id => "to_null")
+    end
     # render 'sharedimage'
     render 'sharedimage', :layout => 'ajax-load-page'
     

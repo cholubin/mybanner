@@ -31,12 +31,17 @@
 				<div id="admin_menu">
 					<div id="top_bar">
 						<div id="nav_container">
-							<%= render :partial => "admin/shared/top_menu" %>								
+							<%= render :partial => "admin/shared/top_menu", :object => @menu, :object => @submenu %>								
 						</div>
 					</div>
 					<div id="top_bar">
 						<div id="nav_container">
-							<%= render :partial => "admin/shared/cus_sub_menu" %>									
+							<%if @type == "myorder"%>
+								<%= render :partial => "admin/myorders/sub_menu", :object => @submenu  %>
+							<%else%>
+								<%= render :partial => "admin/shared/cus_sub_menu", :object => @submenu  %>									
+							<%end %>
+							
 						</div>
 					</div>
 				</div>

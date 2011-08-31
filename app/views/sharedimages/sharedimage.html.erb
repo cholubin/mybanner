@@ -1,3 +1,4 @@
+<script type="text/javascript" src="/js/jquery-1.4.2.js"></script>
 <div id="imagehard">
 	<h3>내 이미지 하드</h3>
 	<p class="description">이미지파일을 업로드할 수 있는 이미지하드입니다.<br/>서버 사정에 의해 연락없이 삭제될 수 있으니, 편집 및 접수 용도외의 사용은 권장하지 않습니다.</p>
@@ -48,24 +49,46 @@
 			<ul class="article" id="<%= myimage.id.to_s %>">
 				<!-- 가로 세로 사이즈 136으로 제한, 현재 IMAG태그에 임의로 width=136, height=136 해놨습니다.  -->
 				<li class="preview"><a href="/sharedimages/show_myimage/<%=myimage.id.to_s %>" target="_blank"><img src="<%= myimage.thumb_url %>"/></a></li>
-				<li class="filename"><a href="### 파일링크 ###" target="_blank"><%= myimage.name %></a><span></span></li>
-				
-	<!--        # 차후 개선버전시 용량도 추가 #
-				<li>5,123kb</li> -->
+				<li class="filename"><%= myimage.name %><span></span></li>
 			</ul>
 	<!-- 파일 목록 반복 끝 -->
 			<%end %>
 		</div>
+		
 		<fieldset id="imagehard_search">
+			<p class="search_ext">
+				<label for="image_search_type">분류</label>
+				<select name="sel_cat" id="sel_cat">
+					<option value='all'>전체보기</option>
+					<%@categories.each do |cat| %>
+						<option value="<%= cat.id %>" <%= "selected" if cat.id.to_s == params[:cat] %>><%= cat.name %></option>
+					<%end %>
+				</select>
+				<select name="sel_subcat" id="sel_subcat">
+					<option value='all'>전체보기</option>
+					<%@subcategories.each do |subcat| %>
+						<option value="<%= subcat.id %>" <%= "selected" if subcat.id.to_s == params[:subcat] %>><%= subcat.name %></option>
+					<%end %>
+				</select>
+			</p>
 			<p class="search_val">
 				<label for="image_search_val">검색</label>
 				<input name="search" id="image_search_val" type="text" value="<%= params[:search] %>"/><input id="image_search_submit_btn" type="submit" value="검색" class="submit-button"/>
 			</p>
 		</fieldset>
+		
 		<div class="pager">				
-			<%ext = "all" %>
-			<%= @sharedimages.pager.to_html "/myimages?ext=#{ext}&search=#{params[:search]}" %>
-			<%#= @sharedimages.pager.to_html "Javascript:alert('test'); /myimages?" %>
+			<%=@sharedimages.pager.to_html "/sharedimages?cat=#{params[:cat]}&subcat=#{params[:subcat]}&search=#{params[:search]}" %>
 		</div>
 	</div>
 </div>
+<!-- <script>
+$('#sel_cat').live("change", function(){
+	location.href = "/sharedimages?cat="+$('#sel_cat option:selected').val();
+})
+
+$('#sel_subcat').live("change", function(){
+	location.href = "/sharedimages?cat="+$('#sel_cat option:selected').val()+"&subcat="+$('#sel_subcat option:selected').val();
+})
+
+</script> -->

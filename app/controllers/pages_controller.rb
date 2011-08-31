@@ -20,7 +20,7 @@ class PagesController < ApplicationController
     @title  = "home"
     @menu = "home"
     
-    @categories = Category.all(:order => [ :priority.asc ])
+    @categories = Category.all(:gubun => "template",:order => [ :priority.asc ])
     @mytemplates_namecard_best = Temp.all(:category => "명함").best
     @mytemplates_banner_best = Temp.all(:category => "현수막").best
     @freeboards = Freeboard.all(:limit => 4, :order => :created_at.desc)

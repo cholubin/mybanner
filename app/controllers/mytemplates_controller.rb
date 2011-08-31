@@ -39,6 +39,7 @@ class MytemplatesController < ApplicationController
     @mytemplates.each do |my|
       price = total_price_cal_sub(my.id).to_i
       @total_prices << price
+      
     end
     
     # @total_prices.each do |to|
@@ -101,6 +102,7 @@ class MytemplatesController < ApplicationController
     mytemp.job_status = 0
     mytemp.feedback_code = 0
     mytemp.total_price = total_price_cal_sub(mytemp.id)
+    
     
     # mytemp.quantity = params[:item_unit].to_i
     # @temp_price += (mytemp.quantity * mytemp.price.to_i)
@@ -584,8 +586,10 @@ class MytemplatesController < ApplicationController
     @mytemp = Mytemplate.get(mytemp_id)
     @mytemp.quantity = quantity
     if @mytemp.save
-      total_price = total_price_cal_sub(mytemp_id).to_i
-      render :text => total_price.to_s
+      total_price = total_price_cal_sub(mytemp_id)
+      puts_message "total_price " + total_price.to_s
+      
+      render :text => total_price.to_i.to_s
     else
       puts_message "수량을 업데이트 하는 도중 오류가 발생했습니다!"
     end
@@ -775,12 +779,21 @@ def total_price_cal_sub(my_id)
   option_basic = Option_basic.first(:category_name => rcategory)
   
   if option_basic.size_limit_flag == true
-    if size < 1.0
-      size = 1.0
+    if size_x.to_f  < 100.0
+      size_x = 100.0
     end  
+    
+    if size_y.to_f  < 100.0
+      size_y = 100.0
+    end
+    
+    size = (size_x.to_f * size_y.to_f) / 10000
   end
   
-  msg = msg + " / size: " + size.to_s
+  size = (size_x.to_f * size_y.to_f) / 10000
+  size_str = size_x.to_f.to_s + " x " + size_y.to_f.to_s + " "
+  
+  msg = msg + " / size: " + size_str + " " + size.to_s
   
   unit_price = option_basic.unit_price.to_f
   
@@ -810,9 +823,13 @@ def total_price_cal_sub(my_id)
   
   total_price = (((size * unit_price) + opt2_price) * ea) * 1.1
   
+  puts_message "total_price: " + total_price.to_s 
+  
+  
   if option_basic.round_off_flag == true
     puts_message "반올림 처리" + "("+option_basic.round_off_unit+") : 원금=>"+ total_price.to_s + "원"
     total_price = round_to(total_price, (option_basic.round_off_unit.to_i == 100)? -3:-4)
+    puts_message "total_price: " + total_price.to_s 
   end
 
   if option_basic.lowest_price_flag == true

@@ -16,6 +16,7 @@ def index
   
   
   @menu = "myorder"
+  @submenu = "order"
   @board = "myorder"
   @section = "index"
   

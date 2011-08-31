@@ -9,9 +9,10 @@ class Admin::SharedimagesController < ApplicationController
       #확장자별 소팅
       ext = params[:ext]
       
-      share = params[:share]
+      share = params[:open_fl]
+      
       if share != nil and share != "" and share != "all"
-  			if share == "y"
+  			if share == "true"
   			  open_fl = true
   			else
   			  open_fl = false
@@ -24,25 +25,40 @@ class Admin::SharedimagesController < ApplicationController
       @menu = "board"
       @board = "sharedimage"
       @section = "index"
-
-      if ext == "all" or ext == nil or ext == ""
-        @sharedimages = Sharedimage.all(:order => [:created_at.desc])   
-      else
-        @sharedimages = Sharedimage.all(:type => ext, :order => [:created_at.desc])           
+      
+      @sharedimages = Sharedimage.all(:order => [:created_at.desc])
+      
+      if params[:cat] != "all" and params[:cat] != nil
+        @sharedimages = @sharedimages.all(:category => params[:cat].to_i)
+      end
+      
+      if params[:subcat] != "all" and params[:subcat] != nil
+        @sharedimages = @sharedimages.all(:subcategory => params[:subcat].to_i)
+      end
+      
+      if ext != "all" and ext!= nil and ext != ""
+        @sharedimages = @sharedimages.all(:type => ext, :order => [:created_at.desc])           
       end
       
       
       
       if share != "all"
-        @sharedimages = @sharedimages.open(open_fl).search_user(params[:search], params[:page])
-        @total_count = @sharedimages.open(open_fl).search_user(params[:search], "").count
-      else
-        @sharedimages = @sharedimages.search_user(params[:search], params[:page])
-        @total_count = @sharedimages.search_user(params[:search], "").count
+        @sharedimages = @sharedimages.open(@sharedimages, open_fl)
       end
 
-      @exts = repository(:default).adapter.select('SELECT distinct type FROM sharedimages')
-
+      @sharedimages = @sharedimages.search_user(@sharedimages,params[:search], params[:page])
+      @total_count = @sharedimages.search_user(@sharedimages,params[:search], "").count
+      
+      # @exts = repository(:default).adapter.select('SELECT distinct type FROM sharedimages')
+      
+      @categories = Category.all(:gubun => "image", :order => :priority)    
+      
+      if params[:cat] != "all" and params[:cat] != ""
+        @subcategories = Subcategory.all(:category_id => params[:cat])
+      else
+        @subcategories = Subcategory.all(:category_id => "to_null")
+      end
+      
       render 'sharedimage'
       
   end
@@ -54,6 +70,9 @@ class Admin::SharedimagesController < ApplicationController
     @section = "new"
   
     @sharedimage = Sharedimage.new
+    @categories = Category.all(:gubun => "image", :order => :priority)    
+    @subcategories = Subcategory.all(:category_id => Category.first(:gubun => "image", :order => [:priority]).id)
+    
       
     render 'sharedimage'
   end
@@ -80,6 +99,9 @@ class Admin::SharedimagesController < ApplicationController
     # file_max_num = params[:file_max_num].to_i
     
     # 이미지 업로드 처리 ===============================================================================
+    sel_category = params[:sel][:category]
+    sel_subcategory = params[:sel][:subcategory]
+    
     files = [params[:file_0],params[:file_1],params[:file_2],params[:file_3],params[:file_4],params[:file_5]]
     files = []
     100.times do |t|
@@ -95,7 +117,9 @@ class Admin::SharedimagesController < ApplicationController
       files.each do |n|
         if n != nil and n != ""
            @sharedimage = Sharedimage.new(params[:sharedimage])
-
+           @sharedimage.category = sel_category.to_i
+           @sharedimage.subcategory = sel_subcategory.to_i
+           
            image_path = @sharedimage.image_path
            SharedimageUploader.store_dir = @sharedimage.image_path
 
@@ -140,7 +164,8 @@ class Admin::SharedimagesController < ApplicationController
       end
       
       # image filename renaming ======================================================================
-      @sharedimages = Sharedimage.all(:order => [:created_at.desc]).search_user(params[:search], params[:page])   
+      @sharedimages = Sharedimage.all(:order => [:created_at.desc])
+      @sharedimages = @sharedimages.search_user(@sharedimages, params[:search], params[:page])   
       @total_count = @sharedimages.count
       @exts = repository(:default).adapter.select('SELECT distinct type FROM sharedimages')
 
@@ -367,4 +392,17 @@ class Admin::SharedimagesController < ApplicationController
     end
     
   end
+  
+  def update_subcategories
+      # updates subcategories based on (main)category selected
+      
+      @categories = Category.first(:id => params[:category_id].to_i)
+      @subcategories = @categories.subcategories
+
+      
+      render :update do |page|
+        page.replace_html 'subcategories', :partial => 'subcategories', :object => @subcategories
+      end
+  end
+  
 end

@@ -1,14 +1,79 @@
 <%= stylesheet_link_tag '/css/paginate.css' %>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all" />
+<link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all" />
 <div id="feature_wrapper">
 		<p1>사용자들에게 공개하는 이미지 입니다.</p1>
 		<% if ! flash[:notice].nil? %>
 			<br>
 			<span class="error_message_small"><%= flash[:notice].to_s %></span>
 		<% end %>		
-<br><br>
+		<br><br>
 
 	</div>
 	
+	<script>
+		$(function() {
+			$('.cat_btn').css("color", "black").css("font-size", "13px");
+			$('.subcat_btn').css("color", "black").css("font-size", "11px");
+			
+			
+			
+			<%if params[:cat] != "all" %>
+				$('.top_subcategory').show() ;
+			<%end %>
+			
+			$('.cat_btn').each(function(){
+				if ( $(this).attr("category") == "<%=  params[:cat] %>" ) {
+					$(this).css("color", "blue").css("font-size", "15px");
+				}
+			})
+			$('.subcat_btn').each(function(){
+				if ( $(this).attr("subcategory") == "<%=  params[:subcat] %>" ) {
+					$(this).css("color", "blue").css("font-size", "12px");
+				}
+			})
+			
+			$( "input:button", ".top_category" ).button();
+			$( "input:button", ".top_subcategory" ).button();
+			
+			$( ".cat_btn" ).click(function() { 
+				location.href = "/admin/sharedimages?cat="+$(this).attr("category")+"&subcat=all&open_fl=<%=params[:open_fl]%>";
+			});
+			$( ".subcat_btn" ).click(function() { 
+				location.href = "/admin/sharedimages?cat=<%=params[:cat]%>&subcat="+$(this).attr("subcategory")+"&open_fl=<%=params[:open_fl]%>";
+			});
+			
+			$('.open_fl').each(function(){
+				if ( $(this).attr("fl") == "<%=  params[:open_fl] %>" ) {
+					$(this).css("color", "blue").css("font-size", "22px");
+				}
+			})
+		});
+		
+		</script>
+
+
+
+	<div class="top_category" style="width: 850px;">
+		<input id="cat_all" class="cat_btn" type="button" category="all" value="전체">
+		<%@categories.each do |cat| %>
+			<input class="cat_btn" type="button" category="<%= cat.id %>" value="<%= cat.name %>" style="font-size:13px;">
+		<%end %>
+	
+	</div><!-- End demo -->
+
+	<div class="top_subcategory" style="display:none;padding:5 0 10 10;">
+		<input id="subcat_all" class="subcat_btn" type="button" subcategory="all" value="전체">
+		<%@subcategories.each do |subcat| %>
+			<input class="subcat_btn" type="button" subcategory="<%= subcat.id %>" value="<%= subcat.name %>">
+		<%end %>
+	</div>
+
+	<div class="open_fl_button" style="text-align:right; width:800px;padding:0 0 5 0;margin:-20 0 0 0">
+		<input class="open_fl" fl="all" type="button" value="전체" style="font-size: 13px;" !importent>
+		<input class="open_fl" fl="true" type="button" value="공개" style="font-size: 13px;">
+		<input class="open_fl" fl="false" type="button" value="비공개" style="font-size: 13px;">
+	</div>
 	
 	<% form_tag :action => :deleteSelection, :method => 'post' do %>			
 	<input type="hidden" id="all_checked" value="false">
@@ -44,7 +109,14 @@
 					</center>
 				</td>
 				<td class="board_tbody" width="80px"><center><span class="subject" id="subject_<%= sharedimage.id %>" style="cursor:pointer;"><%= sharedimage.name %></span></center></td>
-				<td class="board_tbody" width="180px">
+				<td class="board_tbody" width="180px"><center>
+					<%
+						category_name = (Category.get(sharedimage.category) != nil) ? Category.get(sharedimage.category).name : ""
+						subcategory_name = Subcategory.get(sharedimage.subcategory) != nil ? Subcategory.get(sharedimage.subcategory).name : ""
+						category_str = category_name + " / " + subcategory_name
+					%>
+					<%= category_str if category_str != " / " %>
+					</center>
 				</td>
 				<% 
 					if sharedimage.open_fl == true 
@@ -73,11 +145,7 @@
 				<td width="230">&nbsp;</td>
 				<td width="350" style="align:center">
 					<div class="pager">
-					<%if params[:ext] != nil and params[:ext] != "" and params[:ext] != "all"%>
-						<%= Sharedimage.all(:type => params[:ext]).search_user(params[:search], params[:page]).pager.to_html "/admin/sharedimages?search=#{params[:search]}" %>
-					<%else %>
-						<%= Sharedimage.search_user(params[:search], params[:page]).pager.to_html "/admin/sharedimages?search=#{params[:search]}" %>
-					<%end %>
+						<%= @sharedimages.pager.to_html "/admin/sharedimages?search=#{params[:search]}" %>
 					</div>
 				</td>
 				<td width="150" align="right">
@@ -183,5 +251,8 @@ $('.subject').live("click", function(){
 	$('#input_'+$id).focus();
 })
 
+$('.open_fl').click(function() {
+	location.href = "/admin/sharedimages?cat=<%=params[:cat]%>&subcat=<%=params[:subcat]%>&open_fl="+$(this).attr("fl");
+});
 
 </script>

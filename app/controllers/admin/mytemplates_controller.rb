@@ -9,6 +9,16 @@ class Admin::MytemplatesController < ApplicationController
     @board = "mytemplate"
     @section = "index"
     
+    @type =  params[:type] == nil ? "":params[:type]
+    @submenu = params[:sub] == nil ? "":params[:sub]
+    
+    
+    
+    if @type != "" and @submenu != ""
+      @menu = "myorder"
+    end
+    
+    
     if params[:fc] == nil or params[:fc] == "all"
       feedback_code = "all"
     else
@@ -41,10 +51,6 @@ class Admin::MytemplatesController < ApplicationController
     end
     
     @categories = Category.all(:order => :priority)    
-    
-    @menu = "user"
-    @board = "mytemplate"
-    @section = "index"
     
     render 'mytemplate'
   end

@@ -32,16 +32,16 @@ class Sharedimage
   before :create, :image_path
 
   
-  def self.search_user(search, page)
-      (Sharedimage.all(:name.like => "%#{search}%") | Sharedimage.all(:tags.like => "%#{search}%")).page :page => page, :per_page => 12
+  def self.search_user(sharedimage, search, page)
+      (sharedimage.all(:name.like => "%#{search}%") | sharedimage.all(:tags.like => "%#{search}%")).page :page => page, :per_page => 12
   end
 
-  def self.search(search, page)
-      (Sharedimage.all(:name.like => "%#{search}%") | Sharedimage.all(:tags.like => "%#{search}%")).page :page => page, :per_page => 10
+  def self.search(sharedimage, search, page)
+      (sharedimage.all(:name.like => "%#{search}%") | sharedimage.all(:tags.like => "%#{search}%")).page :page => page, :per_page => 6
   end
   
-  def self.open(open_fl)
-      Sharedimage.all(:open_fl => open_fl)
+  def self.open(sharedimage, open_fl)
+      sharedimage.all(:open_fl => open_fl)
   end
   
   

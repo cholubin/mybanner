@@ -67,7 +67,8 @@ class TempsController < ApplicationController
     
     
     
-    @categories = Category.all(:order => :priority)    
+    @categories = Category.all(:gubun => "template",:order => :priority)    
+    
     
     @is_col = is_col
     

@@ -126,7 +126,7 @@ $(document).ready(function(){
 
 			if (myli.attr("id") == "shared") {
 				$("#imagehard-list").fadeOut("fast",function() {
-					$("#imagehard-wrap").load("/sharedimages?search="+$search_val+"&ext=all&myimage_folder_id="+ $folder_id +" #imagehard-wrap", function(){
+					$("#imagehard-wrap").load("/sharedimages?cat=all&subcat=all&search="+$search_val+"&ext=all&myimage_folder_id="+ $folder_id +" #imagehard-wrap", function(){
 						$("#imagehard-list").hide().fadeIn("fast");	
 					});
 				});
@@ -506,3 +506,19 @@ $('#change_file').live("keydown", function(event){
 		return false;
 	}
 });
+
+$('#sel_cat').live("change", function(){
+	$("#imagehard-list").fadeOut("fast",function() {
+		$("#imagehard-wrap").load("/sharedimages?cat="+$('#sel_cat option:selected').val()+"&search=&ext=all&myimage_folder_id=test #imagehard-wrap", function(){
+			$("#imagehard-list").hide().fadeIn("fast");	
+		});
+	});
+})
+
+$('#sel_subcat').live("change", function(){
+	$("#imagehard-list").fadeOut("fast",function() {
+		$("#imagehard-wrap").load("/sharedimages?cat="+$('#sel_cat option:selected').val()+"&subcat="+$('#sel_subcat option:selected').val()+"&search=&ext=all&myimage_folder_id=test #imagehard-wrap", function(){
+			$("#imagehard-list").hide().fadeIn("fast");	
+		});
+	});
+})
