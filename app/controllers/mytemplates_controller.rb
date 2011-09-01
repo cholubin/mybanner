@@ -816,7 +816,7 @@ def total_price_cal_sub(my_id)
       opt_temp.each do |opt|
         if Optionsub.get(opt.to_i) != nil
           if Option.get(Optionsub.get(opt.to_i).option_id).name == "소재"
-            unit_price = Optionsub.get(opt.to_i).unit_price.to_f == 0.0 ? option.basic.unit_price.to_f : Optionsub.get(opt.to_i).unit_price.to_f
+            unit_price = Optionsub.get(opt.to_i).unit_price.to_f == 0.0 ? option_basic.unit_price.to_f : Optionsub.get(opt.to_i).unit_price.to_f
             msg += "/ 소재별 기본단가 변경 적용 "
           end
         end
@@ -828,7 +828,7 @@ def total_price_cal_sub(my_id)
       opt_temp.each do |opt|
         if Optionsub.get(opt.to_i) != nil
           if Option.get(Optionsub.get(opt.to_i).option_id).name == "후가공"
-            unit_price = Optionsub.get(opt.to_i).unit_price.to_f == 0.0 ? option.basic.unit_price.to_f : Optionsub.get(opt.to_i).unit_price.to_f
+            unit_price = Optionsub.get(opt.to_i).unit_price.to_f == 0.0 ? option_basic.unit_price.to_f : Optionsub.get(opt.to_i).unit_price.to_f
             msg += "/ 후가공별 기본단가 변경 적용 "
           end
         end
