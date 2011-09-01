@@ -72,6 +72,7 @@
 		</tr>
 		<tr>
 			<td class="board_tbody">최저금액 적용여부 <input type="checkbox" id="lowest_price_flag" <%= "checked" if lp_f == true %>>
+				<span style="color:green">최저금액은: &nbsp;<font color="yellow">(가로x세로x기본단가)+후가공</font> 까지의 금액과 비을교하여 적용됩니다! </span>
 				<span id="lowest_price_block"><input type="text" id="lowest_price" value="<%= lp %>">원</span>
 			</td>
 		</tr>

@@ -757,16 +757,23 @@ def total_price_cal_sub(my_id)
   ea = my.quantity.to_f
   msg = ea.to_i.to_s + "개 / "
   
+  
   if my.option != nil and my.option != ""
     opt_temp = my.option.split(",")
-    opt1_id = opt_temp[0].to_i
-    opt2_id = opt_temp[1].to_i
-
-    if Optionsub.get(opt2_id) != nil and Optionsub.get(opt2_id) != ""
-      opt2_price = Optionsub.get(opt2_id).price.to_f 
-    else
-      opt2_price = 0
+    
+    opt2_price = 0.0
+    
+    opt_temp.each do |opt|
+      opt_id = opt.to_i
+      
+      if Optionsub.get(opt_id) != nil and Optionsub.get(opt_id) != ""
+        opt2_price += Optionsub.get(opt_id).price.to_f 
+      else
+        opt2_price = 0.0
+      end
+      
     end
+    
   else
     opt2_price = 0  
   end
@@ -798,22 +805,37 @@ def total_price_cal_sub(my_id)
   unit_price = option_basic.unit_price.to_f
   
   
+  
   # 특정소재나, 후가공을 선택했을 때 기본단가를 변경시킬지 여부 판단 
+  if my.option != nil and my.option != ""
+    opt_temp = my.option.split(",")
+  end
+  
   if option_basic.unit_price_change_by_meterial_flag == true
-    if Optionsub.get(opt1_id) != nil and Optionsub.get(opt1_id) != ""
-      unit_price = Optionsub.get(opt1_id).unit_price.to_f
-      msg += "/ 소재별 기본단가 변경 적용 "
+    if my.option != nil and my.option != ""
+      opt_temp.each do |opt|
+        if Optionsub.get(opt.to_i) != nil
+          if Option.get(Optionsub.get(opt.to_i).option_id).name == "소재"
+            unit_price = Optionsub.get(opt.to_i).unit_price.to_f
+            msg += "/ 소재별 기본단가 변경 적용 "
+          end
+        end
+      end
     end
-
+    
   elsif option_basic.unit_price_change_by_postproc_flag == true
-    if my.option != nil and my.option != "" and Optionsub.get(opt2_id) != nil and Optionsub.get(opt2_id) != ""
-      if Optionsub.get(opt2_id).unit_price != nil and Optionsub.get(opt2_id).unit_price != ""
-        unit_price = Optionsub.get(opt2_id).unit_price.to_f
-        msg += "/ 후가공별 기본단가 변경 적용 "
+    if my.option != nil and my.option != ""  
+      opt_temp.each do |opt|
+        if Optionsub.get(opt.to_i) != nil
+          if Option.get(Optionsub.get(opt.to_i).option_id).name == "후가공"
+            unit_price = Optionsub.get(opt.to_i).unit_price.to_f
+            msg += "/ 후가공별 기본단가 변경 적용 "
+          end
+        end
       end
     end
   end
-
+  
   msg += "/ 기본단가: " + unit_price.to_s  
   
   # puts_message size.to_s
@@ -821,7 +843,18 @@ def total_price_cal_sub(my_id)
   # puts_message opt2_price.to_s
   # puts_message ea.to_s
   
-  total_price = (((size * unit_price) + opt2_price) * ea) * 1.1
+  if option_basic.lowest_price_flag == true
+    if size * unit_price + opt2_price < option_basic.lowest_price.to_f
+      final_size_unit_option_price = option_basic.lowest_price.to_f
+    else
+      final_size_unit_option_price = size * unit_price + opt2_price
+    end
+  else
+    final_size_unit_option_price = size * unit_price + opt2_price
+  end
+  
+  
+  total_price = final_size_unit_option_price * ea * 1.1
   
   puts_message "total_price: " + total_price.to_s 
   
@@ -832,11 +865,7 @@ def total_price_cal_sub(my_id)
     puts_message "total_price: " + total_price.to_s 
   end
 
-  if option_basic.lowest_price_flag == true
-    if total_price < option_basic.lowest_price.to_f
-      total_price = option_basic.lowest_price.to_f
-    end
-  end
+  
   
   puts_message msg
   

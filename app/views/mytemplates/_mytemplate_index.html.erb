@@ -548,6 +548,8 @@ $('.delete').click(function(){
 						jQuery.each(temp_array, function(){
 							$('#'+$(this).val()).remove();
 						})
+						$('#total_price').html("0원") ;
+						
 						loadingView();
 					}
 				});	

@@ -104,7 +104,7 @@
 					if jbbs.count > 0
 						jbbs.each do |bbs|
 							if bbs.req_file != nil
-								file_path = "#{HOSTING_URL}user_files/#{current_user.userid}/req_files/" + bbs.req_file
+								file_path = "#{HOSTING_URL}user_files/#{@mytemplate.user.userid}/req_files/" + bbs.req_file
 								ext_name = File.extname(bbs.req_file).gsub(".",'')
 								req_file = "<a href='#{file_path}' class='#{ext_name}'>#{bbs.original_filename}</a>"
 							else

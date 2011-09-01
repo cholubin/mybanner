@@ -75,7 +75,7 @@ my = Mytemplate.get(@tempids[0].to_i)
 				
 				<li class="total"><strong>총 주문금액</strong> <span id="order_total_price" class="price"><%= @total_price %>원</span></li>
 				<input type="hidden" id="current_total_price" name="current_total_price" value="<%= @total_price %>">
-				<li class="first"><strong>선결제금액</strong> <span class="price"><%= @pre_price %>원</span></li>
+				<li class="first"><strong>선결제금액</strong> <span class="price"><%#= @pre_price %>원</span></li>
 				<li class="more"><strong>남은 결제금액</strong> <span id="left_order_total_price" class="price"><%= @total_price - @pre_price %>원</span></li>
 			</ul>
 		</div>
