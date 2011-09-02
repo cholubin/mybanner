@@ -7,7 +7,7 @@ end
 def admin_sign_in(admin)
     admin.remember_me!
 #      session[:ad_remember_token1] = { :value => "멋죠?"}
-    cookies['ad_remember_token' + Rails.root] = { :value => admin.ad_remember_token, :expires => 1.hour.from_now }
+    cookies['ad_remember_token' + Rails.root] = { :value => admin.ad_remember_token, :expires => 10.hour.from_now }
     self.current_admin = admin
 end
 
