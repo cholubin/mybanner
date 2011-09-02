@@ -1,4 +1,6 @@
 <ul id="nav">
-	<li><a <%= "Class=\"on\"" if @section == "index" %> href="/admin/myadmins">관리자 리스트</a></li>
-	<li><a <%= "Class=\"on\"" if @section == "new" %> href="/admin/myadmins/new">관리자 생성</a></li>	
+	<%puts_message "submenu:" +@submenu
+	 %>
+	<li><a <%= "Class=\"on\"" if @submenu == "list" %> href="/admin/myadmins">관리자 리스트</a></li>
+	<li><a <%= "Class=\"on\"" if @submenu == "new" %> href="/admin/myadmins/new">관리자 생성</a></li>	
 </ul>

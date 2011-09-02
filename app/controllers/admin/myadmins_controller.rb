@@ -9,6 +9,7 @@ class Admin::MyadminsController < ApplicationController
     @menu = "admin"
     @board = "admin"
     @section = "index"
+    @submenu = "list"
         
     @myadmins = Myadmin.search(params[:search], params[:page])
     @total_count = Myadmin.search(params[:search],"").count
@@ -22,6 +23,7 @@ class Admin::MyadminsController < ApplicationController
     @menu = "admin"
     @board = "admin"
     @section = "show"
+    @submenu = "list"
     
     @myadmin = Myadmin.get(params[:id].to_i)
 
@@ -34,6 +36,7 @@ class Admin::MyadminsController < ApplicationController
     @menu = "admin"
     @board = "admin"
     @section = "new"
+    @submenu = "new"
     
     @myadmin = Myadmin.new
 
@@ -45,6 +48,7 @@ class Admin::MyadminsController < ApplicationController
     @menu = "admin"
     @board = "admin"
     @section = "edit"
+    @submenu = "list"
     
     @myadmin = Myadmin.get(params[:id].to_i)
 

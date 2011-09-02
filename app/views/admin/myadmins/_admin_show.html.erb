@@ -1,23 +1,18 @@
 <p>
-  <b>ID:</b>
+  <b>아이대:</b>
   <%=h @myadmin.admin_id %>
 </p>
 
 <p>
-  <b>Name:</b>
+  <b>이름:</b>
   <%=h @myadmin.name %>
 </p>
 
 <p>
-  <b>Password:</b>
-  <%=h @myadmin.password %>
-</p>
-
-<p>
-  <b>Email:</b>
+  <b>이메일:</b>
   <%=h @myadmin.email %>
 </p>
 
 
-<%= link_to 'Edit', edit_myadmin_path(@myadmin.id) %> |
-<%= link_to 'Back', myadmin_path %>
+<!-- <input type="button" value="수정" style="cursor:pointer;font-size:20px;" onClick="location.href='/admin/myadmins/<%= params[:id] %>/edit'"> -->
+<input type="button" value="목록" style="cursor:pointer;font-size:20px;" onClick="location.href='/admin/myadmins'">
