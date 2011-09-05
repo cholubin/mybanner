@@ -119,7 +119,7 @@
 		<div class="delivery">
 			<h4>배송정보</h4>
 			<ul>
-				<li class="type"><strong>배송방법</strong> <span><%= Basicinfo.first(:category=>"delivery", :code => @myorder.receive_type.to_i).name %></span><!-- 배송방법 --></li>
+				<li class="type"><strong>배송방법</strong> <span><%= Basicinfo.first(:category=>"delivery", :code => @myorder.receive_type.to_i).name if Basicinfo.first(:category=>"delivery", :code => @myorder.receive_type.to_i) != nil%></span><!-- 배송방법 --></li>
 				<li class="type"><strong>배송상세</strong> <span></span><!-- 배송방법 --></li>
 				<li class="address"><strong>우편번호</strong> <span><%= @myorder.order_zip %></span><!-- 주소 --></li>
 				<li class="address"><strong>배송주소</strong> <span><%= @myorder.order_addr1 + " " + @myorder.order_addr2 %></span><!-- 주소 --></li>
