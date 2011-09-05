@@ -44,6 +44,10 @@ floatClear = 0
 				else
 					unit_price = "미정"
 				end
+				
+				if my.price != nil and my.price != ""
+					unit_price = my.price
+				end
 				%>
 			<li class="price"><span>가격 :</span> <%=unit_price%></li>
 			<% if signed_in? %>
