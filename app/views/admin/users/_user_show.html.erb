@@ -13,6 +13,23 @@
   <%=h @user.email %>
 </p>
 
+<p>
+  <b>일반전화:</b>
+  <%=h @user.tel if @user.tel != nil %>
+</p>
+
+<p>
+  <b>휴대전화:</b>
+  <%=h @user.mobile  if @user.mobile != nil%>
+</p>
+
+<p>
+  <b>주소:</b>
+  <%=h "(#{@user.zip}) #{@user.addr1} #{@user.addr2}" if @user.zip != nil and @user.addr1 != nil and @user.addr2 != nil%>
+</p>
+
+
+
 <%
 count_image = Myimage.all(:user_id => @user.id).count
 count_temp = Mytemplate.all(:user_id => @user.id, :in_order => false).count

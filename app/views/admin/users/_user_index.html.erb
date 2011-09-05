@@ -19,7 +19,7 @@
 	            <th class="board_thead" width="60px">번호 </th>
 	            <td class="board_thead" width="100px"><center>아이디</center></td>
 				<td class="board_thead" width="80px"><center>이름</center></td>
-	            <td class="board_thead" width="80px"><center>비밀번호</center></td>
+	            <td class="board_thead" width="80px"><center>연락처</center></td>
 	            <td class="board_thead" width="80px"><center>이메일</center></td>
 	            <td class="board_thead" width="65px"><center>등록일</center></td>
 				<td class="board_thead" width="30px"><center class="check_all" style="cursor:hand;">선택</center></td>
@@ -40,7 +40,7 @@
 	            <th class="board_tbody" width="60px" onClick="location.href='/admin/users/<%= user.id.to_s %>'" style="cursor:hand;"><%= @page_num %></th>
 	            <td class="board_tbody" width="100px" onClick="location.href='/admin/users/<%= user.id.to_s %>'" style="cursor:hand;"><center><%= user.userid %></center></td>
 				<td class="board_tbody" width="80px" onClick="location.href='/admin/users/<%= user.id.to_s %>'" style="cursor:hand;"><center><%= user.name %></center></td>
-				<td class="board_tbody" width="80px" onClick="location.href='/admin/users/<%= user.id.to_s %>'" style="cursor:hand;"><center><%= user.password %></center></td>
+				<td class="board_tbody" width="80px" onClick="location.href='/admin/users/<%= user.id.to_s %>'" style="cursor:hand;"><center><%= user.mobile  if user.mobile != nil %><%= "<br>"+user.tel if user.tel != nil%></center></td>
 	            <td class="board_tbody" width="80px" onClick="location.href='/admin/users/<%= user.id.to_s %>'" style="cursor:hand;"><center><%= user.email %></center></td>
 	            <td class="board_tbody" width="80px" onClick="location.href='/admin/users/<%= user.id.to_s %>'" style="cursor:hand;"><center><%= user.created_at.strftime('%Y-%m-%d') %></center></td>	
 				<td class="board_tbody" width="30px"><center><input class="chk_box" type="checkbox" name="chk[<%= user.id %>]"></center></td>
