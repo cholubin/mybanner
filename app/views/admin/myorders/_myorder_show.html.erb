@@ -20,7 +20,7 @@
 				item_array.each do |i|
 					temp_id = i
 					temp = Mytemplate.get(i.to_i)  
-					category = Category.get(temp.category.to_i).name
+					category = Category.get(temp.category.to_i) != nil Category.get(temp.category.to_i).name : ""
 					
 					if temp.subcategory != nil
 						if Subcategory.get(temp.subcategory.to_i) != nil and Subcategory.get(temp.subcategory.to_i) != ""
