@@ -241,7 +241,7 @@ class Admin::MytemplatesController < ApplicationController
     bbs.admin = true
 
     if bbs.save
-      userid = bbs.user.userid
+      userid = User.get(user_id.to_i).userid
       if params[:feedback_file] != nil
         req_file = params[:feedback_file]
         #파일업로드
