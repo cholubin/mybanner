@@ -379,7 +379,7 @@ class Admin::MytemplatesController < ApplicationController
   def jobboard_delete
     bbs_id = params[:bbs_id].to_i
     @bbs = Jobboard.get(bbs_id)
-    userid = @bbs.user.userid
+    userid = User.get(@bbs.user_id).userid
     @mytemp_id = @bbs.mytemp_id
     
     # jobboard req_file 삭제
