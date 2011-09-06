@@ -233,7 +233,6 @@ class Admin::MytemplatesController < ApplicationController
     bbs.user_id = user_id
     bbs.content = content
     bbs.feedback_code = feedback_code
-    
     @mytemp = Mytemplate.get(mytemp_id.to_i)
     @mytemp.feedback_code = feedback_code
     @mytemp.save 
@@ -242,13 +241,16 @@ class Admin::MytemplatesController < ApplicationController
     bbs.admin = true
 
     if bbs.save
+      userid = bbs.user.userid
       if params[:feedback_file] != nil
         req_file = params[:feedback_file]
         #파일업로드
-        dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+        dir = "#{RAILS_ROOT}/public/user_files/#{userid}/req_files/"
         FileUtils.mkdir_p dir if not File.exist?(dir)
-        ReqfileUploader.store_dir = "#{RAILS_ROOT}" + "/public/user_files/#{current_user.userid}/req_files/"
+        ReqfileUploader.store_dir = "#{RAILS_ROOT}" + "/public/user_files/#{userid}/req_files/"
 
+        puts_message "#{RAILS_ROOT}" + "/public/user_files/#{userid}/req_files/" + bbs.id.to_s
+        
         uploader = ReqfileUploader.new
         
         begin
@@ -377,10 +379,11 @@ class Admin::MytemplatesController < ApplicationController
   def jobboard_delete
     bbs_id = params[:bbs_id].to_i
     @bbs = Jobboard.get(bbs_id)
+    userid = @bbs.user.userid
     @mytemp_id = @bbs.mytemp_id
     
     # jobboard req_file 삭제
-    req_file_dir = "#{RAILS_ROOT}/public/user_files/#{current_user.userid}/req_files/"
+    req_file_dir = "#{RAILS_ROOT}/public/user_files/#{userid}/req_files/"
     
     if @bbs.req_file != nil and File.exist?(req_file_dir + @bbs.req_file)
       FileUtils.rm_rf req_file_dir + @bbs.req_file
